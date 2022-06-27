@@ -9,6 +9,12 @@ import { myTheme } from './theme';
 import ExplorePage from './screen/ExplorePage';
 import ChatPage from './screen/ChatPage';
 import { PreferencesProvider } from './theme/PreferencesContext';
+import {
+  ChatTabBarIcon,
+  ExploreTabBarIcon,
+  HomeTabBarIcon,
+  UserTabBarIcon,
+} from './components/BottomTabBarIcons';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,11 +24,30 @@ export default function App() {
       <SafeAreaProvider>
         <PreferencesProvider>
           <NavigationContainer>
-            <Tab.Navigator initialRouteName="Home">
-              <Tab.Screen name="Home" component={HomePage} />
-              <Tab.Screen name="Explore" component={ExplorePage} />
-              <Tab.Screen name="Chat" component={ChatPage} />
-              <Tab.Screen name="User" component={UserPage} />
+            <Tab.Navigator
+              initialRouteName="Home"
+              screenOptions={{ tabBarShowLabel: false }}
+            >
+              <Tab.Screen
+                options={{ tabBarIcon: HomeTabBarIcon }}
+                name="Home"
+                component={HomePage}
+              />
+              <Tab.Screen
+                name="Explore"
+                component={ExplorePage}
+                options={{ tabBarIcon: ExploreTabBarIcon }}
+              />
+              <Tab.Screen
+                name="Chat"
+                component={ChatPage}
+                options={{ tabBarIcon: ChatTabBarIcon }}
+              />
+              <Tab.Screen
+                name="User"
+                component={UserPage}
+                options={{ tabBarIcon: UserTabBarIcon }}
+              />
             </Tab.Navigator>
           </NavigationContainer>
         </PreferencesProvider>
