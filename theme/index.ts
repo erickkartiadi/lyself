@@ -6,6 +6,7 @@ import {
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 
 const myTheme: CreateThemeOptions = createTheme({
+  Text: {},
   lightColors: {
     primary: '#F26D85',
     secondary: '#3FB0EB',

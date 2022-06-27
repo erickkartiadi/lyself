@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ThemeProvider } from '@rneui/themed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React from 'react';
+import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
 import NavigationContainer from './components/NavigationContainer';
 import UserPage from './screen/UserPage';
 import HomePage from './screen/HomePage';
@@ -15,6 +16,8 @@ import {
   HomeTabBarIcon,
   UserTabBarIcon,
 } from './components/BottomTabBarIcons';
+import RightHeaderComponent from './components/RightHeaderComponent';
+import LeftHeaderComponent from './components/LeftHeaderComponent';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,10 +29,21 @@ export default function App() {
           <NavigationContainer>
             <Tab.Navigator
               initialRouteName="Home"
-              screenOptions={{ tabBarShowLabel: false }}
+              screenOptions={{
+                tabBarShowLabel: false,
+                headerRight: RightHeaderComponent,
+                headerStyle: { height: 100 },
+                headerTitleContainerStyle: { marginStart: 0 },
+                headerLeftContainerStyle: { marginStart: themeSpacing.lg },
+                headerRightContainerStyle: { marginEnd: themeSpacing.lg },
+              }}
             >
               <Tab.Screen
-                options={{ tabBarIcon: HomeTabBarIcon }}
+                options={{
+                  headerTitleStyle: { display: 'none' },
+                  headerLeft: LeftHeaderComponent,
+                  tabBarIcon: HomeTabBarIcon,
+                }}
                 name="Home"
                 component={HomePage}
               />
