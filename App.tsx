@@ -1,8 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ThemeProvider } from '@rneui/themed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
+import {
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter';
+import * as Font from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 import NavigationContainer from './components/NavigationContainer';
 import UserPage from './screen/UserPage';
 import HomePage from './screen/HomePage';
@@ -22,9 +29,38 @@ import LeftHeaderComponent from './components/LeftHeaderComponent';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await Font.loadAsync({
+          'Inter-Light': Inter_300Light,
+          Inter: Inter_400Regular,
+          'Inter-Bold': Inter_700Bold,
+        });
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
     <ThemeProvider theme={myTheme}>
-      <SafeAreaProvider>
+      <SafeAreaProvider onLayout={onLayoutRootView}>
         <PreferencesProvider>
           <NavigationContainer>
             <Tab.Navigator

@@ -6,7 +6,28 @@ import {
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 
 const myTheme: CreateThemeOptions = createTheme({
-  Text: {},
+  Text: {
+    style: {
+      fontFamily: 'Inter',
+    },
+    h1Style: {
+      fontFamily: 'Inter',
+    },
+    h2Style: {
+      fontFamily: 'Inter',
+    },
+    h3Style: {
+      fontFamily: 'Inter',
+    },
+    h4Style: {
+      fontFamily: 'Inter',
+    },
+  },
+  Button: {
+    titleStyle: {
+      fontFamily: 'Inter',
+    },
+  },
   lightColors: {
     primary: '#F26D85',
     secondary: '#3FB0EB',
