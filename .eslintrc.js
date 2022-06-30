@@ -27,5 +27,6 @@ module.exports = {
     ],
     'no-unused-vars': ['off'],
     'sort-imports': ['error', { ignoreDeclarationSort: true }],
+    'react/jsx-props-no-spreading': 'off',
   },
 };
