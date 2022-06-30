@@ -1,13 +1,27 @@
 import {
   CreateThemeOptions,
   createTheme,
+  themeSpacing,
 } from '@rneui/themed/dist/config/ThemeProvider';
 
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 
+const myCustomColorsLight = {};
+
+const myCustomColorsDark = {};
+
 const myTheme: CreateThemeOptions = createTheme({
-  Text: {
+  Card: {
+    containerStyle: {
+      margin: 0,
+      marginTop: themeSpacing.lg,
+      marginBottom: themeSpacing.lg,
+      borderRadius: themeSpacing.lg,
+    },
+  },
+  Text: (props) => ({
     style: {
+      fontWeight: props.bold ? 'bold' : 'normal',
       fontFamily: 'Inter',
     },
     h1Style: {
@@ -22,7 +36,7 @@ const myTheme: CreateThemeOptions = createTheme({
     h4Style: {
       fontFamily: 'Inter',
     },
-  },
+  }),
   Button: {
     titleStyle: {
       fontFamily: 'Inter',
@@ -30,13 +44,27 @@ const myTheme: CreateThemeOptions = createTheme({
   },
   lightColors: {
     primary: '#F26D85',
+    primaryLight: '#FFE3E9',
+    primaryDark: '#CC4B66',
     secondary: '#3FB0EB',
+    secondaryLight: '#67CEFF',
+    secondaryDark: '#008CC5',
+    purple: '#9267ED',
+    yellow: '#FABD22',
     background: '#ffffff',
+    ...myCustomColorsLight,
   },
   darkColors: {
     primary: '#bb3b58',
+    primaryLight: '#FE788F',
+    primaryDark: '#0C84BB',
     secondary: '#0081b8',
+    secondaryLight: '#67CEFF',
+    secondaryDark: '#0081b8',
+    purple: '#6A44C5',
+    yellow: '#C89200',
     background: '#121212',
+    ...myCustomColorsDark,
   },
 });
 
