@@ -6,9 +6,7 @@ import {
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 
-// import ActivityIcon from './ActivityIcon';
-
-export type Activities = 'music' | 'breathing' | 'meditation';
+export type Activities = 'music' | 'breathing' | 'meditation' | 'article';
 
 export function ActivityIcon({ activity }: { activity: Activities }) {
   const { theme } = useTheme();
@@ -32,6 +30,12 @@ export function ActivityIcon({ activity }: { activity: Activities }) {
       bgColor: theme.colors.secondary,
       iconSize: 32,
     },
+    article: {
+      type: 'ionicon',
+      name: 'newspaper',
+      bgColor: theme.colors.primary,
+      iconSize: 32,
+    },
   };
 
   return (
@@ -40,7 +44,7 @@ export function ActivityIcon({ activity }: { activity: Activities }) {
         backgroundColor: activityType[activity].bgColor || theme.colors.grey5,
         borderRadius: 100,
         marginRight: themeSpacing.xl,
-        width: 60,
+        width: 54,
         aspectRatio: 1,
         justifyContent: 'center',
         alignContent: 'center',
@@ -68,12 +72,16 @@ function RecommendedActivityCard({
 }: RecommendedActivityProps) {
   return (
     <Pressable onPress={onPress}>
-      <Card>
+      <Card
+        containerStyle={{
+          padding: themeSpacing.lg,
+        }}
+      >
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
           <ActivityIcon activity={activity} />
-          <View style={{ paddingRight: themeSpacing.xl }}>
+          <View style={{ paddingRight: themeSpacing.lg }}>
             <Text>{title}</Text>
-            <Text h4 bold>{`${time}m`}</Text>
+            <Text h3>{`${time}m`}</Text>
           </View>
         </View>
       </Card>

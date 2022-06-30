@@ -23,23 +23,40 @@ const myTheme: CreateThemeOptions = createTheme({
     style: {
       fontWeight: props.bold ? 'bold' : 'normal',
       fontFamily: 'Inter',
+      letterSpacing: 0.5,
     },
     h1Style: {
       fontFamily: 'Inter',
+      fontSize: 25.23,
+      letterSpacing: -1.5,
+      fontWeight: '300',
+      marginBottom: themeSpacing.sm,
     },
     h2Style: {
       fontFamily: 'Inter',
+      fontSize: 22.43,
+      letterSpacing: -0.5,
+      fontWeight: '300',
+      marginBottom: themeSpacing.sm,
     },
     h3Style: {
       fontFamily: 'Inter',
+      fontSize: 19.93,
+      letterSpacing: 0,
+      marginBottom: themeSpacing.sm,
     },
     h4Style: {
-      fontFamily: 'Inter',
+      fontSize: 17.72,
+      letterSpacing: 0.25,
+      marginBottom: themeSpacing.sm,
     },
   }),
   Button: {
     titleStyle: {
-      fontFamily: 'Inter',
+      fontFamily: 'Inter-Medium',
+      fontWeight: '500',
+      fontSize: 14,
+      letterSpacing: 0.5,
     },
   },
   lightColors: {
@@ -57,7 +74,7 @@ const myTheme: CreateThemeOptions = createTheme({
   darkColors: {
     primary: '#bb3b58',
     primaryLight: '#FE788F',
-    primaryDark: '#0C84BB',
+    primaryDark: '#bb3b58',
     secondary: '#0081b8',
     secondaryLight: '#67CEFF',
     secondaryDark: '#0081b8',

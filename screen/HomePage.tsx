@@ -1,4 +1,4 @@
-import { Button, Text } from '@rneui/themed';
+import { Button, Text, useTheme } from '@rneui/themed';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
@@ -27,7 +27,7 @@ function HomePage() {
       <StatusBar style={preferences === 'light' ? 'dark' : 'light'} />
       <ScrollView>
         <View style={styles.containerSection}>
-          <Text bold>Recommended activity</Text>
+          <Text h4>Recommended activity</Text>
           <View style={styles.noContainerOffset}>
             <FlatList
               horizontal
@@ -40,9 +40,13 @@ function HomePage() {
             />
           </View>
         </View>
-        <View style={styles.container}>
+        <View style={styles.containerSection}>
+          <Text h4>Your stats</Text>
+          <Text />
+        </View>
+        <View style={styles.containerSection}>
           <Button
-            title="Switch mode"
+            title="Continue with Google"
             onPress={() =>
               setPreferences(preferences === 'light' ? 'dark' : 'light')
             }

@@ -1,6 +1,8 @@
+import { Activities } from './components/RecommendedActivityCard';
+
 export type RecommendedProps = {
   id: string;
-  activity: 'music' | 'breathing' | 'meditation';
+  activity: Activities;
   title: string;
   time: number;
 };
@@ -23,5 +25,11 @@ export const dataRecommended: RecommendedProps[] = [
     activity: 'breathing',
     title: 'Breathing',
     time: 10,
+  },
+  {
+    id: '4',
+    activity: 'article',
+    title: 'Reading',
+    time: 20,
   },
 ];

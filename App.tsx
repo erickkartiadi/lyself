@@ -6,6 +6,7 @@ import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
 import {
   Inter_300Light,
   Inter_400Regular,
+  Inter_500Medium,
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
 import * as Font from 'expo-font';
@@ -38,6 +39,7 @@ export default function App() {
         await Font.loadAsync({
           'Inter-Light': Inter_300Light,
           Inter: Inter_400Regular,
+          'Inter-Medium': Inter_500Medium,
           'Inter-Bold': Inter_700Bold,
         });
       } finally {

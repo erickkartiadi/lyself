@@ -6,7 +6,7 @@ function LeftHeaderComponent() {
   return (
     <View>
       <Text>Good morning</Text>
-      <Text h4>Erick Kartiadi</Text>
+      <Text h3>Erick Kartiadi</Text>
     </View>
   );
 }

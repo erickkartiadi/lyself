@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   containerSection: {
     paddingHorizontal: themeSpacing.lg,
-    paddingVertical: themeSpacing.xl,
+    paddingTop: themeSpacing.lg,
   },
 });
 
