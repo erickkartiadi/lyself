@@ -13,6 +13,7 @@ const myCustomColorsDark = {};
 const myTheme: CreateThemeOptions = createTheme({
   Card: {
     containerStyle: {
+      padding: 0,
       margin: 0,
       marginTop: themeSpacing.lg,
       marginBottom: themeSpacing.lg,
@@ -27,28 +28,22 @@ const myTheme: CreateThemeOptions = createTheme({
     },
     h1Style: {
       fontFamily: 'Inter',
-      fontSize: 25.23,
-      letterSpacing: -1.5,
-      fontWeight: '300',
-      marginBottom: themeSpacing.sm,
+      fontSize: 22.43,
+      letterSpacing: 0,
     },
     h2Style: {
       fontFamily: 'Inter',
-      fontSize: 22.43,
-      letterSpacing: -0.5,
-      fontWeight: '300',
-      marginBottom: themeSpacing.sm,
+      fontSize: 19.93,
+      letterSpacing: 0.15,
     },
     h3Style: {
       fontFamily: 'Inter',
-      fontSize: 19.93,
-      letterSpacing: 0,
-      marginBottom: themeSpacing.sm,
+      fontSize: 17.72,
+      letterSpacing: 0.15,
     },
     h4Style: {
-      fontSize: 17.72,
-      letterSpacing: 0.25,
-      marginBottom: themeSpacing.sm,
+      fontSize: 16.75,
+      letterSpacing: 0.1,
     },
   }),
   Button: {

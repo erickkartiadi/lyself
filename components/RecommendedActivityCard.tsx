@@ -1,10 +1,11 @@
-import { Card, Icon, Text } from '@rneui/themed';
+import { Card, Text } from '@rneui/themed';
 import {
   themeSpacing,
   useTheme,
 } from '@rneui/themed/dist/config/ThemeProvider';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
+import BaseIcon from './BaseIcon';
 
 export type Activities = 'music' | 'breathing' | 'meditation' | 'article';
 
@@ -15,44 +16,39 @@ export function ActivityIcon({ activity }: { activity: Activities }) {
     meditation: {
       type: 'material-community',
       name: 'meditation',
-      bgColor: theme.colors.yellow,
+      backgroundColor: theme.colors.yellow,
       iconSize: 48,
     },
     music: {
       type: 'material-community',
       name: 'music-note',
-      bgColor: theme.colors.purple,
+      backgroundColor: theme.colors.purple,
       iconSize: 40,
     },
     breathing: {
       type: 'entypo',
       name: 'air',
-      bgColor: theme.colors.secondary,
+      backgroundColor: theme.colors.secondary,
       iconSize: 32,
     },
     article: {
       type: 'ionicon',
       name: 'newspaper',
-      bgColor: theme.colors.primary,
+      backgroundColor: theme.colors.primary,
       iconSize: 32,
     },
   };
 
+  const { type, name, backgroundColor, iconSize } = activityType[activity];
+
   return (
-    <Icon
-      containerStyle={{
-        backgroundColor: activityType[activity].bgColor || theme.colors.grey5,
-        borderRadius: 100,
-        marginRight: themeSpacing.xl,
-        width: 54,
-        aspectRatio: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
-      }}
-      size={activityType[activity].iconSize}
+    <BaseIcon
+      backgroundColor={backgroundColor}
+      size={54}
+      iconSize={iconSize}
       color={theme.colors.white}
-      type={activityType[activity].type}
-      name={activityType[activity].name}
+      iconType={type}
+      iconName={name}
     />
   );
 }
