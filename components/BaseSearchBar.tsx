@@ -1,10 +1,7 @@
-import { SearchBar } from '@rneui/themed';
-import {
-  themeSpacing,
-  useTheme,
-} from '@rneui/themed/dist/config/ThemeProvider';
+import { SearchBar, useTheme } from '@rneui/themed';
+
 import React, { useState } from 'react';
-import styles from '../theme/styles';
+import { styles } from '../theme';
 
 function BaseSearchBar() {
   const [searchText, setSearchText] = useState('');
@@ -29,7 +26,7 @@ function BaseSearchBar() {
       inputContainerStyle={{
         backgroundColor: theme.colors.grey5,
         borderRadius: 100,
-        paddingHorizontal: themeSpacing.md,
+        paddingHorizontal: theme.spacing.md,
       }}
       inputStyle={{
         fontFamily: 'Inter',

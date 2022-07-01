@@ -1,9 +1,11 @@
-import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
+import { useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 
 function ViewSeparator() {
-  return <View style={{ width: themeSpacing.lg }} />;
+  const { theme } = useTheme();
+
+  return <View style={{ width: theme.spacing.lg }} />;
 }
 
 export default ViewSeparator;

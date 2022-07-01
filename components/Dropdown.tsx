@@ -1,9 +1,4 @@
-import { Icon } from '@rneui/themed';
-import {
-  themeSpacing,
-  useTheme,
-  useThemeMode,
-} from '@rneui/themed/dist/config/ThemeProvider';
+import { Icon, useTheme, useThemeMode } from '@rneui/themed';
 import React, { useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 
@@ -78,11 +73,11 @@ function Dropdown() {
         backgroundColor:
           mode === 'light' ? theme.colors.white : theme.colors.grey1,
         borderColor: theme.colors.greyOutline,
-        marginTop: themeSpacing.lg * -1,
-        borderTopLeftRadius: themeSpacing.md,
-        borderTopRightRadius: themeSpacing.md,
-        borderBottomLeftRadius: themeSpacing.md,
-        borderBottomRightRadius: themeSpacing.md,
+        marginTop: theme.spacing.lg * -1,
+        borderTopLeftRadius: theme.spacing.md,
+        borderTopRightRadius: theme.spacing.md,
+        borderBottomLeftRadius: theme.spacing.md,
+        borderBottomRightRadius: theme.spacing.md,
       }}
     />
   );

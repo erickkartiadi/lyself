@@ -1,8 +1,5 @@
 import { Icon } from '@rneui/base';
-import {
-  themeSpacing,
-  useTheme,
-} from '@rneui/themed/dist/config/ThemeProvider';
+import { useTheme } from '@rneui/themed';
 import React from 'react';
 import { ColorValue, View } from 'react-native';
 import { Text } from '@rneui/themed';
@@ -117,7 +114,7 @@ function StatusCard() {
               width: '48%',
             }}
           >
-            <Text style={{ marginBottom: themeSpacing.sm }} bold>
+            <Text style={{ marginBottom: theme.spacing.sm }} bold>
               {title}
             </Text>
             <View
@@ -139,7 +136,7 @@ function StatusCard() {
               <View>
                 <Icon
                   containerStyle={{
-                    marginRight: themeSpacing.sm,
+                    marginRight: theme.spacing.sm,
                   }}
                   type={icon.type}
                   name={icon.name}

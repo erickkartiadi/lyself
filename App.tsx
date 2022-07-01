@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ThemeProvider } from '@rneui/themed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useCallback, useEffect, useState } from 'react';
-import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
 import {
   Inter_400Regular,
   Inter_500Medium,
@@ -11,6 +10,7 @@ import {
 } from '@expo-google-fonts/inter';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import NavigationContainer from './components/NavigationContainer';
 import UserPage from './screen/UserPage';
 import HomePage from './screen/HomePage';
@@ -79,8 +79,8 @@ export default function App() {
                 headerRight: RightHeaderComponent,
                 headerStyle: { height: 100 },
                 headerTitleContainerStyle: { marginStart: 0 },
-                headerLeftContainerStyle: { marginStart: themeSpacing.lg },
-                headerRightContainerStyle: { marginEnd: themeSpacing.lg },
+                // headerLeftContainerStyle: { marginStart: themeSpacing.lg },
+                // headerRightContainerStyle: { marginEnd: themeSpacing.lg },
               }}
             >
               <Tab.Screen

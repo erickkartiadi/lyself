@@ -1,5 +1,4 @@
-import { Text } from '@rneui/themed';
-import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
+import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
 import ActivityIcon, { Activities } from '../ActivityIcon';
@@ -18,15 +17,17 @@ function RecommendedActivityCard({
   title,
   time,
 }: RecommendedActivityProps) {
+  const { theme } = useTheme();
+
   return (
     <Pressable onPress={onPress}>
       <BaseCard>
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
           <ActivityIcon
-            containerStyle={{ marginRight: themeSpacing.lg }}
+            containerStyle={{ marginRight: theme.spacing.lg }}
             activity={activity}
           />
-          <View style={{ paddingRight: themeSpacing.lg }}>
+          <View style={{ paddingRight: theme.spacing.lg }}>
             <Text>{title}</Text>
             <Text h3>{`${time}m`}</Text>
           </View>

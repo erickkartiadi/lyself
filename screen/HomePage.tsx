@@ -1,12 +1,10 @@
-import { Button, Text } from '@rneui/themed';
+import { Button, Text, useTheme } from '@rneui/themed';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
-import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
-
 import { RecommendedProps, dataRecommended } from '../constant';
 import { PreferencesContext } from '../theme/PreferencesContext';
-import styles from '../theme/styles';
+import { styles } from '../theme';
 import { comingSoonToast } from '../utils/comingSoonToast';
 import ViewSeparator from '../components/ViewSeparator';
 import RecommendedActivityCard from '../components/widget/RecommendedActivityCard';
@@ -27,6 +25,7 @@ const renderRecommended = ({ item }: { item: RecommendedProps }) => (
 
 function HomePage() {
   const { theme: preferences } = useContext(PreferencesContext);
+  const { theme } = useTheme();
 
   return (
     <>
@@ -34,8 +33,8 @@ function HomePage() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingBottom: themeSpacing.xl,
-          paddingTop: themeSpacing.lg,
+          paddingBottom: theme.spacing.xl,
+          paddingTop: theme.spacing.lg,
         }}
       >
         <View style={styles.containerSection}>
@@ -73,7 +72,9 @@ function HomePage() {
           <MentalScoreCard />
           <StatusCard />
         </View>
-        <View style={(styles.containerSection, { marginTop: themeSpacing.xl })}>
+        <View
+          style={(styles.containerSection, { marginTop: theme.spacing.xl })}
+        >
           <Button
             onPress={comingSoonToast}
             iconPosition="left"

@@ -1,8 +1,4 @@
-import { Text } from '@rneui/themed';
-import {
-  themeSpacing,
-  useTheme,
-} from '@rneui/themed/dist/config/ThemeProvider';
+import { Text, useTheme } from '@rneui/themed';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { FlatList, Pressable, ScrollView, View } from 'react-native';
@@ -10,7 +6,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/types
 import BaseSearchBar from '../../components/BaseSearchBar';
 import ActivityIcon, { Activities } from '../../components/ActivityIcon';
 import { PreferencesContext } from '../../theme/PreferencesContext';
-import styles from '../../theme/styles';
+import { styles } from '../../theme';
 import { ArticleCardProps, dataArticles } from '../../constant';
 import ArticleCard from '../../components/widget/ArticleCard';
 import ViewSeparator from '../../components/ViewSeparator';
@@ -35,6 +31,7 @@ const renderArticles = ({ item }: { item: ArticleCardProps }) => (
 
 function ExplorePage({ navigation }: ExplorePageProps) {
   const { theme: preferences } = useContext(PreferencesContext);
+  const { theme } = useTheme();
   const activityMenu: Activities[] = [
     'consult',
     'meditation',
@@ -50,10 +47,9 @@ function ExplorePage({ navigation }: ExplorePageProps) {
     <>
       <StatusBar style={preferences === 'light' ? 'dark' : 'light'} />
       <ScrollView
-        showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingBottom: themeSpacing.xl,
-          paddingTop: themeSpacing.lg,
+          paddingBottom: theme.spacing.xl,
+          paddingTop: theme.spacing.lg,
         }}
       >
         <BaseSearchBar />
@@ -61,7 +57,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
           style={{
             ...styles.containerSection,
             ...styles.noContainerOffset,
-            marginTop: themeSpacing.lg,
+            marginTop: theme.spacing.lg,
             flex: 1,
             flexDirection: 'row',
             flexWrap: 'wrap',
@@ -78,7 +74,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
               <Pressable
                 style={{
                   alignItems: 'center',
-                  marginBottom: themeSpacing.xl * 1.25,
+                  marginBottom: theme.spacing.xl * 1.25,
                 }}
                 onPress={() => navigation.navigate('Progress')}
               >
@@ -87,7 +83,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
                   sm
                   grey
                   style={{
-                    marginTop: themeSpacing.md,
+                    marginTop: theme.spacing.md,
                     textAlign: 'center',
                     textTransform: 'capitalize',
                   }}

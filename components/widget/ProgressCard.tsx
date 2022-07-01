@@ -1,8 +1,5 @@
-import { Divider, LinearProgress, Text } from '@rneui/themed';
-import {
-  themeSpacing,
-  useTheme,
-} from '@rneui/themed/dist/config/ThemeProvider';
+import { Divider, LinearProgress, Text, useTheme } from '@rneui/themed';
+
 import React from 'react';
 import { View } from 'react-native';
 import ActivityIcon from '../ActivityIcon';
@@ -22,10 +19,10 @@ function ProgressCard() {
       >
         <ActivityIcon
           activity="breathing"
-          containerStyle={{ marginRight: themeSpacing.xl }}
+          containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ marginBottom: themeSpacing.md }}>
+          <Text style={{ marginBottom: theme.spacing.md }}>
             Relax{' '}
             <Text sm bold>
               (3m)
@@ -39,7 +36,7 @@ function ProgressCard() {
           />
           <View
             style={{
-              marginTop: themeSpacing.xs,
+              marginTop: theme.spacing.xs,
               flex: 1,
               flexDirection: 'row',
               alignItems: 'center',
@@ -55,7 +52,7 @@ function ProgressCard() {
           </View>
         </View>
       </View>
-      <Divider style={{ marginVertical: themeSpacing.xl * 1.25 }} />
+      <Divider style={{ marginVertical: theme.spacing.xl * 1.25 }} />
       <View
         style={{
           flex: 1,
@@ -65,10 +62,10 @@ function ProgressCard() {
       >
         <ActivityIcon
           activity="meditation"
-          containerStyle={{ marginRight: themeSpacing.xl }}
+          containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ marginBottom: themeSpacing.md }}>
+          <Text style={{ marginBottom: theme.spacing.md }}>
             Morning meditation{' '}
             <Text sm bold>
               (10m)
@@ -82,7 +79,7 @@ function ProgressCard() {
           />
           <View
             style={{
-              marginTop: themeSpacing.xs,
+              marginTop: theme.spacing.xs,
               flex: 1,
               flexDirection: 'row',
               alignItems: 'center',
@@ -98,7 +95,7 @@ function ProgressCard() {
           </View>
         </View>
       </View>
-      <Divider style={{ marginVertical: themeSpacing.xl * 1.25 }} />
+      <Divider style={{ marginVertical: theme.spacing.xl * 1.25 }} />
       <View
         style={{
           flex: 1,
@@ -108,10 +105,10 @@ function ProgressCard() {
       >
         <ActivityIcon
           activity="music"
-          containerStyle={{ marginRight: themeSpacing.xl }}
+          containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ marginBottom: themeSpacing.md }}>
+          <Text style={{ marginBottom: theme.spacing.md }}>
             Lofi beats{' '}
             <Text sm bold>
               (45m)
@@ -125,7 +122,7 @@ function ProgressCard() {
           />
           <View
             style={{
-              marginTop: themeSpacing.xs,
+              marginTop: theme.spacing.xs,
               flex: 1,
               flexDirection: 'row',
               alignItems: 'center',

@@ -1,16 +1,12 @@
-import { Text } from '@rneui/themed';
-import {
-  themeSpacing,
-  useTheme,
-  useThemeMode,
-} from '@rneui/themed/dist/config/ThemeProvider';
+import { Text, useTheme, useThemeMode } from '@rneui/themed';
+
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
-import styles from '../../theme/styles';
 import BaseCard from '../BaseCard';
+import { styles } from '../../theme';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';
@@ -34,7 +30,7 @@ function MentalScoreCard() {
       containerStyle={{
         overflow: 'hidden',
         padding: 0,
-        marginBottom: themeSpacing.md,
+        marginBottom: theme.spacing.md,
       }}
     >
       <View
@@ -42,8 +38,8 @@ function MentalScoreCard() {
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
-          padding: themeSpacing.xl * 1.25,
-          marginBottom: themeSpacing.xl * 1.25,
+          padding: theme.spacing.xl * 1.25,
+          marginBottom: theme.spacing.xl * 1.25,
         }}
       >
         <AnimatedCircularProgress
@@ -54,7 +50,7 @@ function MentalScoreCard() {
           tintColorSecondary={theme.colors.primary}
           backgroundColor={theme.colors.grey4}
           prefill={0}
-          style={{ marginRight: themeSpacing.xl }}
+          style={{ marginRight: theme.spacing.xl }}
         >
           {(fill) => <Emoji fill={fill} />}
         </AnimatedCircularProgress>
@@ -125,7 +121,7 @@ function MentalScoreCard() {
             fontFamily: 'Inter-Medium',
           },
           style: {
-            borderRadius: themeSpacing.md,
+            borderRadius: theme.spacing.md,
           },
           propsForDots: {
             r: '6',

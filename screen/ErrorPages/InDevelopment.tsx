@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Text } from '@rneui/themed';
 import { View } from 'react-native';
-import styles from '../../theme/styles';
+import { styles } from '../../theme';
 import { ExplorePageProps } from '../Explore/ExplorePage';
 
 function Progress({ navigation }: ExplorePageProps) {

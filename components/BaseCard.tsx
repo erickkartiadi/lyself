@@ -1,9 +1,5 @@
 import * as React from 'react';
-import { Card, CardProps, useTheme } from '@rneui/themed';
-import {
-  themeSpacing,
-  useThemeMode,
-} from '@rneui/themed/dist/config/ThemeProvider';
+import { Card, CardProps, useTheme, useThemeMode } from '@rneui/themed';
 
 function BaseCard({
   children,
@@ -23,7 +19,7 @@ function BaseCard({
               : theme.colors.cardBackground,
           elevation: 0.5,
           borderWidth: 0.25,
-          borderRadius: themeSpacing.md,
+          borderRadius: theme.spacing.md,
         },
         containerStyle,
       ]}

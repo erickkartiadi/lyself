@@ -1,13 +1,30 @@
-import {
-  CreateThemeOptions,
-  createTheme,
-  themeSpacing,
-} from '@rneui/themed/dist/config/ThemeProvider';
-
+import { CreateThemeOptions, createTheme } from '@rneui/themed';
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import styles from './styles';
+import { StyleSheet } from 'react-native';
+
+const themeSpacing = {
+  xs: 4,
+  sm: 6,
+  md: 8,
+  lg: 12,
+  xl: 16,
+};
+
+export const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: themeSpacing.lg,
+  },
+  noContainerOffset: {
+    marginHorizontal: themeSpacing.lg * -1,
+  },
+  containerSection: {
+    paddingHorizontal: themeSpacing.lg,
+    paddingTop: themeSpacing.md,
+  },
+});
 
 const myTheme: CreateThemeOptions = createTheme({
+  spacing: { ...themeSpacing },
   Card: {
     containerStyle: {
       margin: 0,
@@ -26,22 +43,18 @@ const myTheme: CreateThemeOptions = createTheme({
       fontFamily: 'Inter-Bold',
       fontSize: 22.43,
       fontWeight: 'bold',
-      marginBottom: themeSpacing.sm,
       letterSpacing: -0.0175,
     },
     h2Style: {
       fontFamily: 'Inter-Bold',
       fontSize: 19.93,
       letterSpacing: -0.017,
-      marginBottom: themeSpacing.sm,
       fontWeight: 'bold',
     },
     h3Style: {
       fontFamily: 'Inter-Semibold',
       fontWeight: '600',
       fontSize: 17.72,
-      marginBottom: themeSpacing.sm,
-      lineHeight: 32,
       letterSpacing: -0.0125,
     },
     h4Style: {
@@ -49,7 +62,6 @@ const myTheme: CreateThemeOptions = createTheme({
       fontWeight: '600',
       fontSize: 15.75,
       letterSpacing: -0.25,
-      marginBottom: themeSpacing.xs,
     },
   }),
   Button: (props) => ({
