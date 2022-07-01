@@ -116,7 +116,7 @@ function MentalScoreChart() {
             fontFamily: 'Inter-Medium',
           },
           style: {
-            borderRadius: 16,
+            borderRadius: themeSpacing.md,
           },
           propsForDots: {
             r: '6',

@@ -5,6 +5,7 @@ import {
 } from '@rneui/themed/dist/config/ThemeProvider';
 
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
+import styles from './styles';
 
 const myTheme: CreateThemeOptions = createTheme({
   Card: {
@@ -47,14 +48,26 @@ const myTheme: CreateThemeOptions = createTheme({
       letterSpacing: -0.75,
     },
   }),
-  Button: {
+  Button: (props) => ({
+    iconContainerStyle: {
+      marginEnd: props.iconPosition === 'left' ? themeSpacing.md : 0,
+      marginStart: props.iconPosition === 'right' ? themeSpacing.md : 0,
+    },
+    containerStyle: {
+      alignItems: props.fullWidth ? 'stretch' : 'center',
+      marginHorizontal: styles.containerSection.paddingHorizontal,
+    },
+    buttonStyle: {
+      paddingVertical: themeSpacing.lg,
+      paddingHorizontal: themeSpacing.lg,
+    },
     titleStyle: {
       fontFamily: 'Inter-Medium',
       fontWeight: '500',
       fontSize: 14,
-      letterSpacing: 0.5,
+      letterSpacing: -0.125,
     },
-  },
+  }),
   lightColors: {
     primary: '#F26D85',
     primaryLight: '#FFE3E9',

@@ -18,4 +18,8 @@ declare module '@rneui/themed' {
     sm?: boolean;
     grey?: boolean;
   }
+
+  export interface ButtonProps {
+    fullWidth?: boolean;
+  }
 }

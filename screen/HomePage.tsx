@@ -35,7 +35,13 @@ function HomePage() {
   return (
     <>
       <StatusBar style={preferences === 'light' ? 'dark' : 'light'} />
-      <ScrollView nestedScrollEnabled>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingBottom: themeSpacing.xl,
+          paddingTop: themeSpacing.lg,
+        }}
+      >
         <View style={styles.containerSection}>
           <Text h4>Recommended activity</Text>
           <View style={styles.noContainerOffset}>
@@ -209,13 +215,19 @@ function HomePage() {
             </View>
           </View>
         </View>
-        <View style={styles.containerSection}>
+        <View style={(styles.containerSection, { marginTop: themeSpacing.xl })}>
           <Button
-            title="Change Theme"
-            onPress={() =>
-              setPreferences(preferences === 'light' ? 'dark' : 'light')
-            }
-          />
+            radius={theme.spacing.md}
+            onPress={comingSoonToast}
+            iconPosition="left"
+            icon={{
+              type: 'material',
+              name: 'library-add',
+              color: 'white',
+            }}
+          >
+            Add Widget
+          </Button>
         </View>
       </ScrollView>
     </>
