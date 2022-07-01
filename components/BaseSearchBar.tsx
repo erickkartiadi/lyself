@@ -24,7 +24,8 @@ function BaseSearchBar() {
         ...styles.container,
       }}
       inputContainerStyle={{
-        backgroundColor: theme.colors.grey5,
+        backgroundColor: theme.colors.cardBackground,
+        elevation: 1,
         borderRadius: 100,
         paddingHorizontal: theme.spacing.md,
       }}

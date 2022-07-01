@@ -112,7 +112,7 @@ function StatusCard() {
               width: '48%',
             }}
           >
-            <Text style={{ marginBottom: theme.spacing.sm }} bold>
+            <Text style={{ marginBottom: theme.spacing.xs }} bold>
               {title}
             </Text>
             <View
@@ -124,24 +124,26 @@ function StatusCard() {
               }}
             >
               <View>
-                <Text h2 h2Style={{ color }}>
+                <Text h1 h1Style={{ color }}>
                   {value}
                 </Text>
                 <Text sm style={{ color: theme.colors.grey1 }}>
                   {subtitle}
                 </Text>
               </View>
-              <View>
-                <Icon
-                  containerStyle={{
-                    marginRight: theme.spacing.sm,
-                  }}
-                  type={icon.type}
-                  name={icon.name}
-                  size={icon.size}
-                  color={icon.color}
-                />
-              </View>
+              {icon.type !== '' && (
+                <View>
+                  <Icon
+                    containerStyle={{
+                      marginRight: theme.spacing.sm,
+                    }}
+                    type={icon.type}
+                    name={icon.name}
+                    size={icon.size}
+                    color={icon.color}
+                  />
+                </View>
+              )}
             </View>
           </BaseCard>
         ))}

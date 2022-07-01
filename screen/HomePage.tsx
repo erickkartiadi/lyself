@@ -38,11 +38,7 @@ function HomePage() {
         }}
       >
         <View style={styles.containerSection}>
-          <Text h4>Continue your progress</Text>
-          <ProgressCard />
-        </View>
-        <View style={styles.containerSection}>
-          <Text h4>Recommended activity</Text>
+          <Text h3>Recommended activity</Text>
           <View style={styles.noContainerOffset}>
             <FlatList
               horizontal
@@ -64,13 +60,17 @@ function HomePage() {
               justifyContent: 'space-between',
             }}
           >
-            <Text h4>Your stats</Text>
+            <Text h3>Your stats</Text>
             <View>
               <Dropdown />
             </View>
           </View>
           <MentalScoreCard />
           <StatusCard />
+        </View>
+        <View style={styles.containerSection}>
+          <Text h3>Continue your progress</Text>
+          <ProgressCard />
         </View>
         <View
           style={(styles.containerSection, { marginTop: theme.spacing.xl })}

@@ -18,16 +18,12 @@ function ProgressCard() {
         }}
       >
         <ActivityIcon
+          size={58}
           activity="breathing"
           containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ marginBottom: theme.spacing.md }}>
-            Relax{' '}
-            <Text sm bold>
-              (3m)
-            </Text>
-          </Text>
+          <Text style={{ marginBottom: theme.spacing.sm }}>Relax</Text>
           <LinearProgress
             value={0.5}
             color={theme.colors.secondary}
@@ -52,7 +48,7 @@ function ProgressCard() {
           </View>
         </View>
       </View>
-      <Divider style={{ marginVertical: theme.spacing.xl * 1.25 }} />
+      <Divider style={{ marginVertical: theme.spacing.xl * 1.5 }} />
       <View
         style={{
           flex: 1,
@@ -61,15 +57,13 @@ function ProgressCard() {
         }}
       >
         <ActivityIcon
+          size={58}
           activity="meditation"
           containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ marginBottom: theme.spacing.md }}>
-            Morning meditation{' '}
-            <Text sm bold>
-              (10m)
-            </Text>
+          <Text style={{ marginBottom: theme.spacing.sm }}>
+            Morning meditation
           </Text>
           <LinearProgress
             value={0.9}
@@ -104,16 +98,12 @@ function ProgressCard() {
         }}
       >
         <ActivityIcon
+          size={58}
           activity="music"
           containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View style={{ flex: 1 }}>
-          <Text style={{ marginBottom: theme.spacing.md }}>
-            Lofi beats{' '}
-            <Text sm bold>
-              (45m)
-            </Text>
-          </Text>
+          <Text style={{ marginBottom: theme.spacing.sm }}>Lofi Beats</Text>
           <LinearProgress
             value={0.3}
             color={theme.colors.secondary}

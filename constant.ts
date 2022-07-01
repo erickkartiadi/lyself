@@ -25,11 +25,11 @@ export const dataArticles: ArticleCardProps[] = [
     url: 'https://www.rollingstone.com/culture-council/articles/supporting-employees-mental-health-work-1376097/',
   },
   {
-    title: 'Screen Time and Mental Health',
-    publisher: 'News Medical',
-    time: '1d',
-    src: 'https://images.unsplash.com/photo-1508440767412-59ce0b206bbc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
-    url: 'https://www.news-medical.net/health/Screen-Time-and-Mental-Health.aspx',
+    title: 'Parental controls, screen time, and kids mental health',
+    publisher: 'Mashable',
+    time: '1w',
+    src: 'https://images.unsplash.com/photo-1554410637-1a8267402b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
+    url: 'https://mashable.com/article/screen-time-parenting-styles-teen-mental-health',
   },
   {
     title: 'Mental Health: You must prioritise this!',

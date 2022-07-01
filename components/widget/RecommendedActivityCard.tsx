@@ -28,8 +28,8 @@ function RecommendedActivityCard({
             activity={activity}
           />
           <View style={{ paddingRight: theme.spacing.lg }}>
-            <Text>{title}</Text>
-            <Text h3>{`${time}m`}</Text>
+            <Text h4>{title}</Text>
+            <Text>{`${time}m`}</Text>
           </View>
         </View>
       </BaseCard>
