@@ -49,6 +49,7 @@ const myTheme: CreateThemeOptions = createTheme({
     },
   }),
   Button: (props) => ({
+    radius: themeSpacing.md,
     iconContainerStyle: {
       marginEnd: props.iconPosition === 'left' ? themeSpacing.md : 0,
       marginStart: props.iconPosition === 'right' ? themeSpacing.md : 0,

@@ -2,15 +2,24 @@ import { Text } from '@rneui/themed';
 import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { ScrollView, View } from 'react-native';
-import BaseSearchBar from '../components/BaseSearchBar';
-import ActivityIcon, { Activities } from '../components/ActivityIcon';
-import { PreferencesContext } from '../theme/PreferencesContext';
-import styles from '../theme/styles';
+import { Pressable, ScrollView, View } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
+import BaseSearchBar from '../../components/BaseSearchBar';
+import ActivityIcon, { Activities } from '../../components/ActivityIcon';
+import { PreferencesContext } from '../../theme/PreferencesContext';
+import styles from '../../theme/styles';
 
-function ExplorePage() {
+export type ExploreRouteParamList = {
+  Explore: undefined;
+  Progress: undefined;
+};
+export type ExplorePageProps = NativeStackScreenProps<
+  ExploreRouteParamList,
+  'Explore'
+>;
+
+function ExplorePage({ navigation }: ExplorePageProps) {
   const { theme: preferences } = useContext(PreferencesContext);
-
   const activityMenu: Activities[] = [
     'consult',
     'meditation',
@@ -53,18 +62,20 @@ function ExplorePage() {
                 marginBottom: themeSpacing.xl * 1.25,
               }}
             >
-              <ActivityIcon activity={activity} />
-              <Text
-                sm
-                grey
-                style={{
-                  marginTop: themeSpacing.md,
-                  textAlign: 'center',
-                  textTransform: 'capitalize',
-                }}
-              >
-                {activity}
-              </Text>
+              <Pressable onPress={() => navigation.navigate('Progress')}>
+                <ActivityIcon activity={activity} />
+                <Text
+                  sm
+                  grey
+                  style={{
+                    marginTop: themeSpacing.md,
+                    textAlign: 'center',
+                    textTransform: 'capitalize',
+                  }}
+                >
+                  {activity}
+                </Text>
+              </Pressable>
             </View>
           ))}
         </View>

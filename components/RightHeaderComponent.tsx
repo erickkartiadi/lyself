@@ -1,7 +1,7 @@
-import { useTheme } from '@rneui/themed';
+import { Badge, Icon, useTheme } from '@rneui/themed';
 import React, { useContext } from 'react';
 import { View } from 'react-native';
-import { Badge, Icon } from '@rneui/base';
+
 import { PreferencesContext } from '../theme/PreferencesContext';
 import ViewSeparator from './ViewSeparator';
 import { comingSoonToast } from '../utils/comingSoonToast';

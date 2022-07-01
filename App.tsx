@@ -15,7 +15,6 @@ import NavigationContainer from './components/NavigationContainer';
 import UserPage from './screen/UserPage';
 import HomePage from './screen/HomePage';
 import { myTheme } from './theme';
-import ExplorePage from './screen/ExplorePage';
 import ChatPage from './screen/ChatPage';
 import { PreferencesProvider } from './theme/PreferencesContext';
 import {
@@ -26,8 +25,16 @@ import {
 } from './components/BottomTabBarIcons';
 import RightHeaderComponent from './components/RightHeaderComponent';
 import LeftHeaderComponent from './components/LeftHeaderComponent';
+import ExploreRoutes from './screen/Explore/Explore.routes';
 
-const Tab = createBottomTabNavigator();
+export type RootStackParamList = {
+  Home: undefined;
+  Chat: undefined;
+  User: undefined;
+  ExploreRoutes: undefined;
+};
+
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -66,7 +73,7 @@ export default function App() {
         <PreferencesProvider>
           <NavigationContainer>
             <Tab.Navigator
-              initialRouteName="Explore"
+              initialRouteName="ExploreRoutes"
               screenOptions={{
                 tabBarShowLabel: false,
                 headerRight: RightHeaderComponent,
@@ -86,9 +93,9 @@ export default function App() {
                 component={HomePage}
               />
               <Tab.Screen
-                name="Explore"
-                component={ExplorePage}
-                options={{ tabBarIcon: ExploreTabBarIcon }}
+                name="ExploreRoutes"
+                component={ExploreRoutes}
+                options={{ tabBarIcon: ExploreTabBarIcon, title: 'Explore' }}
               />
               <Tab.Screen
                 name="Chat"

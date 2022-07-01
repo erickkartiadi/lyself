@@ -1,4 +1,4 @@
-import { Button, Text } from '@rneui/themed';
+import { Button, Icon, Text } from '@rneui/themed';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
@@ -7,7 +7,6 @@ import {
   useTheme,
 } from '@rneui/themed/dist/config/ThemeProvider';
 
-import { Icon } from '@rneui/base';
 import { RecommendedProps, dataRecommended } from '../constant';
 import { PreferencesContext } from '../theme/PreferencesContext';
 import styles from '../theme/styles';
@@ -217,7 +216,6 @@ function HomePage() {
         </View>
         <View style={(styles.containerSection, { marginTop: themeSpacing.xl })}>
           <Button
-            radius={theme.spacing.md}
             onPress={comingSoonToast}
             iconPosition="left"
             icon={{
