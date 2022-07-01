@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, Text } from '@rneui/themed';
 import { View } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import styles from '../../theme/styles';
 import { ExplorePageProps } from '../Explore/ExplorePage';
 

@@ -1,21 +1,19 @@
-import { Button, Icon, Text } from '@rneui/themed';
+import { Button, Text } from '@rneui/themed';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
-import {
-  themeSpacing,
-  useTheme,
-} from '@rneui/themed/dist/config/ThemeProvider';
+import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
 
 import { RecommendedProps, dataRecommended } from '../constant';
 import { PreferencesContext } from '../theme/PreferencesContext';
 import styles from '../theme/styles';
 import { comingSoonToast } from '../utils/comingSoonToast';
 import ViewSeparator from '../components/ViewSeparator';
-import RecommendedActivityCard from '../components/RecommendedActivityCard';
-import MentalScoreChart from '../components/MentalScoreChart';
+import RecommendedActivityCard from '../components/widget/RecommendedActivityCard';
+import MentalScoreCard from '../components/widget/MentalScoreCard';
 import Dropdown from '../components/Dropdown';
-import BaseCard from '../components/BaseCard';
+import ProgressCard from '../components/widget/ProgressCard';
+import StatusCard from '../components/widget/StatusCard';
 
 const renderRecommended = ({ item }: { item: RecommendedProps }) => (
   <RecommendedActivityCard
@@ -29,7 +27,6 @@ const renderRecommended = ({ item }: { item: RecommendedProps }) => (
 
 function HomePage() {
   const { theme: preferences } = useContext(PreferencesContext);
-  const { theme } = useTheme();
 
   return (
     <>
@@ -41,6 +38,10 @@ function HomePage() {
           paddingTop: themeSpacing.lg,
         }}
       >
+        <View style={styles.containerSection}>
+          <Text h4>Continue your progress</Text>
+          <ProgressCard />
+        </View>
         <View style={styles.containerSection}>
           <Text h4>Recommended activity</Text>
           <View style={styles.noContainerOffset}>
@@ -69,150 +70,8 @@ function HomePage() {
               <Dropdown />
             </View>
           </View>
-          <MentalScoreChart />
-          <View>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                alignItems: 'flex-start',
-                justifyContent: 'space-between',
-              }}
-            >
-              <BaseCard
-                containerStyle={{
-                  width: '48%',
-                }}
-              >
-                <Text style={{ marginBottom: themeSpacing.sm }} bold>
-                  Heart rate
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <View>
-                    <Text h2 h2Style={{ color: theme.colors.primary }}>
-                      100
-                    </Text>
-                    <Text style={{ color: theme.colors.grey1 }}>bpm</Text>
-                  </View>
-                  <View>
-                    <Icon
-                      containerStyle={{
-                        marginRight: themeSpacing.sm,
-                      }}
-                      type="font-awesome-5"
-                      name="heartbeat"
-                      size={42}
-                      color={theme.colors.primary}
-                    />
-                  </View>
-                </View>
-              </BaseCard>
-              <BaseCard
-                containerStyle={{
-                  width: '48%',
-                }}
-              >
-                <Text style={{ marginBottom: themeSpacing.sm }} bold>
-                  Blood pressure
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <View>
-                    <Text h2 h2Style={{ color: theme.colors.primaryDark }}>
-                      110/80
-                    </Text>
-                    <Text style={{ color: theme.colors.grey1 }}>mmHg</Text>
-                  </View>
-                  <View>
-                    <Icon
-                      containerStyle={{
-                        marginRight: themeSpacing.sm,
-                      }}
-                      type="fontisto"
-                      name="blood-drop"
-                      size={42}
-                      color={theme.colors.primaryDark}
-                    />
-                  </View>
-                </View>
-              </BaseCard>
-              <BaseCard
-                containerStyle={{
-                  width: '48%',
-                }}
-              >
-                <Text style={{ marginBottom: themeSpacing.sm }} bold>
-                  Screen activity
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <View>
-                    <Text h2 h2Style={{ color: theme.colors.secondary }}>
-                      3h 10m
-                    </Text>
-                    <Text sm style={{ color: theme.colors.grey1 }}>
-                      1h more than yesterday
-                    </Text>
-                  </View>
-                </View>
-              </BaseCard>
-              <BaseCard
-                containerStyle={{
-                  width: '48%',
-                }}
-              >
-                <Text style={{ marginBottom: themeSpacing.sm }} bold>
-                  Sleep time
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <View>
-                    <Text h2 h2Style={{ color: theme.colors.purple }}>
-                      8h 2m
-                    </Text>
-                    <Text style={{ color: theme.colors.grey1 }}>Yesterday</Text>
-                  </View>
-                  <View>
-                    <Icon
-                      containerStyle={{
-                        marginRight: themeSpacing.sm,
-                      }}
-                      type="ionicon"
-                      name="moon"
-                      size={42}
-                      color={theme.colors.yellow}
-                    />
-                  </View>
-                </View>
-              </BaseCard>
-            </View>
-          </View>
+          <MentalScoreCard />
+          <StatusCard />
         </View>
         <View style={(styles.containerSection, { marginTop: themeSpacing.xl })}>
           <Button

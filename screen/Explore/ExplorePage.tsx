@@ -27,7 +27,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
     'music',
     'forum',
     'article',
-    'diagnose',
+    'todo',
     'other',
   ];
 
@@ -58,11 +58,15 @@ function ExplorePage({ navigation }: ExplorePageProps) {
               key={activity}
               style={{
                 width: '25%',
-                alignItems: 'center',
-                marginBottom: themeSpacing.xl * 1.25,
               }}
             >
-              <Pressable onPress={() => navigation.navigate('Progress')}>
+              <Pressable
+                style={{
+                  alignItems: 'center',
+                  marginBottom: themeSpacing.xl * 1.25,
+                }}
+                onPress={() => navigation.navigate('Progress')}
+              >
                 <ActivityIcon activity={activity} />
                 <Text
                   sm

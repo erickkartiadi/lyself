@@ -12,6 +12,7 @@ export type Activities =
   | 'other'
   | 'music'
   | 'breathing'
+  | 'todo'
   | 'article';
 
 function ActivityIcon({
@@ -69,6 +70,12 @@ function ActivityIcon({
       name: 'music-note',
       backgroundColor: theme.colors.purple,
       iconSize: 36,
+    },
+    todo: {
+      type: 'ionicon',
+      name: 'checkmark-done-sharp',
+      backgroundColor: theme.colors.success,
+      iconSize: 32,
     },
     other: {
       type: 'material-icon',

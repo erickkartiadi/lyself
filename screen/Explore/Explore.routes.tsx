@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Progress from '../ErrorPages/Progress';
+import Progress from '../ErrorPages/InDevelopment';
 import ExplorePage, { ExploreRouteParamList } from './ExplorePage';
 
 const Stack = createNativeStackNavigator<ExploreRouteParamList>();

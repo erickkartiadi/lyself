@@ -9,8 +9,8 @@ import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
-import styles from '../theme/styles';
-import BaseCard from './BaseCard';
+import styles from '../../theme/styles';
+import BaseCard from '../BaseCard';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';
@@ -25,7 +25,7 @@ function Emoji({ fill }: { fill: number }) {
   return <Text h3>{currentEmoji}</Text>;
 }
 
-function MentalScoreChart() {
+function MentalScoreCard() {
   const { theme } = useTheme();
   const { mode } = useThemeMode();
 
@@ -143,4 +143,4 @@ function MentalScoreChart() {
   );
 }
 
-export default MentalScoreChart;
+export default MentalScoreCard;
