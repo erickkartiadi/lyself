@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { Badge, Icon } from '@rneui/base';
 import { PreferencesContext } from '../theme/PreferencesContext';
 import ViewSeparator from './ViewSeparator';
+import { comingSoonToast } from '../utils/comingSoonToast';
 
 function RightHeaderComponent() {
   const { theme } = useTheme();
@@ -39,7 +40,7 @@ function RightHeaderComponent() {
         <Icon
           name="notifications-outline"
           type="ionicon"
-          onPress={() => console.log('go to notification page')}
+          onPress={comingSoonToast}
           containerStyle={{ borderRadius: 100, aspectRatio: 1 }}
           color={theme.colors.black}
           underlayColor={theme.colors.primary}

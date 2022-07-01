@@ -1,9 +1,9 @@
 import { Icon } from '@rneui/themed';
-import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
 import React from 'react';
-import { ColorValue } from 'react-native';
+import { ColorValue, StyleProp, ViewStyle } from 'react-native';
 
 function BaseIcon({
+  containerStyle,
   backgroundColor,
   size,
   iconSize,
@@ -11,8 +11,9 @@ function BaseIcon({
   iconType,
   iconName,
 }: {
+  containerStyle?: StyleProp<ViewStyle>;
   backgroundColor: ColorValue;
-  size: number;
+  size: number | undefined;
   color: ColorValue | number | undefined;
   iconSize: number;
   iconType: string;
@@ -20,15 +21,17 @@ function BaseIcon({
 }) {
   return (
     <Icon
-      containerStyle={{
-        backgroundColor,
-        borderRadius: 100,
-        marginRight: themeSpacing.xl,
-        width: size,
-        aspectRatio: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
-      }}
+      containerStyle={[
+        {
+          backgroundColor,
+          borderRadius: 100,
+          width: size,
+          aspectRatio: 1,
+          justifyContent: 'center',
+          alignContent: 'center',
+        },
+        containerStyle,
+      ]}
       size={iconSize}
       color={color}
       type={iconType}
@@ -36,5 +39,9 @@ function BaseIcon({
     />
   );
 }
+
+BaseIcon.defaultProps = {
+  containerStyle: {},
+};
 
 export default BaseIcon;

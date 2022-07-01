@@ -104,9 +104,18 @@ function MentalScoreChart() {
         withHorizontalLabels={false}
         xLabelsOffset={-42}
         chartConfig={{
-          backgroundColor: theme.colors.cardBackground,
-          backgroundGradientFrom: theme.colors.cardBackground,
-          backgroundGradientTo: theme.colors.cardBackground,
+          backgroundColor:
+            mode === 'light'
+              ? theme.colors.background
+              : theme.colors.cardBackground,
+          backgroundGradientFrom:
+            mode === 'light'
+              ? theme.colors.background
+              : theme.colors.cardBackground,
+          backgroundGradientTo:
+            mode === 'light'
+              ? theme.colors.background
+              : theme.colors.cardBackground,
           decimalPlaces: 0,
           color: () => theme.colors.primary,
           labelColor: () => theme.colors.grey1,

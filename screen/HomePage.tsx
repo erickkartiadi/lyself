@@ -29,7 +29,7 @@ const renderRecommended = ({ item }: { item: RecommendedProps }) => (
 );
 
 function HomePage() {
-  const { theme: preferences, setPreferences } = useContext(PreferencesContext);
+  const { theme: preferences } = useContext(PreferencesContext);
   const { theme } = useTheme();
 
   return (
