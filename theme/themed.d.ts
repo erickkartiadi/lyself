@@ -7,6 +7,7 @@ declare module '@rneui/themed' {
     secondaryLight: string;
     secondaryDark: string;
     cardBackground: string;
+    textColor: string;
 
     purple: string;
     yellow: string;
@@ -14,5 +15,7 @@ declare module '@rneui/themed' {
 
   export interface TextProps {
     bold?: boolean;
+    lg?: boolean;
+    grey?: boolean;
   }
 }

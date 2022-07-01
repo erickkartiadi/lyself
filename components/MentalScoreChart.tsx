@@ -7,45 +7,65 @@ import {
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+
 import styles from '../theme/styles';
 import BaseCard from './BaseCard';
+
+function Emoji({ fill }: { fill: number }) {
+  let currentEmoji = '😁';
+
+  if (fill >= 0) currentEmoji = '😢';
+  if (fill >= 25) currentEmoji = '☹️';
+  if (fill >= 50) currentEmoji = '😐';
+  if (fill >= 60) currentEmoji = '🙂';
+  if (fill >= 80) currentEmoji = '😄';
+  if (fill >= 90) currentEmoji = '🥰';
+
+  return <Text h3>{currentEmoji}</Text>;
+}
 
 function MentalScoreChart() {
   const { theme } = useTheme();
   const { mode } = useThemeMode();
 
   return (
-    <BaseCard containerStyle={{ overflow: 'hidden', padding: 0 }}>
+    <BaseCard
+      containerStyle={{
+        overflow: 'hidden',
+        padding: 0,
+        marginBottom: themeSpacing.md,
+      }}
+    >
       <View
         style={{
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
-          padding: themeSpacing.xl,
-          paddingBottom: 32,
+          padding: themeSpacing.xl * 1.25,
+          marginBottom: themeSpacing.xl * 1.25,
         }}
       >
-        <View
-          style={{
-            backgroundColor: theme.colors.grey2,
-            borderRadius: 100,
-            marginRight: themeSpacing.xl,
-            width: 64,
-            aspectRatio: 1,
-            justifyContent: 'center',
-          }}
+        <AnimatedCircularProgress
+          size={64}
+          width={6}
+          fill={Math.floor(Math.random() * 100) + 1}
+          tintColor={theme.colors.warning}
+          tintColorSecondary={theme.colors.primary}
+          backgroundColor={theme.colors.grey4}
+          prefill={0}
+          style={{ marginRight: themeSpacing.xl }}
         >
-          <Text style={{ textAlign: 'center' }} h1>
-            😀
-          </Text>
-        </View>
+          {(fill) => <Emoji fill={fill} />}
+        </AnimatedCircularProgress>
+
         <View
           style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}
         >
-          <Text h1 style={{ color: theme.colors.success }}>
-            80
+          <Text h3 style={{ color: theme.colors.primary }}>
+            Awesome
           </Text>
-          <Text>Mental score</Text>
+          <Text>Keep up the mood</Text>
         </View>
       </View>
       <LineChart
@@ -62,13 +82,13 @@ function MentalScoreChart() {
           datasets: [
             {
               data: [
-                Math.random() * 100 + 30,
-                Math.random() * 100 + 30,
-                Math.random() * 100 + 30,
-                Math.random() * 100 + 30,
-                Math.random() * 100 + 30,
-                Math.random() * 100 + 30,
-                Math.random() * 100 + 30,
+                Math.floor(Math.random() * 10) + 1,
+                Math.floor(Math.random() * 10) + 1,
+                Math.floor(Math.random() * 10) + 1,
+                Math.floor(Math.random() * 10) + 1,
+                Math.floor(Math.random() * 10) + 1,
+                Math.floor(Math.random() * 10) + 1,
+                Math.floor(Math.random() * 10) + 1,
               ],
             },
           ],

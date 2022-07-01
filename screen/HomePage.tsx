@@ -2,6 +2,12 @@ import { Button, Text } from '@rneui/themed';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
+import {
+  themeSpacing,
+  useTheme,
+} from '@rneui/themed/dist/config/ThemeProvider';
+
+import { Icon } from '@rneui/base';
 import { RecommendedProps, dataRecommended } from '../constant';
 import { PreferencesContext } from '../theme/PreferencesContext';
 import styles from '../theme/styles';
@@ -10,6 +16,7 @@ import ViewSeparator from '../components/ViewSeparator';
 import RecommendedActivityCard from '../components/RecommendedActivityCard';
 import MentalScoreChart from '../components/MentalScoreChart';
 import Dropdown from '../components/Dropdown';
+import BaseCard from '../components/BaseCard';
 
 const renderRecommended = ({ item }: { item: RecommendedProps }) => (
   <RecommendedActivityCard
@@ -23,6 +30,7 @@ const renderRecommended = ({ item }: { item: RecommendedProps }) => (
 
 function HomePage() {
   const { theme: preferences, setPreferences } = useContext(PreferencesContext);
+  const { theme } = useTheme();
 
   return (
     <>
@@ -57,11 +65,52 @@ function HomePage() {
             </View>
           </View>
           <MentalScoreChart />
-        </View>
-        <View style={styles.containerSection}>
-          {/* <Card>
-            <Text>title</Text>
-          </Card> */}
+          <View>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
+              }}
+            >
+              <BaseCard
+                containerStyle={{
+                  width: '48%',
+                }}
+              >
+                <Text bold style={{ marginBottom: themeSpacing.sm }}>
+                  Heart rate
+                </Text>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <View>
+                    <Text h2 h2Style={{ color: theme.colors.primary }}>
+                      100
+                    </Text>
+                    <Text style={{ color: theme.colors.grey1 }}>bpm</Text>
+                  </View>
+                  <View>
+                    <Icon
+                      containerStyle={{
+                        marginRight: 12,
+                      }}
+                      type="font-awesome-5"
+                      name="heartbeat"
+                      size={36}
+                    />
+                  </View>
+                </View>
+              </BaseCard>
+            </View>
+          </View>
         </View>
         <View style={styles.containerSection}>
           <Button

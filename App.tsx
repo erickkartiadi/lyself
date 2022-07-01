@@ -4,9 +4,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useCallback, useEffect, useState } from 'react';
 import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
 import {
-  Inter_300Light,
   Inter_400Regular,
   Inter_500Medium,
+  Inter_600SemiBold,
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
 import * as Font from 'expo-font';
@@ -37,9 +37,9 @@ export default function App() {
       try {
         await SplashScreen.preventAutoHideAsync();
         await Font.loadAsync({
-          'Inter-Light': Inter_300Light,
           Inter: Inter_400Regular,
           'Inter-Medium': Inter_500Medium,
+          'Inter-Semibold': Inter_600SemiBold,
           'Inter-Bold': Inter_700Bold,
         });
       } finally {

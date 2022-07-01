@@ -9,37 +9,42 @@ import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 const myTheme: CreateThemeOptions = createTheme({
   Card: {
     containerStyle: {
-      padding: 0,
       margin: 0,
-      marginTop: themeSpacing.lg,
-      marginBottom: themeSpacing.lg,
-      borderRadius: themeSpacing.lg,
+      padding: themeSpacing.xl,
+      marginTop: themeSpacing.md,
+      marginBottom: themeSpacing.md,
     },
   },
   Text: (props) => ({
     style: {
-      fontWeight: props.bold ? 'bold' : 'normal',
       fontFamily: 'Inter',
-      letterSpacing: 0.5,
+      fontWeight: props.bold ? 'bold' : 'normal',
+      fontSize: props.lg ? 16 : 14,
+      letterSpacing: 0.01,
     },
     h1Style: {
-      fontFamily: 'Inter',
-      fontSize: 22.43,
-      letterSpacing: 0,
+      fontFamily: 'Inter-Bold',
+      fontSize: 29.03,
+      fontWeight: 'bold',
+      letterSpacing: -0.02,
     },
     h2Style: {
-      fontFamily: 'Inter',
-      fontSize: 19.93,
-      letterSpacing: 0.15,
+      fontFamily: 'Inter-Bold',
+      fontSize: 24.19,
+      letterSpacing: -0.018,
+      fontWeight: 'bold',
     },
     h3Style: {
-      fontFamily: 'Inter',
-      fontSize: 17.72,
-      letterSpacing: 0.15,
+      fontFamily: 'Inter-Semibold',
+      fontWeight: '600',
+      fontSize: 20.16,
+      letterSpacing: -0.0175,
     },
     h4Style: {
-      fontSize: 16.75,
-      letterSpacing: 0.1,
+      fontFamily: 'Inter-Medium',
+      fontWeight: '500',
+      fontSize: 16.8,
+      letterSpacing: -0.75,
     },
   }),
   Button: {
@@ -61,6 +66,7 @@ const myTheme: CreateThemeOptions = createTheme({
     yellow: '#FABD22',
     background: '#ffffff',
     cardBackground: '#f7f7f7',
+    textColor: '#242424',
   },
   darkColors: {
     primary: '#bb3b58',
@@ -73,6 +79,7 @@ const myTheme: CreateThemeOptions = createTheme({
     yellow: '#C89200',
     background: '#121212',
     cardBackground: '#222222',
+    textColor: '#f2f2f2',
   },
 });
 

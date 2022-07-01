@@ -69,11 +69,7 @@ function RecommendedActivityCard({
 }: RecommendedActivityProps) {
   return (
     <Pressable onPress={onPress}>
-      <BaseCard
-        containerStyle={{
-          padding: themeSpacing.lg,
-        }}
-      >
+      <BaseCard>
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
           <ActivityIcon activity={activity} />
           <View style={{ paddingRight: themeSpacing.lg }}>

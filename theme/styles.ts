@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   containerSection: {
     paddingHorizontal: themeSpacing.lg,
-    paddingTop: themeSpacing.lg,
+    paddingTop: themeSpacing.md,
   },
 });
 
