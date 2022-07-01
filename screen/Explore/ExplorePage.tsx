@@ -8,8 +8,8 @@ import ActivityIcon, { Activities } from '../../components/ActivityIcon';
 import { PreferencesContext } from '../../theme/PreferencesContext';
 import { styles } from '../../theme';
 import { ArticleCardProps, dataArticles } from '../../constant';
-import ArticleCard from '../../components/widget/ArticleCard';
 import ViewSeparator from '../../components/ViewSeparator';
+import ArticleCard from '../../components/widget/ArticleCard';
 
 export type ExploreRouteParamList = {
   Explore: undefined;
@@ -26,6 +26,7 @@ const renderArticles = ({ item }: { item: ArticleCardProps }) => (
     time={item.time}
     publisher={item.publisher}
     title={item.title}
+    url={item.url}
   />
 );
 
@@ -107,6 +108,9 @@ function ExplorePage({ navigation }: ExplorePageProps) {
               keyExtractor={(item: ArticleCardProps) => item.title}
             />
           </View>
+        </View>
+        <View style={styles.containerSection}>
+          <Text h4>Calming playlist </Text>
         </View>
       </ScrollView>
     </>

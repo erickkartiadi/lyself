@@ -1,15 +1,20 @@
 import { Icon, Image, Text, useTheme } from '@rneui/themed';
 
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
+import * as Linking from 'expo-linking';
 import { ArticleCardProps } from '../../constant';
 import BaseCard from '../BaseCard';
 
-function ArticleCard({ title, publisher, time, src }: ArticleCardProps) {
+function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   const { theme } = useTheme();
 
+  const handleOpenArticle = () => {
+    Linking.openURL(url);
+  };
+
   return (
-    <View>
+    <Pressable onPress={handleOpenArticle}>
       <BaseCard
         containerStyle={{
           width: 280,
@@ -52,7 +57,7 @@ function ArticleCard({ title, publisher, time, src }: ArticleCardProps) {
           </View>
         </View>
       </BaseCard>
-    </View>
+    </Pressable>
   );
 }
 
