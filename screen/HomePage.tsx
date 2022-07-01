@@ -59,6 +59,11 @@ function HomePage() {
           <MentalScoreChart />
         </View>
         <View style={styles.containerSection}>
+          {/* <Card>
+            <Text>title</Text>
+          </Card> */}
+        </View>
+        <View style={styles.containerSection}>
           <Button
             title="Change Theme"
             onPress={() =>

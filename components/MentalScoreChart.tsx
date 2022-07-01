@@ -1,4 +1,4 @@
-import { Card, Text } from '@rneui/themed';
+import { Text } from '@rneui/themed';
 import {
   themeSpacing,
   useTheme,
@@ -8,13 +8,14 @@ import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import styles from '../theme/styles';
+import BaseCard from './BaseCard';
 
 function MentalScoreChart() {
   const { theme } = useTheme();
   const { mode } = useThemeMode();
 
   return (
-    <Card containerStyle={{ overflow: 'hidden' }}>
+    <BaseCard containerStyle={{ overflow: 'hidden', padding: 0 }}>
       <View
         style={{
           flex: 1,
@@ -26,19 +27,21 @@ function MentalScoreChart() {
       >
         <View
           style={{
-            backgroundColor: theme.colors.grey5,
+            backgroundColor: theme.colors.grey2,
             borderRadius: 100,
             marginRight: themeSpacing.xl,
-            width: 58,
+            width: 64,
             aspectRatio: 1,
             justifyContent: 'center',
           }}
         >
-          <Text style={{ textAlign: 'center' }} h2>
+          <Text style={{ textAlign: 'center' }} h1>
             😀
           </Text>
         </View>
-        <View>
+        <View
+          style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}
+        >
           <Text h1 style={{ color: theme.colors.success }}>
             80
           </Text>
@@ -81,9 +84,9 @@ function MentalScoreChart() {
         withHorizontalLabels={false}
         xLabelsOffset={-42}
         chartConfig={{
-          backgroundColor: theme.colors.white,
-          backgroundGradientFrom: theme.colors.white,
-          backgroundGradientTo: theme.colors.white,
+          backgroundColor: theme.colors.cardBackground,
+          backgroundGradientFrom: theme.colors.cardBackground,
+          backgroundGradientTo: theme.colors.cardBackground,
           decimalPlaces: 0,
           color: () => theme.colors.primary,
           labelColor: () => theme.colors.grey1,
@@ -107,7 +110,7 @@ function MentalScoreChart() {
           paddingBottom: -58,
         }}
       />
-    </Card>
+    </BaseCard>
   );
 }
 

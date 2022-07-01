@@ -1,10 +1,11 @@
-import { Card, Text } from '@rneui/themed';
+import { Text } from '@rneui/themed';
 import {
   themeSpacing,
   useTheme,
 } from '@rneui/themed/dist/config/ThemeProvider';
 import React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
+import BaseCard from './BaseCard';
 import BaseIcon from './BaseIcon';
 
 export type Activities = 'music' | 'breathing' | 'meditation' | 'article';
@@ -68,7 +69,7 @@ function RecommendedActivityCard({
 }: RecommendedActivityProps) {
   return (
     <Pressable onPress={onPress}>
-      <Card
+      <BaseCard
         containerStyle={{
           padding: themeSpacing.lg,
         }}
@@ -80,7 +81,7 @@ function RecommendedActivityCard({
             <Text h3>{`${time}m`}</Text>
           </View>
         </View>
-      </Card>
+      </BaseCard>
     </Pressable>
   );
 }

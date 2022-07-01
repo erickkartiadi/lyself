@@ -6,6 +6,7 @@ declare module '@rneui/themed' {
     primaryDark: string;
     secondaryLight: string;
     secondaryDark: string;
+    cardBackground: string;
 
     purple: string;
     yellow: string;

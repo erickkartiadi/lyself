@@ -6,10 +6,6 @@ import {
 
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 
-const myCustomColorsLight = {};
-
-const myCustomColorsDark = {};
-
 const myTheme: CreateThemeOptions = createTheme({
   Card: {
     containerStyle: {
@@ -64,7 +60,7 @@ const myTheme: CreateThemeOptions = createTheme({
     purple: '#9267ED',
     yellow: '#FABD22',
     background: '#ffffff',
-    ...myCustomColorsLight,
+    cardBackground: '#f7f7f7',
   },
   darkColors: {
     primary: '#bb3b58',
@@ -76,7 +72,7 @@ const myTheme: CreateThemeOptions = createTheme({
     purple: '#6A44C5',
     yellow: '#C89200',
     background: '#121212',
-    ...myCustomColorsDark,
+    cardBackground: '#222222',
   },
 });
 
