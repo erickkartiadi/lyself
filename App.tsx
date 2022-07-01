@@ -73,7 +73,7 @@ export default function App() {
         <PreferencesProvider>
           <NavigationContainer>
             <Tab.Navigator
-              initialRouteName="Home"
+              initialRouteName="ExploreRoutes"
               screenOptions={{
                 tabBarShowLabel: false,
                 headerRight: RightHeaderComponent,

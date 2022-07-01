@@ -1,13 +1,19 @@
 import { Text } from '@rneui/themed';
-import { themeSpacing } from '@rneui/themed/dist/config/ThemeProvider';
+import {
+  themeSpacing,
+  useTheme,
+} from '@rneui/themed/dist/config/ThemeProvider';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import BaseSearchBar from '../../components/BaseSearchBar';
 import ActivityIcon, { Activities } from '../../components/ActivityIcon';
 import { PreferencesContext } from '../../theme/PreferencesContext';
 import styles from '../../theme/styles';
+import { ArticleCardProps, dataArticles } from '../../constant';
+import ArticleCard from '../../components/widget/ArticleCard';
+import ViewSeparator from '../../components/ViewSeparator';
 
 export type ExploreRouteParamList = {
   Explore: undefined;
@@ -17,6 +23,15 @@ export type ExplorePageProps = NativeStackScreenProps<
   ExploreRouteParamList,
   'Explore'
 >;
+
+const renderArticles = ({ item }: { item: ArticleCardProps }) => (
+  <ArticleCard
+    src={item.src}
+    time={item.time}
+    publisher={item.publisher}
+    title={item.title}
+  />
+);
 
 function ExplorePage({ navigation }: ExplorePageProps) {
   const { theme: preferences } = useContext(PreferencesContext);
@@ -82,6 +97,20 @@ function ExplorePage({ navigation }: ExplorePageProps) {
               </Pressable>
             </View>
           ))}
+        </View>
+        <View style={styles.containerSection}>
+          <Text h4>Popular articles</Text>
+          <View style={styles.noContainerOffset}>
+            <FlatList
+              horizontal
+              ItemSeparatorComponent={ViewSeparator}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.container}
+              data={dataArticles}
+              renderItem={renderArticles}
+              keyExtractor={(item: ArticleCardProps) => item.title}
+            />
+          </View>
         </View>
       </ScrollView>
     </>

@@ -11,7 +11,7 @@ const myTheme: CreateThemeOptions = createTheme({
   Card: {
     containerStyle: {
       margin: 0,
-      padding: themeSpacing.xl,
+      padding: themeSpacing.lg,
       marginTop: themeSpacing.md,
       marginBottom: themeSpacing.md,
     },
@@ -41,11 +41,12 @@ const myTheme: CreateThemeOptions = createTheme({
       fontWeight: '600',
       fontSize: 17.72,
       marginBottom: themeSpacing.sm,
+      lineHeight: 32,
       letterSpacing: -0.0125,
     },
     h4Style: {
-      fontFamily: 'Inter-Medium',
-      fontWeight: '500',
+      fontFamily: 'Inter-Semibold',
+      fontWeight: '600',
       fontSize: 15.75,
       letterSpacing: -0.25,
       marginBottom: themeSpacing.xs,
