@@ -80,7 +80,7 @@ function HomePage() {
                   width: '48%',
                 }}
               >
-                <Text bold style={{ marginBottom: themeSpacing.sm }}>
+                <Text style={{ marginBottom: themeSpacing.sm }} bold>
                   Heart rate
                 </Text>
                 <View
@@ -100,11 +100,108 @@ function HomePage() {
                   <View>
                     <Icon
                       containerStyle={{
-                        marginRight: 12,
+                        marginRight: themeSpacing.sm,
                       }}
                       type="font-awesome-5"
                       name="heartbeat"
-                      size={36}
+                      size={42}
+                      color={theme.colors.primary}
+                    />
+                  </View>
+                </View>
+              </BaseCard>
+              <BaseCard
+                containerStyle={{
+                  width: '48%',
+                }}
+              >
+                <Text style={{ marginBottom: themeSpacing.sm }} bold>
+                  Blood pressure
+                </Text>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <View>
+                    <Text h2 h2Style={{ color: theme.colors.primaryDark }}>
+                      110/80
+                    </Text>
+                    <Text style={{ color: theme.colors.grey1 }}>mmHg</Text>
+                  </View>
+                  <View>
+                    <Icon
+                      containerStyle={{
+                        marginRight: themeSpacing.sm,
+                      }}
+                      type="fontisto"
+                      name="blood-drop"
+                      size={42}
+                      color={theme.colors.primaryDark}
+                    />
+                  </View>
+                </View>
+              </BaseCard>
+              <BaseCard
+                containerStyle={{
+                  width: '48%',
+                }}
+              >
+                <Text style={{ marginBottom: themeSpacing.sm }} bold>
+                  Screen activity
+                </Text>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <View>
+                    <Text h2 h2Style={{ color: theme.colors.secondary }}>
+                      3h 10m
+                    </Text>
+                    <Text sm style={{ color: theme.colors.grey1 }}>
+                      1h more than yesterday
+                    </Text>
+                  </View>
+                </View>
+              </BaseCard>
+              <BaseCard
+                containerStyle={{
+                  width: '48%',
+                }}
+              >
+                <Text style={{ marginBottom: themeSpacing.sm }} bold>
+                  Sleep time
+                </Text>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <View>
+                    <Text h2 h2Style={{ color: theme.colors.purple }}>
+                      8h 2m
+                    </Text>
+                    <Text style={{ color: theme.colors.grey1 }}>Yesterday</Text>
+                  </View>
+                  <View>
+                    <Icon
+                      containerStyle={{
+                        marginRight: themeSpacing.sm,
+                      }}
+                      type="ionicon"
+                      name="moon"
+                      size={42}
+                      color={theme.colors.yellow}
                     />
                   </View>
                 </View>

@@ -18,25 +18,25 @@ export function ActivityIcon({ activity }: { activity: Activities }) {
       type: 'material-community',
       name: 'meditation',
       backgroundColor: theme.colors.yellow,
-      iconSize: 48,
+      iconSize: 42,
     },
     music: {
       type: 'material-community',
       name: 'music-note',
       backgroundColor: theme.colors.purple,
-      iconSize: 40,
+      iconSize: 36,
     },
     breathing: {
       type: 'entypo',
       name: 'air',
       backgroundColor: theme.colors.secondary,
-      iconSize: 32,
+      iconSize: 30,
     },
     article: {
       type: 'ionicon',
       name: 'newspaper',
       backgroundColor: theme.colors.primary,
-      iconSize: 32,
+      iconSize: 30,
     },
   };
 

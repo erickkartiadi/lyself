@@ -10,7 +10,7 @@ const myTheme: CreateThemeOptions = createTheme({
   Card: {
     containerStyle: {
       margin: 0,
-      padding: themeSpacing.xl,
+      padding: themeSpacing.lg,
       marginTop: themeSpacing.md,
       marginBottom: themeSpacing.md,
     },
@@ -19,7 +19,7 @@ const myTheme: CreateThemeOptions = createTheme({
     style: {
       fontFamily: 'Inter',
       fontWeight: props.bold ? 'bold' : 'normal',
-      fontSize: props.lg ? 16 : 14,
+      fontSize: props.sm ? 12.5 : 14,
       letterSpacing: 0.01,
     },
     h1Style: {
