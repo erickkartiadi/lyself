@@ -10,31 +10,12 @@ import {
 } from '@expo-google-fonts/inter';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import NavigationContainer from './components/NavigationContainer';
-import UserPage from './screen/UserPage';
-import HomePage from './screen/HomePage';
 import { myTheme } from './theme';
-import ChatPage from './screen/ChatPage';
+
 import { PreferencesProvider } from './theme/PreferencesContext';
-import {
-  ChatTabBarIcon,
-  ExploreTabBarIcon,
-  HomeTabBarIcon,
-  UserTabBarIcon,
-} from './components/BottomTabBarIcons';
-import RightHeaderComponent from './components/RightHeaderComponent';
-import LeftHeaderComponent from './components/LeftHeaderComponent';
-import ExploreRoutes from './screen/Explore/Explore.routes';
 
-export type RootStackParamList = {
-  Home: undefined;
-  Chat: undefined;
-  User: undefined;
-  ExploreRoutes: undefined;
-};
-
-const Tab = createBottomTabNavigator<RootStackParamList>();
+import Routes from './screen/Routes';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -72,42 +53,7 @@ export default function App() {
       <SafeAreaProvider onLayout={onLayoutRootView}>
         <PreferencesProvider>
           <NavigationContainer>
-            <Tab.Navigator
-              initialRouteName="ExploreRoutes"
-              screenOptions={{
-                tabBarShowLabel: false,
-                headerRight: RightHeaderComponent,
-                headerStyle: { height: 100 },
-                headerTitleContainerStyle: { marginStart: 0 },
-                // headerLeftContainerStyle: { marginStart: themeSpacing.lg },
-                // headerRightContainerStyle: { marginEnd: themeSpacing.lg },
-              }}
-            >
-              <Tab.Screen
-                options={{
-                  headerTitleStyle: { display: 'none' },
-                  headerLeft: LeftHeaderComponent,
-                  tabBarIcon: HomeTabBarIcon,
-                }}
-                name="Home"
-                component={HomePage}
-              />
-              <Tab.Screen
-                name="ExploreRoutes"
-                component={ExploreRoutes}
-                options={{ tabBarIcon: ExploreTabBarIcon, title: 'Explore' }}
-              />
-              <Tab.Screen
-                name="Chat"
-                component={ChatPage}
-                options={{ tabBarIcon: ChatTabBarIcon }}
-              />
-              <Tab.Screen
-                name="User"
-                component={UserPage}
-                options={{ tabBarIcon: UserTabBarIcon }}
-              />
-            </Tab.Navigator>
+            <Routes />
           </NavigationContainer>
         </PreferencesProvider>
       </SafeAreaProvider>
