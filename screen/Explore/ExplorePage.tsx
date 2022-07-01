@@ -7,9 +7,14 @@ import BaseSearchBar from '../../components/BaseSearchBar';
 import ActivityIcon, { Activities } from '../../components/ActivityIcon';
 import { PreferencesContext } from '../../theme/PreferencesContext';
 import { styles } from '../../theme';
-import { ArticleCardProps, dataArticles } from '../../constant';
+import { dataArticles, playlistIds } from '../../constant';
 import ViewSeparator from '../../components/ViewSeparator';
-import ArticleCard from '../../components/widget/ArticleCard';
+import ArticleCard, {
+  ArticleCardProps,
+} from '../../components/widget/ArticleCard';
+import PlaylistCard, {
+  PlaylistCardProps,
+} from '../../components/widget/PlaylistCard';
 
 export type ExploreRouteParamList = {
   Explore: undefined;
@@ -20,6 +25,9 @@ export type ExplorePageProps = NativeStackScreenProps<
   'Explore'
 >;
 
+const renderPlaylist = ({ item }: { item: PlaylistCardProps }) => (
+  <PlaylistCard key={item.id} id={item.id} />
+);
 const renderArticles = ({ item }: { item: ArticleCardProps }) => (
   <ArticleCard
     src={item.src}
@@ -96,7 +104,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
           ))}
         </View>
         <View style={styles.containerSection}>
-          <Text h4>Popular articles</Text>
+          <Text h3>Popular articles</Text>
           <View style={styles.noContainerOffset}>
             <FlatList
               horizontal
@@ -110,7 +118,21 @@ function ExplorePage({ navigation }: ExplorePageProps) {
           </View>
         </View>
         <View style={styles.containerSection}>
-          <Text h4>Calming playlist </Text>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            <Text h3>Calming playlist </Text>
+            <ActivityIcon activity="music" size={24} iconFontSize={16} />
+          </View>
+          <View style={styles.noContainerOffset}>
+            <FlatList
+              horizontal
+              ItemSeparatorComponent={ViewSeparator}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.container}
+              data={playlistIds}
+              renderItem={renderPlaylist}
+              keyExtractor={(item: PlaylistCardProps) => item.id}
+            />
+          </View>
         </View>
       </ScrollView>
     </>

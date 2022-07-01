@@ -1,4 +1,6 @@
 import { Activities } from './components/ActivityIcon';
+import { ArticleCardProps } from './components/widget/ArticleCard';
+import { PlaylistCardProps } from './components/widget/PlaylistCard';
 
 export type RecommendedProps = {
   id: string;
@@ -7,13 +9,14 @@ export type RecommendedProps = {
   time: number;
 };
 
-export interface ArticleCardProps {
-  title: string;
-  publisher: string;
-  time: string;
-  src: string;
-  url: string;
-}
+export const playlistIds: PlaylistCardProps[] = [
+  { id: '37i9dQZF1DX1s9knjP51Oa' },
+  { id: '4dlYSpSOZjDZizTaiX7Kjy' },
+  { id: '37i9dQZF1DX4WYpdgoIcn6' },
+  { id: '37i9dQZF1DWWQRwui0ExPn' },
+  { id: '1Ty8JKNLTI5C7DKE65jvb9' },
+  { id: '37i9dQZF1DX2vYju3i0lNX' },
+];
 
 // image by: unsplash
 export const dataArticles: ArticleCardProps[] = [

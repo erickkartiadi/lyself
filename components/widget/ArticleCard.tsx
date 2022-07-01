@@ -3,8 +3,15 @@ import { Icon, Image, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { ActivityIndicator, Pressable, View } from 'react-native';
 import * as Linking from 'expo-linking';
-import { ArticleCardProps } from '../../constant';
 import BaseCard from '../BaseCard';
+
+export interface ArticleCardProps {
+  title: string;
+  publisher: string;
+  time: string;
+  src: string;
+  url: string;
+}
 
 function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   const { theme } = useTheme();
@@ -20,6 +27,7 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
           width: 280,
           paddingTop: 0,
           paddingHorizontal: 0,
+
           borderWidth: 0,
           elevation: 0,
           borderRadius: theme.spacing.xl,
@@ -40,7 +48,7 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
         <View
           style={{
             padding: theme.spacing.xl,
-            paddingBottom: theme.spacing.md,
+            paddingBottom: theme.spacing.xs,
           }}
         >
           <Text h4>{title}</Text>

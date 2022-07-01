@@ -12,6 +12,7 @@ function ProgressCard() {
     <BaseCard>
       <View
         style={{
+          paddingTop: theme.spacing.sm,
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
