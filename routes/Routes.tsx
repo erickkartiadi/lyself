@@ -29,6 +29,11 @@ function Routes() {
         headerStyle: { height: 100 },
         headerTitleContainerStyle: { marginStart: 0 },
         headerLeftContainerStyle: { marginStart: theme.spacing.lg },
+        headerTitleStyle: {
+          fontWeight: '800',
+          fontFamily: 'Inter-ExtraBold',
+          fontSize: 22.43,
+        },
         headerRightContainerStyle: { marginEnd: theme.spacing.lg },
       }}
     >

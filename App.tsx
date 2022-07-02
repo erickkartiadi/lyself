@@ -6,6 +6,7 @@ import {
   Inter_500Medium,
   Inter_600SemiBold,
   Inter_700Bold,
+  Inter_800ExtraBold,
 } from '@expo-google-fonts/inter';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -30,6 +31,7 @@ export default function App() {
           'Inter-Medium': Inter_500Medium,
           'Inter-Semibold': Inter_600SemiBold,
           'Inter-Bold': Inter_700Bold,
+          'Inter-ExtraBold': Inter_800ExtraBold,
         });
       } finally {
         setAppIsReady(true);
