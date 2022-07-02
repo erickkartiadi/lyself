@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
   containerSection: {
     paddingHorizontal: themeSpacing.lg,
     paddingTop: themeSpacing.md,
+    marginTop: themeSpacing.xl,
   },
 });
 
@@ -56,6 +57,7 @@ const myTheme: CreateThemeOptions = createTheme({
       fontSize: 15.75,
       letterSpacing: 0.15,
       fontFamily: 'Inter-Semibold',
+      // marginBottom: themeSpacing.sm,
     },
     h4Style: {
       fontSize: 14,

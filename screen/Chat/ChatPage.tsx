@@ -5,11 +5,12 @@ import { FlatList, ScrollView, View } from 'react-native';
 import ViewSeparator from '../../components/ViewSeparator';
 import { styles } from '../../theme';
 import { comingSoonToast } from '../../utils/comingSoonToast';
-import { psychiatristData } from '../../constant';
+import { chatData, psychiatristData } from '../../constant';
 import { ChatRouteParamList } from '../../routes/types';
 import PsychiatristAvatar, {
   PsychiatristDataProp,
 } from '../../components/PsychiatristAvatar';
+import Chat from '../../components/Chat';
 
 const renderPsychiatristAvatar = ({ item }: { item: PsychiatristDataProp }) => (
   <PsychiatristAvatar
@@ -90,6 +91,22 @@ function ChatPage({ navigation }: ChatPageProps) {
             renderItem={renderPsychiatristAvatar}
             keyExtractor={(item: PsychiatristDataProp) => item.name}
           />
+        </View>
+      </View>
+
+      <View style={styles.containerSection}>
+        <Text h3>Active chats</Text>
+        <View style={styles.noContainerOffset}>
+          {chatData.map(({ name, text, unread, time, avatar_url }) => (
+            <Chat
+              key={name}
+              name={name}
+              text={text}
+              unread={unread}
+              time={time}
+              avatarUrl={avatar_url}
+            />
+          ))}
         </View>
       </View>
     </ScrollView>

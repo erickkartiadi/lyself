@@ -34,7 +34,6 @@ function HomePage() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: theme.spacing.xl,
-          paddingTop: theme.spacing.lg,
         }}
       >
         <View style={styles.containerSection}>
