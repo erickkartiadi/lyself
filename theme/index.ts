@@ -74,7 +74,7 @@ const myTheme: CreateThemeOptions = createTheme({
       marginHorizontal: styles.containerSection.paddingHorizontal,
     },
     buttonStyle: {
-      paddingVertical: themeSpacing.lg,
+      // paddingVertical: themeSpacing.lg,
       paddingHorizontal: themeSpacing.lg,
     },
     titleStyle: {
@@ -96,6 +96,9 @@ const myTheme: CreateThemeOptions = createTheme({
     background: '#ffffff',
     cardBackground: '#f7f7f7',
     textColor: '#242424',
+    brand: {
+      spotify: '#1db954',
+    },
   },
   darkColors: {
     primary: '#bb3b58',
@@ -109,6 +112,9 @@ const myTheme: CreateThemeOptions = createTheme({
     background: '#121212',
     cardBackground: '#222222',
     textColor: '#f2f2f2',
+    brand: {
+      spotify: '#1db954',
+    },
   },
 });
 

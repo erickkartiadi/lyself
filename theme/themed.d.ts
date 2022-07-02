@@ -8,9 +8,11 @@ declare module '@rneui/themed' {
     secondaryDark: string;
     cardBackground: string;
     textColor: string;
-
     purple: string;
     yellow: string;
+    brand: {
+      spotify: string;
+    };
   }
 
   export interface TextProps {
