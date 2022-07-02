@@ -15,7 +15,7 @@ import { myTheme } from './theme';
 
 import { PreferencesProvider } from './theme/PreferencesContext';
 
-import Routes from './screen/Routes';
+import Routes from './routes/Routes';
 
 export default function App() {
   Linking.createURL('exp://192.168.1.101:19000');

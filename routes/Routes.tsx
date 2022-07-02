@@ -9,17 +9,11 @@ import {
 } from '../components/BottomTabBarIcons';
 import LeftHeaderComponent from '../components/LeftHeaderComponent';
 import RightHeaderComponent from '../components/RightHeaderComponent';
-import ChatPage from './ChatPage';
-import ExploreRoutes from './Explore/Explore.routes';
-import HomePage from './HomePage';
-import UserPage from './UserPage';
-
-export type RootStackParamList = {
-  Home: undefined;
-  Chat: undefined;
-  User: undefined;
-  ExploreRoutes: undefined;
-};
+import HomePage from '../screen/HomePage';
+import UserPage from '../screen/UserPage';
+import ChatRoutes from './Chat.routes';
+import ExploreRoutes from './Explore.routes';
+import { RootStackParamList } from './types';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -28,7 +22,7 @@ function Routes() {
 
   return (
     <Tab.Navigator
-      initialRouteName="ExploreRoutes"
+      initialRouteName="ChatRoutes"
       screenOptions={{
         tabBarShowLabel: false,
         headerRight: RightHeaderComponent,
@@ -53,9 +47,9 @@ function Routes() {
         options={{ tabBarIcon: ExploreTabBarIcon, title: 'Explore' }}
       />
       <Tab.Screen
-        name="Chat"
-        component={ChatPage}
-        options={{ tabBarIcon: ChatTabBarIcon }}
+        name="ChatRoutes"
+        component={ChatRoutes}
+        options={{ tabBarIcon: ChatTabBarIcon, title: 'Chat' }}
       />
       <Tab.Screen
         name="User"

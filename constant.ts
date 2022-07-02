@@ -1,6 +1,5 @@
 import { Activities } from './components/ActivityIcon';
 import { ArticleCardProps } from './components/widget/ArticleCard';
-import { PlaylistCardProps } from './components/widget/PlaylistCard';
 
 export type RecommendedProps = {
   id: string;
@@ -9,13 +8,37 @@ export type RecommendedProps = {
   time: number;
 };
 
-export const playlistIds: PlaylistCardProps[] = [
-  { id: '37i9dQZF1DX1s9knjP51Oa' },
-  { id: '4dlYSpSOZjDZizTaiX7Kjy' },
-  { id: '37i9dQZF1DX4WYpdgoIcn6' },
-  { id: '37i9dQZF1DWWQRwui0ExPn' },
-  { id: '1Ty8JKNLTI5C7DKE65jvb9' },
-  { id: '37i9dQZF1DX2vYju3i0lNX' },
+export const psychiatristData = [
+  {
+    uri: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
+    experience: '4 year',
+    name: 'Dr. Theres Webb',
+  },
+  {
+    uri: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
+    experience: '6 year',
+    name: 'Dr. Usman Yousaf',
+  },
+  {
+    uri: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
+    experience: '3 year',
+    name: 'Dr. Austin Distel',
+  },
+  {
+    uri: 'https://images.unsplash.com/photo-1642050923713-c48db6ea4bec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
+    experience: '5 year',
+    name: 'Dr. Kirstin Watson',
+  },
+  {
+    uri: 'https://images.unsplash.com/photo-1622253694238-3b22139576c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
+    experience: '6 year',
+    name: 'Dr. Bruno Rodrigues',
+  },
+  {
+    uri: 'https://images.unsplash.com/photo-1576669801775-ff43c5ab079d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
+    experience: '2 year',
+    name: 'Dr. Floyd Miles',
+  },
 ];
 
 // image by: unsplash

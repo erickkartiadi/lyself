@@ -5,7 +5,6 @@ import { FlatList, Pressable, ScrollView, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
-
 import BaseSearchBar from '../../components/BaseSearchBar';
 import ActivityIcon, { Activities } from '../../components/ActivityIcon';
 import { PreferencesContext } from '../../theme/PreferencesContext';
@@ -18,11 +17,8 @@ import ArticleCard, {
 import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/widget/PlaylistCard';
+import { ExploreRouteParamList } from '../../routes/types';
 
-export type ExploreRouteParamList = {
-  Explore: undefined;
-  Progress: undefined;
-};
 export type ExplorePageProps = NativeStackScreenProps<
   ExploreRouteParamList,
   'Explore'

@@ -1,7 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Progress from '../ErrorPages/InDevelopment';
-import ExplorePage, { ExploreRouteParamList } from './ExplorePage';
+import Progress from '../screen/ErrorPages/InDevelopment';
+import ExplorePage from '../screen/Explore/ExplorePage';
+import { ExploreRouteParamList } from './types';
 
 const Stack = createNativeStackNavigator<ExploreRouteParamList>();
 

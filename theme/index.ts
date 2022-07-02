@@ -59,23 +59,17 @@ const myTheme: CreateThemeOptions = createTheme({
     },
     h4Style: {
       fontSize: 14,
-      letterSpacing: 0.15,
+      letterSpacing: 0,
       fontFamily: 'Inter-Medium',
     },
   }),
   Button: (props) => ({
     radius: themeSpacing.md,
-    iconContainerStyle: {
-      marginEnd: props.iconPosition === 'left' ? themeSpacing.md : 0,
-      marginStart: props.iconPosition === 'right' ? themeSpacing.md : 0,
-    },
     containerStyle: {
       alignItems: props.fullWidth ? 'stretch' : 'center',
-      marginHorizontal: styles.containerSection.paddingHorizontal,
-    },
-    buttonStyle: {
-      // paddingVertical: themeSpacing.lg,
-      paddingHorizontal: themeSpacing.lg,
+      marginHorizontal: props.fullWidth
+        ? styles.containerSection.paddingHorizontal
+        : 0,
     },
     titleStyle: {
       fontFamily: 'Inter-Medium',
