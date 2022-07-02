@@ -10,7 +10,6 @@ import {
 } from '@expo-google-fonts/inter';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import * as Linking from 'expo-linking';
 import NavigationContainer from './components/NavigationContainer';
 import { myTheme } from './theme';
 
@@ -19,7 +18,6 @@ import { PreferencesProvider } from './theme/PreferencesContext';
 import Routes from './routes/Routes';
 
 export default function App() {
-  Linking.createURL('exp://192.168.1.101:19000');
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {

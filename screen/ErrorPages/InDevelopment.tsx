@@ -15,7 +15,7 @@ function Progress({ navigation }: ExplorePageProps) {
       }}
     >
       <Text h4 style={{ textAlign: 'center' }}>
-        Sorry, this page is still in development 🚀
+        Sorry, this page is still in development 🚧
       </Text>
       <Button
         onPress={() => navigation.navigate('Explore')}

@@ -22,7 +22,7 @@ function Routes() {
 
   return (
     <Tab.Navigator
-      initialRouteName="User"
+      initialRouteName="Home"
       screenOptions={{
         tabBarShowLabel: false,
         headerRight: RightHeaderComponent,
