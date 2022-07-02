@@ -12,13 +12,13 @@ const themeSpacing = {
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: themeSpacing.lg,
+    paddingHorizontal: themeSpacing.xl,
   },
   noContainerOffset: {
-    marginHorizontal: themeSpacing.lg * -1,
+    marginHorizontal: themeSpacing.xl * -1,
   },
   containerSection: {
-    paddingHorizontal: themeSpacing.lg,
+    paddingHorizontal: themeSpacing.xl,
     paddingTop: themeSpacing.md,
     marginTop: themeSpacing.xl,
   },
@@ -43,25 +43,27 @@ const myTheme: CreateThemeOptions = createTheme({
     },
     h1Style: {
       fontSize: 19.93,
-      letterSpacing: 0.05,
+      letterSpacing: -0.125,
       fontWeight: 'bold',
       fontFamily: 'Inter-Bold',
     },
     h2Style: {
       fontSize: 17.72,
-      letterSpacing: 0.1,
-      fontWeight: 'bold',
-      fontFamily: 'Inter-Bold',
+      letterSpacing: -0.1,
+      fontWeight: '600',
+      fontFamily: 'Inter-Semibold',
     },
     h3Style: {
       fontSize: 15.75,
-      letterSpacing: 0.15,
-      fontFamily: 'Inter-Semibold',
+      letterSpacing: -0.05,
+      fontWeight: '500',
+      fontFamily: 'Inter-Medium',
       // marginBottom: themeSpacing.sm,
     },
     h4Style: {
       fontSize: 14,
       letterSpacing: 0,
+      fontWeight: '500',
       fontFamily: 'Inter-Medium',
     },
   }),

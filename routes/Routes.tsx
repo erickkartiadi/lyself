@@ -22,7 +22,7 @@ function Routes() {
 
   return (
     <Tab.Navigator
-      initialRouteName="ChatRoutes"
+      initialRouteName="User"
       screenOptions={{
         tabBarShowLabel: false,
         headerRight: RightHeaderComponent,
@@ -32,7 +32,6 @@ function Routes() {
         headerTitleStyle: {
           fontWeight: '800',
           fontFamily: 'Inter-ExtraBold',
-          fontSize: 22.43,
         },
         headerRightContainerStyle: { marginEnd: theme.spacing.lg },
       }}
@@ -59,7 +58,7 @@ function Routes() {
       <Tab.Screen
         name="User"
         component={UserPage}
-        options={{ tabBarIcon: UserTabBarIcon }}
+        options={{ tabBarIcon: UserTabBarIcon, title: 'Account' }}
       />
     </Tab.Navigator>
   );

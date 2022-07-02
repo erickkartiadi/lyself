@@ -51,7 +51,6 @@ function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
       leftContent={LeftSwipeButton}
       rightContent={RightSwipeButton}
       key={name}
-      bottomDivider
       containerStyle={{
         paddingHorizontal: styles.containerSection.paddingHorizontal,
         backgroundColor: theme.colors.background,
