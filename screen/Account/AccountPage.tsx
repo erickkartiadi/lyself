@@ -1,12 +1,10 @@
 import { Avatar, Divider, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import SettingMenu from '../components/SettingMenu';
-import SwitchModeSettingMenu from '../components/SwitchModeSettingMenu';
-import { styles } from '../theme';
-import { ChatPageProps } from './Chat/ChatPage';
+import SettingMenu from '../../components/SettingMenu';
+import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
 
-function UserPage({ navigation }: ChatPageProps) {
+function AccountPage() {
   const { theme } = useTheme();
 
   return (
@@ -36,7 +34,7 @@ function UserPage({ navigation }: ChatPageProps) {
               marginBottom: theme.spacing.md,
             }}
             source={{
-              uri: 'https://instagram.fcgk29-1.fna.fbcdn.net/v/t51.2885-19/262444890_632892304395690_6565347219672419326_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fcgk29-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=00380RuglZsAX9mCexL&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT9K0obl2_YwfnRcz-qfHMkavh0EsD9blyjKG53ishhK0Q&oe=62C79450&_nc_sid=8fd12b',
+              uri: 'https://images.unsplash.com/photo-1605979399824-542335ee35d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
             }}
           />
           <Text h3 h2Style={{ marginBottom: 2 }}>
@@ -142,4 +140,4 @@ function UserPage({ navigation }: ChatPageProps) {
   );
 }
 
-export default UserPage;
+export default AccountPage;

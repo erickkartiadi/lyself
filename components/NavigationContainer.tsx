@@ -1,8 +1,8 @@
-import { NavigationContainer as RNENavigationContainer } from '@react-navigation/native';
+import { NavigationContainer as Container } from '@react-navigation/native';
 import React, { PropsWithChildren, ReactNode, useContext } from 'react';
 import * as Linking from 'expo-linking';
 import { navThemeDark, navThemeLight } from '../theme';
-import { PreferencesContext } from '../theme/PreferencesContext';
+import { ThemeModeContext } from '../theme/ThemeModeContext';
 
 const prefix = Linking.createURL('/');
 
@@ -12,15 +12,15 @@ function NavigationContainer({
   const linking = {
     prefixes: [prefix],
   };
-  const { theme } = useContext(PreferencesContext);
+  const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
-    <RNENavigationContainer
+    <Container
       linking={linking}
-      theme={theme === 'light' ? navThemeLight : navThemeDark}
+      theme={isDarkMode ? navThemeDark : navThemeLight}
     >
       {children}
-    </RNENavigationContainer>
+    </Container>
   );
 }
 

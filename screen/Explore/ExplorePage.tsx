@@ -1,13 +1,11 @@
 import { Button, Text, useTheme } from '@rneui/themed';
-import { StatusBar } from 'expo-status-bar';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import BaseSearchBar from '../../components/BaseSearchBar';
 import ActivityIcon, { Activities } from '../../components/ActivityIcon';
-import { PreferencesContext } from '../../theme/PreferencesContext';
 import { styles } from '../../theme';
 import { dataArticles } from '../../constant';
 import ViewSeparator from '../../components/ViewSeparator';
@@ -24,33 +22,6 @@ export type ExplorePageProps = NativeStackScreenProps<
   'Explore'
 >;
 
-const renderPlaylist = ({ item }: { item: any }) => {
-  const { name, id } = item;
-  const imageUrl = item.images[0].url;
-  const creator = item.owner.display_name;
-  const spotifyUrl = item.external_urls.spotify;
-  return (
-    <PlaylistCard
-      key={id}
-      id={id}
-      title={name}
-      imageUrl={imageUrl}
-      creator={creator}
-      spotifyUrl={spotifyUrl}
-    />
-  );
-};
-
-const renderArticles = ({ item }: { item: ArticleCardProps }) => (
-  <ArticleCard
-    src={item.src}
-    time={item.time}
-    publisher={item.publisher}
-    title={item.title}
-    url={item.url}
-  />
-);
-
 const CLIENT_ID = '189bb29572b34ba29b2c243cae7f6105';
 const discovery = {
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
@@ -58,10 +29,36 @@ const discovery = {
 };
 
 function ExplorePage({ navigation }: ExplorePageProps) {
-  const { theme: preferences } = useContext(PreferencesContext);
   const { theme } = useTheme();
   const [token, setToken] = useState('');
   const [featuredPlaylist, setFeaturedPlaylist] = useState([]);
+
+  const renderPlaylist = ({ item }: { item: any }) => {
+    const { name, id } = item;
+    const imageUrl = item.images[0].url;
+    const creator = item.owner.display_name;
+    const spotifyUrl = item.external_urls.spotify;
+    return (
+      <PlaylistCard
+        key={id}
+        id={id}
+        title={name}
+        imageUrl={imageUrl}
+        creator={creator}
+        spotifyUrl={spotifyUrl}
+      />
+    );
+  };
+
+  const renderArticles = ({ item }: { item: ArticleCardProps }) => (
+    <ArticleCard
+      src={item.src}
+      time={item.time}
+      publisher={item.publisher}
+      title={item.title}
+      url={item.url}
+    />
+  );
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -119,108 +116,105 @@ function ExplorePage({ navigation }: ExplorePageProps) {
   ];
 
   return (
-    <>
-      <StatusBar style={preferences === 'light' ? 'dark' : 'light'} />
-      <ScrollView
-        contentContainerStyle={{
-          paddingBottom: theme.spacing.xl,
-          paddingTop: theme.spacing.lg,
+    <ScrollView
+      contentContainerStyle={{
+        paddingBottom: theme.spacing.xl,
+        paddingTop: theme.spacing.lg,
+      }}
+    >
+      <BaseSearchBar placeholder="Search tools, news or forum" />
+      <View
+        style={{
+          ...styles.containerSection,
+          ...styles.noContainerOffset,
+          marginTop: theme.spacing.lg,
+          flex: 1,
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-around',
         }}
       >
-        <BaseSearchBar />
+        {activityMenu.map((activity) => (
+          <View
+            key={activity}
+            style={{
+              width: '25%',
+            }}
+          >
+            <Pressable
+              style={{
+                alignItems: 'center',
+                marginBottom: theme.spacing.xl * 1.25,
+              }}
+              onPress={() => navigation.navigate('Progress')}
+            >
+              <ActivityIcon activity={activity} />
+              <Text
+                sm
+                grey
+                style={{
+                  marginTop: theme.spacing.md,
+                  textAlign: 'center',
+                  textTransform: 'capitalize',
+                }}
+              >
+                {activity}
+              </Text>
+            </Pressable>
+          </View>
+        ))}
+      </View>
+      <View style={styles.containerSection}>
+        <Text h3>Popular articles</Text>
+        <View style={styles.noContainerOffset}>
+          <FlatList
+            horizontal
+            ItemSeparatorComponent={ViewSeparator}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.container}
+            data={dataArticles}
+            renderItem={renderArticles}
+            keyExtractor={(item: ArticleCardProps) => item.title}
+          />
+        </View>
+      </View>
+      <View style={styles.containerSection}>
         <View
           style={{
-            ...styles.containerSection,
-            ...styles.noContainerOffset,
-            marginTop: theme.spacing.lg,
             flex: 1,
             flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around',
+            alignItems: 'center',
           }}
         >
-          {activityMenu.map((activity) => (
-            <View
-              key={activity}
-              style={{
-                width: '25%',
-              }}
-            >
-              <Pressable
-                style={{
-                  alignItems: 'center',
-                  marginBottom: theme.spacing.xl * 1.25,
-                }}
-                onPress={() => navigation.navigate('Progress')}
-              >
-                <ActivityIcon activity={activity} />
-                <Text
-                  sm
-                  grey
-                  style={{
-                    marginTop: theme.spacing.md,
-                    textAlign: 'center',
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  {activity}
-                </Text>
-              </Pressable>
-            </View>
-          ))}
+          <Text h3>Featured playlist </Text>
+          <ActivityIcon activity="music" size={24} iconFontSize={16} />
         </View>
-        <View style={styles.containerSection}>
-          <Text h3>Popular articles</Text>
-          <View style={styles.noContainerOffset}>
+        <View style={styles.noContainerOffset}>
+          {token ? (
             <FlatList
               horizontal
               ItemSeparatorComponent={ViewSeparator}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.container}
-              data={dataArticles}
-              renderItem={renderArticles}
-              keyExtractor={(item: ArticleCardProps) => item.title}
+              data={featuredPlaylist}
+              renderItem={renderPlaylist}
+              keyExtractor={(item: PlaylistCardProps) => item.id}
             />
-          </View>
+          ) : (
+            <Button
+              fullWidth
+              title="Connect to Spotify to see your playlist"
+              iconPosition="left"
+              size="lg"
+              icon={{ type: 'fontisto', name: 'spotify' }}
+              color={theme.colors.brand.spotify}
+              onPress={() => promptAsync()}
+              containerStyle={{ marginTop: theme.spacing.lg }}
+            />
+          )}
         </View>
-        <View style={styles.containerSection}>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Text h3>Featured playlist </Text>
-            <ActivityIcon activity="music" size={24} iconFontSize={16} />
-          </View>
-          <View style={styles.noContainerOffset}>
-            {token ? (
-              <FlatList
-                horizontal
-                ItemSeparatorComponent={ViewSeparator}
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.container}
-                data={featuredPlaylist}
-                renderItem={renderPlaylist}
-                keyExtractor={(item: PlaylistCardProps) => item.id}
-              />
-            ) : (
-              <Button
-                fullWidth
-                title="Connect to Spotify to see your playlist"
-                iconPosition="left"
-                size="lg"
-                icon={{ type: 'fontisto', name: 'spotify' }}
-                color={theme.colors.brand.spotify}
-                onPress={() => promptAsync()}
-                containerStyle={{ marginTop: theme.spacing.lg }}
-              />
-            )}
-          </View>
-        </View>
-      </ScrollView>
-    </>
+      </View>
+    </ScrollView>
   );
 }
 

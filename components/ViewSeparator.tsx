@@ -5,7 +5,7 @@ import { View } from 'react-native';
 function ViewSeparator() {
   const { theme } = useTheme();
 
-  return <View style={{ width: theme.spacing.lg * 1.25 }} />;
+  return <View style={{ width: theme.spacing.xl }} />;
 }
 
 export default ViewSeparator;

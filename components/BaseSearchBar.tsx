@@ -3,7 +3,11 @@ import { SearchBar, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 import { styles } from '../theme';
 
-function BaseSearchBar() {
+interface BaseSearchBarProps {
+  placeholder: string;
+}
+
+function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
   const [searchText, setSearchText] = useState('');
   const { theme } = useTheme();
 
@@ -13,7 +17,7 @@ function BaseSearchBar() {
 
   return (
     <SearchBar
-      placeholder="Search tools, news or forum"
+      placeholder={placeholder}
       onChangeText={updateSearch}
       containerStyle={{
         backgroundColor: 'transparent',

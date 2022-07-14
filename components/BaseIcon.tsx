@@ -6,8 +6,8 @@ function BaseIcon({
   containerStyle,
   backgroundColor,
   size,
-  iconSize,
   color,
+  iconSize,
   iconType,
   iconName,
 }: {

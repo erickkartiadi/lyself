@@ -1,6 +1,7 @@
-import { Icon, Text, useTheme, useThemeMode } from '@rneui/themed';
-import React from 'react';
+import { Icon, Text, useTheme } from '@rneui/themed';
+import React, { useContext } from 'react';
 import { ColorValue, Pressable, View } from 'react-native';
+import { ThemeModeContext } from '../theme/ThemeModeContext';
 import BaseIcon from './BaseIcon';
 
 interface SettingMenuProp {
@@ -43,7 +44,7 @@ function SettingMenu({
   value,
 }: SettingMenuProp) {
   const { theme } = useTheme();
-  const { mode } = useThemeMode();
+  const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
     <Pressable
@@ -67,7 +68,7 @@ function SettingMenu({
         }}
       >
         <BaseIcon
-          backgroundColor={mode === 'dark' ? bgColorDark : bgColor}
+          backgroundColor={isDarkMode ? bgColorDark : bgColor}
           iconSize={18}
           size={32}
           color="white"

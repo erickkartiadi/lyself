@@ -12,18 +12,22 @@ import PsychiatristAvatar, {
 } from '../../components/PsychiatristAvatar';
 import Chat from '../../components/Chat';
 
-const renderPsychiatristAvatar = ({ item }: { item: PsychiatristDataProp }) => (
-  <PsychiatristAvatar
-    name={item.name}
-    experience={item.experience}
-    uri={item.uri}
-  />
-);
-
 export type ChatPageProps = NativeStackScreenProps<ChatRouteParamList, 'Chat'>;
 
-function ChatPage({ navigation }: ChatPageProps) {
+function ChatPage() {
   const { theme } = useTheme();
+
+  const renderPsychiatristAvatar = ({
+    item,
+  }: {
+    item: PsychiatristDataProp;
+  }) => (
+    <PsychiatristAvatar
+      name={item.name}
+      experience={item.experience}
+      uri={item.uri}
+    />
+  );
 
   return (
     <ScrollView>

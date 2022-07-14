@@ -13,7 +13,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import NavigationContainer from './components/NavigationContainer';
 import { myTheme } from './theme';
 
-import { PreferencesProvider } from './theme/PreferencesContext';
+import { ThemeModeProvider } from './theme/ThemeModeContext';
 
 import Routes from './routes/Routes';
 
@@ -52,11 +52,11 @@ export default function App() {
   return (
     <ThemeProvider theme={myTheme}>
       <SafeAreaProvider onLayout={onLayoutRootView}>
-        <PreferencesProvider>
+        <ThemeModeProvider>
           <NavigationContainer>
             <Routes />
           </NavigationContainer>
-        </PreferencesProvider>
+        </ThemeModeProvider>
       </SafeAreaProvider>
     </ThemeProvider>
   );

@@ -8,6 +8,38 @@ export type RecommendedProps = {
   time: number;
 };
 
+export type ProgressProps = {
+  id: string;
+  title: string;
+  activityType: Activities;
+  progress: number;
+  time: string;
+};
+
+export const dataProgress: ProgressProps[] = [
+  {
+    id: '1',
+    title: 'Relax',
+    activityType: 'breathing',
+    progress: 67,
+    time: '1m 30s',
+  },
+  {
+    id: '2',
+    title: 'Morning meditation',
+    activityType: 'meditation',
+    progress: 90,
+    time: '1m',
+  },
+  {
+    id: '3',
+    title: 'Chill vibes',
+    activityType: 'music',
+    progress: 40,
+    time: '15m',
+  },
+];
+
 export const chatData = [
   {
     name: 'Dr. Johny',

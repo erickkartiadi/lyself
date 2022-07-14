@@ -1,12 +1,11 @@
-import { Text, useTheme, useThemeMode } from '@rneui/themed';
-
-import React from 'react';
+import { Text, useTheme } from '@rneui/themed';
+import React, { useContext } from 'react';
 import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-
 import BaseCard from '../BaseCard';
 import { styles } from '../../theme';
+import { ThemeModeContext } from '../../theme/ThemeModeContext';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';
@@ -23,7 +22,7 @@ function Emoji({ fill }: { fill: number }) {
 
 function MentalScoreCard() {
   const { theme } = useTheme();
-  const { mode } = useThemeMode();
+  const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
     <BaseCard
@@ -100,22 +99,19 @@ function MentalScoreCard() {
         withHorizontalLabels={false}
         xLabelsOffset={-42}
         chartConfig={{
-          backgroundColor:
-            mode === 'light'
-              ? theme.colors.background
-              : theme.colors.cardBackground,
-          backgroundGradientFrom:
-            mode === 'light'
-              ? theme.colors.background
-              : theme.colors.cardBackground,
-          backgroundGradientTo:
-            mode === 'light'
-              ? theme.colors.background
-              : theme.colors.cardBackground,
+          backgroundColor: isDarkMode
+            ? theme.colors.cardBackground
+            : theme.colors.background,
+          backgroundGradientFrom: isDarkMode
+            ? theme.colors.cardBackground
+            : theme.colors.background,
+          backgroundGradientTo: isDarkMode
+            ? theme.colors.cardBackground
+            : theme.colors.background,
           decimalPlaces: 0,
           color: () => theme.colors.primary,
           labelColor: () => theme.colors.grey1,
-          fillShadowGradientOpacity: mode === 'light' ? 0.1 : 0.25,
+          fillShadowGradientOpacity: isDarkMode ? 0.25 : 0.1,
           propsForLabels: {
             fontWeight: '700',
             fontFamily: 'Inter-Medium',

@@ -8,9 +8,13 @@ export type ExploreRouteParamList = {
   Progress: undefined;
 };
 
+export type AccountRouteParamList = {
+  Account: undefined;
+};
+
 export type RootStackParamList = {
   Home: undefined;
   ChatRoutes: undefined;
-  User: undefined;
   ExploreRoutes: undefined;
+  AccountRoutes: undefined;
 };

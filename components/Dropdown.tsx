@@ -1,6 +1,7 @@
-import { Icon, useTheme, useThemeMode } from '@rneui/themed';
-import React, { useState } from 'react';
+import { Icon, useTheme } from '@rneui/themed';
+import React, { useContext, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { ThemeModeContext } from '../theme/ThemeModeContext';
 
 function ArrowDownIcon() {
   const { theme } = useTheme();
@@ -23,8 +24,8 @@ function Dropdown() {
     { label: 'Weekly', value: 'weekly' },
     { label: 'Daily', value: 'daily' },
   ]);
-  const { mode } = useThemeMode();
   const { theme } = useTheme();
+  const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
     <DropDownPicker
@@ -42,8 +43,7 @@ function Dropdown() {
       ArrowDownIconComponent={ArrowDownIcon}
       ArrowUpIconComponent={ArrowUpIcon}
       selectedItemContainerStyle={{
-        backgroundColor:
-          mode === 'light' ? theme.colors.grey5 : theme.colors.grey2,
+        backgroundColor: isDarkMode ? theme.colors.grey2 : theme.colors.grey5,
       }}
       selectedItemLabelStyle={{
         fontWeight: 'bold',
@@ -63,15 +63,14 @@ function Dropdown() {
       }}
       listItemLabelStyle={{
         textAlign: 'left',
-        color: mode === 'light' ? theme.colors.grey1 : theme.colors.grey5,
+        color: isDarkMode ? theme.colors.grey5 : theme.colors.grey1,
         fontWeight: 'normal',
       }}
       dropDownContainerStyle={{
         width: 110,
         alignSelf: 'flex-end',
-        borderWidth: mode === 'light' ? 0.5 : 0,
-        backgroundColor:
-          mode === 'light' ? theme.colors.white : theme.colors.grey1,
+        borderWidth: isDarkMode ? 0 : 0.5,
+        backgroundColor: isDarkMode ? theme.colors.grey1 : theme.colors.white,
         borderColor: theme.colors.greyOutline,
         marginTop: theme.spacing.lg * -1,
         borderTopLeftRadius: theme.spacing.md,

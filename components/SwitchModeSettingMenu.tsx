@@ -1,21 +1,22 @@
-import { Switch, useTheme, useThemeMode } from '@rneui/themed';
+import { Switch, useTheme } from '@rneui/themed';
 import React, { useContext, useState } from 'react';
-import { PreferencesContext } from '../theme/PreferencesContext';
+import { ThemeModeContext } from '../theme/ThemeModeContext';
 import SettingMenu from './SettingMenu';
 
 function ThemeSwitch() {
   const { theme } = useTheme();
-  const { theme: preferences, setPreferences } = useContext(PreferencesContext);
-  const [isDarkMode, setIsDarkMode] = useState(preferences === 'dark');
+  const { isDarkMode, setThemeMode } = useContext(ThemeModeContext);
+  const [isOn, setIsOn] = useState(isDarkMode);
 
   const handleSwitchThemeMode = (value: boolean) => {
-    setIsDarkMode(value);
-    setPreferences(isDarkMode ? 'light' : 'dark');
+    setThemeMode(value ? 'dark' : 'light');
+    setIsOn(value);
   };
+
   return (
     <Switch
       color={theme.colors.grey1}
-      value={isDarkMode}
+      value={isOn}
       onValueChange={handleSwitchThemeMode}
     />
   );
@@ -23,14 +24,14 @@ function ThemeSwitch() {
 
 function SwitchModeSettingMenu() {
   const { theme } = useTheme();
-  const { mode } = useThemeMode();
+  const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
     <SettingMenu
-      title={mode === 'light' ? 'Light mode' : 'Dark mode'}
+      title={isDarkMode ? 'Dark mode' : 'Light mode'}
       bgColor={theme.colors.yellow}
       bgColorDark={theme.colors.purple}
-      iconName={mode === 'dark' ? 'moon' : 'sunny'}
+      iconName={isDarkMode ? 'moon' : 'sunny'}
       iconType="ionicon"
       rightComponent={<ThemeSwitch />}
     />

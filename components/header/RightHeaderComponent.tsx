@@ -1,9 +1,8 @@
 import { Badge, Icon, useTheme } from '@rneui/themed';
-import React, { useContext } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
-import ViewSeparator from './ViewSeparator';
-import { comingSoonToast } from '../utils/comingSoonToast';
+import { comingSoonToast } from '../../utils/comingSoonToast';
 
 function RightHeaderComponent() {
   const { theme } = useTheme();
@@ -16,7 +15,6 @@ function RightHeaderComponent() {
         alignItems: 'center',
       }}
     >
-      <ViewSeparator />
       <View>
         <Badge
           status="error"
