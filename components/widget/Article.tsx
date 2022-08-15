@@ -1,17 +1,11 @@
 import { Icon, Image, Text, useTheme } from '@rneui/themed';
-
 import React from 'react';
-import { ActivityIndicator, Pressable, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, View } from 'react-native';
 import * as Linking from 'expo-linking';
 import BaseCard from '../BaseCard';
-
-export interface ArticleCardProps {
-  title: string;
-  publisher: string;
-  time: string;
-  src: string;
-  url: string;
-}
+import { ArticleCardProps, dataArticles } from '../../constant';
+import { styles } from '../../theme';
+import ViewSeparator from '../ViewSeparator';
 
 function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   const { theme } = useTheme();
@@ -63,4 +57,33 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   );
 }
 
-export default ArticleCard;
+function ArticleWidget() {
+  const renderArticles = ({ item }: { item: ArticleCardProps }) => (
+    <ArticleCard
+      src={item.src}
+      time={item.time}
+      publisher={item.publisher}
+      title={item.title}
+      url={item.url}
+    />
+  );
+
+  return (
+    <View style={styles.containerSection}>
+      <Text h3>News about mental health</Text>
+      <View style={styles.noContainerOffset}>
+        <FlatList
+          horizontal
+          ItemSeparatorComponent={ViewSeparator}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.container}
+          data={dataArticles}
+          renderItem={renderArticles}
+          keyExtractor={(item: ArticleCardProps) => item.title}
+        />
+      </View>
+    </View>
+  );
+}
+
+export { ArticleCard, ArticleWidget };

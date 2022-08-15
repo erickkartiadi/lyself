@@ -1,5 +1,4 @@
 import { Activities } from './components/ActivityIcon';
-import { ArticleCardProps } from './components/widget/ArticleCard';
 
 export type RecommendedProps = {
   id: string;
@@ -14,6 +13,14 @@ export type ProgressProps = {
   activityType: Activities;
   progress: number;
   time: string;
+};
+
+export type ArticleCardProps = {
+  title: string;
+  publisher: string;
+  time: string;
+  src: string;
+  url: string;
 };
 
 export const dataProgress: ProgressProps[] = [

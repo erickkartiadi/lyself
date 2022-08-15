@@ -2,6 +2,7 @@ import { LinearProgress, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 import { ProgressProps, dataProgress } from '../../constant';
+import { styles } from '../../theme';
 import ActivityIcon from '../ActivityIcon';
 import BaseCard from '../BaseCard';
 
@@ -15,7 +16,7 @@ function ProgressCard() {
           <View
             key={id}
             style={{
-              marginVertical: theme.spacing.lg,
+              marginVertical: theme.spacing.md,
               flex: 1,
               flexDirection: 'row',
               alignItems: 'center',
@@ -57,4 +58,13 @@ function ProgressCard() {
     </BaseCard>
   );
 }
-export default ProgressCard;
+
+function Progress() {
+  return (
+    <View style={styles.containerSection}>
+      <Text h3>Continue your progress</Text>
+      <ProgressCard />
+    </View>
+  );
+}
+export default Progress;

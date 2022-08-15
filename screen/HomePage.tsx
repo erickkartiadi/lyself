@@ -1,28 +1,50 @@
-import { Button, Text, useTheme } from '@rneui/themed';
-import React from 'react';
-import { FlatList, ScrollView, View } from 'react-native';
-import { RecommendedProps, dataRecommended } from '../constant';
+import { BottomSheet, Button, CheckBox, Text, useTheme } from '@rneui/themed';
+import React, { useState } from 'react';
+import { ScrollView, View } from 'react-native';
 import { styles } from '../theme';
-import { comingSoonToast } from '../utils/comingSoonToast';
-import ViewSeparator from '../components/ViewSeparator';
-import RecommendedActivityCard from '../components/widget/RecommendedActivityCard';
-import MentalScoreCard from '../components/widget/MentalScoreCard';
-import Dropdown from '../components/Dropdown';
-import ProgressCard from '../components/widget/ProgressCard';
-import StatusCard from '../components/widget/StatusCard';
+import useToggle from '../utils/hooks/useToggle';
+import Progress from '../components/widget/Progress';
+import MentalScore from '../components/widget/MentalScore';
+import RecommendedActivity from '../components/widget/RecommendedActivity';
+import { ArticleWidget } from '../components/widget/Article';
 
 function HomePage() {
   const { theme } = useTheme();
+  const [isBottomSheetVisible, toggleIsBottomSheetVisible] = useToggle(false);
+  const [activeWidgets, setActiveWidgets] = useState([
+    {
+      no: 1,
+      active: true,
+      Widget: RecommendedActivity,
+      label: 'Recommended Activity',
+    },
+    {
+      no: 2,
+      active: true,
+      Widget: MentalScore,
+      label: 'Mental Score',
+    },
+    {
+      no: 3,
+      active: true,
+      Widget: Progress,
+      label: 'Activity Progress',
+    },
+    {
+      no: 4,
+      active: true,
+      Widget: ArticleWidget,
+      label: 'Article',
+    },
+  ]);
 
-  const renderRecommended = ({ item }: { item: RecommendedProps }) => (
-    <RecommendedActivityCard
-      onPress={comingSoonToast}
-      key={item.id}
-      activity={item.activity}
-      title={item.title}
-      time={item.time}
-    />
-  );
+  const handleEditWidget = (no: number) => {
+    setActiveWidgets((prevState) =>
+      prevState.map((widget) =>
+        widget.no === no ? { ...widget, active: !widget.active } : widget
+      )
+    );
+  };
 
   return (
     <ScrollView
@@ -31,54 +53,59 @@ function HomePage() {
         paddingBottom: theme.spacing.xl,
       }}
     >
-      <View style={styles.containerSection}>
-        <Text h3>Recommended activity</Text>
-        <View style={styles.noContainerOffset}>
-          <FlatList
-            horizontal
-            ItemSeparatorComponent={ViewSeparator}
-            contentContainerStyle={styles.container}
-            showsHorizontalScrollIndicator={false}
-            data={dataRecommended}
-            renderItem={renderRecommended}
-            keyExtractor={(item: RecommendedProps) => item.id}
-          />
-        </View>
-      </View>
-      <View style={styles.containerSection}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Text h3>Your stats</Text>
-          <View>
-            <Dropdown />
-          </View>
-        </View>
-        <MentalScoreCard />
-        <StatusCard />
-      </View>
-      <View style={styles.containerSection}>
-        <Text h3>Continue your progress</Text>
-        <ProgressCard />
-      </View>
+      {activeWidgets.map(
+        ({ no, active, Widget }) => active && <Widget key={no} />
+      )}
       <View style={(styles.containerSection, { marginTop: theme.spacing.xl })}>
         <Button
-          onPress={comingSoonToast}
+          color="secondary"
           iconPosition="left"
           icon={{
             type: 'material',
-            name: 'library-add',
+            name: 'edit',
             color: 'white',
           }}
+          onPress={() => toggleIsBottomSheetVisible()}
         >
-          Add Widget
+          Edit Widget
         </Button>
       </View>
+      <BottomSheet
+        modalProps={{}}
+        isVisible={isBottomSheetVisible}
+        onBackdropPress={toggleIsBottomSheetVisible}
+      >
+        <View
+          style={{
+            borderTopStartRadius: theme.spacing.xl,
+            borderTopEndRadius: theme.spacing.xl,
+            backgroundColor: theme.colors.background,
+            paddingVertical: theme.spacing.xl,
+          }}
+        >
+          <Text
+            h3
+            h3Style={{ ...styles.container, marginTop: theme.spacing.md }}
+          >
+            Widgets
+          </Text>
+          <View style={{ marginVertical: theme.spacing.md }}>
+            {activeWidgets.map(({ no, label, active }) => (
+              <CheckBox
+                key={no}
+                title={label}
+                checked={active}
+                onPress={() => handleEditWidget(no)}
+              />
+            ))}
+          </View>
+          <Button
+            fullWidth
+            title="Cancel"
+            onPress={() => toggleIsBottomSheetVisible()}
+          />
+        </View>
+      </BottomSheet>
     </ScrollView>
   );
 }

@@ -7,11 +7,9 @@ import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import BaseSearchBar from '../../components/BaseSearchBar';
 import ActivityIcon, { Activities } from '../../components/ActivityIcon';
 import { styles } from '../../theme';
-import { dataArticles } from '../../constant';
+import { ArticleCardProps, dataArticles } from '../../constant';
 import ViewSeparator from '../../components/ViewSeparator';
-import ArticleCard, {
-  ArticleCardProps,
-} from '../../components/widget/ArticleCard';
+import { ArticleCard } from '../../components/widget/Article';
 import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/widget/PlaylistCard';

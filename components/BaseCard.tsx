@@ -14,11 +14,11 @@ function BaseCard({
       containerStyle={[
         {
           backgroundColor: theme.colors.cardBackground,
-          shadowColor: 'rgba(0, 0, 0, 0.175)',
+          shadowColor: 'rgba(0, 0, 0, 0.25)',
           shadowOffset: { width: 4, height: 12 },
           shadowRadius: 4,
           elevation: 4,
-          borderWidth: isDarkMode ? 0.275 : 0,
+          borderWidth: isDarkMode ? 0.275 : 0.1,
           borderRadius: theme.spacing.md,
         },
         containerStyle,

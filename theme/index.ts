@@ -39,6 +39,10 @@ const myTheme: CreateThemeOptions = createTheme({
       fontFamily: 'OpenSans',
     },
   },
+  CheckBox: {
+    fontFamily: 'OpenSans',
+    textStyle: { fontWeight: '400' },
+  },
   Text: (props) => ({
     style: {
       fontSize: props.sm ? 12.44 : 14,
@@ -56,14 +60,14 @@ const myTheme: CreateThemeOptions = createTheme({
       fontFamily: 'OpenSans-Medium',
       fontWeight: '500',
       letterSpacing: 0.075,
-      marginBottom: themeSpacing.md,
+      marginBottom: themeSpacing.sm,
     },
     h3Style: {
       fontSize: 15.75,
       fontFamily: 'OpenSans-Semibold',
       fontWeight: '600',
       letterSpacing: 0,
-      marginBottom: themeSpacing.sm,
+      marginBottom: themeSpacing.xs,
     },
     h4Style: {
       fontSize: 14,

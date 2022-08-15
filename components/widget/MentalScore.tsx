@@ -6,6 +6,8 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import BaseCard from '../BaseCard';
 import { styles } from '../../theme';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
+import StatusCard from './StatusCard';
+import Dropdown from '../Dropdown';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';
@@ -128,4 +130,26 @@ function MentalScoreCard() {
   );
 }
 
-export default MentalScoreCard;
+function MentalScore() {
+  return (
+    <View style={styles.containerSection}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Text h3>Your stats</Text>
+        <View>
+          <Dropdown />
+        </View>
+      </View>
+      <MentalScoreCard />
+      <StatusCard />
+    </View>
+  );
+}
+
+export default MentalScore;
