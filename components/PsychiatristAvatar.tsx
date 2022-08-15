@@ -33,7 +33,7 @@ function PsychiatristAvatar({ uri, experience, name }: PsychiatristDataProp) {
         containerStyle={{ marginBottom: theme.spacing.sm }}
       />
       <Text h4>{name}</Text>
-      <Text sm style={{ color: theme.colors.grey2, textAlign: 'center' }}>
+      <Text style={{ color: theme.colors.grey2, textAlign: 'center' }}>
         {experience}
       </Text>
     </Pressable>

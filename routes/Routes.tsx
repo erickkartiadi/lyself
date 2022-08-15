@@ -33,11 +33,11 @@ function Routes() {
           headerRight: RightHeaderComponent,
           headerStyle: { height: 100 },
           headerTitleContainerStyle: { marginStart: 0 },
-          headerLeftContainerStyle: { marginStart: theme.spacing.lg },
           headerTitleStyle: {
-            fontWeight: '800',
-            fontFamily: 'Inter-ExtraBold',
+            fontFamily: 'OpenSans-Semibold',
+            fontWeight: '600',
           },
+          headerLeftContainerStyle: { marginStart: theme.spacing.lg },
           headerRightContainerStyle: { marginEnd: theme.spacing.lg },
         }}
       >

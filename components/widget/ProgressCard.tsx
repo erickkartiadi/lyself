@@ -43,7 +43,7 @@ function ProgressCard() {
                   justifyContent: 'space-between',
                 }}
               >
-                <Text sm bold style={{ color: theme.colors.secondary }}>
+                <Text sm style={{ color: theme.colors.secondary }}>
                   {`${progress}%`}
                 </Text>
                 <Text sm style={{ color: theme.colors.grey1 }}>

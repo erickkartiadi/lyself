@@ -56,7 +56,7 @@ function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
         backgroundColor: theme.colors.background,
       }}
     >
-      <Avatar size={68} rounded source={{ uri: avatarUrl }} />
+      <Avatar size={62} rounded source={{ uri: avatarUrl }} />
       <ListItem.Content>
         <View
           style={{
@@ -70,10 +70,12 @@ function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignContent: 'center',
-              marginBottom: theme.spacing.sm * 0.5,
+              marginBottom: theme.spacing.sm,
             }}
           >
-            <Text h3>{name}</Text>
+            <Text h3 h3Style={{ marginBottom: 0 }}>
+              {name}
+            </Text>
             <Text sm>{time}</Text>
           </View>
           <View
@@ -84,9 +86,8 @@ function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
             }}
           >
             <Text
-              sm
               style={{
-                color: unread > 0 ? theme.colors.black : theme.colors.grey2,
+                color: unread > 0 ? theme.colors.grey1 : theme.colors.grey3,
               }}
             >
               {text}

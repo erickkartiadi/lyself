@@ -1,15 +1,14 @@
 import { ThemeProvider } from '@rneui/themed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  Inter_400Regular,
-  Inter_500Medium,
-  Inter_600SemiBold,
-  Inter_700Bold,
-  Inter_800ExtraBold,
-} from '@expo-google-fonts/inter';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import {
+  OpenSans_400Regular,
+  OpenSans_500Medium,
+  OpenSans_600SemiBold,
+  OpenSans_700Bold,
+} from '@expo-google-fonts/open-sans';
 import NavigationContainer from './components/NavigationContainer';
 import { myTheme } from './theme';
 
@@ -25,11 +24,10 @@ export default function App() {
       try {
         await SplashScreen.preventAutoHideAsync();
         await Font.loadAsync({
-          Inter: Inter_400Regular,
-          'Inter-Medium': Inter_500Medium,
-          'Inter-Semibold': Inter_600SemiBold,
-          'Inter-Bold': Inter_700Bold,
-          'Inter-ExtraBold': Inter_800ExtraBold,
+          OpenSans: OpenSans_400Regular,
+          'OpenSans-Medium': OpenSans_500Medium,
+          'OpenSans-Semibold': OpenSans_600SemiBold,
+          'OpenSans-Bold': OpenSans_700Bold,
         });
       } finally {
         setAppIsReady(true);

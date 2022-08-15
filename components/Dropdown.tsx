@@ -20,9 +20,9 @@ function Dropdown() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('weekly');
   const [items, setItems] = useState([
-    { label: 'Monthly', value: 'monthly' },
-    { label: 'Weekly', value: 'weekly' },
     { label: 'Daily', value: 'daily' },
+    { label: 'Weekly', value: 'weekly' },
+    { label: 'Monthly', value: 'monthly' },
   ]);
   const { theme } = useTheme();
   const { isDarkMode } = useContext(ThemeModeContext);
@@ -56,7 +56,6 @@ function Dropdown() {
         height: 30,
       }}
       textStyle={{
-        fontFamily: 'Inter-Medium',
         color: theme.colors.grey2,
         textAlign: 'right',
         fontWeight: 'normal',

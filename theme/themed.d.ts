@@ -16,9 +16,7 @@ declare module '@rneui/themed' {
   }
 
   export interface TextProps {
-    bold?: boolean;
     sm?: boolean;
-    grey?: boolean;
   }
 
   export interface ButtonProps {

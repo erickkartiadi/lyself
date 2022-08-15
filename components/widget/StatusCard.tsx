@@ -23,7 +23,7 @@ function StatusCard() {
     {
       title: 'Heart rate',
       subtitle: 'bpm',
-      value: '100',
+      value: '85',
       color: theme.colors.primary,
       icon: {
         type: 'font-awesome-5',
@@ -45,7 +45,7 @@ function StatusCard() {
       },
     },
     {
-      title: 'Screen activity',
+      title: 'Screen time',
       subtitle: '1h less than yesterday',
       value: '3h 10m',
       color: theme.colors.secondary,
@@ -112,9 +112,7 @@ function StatusCard() {
               width: '48%',
             }}
           >
-            <Text style={{ marginBottom: theme.spacing.xs }} bold>
-              {title}
-            </Text>
+            <Text h4>{title}</Text>
             <View
               style={{
                 flex: 1,
@@ -124,7 +122,7 @@ function StatusCard() {
               }}
             >
               <View>
-                <Text h1 h1Style={{ color }}>
+                <Text h1 h1Style={{ color, marginBottom: 0 }}>
                   {value}
                 </Text>
                 <Text sm style={{ color: theme.colors.grey1 }}>

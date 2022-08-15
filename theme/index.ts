@@ -19,8 +19,8 @@ export const styles = StyleSheet.create({
   },
   containerSection: {
     paddingHorizontal: themeSpacing.xl,
-    paddingTop: themeSpacing.md,
     marginTop: themeSpacing.xl,
+    marginBottom: themeSpacing.xl,
   },
 });
 
@@ -34,37 +34,43 @@ const myTheme: CreateThemeOptions = createTheme({
       marginBottom: themeSpacing.md,
     },
   },
+  SearchBar: {
+    style: {
+      fontFamily: 'OpenSans',
+    },
+  },
   Text: (props) => ({
     style: {
-      fontFamily: props.bold ? 'Inter-Medium' : 'Inter',
-      fontWeight: props.bold ? '500' : 'normal',
       fontSize: props.sm ? 12.44 : 14,
-      letterSpacing: 0.25,
+      letterSpacing: 0.1,
     },
     h1Style: {
       fontSize: 19.93,
-      letterSpacing: -0.125,
-      fontWeight: 'bold',
-      fontFamily: 'Inter-Bold',
+      fontFamily: 'OpenSans-Medium',
+      fontWeight: '500',
+      letterSpacing: 0.15,
+      marginBottom: themeSpacing.md,
     },
     h2Style: {
       fontSize: 17.72,
-      letterSpacing: -0.1,
-      fontWeight: '600',
-      fontFamily: 'Inter-Semibold',
+      fontFamily: 'OpenSans-Medium',
+      fontWeight: '500',
+      letterSpacing: 0.075,
+      marginBottom: themeSpacing.md,
     },
     h3Style: {
       fontSize: 15.75,
-      letterSpacing: -0.05,
-      fontWeight: '500',
-      fontFamily: 'Inter-Medium',
-      // marginBottom: themeSpacing.sm,
+      fontFamily: 'OpenSans-Semibold',
+      fontWeight: '600',
+      letterSpacing: 0,
+      marginBottom: themeSpacing.sm,
     },
     h4Style: {
       fontSize: 14,
-      letterSpacing: 0,
-      fontWeight: '500',
-      fontFamily: 'Inter-Medium',
+      fontFamily: 'OpenSans-Semibold',
+      fontWeight: '600',
+      letterSpacing: 0.15,
+      marginBottom: themeSpacing.xs,
     },
   }),
   Button: (props) => ({
@@ -76,10 +82,9 @@ const myTheme: CreateThemeOptions = createTheme({
         : 0,
     },
     titleStyle: {
-      fontFamily: 'Inter-Medium',
-      fontWeight: '500',
+      fontFamily: 'OpenSans-Bold',
       fontSize: 14,
-      letterSpacing: -0.125,
+      letterSpacing: 0.15,
     },
   }),
   lightColors: {

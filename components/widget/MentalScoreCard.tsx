@@ -113,8 +113,7 @@ function MentalScoreCard() {
           labelColor: () => theme.colors.grey1,
           fillShadowGradientOpacity: isDarkMode ? 0.25 : 0.1,
           propsForLabels: {
-            fontWeight: '700',
-            fontFamily: 'Inter-Medium',
+            fontFamily: 'OpenSans-Bold',
           },
           style: {
             borderRadius: theme.spacing.md,

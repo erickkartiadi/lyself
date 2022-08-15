@@ -31,29 +31,13 @@ function ChatPage() {
 
   return (
     <ScrollView>
-      <View style={styles.containerSection}>
-        <View>
-          <Text style={{ fontSize: 24, fontFamily: 'Inter-Bold' }}>
-            Find trustworthy
-          </Text>
-          <Text
-            style={{
-              color: theme.colors.primary,
-              fontSize: 24,
-              fontFamily: 'Inter-Bold',
-            }}
-          >
-            Psychiatrist
-          </Text>
-        </View>
-      </View>
-      <View style={{ ...styles.containerSection, marginTop: theme.spacing.lg }}>
+      <View style={{ ...styles.containerSection }}>
         <View
           style={{
             flex: 1,
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginBottom: theme.spacing.xl * 1.25,
+            marginBottom: theme.spacing.xl,
             alignItems: 'center',
           }}
         >

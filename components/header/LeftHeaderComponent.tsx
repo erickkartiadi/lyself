@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 
 function LeftHeaderComponent() {
   const currentHour = dayjs().hour();
+  const name = 'Erick Kartiadi';
   let greeting = 'Howdy';
 
   if (currentHour >= 5 && currentHour <= 11) greeting = 'Good morning';
@@ -14,7 +15,7 @@ function LeftHeaderComponent() {
   return (
     <View>
       <Text>{greeting}</Text>
-      <Text h1>Erick Kartiadi</Text>
+      <Text h1>{name}</Text>
     </View>
   );
 }

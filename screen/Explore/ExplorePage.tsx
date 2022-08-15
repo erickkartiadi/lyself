@@ -151,7 +151,6 @@ function ExplorePage({ navigation }: ExplorePageProps) {
               <ActivityIcon activity={activity} />
               <Text
                 sm
-                grey
                 style={{
                   marginTop: theme.spacing.md,
                   textAlign: 'center',

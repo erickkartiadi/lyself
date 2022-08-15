@@ -37,9 +37,7 @@ function AccountPage() {
               uri: 'https://images.unsplash.com/photo-1605979399824-542335ee35d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
             }}
           />
-          <Text h3 h2Style={{ marginBottom: 2 }}>
-            Erick Kartiadi
-          </Text>
+          <Text h3>Erick Kartiadi</Text>
           <Text sm style={{ color: theme.colors.grey2 }}>
             erick007@binus.ac.id
           </Text>

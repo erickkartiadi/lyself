@@ -79,7 +79,7 @@ function SettingMenu({
           iconType={iconType}
           iconName={iconName}
         />
-        <Text h3>{title}</Text>
+        <Text h4>{title}</Text>
       </View>
       <View
         style={{
