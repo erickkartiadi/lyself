@@ -15,19 +15,21 @@ function ProgressCard() {
           <View
             key={id}
             style={{
-              paddingVertical: theme.spacing.md,
+              marginVertical: theme.spacing.lg,
               flex: 1,
               flexDirection: 'row',
               alignItems: 'center',
             }}
           >
             <ActivityIcon
-              size={58}
+              size={62}
               activity={activityType}
               containerStyle={{ marginRight: theme.spacing.xl }}
             />
             <View style={{ flex: 1 }}>
-              <Text style={{ marginBottom: theme.spacing.sm }}>{title}</Text>
+              <Text h4 h4Style={{ marginBottom: theme.spacing.md }}>
+                {title}
+              </Text>
               <LinearProgress
                 value={progress / 100}
                 color={theme.colors.secondary}
@@ -36,19 +38,17 @@ function ProgressCard() {
               />
               <View
                 style={{
-                  marginTop: theme.spacing.xs,
+                  marginTop: theme.spacing.xs * -1,
                   flex: 1,
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                 }}
               >
-                <Text sm style={{ color: theme.colors.secondary }}>
+                <Text style={{ color: theme.colors.secondary }}>
                   {`${progress}%`}
                 </Text>
-                <Text sm style={{ color: theme.colors.grey1 }}>
-                  {time}
-                </Text>
+                <Text style={{ color: theme.colors.grey1 }}>{time}</Text>
               </View>
             </View>
           </View>
