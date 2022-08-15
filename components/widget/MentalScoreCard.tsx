@@ -17,7 +17,7 @@ function Emoji({ fill }: { fill: number }) {
   if (fill >= 80) currentEmoji = '😄';
   if (fill >= 90) currentEmoji = '🥰';
 
-  return <Text h3>{currentEmoji}</Text>;
+  return <Text>{currentEmoji}</Text>;
 }
 
 function MentalScoreCard() {
@@ -57,7 +57,7 @@ function MentalScoreCard() {
         <View
           style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}
         >
-          <Text h3 style={{ color: theme.colors.primary }}>
+          <Text h2 h2Style={{ color: theme.colors.primary, marginBottom: 0 }}>
             Awesome
           </Text>
           <Text>Keep up the mood</Text>
