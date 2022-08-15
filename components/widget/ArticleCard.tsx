@@ -27,10 +27,6 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
           width: 280,
           paddingTop: 0,
           paddingHorizontal: 0,
-          borderWidth: 0,
-          elevation: 0,
-          borderRadius: theme.spacing.xl,
-          backgroundColor: theme.colors.cardBackground,
           overflow: 'hidden',
         }}
       >
@@ -38,7 +34,6 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
           containerStyle={{
             width: '100%',
             aspectRatio: 4 / 3,
-            borderRadius: theme.spacing.md,
           }}
           PlaceholderContent={<ActivityIndicator />}
           childrenContainerStyle={{ width: '100%' }}

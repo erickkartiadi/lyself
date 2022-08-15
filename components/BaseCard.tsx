@@ -9,16 +9,16 @@ function BaseCard({
 }: React.PropsWithChildren<CardProps>) {
   const { theme } = useTheme();
   const { isDarkMode } = React.useContext(ThemeModeContext);
-
   return (
     <Card
       containerStyle={[
         {
-          backgroundColor: isDarkMode
-            ? theme.colors.cardBackground
-            : theme.colors.background,
-          elevation: 0.5,
-          borderWidth: 0.25,
+          backgroundColor: theme.colors.cardBackground,
+          shadowColor: 'rgba(0, 0, 0, 0.175)',
+          shadowOffset: { width: 4, height: 12 },
+          shadowRadius: 4,
+          elevation: 4,
+          borderWidth: isDarkMode ? 0.275 : 0,
           borderRadius: theme.spacing.md,
         },
         containerStyle,

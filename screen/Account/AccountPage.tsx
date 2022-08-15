@@ -1,4 +1,4 @@
-import { Avatar, Divider, Text, useTheme } from '@rneui/themed';
+import { Avatar, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import SettingMenu from '../../components/SettingMenu';
@@ -8,11 +8,10 @@ function AccountPage() {
   const { theme } = useTheme();
 
   return (
-    <ScrollView stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View
         style={{
-          backgroundColor: theme.colors.background,
-          paddingTop: theme.spacing.xl * 2,
+          marginVertical: theme.spacing.xl,
         }}
       >
         <View
@@ -41,13 +40,6 @@ function AccountPage() {
           <Text sm style={{ color: theme.colors.grey2 }}>
             erick007@binus.ac.id
           </Text>
-        </View>
-        <View
-          style={{
-            marginTop: theme.spacing.xl * 1.5,
-          }}
-        >
-          <Divider color={theme.colors.cardBackground} width={1} />
         </View>
       </View>
       <View style={{ marginTop: theme.spacing.md }}>

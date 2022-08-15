@@ -82,7 +82,8 @@ const myTheme: CreateThemeOptions = createTheme({
         : 0,
     },
     titleStyle: {
-      fontFamily: 'OpenSans-Bold',
+      fontFamily: 'OpenSans-Semibold',
+      fontWeight: '600',
       fontSize: 14,
       letterSpacing: 0.15,
     },
@@ -96,8 +97,8 @@ const myTheme: CreateThemeOptions = createTheme({
     secondaryDark: '#008CC5',
     purple: '#9267ED',
     yellow: '#FABD22',
-    background: '#ffffff',
-    cardBackground: '#f7f7f7',
+    background: '#fdfdfd',
+    cardBackground: '#ffffff',
     textColor: '#242424',
     brand: {
       spotify: '#1db954',
@@ -112,7 +113,7 @@ const myTheme: CreateThemeOptions = createTheme({
     secondaryDark: '#0081b8',
     purple: '#6A44C5',
     yellow: '#C89200',
-    background: '#121212',
+    background: '#1f1f1f',
     cardBackground: '#222222',
     textColor: '#f2f2f2',
     brand: {
