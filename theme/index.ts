@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   containerSection: {
     paddingHorizontal: themeSpacing.xl,
     marginTop: themeSpacing.xl,
-    marginBottom: themeSpacing.xl,
+    marginBottom: themeSpacing.md,
   },
 });
 
@@ -78,12 +78,9 @@ const myTheme: CreateThemeOptions = createTheme({
     },
   }),
   Button: (props) => ({
-    radius: themeSpacing.md,
+    radius: 999,
     containerStyle: {
       alignItems: props.fullWidth ? 'stretch' : 'center',
-      marginHorizontal: props.fullWidth
-        ? styles.containerSection.paddingHorizontal
-        : 0,
     },
     titleStyle: {
       fontFamily: 'OpenSans-Semibold',
@@ -101,7 +98,7 @@ const myTheme: CreateThemeOptions = createTheme({
     secondaryDark: '#008CC5',
     purple: '#9267ED',
     yellow: '#FABD22',
-    background: '#fdfdfd',
+    background: '#fbfbfb',
     cardBackground: '#ffffff',
     textColor: '#242424',
     brand: {

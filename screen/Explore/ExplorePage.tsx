@@ -186,8 +186,8 @@ function ExplorePage({ navigation }: ExplorePageProps) {
           <Text h3>Featured playlist </Text>
           <ActivityIcon activity="music" size={24} iconFontSize={16} />
         </View>
-        <View style={styles.noContainerOffset}>
-          {token ? (
+        {token ? (
+          <View style={styles.noContainerOffset}>
             <FlatList
               horizontal
               ItemSeparatorComponent={ViewSeparator}
@@ -197,19 +197,19 @@ function ExplorePage({ navigation }: ExplorePageProps) {
               renderItem={renderPlaylist}
               keyExtractor={(item: PlaylistCardProps) => item.id}
             />
-          ) : (
-            <Button
-              fullWidth
-              title="Connect to Spotify to see your playlist"
-              iconPosition="left"
-              size="lg"
-              icon={{ type: 'fontisto', name: 'spotify' }}
-              color={theme.colors.brand.spotify}
-              onPress={() => promptAsync()}
-              containerStyle={{ marginTop: theme.spacing.lg }}
-            />
-          )}
-        </View>
+          </View>
+        ) : (
+          <Button
+            fullWidth
+            title="Connect to Spotify to see your playlist"
+            iconPosition="left"
+            size="lg"
+            icon={{ type: 'fontisto', name: 'spotify' }}
+            color={theme.colors.brand.spotify}
+            onPress={() => promptAsync()}
+            containerStyle={{ marginTop: theme.spacing.lg }}
+          />
+        )}
       </View>
     </ScrollView>
   );

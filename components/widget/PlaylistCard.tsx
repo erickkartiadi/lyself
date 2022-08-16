@@ -35,9 +35,6 @@ function PlaylistCard({
         containerStyle={{
           width: 120,
           padding: 0,
-          borderWidth: 0,
-          elevation: 0.25,
-          borderRadius: theme.spacing.lg,
           backgroundColor: theme.colors.cardBackground,
           overflow: 'hidden',
           marginBottom: theme.spacing.sm,
