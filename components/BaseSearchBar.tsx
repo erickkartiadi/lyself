@@ -17,6 +17,7 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
 
   return (
     <SearchBar
+      selectionColor={theme.colors.primary}
       placeholder={placeholder}
       onChangeText={updateSearch}
       containerStyle={{
