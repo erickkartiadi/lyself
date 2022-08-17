@@ -69,7 +69,7 @@ function LoginPage({ navigation }: LoginPageProps) {
           labelStyle={{ color: theme.colors.black }}
           selectionColor={theme.colors.primary}
           inputContainerStyle={{ borderColor: theme.colors.grey3 }}
-          label="Email"
+          label="Email address"
           placeholder="example@email.com"
         />
         <Input
