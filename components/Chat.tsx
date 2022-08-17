@@ -73,10 +73,10 @@ function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
               marginBottom: theme.spacing.sm,
             }}
           >
-            <Text h3 h3Style={{ marginBottom: 0 }}>
+            <Text subtitle1 style={{ marginBottom: 0 }}>
               {name}
             </Text>
-            <Text sm>{time}</Text>
+            <Text caption>{time}</Text>
           </View>
           <View
             style={{
@@ -86,6 +86,7 @@ function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
             }}
           >
             <Text
+              subtitle2
               style={{
                 color: unread > 0 ? theme.colors.grey1 : theme.colors.grey3,
               }}

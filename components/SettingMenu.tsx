@@ -1,18 +1,18 @@
 import { Icon, Text, useTheme } from '@rneui/themed';
 import React, { useContext } from 'react';
-import { ColorValue, Pressable, View } from 'react-native';
+import { ColorValue, Pressable, PressableProps, View } from 'react-native';
 import { ThemeModeContext } from '../theme/ThemeModeContext';
 import BaseIcon from './BaseIcon';
 
 interface SettingMenuProp {
   title: string;
-
   bgColor: ColorValue;
   bgColorDark: ColorValue;
   iconName: string;
   iconType: string;
   rightComponent?: JSX.Element;
   value?: string | undefined;
+  onPress?: PressableProps['onPress'];
 }
 
 function ChevronIcon(value: string | undefined) {
@@ -20,7 +20,7 @@ function ChevronIcon(value: string | undefined) {
 
   return (
     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-      <Text style={{ color: theme.colors.grey2 }} sm>
+      <Text style={{ color: theme.colors.grey2 }} caption>
         {value}
       </Text>
       <Icon
@@ -42,6 +42,7 @@ function SettingMenu({
   iconType,
   rightComponent: RightComponent,
   value,
+  onPress,
 }: SettingMenuProp) {
   const { theme } = useTheme();
   const { isDarkMode } = useContext(ThemeModeContext);
@@ -57,6 +58,7 @@ function SettingMenu({
         paddingVertical: theme.spacing.md,
         paddingHorizontal: theme.spacing.xl,
       }}
+      onPress={onPress}
     >
       <View
         style={{
@@ -79,7 +81,7 @@ function SettingMenu({
           iconType={iconType}
           iconName={iconName}
         />
-        <Text h4>{title}</Text>
+        <Text>{title}</Text>
       </View>
       <View
         style={{
@@ -95,6 +97,7 @@ function SettingMenu({
 SettingMenu.defaultProps = {
   rightComponent: null,
   value: '',
+  onPress: (): void => {},
 };
 
 export default SettingMenu;

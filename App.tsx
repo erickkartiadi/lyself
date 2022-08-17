@@ -4,17 +4,15 @@ import React, { useCallback, useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import {
-  OpenSans_400Regular,
-  OpenSans_500Medium,
-  OpenSans_600SemiBold,
-  OpenSans_700Bold,
-} from '@expo-google-fonts/open-sans';
+  Quicksand_400Regular,
+  Quicksand_500Medium,
+  Quicksand_700Bold,
+} from '@expo-google-fonts/quicksand';
 import NavigationContainer from './components/NavigationContainer';
 import { myTheme } from './theme';
 
 import { ThemeModeProvider } from './theme/ThemeModeContext';
-
-import Routes from './routes/Routes';
+import RootRoutes from './routes/Root.routes';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -24,10 +22,9 @@ export default function App() {
       try {
         await SplashScreen.preventAutoHideAsync();
         await Font.loadAsync({
-          OpenSans: OpenSans_400Regular,
-          'OpenSans-Medium': OpenSans_500Medium,
-          'OpenSans-Semibold': OpenSans_600SemiBold,
-          'OpenSans-Bold': OpenSans_700Bold,
+          Quicksand: Quicksand_400Regular,
+          'Quicksand-Medium': Quicksand_500Medium,
+          'Quicksand-Bold': Quicksand_700Bold,
         });
       } finally {
         setAppIsReady(true);
@@ -52,7 +49,7 @@ export default function App() {
       <SafeAreaProvider onLayout={onLayoutRootView}>
         <ThemeModeProvider>
           <NavigationContainer>
-            <Routes />
+            <RootRoutes />
           </NavigationContainer>
         </ThemeModeProvider>
       </SafeAreaProvider>

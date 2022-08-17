@@ -39,7 +39,7 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
             paddingBottom: theme.spacing.xs,
           }}
         >
-          <Text h4>{title}</Text>
+          <Text subtitle1>{title}</Text>
           <View
             style={{
               flex: 1,
@@ -47,9 +47,9 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
               alignItems: 'center',
             }}
           >
-            <Text sm>{publisher}</Text>
+            <Text caption>{publisher}</Text>
             <Icon type="entypo" name="dot-single" color={theme.colors.grey4} />
-            <Text sm>{time} ago</Text>
+            <Text caption>{time} ago</Text>
           </View>
         </View>
       </BaseCard>
@@ -70,7 +70,7 @@ function ArticleWidget() {
 
   return (
     <View style={styles.containerSection}>
-      <Text h3>News about mental health</Text>
+      <Text h4>News about mental health</Text>
       <View style={styles.noContainerOffset}>
         <FlatList
           horizontal

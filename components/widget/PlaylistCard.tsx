@@ -29,11 +29,11 @@ function PlaylistCard({
     <Pressable
       key={id}
       onPress={handleOpenSpotifyPlaylist}
-      style={{ marginTop: theme.spacing.md }}
+      style={{ marginTop: theme.spacing.md, flex: 1 }}
     >
       <BaseCard
         containerStyle={{
-          width: 120,
+          width: 160,
           padding: 0,
           backgroundColor: theme.colors.cardBackground,
           overflow: 'hidden',
@@ -52,9 +52,9 @@ function PlaylistCard({
           }}
         />
       </BaseCard>
-      <View style={{ flex: 1, width: 120 }}>
-        <Text h4>{title}</Text>
-        <Text sm>by {creator}</Text>
+      <View style={{ flex: 1, width: 160 }}>
+        <Text subtitle1>{title}</Text>
+        <Text caption>by {creator}</Text>
       </View>
     </Pressable>
   );

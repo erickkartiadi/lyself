@@ -1,14 +1,14 @@
 import { BottomSheet, Button, CheckBox, Text, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { styles } from '../theme';
-import useToggle from '../utils/hooks/useToggle';
-import Progress from '../components/widget/Progress';
-import MentalScore from '../components/widget/MentalScore';
-import RecommendedActivity from '../components/widget/RecommendedActivity';
-import { ArticleWidget } from '../components/widget/Article';
+import { styles } from '../../theme';
+import useToggle from '../../utils/hooks/useToggle';
+import Progress from '../../components/widget/Progress';
+import MentalScore from '../../components/widget/MentalScore';
+import RecommendedActivity from '../../components/widget/RecommendedActivity';
+import { ArticleWidget } from '../../components/widget/Article';
 
-function HomePage() {
+function Home() {
   const { theme } = useTheme();
   const [isBottomSheetVisible, toggleIsBottomSheetVisible] = useToggle(false);
   const [activeWidgets, setActiveWidgets] = useState([
@@ -76,16 +76,21 @@ function HomePage() {
         onBackdropPress={toggleIsBottomSheetVisible}
       >
         <View
-          style={{
-            borderTopStartRadius: theme.spacing.xl,
-            borderTopEndRadius: theme.spacing.xl,
-            backgroundColor: theme.colors.background,
-            paddingVertical: theme.spacing.xl,
-          }}
+          style={[
+            styles.container,
+            {
+              borderTopStartRadius: theme.spacing.xl,
+              borderTopEndRadius: theme.spacing.xl,
+              backgroundColor: theme.colors.background,
+              paddingVertical: theme.spacing.xl,
+            },
+          ]}
         >
           <Text
-            h3
-            h3Style={{ ...styles.container, marginTop: theme.spacing.md }}
+            h4
+            h4Style={{
+              marginTop: theme.spacing.md,
+            }}
           >
             Widgets
           </Text>
@@ -101,7 +106,7 @@ function HomePage() {
           </View>
           <Button
             fullWidth
-            title="Cancel"
+            title="Done"
             onPress={() => toggleIsBottomSheetVisible()}
           />
         </View>
@@ -110,4 +115,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Home;

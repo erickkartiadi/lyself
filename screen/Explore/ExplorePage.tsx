@@ -13,7 +13,7 @@ import { ArticleCard } from '../../components/widget/Article';
 import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/widget/PlaylistCard';
-import { ExploreRouteParamList } from '../../routes/types';
+import { ExploreRouteParamList } from '../../types/routes';
 
 export type ExplorePageProps = NativeStackScreenProps<
   ExploreRouteParamList,
@@ -73,7 +73,8 @@ function ExplorePage({ navigation }: ExplorePageProps) {
         'user-read-private',
       ],
       usePKCE: false,
-      redirectUri: 'lyself://',
+      // redirectUri: 'lyself://',
+      redirectUri: 'exp://192.168.1.110:19000',
     },
     discovery
   );
@@ -148,7 +149,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
             >
               <ActivityIcon activity={activity} />
               <Text
-                sm
+                subtitle2
                 style={{
                   marginTop: theme.spacing.md,
                   textAlign: 'center',
@@ -162,7 +163,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
         ))}
       </View>
       <View style={styles.containerSection}>
-        <Text h3>Popular articles</Text>
+        <Text h4>Popular articles</Text>
         <View style={styles.noContainerOffset}>
           <FlatList
             horizontal
@@ -183,7 +184,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
             alignItems: 'center',
           }}
         >
-          <Text h3>Featured playlist </Text>
+          <Text h4>Featured playlist </Text>
           <ActivityIcon activity="music" size={24} iconFontSize={16} />
         </View>
         {token ? (
@@ -201,9 +202,8 @@ function ExplorePage({ navigation }: ExplorePageProps) {
         ) : (
           <Button
             fullWidth
-            title="Connect to Spotify to see your playlist"
+            title="Connect to Spotify"
             iconPosition="left"
-            size="lg"
             icon={{ type: 'fontisto', name: 'spotify' }}
             color={theme.colors.brand.spotify}
             onPress={() => promptAsync()}

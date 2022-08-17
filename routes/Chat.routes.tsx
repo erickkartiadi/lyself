@@ -2,7 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChatPage from '../screen/Chat/ChatPage';
 import PsychiatristPage from '../screen/Chat/PsychiatristPage';
-import { ChatRouteParamList } from './types';
+import { ChatRouteParamList } from '../types/routes';
 
 const Stack = createNativeStackNavigator<ChatRouteParamList>();
 

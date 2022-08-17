@@ -24,8 +24,60 @@ export const styles = StyleSheet.create({
   },
 });
 
+const lightColors = {
+  primary: '#F26D85',
+  primaryLight: '#FFE3E9',
+  primaryDark: '#CC4B66',
+  secondary: '#3FB0EB',
+  secondaryLight: '#67CEFF',
+  secondaryDark: '#008CC5',
+  purple: '#9267ED',
+  yellow: '#FABD22',
+  background: '#fbfbfb',
+  cardBackground: '#ffffff',
+  textColor: '#242424',
+  brand: {
+    spotify: '#1db954',
+    google: '#ea4335',
+    facebook: '#1877f2',
+    apple: '#000000',
+  },
+};
+const darkColors = {
+  primary: '#bb3b58',
+  primaryLight: '#FE788F',
+  primaryDark: '#bb3b58',
+  secondary: '#0081b8',
+  secondaryLight: '#67CEFF',
+  secondaryDark: '#0081b8',
+  purple: '#6A44C5',
+  yellow: '#C89200',
+  background: '#1f1f1f',
+  cardBackground: '#222222',
+  textColor: '#f2f2f2',
+  brand: {
+    spotify: '#1db954',
+    google: '#ea4335',
+    facebook: '#1877f2',
+    apple: '#000000',
+  },
+};
 const myTheme: CreateThemeOptions = createTheme({
   spacing: { ...themeSpacing },
+  Input: {
+    labelStyle: {
+      fontSize: 14.22,
+      fontFamily: 'Quicksand-Medium',
+      fontWeight: '500',
+      letterSpacing: 0.1,
+      marginBottom: themeSpacing.xs,
+    },
+    inputStyle: { fontFamily: 'Quicksand', fontSize: 16 },
+    inputContainerStyle: {
+      borderBottomWidth: 0.25,
+    },
+    containerStyle: { paddingHorizontal: 0 },
+  },
   Card: {
     containerStyle: {
       margin: 0,
@@ -36,45 +88,96 @@ const myTheme: CreateThemeOptions = createTheme({
   },
   SearchBar: {
     style: {
-      fontFamily: 'OpenSans',
+      fontFamily: 'Quicksand',
+    },
+    inputStyle: {
+      fontSize: 14.22,
     },
   },
   CheckBox: {
-    fontFamily: 'OpenSans',
-    textStyle: { fontWeight: '400' },
+    fontFamily: 'Quicksand-Medium',
+    textStyle: { fontWeight: '500', marginTop: -4 },
+    containerStyle: {
+      padding: 0,
+      marginLeft: 0,
+      paddingVertical: themeSpacing.md,
+    },
   },
   Text: (props) => ({
     style: {
-      fontSize: props.sm ? 12.44 : 14,
-      letterSpacing: 0.1,
+      // default
+      ...{
+        fontSize: 16,
+        letterSpacing: 0.5,
+        fontFamily: 'Quicksand',
+        fontWeight: '400',
+      },
+      ...(props.bold && {
+        fontWeight: '700',
+        fontFamily: 'Quicksand-Bold',
+      }),
+      ...(props.subtitle1 && {
+        fontSize: 16,
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        letterSpacing: 0.15,
+        marginBottom: themeSpacing.xs,
+      }),
+      ...(props.subtitle2 && {
+        fontSize: 14.22,
+        fontFamily: 'Quicksand',
+        letterSpacing: 0.15,
+      }),
+      ...(props.caption && {
+        fontSize: 12.64,
+        fontFamily: 'Quicksand',
+        fontWeight: '400',
+        letterSpacing: 0.3,
+      }),
     },
     h1Style: {
-      fontSize: 19.93,
-      fontFamily: 'OpenSans-Medium',
+      fontSize: 25.63,
+      fontFamily: 'Quicksand-Medium',
       fontWeight: '500',
-      letterSpacing: 0.15,
-      marginBottom: themeSpacing.md,
+      letterSpacing: -0.25,
+      marginBottom: themeSpacing.sm,
+      ...(props.bold && {
+        fontWeight: '700',
+        fontFamily: 'Quicksand-Bold',
+      }),
     },
     h2Style: {
-      fontSize: 17.72,
-      fontFamily: 'OpenSans-Medium',
+      fontSize: 22.78,
+      fontFamily: 'Quicksand-Medium',
       fontWeight: '500',
-      letterSpacing: 0.075,
+      letterSpacing: 0.125,
       marginBottom: themeSpacing.sm,
+      ...(props.bold && {
+        fontWeight: '700',
+        fontFamily: 'Quicksand-Bold',
+      }),
     },
     h3Style: {
-      fontSize: 15.75,
-      fontFamily: 'OpenSans-Semibold',
-      fontWeight: '600',
-      letterSpacing: 0,
-      marginBottom: themeSpacing.xs,
+      fontSize: 20.25,
+      fontFamily: 'Quicksand-Medium',
+      fontWeight: '500',
+      letterSpacing: 0.1,
+      marginBottom: themeSpacing.sm,
+      ...(props.bold && {
+        fontWeight: '700',
+        fontFamily: 'Quicksand-Bold',
+      }),
     },
     h4Style: {
-      fontSize: 14,
-      fontFamily: 'OpenSans-Semibold',
-      fontWeight: '600',
-      letterSpacing: 0.15,
-      marginBottom: themeSpacing.xs,
+      fontSize: 18,
+      fontFamily: 'Quicksand-Bold',
+      fontWeight: '700',
+      letterSpacing: 0.25,
+      marginBottom: themeSpacing.sm,
+      ...(props.bold && {
+        fontWeight: '700',
+        fontFamily: 'Quicksand-Bold',
+      }),
     },
   }),
   Button: (props) => ({
@@ -83,44 +186,16 @@ const myTheme: CreateThemeOptions = createTheme({
       alignItems: props.fullWidth ? 'stretch' : 'center',
     },
     titleStyle: {
-      fontFamily: 'OpenSans-Semibold',
-      fontWeight: '600',
-      fontSize: 14,
-      letterSpacing: 0.15,
+      fontFamily: 'Quicksand-Medium',
+      fontWeight: '500',
+      fontSize: 14.22,
+      letterSpacing: 1.25,
     },
+    size: 'lg',
+    uppercase: true,
   }),
-  lightColors: {
-    primary: '#F26D85',
-    primaryLight: '#FFE3E9',
-    primaryDark: '#CC4B66',
-    secondary: '#3FB0EB',
-    secondaryLight: '#67CEFF',
-    secondaryDark: '#008CC5',
-    purple: '#9267ED',
-    yellow: '#FABD22',
-    background: '#fbfbfb',
-    cardBackground: '#ffffff',
-    textColor: '#242424',
-    brand: {
-      spotify: '#1db954',
-    },
-  },
-  darkColors: {
-    primary: '#bb3b58',
-    primaryLight: '#FE788F',
-    primaryDark: '#bb3b58',
-    secondary: '#0081b8',
-    secondaryLight: '#67CEFF',
-    secondaryDark: '#0081b8',
-    purple: '#6A44C5',
-    yellow: '#C89200',
-    background: '#1f1f1f',
-    cardBackground: '#222222',
-    textColor: '#f2f2f2',
-    brand: {
-      spotify: '#1db954',
-    },
-  },
+  lightColors,
+  darkColors,
 });
 
 const navThemeLight: Theme = {

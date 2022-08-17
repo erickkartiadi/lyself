@@ -59,10 +59,10 @@ function MentalScoreCard() {
         <View
           style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}
         >
-          <Text h2 h2Style={{ color: theme.colors.primary, marginBottom: 0 }}>
+          <Text subtitle1 style={{ color: theme.colors.primary }}>
             Awesome
           </Text>
-          <Text>Keep up the mood</Text>
+          <Text caption>Keep up the mood</Text>
         </View>
       </View>
       <LineChart
@@ -109,7 +109,8 @@ function MentalScoreCard() {
           labelColor: () => theme.colors.grey1,
           fillShadowGradientOpacity: isDarkMode ? 0.25 : 0.1,
           propsForLabels: {
-            fontFamily: 'OpenSans-Bold',
+            fontFamily: 'Quicksand-Bold',
+            fontWeight: '700',
           },
           style: {
             borderRadius: theme.spacing.md,
@@ -141,7 +142,7 @@ function MentalScore() {
           justifyContent: 'space-between',
         }}
       >
-        <Text h3>Your stats</Text>
+        <Text h4>Your stats</Text>
         <View>
           <Dropdown />
         </View>

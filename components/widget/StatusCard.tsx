@@ -28,7 +28,7 @@ function StatusCard() {
       icon: {
         type: 'font-awesome-5',
         name: 'heartbeat',
-        size: 42,
+        size: 36,
         color: theme.colors.primary,
       },
     },
@@ -40,19 +40,19 @@ function StatusCard() {
       icon: {
         type: 'fontisto',
         name: 'blood-drop',
-        size: 42,
+        size: 36,
         color: theme.colors.primaryDark,
       },
     },
     {
       title: 'Screen time',
-      subtitle: '1h less than yesterday',
+      subtitle: 'more than last week',
       value: '3h 10m',
       color: theme.colors.secondary,
       icon: {
         type: '',
         name: '',
-        size: 42,
+        size: 36,
         color: theme.colors.secondary,
       },
     },
@@ -64,7 +64,7 @@ function StatusCard() {
       icon: {
         type: 'ionicon',
         name: 'moon',
-        size: 42,
+        size: 36,
         color: theme.colors.yellow,
       },
     },
@@ -76,7 +76,7 @@ function StatusCard() {
       icon: {
         type: 'ionicon',
         name: 'body',
-        size: 42,
+        size: 36,
         color: theme.colors.primary,
       },
     },
@@ -88,7 +88,7 @@ function StatusCard() {
       icon: {
         type: 'ionicon',
         name: 'checkmark-done-circle',
-        size: 42,
+        size: 36,
         color: theme.colors.success,
       },
     },
@@ -112,7 +112,7 @@ function StatusCard() {
               width: '48%',
             }}
           >
-            <Text h4>{title}</Text>
+            <Text subtitle1>{title}</Text>
             <View
               style={{
                 flex: 1,
@@ -122,12 +122,10 @@ function StatusCard() {
               }}
             >
               <View>
-                <Text h1 h1Style={{ color, marginBottom: 0 }}>
+                <Text h2 h2Style={{ color, marginBottom: 0 }}>
                   {value}
                 </Text>
-                <Text sm style={{ color: theme.colors.grey1 }}>
-                  {subtitle}
-                </Text>
+                <Text caption>{subtitle}</Text>
               </View>
               {icon.type !== '' && (
                 <View>

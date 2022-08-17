@@ -6,7 +6,7 @@ import ViewSeparator from '../../components/ViewSeparator';
 import { styles } from '../../theme';
 import { comingSoonToast } from '../../utils/comingSoonToast';
 import { chatData, psychiatristData } from '../../constant';
-import { ChatRouteParamList } from '../../routes/types';
+import { ChatRouteParamList } from '../../types/routes';
 import PsychiatristAvatar, {
   PsychiatristDataProp,
 } from '../../components/PsychiatristAvatar';
@@ -41,7 +41,7 @@ function ChatPage() {
             alignItems: 'center',
           }}
         >
-          <Text h3>Top-rated psychiatrist</Text>
+          <Text h4>Top-rated psychiatrist</Text>
           <Button
             type="clear"
             title="See all"
@@ -83,7 +83,7 @@ function ChatPage() {
       </View>
 
       <View style={styles.containerSection}>
-        <Text h3>Active chats</Text>
+        <Text h4>Active chats</Text>
         <View style={styles.noContainerOffset}>
           {chatData.map(({ name, text, unread, time, avatar_url }) => (
             <Chat

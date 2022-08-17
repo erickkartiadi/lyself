@@ -26,16 +26,21 @@ function RecommendedActivityCard({
   return (
     <Pressable onPress={onPress}>
       <BaseCard>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
           <ActivityIcon
+            size={58}
             containerStyle={{ marginRight: theme.spacing.lg }}
             activity={activity}
           />
-          <View style={{ paddingRight: theme.spacing.lg }}>
-            <Text h4 h4Style={{ marginBottom: 0 }}>
-              {title}
-            </Text>
-            <Text>{`${time}m`}</Text>
+          <View style={{ paddingRight: theme.spacing.xl }}>
+            <Text>{title}</Text>
+            <Text subtitle1>{`${time}m`}</Text>
           </View>
         </View>
       </BaseCard>
@@ -56,7 +61,7 @@ function RecommendedActivity() {
 
   return (
     <View style={styles.containerSection}>
-      <Text h3>Recommended activity</Text>
+      <Text h4>Recommended activity</Text>
       <View style={styles.noContainerOffset}>
         <FlatList
           horizontal

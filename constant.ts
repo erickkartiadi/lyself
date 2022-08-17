@@ -165,7 +165,7 @@ export const dataArticles: ArticleCardProps[] = [
     url: 'https://www.rollingstone.com/culture-council/articles/supporting-employees-mental-health-work-1376097/',
   },
   {
-    title: 'Parental controls, screen time, and kids mental health',
+    title: 'Parental controls and kids mental health',
     publisher: 'Mashable',
     time: '1w',
     src: 'https://images.unsplash.com/photo-1554410637-1a8267402b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',

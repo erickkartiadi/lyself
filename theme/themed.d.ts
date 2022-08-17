@@ -12,11 +12,17 @@ declare module '@rneui/themed' {
     yellow: string;
     brand: {
       spotify: string;
+      google: string;
+      facebook: string;
+      apple: string;
     };
   }
 
   export interface TextProps {
-    sm?: boolean;
+    bold?: boolean;
+    subtitle1?: boolean;
+    subtitle2?: boolean;
+    caption?: boolean;
   }
 
   export interface ButtonProps {

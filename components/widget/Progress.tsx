@@ -19,37 +19,48 @@ function ProgressCard() {
               marginVertical: theme.spacing.md,
               flex: 1,
               flexDirection: 'row',
+              justifyContent: 'center',
+              alignContent: 'center',
               alignItems: 'center',
             }}
           >
             <ActivityIcon
-              size={62}
+              size={64}
               activity={activityType}
               containerStyle={{ marginRight: theme.spacing.xl }}
             />
-            <View style={{ flex: 1 }}>
-              <Text h4 h4Style={{ marginBottom: theme.spacing.md }}>
+            <View
+              style={{
+                flex: 1,
+              }}
+            >
+              <Text caption style={{ marginBottom: theme.spacing.sm }}>
                 {title}
               </Text>
               <LinearProgress
                 value={progress / 100}
                 color={theme.colors.secondary}
                 variant="determinate"
-                style={{ borderRadius: 100, height: 5 }}
+                style={{
+                  borderRadius: 100,
+                  height: 5,
+                  marginVertical: theme.spacing.xs,
+                }}
               />
               <View
                 style={{
-                  marginTop: theme.spacing.xs * -1,
                   flex: 1,
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                 }}
               >
-                <Text style={{ color: theme.colors.secondary }}>
+                <Text caption style={{ color: theme.colors.secondary }}>
                   {`${progress}%`}
                 </Text>
-                <Text style={{ color: theme.colors.grey1 }}>{time}</Text>
+                <Text caption style={{ color: theme.colors.grey1 }}>
+                  {time}
+                </Text>
               </View>
             </View>
           </View>
@@ -62,7 +73,7 @@ function ProgressCard() {
 function Progress() {
   return (
     <View style={styles.containerSection}>
-      <Text h3>Continue your progress</Text>
+      <Text h4>Continue your progress</Text>
       <ProgressCard />
     </View>
   );

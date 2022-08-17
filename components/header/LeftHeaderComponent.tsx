@@ -15,7 +15,7 @@ function LeftHeaderComponent() {
   return (
     <View>
       <Text>{greeting}</Text>
-      <Text h1>{name}</Text>
+      <Text h3>{name}</Text>
     </View>
   );
 }

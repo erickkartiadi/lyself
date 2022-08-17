@@ -35,7 +35,6 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
         paddingHorizontal: theme.spacing.md,
       }}
       inputStyle={{
-        fontSize: 14,
         color: theme.colors.black,
       }}
       value={searchText}

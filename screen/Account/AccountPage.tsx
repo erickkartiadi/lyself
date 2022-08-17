@@ -1,10 +1,16 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Avatar, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import SettingMenu from '../../components/SettingMenu';
 import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
+import { AccountRouteParamList, AuthRouteParamList } from '../../types/routes';
 
-function AccountPage() {
+export type AccountPageProps = NativeStackScreenProps<
+  AuthRouteParamList & AccountRouteParamList,
+  'Account'
+>;
+function AccountPage({ navigation }: AccountPageProps) {
   const { theme } = useTheme();
 
   return (
@@ -36,8 +42,8 @@ function AccountPage() {
               uri: 'https://images.unsplash.com/photo-1605979399824-542335ee35d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
             }}
           />
-          <Text h3>Erick Kartiadi</Text>
-          <Text sm style={{ color: theme.colors.grey2 }}>
+          <Text h4>Erick Kartiadi</Text>
+          <Text caption style={{ color: theme.colors.grey2 }}>
             erick007@binus.ac.id
           </Text>
         </View>
@@ -123,6 +129,7 @@ function AccountPage() {
             bgColorDark={theme.colors.error}
             iconName="log-out"
             iconType="ionicon"
+            onPress={() => navigation.navigate('Login')}
           />
         </View>
       </View>
