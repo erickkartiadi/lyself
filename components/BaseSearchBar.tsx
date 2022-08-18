@@ -20,14 +20,16 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
       selectionColor={theme.colors.primary}
       placeholder={placeholder}
       onChangeText={updateSearch}
-      containerStyle={{
-        backgroundColor: 'transparent',
-        borderTopWidth: 0,
-        borderBottomWidth: 0,
-        borderWidth: 0,
-        elevation: 0,
-        ...styles.container,
-      }}
+      containerStyle={[
+        styles.container,
+        {
+          backgroundColor: 'transparent',
+          borderTopWidth: 0,
+          borderBottomWidth: 0,
+          borderWidth: 0,
+          elevation: 0,
+        },
+      ]}
       inputContainerStyle={{
         backgroundColor: theme.colors.cardBackground,
         elevation: 1,

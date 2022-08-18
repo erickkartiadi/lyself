@@ -7,12 +7,14 @@ import { ExplorePageProps } from '../Explore/ExplorePage';
 function Progress({ navigation }: ExplorePageProps) {
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        ...styles.containerSection,
-      }}
+      style={[
+        styles.containerSection,
+        {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+      ]}
     >
       <Text h4 style={{ textAlign: 'center' }}>
         Sorry, this page is still in development 🚧

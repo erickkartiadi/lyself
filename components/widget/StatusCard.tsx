@@ -106,12 +106,7 @@ function StatusCard() {
         }}
       >
         {data.map(({ title, subtitle, value, color, icon }) => (
-          <BaseCard
-            key={title}
-            containerStyle={{
-              width: '48%',
-            }}
-          >
+          <BaseCard key={title} width="48%">
             <Text subtitle1>{title}</Text>
             <View
               style={{

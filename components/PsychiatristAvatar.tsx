@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Avatar, Text, useTheme } from '@rneui/themed';
 import React from 'react';
-import { Pressable } from 'react-native';
 import { ChatRouteParamList } from '../types/routes';
+import AnimatedPressable from './AnimatedPressable';
 
 export type PsychiatristDataProp = {
   uri: string;
@@ -17,7 +17,7 @@ function PsychiatristAvatar({ uri, experience, name }: PsychiatristDataProp) {
     useNavigation<NativeStackNavigationProp<ChatRouteParamList>>();
 
   return (
-    <Pressable
+    <AnimatedPressable
       onPress={() => navigation.navigate('Psychiatrist')}
       style={{
         flex: 1,
@@ -36,7 +36,7 @@ function PsychiatristAvatar({ uri, experience, name }: PsychiatristDataProp) {
       <Text caption style={{ color: theme.colors.grey2, textAlign: 'center' }}>
         {experience}
       </Text>
-    </Pressable>
+    </AnimatedPressable>
   );
 }
 

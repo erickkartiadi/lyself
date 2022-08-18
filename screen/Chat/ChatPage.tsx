@@ -31,7 +31,7 @@ function ChatPage() {
 
   return (
     <ScrollView>
-      <View style={{ ...styles.containerSection }}>
+      <View style={styles.containerSection}>
         <View
           style={{
             flex: 1,
@@ -63,12 +63,14 @@ function ChatPage() {
           />
         </View>
         <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            ...styles.noContainerOffset,
-          }}
+          style={[
+            styles.noContainerOffset,
+            {
+              flex: 1,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+            },
+          ]}
         >
           <FlatList
             horizontal

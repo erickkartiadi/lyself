@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { ProgressProps, dataProgress } from '../../constant';
 import { styles } from '../../theme';
+import { comingSoonToast } from '../../utils/comingSoonToast';
 import ActivityIcon from '../ActivityIcon';
 import BaseCard from '../BaseCard';
 
@@ -10,10 +11,10 @@ function ProgressCard() {
   const { theme } = useTheme();
 
   return (
-    <View>
+    <>
       {dataProgress.map(
         ({ activityType, id, progress, time, title }: ProgressProps) => (
-          <BaseCard key={id}>
+          <BaseCard key={id} onPress={comingSoonToast}>
             <View
               style={{
                 flex: 1,
@@ -66,7 +67,7 @@ function ProgressCard() {
           </BaseCard>
         )
       )}
-    </View>
+    </>
   );
 }
 

@@ -7,12 +7,14 @@ import { ChatPageProps } from './ChatPage';
 function PsychiatristPage({ navigation }: ChatPageProps) {
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        ...styles.containerSection,
-      }}
+      style={[
+        styles.containerSection,
+        {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+      ]}
     >
       <Text h4 style={{ textAlign: 'center' }}>
         Sorry, this page is still in development 👨🏻‍⚕️

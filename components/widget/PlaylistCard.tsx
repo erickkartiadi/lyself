@@ -31,15 +31,7 @@ function PlaylistCard({
       onPress={handleOpenSpotifyPlaylist}
       style={{ marginTop: theme.spacing.md, flex: 1 }}
     >
-      <BaseCard
-        containerStyle={{
-          width: 160,
-          padding: 0,
-          backgroundColor: theme.colors.cardBackground,
-          overflow: 'hidden',
-          marginBottom: theme.spacing.sm,
-        }}
-      >
+      <BaseCard width={160} disablePadding>
         <Image
           containerStyle={{
             width: '100%',

@@ -4,10 +4,10 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import SettingMenu from '../../components/SettingMenu';
 import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
-import { AccountRouteParamList, AuthRouteParamList } from '../../types/routes';
+import { AccountRouteParamList, RootRouteParamList } from '../../types/routes';
 
 export type AccountPageProps = NativeStackScreenProps<
-  AuthRouteParamList & AccountRouteParamList,
+  RootRouteParamList & AccountRouteParamList,
   'Account'
 >;
 function AccountPage({ navigation }: AccountPageProps) {

@@ -1,6 +1,6 @@
 import { Button, Text, useTheme } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Pressable, ScrollView, View } from 'react-native';
+import { FlatList, ScrollView, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
@@ -14,6 +14,7 @@ import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/widget/PlaylistCard';
 import { ExploreRouteParamList } from '../../types/routes';
+import AnimatedPressable from '../../components/AnimatedPressable';
 
 export type ExplorePageProps = NativeStackScreenProps<
   ExploreRouteParamList,
@@ -123,15 +124,17 @@ function ExplorePage({ navigation }: ExplorePageProps) {
     >
       <BaseSearchBar placeholder="Search tools, news or forum" />
       <View
-        style={{
-          ...styles.containerSection,
-          ...styles.noContainerOffset,
-          marginTop: theme.spacing.lg,
-          flex: 1,
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'space-around',
-        }}
+        style={[
+          styles.containerSection,
+          styles.noContainerOffset,
+          {
+            marginTop: theme.spacing.lg,
+            flex: 1,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+          },
+        ]}
       >
         {activityMenu.map((activity) => (
           <View
@@ -140,7 +143,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
               width: '25%',
             }}
           >
-            <Pressable
+            <AnimatedPressable
               style={{
                 alignItems: 'center',
                 marginBottom: theme.spacing.xl * 1.25,
@@ -158,7 +161,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
               >
                 {activity}
               </Text>
-            </Pressable>
+            </AnimatedPressable>
           </View>
         ))}
       </View>

@@ -1,6 +1,6 @@
 import { Icon, Image, Text, useTheme } from '@rneui/themed';
 import React from 'react';
-import { ActivityIndicator, FlatList, Pressable, View } from 'react-native';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import * as Linking from 'expo-linking';
 import BaseCard from '../BaseCard';
 import { ArticleCardProps, dataArticles } from '../../constant';
@@ -15,45 +15,34 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   };
 
   return (
-    <Pressable onPress={handleOpenArticle}>
-      <BaseCard
+    <BaseCard width={280} disablePadding onPress={handleOpenArticle}>
+      <Image
         containerStyle={{
-          width: 280,
-          paddingTop: 0,
-          paddingHorizontal: 0,
-          overflow: 'hidden',
+          width: '100%',
+          aspectRatio: 4 / 3,
+        }}
+        PlaceholderContent={<ActivityIndicator />}
+        source={{ uri: src }}
+      />
+      <View
+        style={{
+          padding: theme.spacing.xl,
         }}
       >
-        <Image
-          containerStyle={{
-            width: '100%',
-            aspectRatio: 4 / 3,
-          }}
-          PlaceholderContent={<ActivityIndicator />}
-          childrenContainerStyle={{ width: '100%' }}
-          source={{ uri: src }}
-        />
+        <Text subtitle1>{title}</Text>
         <View
           style={{
-            padding: theme.spacing.xl,
-            paddingBottom: theme.spacing.xs,
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
           }}
         >
-          <Text subtitle1>{title}</Text>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Text caption>{publisher}</Text>
-            <Icon type="entypo" name="dot-single" color={theme.colors.grey4} />
-            <Text caption>{time} ago</Text>
-          </View>
+          <Text caption>{publisher}</Text>
+          <Icon type="entypo" name="dot-single" color={theme.colors.grey4} />
+          <Text caption>{time} ago</Text>
         </View>
-      </BaseCard>
-    </Pressable>
+      </View>
+    </BaseCard>
   );
 }
 
