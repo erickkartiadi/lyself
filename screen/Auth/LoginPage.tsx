@@ -8,6 +8,8 @@ import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/index';
 import loginIllustration from '../../assets/images/login-illustration.png';
 import useToggle from '../../utils/hooks/useToggle';
+import { InputPassword, InputText } from '../../components/form/Input';
+import ButtonBack from '../../components/ButtonBack';
 
 export type LoginPageProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
@@ -16,7 +18,6 @@ export type LoginPageProps = NativeStackScreenProps<
 
 function LoginPage({ navigation }: LoginPageProps) {
   const { theme } = useTheme();
-  const [isPasswordVisible, togglePasswordVisible] = useToggle(false);
   const [isRememberLogin, toggleIsRememberLogin] = useToggle(false);
 
   return (
@@ -29,22 +30,7 @@ function LoginPage({ navigation }: LoginPageProps) {
           },
         ]}
       >
-        <Button
-          type="outline"
-          onPress={() => navigation.navigate('GetStarted')}
-          containerStyle={{
-            alignSelf: 'flex-start',
-            marginBottom: theme.spacing.lg,
-          }}
-          buttonStyle={{ padding: 10, paddingHorizontal: 10 }}
-        >
-          <Icon
-            size={20}
-            name="arrow-back-outline"
-            type="ionicon"
-            containerStyle={{ aspectRatio: 1, padding: 0 }}
-          />
-        </Button>
+        <ButtonBack onPress={() => navigation.navigate('GetStarted')} />
         <Text h1 bold>
           Welcome to Lyself
         </Text>
@@ -65,31 +51,8 @@ function LoginPage({ navigation }: LoginPageProps) {
             resizeMode="center"
           />
         </View>
-        <Input
-          labelStyle={{ color: theme.colors.black }}
-          selectionColor={theme.colors.primary}
-          inputContainerStyle={{ borderColor: theme.colors.grey3 }}
-          label="Email address"
-          placeholder="example@email.com"
-        />
-        <Input
-          labelStyle={{ color: theme.colors.black }}
-          selectionColor={theme.colors.primary}
-          inputContainerStyle={{ borderColor: theme.colors.grey3 }}
-          label="Password"
-          placeholder="must have at least 8 characters"
-          secureTextEntry={!isPasswordVisible}
-          rightIcon={
-            <Icon
-              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
-              type="ionicon"
-              size={24}
-              iconStyle={{ padding: theme.spacing.sm }}
-              color={theme.colors.black}
-              onPress={() => togglePasswordVisible()}
-            />
-          }
-        />
+        <InputText label="Email address" placeholder="example@email.com" />
+        <InputPassword />
         <View
           style={{
             flex: 1,

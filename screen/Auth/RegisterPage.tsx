@@ -5,8 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, ScrollView, View } from 'react-native';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme';
-import useToggle from '../../utils/hooks/useToggle';
 import registerIllustration from '../../assets/images/register-illustration.png';
+import { InputPassword, InputText } from '../../components/form/Input';
+import ButtonBack from '../../components/ButtonBack';
 
 export type RegisterPageProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
@@ -15,7 +16,6 @@ export type RegisterPageProps = NativeStackScreenProps<
 
 function RegisterPage({ navigation }: RegisterPageProps) {
   const { theme } = useTheme();
-  const [isPasswordVisible, togglePasswordVisible] = useToggle(false);
 
   return (
     <ScrollView>
@@ -27,22 +27,7 @@ function RegisterPage({ navigation }: RegisterPageProps) {
           },
         ]}
       >
-        <Button
-          type="outline"
-          onPress={() => navigation.navigate('Login')}
-          containerStyle={{
-            alignSelf: 'flex-start',
-            marginBottom: theme.spacing.lg,
-          }}
-          buttonStyle={{ padding: 10, paddingHorizontal: 10 }}
-        >
-          <Icon
-            size={20}
-            name="arrow-back-outline"
-            type="ionicon"
-            containerStyle={{ aspectRatio: 1, padding: 0 }}
-          />
-        </Button>
+        <ButtonBack onPress={() => navigation.navigate('Login')} />
         <Text h1 bold>
           Create new account
         </Text>
@@ -65,38 +50,9 @@ function RegisterPage({ navigation }: RegisterPageProps) {
             resizeMode="center"
           />
         </View>
-        <Input
-          labelStyle={{ color: theme.colors.black }}
-          selectionColor={theme.colors.primary}
-          inputContainerStyle={{ borderColor: theme.colors.grey3 }}
-          label="Name"
-          placeholder="eg. John Doe"
-        />
-        <Input
-          labelStyle={{ color: theme.colors.black }}
-          selectionColor={theme.colors.primary}
-          inputContainerStyle={{ borderColor: theme.colors.grey3 }}
-          label="Email address"
-          placeholder="example@email.com"
-        />
-        <Input
-          labelStyle={{ color: theme.colors.black }}
-          selectionColor={theme.colors.primary}
-          inputContainerStyle={{ borderColor: theme.colors.grey3 }}
-          label="Password"
-          placeholder="must have at least 8 characters"
-          secureTextEntry={!isPasswordVisible}
-          rightIcon={
-            <Icon
-              name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
-              type="ionicon"
-              size={24}
-              iconStyle={{ padding: theme.spacing.sm }}
-              color={theme.colors.black}
-              onPress={() => togglePasswordVisible()}
-            />
-          }
-        />
+        <InputText label="Name" placeholder="eg. John Doe" />
+        <InputText label="Email address" placeholder="example@email.com" />
+        <InputPassword />
         <Button fullWidth onPress={() => navigation.navigate('Login')}>
           Create Account
         </Button>

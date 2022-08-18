@@ -1,4 +1,3 @@
-import { InlinePressableProps } from '@rneui/base';
 import { Icon } from '@rneui/themed';
 import React from 'react';
 import { ColorValue, StyleProp, ViewStyle } from 'react-native';
@@ -11,7 +10,6 @@ function BaseIcon({
   iconSize,
   iconType,
   iconName,
-  onPress,
 }: {
   containerStyle?: StyleProp<ViewStyle>;
   backgroundColor: ColorValue;
@@ -20,11 +18,9 @@ function BaseIcon({
   iconSize: number;
   iconType: string;
   iconName: string;
-  onPress?: InlinePressableProps['onPress'];
 }) {
   return (
     <Icon
-      onPress={onPress}
       containerStyle={[
         {
           backgroundColor,
@@ -46,7 +42,6 @@ function BaseIcon({
 
 BaseIcon.defaultProps = {
   containerStyle: {},
-  onPress: (): void => {},
 };
 
 export default BaseIcon;

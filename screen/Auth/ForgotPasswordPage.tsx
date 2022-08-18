@@ -7,6 +7,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/index';
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
+import ButtonBack from '../../components/ButtonBack';
+import { InputText } from '../../components/form/Input';
 
 export type ForgotPasswordProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
@@ -26,22 +28,7 @@ function ForgotPassword({ navigation }: ForgotPasswordProps) {
           },
         ]}
       >
-        <Button
-          type="outline"
-          onPress={() => navigation.navigate('Login')}
-          containerStyle={{
-            alignSelf: 'flex-start',
-            marginBottom: theme.spacing.lg,
-          }}
-          buttonStyle={{ padding: 10, paddingHorizontal: 10 }}
-        >
-          <Icon
-            size={20}
-            name="arrow-back-outline"
-            type="ionicon"
-            containerStyle={{ aspectRatio: 1, padding: 0 }}
-          />
-        </Button>
+        <ButtonBack onPress={() => navigation.navigate('Login')} />
         <Text h1 bold>
           Forgot Password?
         </Text>
@@ -58,13 +45,7 @@ function ForgotPassword({ navigation }: ForgotPasswordProps) {
             }}
           />
         </View>
-        <Input
-          labelStyle={{ color: theme.colors.black }}
-          selectionColor={theme.colors.primary}
-          inputContainerStyle={{ borderColor: theme.colors.grey3 }}
-          label="Email address"
-          placeholder="example@email.com"
-        />
+        <InputText label="Email address" placeholder="example@email.com" />
         <Button fullWidth onPress={() => navigation.navigate('Login')}>
           Send Instruction
         </Button>
