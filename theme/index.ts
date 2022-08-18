@@ -33,8 +33,8 @@ const lightColors = {
   secondaryDark: '#008CC5',
   purple: '#9267ED',
   yellow: '#FABD22',
-  background: '#fbfbfb',
-  cardBackground: '#ffffff',
+  background: '#ffffff',
+  cardBackground: '#fdfdfd',
   textColor: '#242424',
   brand: {
     spotify: '#1db954',
@@ -52,8 +52,8 @@ const darkColors = {
   secondaryDark: '#0081b8',
   purple: '#6A44C5',
   yellow: '#C89200',
-  background: '#1f1f1f',
-  cardBackground: '#222222',
+  background: '#080808',
+  cardBackground: '#171717',
   textColor: '#f2f2f2',
   brand: {
     spotify: '#1db954',

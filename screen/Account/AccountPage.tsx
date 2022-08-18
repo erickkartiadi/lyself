@@ -129,7 +129,7 @@ function AccountPage({ navigation }: AccountPageProps) {
             bgColorDark={theme.colors.error}
             iconName="log-out"
             iconType="ionicon"
-            onPress={() => navigation.navigate('Login')}
+            onPress={() => navigation.navigate('AuthRoutes')}
           />
         </View>
       </View>

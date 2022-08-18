@@ -15,7 +15,7 @@ function RootRoutes() {
     <>
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <Stack.Navigator
-        initialRouteName="AuthRoutes"
+        initialRouteName="HomeRoutes"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="AuthRoutes" component={AuthRoutes} />
