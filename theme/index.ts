@@ -74,7 +74,7 @@ const myTheme: CreateThemeOptions = createTheme({
     },
     inputStyle: { fontFamily: 'Quicksand', fontSize: 16 },
     inputContainerStyle: {
-      borderBottomWidth: 0.25,
+      borderBottomWidth: 0.75,
     },
     containerStyle: { paddingHorizontal: 0 },
   },

@@ -1,17 +1,26 @@
 import { Icon, Input, InputProps, useTheme } from '@rneui/themed';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import useToggle from '../../utils/hooks/useToggle';
 
-function InputText({ label, placeholder, ...others }: InputProps) {
+function InputText({ label, placeholder, ref, ...others }: InputProps) {
   const { theme } = useTheme();
+  const inputRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <Input
-      labelStyle={{ color: theme.colors.black }}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      labelStyle={{
+        color: theme.colors.black,
+      }}
       selectionColor={theme.colors.primary}
-      inputContainerStyle={{ borderColor: theme.colors.grey3 }}
+      inputContainerStyle={{
+        borderColor: isFocused ? theme.colors.primary : theme.colors.grey4,
+      }}
       label={label}
       placeholder={placeholder}
+      ref={inputRef}
       {...others}
     />
   );
