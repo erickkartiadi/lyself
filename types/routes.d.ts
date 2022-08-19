@@ -12,7 +12,8 @@ export type AuthRouteParamList = {
 
 export type ExploreRouteParamList = {
   Explore: undefined;
-  Progress: undefined;
+  Consult: undefined;
+  InDevelopment: undefined;
 };
 
 export type AccountRouteParamList = {

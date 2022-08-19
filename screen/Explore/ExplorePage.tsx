@@ -14,7 +14,7 @@ import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/widget/PlaylistCard';
 import { ExploreRouteParamList } from '../../types/routes';
-import AnimatedPressable from '../../components/AnimatedPressable';
+import ActivityMenu from '../../components/ActivityMenu';
 
 export type ExplorePageProps = NativeStackScreenProps<
   ExploreRouteParamList,
@@ -104,15 +104,18 @@ function ExplorePage({ navigation }: ExplorePageProps) {
     }
   });
 
-  const activityMenu: Activities[] = [
-    'consult',
-    'meditation',
-    'breathing',
-    'music',
-    'forum',
-    'article',
-    'todo',
-    'other',
+  const menus: {
+    activity: Activities;
+    route: keyof ExploreRouteParamList;
+  }[] = [
+    { activity: 'consult', route: 'Consult' },
+    { activity: 'meditation', route: 'InDevelopment' },
+    { activity: 'forum', route: 'InDevelopment' },
+    { activity: 'music', route: 'InDevelopment' },
+    { activity: 'todo', route: 'InDevelopment' },
+    { activity: 'breathing', route: 'InDevelopment' },
+    { activity: 'article', route: 'InDevelopment' },
+    { activity: 'other', route: 'InDevelopment' },
   ];
 
   return (
@@ -136,33 +139,11 @@ function ExplorePage({ navigation }: ExplorePageProps) {
           },
         ]}
       >
-        {activityMenu.map((activity) => (
-          <View
-            key={activity}
-            style={{
-              width: '25%',
-            }}
-          >
-            <AnimatedPressable
-              style={{
-                alignItems: 'center',
-                marginBottom: theme.spacing.xl * 1.25,
-              }}
-              onPress={() => navigation.navigate('Progress')}
-            >
-              <ActivityIcon activity={activity} />
-              <Text
-                subtitle2
-                style={{
-                  marginTop: theme.spacing.md,
-                  textAlign: 'center',
-                  textTransform: 'capitalize',
-                }}
-              >
-                {activity}
-              </Text>
-            </AnimatedPressable>
-          </View>
+        {menus.map(({ activity, route }) => (
+          <ActivityMenu
+            activity={activity}
+            onPress={() => navigation.navigate(route)}
+          />
         ))}
       </View>
       <View style={styles.containerSection}>

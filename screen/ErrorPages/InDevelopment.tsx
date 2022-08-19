@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { styles } from '../../theme';
 import { ExplorePageProps } from '../Explore/ExplorePage';
 
-function Progress({ navigation }: ExplorePageProps) {
+function InDevelopment({ navigation }: ExplorePageProps) {
   return (
     <View
       style={[
@@ -28,4 +28,4 @@ function Progress({ navigation }: ExplorePageProps) {
   );
 }
 
-export default Progress;
+export default InDevelopment;

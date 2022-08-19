@@ -48,7 +48,10 @@ function HomeRoutes() {
       <Tab.Screen
         name="ExploreRoutes"
         component={ExploreRoutes}
-        options={{ tabBarIcon: ExploreTabBarIcon, title: 'Explore' }}
+        options={{
+          tabBarIcon: ExploreTabBarIcon,
+          title: 'Explore',
+        }}
       />
       <Tab.Screen
         name="ChatRoutes"

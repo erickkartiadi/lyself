@@ -1,8 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Progress from '../screen/ErrorPages/InDevelopment';
+import InDevelopment from '../screen/ErrorPages/InDevelopment';
 import ExplorePage from '../screen/Explore/ExplorePage';
 import { ExploreRouteParamList } from '../types/routes';
+import ConsultPage from '../screen/Explore/ConsultPage';
 
 const Stack = createNativeStackNavigator<ExploreRouteParamList>();
 
@@ -15,8 +16,13 @@ function ExploreRoutes() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Progress"
-        component={Progress}
+        name="Consult"
+        component={ConsultPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="InDevelopment"
+        component={InDevelopment}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
