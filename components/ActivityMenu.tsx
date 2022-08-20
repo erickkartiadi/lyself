@@ -21,12 +21,14 @@ function ActivityMenu({ activity, onPress }: ActivityMenuProps) {
     >
       <AnimatedPressable
         style={{
-          alignItems: 'center',
-          marginBottom: theme.spacing.xl * 1.25,
+          marginBottom: theme.spacing.xl * 1.5,
         }}
         onPress={onPress}
       >
-        <ActivityIcon activity={activity} />
+        <ActivityIcon
+          containerStyle={{ alignSelf: 'center' }}
+          activity={activity}
+        />
         <Text
           subtitle2
           style={{

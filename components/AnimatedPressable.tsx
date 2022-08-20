@@ -1,44 +1,41 @@
 import React from 'react';
 import { Pressable, PressableProps } from 'react-native';
-import * as Animatable from 'react-native-animatable';
-import useToggle from '../utils/hooks/useToggle';
-
-const AnimatablePressable = Animatable.createAnimatableComponent(Pressable);
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 
 function AnimatedPressable({ onPress, children, style }: PressableProps) {
-  const pressableRef = React.useRef(null);
-  const [isPressed, toggleIsPressed] = useToggle(false);
+  const scaleValue = useSharedValue(1);
+  const opacityValue = useSharedValue(1);
 
-  const handleAnimation = () => {
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [{ scale: scaleValue.value }],
+    opacity: opacityValue.value,
+  }));
+
+  const onPressInAnimation = () => {
     if (!onPress) return;
-    toggleIsPressed();
+    scaleValue.value = withSpring(0.9);
+    opacityValue.value = withSpring(0.9);
+  };
 
-    if (pressableRef) {
-      pressableRef.current?.animate({
-        0: {
-          transform: [{ scale: isPressed ? 0.925 : 1 }],
-          opacity: isPressed ? 0.85 : 1,
-        },
-        1: {
-          transform: [{ scale: isPressed ? 1 : 0.925 }],
-          opacity: isPressed ? 1 : 0.85,
-        },
-      });
-    }
+  const onPressOutAnimation = () => {
+    if (!onPress) return;
+    scaleValue.value = withSpring(1);
+    opacityValue.value = withSpring(1);
   };
 
   return (
-    <AnimatablePressable
+    <Pressable
       style={style}
-      duration={100}
-      easing="ease-in"
-      ref={pressableRef}
-      onPressIn={handleAnimation}
-      onPressOut={handleAnimation}
+      onPressIn={onPressInAnimation}
+      onPressOut={onPressOutAnimation}
       onPress={onPress}
     >
-      {children}
-    </AnimatablePressable>
+      <Animated.View style={[animatedStyles]}>{children}</Animated.View>
+    </Pressable>
   );
 }
 
