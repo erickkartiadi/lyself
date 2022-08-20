@@ -15,7 +15,7 @@ function ThemeSwitch() {
 
   return (
     <Switch
-      color={theme.colors.grey1}
+      color={theme.colors.grey2}
       value={isOn}
       onValueChange={handleSwitchThemeMode}
     />
