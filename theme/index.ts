@@ -1,4 +1,9 @@
-import { CreateThemeOptions, createTheme } from '@rneui/themed';
+import {
+  ButtonProps,
+  CreateThemeOptions,
+  TextProps,
+  createTheme,
+} from '@rneui/themed';
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 
@@ -64,136 +69,138 @@ const darkColors = {
 };
 const myTheme: CreateThemeOptions = createTheme({
   spacing: { ...themeSpacing },
-  Input: {
-    labelStyle: {
-      fontSize: 14.22,
-      fontFamily: 'Quicksand-Medium',
-      fontWeight: '500',
-      letterSpacing: 0.1,
-      marginBottom: themeSpacing.xs,
-    },
-    inputStyle: { fontFamily: 'Quicksand', fontSize: 16 },
-    inputContainerStyle: {
-      borderBottomWidth: 0.75,
-    },
-    containerStyle: { paddingHorizontal: 0 },
-  },
-  Card: {
-    containerStyle: {
-      margin: 0,
-      padding: themeSpacing.lg,
-      marginTop: themeSpacing.md,
-      marginBottom: themeSpacing.md,
-    },
-  },
-  SearchBar: {
-    style: {
-      fontFamily: 'Quicksand',
-    },
-    inputStyle: {
-      fontSize: 14.22,
-    },
-  },
-  CheckBox: {
-    fontFamily: 'Quicksand-Medium',
-    textStyle: { fontWeight: '500', marginTop: -4 },
-    containerStyle: {
-      padding: 0,
-      marginLeft: 0,
-      paddingVertical: themeSpacing.md,
-    },
-  },
-  Text: (props) => ({
-    style: {
-      // default
-      ...{
-        fontSize: 16,
-        letterSpacing: 0.5,
-        fontFamily: 'Quicksand',
-        fontWeight: '400',
-      },
-      ...(props.bold && {
-        fontFamily: 'Quicksand-Bold',
-        fontWeight: 'normal',
-      }),
-      ...(props.subtitle1 && {
-        fontSize: 16,
+  components: {
+    Input: () => ({
+      labelStyle: {
+        fontSize: 14.22,
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
-        letterSpacing: 0.15,
+        letterSpacing: 0.1,
         marginBottom: themeSpacing.xs,
-      }),
-      ...(props.subtitle2 && {
+      },
+      inputStyle: { fontFamily: 'Quicksand', fontSize: 16 },
+      inputContainerStyle: {
+        borderBottomWidth: 0.75,
+      },
+      containerStyle: { paddingHorizontal: 0 },
+    }),
+    Card: {
+      containerStyle: {
+        margin: 0,
+        padding: themeSpacing.lg,
+        marginTop: themeSpacing.md,
+        marginBottom: themeSpacing.md,
+      },
+    },
+    SearchBar: {
+      style: {
+        fontFamily: 'Quicksand',
+      },
+      inputStyle: {
         fontSize: 14.22,
-        fontFamily: 'Quicksand',
-        letterSpacing: 0.15,
-      }),
-      ...(props.caption && {
-        fontSize: 12.64,
-        fontFamily: 'Quicksand',
-        fontWeight: '400',
-        letterSpacing: 0.3,
-      }),
+      },
     },
-    h1Style: {
-      fontSize: 25.63,
+    CheckBox: {
       fontFamily: 'Quicksand-Medium',
-      fontWeight: '500',
-      letterSpacing: -0.25,
-      marginBottom: themeSpacing.sm,
-      ...(props.bold && {
+      textStyle: { fontWeight: '500', marginTop: -4 },
+      containerStyle: {
+        padding: 0,
+        marginLeft: 0,
+        paddingVertical: themeSpacing.md,
+      },
+    },
+    Text: (props: TextProps) => ({
+      style: {
+        // default
+        ...{
+          fontSize: 16,
+          letterSpacing: 0.5,
+          fontFamily: 'Quicksand',
+          fontWeight: '400',
+        },
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+        ...(props.subtitle1 && {
+          fontSize: 16,
+          fontFamily: 'Quicksand-Medium',
+          fontWeight: '500',
+          letterSpacing: 0.15,
+          marginBottom: themeSpacing.xs,
+        }),
+        ...(props.subtitle2 && {
+          fontSize: 14.22,
+          fontFamily: 'Quicksand',
+          letterSpacing: 0.15,
+        }),
+        ...(props.caption && {
+          fontSize: 12.64,
+          fontFamily: 'Quicksand',
+          fontWeight: '400',
+          letterSpacing: 0.3,
+        }),
+      },
+      h1Style: {
+        fontSize: 25.63,
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        letterSpacing: -0.25,
+        marginBottom: themeSpacing.sm,
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+      },
+      h2Style: {
+        fontSize: 22.78,
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        letterSpacing: 0.125,
+        marginBottom: themeSpacing.sm,
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+      },
+      h3Style: {
+        fontSize: 20.25,
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        letterSpacing: 0.1,
+        marginBottom: themeSpacing.sm,
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+      },
+      h4Style: {
+        fontSize: 18,
         fontFamily: 'Quicksand-Bold',
         fontWeight: 'normal',
-      }),
-    },
-    h2Style: {
-      fontSize: 22.78,
-      fontFamily: 'Quicksand-Medium',
-      fontWeight: '500',
-      letterSpacing: 0.125,
-      marginBottom: themeSpacing.sm,
-      ...(props.bold && {
-        fontFamily: 'Quicksand-Bold',
-        fontWeight: 'normal',
-      }),
-    },
-    h3Style: {
-      fontSize: 20.25,
-      fontFamily: 'Quicksand-Medium',
-      fontWeight: '500',
-      letterSpacing: 0.1,
-      marginBottom: themeSpacing.sm,
-      ...(props.bold && {
-        fontFamily: 'Quicksand-Bold',
-        fontWeight: 'normal',
-      }),
-    },
-    h4Style: {
-      fontSize: 18,
-      fontFamily: 'Quicksand-Bold',
-      fontWeight: 'normal',
-      letterSpacing: 0.25,
-      marginBottom: themeSpacing.sm,
-      ...(props.bold && {
-        fontFamily: 'Quicksand-Bold',
-        fontWeight: 'normal',
-      }),
-    },
-  }),
-  Button: (props) => ({
-    radius: 999,
-    containerStyle: {
-      alignItems: props.fullWidth ? 'stretch' : 'center',
-    },
-    titleStyle: {
-      fontFamily: 'Quicksand-Medium',
-      fontWeight: '500',
-      fontSize: 14.22,
-      letterSpacing: 1.25,
-    },
-    size: 'lg',
-    uppercase: true,
-  }),
+        letterSpacing: 0.25,
+        marginBottom: themeSpacing.sm,
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+      },
+    }),
+    Button: (props: ButtonProps) => ({
+      radius: 999,
+      containerStyle: {
+        alignItems: props.fullWidth ? 'stretch' : 'center',
+      },
+      titleStyle: {
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        fontSize: 14.22,
+        letterSpacing: 1.25,
+      },
+      size: 'lg',
+      uppercase: true,
+    }),
+  },
   lightColors,
   darkColors,
 });

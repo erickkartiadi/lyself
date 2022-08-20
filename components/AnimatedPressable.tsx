@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Pressable, PressableProps } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -6,7 +6,17 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-function AnimatedPressable({ onPress, children, style }: PressableProps) {
+interface AnimatedPressableProps {
+  onPress: PressableProps['onPress'];
+  style: PressableProps['style'];
+  children: ReactNode;
+}
+
+function AnimatedPressable({
+  onPress,
+  children,
+  style,
+}: AnimatedPressableProps) {
   const scaleValue = useSharedValue(1);
   const opacityValue = useSharedValue(1);
 
