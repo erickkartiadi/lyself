@@ -23,7 +23,7 @@ function HomeRoutes() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="ExploreRoutes"
       screenOptions={{
         headerStyle: {
           elevation: 0,

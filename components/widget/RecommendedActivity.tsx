@@ -6,6 +6,7 @@ import { styles } from '../../theme';
 import { comingSoonToast } from '../../utils/comingSoonToast';
 import ActivityIcon, { Activities } from '../ActivityIcon';
 import BaseCard from '../BaseCard';
+import SectionTitle from '../SectionTitle';
 import ViewSeparator from '../ViewSeparator';
 
 interface RecommendedActivityProps {
@@ -59,7 +60,7 @@ function RecommendedActivity() {
 
   return (
     <View style={styles.containerSection}>
-      <Text h4>Recommended activity</Text>
+      <SectionTitle title="Recommended activity" />
       <View style={styles.noContainerOffset}>
         <FlatList
           horizontal

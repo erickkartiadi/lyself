@@ -9,10 +9,12 @@ export interface PlaylistCardProps {
   title: string;
   creator: string;
   spotifyUrl: string;
+  id: string;
 }
 
 function PlaylistCard({
   imageUrl,
+  id,
   title,
   creator,
   spotifyUrl,
@@ -24,11 +26,8 @@ function PlaylistCard({
   };
 
   return (
-    // <Pressable
-    //   onPress={handleOpenSpotifyPlaylist}
-    //   style={{ marginTop: theme.spacing.md, flex: 1 }}
-    // >
     <AnimatedPressable
+      key={id}
       onPress={handleOpenSpotifyPlaylist}
       style={{ marginTop: theme.spacing.md, width: 160 }}
     >
@@ -49,7 +48,6 @@ function PlaylistCard({
         <Text caption>by {creator}</Text>
       </View>
     </AnimatedPressable>
-    // </Pressable>
   );
 }
 

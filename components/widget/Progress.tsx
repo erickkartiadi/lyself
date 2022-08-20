@@ -6,6 +6,7 @@ import { styles } from '../../theme';
 import { comingSoonToast } from '../../utils/comingSoonToast';
 import ActivityIcon from '../ActivityIcon';
 import BaseCard from '../BaseCard';
+import SectionTitle from '../SectionTitle';
 
 function ProgressCard() {
   const { theme } = useTheme();
@@ -74,7 +75,7 @@ function ProgressCard() {
 function Progress() {
   return (
     <View style={styles.containerSection}>
-      <Text h4>Continue your progress</Text>
+      <SectionTitle title="Continue your progress" />
       <ProgressCard />
     </View>
   );

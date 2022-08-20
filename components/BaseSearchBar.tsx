@@ -28,6 +28,7 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
           borderBottomWidth: 0,
           borderWidth: 0,
           elevation: 0,
+          marginBottom: theme.spacing.md,
         },
       ]}
       inputContainerStyle={{

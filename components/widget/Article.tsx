@@ -6,6 +6,7 @@ import BaseCard from '../BaseCard';
 import { ArticleCardProps, dataArticles } from '../../constant';
 import { styles } from '../../theme';
 import ViewSeparator from '../ViewSeparator';
+import SectionTitle from '../SectionTitle';
 
 function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   const { theme } = useTheme();
@@ -59,7 +60,7 @@ function ArticleWidget() {
 
   return (
     <View style={styles.containerSection}>
-      <Text h4>News about mental health</Text>
+      <SectionTitle title="News about mental health" showRightButton />
       <View style={styles.noContainerOffset}>
         <FlatList
           horizontal

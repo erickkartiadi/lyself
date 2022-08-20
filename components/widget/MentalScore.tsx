@@ -8,6 +8,7 @@ import { styles } from '../../theme';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
 import StatusCard from './StatusCard';
 import Dropdown from '../Dropdown';
+import SectionTitle from '../SectionTitle';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';
@@ -128,19 +129,11 @@ function MentalScoreCard() {
 function MentalScore() {
   return (
     <View style={styles.containerSection}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Text h4>Your stats</Text>
-        <View>
-          <Dropdown />
-        </View>
-      </View>
+      <SectionTitle
+        title="Your stats"
+        showRightButton
+        rightButtonComponent={<Dropdown />}
+      />
       <MentalScoreCard />
       <StatusCard />
     </View>

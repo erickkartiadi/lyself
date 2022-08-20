@@ -71,8 +71,9 @@ function Home() {
           Edit Widget
         </Button>
       </View>
+
+      {/* TODO Fix type error */}
       <BottomSheet
-        modalProps={{}}
         isVisible={isBottomSheetVisible}
         onBackdropPress={toggleIsBottomSheetVisible}
       >

@@ -8,9 +8,8 @@ import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import BaseSearchBar from '../../components/BaseSearchBar';
 import ActivityIcon, { Activities } from '../../components/ActivityIcon';
 import { styles } from '../../theme';
-import { ArticleCardProps, dataArticles } from '../../constant';
 import ViewSeparator from '../../components/ViewSeparator';
-import { ArticleCard } from '../../components/widget/Article';
+import { ArticleWidget } from '../../components/widget/Article';
 import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/widget/PlaylistCard';
@@ -49,16 +48,6 @@ function ExplorePage({ navigation }: ExplorePageProps) {
       />
     );
   };
-
-  const renderArticles = ({ item }: { item: ArticleCardProps }) => (
-    <ArticleCard
-      src={item.src}
-      time={item.time}
-      publisher={item.publisher}
-      title={item.title}
-      url={item.url}
-    />
-  );
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -148,20 +137,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
           />
         ))}
       </View>
-      <View style={styles.containerSection}>
-        <Text h4>Popular articles</Text>
-        <View style={styles.noContainerOffset}>
-          <FlatList
-            horizontal
-            ItemSeparatorComponent={ViewSeparator}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.container}
-            data={dataArticles}
-            renderItem={renderArticles}
-            keyExtractor={(item: ArticleCardProps) => item.title}
-          />
-        </View>
-      </View>
+      <ArticleWidget />
       <View style={styles.containerSection}>
         <View
           style={{

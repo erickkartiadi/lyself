@@ -118,10 +118,7 @@ const myTheme: CreateThemeOptions = createTheme({
           fontFamily: 'Quicksand',
           fontWeight: '400',
         },
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
+
         ...(props.subtitle1 && {
           fontSize: 16,
           fontFamily: 'Quicksand-Medium',
@@ -139,6 +136,14 @@ const myTheme: CreateThemeOptions = createTheme({
           fontFamily: 'Quicksand',
           fontWeight: '400',
           letterSpacing: 0.3,
+        }),
+        ...(props.medium && {
+          fontFamily: 'Quicksand-Medium',
+          fontWeight: '500',
+        }),
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
         }),
       },
       h1Style: {
@@ -178,7 +183,7 @@ const myTheme: CreateThemeOptions = createTheme({
         fontSize: 18,
         fontFamily: 'Quicksand-Bold',
         fontWeight: 'normal',
-        letterSpacing: 0.25,
+        letterSpacing: -0.5,
         marginBottom: themeSpacing.sm,
         ...(props.bold && {
           fontFamily: 'Quicksand-Bold',
