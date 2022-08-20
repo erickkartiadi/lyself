@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { styles } from '../../theme';
 import { chatData } from '../../constant';
 import { ChatRouteParamList } from '../../types/routes';

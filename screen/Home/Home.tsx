@@ -1,6 +1,7 @@
 import { BottomSheet, Button, CheckBox, Text, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { styles } from '../../theme';
 import useToggle from '../../utils/hooks/useToggle';
 import Progress from '../../components/widget/Progress';
