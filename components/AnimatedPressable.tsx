@@ -8,7 +8,7 @@ import Animated, {
 
 interface AnimatedPressableProps {
   onPress: PressableProps['onPress'];
-  style: PressableProps['style'];
+  style?: PressableProps['style'];
   children: ReactNode;
 }
 
@@ -48,5 +48,9 @@ function AnimatedPressable({
     </Pressable>
   );
 }
+
+AnimatedPressable.defaultProps = {
+  style: null,
+};
 
 export default AnimatedPressable;

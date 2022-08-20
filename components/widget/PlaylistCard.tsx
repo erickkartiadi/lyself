@@ -1,11 +1,10 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { Image, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
-import BaseCard from '../BaseCard';
+import AnimatedPressable from '../AnimatedPressable';
 
 export interface PlaylistCardProps {
-  id: string;
   imageUrl: string;
   title: string;
   creator: string;
@@ -13,7 +12,6 @@ export interface PlaylistCardProps {
 }
 
 function PlaylistCard({
-  id,
   imageUrl,
   title,
   creator,
@@ -26,29 +24,32 @@ function PlaylistCard({
   };
 
   return (
-    <Pressable
-      key={id}
+    // <Pressable
+    //   onPress={handleOpenSpotifyPlaylist}
+    //   style={{ marginTop: theme.spacing.md, flex: 1 }}
+    // >
+    <AnimatedPressable
       onPress={handleOpenSpotifyPlaylist}
-      style={{ marginTop: theme.spacing.md, flex: 1 }}
+      style={{ marginTop: theme.spacing.md, width: 160 }}
     >
-      <BaseCard width={160} disablePadding>
-        <Image
-          containerStyle={{
-            width: '100%',
-            aspectRatio: 1,
-          }}
-          PlaceholderContent={<ActivityIndicator />}
-          childrenContainerStyle={{ width: '100%' }}
-          source={{
-            uri: imageUrl,
-          }}
-        />
-      </BaseCard>
-      <View style={{ flex: 1, width: 160 }}>
+      <Image
+        containerStyle={{
+          width: '100%',
+          aspectRatio: 1,
+          borderRadius: theme.spacing.md,
+        }}
+        PlaceholderContent={<ActivityIndicator />}
+        childrenContainerStyle={{ width: '100%' }}
+        source={{
+          uri: imageUrl,
+        }}
+      />
+      <View style={{ marginTop: theme.spacing.md }}>
         <Text subtitle1>{title}</Text>
         <Text caption>by {creator}</Text>
       </View>
-    </Pressable>
+    </AnimatedPressable>
+    // </Pressable>
   );
 }
 
