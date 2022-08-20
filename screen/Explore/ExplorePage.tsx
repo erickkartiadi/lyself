@@ -141,6 +141,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
       >
         {menus.map(({ activity, route }) => (
           <ActivityMenu
+            key={activity}
             activity={activity}
             onPress={() => navigation.navigate(route)}
           />

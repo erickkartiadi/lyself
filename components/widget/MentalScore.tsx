@@ -104,7 +104,7 @@ function MentalScoreCard() {
           fillShadowGradientOpacity: isDarkMode ? 0.25 : 0.1,
           propsForLabels: {
             fontFamily: 'Quicksand-Bold',
-            fontWeight: '700',
+            fontWeight: 'normal',
           },
           style: {
             borderRadius: theme.spacing.md,

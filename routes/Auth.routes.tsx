@@ -10,27 +10,14 @@ const Stack = createNativeStackNavigator<AuthRouteParamList>();
 
 function AuthRoutes() {
   return (
-    <Stack.Navigator initialRouteName="GetStarted">
-      <Stack.Screen
-        name="Login"
-        component={LoginPage}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Register"
-        component={RegisterPage}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPasswordPage}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="GetStarted"
-        component={GetStartedPage}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator
+      initialRouteName="GetStarted"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="Login" component={LoginPage} />
+      <Stack.Screen name="Register" component={RegisterPage} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordPage} />
+      <Stack.Screen name="GetStarted" component={GetStartedPage} />
     </Stack.Navigator>
   );
 }

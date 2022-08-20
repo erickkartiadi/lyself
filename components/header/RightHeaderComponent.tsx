@@ -8,13 +8,7 @@ function RightHeaderComponent() {
   const { theme } = useTheme();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-      }}
-    >
+    <View>
       <View>
         <Badge
           status="error"

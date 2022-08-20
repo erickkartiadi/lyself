@@ -113,8 +113,8 @@ const myTheme: CreateThemeOptions = createTheme({
         fontWeight: '400',
       },
       ...(props.bold && {
-        fontWeight: '700',
         fontFamily: 'Quicksand-Bold',
+        fontWeight: 'normal',
       }),
       ...(props.subtitle1 && {
         fontSize: 16,
@@ -142,8 +142,8 @@ const myTheme: CreateThemeOptions = createTheme({
       letterSpacing: -0.25,
       marginBottom: themeSpacing.sm,
       ...(props.bold && {
-        fontWeight: '700',
         fontFamily: 'Quicksand-Bold',
+        fontWeight: 'normal',
       }),
     },
     h2Style: {
@@ -153,8 +153,8 @@ const myTheme: CreateThemeOptions = createTheme({
       letterSpacing: 0.125,
       marginBottom: themeSpacing.sm,
       ...(props.bold && {
-        fontWeight: '700',
         fontFamily: 'Quicksand-Bold',
+        fontWeight: 'normal',
       }),
     },
     h3Style: {
@@ -164,19 +164,19 @@ const myTheme: CreateThemeOptions = createTheme({
       letterSpacing: 0.1,
       marginBottom: themeSpacing.sm,
       ...(props.bold && {
-        fontWeight: '700',
         fontFamily: 'Quicksand-Bold',
+        fontWeight: 'normal',
       }),
     },
     h4Style: {
       fontSize: 18,
       fontFamily: 'Quicksand-Bold',
-      fontWeight: '700',
+      fontWeight: 'normal',
       letterSpacing: 0.25,
       marginBottom: themeSpacing.sm,
       ...(props.bold && {
-        fontWeight: '700',
         fontFamily: 'Quicksand-Bold',
+        fontWeight: 'normal',
       }),
     },
   }),

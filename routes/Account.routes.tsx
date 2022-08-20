@@ -7,12 +7,11 @@ const Stack = createNativeStackNavigator<AccountRouteParamList>();
 
 function AccountRoutes() {
   return (
-    <Stack.Navigator initialRouteName="Account">
-      <Stack.Screen
-        name="Account"
-        component={AccountPage}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator
+      initialRouteName="Account"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="Account" component={AccountPage} />
     </Stack.Navigator>
   );
 }

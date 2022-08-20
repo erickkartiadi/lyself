@@ -31,7 +31,7 @@ function AnimatedPressable({ onPress, children, style }: PressableProps) {
     <AnimatablePressable
       style={style}
       duration={100}
-      easing="ease-in-out"
+      easing="ease-in"
       ref={pressableRef}
       onPressIn={handleAnimation}
       onPressOut={handleAnimation}
