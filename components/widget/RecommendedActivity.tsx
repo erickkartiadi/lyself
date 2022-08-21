@@ -61,17 +61,16 @@ function RecommendedActivity() {
   return (
     <View style={styles.containerSection}>
       <SectionTitle title="Recommended activity" />
-      <View style={styles.noContainerOffset}>
-        <FlatList
-          horizontal
-          ItemSeparatorComponent={ViewSeparator}
-          contentContainerStyle={styles.container}
-          showsHorizontalScrollIndicator={false}
-          data={dataRecommended}
-          renderItem={renderRecommended}
-          keyExtractor={(item: RecommendedProps) => item.id}
-        />
-      </View>
+      <FlatList
+        horizontal
+        ItemSeparatorComponent={ViewSeparator}
+        style={styles.flatListContainer}
+        contentContainerStyle={styles.flatList}
+        showsHorizontalScrollIndicator={false}
+        data={dataRecommended}
+        renderItem={renderRecommended}
+        keyExtractor={(item: RecommendedProps) => item.id}
+      />
     </View>
   );
 }

@@ -88,7 +88,6 @@ function SectionTitle({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: theme.spacing.lg,
-        // backgroundColor: 'blue',
       }}
     >
       <>

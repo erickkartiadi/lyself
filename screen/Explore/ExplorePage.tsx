@@ -150,17 +150,16 @@ function ExplorePage({ navigation }: ExplorePageProps) {
           <ActivityIcon activity="music" size={24} iconFontSize={16} />
         </View>
         {token ? (
-          <View style={styles.noContainerOffset}>
-            <FlatList
-              horizontal
-              ItemSeparatorComponent={ViewSeparator}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.container}
-              data={featuredPlaylist}
-              renderItem={renderPlaylist}
-              keyExtractor={(item: PlaylistCardProps) => item.id}
-            />
-          </View>
+          <FlatList
+            horizontal
+            ItemSeparatorComponent={ViewSeparator}
+            showsHorizontalScrollIndicator={false}
+            style={styles.flatListContainer}
+            contentContainerStyle={styles.flatList}
+            data={featuredPlaylist}
+            renderItem={renderPlaylist}
+            keyExtractor={(item: PlaylistCardProps) => item.id}
+          />
         ) : (
           <Button
             fullWidth

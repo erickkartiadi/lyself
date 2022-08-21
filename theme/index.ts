@@ -24,8 +24,19 @@ export const styles = StyleSheet.create({
   },
   containerSection: {
     paddingHorizontal: themeSpacing.xl,
-    marginTop: themeSpacing.xl,
-    marginBottom: themeSpacing.md,
+    marginTop: themeSpacing.lg,
+    marginBottom: themeSpacing.lg,
+  },
+  flatList: {
+    paddingHorizontal: themeSpacing.xl,
+    paddingBottom: themeSpacing.lg,
+  },
+  flatListContainer: {
+    // remove container offset
+    marginHorizontal: themeSpacing.xl * -1,
+
+    // remove FlatList padding bottom
+    marginBottom: themeSpacing.lg * -1,
   },
 });
 
@@ -38,8 +49,8 @@ const lightColors = {
   secondaryDark: '#008CC5',
   purple: '#9267ED',
   yellow: '#FABD22',
-  background: '#ffffff',
-  cardBackground: '#fdfdfd',
+  background: '#fafafa',
+  cardBackground: '#ffffff',
   textColor: '#242424',
   brand: {
     spotify: '#1db954',
@@ -57,8 +68,8 @@ const darkColors = {
   secondaryDark: '#0081b8',
   purple: '#6A44C5',
   yellow: '#C89200',
-  background: '#080808',
-  cardBackground: '#171717',
+  background: '#171717',
+  cardBackground: '#080808',
   textColor: '#f2f2f2',
   brand: {
     spotify: '#1db954',

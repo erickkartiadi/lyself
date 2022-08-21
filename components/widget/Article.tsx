@@ -61,17 +61,16 @@ function ArticleWidget() {
   return (
     <View style={styles.containerSection}>
       <SectionTitle title="News about mental health" showRightButton />
-      <View style={styles.noContainerOffset}>
-        <FlatList
-          horizontal
-          ItemSeparatorComponent={ViewSeparator}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.container}
-          data={dataArticles}
-          renderItem={renderArticles}
-          keyExtractor={(item: ArticleCardProps) => item.title}
-        />
-      </View>
+      <FlatList
+        horizontal
+        ItemSeparatorComponent={ViewSeparator}
+        showsHorizontalScrollIndicator={false}
+        style={styles.flatListContainer}
+        contentContainerStyle={styles.flatList}
+        data={dataArticles}
+        renderItem={renderArticles}
+        keyExtractor={(item: ArticleCardProps) => item.title}
+      />
     </View>
   );
 }

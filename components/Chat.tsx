@@ -35,7 +35,7 @@ function RightSwipeButton() {
   );
 }
 
-interface ChatProps {
+export interface ChatProps {
   name: string;
   text: string;
   time: string;
