@@ -34,7 +34,11 @@ function HomeRoutes() {
           fontFamily: 'Quicksand-Bold',
         },
         tabBarStyle: {
-          height: 60,
+          height: 72,
+          shadowColor: 'rgba(0, 0, 0, 0.08)',
+          elevation: 1,
+          borderTopColor: theme.colors.grey4,
+          borderTopWidth: 0.25,
         },
         tabBarShowLabel: false,
         headerRight: RightHeaderComponent,
