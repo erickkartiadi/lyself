@@ -4,7 +4,6 @@ import { ThemeModeContext } from '../theme/ThemeModeContext';
 import SettingMenu from './SettingMenu';
 
 function ThemeSwitch() {
-  const { theme } = useTheme();
   const { isDarkMode, setThemeMode } = useContext(ThemeModeContext);
   const [isOn, setIsOn] = useState(isDarkMode);
 
@@ -13,13 +12,7 @@ function ThemeSwitch() {
     setIsOn(value);
   };
 
-  return (
-    <Switch
-      color={theme.colors.grey2}
-      value={isOn}
-      onValueChange={handleSwitchThemeMode}
-    />
-  );
+  return <Switch value={isOn} onValueChange={handleSwitchThemeMode} />;
 }
 
 function SwitchModeSettingMenu() {

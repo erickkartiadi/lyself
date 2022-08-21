@@ -27,7 +27,7 @@ function AnimatedPressable({
 
   const onPressInAnimation = () => {
     if (!onPress) return;
-    scaleValue.value = withSpring(0.9);
+    scaleValue.value = withSpring(0.95);
     opacityValue.value = withSpring(0.9);
   };
 

@@ -24,33 +24,33 @@ export const styles = StyleSheet.create({
   },
   containerSection: {
     paddingHorizontal: themeSpacing.xl,
-    marginTop: themeSpacing.lg,
-    marginBottom: themeSpacing.lg,
+    marginTop: themeSpacing.xl,
+    marginBottom: themeSpacing.xl,
   },
   flatList: {
     paddingHorizontal: themeSpacing.xl,
-    paddingBottom: themeSpacing.lg,
+    paddingBottom: themeSpacing.xl,
   },
   flatListContainer: {
     // remove container offset
     marginHorizontal: themeSpacing.xl * -1,
 
     // remove FlatList padding bottom
-    marginBottom: themeSpacing.lg * -1,
+    marginBottom: themeSpacing.xl * -1,
   },
 });
 
 const lightColors = {
-  primary: '#F26D85',
-  primaryLight: '#FFE3E9',
-  primaryDark: '#CC4B66',
-  secondary: '#3FB0EB',
-  secondaryLight: '#67CEFF',
-  secondaryDark: '#008CC5',
-  purple: '#9267ED',
-  yellow: '#FABD22',
-  background: '#fafafa',
-  cardBackground: '#ffffff',
+  primary: '#FF7096',
+  primaryLight: '#FFB8CB',
+  secondary: '#7096FF',
+  secondaryLight: '#B8CBFF',
+  purple: '#9270FF',
+  yellow: '#FFCC3E',
+  background: '#FDFDFD',
+  cardBackground: '#FFFFFF',
+  blue: '#30ACF4',
+  error: '#FF0A54',
   textColor: '#242424',
   brand: {
     spotify: '#1db954',
@@ -60,17 +60,17 @@ const lightColors = {
   },
 };
 const darkColors = {
-  primary: '#bb3b58',
-  primaryLight: '#FE788F',
-  primaryDark: '#bb3b58',
-  secondary: '#0081b8',
-  secondaryLight: '#67CEFF',
-  secondaryDark: '#0081b8',
-  purple: '#6A44C5',
-  yellow: '#C89200',
-  background: '#171717',
-  cardBackground: '#080808',
-  textColor: '#f2f2f2',
+  primary: '#FF5683',
+  primaryLight: '#FFABC1',
+  secondary: '#5784FF',
+  secondaryLight: '#ABC1FF',
+  purple: '#7D56FF',
+  yellow: '#FFC527',
+  background: '#111111',
+  cardBackground: '#171717',
+  textColor: '#F2F2F2',
+  blue: '#1BA4F3',
+  error: '#E30044',
   brand: {
     spotify: '#1db954',
     google: '#ea4335',

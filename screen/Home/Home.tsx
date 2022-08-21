@@ -57,9 +57,9 @@ function Home() {
       {activeWidgets.map(
         ({ no, active, Widget }) => active && <Widget key={no} />
       )}
-      <View style={(styles.containerSection, { marginTop: theme.spacing.xl })}>
+      <View style={styles.containerSection}>
         <Button
-          color="secondary"
+          color="primary"
           iconPosition="left"
           icon={{
             type: 'material',

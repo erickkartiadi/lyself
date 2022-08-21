@@ -50,13 +50,13 @@ function ActivityIcon({
     article: {
       type: 'ionicon',
       name: 'newspaper',
-      backgroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.grey0,
       iconSize: 30,
     },
     breathing: {
       type: 'entypo',
       name: 'air',
-      backgroundColor: theme.colors.secondary,
+      backgroundColor: theme.colors.blue,
       iconSize: 30,
     },
     diagnose: {
@@ -74,7 +74,7 @@ function ActivityIcon({
     todo: {
       type: 'ionicon',
       name: 'checkmark-done-sharp',
-      backgroundColor: theme.colors.success,
+      backgroundColor: theme.colors.secondary,
       iconSize: 32,
     },
     other: {
@@ -93,7 +93,7 @@ function ActivityIcon({
       containerStyle={containerStyle}
       size={size}
       iconSize={iconFontSize || iconSize}
-      color={theme.colors.white}
+      color={theme.colors.background}
       iconType={type}
       iconName={name}
     />

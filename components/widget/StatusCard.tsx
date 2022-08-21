@@ -36,12 +36,12 @@ function StatusCard() {
       title: 'Blood pressure',
       subtitle: 'mmHg',
       value: '110/80',
-      color: theme.colors.primaryDark,
+      color: theme.colors.primary,
       icon: {
         type: 'fontisto',
         name: 'blood-drop',
         size: 36,
-        color: theme.colors.primaryDark,
+        color: theme.colors.primary,
       },
     },
     {
