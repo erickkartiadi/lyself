@@ -3,13 +3,14 @@ import {
   CreateThemeOptions,
   TextProps,
   createTheme,
+  normalize,
 } from '@rneui/themed';
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 
 const themeSpacing = {
-  xs: 4,
-  sm: 6,
+  xs: 2,
+  sm: 4,
   md: 8,
   lg: 12,
   xl: 16,
@@ -40,56 +41,82 @@ export const styles = StyleSheet.create({
   },
 });
 
+// scale: 1.125 - major second
+const fontSize = {
+  heading1: normalize(25.63),
+  heading2: normalize(22.78),
+  heading3: normalize(20.25),
+  heading4: normalize(18),
+  body1: normalize(16),
+  body2: normalize(14.22),
+  caption: normalize(12.64),
+};
+
 const lightColors = {
-  primary: '#FF7096',
-  primaryLight: '#FFB8CB',
-  secondary: '#7096FF',
-  secondaryLight: '#B8CBFF',
-  purple: '#9270FF',
-  yellow: '#FFCC3E',
-  background: '#FDFDFD',
+  primary: '#f55c7a',
+  secondary: '#5C7BF5',
+  purple: '#8a5cf5',
+  yellow: '#f3b700',
+  blue: '#35A7FF',
+  error: '#E61025',
+  background: '#FBFBFB',
   cardBackground: '#FFFFFF',
-  blue: '#30ACF4',
-  error: '#FF0A54',
-  textColor: '#242424',
   brand: {
-    spotify: '#1db954',
-    google: '#ea4335',
-    facebook: '#1877f2',
-    apple: '#000000',
+    spotify: {
+      green: '#1db954',
+    },
+    google: {
+      red: '#ea4335',
+    },
+    facebook: {
+      blue: '#1877f2',
+    },
+    apple: {
+      black: '#000000',
+    },
   },
 };
+
 const darkColors = {
-  primary: '#FF5683',
-  primaryLight: '#FFABC1',
-  secondary: '#5784FF',
-  secondaryLight: '#ABC1FF',
-  purple: '#7D56FF',
-  yellow: '#FFC527',
+  primary: '#EF617E',
+  secondary: '#617EEF',
+  purple: '#8C61EF',
+  yellow: '#ECB309',
+  blue: '#3AA6F8',
+  error: '#BF3644',
   background: '#111111',
   cardBackground: '#171717',
-  textColor: '#F2F2F2',
-  blue: '#1BA4F3',
-  error: '#E30044',
   brand: {
-    spotify: '#1db954',
-    google: '#ea4335',
-    facebook: '#1877f2',
-    apple: '#000000',
+    spotify: {
+      green: '#23B455',
+    },
+    google: {
+      red: '#E3483A',
+    },
+    facebook: {
+      blue: '#1F77EA',
+    },
+    apple: {
+      black: '#FFFFFF',
+    },
   },
 };
+
 const myTheme: CreateThemeOptions = createTheme({
   spacing: { ...themeSpacing },
   components: {
     Input: () => ({
       labelStyle: {
-        fontSize: 14.22,
+        fontSize: fontSize.body2,
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
         letterSpacing: 0.1,
         marginBottom: themeSpacing.xs,
       },
-      inputStyle: { fontFamily: 'Quicksand', fontSize: 16 },
+      inputStyle: {
+        fontFamily: 'Quicksand',
+        fontSize: fontSize.body1,
+      },
       inputContainerStyle: {
         borderBottomWidth: 0.75,
       },
@@ -108,7 +135,7 @@ const myTheme: CreateThemeOptions = createTheme({
         fontFamily: 'Quicksand',
       },
       inputStyle: {
-        fontSize: 14.22,
+        fontSize: fontSize.body2,
       },
     },
     CheckBox: {
@@ -121,32 +148,92 @@ const myTheme: CreateThemeOptions = createTheme({
       },
     },
     Text: (props: TextProps) => ({
+      h1Style: {
+        fontSize: fontSize.heading1,
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        letterSpacing: -0.75,
+        marginBottom: themeSpacing.md,
+        ...(props.medium && {
+          fontFamily: 'Quicksand-Medium',
+          fontWeight: '500',
+        }),
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+      },
+      h2Style: {
+        fontSize: fontSize.heading2,
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        marginBottom: themeSpacing.md,
+        letterSpacing: -0.25,
+        ...(props.medium && {
+          fontFamily: 'Quicksand-Medium',
+          fontWeight: '500',
+        }),
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+      },
+      h3Style: {
+        fontSize: fontSize.heading3,
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        marginBottom: themeSpacing.sm,
+        letterSpacing: 0,
+        ...(props.medium && {
+          fontFamily: 'Quicksand-Medium',
+          fontWeight: '500',
+        }),
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+      },
+      h4Style: {
+        fontSize: fontSize.heading4,
+        fontFamily: 'Quicksand-Medium',
+        fontWeight: '500',
+        marginBottom: themeSpacing.sm,
+        letterSpacing: 0.125,
+        ...(props.medium && {
+          fontFamily: 'Quicksand-Medium',
+          fontWeight: '500',
+        }),
+        ...(props.bold && {
+          fontFamily: 'Quicksand-Bold',
+          fontWeight: 'normal',
+        }),
+      },
       style: {
         // default
         ...{
-          fontSize: 16,
-          letterSpacing: 0.5,
+          fontSize: fontSize.body1,
           fontFamily: 'Quicksand',
           fontWeight: '400',
+          letterSpacing: 0.5,
         },
-
         ...(props.subtitle1 && {
-          fontSize: 16,
-          fontFamily: 'Quicksand-Medium',
-          fontWeight: '500',
+          fontSize: fontSize.body1,
+          fontFamily: 'Quicksand',
+          fontWeight: '400',
           letterSpacing: 0.15,
           marginBottom: themeSpacing.xs,
         }),
         ...(props.subtitle2 && {
-          fontSize: 14.22,
-          fontFamily: 'Quicksand',
-          letterSpacing: 0.15,
+          fontSize: fontSize.body2,
+          fontFamily: 'Quicksand-Medium',
+          fontWeight: '500',
+          letterSpacing: 0.1,
         }),
         ...(props.caption && {
-          fontSize: 12.64,
+          fontSize: fontSize.caption,
           fontFamily: 'Quicksand',
           fontWeight: '400',
-          letterSpacing: 0.3,
+          letterSpacing: 0.4,
         }),
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
@@ -157,60 +244,16 @@ const myTheme: CreateThemeOptions = createTheme({
           fontWeight: 'normal',
         }),
       },
-      h1Style: {
-        fontSize: 25.63,
-        fontFamily: 'Quicksand-Medium',
-        fontWeight: '500',
-        letterSpacing: -0.25,
-        marginBottom: themeSpacing.sm,
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
-      },
-      h2Style: {
-        fontSize: 22.78,
-        fontFamily: 'Quicksand-Medium',
-        fontWeight: '500',
-        letterSpacing: 0.125,
-        marginBottom: themeSpacing.sm,
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
-      },
-      h3Style: {
-        fontSize: 20.25,
-        fontFamily: 'Quicksand-Medium',
-        fontWeight: '500',
-        letterSpacing: 0.1,
-        marginBottom: themeSpacing.sm,
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
-      },
-      h4Style: {
-        fontSize: 18,
-        fontFamily: 'Quicksand-Bold',
-        fontWeight: 'normal',
-        letterSpacing: -0.5,
-        marginBottom: themeSpacing.sm,
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
-      },
     }),
     Button: (props: ButtonProps) => ({
-      radius: 999,
+      radius: 100,
       containerStyle: {
         alignItems: props.fullWidth ? 'stretch' : 'center',
       },
       titleStyle: {
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
-        fontSize: 14.22,
+        fontSize: fontSize.body2,
         letterSpacing: 1.25,
       },
       size: 'lg',

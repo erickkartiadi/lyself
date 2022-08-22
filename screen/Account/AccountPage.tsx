@@ -33,8 +33,6 @@ function AccountPage({ navigation }: AccountPageProps) {
             rounded
             size={96}
             containerStyle={{
-              borderWidth: 2,
-              borderColor: theme.colors.cardBackground,
               overflow: 'hidden',
               elevation: 1,
               marginBottom: theme.spacing.md,

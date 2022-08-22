@@ -50,7 +50,7 @@ function ActivityIcon({
     article: {
       type: 'ionicon',
       name: 'newspaper',
-      backgroundColor: theme.colors.grey0,
+      backgroundColor: theme.colors.error,
       iconSize: 30,
     },
     breathing: {
@@ -93,7 +93,7 @@ function ActivityIcon({
       containerStyle={containerStyle}
       size={size}
       iconSize={iconFontSize || iconSize}
-      color={theme.colors.background}
+      color={theme.colors.white}
       iconType={type}
       iconName={name}
     />

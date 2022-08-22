@@ -16,7 +16,9 @@ function InputText({ label, placeholder, ref, ...others }: InputProps) {
       }}
       selectionColor={theme.colors.primary}
       inputContainerStyle={{
-        borderColor: isFocused ? theme.colors.primary : theme.colors.grey4,
+        borderColor: isFocused
+          ? theme.colors.primary
+          : theme.colors.greyOutline,
       }}
       label={label}
       placeholder={placeholder}

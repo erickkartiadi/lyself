@@ -2,18 +2,23 @@ import '@rneui/themed';
 
 declare module '@rneui/themed' {
   export interface Colors {
-    primaryLight: string;
-    secondaryLight: string;
     cardBackground: string;
-    textColor: string;
     purple: string;
     yellow: string;
     blue: string;
     brand: {
-      spotify: string;
-      google: string;
-      facebook: string;
-      apple: string;
+      spotify: {
+        green: string;
+      };
+      google: {
+        red: string;
+      };
+      facebook: {
+        blue: string;
+      };
+      apple: {
+        black: string;
+      };
     };
   }
 

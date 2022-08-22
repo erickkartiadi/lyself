@@ -24,13 +24,11 @@ function GetStartedPage({ navigation }: GetStartedPageProps) {
       }}
     >
       <View
-        style={[
-          {
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          },
-        ]}
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
       >
         <Image
           source={getStartedIllustration}
@@ -49,9 +47,7 @@ function GetStartedPage({ navigation }: GetStartedPageProps) {
               textAlign: 'center',
             }}
           >
-            <Text h2 h2Style={{ color: theme.colors.textColor }}>
-              Start your mental health journey with
-            </Text>
+            <Text h2>Start your mental health journey with</Text>
             <Text h2 h2Style={{ color: theme.colors.primary }}>
               {' '}
               Lyself
@@ -62,9 +58,7 @@ function GetStartedPage({ navigation }: GetStartedPageProps) {
               onPress={() => navigation.navigate('Login')}
               fullWidth
               buttonStyle={{
-                backgroundColor: theme.colors.primary,
                 paddingVertical: theme.spacing.xl,
-                borderColor: theme.colors.grey3,
               }}
               containerStyle={{ marginBottom: theme.spacing.xl }}
               titleStyle={{
@@ -74,10 +68,8 @@ function GetStartedPage({ navigation }: GetStartedPageProps) {
             >
               <Icon
                 containerStyle={{
-                  flexDirection: 'row',
-                  marginLeft: theme.spacing.xl,
                   position: 'absolute',
-                  left: theme.spacing.sm,
+                  left: 28,
                 }}
                 type="ionicon"
                 name="mail"
@@ -90,76 +82,93 @@ function GetStartedPage({ navigation }: GetStartedPageProps) {
               onPress={() => navigation.navigate('HomeRoutes')}
               fullWidth
               buttonStyle={{
-                backgroundColor: '#FFFFFF',
-                paddingVertical: theme.spacing.xl,
                 borderColor: theme.colors.grey3,
+                backgroundColor: theme.colors.cardBackground,
+                paddingVertical: theme.spacing.xl,
               }}
               containerStyle={{ marginBottom: theme.spacing.xl }}
               titleStyle={{
-                color: '#000000',
+                color: theme.colors.black,
                 marginLeft: theme.spacing.xl,
               }}
             >
               <Icon
                 containerStyle={{
-                  flexDirection: 'row',
-                  marginLeft: theme.spacing.xl,
                   position: 'absolute',
-                  left: theme.spacing.sm,
+                  left: 28,
                 }}
                 type="ionicon"
                 name="logo-google"
-                color={theme.colors.brand.google}
+                color={theme.colors.brand.google.red}
               />
-              Continue with Google
+              CONTINUE WITH GOOGLE
             </Button>
             <Button
+              type="outline"
               onPress={() => navigation.navigate('HomeRoutes')}
               fullWidth
               buttonStyle={{
-                backgroundColor: theme.colors.brand.facebook,
+                borderColor: theme.colors.grey3,
+                backgroundColor: theme.colors.cardBackground,
                 paddingVertical: theme.spacing.xl,
               }}
               containerStyle={{ marginBottom: theme.spacing.xl }}
               titleStyle={{
-                color: '#FFFFFF',
+                color: theme.colors.black,
                 marginLeft: theme.spacing.xl,
               }}
             >
               <Icon
                 containerStyle={{
-                  flexDirection: 'row',
-                  marginLeft: theme.spacing.xl,
                   position: 'absolute',
-                  left: theme.spacing.sm,
+                  left: 28,
+                }}
+                type="ionicon"
+                name="logo-apple"
+                color={theme.colors.brand.apple.black}
+              />
+              CONTINUE WITH APPLE
+            </Button>
+            <Button
+              type="outline"
+              onPress={() => navigation.navigate('HomeRoutes')}
+              fullWidth
+              buttonStyle={{
+                borderColor: theme.colors.grey3,
+                backgroundColor: theme.colors.cardBackground,
+                paddingVertical: theme.spacing.xl,
+              }}
+              containerStyle={{ marginBottom: theme.spacing.xl }}
+              titleStyle={{
+                color: theme.colors.black,
+                marginLeft: theme.spacing.xl,
+              }}
+            >
+              <Icon
+                containerStyle={{
+                  position: 'absolute',
+                  left: 28,
                 }}
                 type="ionicon"
                 name="logo-facebook"
-                color="#FFFFFF"
+                color={theme.colors.brand.facebook.blue}
               />
-              Continue with Facebook
+              CONTINUE WITH FACEBOOK
             </Button>
           </View>
         </View>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: theme.spacing.xl,
-        }}
-      >
-        <Text subtitle2>Didn&apos;t have an account? </Text>
-        <Text
-          bold
-          subtitle2
-          onPress={() => navigation.navigate('Register')}
-          style={{
-            color: theme.colors.primary,
-          }}
-        >
-          Sign Up{' '}
+        <Text style={{ textAlign: 'center' }}>
+          <Text subtitle2>Didn&apos;t have an account? </Text>
+          <Text
+            bold
+            subtitle2
+            onPress={() => navigation.navigate('Register')}
+            style={{
+              color: theme.colors.primary,
+            }}
+          >
+            Sign Up
+          </Text>
         </Text>
       </View>
     </SafeAreaView>

@@ -73,7 +73,7 @@ function SettingMenu({
           backgroundColor={isDarkMode ? bgColorDark : bgColor}
           iconSize={18}
           size={32}
-          color="white"
+          color={theme.colors.white}
           containerStyle={{
             marginRight: theme.spacing.lg,
             borderRadius: 8,

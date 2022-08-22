@@ -166,7 +166,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
             title="Connect to Spotify"
             iconPosition="left"
             icon={{ type: 'fontisto', name: 'spotify' }}
-            color={theme.colors.brand.spotify}
+            color={theme.colors.brand.spotify.green}
             onPress={() => promptAsync()}
             containerStyle={{ marginTop: theme.spacing.lg }}
           />
