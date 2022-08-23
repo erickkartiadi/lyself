@@ -26,7 +26,9 @@ function BaseCard({
       <Card
         containerStyle={[
           {
-            shadowColor: isDarkMode ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 0.2)',
+            shadowColor: isDarkMode
+              ? 'rgba(0, 0, 0, 0.25)'
+              : 'rgba(0, 0, 0, 0.25)',
             shadowOffset: {
               width: 0,
               height: 4,
@@ -37,8 +39,8 @@ function BaseCard({
             elevation: 12,
 
             borderWidth: 0,
-            padding: disablePadding ? 0 : theme.spacing.lg,
-            borderRadius: theme.spacing.md,
+            padding: disablePadding ? 0 : theme.spacing.xl,
+            borderRadius: theme.spacing.xl,
             overflow: 'hidden',
             backgroundColor: theme.colors.cardBackground,
             marginTop: theme.spacing.md,

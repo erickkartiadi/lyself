@@ -1,15 +1,17 @@
 import { Icon } from '@rneui/base';
 import { Avatar, Text, useTheme } from '@rneui/themed';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import BaseCard from '../../components/BaseCard';
 import BaseSearchBar from '../../components/BaseSearchBar';
 import SectionTitle from '../../components/SectionTitle';
 import { styles } from '../../theme';
+import { ThemeModeContext } from '../../theme/ThemeModeContext';
 
 function ConsultPage() {
   const { theme } = useTheme();
+  const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
     <ScrollView>
@@ -29,28 +31,24 @@ function ConsultPage() {
             }}
           >
             <Avatar
-              size="medium"
+              size={60}
               rounded
+              avatarStyle={{ borderRadius: theme.spacing.md }}
               containerStyle={{ marginRight: theme.spacing.xl }}
               source={{
                 uri: 'https://images.pexels.com/photos/6749778/pexels-photo-6749778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
               }}
             />
             <View style={{ flex: 1 }}>
-              <Text
-                h4
-                h4Style={{
-                  color: theme.colors.white,
-                  marginTop: theme.spacing.xs * -1,
-                  marginBottom: theme.spacing.xs,
-                }}
-              >
+              <Text h4 bold h4Style={{ color: theme.colors.white }}>
                 Dr. Mona Lisa
               </Text>
               <Text
-                caption
+                subtitle1
                 style={{
-                  color: theme.colors.white,
+                  color: isDarkMode
+                    ? 'rgba(0, 0, 0, 0.75)'
+                    : 'rgba(255, 255, 255, 0.75)',
                 }}
               >
                 Children Psychiatry{' '}
@@ -60,16 +58,18 @@ function ConsultPage() {
           <View
             style={{
               flexDirection: 'row',
+              marginTop: theme.spacing.xl,
               alignItems: 'center',
             }}
           >
             <View
               style={{
-                backgroundColor: theme.colors.background,
-                borderRadius: 100,
+                backgroundColor: isDarkMode
+                  ? 'rgba(0, 0, 0, 0.5)'
+                  : 'rgba(255, 255, 255, 0.5)',
+                borderRadius: theme.spacing.md,
                 paddingVertical: theme.spacing.sm,
                 paddingHorizontal: theme.spacing.lg,
-                marginTop: theme.spacing.xl,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',

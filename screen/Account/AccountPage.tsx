@@ -101,15 +101,15 @@ function AccountPage({ navigation }: AccountPageProps) {
         <View style={{ paddingVertical: theme.spacing.lg }}>
           <SettingMenu
             title="Ask a Question"
-            bgColor="#FF88BB"
-            bgColorDark="#b35f83"
+            bgColor={theme.colors.primary}
+            bgColorDark={theme.colors.primary}
             iconName="chatbubbles"
             iconType="ionicon"
           />
           <SettingMenu
             title="FAQ"
-            bgColor="#5B92FF"
-            bgColorDark="#4066b3"
+            bgColor={theme.colors.blue}
+            bgColorDark={theme.colors.blue}
             iconName="book"
             iconType="ionicon"
           />

@@ -84,8 +84,8 @@ const darkColors = {
   yellow: '#ECB309',
   blue: '#3AA6F8',
   error: '#BF3644',
-  background: '#111111',
-  cardBackground: '#171717',
+  background: '#141414',
+  cardBackground: '#1A1A1A',
   brand: {
     spotify: {
       green: '#23B455',
@@ -215,12 +215,13 @@ const myTheme: CreateThemeOptions = createTheme({
           fontFamily: 'Quicksand',
           fontWeight: '400',
           letterSpacing: 0.5,
+          marginBottom: 1,
         },
         ...(props.subtitle1 && {
           fontSize: fontSize.body1,
-          fontFamily: 'Quicksand',
-          fontWeight: '400',
-          letterSpacing: 0.15,
+          fontFamily: 'Quicksand-Medium',
+          fontWeight: '500',
+          letterSpacing: 0.2,
           marginBottom: themeSpacing.xs,
         }),
         ...(props.subtitle2 && {
@@ -228,12 +229,14 @@ const myTheme: CreateThemeOptions = createTheme({
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
           letterSpacing: 0.1,
+          marginBottom: themeSpacing.xs,
         }),
         ...(props.caption && {
           fontSize: fontSize.caption,
           fontFamily: 'Quicksand',
           fontWeight: '400',
           letterSpacing: 0.4,
+          marginBottom: themeSpacing.xs,
         }),
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
@@ -282,7 +285,7 @@ const navThemeDark: Theme = {
     ...DarkTheme.colors,
     primary: myTheme.darkColors?.primary as string,
     background: myTheme.darkColors?.background as string,
-    card: myTheme.darkColors?.cardBackground as string,
+    card: myTheme.darkColors?.background as string,
     border: myTheme.darkColors?.grey4 as string,
     notification: myTheme.darkColors?.error as string,
   },
