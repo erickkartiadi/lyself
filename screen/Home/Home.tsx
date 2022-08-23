@@ -1,4 +1,4 @@
-import { BottomSheet, Button, CheckBox, Text, useTheme } from '@rneui/themed';
+import { Button, CheckBox, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -8,6 +8,7 @@ import Progress from '../../components/widget/Progress';
 import MentalScore from '../../components/widget/MentalScore';
 import RecommendedActivity from '../../components/widget/RecommendedActivity';
 import { ArticleWidget } from '../../components/widget/Article';
+import BaseBottomSheet from '../../components/BaseBottomSheet';
 
 function Home() {
   const { theme } = useTheme();
@@ -73,46 +74,28 @@ function Home() {
       </View>
 
       {/* TODO Fix type error */}
-      <BottomSheet
+      <BaseBottomSheet
         isVisible={isBottomSheetVisible}
         onBackdropPress={toggleIsBottomSheetVisible}
+        headerTitle="Widgets"
       >
-        <View
-          style={[
-            styles.container,
-            {
-              borderTopStartRadius: theme.spacing.xl,
-              borderTopEndRadius: theme.spacing.xl,
-              backgroundColor: theme.colors.background,
-              paddingVertical: theme.spacing.xl,
-            },
-          ]}
-        >
-          <Text
-            h4
-            h4Style={{
-              marginTop: theme.spacing.md,
-            }}
-          >
-            Widgets
-          </Text>
-          <View style={{ marginVertical: theme.spacing.md }}>
-            {activeWidgets.map(({ no, label, active }) => (
-              <CheckBox
-                key={no}
-                title={label}
-                checked={active}
-                onPress={() => handleEditWidget(no)}
-              />
-            ))}
-          </View>
-          <Button
-            fullWidth
-            title="Done"
-            onPress={() => toggleIsBottomSheetVisible()}
-          />
+        <View style={{ marginVertical: theme.spacing.md }}>
+          {activeWidgets.map(({ no, label, active }) => (
+            <CheckBox
+              containerStyle={{ backgroundColor: theme.colors.cardBackground }}
+              key={no}
+              title={label}
+              checked={active}
+              onPress={() => handleEditWidget(no)}
+            />
+          ))}
         </View>
-      </BottomSheet>
+        <Button
+          fullWidth
+          title="Done"
+          onPress={() => toggleIsBottomSheetVisible()}
+        />
+      </BaseBottomSheet>
     </ScrollView>
   );
 }

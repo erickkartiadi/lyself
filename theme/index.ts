@@ -25,8 +25,8 @@ export const styles = StyleSheet.create({
   },
   containerSection: {
     paddingHorizontal: themeSpacing.xl,
-    marginTop: themeSpacing.xl,
-    marginBottom: themeSpacing.xl,
+    marginTop: themeSpacing.lg,
+    marginBottom: themeSpacing.lg,
   },
   flatList: {
     paddingHorizontal: themeSpacing.xl,
@@ -54,7 +54,11 @@ const fontSize = {
 
 const lightColors = {
   primary: '#f55c7a',
+  primaryLight: '#ff8fa9',
+  primaryDark: '#bd244e',
   secondary: '#5C7BF5',
+  secondaryLight: '#94aaff',
+  secondaryDark: '#0850c1',
   purple: '#8a5cf5',
   yellow: '#f3b700',
   blue: '#35A7FF',
@@ -79,13 +83,17 @@ const lightColors = {
 
 const darkColors = {
   primary: '#EF617E',
+  primaryLight: '#bd244e',
+  primaryDark: '#ff8fa9',
   secondary: '#617EEF',
+  secondaryLight: '#0850c1',
+  secondaryDark: '#94aaff',
   purple: '#8C61EF',
   yellow: '#ECB309',
   blue: '#3AA6F8',
   error: '#BF3644',
   background: '#141414',
-  cardBackground: '#1A1A1A',
+  cardBackground: '#1D1D1D',
   brand: {
     spotify: {
       green: '#23B455',
@@ -215,20 +223,19 @@ const myTheme: CreateThemeOptions = createTheme({
           fontFamily: 'Quicksand',
           fontWeight: '400',
           letterSpacing: 0.5,
-          marginBottom: 1,
         },
         ...(props.subtitle1 && {
           fontSize: fontSize.body1,
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
-          letterSpacing: 0.2,
+          letterSpacing: 0.25,
           marginBottom: themeSpacing.xs,
         }),
         ...(props.subtitle2 && {
           fontSize: fontSize.body2,
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
-          letterSpacing: 0.1,
+          letterSpacing: 0.125,
           marginBottom: themeSpacing.xs,
         }),
         ...(props.caption && {
