@@ -75,6 +75,7 @@ function Home() {
 
       {/* TODO Fix type error */}
       <BaseBottomSheet
+        modalProps={{}}
         isVisible={isBottomSheetVisible}
         onBackdropPress={toggleIsBottomSheetVisible}
         headerTitle="Widgets"
@@ -82,7 +83,9 @@ function Home() {
         <View style={{ marginVertical: theme.spacing.md }}>
           {activeWidgets.map(({ no, label, active }) => (
             <CheckBox
-              containerStyle={{ backgroundColor: theme.colors.cardBackground }}
+              containerStyle={{
+                backgroundColor: theme.colors.cardBackground,
+              }}
               key={no}
               title={label}
               checked={active}

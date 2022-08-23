@@ -5,6 +5,7 @@ import { styles } from '../theme';
 
 interface BaseBottomSheetProps {
   headerTitle?: string;
+  children: React.ReactNode;
 }
 
 function BaseBottomSheet({
