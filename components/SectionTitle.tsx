@@ -87,7 +87,7 @@ function SectionTitle({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: theme.spacing.lg,
+        marginBottom: theme.spacing.md,
       }}
     >
       <>

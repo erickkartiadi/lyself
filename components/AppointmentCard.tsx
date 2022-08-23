@@ -1,7 +1,7 @@
 import { Avatar, Icon, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
-import alpha from 'color-alpha';
+import colorAlpha from 'color-alpha';
 import BaseCard from './BaseCard';
 import useToggle from '../utils/hooks/useToggle';
 import BaseBottomSheet from './BaseBottomSheet';
@@ -38,7 +38,7 @@ function AppointmentCard({
           }}
         >
           <Avatar
-            size={60}
+            size="medium"
             rounded
             containerStyle={{ marginRight: theme.spacing.xl }}
             source={{
@@ -46,13 +46,13 @@ function AppointmentCard({
             }}
           />
           <View style={{ flex: 1 }}>
-            <Text bold h4 h4Style={{ color: theme.colors.white }}>
+            <Text h4 h4Style={{ color: theme.colors.white }}>
               {psychiatristName}
             </Text>
             <Text
               subtitle2
               style={{
-                color: theme.colors.white,
+                color: colorAlpha(theme.colors.white, 0.75),
               }}
             >
               {specialty}
@@ -89,7 +89,7 @@ function AppointmentCard({
                 type="ionicon"
                 name="calendar"
                 size={20}
-                color={alpha(theme.colors.white, 0.75)}
+                color={colorAlpha(theme.colors.white, 0.75)}
                 containerStyle={{ marginRight: theme.spacing.md }}
               />
               <Text
@@ -110,7 +110,7 @@ function AppointmentCard({
                 type="ionicon"
                 name="time"
                 size={20}
-                color={alpha(theme.colors.white, 0.75)}
+                color={colorAlpha(theme.colors.white, 0.75)}
                 containerStyle={{ marginRight: theme.spacing.md }}
               />
               <Text
@@ -127,7 +127,9 @@ function AppointmentCard({
         headerTitle={psychiatristName}
         onBackdropPress={toggleIsBottomSheetVisible}
         isVisible={isBottomSheetVisible}
-      />
+      >
+        <Text>{specialty}</Text>
+      </BaseBottomSheet>
     </>
   );
 }

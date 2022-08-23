@@ -5,9 +5,10 @@ import { styles } from '../theme';
 
 interface BaseSearchBarProps {
   placeholder: string;
+  enablePadding?: boolean;
 }
 
-function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
+function BaseSearchBar({ placeholder, enablePadding }: BaseSearchBarProps) {
   const [searchText, setSearchText] = useState('');
   const { theme } = useTheme();
 
@@ -21,14 +22,16 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
       placeholder={placeholder}
       onChangeText={updateSearch}
       containerStyle={[
-        styles.container,
         {
+          paddingHorizontal: enablePadding
+            ? styles.container.paddingHorizontal
+            : 0,
           backgroundColor: 'transparent',
           borderTopWidth: 0,
           borderBottomWidth: 0,
           borderWidth: 0,
           elevation: 0,
-          marginBottom: theme.spacing.md,
+          marginBottom: theme.spacing.xl,
         },
       ]}
       inputContainerStyle={{
@@ -65,5 +68,9 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
     />
   );
 }
+
+BaseSearchBar.defaultProps = {
+  enablePadding: true,
+};
 
 export default BaseSearchBar;

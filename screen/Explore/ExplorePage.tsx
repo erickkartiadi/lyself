@@ -121,7 +121,6 @@ function ExplorePage({ navigation }: ExplorePageProps) {
           styles.containerSection,
           styles.noContainerOffset,
           {
-            marginTop: theme.spacing.lg,
             flex: 1,
             flexDirection: 'row',
             flexWrap: 'wrap',

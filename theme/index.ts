@@ -28,6 +28,9 @@ export const styles = StyleSheet.create({
     marginTop: themeSpacing.lg,
     marginBottom: themeSpacing.lg,
   },
+  containerSectionVerticalDistance: {
+    marginVertical: themeSpacing.lg,
+  },
   flatList: {
     paddingHorizontal: themeSpacing.xl,
     paddingBottom: themeSpacing.xl,
