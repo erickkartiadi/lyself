@@ -13,6 +13,13 @@ export type AuthRouteParamList = {
 export type ExploreRouteParamList = {
   Explore: undefined;
   Consult: undefined;
+  Psychiatrist: {
+    uri: string;
+    experience: string;
+    name: string;
+    rating: string;
+    specialty: string;
+  };
   InDevelopment: undefined;
 };
 

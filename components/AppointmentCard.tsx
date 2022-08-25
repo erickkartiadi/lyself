@@ -34,11 +34,11 @@ function AppointmentCard({
         <View
           style={{
             flexDirection: 'row',
-            alignItems: 'center',
+            alignItems: 'flex-end',
           }}
         >
           <Avatar
-            size="medium"
+            size={60}
             rounded
             containerStyle={{ marginRight: theme.spacing.xl }}
             source={{
@@ -46,11 +46,11 @@ function AppointmentCard({
             }}
           />
           <View style={{ flex: 1 }}>
-            <Text h4 h4Style={{ color: theme.colors.white }}>
+            <Text bold h3 h3Style={{ color: theme.colors.white }}>
               {psychiatristName}
             </Text>
             <Text
-              subtitle2
+              subtitle1
               style={{
                 color: colorAlpha(theme.colors.white, 0.75),
               }}
