@@ -1,13 +1,12 @@
 import React from 'react';
-import { Avatar, Image, Text, useTheme } from '@rneui/themed';
+import { Avatar, Text, useTheme } from '@rneui/themed';
 import { View } from 'react-native';
 import colorAlpha from 'color-alpha';
 import { Icon } from '@rneui/base';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import BaseCard from './BaseCard';
-import { ExploreRouteParamList } from '../types/routes';
 import { ExplorePageProps } from '../screen/Explore/ExplorePage';
+import { BORDER_RADIUS } from '../theme/styles';
 
 export interface PsychiatristCardProps {
   uri: string;
@@ -65,7 +64,7 @@ function PsychiatristCard({
                 backgroundColor: colorAlpha(theme.colors.primary, 0.2),
                 paddingHorizontal: theme.spacing.lg,
                 paddingVertical: theme.spacing.sm,
-                borderRadius: 999,
+                borderRadius: BORDER_RADIUS.rounded,
                 flexDirection: 'row',
                 alignItems: 'center',
                 marginRight: theme.spacing.md,
@@ -86,7 +85,7 @@ function PsychiatristCard({
                 backgroundColor: colorAlpha(theme.colors.blue, 0.2),
                 paddingHorizontal: theme.spacing.lg,
                 paddingVertical: theme.spacing.sm,
-                borderRadius: 999,
+                borderRadius: BORDER_RADIUS.rounded,
                 flexDirection: 'row',
                 alignItems: 'center',
                 marginRight: theme.spacing.md,

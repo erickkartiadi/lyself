@@ -1,14 +1,13 @@
 import { SearchBar, useTheme } from '@rneui/themed';
 
 import React, { useState } from 'react';
-import { styles } from '../theme';
+import { BORDER_RADIUS } from '../theme/styles';
 
 interface BaseSearchBarProps {
   placeholder: string;
-  enablePadding?: boolean;
 }
 
-function BaseSearchBar({ placeholder, enablePadding }: BaseSearchBarProps) {
+function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
   const [searchText, setSearchText] = useState('');
   const { theme } = useTheme();
 
@@ -23,9 +22,7 @@ function BaseSearchBar({ placeholder, enablePadding }: BaseSearchBarProps) {
       onChangeText={updateSearch}
       containerStyle={[
         {
-          paddingHorizontal: enablePadding
-            ? styles.container.paddingHorizontal
-            : 0,
+          paddingHorizontal: 0,
           backgroundColor: 'transparent',
           borderTopWidth: 0,
           borderBottomWidth: 0,
@@ -46,7 +43,7 @@ function BaseSearchBar({ placeholder, enablePadding }: BaseSearchBarProps) {
 
         elevation: 1,
 
-        borderRadius: 100,
+        borderRadius: BORDER_RADIUS.rounded,
         paddingHorizontal: theme.spacing.md,
       }}
       inputStyle={{
@@ -68,9 +65,5 @@ function BaseSearchBar({ placeholder, enablePadding }: BaseSearchBarProps) {
     />
   );
 }
-
-BaseSearchBar.defaultProps = {
-  enablePadding: true,
-};
 
 export default BaseSearchBar;

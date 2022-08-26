@@ -4,11 +4,11 @@ import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import BaseCard from '../BaseCard';
-import { styles } from '../../theme';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
 import StatusCard from './StatusCard';
 import Dropdown from '../Dropdown';
 import SectionTitle from '../SectionTitle';
+import { BORDER_RADIUS, styles } from '../../theme/styles';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';
@@ -86,9 +86,8 @@ function MentalScoreCard() {
           ],
         }}
         width={
-          Dimensions.get('screen').width +
-          30 +
-          styles.containerSection.paddingHorizontal * 2
+          Dimensions.get('screen').width + 30 + 0
+          // styles.containerSection.paddingHorizontal * 2
         }
         height={300}
         withInnerLines={false}
@@ -108,7 +107,7 @@ function MentalScoreCard() {
             fontWeight: 'normal',
           },
           style: {
-            borderRadius: theme.spacing.md,
+            borderRadius: BORDER_RADIUS.md,
           },
           propsForDots: {
             r: '6',
@@ -128,7 +127,7 @@ function MentalScoreCard() {
 
 function MentalScore() {
   return (
-    <View style={styles.containerSection}>
+    <View style={styles.section}>
       <SectionTitle
         title="Your stats"
         showRightButton

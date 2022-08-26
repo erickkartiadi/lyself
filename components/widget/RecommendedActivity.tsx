@@ -2,12 +2,12 @@ import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { FlatList, GestureResponderEvent, View } from 'react-native';
 import { RecommendedProps, dataRecommended } from '../../constant';
-import { styles } from '../../theme';
 import { comingSoonToast } from '../../utils/comingSoonToast';
 import ActivityIcon, { Activities } from '../ActivityIcon';
 import BaseCard from '../BaseCard';
 import SectionTitle from '../SectionTitle';
 import ViewSeparator from '../ViewSeparator';
+import { styles } from '../../theme/styles';
 
 interface RecommendedActivityProps {
   onPress: ((event: GestureResponderEvent) => void) | null | undefined;
@@ -59,13 +59,16 @@ function RecommendedActivity() {
   );
 
   return (
-    <View style={styles.containerSection}>
+    <View style={styles.section}>
       <SectionTitle title="Recommended activity" />
       <FlatList
         horizontal
         ItemSeparatorComponent={ViewSeparator}
-        style={styles.flatListContainer}
-        contentContainerStyle={styles.flatList}
+        style={[styles.noContainerGutter, styles.flatListHorizontal]}
+        contentContainerStyle={[
+          styles.scrollViewContainer,
+          styles.flatListHorizontalContainer,
+        ]}
         showsHorizontalScrollIndicator={false}
         data={dataRecommended}
         renderItem={renderRecommended}

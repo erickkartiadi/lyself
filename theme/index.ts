@@ -3,57 +3,9 @@ import {
   CreateThemeOptions,
   TextProps,
   createTheme,
-  normalize,
 } from '@rneui/themed';
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
-
-const themeSpacing = {
-  xs: 2,
-  sm: 4,
-  md: 8,
-  lg: 12,
-  xl: 16,
-};
-
-export const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: themeSpacing.xl,
-  },
-  noContainerOffset: {
-    marginHorizontal: themeSpacing.xl * -1,
-  },
-  containerSection: {
-    paddingHorizontal: themeSpacing.xl,
-    marginTop: themeSpacing.lg,
-    marginBottom: themeSpacing.lg,
-  },
-  containerSectionVerticalDistance: {
-    marginVertical: themeSpacing.lg,
-  },
-  flatList: {
-    paddingHorizontal: themeSpacing.xl,
-    paddingBottom: themeSpacing.xl,
-  },
-  flatListContainer: {
-    // remove container offset
-    marginHorizontal: themeSpacing.xl * -1,
-
-    // remove FlatList padding bottom
-    marginBottom: themeSpacing.xl * -1,
-  },
-});
-
-// scale: 1.125 - major second
-const fontSize = {
-  heading1: normalize(25.63),
-  heading2: normalize(22.78),
-  heading3: normalize(20.25),
-  heading4: normalize(18),
-  body1: normalize(16),
-  body2: normalize(14.22),
-  caption: normalize(12.64),
-};
+import { FONT_SIZE, THEME_SPACING } from './styles';
 
 const lightColors = {
   primary: '#f55c7a',
@@ -114,19 +66,19 @@ const darkColors = {
 };
 
 const myTheme: CreateThemeOptions = createTheme({
-  spacing: { ...themeSpacing },
+  spacing: { ...THEME_SPACING },
   components: {
     Input: () => ({
       labelStyle: {
-        fontSize: fontSize.body2,
+        fontSize: FONT_SIZE.body2,
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
         letterSpacing: 0.1,
-        marginBottom: themeSpacing.xs,
+        marginBottom: THEME_SPACING.xs,
       },
       inputStyle: {
         fontFamily: 'Quicksand',
-        fontSize: fontSize.body1,
+        fontSize: FONT_SIZE.body1,
       },
       inputContainerStyle: {
         borderBottomWidth: 0.75,
@@ -136,9 +88,9 @@ const myTheme: CreateThemeOptions = createTheme({
     Card: {
       containerStyle: {
         margin: 0,
-        padding: themeSpacing.lg,
-        marginTop: themeSpacing.md,
-        marginBottom: themeSpacing.md,
+        padding: THEME_SPACING.lg,
+        marginTop: THEME_SPACING.md,
+        marginBottom: THEME_SPACING.md,
       },
     },
     SearchBar: {
@@ -146,7 +98,7 @@ const myTheme: CreateThemeOptions = createTheme({
         fontFamily: 'Quicksand',
       },
       inputStyle: {
-        fontSize: fontSize.body2,
+        fontSize: FONT_SIZE.body2,
       },
     },
     CheckBox: {
@@ -155,16 +107,16 @@ const myTheme: CreateThemeOptions = createTheme({
       containerStyle: {
         padding: 0,
         marginLeft: 0,
-        paddingVertical: themeSpacing.md,
+        paddingVertical: THEME_SPACING.md,
       },
     },
     Text: (props: TextProps) => ({
       h1Style: {
-        fontSize: fontSize.heading1,
+        fontSize: FONT_SIZE.heading1,
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
         letterSpacing: -0.75,
-        marginBottom: themeSpacing.md,
+        marginBottom: THEME_SPACING.md,
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
@@ -175,10 +127,10 @@ const myTheme: CreateThemeOptions = createTheme({
         }),
       },
       h2Style: {
-        fontSize: fontSize.heading2,
+        fontSize: FONT_SIZE.heading2,
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
-        marginBottom: themeSpacing.md,
+        marginBottom: THEME_SPACING.md,
         letterSpacing: -0.25,
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
@@ -190,10 +142,10 @@ const myTheme: CreateThemeOptions = createTheme({
         }),
       },
       h3Style: {
-        fontSize: fontSize.heading3,
+        fontSize: FONT_SIZE.heading3,
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
-        marginBottom: themeSpacing.sm,
+        marginBottom: THEME_SPACING.sm,
         letterSpacing: 0,
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
@@ -205,10 +157,10 @@ const myTheme: CreateThemeOptions = createTheme({
         }),
       },
       h4Style: {
-        fontSize: fontSize.heading4,
+        fontSize: FONT_SIZE.heading4,
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
-        marginBottom: themeSpacing.sm,
+        marginBottom: THEME_SPACING.sm,
         letterSpacing: 0.125,
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
@@ -222,31 +174,31 @@ const myTheme: CreateThemeOptions = createTheme({
       style: {
         // default
         ...{
-          fontSize: fontSize.body1,
+          fontSize: FONT_SIZE.body1,
           fontFamily: 'Quicksand',
           fontWeight: '400',
           letterSpacing: 0.5,
         },
         ...(props.subtitle1 && {
-          fontSize: fontSize.body1,
+          fontSize: FONT_SIZE.body1,
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
           letterSpacing: 0.25,
-          marginBottom: themeSpacing.xs,
+          marginBottom: THEME_SPACING.xs,
         }),
         ...(props.subtitle2 && {
-          fontSize: fontSize.body2,
+          fontSize: FONT_SIZE.body2,
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
           letterSpacing: 0.125,
-          marginBottom: themeSpacing.xs,
+          marginBottom: THEME_SPACING.xs,
         }),
         ...(props.caption && {
-          fontSize: fontSize.caption,
+          fontSize: FONT_SIZE.caption,
           fontFamily: 'Quicksand',
           fontWeight: '400',
           letterSpacing: 0.4,
-          marginBottom: themeSpacing.xs,
+          marginBottom: THEME_SPACING.xs,
         }),
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
@@ -266,7 +218,7 @@ const myTheme: CreateThemeOptions = createTheme({
       titleStyle: {
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
-        fontSize: fontSize.body2,
+        fontSize: FONT_SIZE.body2,
         letterSpacing: 1.25,
       },
       size: 'lg',

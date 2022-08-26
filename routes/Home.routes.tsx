@@ -14,7 +14,7 @@ import ChatRoutes from './Chat.routes';
 import { HomeRouteParamList } from '../types/routes';
 import AccountRoutes from './Account.routes';
 import ExploreRoutes from './Explore.routes';
-import { styles } from '../theme';
+import { styles } from '../theme/styles';
 
 const Tab = createBottomTabNavigator<HomeRouteParamList>();
 

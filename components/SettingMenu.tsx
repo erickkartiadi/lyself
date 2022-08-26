@@ -1,6 +1,7 @@
 import { Icon, Text, useTheme } from '@rneui/themed';
 import React, { useContext } from 'react';
 import { ColorValue, Pressable, PressableProps, View } from 'react-native';
+import { BORDER_RADIUS } from '../theme/styles';
 import { ThemeModeContext } from '../theme/ThemeModeContext';
 import BaseIcon from './BaseIcon';
 
@@ -56,7 +57,6 @@ function SettingMenu({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingVertical: theme.spacing.md,
-        paddingHorizontal: theme.spacing.xl,
       }}
       onPress={onPress}
     >
@@ -76,7 +76,7 @@ function SettingMenu({
           color={theme.colors.white}
           containerStyle={{
             marginRight: theme.spacing.lg,
-            borderRadius: 8,
+            borderRadius: BORDER_RADIUS.md,
           }}
           iconType={iconType}
           iconName={iconName}

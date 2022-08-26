@@ -6,6 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import SettingMenu from '../../components/SettingMenu';
 import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
 import { AccountRouteParamList, RootRouteParamList } from '../../types/routes';
+import { styles } from '../../theme/styles';
 
 export type AccountPageProps = NativeStackScreenProps<
   RootRouteParamList & AccountRouteParamList,
@@ -15,12 +16,10 @@ function AccountPage({ navigation }: AccountPageProps) {
   const { theme } = useTheme();
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View
-        style={{
-          marginVertical: theme.spacing.xl,
-        }}
-      >
+    <ScrollView
+      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+    >
+      <View>
         <View
           style={{
             flex: 1,

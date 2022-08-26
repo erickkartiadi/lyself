@@ -3,6 +3,7 @@ import { ActivityIndicator, View } from 'react-native';
 import { Image, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
 import AnimatedPressable from '../AnimatedPressable';
+import { BORDER_RADIUS } from '../../theme/styles';
 
 export interface PlaylistCardProps {
   imageUrl: string;
@@ -35,7 +36,7 @@ function PlaylistCard({
         containerStyle={{
           width: '100%',
           aspectRatio: 1,
-          borderRadius: theme.spacing.md,
+          borderRadius: BORDER_RADIUS.md,
         }}
         PlaceholderContent={<ActivityIndicator />}
         childrenContainerStyle={{ width: '100%' }}

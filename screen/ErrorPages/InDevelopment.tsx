@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Button, Text } from '@rneui/themed';
 import { View } from 'react-native';
-import { styles } from '../../theme';
+import { styles } from '../../theme/styles';
 import { ExplorePageProps } from '../Explore/ExplorePage';
 
 function InDevelopment({ navigation }: ExplorePageProps) {
   return (
     <View
       style={[
-        styles.containerSection,
+        styles.container,
         {
           flex: 1,
           justifyContent: 'center',

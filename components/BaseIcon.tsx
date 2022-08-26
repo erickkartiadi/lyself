@@ -1,6 +1,7 @@
 import { Icon } from '@rneui/themed';
 import React from 'react';
 import { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import { BORDER_RADIUS } from '../theme/styles';
 
 function BaseIcon({
   containerStyle,
@@ -24,7 +25,7 @@ function BaseIcon({
       containerStyle={[
         {
           backgroundColor,
-          borderRadius: 100,
+          borderRadius: BORDER_RADIUS.rounded,
           width: size,
           aspectRatio: 1,
           justifyContent: 'center',

@@ -5,6 +5,7 @@ import colorAlpha from 'color-alpha';
 import BaseCard from './BaseCard';
 import useToggle from '../utils/hooks/useToggle';
 import BaseBottomSheet from './BaseBottomSheet';
+import { BORDER_RADIUS } from '../theme/styles';
 
 interface AppointmentCardProps {
   psychiatristName: string;
@@ -34,7 +35,7 @@ function AppointmentCard({
         <View
           style={{
             flexDirection: 'row',
-            alignItems: 'flex-end',
+            alignItems: 'center',
           }}
         >
           <Avatar
@@ -69,7 +70,7 @@ function AppointmentCard({
           <View
             style={{
               backgroundColor: theme.colors.primaryDark,
-              borderRadius: theme.spacing.md,
+              borderRadius: BORDER_RADIUS.md,
               padding: theme.spacing.lg,
               flexDirection: 'row',
               justifyContent: 'space-between',

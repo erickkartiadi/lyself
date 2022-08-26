@@ -1,8 +1,8 @@
 import { Avatar, Badge, Button, ListItem, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
-import { styles } from '../theme';
 import { comingSoonToast } from '../utils/comingSoonToast';
+import { styles } from '../theme/styles';
 
 function LeftSwipeButton() {
   return (
@@ -51,10 +51,10 @@ function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
       leftContent={LeftSwipeButton}
       rightContent={RightSwipeButton}
       key={name}
-      containerStyle={{
-        paddingHorizontal: styles.containerSection.paddingHorizontal,
-        backgroundColor: theme.colors.background,
-      }}
+      containerStyle={[
+        styles.container,
+        { backgroundColor: theme.colors.background },
+      ]}
     >
       <Avatar size={62} rounded source={{ uri: avatarUrl }} />
       <ListItem.Content>

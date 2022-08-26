@@ -5,7 +5,8 @@ import { Dimensions, Image, View } from 'react-native';
 import { Button, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
-import { styles } from '../../theme';
+import { styles } from '../../theme/styles';
+
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
 
 export type GetStartedPageProps = NativeStackScreenProps<

@@ -21,7 +21,7 @@ function ActivityMenu({ activity, onPress }: ActivityMenuProps) {
     >
       <AnimatedPressable
         style={{
-          marginBottom: theme.spacing.xl * 1.5,
+          marginVertical: theme.spacing.xl,
         }}
         onPress={onPress}
       >

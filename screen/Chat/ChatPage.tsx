@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { styles } from '../../theme';
+
 import { ChatRouteParamList } from '../../types/routes';
 import Chat, { ChatProps } from '../../components/Chat';
 
@@ -95,8 +95,6 @@ function ChatPage() {
 
   return (
     <FlatList
-      style={styles.flatListContainer}
-      contentContainerStyle={styles.flatList}
       data={chatData}
       renderItem={renderChat}
       keyExtractor={(item: ChatProps) => item.name}

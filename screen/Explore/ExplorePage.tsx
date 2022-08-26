@@ -7,7 +7,7 @@ import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import BaseSearchBar from '../../components/BaseSearchBar';
 import ActivityIcon, { Activities } from '../../components/ActivityIcon';
-import { styles } from '../../theme';
+import { styles } from '../../theme/styles';
 import ViewSeparator from '../../components/ViewSeparator';
 import { ArticleWidget } from '../../components/widget/Article';
 import PlaylistCard, {
@@ -110,21 +110,17 @@ function ExplorePage({ navigation }: ExplorePageProps) {
 
   return (
     <ScrollView
-      contentContainerStyle={{
-        paddingBottom: theme.spacing.xl,
-        paddingTop: theme.spacing.lg,
-      }}
+      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       <BaseSearchBar placeholder="Search tools, news or forum" />
       <View
         style={[
-          styles.containerSection,
-          styles.noContainerOffset,
+          styles.noContainerGutter,
           {
             flex: 1,
             flexDirection: 'row',
             flexWrap: 'wrap',
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
           },
         ]}
       >
@@ -137,7 +133,7 @@ function ExplorePage({ navigation }: ExplorePageProps) {
         ))}
       </View>
       <ArticleWidget />
-      <View style={styles.containerSection}>
+      <View style={styles.section}>
         <View
           style={{
             flex: 1,
@@ -153,8 +149,8 @@ function ExplorePage({ navigation }: ExplorePageProps) {
             horizontal
             ItemSeparatorComponent={ViewSeparator}
             showsHorizontalScrollIndicator={false}
-            style={styles.flatListContainer}
-            contentContainerStyle={styles.flatList}
+            style={styles.noContainerGutter}
+            contentContainerStyle={styles.scrollViewContainer}
             data={featuredPlaylist}
             renderItem={renderPlaylist}
             keyExtractor={(item: PlaylistCardProps) => item.id}

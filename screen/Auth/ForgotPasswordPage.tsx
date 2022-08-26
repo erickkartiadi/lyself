@@ -1,11 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, Text, useTheme } from '@rneui/themed';
+import { Button, Text } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
-import { styles } from '../../theme/index';
+import { styles } from '../../theme/styles';
+
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import ButtonBack from '../../components/ButtonBack';
 import { InputText } from '../../components/form/Input';
@@ -16,18 +17,11 @@ export type ForgotPasswordProps = NativeStackScreenProps<
 >;
 
 function ForgotPassword({ navigation }: ForgotPasswordProps) {
-  const { theme } = useTheme();
-
   return (
-    <ScrollView>
-      <SafeAreaView
-        style={[
-          styles.containerSection,
-          {
-            paddingVertical: theme.spacing.xl,
-          },
-        ]}
-      >
+    <ScrollView
+      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+    >
+      <SafeAreaView>
         <ButtonBack onPress={() => navigation.navigate('Login')} />
         <Text h1 bold>
           Forgot Password?

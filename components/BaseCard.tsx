@@ -3,6 +3,7 @@ import { Card, CardProps, useTheme } from '@rneui/themed';
 import { PressableProps } from 'react-native';
 import AnimatedPressable from './AnimatedPressable';
 import { ThemeModeContext } from '../theme/ThemeModeContext';
+import { BORDER_RADIUS } from '../theme/styles';
 
 interface BaseCardProps {
   disablePadding?: boolean;
@@ -27,7 +28,7 @@ function BaseCard({
         containerStyle={[
           {
             shadowColor: isDarkMode
-              ? 'rgba(0, 0, 0, 0.25)'
+              ? 'rgba(0, 0, 0, 1)'
               : 'rgba(0, 0, 0, 0.25)',
             shadowOffset: {
               width: 0,
@@ -40,7 +41,7 @@ function BaseCard({
 
             borderWidth: 0,
             padding: disablePadding ? 0 : theme.spacing.xl,
-            borderRadius: theme.spacing.xl,
+            borderRadius: BORDER_RADIUS.lg,
             overflow: 'hidden',
             backgroundColor: theme.colors.cardBackground,
             marginTop: theme.spacing.md,

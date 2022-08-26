@@ -2,7 +2,7 @@ import { Button, CheckBox, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { styles } from '../../theme';
+import { styles } from '../../theme/styles';
 import useToggle from '../../utils/hooks/useToggle';
 import Progress from '../../components/widget/Progress';
 import MentalScore from '../../components/widget/MentalScore';
@@ -50,16 +50,14 @@ function Home() {
 
   return (
     <ScrollView
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        paddingBottom: theme.spacing.xl,
-      }}
+      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       {activeWidgets.map(
         ({ no, active, Widget }) => active && <Widget key={no} />
       )}
-      <View style={styles.containerSection}>
+      <View style={styles.section}>
         <Button
+          fullWidth
           color="primary"
           iconPosition="left"
           icon={{
@@ -79,6 +77,7 @@ function Home() {
         isVisible={isBottomSheetVisible}
         onBackdropPress={toggleIsBottomSheetVisible}
         headerTitle="Widgets"
+        wrapperStyle={{}}
       >
         <View style={{ marginVertical: theme.spacing.md }}>
           {activeWidgets.map(({ no, label, active }) => (

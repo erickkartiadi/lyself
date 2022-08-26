@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
-import { styles } from '../../theme';
+import { styles } from '../../theme/styles';
 import registerIllustration from '../../assets/images/register-illustration.png';
 import { InputPassword, InputText } from '../../components/form/Input';
 import ButtonBack from '../../components/ButtonBack';
@@ -19,15 +19,10 @@ function RegisterPage({ navigation }: RegisterPageProps) {
   const { theme } = useTheme();
 
   return (
-    <ScrollView>
-      <SafeAreaView
-        style={[
-          styles.containerSection,
-          {
-            paddingVertical: theme.spacing.xl,
-          },
-        ]}
-      >
+    <ScrollView
+      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+    >
+      <SafeAreaView>
         <ButtonBack onPress={() => navigation.navigate('Login')} />
         <Text h1 bold>
           Create new account

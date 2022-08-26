@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Avatar, Button, FAB, Text, useTheme } from '@rneui/themed';
+import { Avatar, Button, Text, useTheme } from '@rneui/themed';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import colorAlpha from 'color-alpha';
 import { ExploreRouteParamList } from '../../types/routes';
-import { styles } from '../../theme';
+import { styles } from '../../theme/styles';
 import SectionTitle from '../../components/SectionTitle';
 import BaseIcon from '../../components/BaseIcon';
 
@@ -19,7 +19,9 @@ function PsychiatristPage({ route }: PsychiatristPageProps) {
   const { theme } = useTheme();
 
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <ScrollView
+      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+    >
       <View style={{ backgroundColor: theme.colors.background }}>
         <Avatar
           source={{ uri }}
@@ -112,7 +114,7 @@ function PsychiatristPage({ route }: PsychiatristPageProps) {
           </View>
         </View>
       </View>
-      <View style={styles.containerSectionVerticalDistance}>
+      <View style={styles.section}>
         <SectionTitle title="About doctor" />
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis

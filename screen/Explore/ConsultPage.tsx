@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import BaseSearchBar from '../../components/BaseSearchBar';
 import SectionTitle from '../../components/SectionTitle';
-import { styles } from '../../theme';
+import { styles } from '../../theme/styles';
 import AppointmentCard from '../../components/AppointmentCard';
 import PsychiatristCard, {
   PsychiatristCardProps,
@@ -71,24 +71,17 @@ function ConsultPage() {
 
   return (
     <FlatList
-      contentContainerStyle={styles.flatList}
       data={psychiatristData}
       renderItem={renderTopPsychiatrist}
+      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
       ListHeaderComponent={
         <>
-          <View style={styles.containerSectionVerticalDistance}>
-            <BaseSearchBar
-              enablePadding={false}
-              placeholder="Find a psychiatrist"
-            />
+          <BaseSearchBar placeholder="Find a psychiatrist" />
+          <View style={styles.section}>
             <SectionTitle title="My Appointment" showRightButton />
             <AppointmentCard {...scheduleData} />
           </View>
-          <View
-            style={{
-              marginTop: styles.containerSectionVerticalDistance.marginVertical,
-            }}
-          >
+          <View style={{ marginTop: styles.section.paddingVertical }}>
             <SectionTitle title="Top Psychiatrist" />
           </View>
         </>

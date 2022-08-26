@@ -4,9 +4,9 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 import * as Linking from 'expo-linking';
 import BaseCard from '../BaseCard';
 import { ArticleCardProps, dataArticles } from '../../constant';
-import { styles } from '../../theme';
 import ViewSeparator from '../ViewSeparator';
 import SectionTitle from '../SectionTitle';
+import { styles } from '../../theme/styles';
 
 function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   const { theme } = useTheme();
@@ -59,14 +59,17 @@ function ArticleWidget() {
   );
 
   return (
-    <View style={styles.containerSection}>
+    <View style={styles.section}>
       <SectionTitle title="News about mental health" showRightButton />
       <FlatList
         horizontal
         ItemSeparatorComponent={ViewSeparator}
         showsHorizontalScrollIndicator={false}
-        style={styles.flatListContainer}
-        contentContainerStyle={styles.flatList}
+        style={[styles.noContainerGutter, styles.flatListHorizontal]}
+        contentContainerStyle={[
+          styles.scrollViewContainer,
+          styles.flatListHorizontalContainer,
+        ]}
         data={dataArticles}
         renderItem={renderArticles}
         keyExtractor={(item: ArticleCardProps) => item.title}

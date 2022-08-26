@@ -1,12 +1,12 @@
 import { BottomSheet, BottomSheetProps, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
-import { styles } from '../theme';
+import { styles } from '../theme/styles';
 
 interface BaseBottomSheetProps {
   headerTitle?: string;
+  wrapperStyle?: StyleProp<ViewStyle>;
   children: React.ReactNode;
-  wrapperStyle: StyleProp<ViewStyle>;
 }
 
 function BaseBottomSheet({
@@ -51,6 +51,7 @@ function BaseBottomSheet({
 
 BaseBottomSheet.defaultProps = {
   headerTitle: null,
+  wrapperStyle: {},
 };
 
 export default BaseBottomSheet;

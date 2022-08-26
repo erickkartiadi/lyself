@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
-import { styles } from '../../theme/index';
+import { styles } from '../../theme/styles';
 import loginIllustration from '../../assets/images/login-illustration.png';
 import useToggle from '../../utils/hooks/useToggle';
 import { InputPassword, InputText } from '../../components/form/Input';
@@ -21,15 +21,10 @@ function LoginPage({ navigation }: LoginPageProps) {
   const [isRememberLogin, toggleIsRememberLogin] = useToggle(false);
 
   return (
-    <ScrollView>
-      <SafeAreaView
-        style={[
-          styles.containerSection,
-          {
-            paddingVertical: theme.spacing.xl,
-          },
-        ]}
-      >
+    <ScrollView
+      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+    >
+      <SafeAreaView>
         <ButtonBack onPress={() => navigation.navigate('GetStarted')} />
         <Text h1 bold>
           Welcome to Lyself

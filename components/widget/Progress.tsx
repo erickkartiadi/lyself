@@ -1,11 +1,11 @@
 import { LinearProgress, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
-import { styles } from '../../theme';
 import { comingSoonToast } from '../../utils/comingSoonToast';
 import ActivityIcon, { Activities } from '../ActivityIcon';
 import BaseCard from '../BaseCard';
 import SectionTitle from '../SectionTitle';
+import { BORDER_RADIUS, styles } from '../../theme/styles';
 
 interface ProgressCardProps {
   id: string;
@@ -77,7 +77,7 @@ function ProgressCard({
             color={theme.colors.secondary}
             variant="determinate"
             style={{
-              borderRadius: 100,
+              borderRadius: BORDER_RADIUS.rounded,
               height: 5,
               marginVertical: theme.spacing.xs,
             }}
@@ -105,7 +105,7 @@ function ProgressCard({
 
 function Progress() {
   return (
-    <View style={styles.containerSection}>
+    <View style={styles.section}>
       <SectionTitle title="Continue your progress" />
 
       {dataProgress.map(({ activityType, id, progress, time, title }) => (
