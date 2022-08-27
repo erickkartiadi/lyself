@@ -8,6 +8,7 @@ import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
+import LinkButton from '../../components/atoms/LinkButton';
 
 export type GetStartedScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
@@ -160,16 +161,9 @@ function GetStartedScreen({ navigation }: GetStartedScreenProps) {
         </View>
         <Text style={{ textAlign: 'center' }}>
           <Text subtitle2>Didn&apos;t have an account? </Text>
-          <Text
-            bold
-            subtitle2
-            onPress={() => navigation.navigate('Register')}
-            style={{
-              color: theme.colors.primary,
-            }}
-          >
+          <LinkButton to={{ screen: 'Register' }} color="primary">
             Sign Up
-          </Text>
+          </LinkButton>
         </Text>
       </View>
     </SafeAreaView>

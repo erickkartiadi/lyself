@@ -10,6 +10,7 @@ import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 import registerIllustration from '../../assets/images/register-illustration.png';
 import { InputPassword, InputText } from '../../components/atoms/Input';
+import LinkButton from '../../components/atoms/LinkButton';
 
 export type RegisterScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
@@ -62,16 +63,9 @@ function RegisterScreen({ navigation }: RegisterScreenProps) {
           }}
         >
           <Text subtitle2>Already have an account? </Text>
-          <Text
-            bold
-            subtitle2
-            onPress={() => navigation.navigate('Login')}
-            style={{
-              color: theme.colors.primary,
-            }}
-          >
-            Login{' '}
-          </Text>
+          <LinkButton to={{ screen: 'Login' }} color="primary">
+            Login
+          </LinkButton>
         </View>
       </SafeAreaView>
     </ScrollView>

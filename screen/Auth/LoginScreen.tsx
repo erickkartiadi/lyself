@@ -10,6 +10,7 @@ import { styles } from '../../theme/styles';
 import loginIllustration from '../../assets/images/login-illustration.png';
 import useToggle from '../../utils/hooks/useToggle';
 import { InputPassword, InputText } from '../../components/atoms/Input';
+import LinkButton from '../../components/atoms/LinkButton';
 
 export type LoginScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
@@ -63,7 +64,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
             checked={isRememberLogin}
             onPress={() => toggleIsRememberLogin()}
           />
-          <Text
+          {/* <Text
             subtitle2
             style={{
               color: theme.colors.secondary,
@@ -71,7 +72,10 @@ function LoginScreen({ navigation }: LoginScreenProps) {
             onPress={() => navigation.navigate('ForgotPassword')}
           >
             Forgot Password?
-          </Text>
+          </Text> */}
+          <LinkButton to={{ screen: 'ForgotPassword' }}>
+            Forgot Password?
+          </LinkButton>
         </View>
         <Button fullWidth onPress={() => navigation.navigate('HomeRoutes')}>
           Login
@@ -85,16 +89,9 @@ function LoginScreen({ navigation }: LoginScreenProps) {
           }}
         >
           <Text subtitle2>Didn&apos;t have an account? </Text>
-          <Text
-            bold
-            subtitle2
-            onPress={() => navigation.navigate('Register')}
-            style={{
-              color: theme.colors.primary,
-            }}
-          >
-            Sign Up{' '}
-          </Text>
+          <LinkButton to={{ screen: 'Register' }} color="primary">
+            Sign Up
+          </LinkButton>
         </View>
       </SafeAreaView>
     </ScrollView>
