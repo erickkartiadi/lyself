@@ -2,12 +2,11 @@ import React from 'react';
 import { Avatar, Text, useTheme } from '@rneui/themed';
 import { View } from 'react-native';
 import colorAlpha from 'color-alpha';
-import { Icon } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import BaseCard from '../atoms/BaseCard';
 
 import { ExploreScreenProps } from '../../screen/Explore/ExploreScreen';
-import { BORDER_RADIUS } from '../../theme/styles';
+import Label from '../atoms/Label';
 
 export interface PsychiatristCardProps {
   uri: string;
@@ -60,48 +59,22 @@ function PsychiatristCard({
               flexWrap: 'wrap',
             }}
           >
-            <View
-              style={{
-                backgroundColor: colorAlpha(theme.colors.primary, 0.2),
-                paddingHorizontal: theme.spacing.lg,
-                paddingVertical: theme.spacing.sm,
-                borderRadius: BORDER_RADIUS.rounded,
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginRight: theme.spacing.md,
-                marginTop: theme.spacing.md,
-              }}
+            <Label
+              color={theme.colors.primary}
+              showIcon
+              name="heart"
+              type="ionicon"
             >
-              <Icon
-                name="heart"
-                type="ionicon"
-                size={18}
-                color={theme.colors.primary}
-                style={{ marginRight: theme.spacing.sm, marginTop: 2 }}
-              />
-              <Text subtitle2>{`${rating}%`}</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: colorAlpha(theme.colors.blue, 0.2),
-                paddingHorizontal: theme.spacing.lg,
-                paddingVertical: theme.spacing.sm,
-                borderRadius: BORDER_RADIUS.rounded,
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginRight: theme.spacing.md,
-                marginTop: theme.spacing.md,
-              }}
+              {rating}
+            </Label>
+            <Label
+              color={theme.colors.yellow}
+              showIcon
+              name="briefcase"
+              type="ionicon"
             >
-              <Icon
-                name="briefcase"
-                type="ionicon"
-                size={18}
-                color={theme.colors.blue}
-                style={{ marginRight: theme.spacing.sm }}
-              />
-              <Text subtitle2>{`${experience}`}</Text>
-            </View>
+              {experience}
+            </Label>
           </View>
         </View>
       </View>
