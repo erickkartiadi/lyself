@@ -4,11 +4,7 @@
   },
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "baseUrl": ".",
-    "typeRoots": ["node_modules/@types"],
-    "strict": true,
-    "paths": {
-      "types/*": ["types/*"]
-    }
+    "typeRoots": ["node_modules/@types", "types"],
+    "strict": true
   }
 }
