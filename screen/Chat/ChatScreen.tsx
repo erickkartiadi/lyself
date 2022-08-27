@@ -3,7 +3,7 @@ import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { ChatRouteParamList } from '../../types/routes';
-import Chat, { ChatProps } from '../../components/Chat';
+import Chat, { ChatProps } from '../../components/organisms/Chat';
 
 export const chatData: ChatProps[] = [
   {

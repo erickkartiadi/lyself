@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Card, CardProps, useTheme } from '@rneui/themed';
 import { PressableProps } from 'react-native';
+import { ThemeModeContext } from '../../theme/ThemeModeContext';
 import AnimatedPressable from './AnimatedPressable';
-import { ThemeModeContext } from '../theme/ThemeModeContext';
-import { BORDER_RADIUS } from '../theme/styles';
+import { BORDER_RADIUS } from '../../theme/styles';
 
 interface BaseCardProps {
   disablePadding?: boolean;

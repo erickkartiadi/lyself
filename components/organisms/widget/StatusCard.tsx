@@ -1,7 +1,7 @@
 import { Icon, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { ColorValue, View } from 'react-native';
-import BaseCard from '../BaseCard';
+import BaseCard from '../../atoms/BaseCard';
 
 interface StatusCardData {
   title: string;

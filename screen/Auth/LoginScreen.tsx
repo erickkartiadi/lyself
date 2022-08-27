@@ -4,12 +4,12 @@ import { Button, CheckBox, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import ButtonBack from '../../components/atoms/ButtonBack';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 import loginIllustration from '../../assets/images/login-illustration.png';
 import useToggle from '../../utils/hooks/useToggle';
-import { InputPassword, InputText } from '../../components/form/Input';
-import ButtonBack from '../../components/ButtonBack';
+import { InputPassword, InputText } from '../../components/atoms/Input';
 
 export type LoginScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,

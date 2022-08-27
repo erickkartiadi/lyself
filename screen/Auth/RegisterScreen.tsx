@@ -4,11 +4,12 @@ import { Button, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import ButtonBack from '../../components/atoms/ButtonBack';
+
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 import registerIllustration from '../../assets/images/register-illustration.png';
-import { InputPassword, InputText } from '../../components/form/Input';
-import ButtonBack from '../../components/ButtonBack';
+import { InputPassword, InputText } from '../../components/atoms/Input';
 
 export type RegisterScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,

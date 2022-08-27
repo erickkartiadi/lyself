@@ -2,11 +2,11 @@ import { Icon, Image, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import * as Linking from 'expo-linking';
-import BaseCard from '../BaseCard';
-import { ArticleCardProps, dataArticles } from '../../constant';
-import ViewSeparator from '../ViewSeparator';
+import BaseCard from '../../atoms/BaseCard';
+import ViewSeparator from '../../atoms/ViewSeparator';
+import { ArticleCardProps, dataArticles } from '../../../constant';
 import SectionTitle from '../SectionTitle';
-import { styles } from '../../theme/styles';
+import { styles } from '../../../theme/styles';
 
 function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   const { theme } = useTheme();

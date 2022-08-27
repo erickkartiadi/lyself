@@ -3,12 +3,13 @@ import React, { useContext } from 'react';
 import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import BaseCard from '../BaseCard';
-import { ThemeModeContext } from '../../theme/ThemeModeContext';
+import BaseCard from '../../atoms/BaseCard';
+
+import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import StatusCard from './StatusCard';
 import Dropdown from '../Dropdown';
 import SectionTitle from '../SectionTitle';
-import { BORDER_RADIUS, styles } from '../../theme/styles';
+import { BORDER_RADIUS, styles } from '../../../theme/styles';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';

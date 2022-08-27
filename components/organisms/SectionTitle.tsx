@@ -6,7 +6,7 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { comingSoonToast } from '../utils/comingSoonToast';
+import { comingSoonToast } from '../../utils/comingSoonToast';
 
 interface SectionTitleProps {
   title: string;

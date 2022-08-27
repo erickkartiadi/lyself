@@ -3,8 +3,8 @@ import { Avatar, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import SettingMenu from '../../components/SettingMenu';
-import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
+import SettingMenu from '../../components/organisms/SettingMenu';
+import SwitchModeSettingMenu from '../../components/organisms/SwitchModeSettingMenu';
 import { AccountRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 

@@ -1,13 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import BaseSearchBar from '../../components/BaseSearchBar';
-import SectionTitle from '../../components/SectionTitle';
+import BaseSearchBar from '../../components/atoms/BaseSearchBar';
+
+import SectionTitle from '../../components/organisms/SectionTitle';
 import { styles } from '../../theme/styles';
-import AppointmentCard from '../../components/AppointmentCard';
+import AppointmentCard from '../../components/organisms/AppointmentCard';
 import PsychiatristCard, {
   PsychiatristCardProps,
-} from '../../components/PsychiatristCard';
+} from '../../components/organisms/PsychiatristCard';
 
 export const psychiatristData = [
   {

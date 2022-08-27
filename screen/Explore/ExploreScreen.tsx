@@ -5,16 +5,16 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
-import BaseSearchBar from '../../components/BaseSearchBar';
-import ActivityIcon, { Activities } from '../../components/ActivityIcon';
+import ViewSeparator from '../../components/atoms/ViewSeparator';
+import BaseSearchBar from '../../components/atoms/BaseSearchBar';
+import ActivityIcon, { Activities } from '../../components/atoms/ActivityIcon';
 import { styles } from '../../theme/styles';
-import ViewSeparator from '../../components/ViewSeparator';
-import { ArticleWidget } from '../../components/widget/Article';
+import { ArticleWidget } from '../../components/organisms/widget/Article';
 import PlaylistCard, {
   PlaylistCardProps,
-} from '../../components/widget/PlaylistCard';
+} from '../../components/organisms/widget/PlaylistCard';
 import { ExploreRouteParamList } from '../../types/routes';
-import ActivityMenu from '../../components/ActivityMenu';
+import ActivityMenu from '../../components/organisms/ActivityMenu';
 
 export type ExploreScreenProps = NativeStackScreenProps<
   ExploreRouteParamList,

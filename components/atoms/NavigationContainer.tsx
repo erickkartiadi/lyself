@@ -1,8 +1,8 @@
 import { NavigationContainer as Container } from '@react-navigation/native';
 import React, { PropsWithChildren, ReactNode, useContext } from 'react';
 import * as Linking from 'expo-linking';
-import { navThemeDark, navThemeLight } from '../theme';
-import { ThemeModeContext } from '../theme/ThemeModeContext';
+import { ThemeModeContext } from '../../theme/ThemeModeContext';
+import { navThemeDark, navThemeLight } from '../../theme';
 
 const prefix = Linking.createURL('/');
 

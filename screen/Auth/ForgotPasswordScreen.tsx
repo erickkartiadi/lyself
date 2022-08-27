@@ -4,12 +4,13 @@ import { Button, Text } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import ButtonBack from '../../components/atoms/ButtonBack';
+
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
-import ButtonBack from '../../components/ButtonBack';
-import { InputText } from '../../components/form/Input';
+import { InputText } from '../../components/atoms/Input';
 
 export type ForgotPasswordScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,

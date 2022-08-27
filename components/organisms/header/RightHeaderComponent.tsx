@@ -1,9 +1,9 @@
 import { Badge, Icon, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
-import { BORDER_RADIUS } from '../../theme/styles';
+import { BORDER_RADIUS } from '../../../theme/styles';
 
-import { comingSoonToast } from '../../utils/comingSoonToast';
+import { comingSoonToast } from '../../../utils/comingSoonToast';
 
 function RightHeaderComponent() {
   const { theme } = useTheme();

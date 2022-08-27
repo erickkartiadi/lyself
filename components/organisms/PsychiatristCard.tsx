@@ -4,9 +4,10 @@ import { View } from 'react-native';
 import colorAlpha from 'color-alpha';
 import { Icon } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
-import BaseCard from './BaseCard';
-import { ExploreScreenProps } from '../screen/Explore/ExploreScreen';
-import { BORDER_RADIUS } from '../theme/styles';
+import BaseCard from '../atoms/BaseCard';
+
+import { ExploreScreenProps } from '../../screen/Explore/ExploreScreen';
+import { BORDER_RADIUS } from '../../theme/styles';
 
 export interface PsychiatristCardProps {
   uri: string;

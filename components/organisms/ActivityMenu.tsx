@@ -1,8 +1,8 @@
 import React from 'react';
 import { PressableProps, View } from 'react-native';
 import { Text, useTheme } from '@rneui/themed';
-import ActivityIcon, { Activities } from './ActivityIcon';
-import AnimatedPressable from './AnimatedPressable';
+import ActivityIcon, { Activities } from '../atoms/ActivityIcon';
+import AnimatedPressable from '../atoms/AnimatedPressable';
 
 interface ActivityMenuProps {
   activity: Activities;

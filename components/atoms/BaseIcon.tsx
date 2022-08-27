@@ -1,7 +1,7 @@
 import { Icon } from '@rneui/themed';
 import React from 'react';
 import { ColorValue, StyleProp, ViewStyle } from 'react-native';
-import { BORDER_RADIUS } from '../theme/styles';
+import { BORDER_RADIUS } from '../../theme/styles';
 
 function BaseIcon({
   containerStyle,

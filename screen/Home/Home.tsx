@@ -4,11 +4,11 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { styles } from '../../theme/styles';
 import useToggle from '../../utils/hooks/useToggle';
-import Progress from '../../components/widget/Progress';
-import MentalScore from '../../components/widget/MentalScore';
-import RecommendedActivity from '../../components/widget/RecommendedActivity';
-import { ArticleWidget } from '../../components/widget/Article';
-import BaseBottomSheet from '../../components/BaseBottomSheet';
+import Progress from '../../components/organisms/widget/Progress';
+import MentalScore from '../../components/organisms/widget/MentalScore';
+import RecommendedActivity from '../../components/organisms/widget/RecommendedActivity';
+import { ArticleWidget } from '../../components/organisms/widget/Article';
+import BaseBottomSheet from '../../components/atoms/BaseBottomSheet';
 
 function HomeScreen() {
   const { theme } = useTheme();

@@ -5,7 +5,7 @@ import InDevelopmentScreen from '../screen/Error/InDevelopmentScreen';
 import ExploreScreen from '../screen/Explore/ExploreScreen';
 import { ExploreRouteParamList } from '../types/routes';
 import ConsultScreen from '../screen/Explore/ConsultScreen';
-import RightHeaderComponent from '../components/header/RightHeaderComponent';
+import RightHeaderComponent from '../components/organisms/header/RightHeaderComponent';
 import PsychiatristScreen from '../screen/Explore/PsychiatristScreen';
 
 const Stack = createNativeStackNavigator<ExploreRouteParamList>();

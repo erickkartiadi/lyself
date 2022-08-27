@@ -4,10 +4,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Avatar, Button, Text, useTheme } from '@rneui/themed';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import colorAlpha from 'color-alpha';
+import BaseIcon from '../../components/atoms/BaseIcon';
 import { ExploreRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
-import SectionTitle from '../../components/SectionTitle';
-import BaseIcon from '../../components/BaseIcon';
+import SectionTitle from '../../components/organisms/SectionTitle';
 
 export type PsychiatristScreenProps = NativeStackScreenProps<
   ExploreRouteParamList,

@@ -8,7 +8,7 @@ import {
   Quicksand_500Medium,
   Quicksand_700Bold,
 } from '@expo-google-fonts/quicksand';
-import NavigationContainer from './components/NavigationContainer';
+import NavigationContainer from './components/atoms/NavigationContainer';
 import { myTheme } from './theme';
 
 import { ThemeModeProvider } from './theme/ThemeModeContext';

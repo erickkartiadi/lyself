@@ -6,9 +6,9 @@ import {
   ExploreTabBarIcon,
   HomeTabBarIcon,
   UserTabBarIcon,
-} from '../components/BottomTabBarIcons';
-import LeftHeaderComponent from '../components/header/LeftHeaderComponent';
-import RightHeaderComponent from '../components/header/RightHeaderComponent';
+} from '../components/atoms/BottomTabBarIcons';
+import LeftHeaderComponent from '../components/organisms/header/LeftHeaderComponent';
+import RightHeaderComponent from '../components/organisms/header/RightHeaderComponent';
 import HomeScreen from '../screen/Home/Home';
 import ChatRoutes from './Chat.routes';
 import { HomeRouteParamList } from '../types/routes';

@@ -2,8 +2,8 @@ import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { Image, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
-import AnimatedPressable from '../AnimatedPressable';
-import { BORDER_RADIUS } from '../../theme/styles';
+import AnimatedPressable from '../../atoms/AnimatedPressable';
+import { BORDER_RADIUS } from '../../../theme/styles';
 
 export interface PlaylistCardProps {
   imageUrl: string;

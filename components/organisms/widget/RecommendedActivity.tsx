@@ -1,13 +1,13 @@
 import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { FlatList, GestureResponderEvent, View } from 'react-native';
-import { RecommendedProps, dataRecommended } from '../../constant';
-import { comingSoonToast } from '../../utils/comingSoonToast';
-import ActivityIcon, { Activities } from '../ActivityIcon';
-import BaseCard from '../BaseCard';
+import BaseCard from '../../atoms/BaseCard';
+import ViewSeparator from '../../atoms/ViewSeparator';
+import { RecommendedProps, dataRecommended } from '../../../constant';
+import { comingSoonToast } from '../../../utils/comingSoonToast';
+import ActivityIcon, { Activities } from '../../atoms/ActivityIcon';
 import SectionTitle from '../SectionTitle';
-import ViewSeparator from '../ViewSeparator';
-import { styles } from '../../theme/styles';
+import { styles } from '../../../theme/styles';
 
 interface RecommendedActivityProps {
   onPress: ((event: GestureResponderEvent) => void) | null | undefined;

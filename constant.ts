@@ -1,4 +1,4 @@
-import { Activities } from './components/ActivityIcon';
+import { Activities } from './components/atoms/ActivityIcon';
 
 export type RecommendedProps = {
   id: string;
