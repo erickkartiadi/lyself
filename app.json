@@ -15,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "buildNumber": "1.0.0",
@@ -37,7 +35,15 @@
       "eas": {
         "projectId": "78d64a9e-b2e7-4f52-9684-5009b95981e7"
       }
-    }
+    },
+    "plugins": [
+      [
+        "./plugins/withAndroidColorEdgeEffect",
+        {
+          "color": "#f55c7a"
+        }
+      ]
+    ]
   },
   "name": "lyself"
 }
