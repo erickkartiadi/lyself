@@ -9,7 +9,7 @@ import {
 } from '../components/atoms/BottomTabBarIcons';
 import LeftHeaderComponent from '../components/organisms/header/LeftHeaderComponent';
 import RightHeaderComponent from '../components/organisms/header/RightHeaderComponent';
-import HomeScreen from '../screen/Home/Home';
+import HomeScreen from '../screen/Home/HomeScreen';
 import ChatRoutes from './Chat.routes';
 import { HomeRouteParamList } from '../types/routes';
 import AccountRoutes from './Account.routes';

@@ -33,7 +33,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
         <Text>Login to continue.</Text>
         <View
           style={{
-            height: 300,
+            aspectRatio: 1,
             justifyContent: 'center',
             alignItems: 'center',
           }}
@@ -42,7 +42,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
             source={loginIllustration}
             style={{
               flex: 1,
-              width: '80%',
+              width: '100%',
             }}
             resizeMode="center"
           />
@@ -64,15 +64,6 @@ function LoginScreen({ navigation }: LoginScreenProps) {
             checked={isRememberLogin}
             onPress={() => toggleIsRememberLogin()}
           />
-          {/* <Text
-            subtitle2
-            style={{
-              color: theme.colors.secondary,
-            }}
-            onPress={() => navigation.navigate('ForgotPassword')}
-          >
-            Forgot Password?
-          </Text> */}
           <LinkButton to={{ screen: 'ForgotPassword' }}>
             Forgot Password?
           </LinkButton>

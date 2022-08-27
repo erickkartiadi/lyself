@@ -74,7 +74,6 @@ const myTheme: CreateThemeOptions = createTheme({
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
         letterSpacing: 0.1,
-        marginBottom: THEME_SPACING.xs,
       },
       inputStyle: {
         fontFamily: 'Quicksand',
@@ -90,7 +89,6 @@ const myTheme: CreateThemeOptions = createTheme({
         margin: 0,
         padding: THEME_SPACING.lg,
         marginTop: THEME_SPACING.md,
-        marginBottom: THEME_SPACING.md,
       },
     },
     SearchBar: {
@@ -116,7 +114,7 @@ const myTheme: CreateThemeOptions = createTheme({
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
         letterSpacing: -0.75,
-        marginBottom: THEME_SPACING.md,
+        marginBottom: THEME_SPACING.sm,
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
@@ -130,7 +128,7 @@ const myTheme: CreateThemeOptions = createTheme({
         fontSize: FONT_SIZE.heading2,
         fontFamily: 'Quicksand-Medium',
         fontWeight: '500',
-        marginBottom: THEME_SPACING.md,
+        marginBottom: THEME_SPACING.sm,
         letterSpacing: -0.25,
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',
@@ -184,21 +182,18 @@ const myTheme: CreateThemeOptions = createTheme({
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
           letterSpacing: 0.25,
-          marginBottom: THEME_SPACING.xs,
         }),
         ...(props.subtitle2 && {
           fontSize: FONT_SIZE.body2,
           fontFamily: 'Quicksand-Medium',
           fontWeight: '500',
           letterSpacing: 0.125,
-          marginBottom: THEME_SPACING.xs,
         }),
         ...(props.caption && {
           fontSize: FONT_SIZE.caption,
           fontFamily: 'Quicksand',
           fontWeight: '400',
           letterSpacing: 0.4,
-          marginBottom: THEME_SPACING.xs,
         }),
         ...(props.medium && {
           fontFamily: 'Quicksand-Medium',

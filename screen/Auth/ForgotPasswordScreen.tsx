@@ -31,7 +31,13 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenProps) {
           Please enter your email address, we&apos;ll send an email with
           instructions to reset your password.
         </Text>
-        <View style={{ flex: 1, height: 360, alignItems: 'center' }}>
+        <View
+          style={{
+            flex: 1,
+            aspectRatio: 1,
+            alignItems: 'center',
+          }}
+        >
           <Image
             source={forgotPasswordIllustration}
             style={{

@@ -1,4 +1,4 @@
-import { Button, Text, useTheme } from '@rneui/themed';
+import { Button, useTheme } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -7,7 +7,7 @@ import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import ViewSeparator from '../../components/atoms/ViewSeparator';
 import BaseSearchBar from '../../components/atoms/BaseSearchBar';
-import ActivityIcon, { Activities } from '../../components/atoms/ActivityIcon';
+import { Activities } from '../../components/atoms/ActivityIcon';
 import { styles } from '../../theme/styles';
 import { ArticleWidget } from '../../components/organisms/widget/Article';
 import PlaylistCard, {
@@ -15,6 +15,7 @@ import PlaylistCard, {
 } from '../../components/organisms/widget/PlaylistCard';
 import { ExploreRouteParamList } from '../../types/routes';
 import ActivityMenu from '../../components/organisms/ActivityMenu';
+import SectionTitle from '../../components/organisms/SectionTitle';
 
 export type ExploreScreenProps = NativeStackScreenProps<
   ExploreRouteParamList,
@@ -134,16 +135,7 @@ function ExploreScreen({ navigation }: ExploreScreenProps) {
       </View>
       <ArticleWidget />
       <View style={styles.section}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-        >
-          <Text h4>Featured playlist </Text>
-          <ActivityIcon activity="music" size={24} iconFontSize={16} />
-        </View>
+        <SectionTitle title="Featured playlist" />
         {token ? (
           <FlatList
             horizontal

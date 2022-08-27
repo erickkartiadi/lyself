@@ -34,7 +34,7 @@ function RegisterScreen({ navigation }: RegisterScreenProps) {
         </Text>
         <View
           style={{
-            height: 300,
+            aspectRatio: 1,
             justifyContent: 'center',
             alignItems: 'center',
           }}
@@ -43,7 +43,7 @@ function RegisterScreen({ navigation }: RegisterScreenProps) {
             source={registerIllustration}
             style={{
               flex: 1,
-              width: '80%',
+              width: '100%',
             }}
             resizeMode="center"
           />
