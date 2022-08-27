@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { AuthRouteParamList } from '../types/routes';
-import LoginPage from '../screen/Auth/LoginPage';
-import RegisterPage from '../screen/Auth/RegisterPage';
-import ForgotPasswordPage from '../screen/Auth/ForgotPasswordPage';
-import GetStartedPage from '../screen/Auth/GetStartedPage';
+import LoginScreen from '../screen/Auth/LoginScreen';
+import RegisterScreen from '../screen/Auth/RegisterScreen';
+import GetStartedScreen from '../screen/Auth/GetStartedScreen';
+import ForgotPasswordScreen from '../screen/Auth/ForgotPasswordScreen';
 
 const Stack = createNativeStackNavigator<AuthRouteParamList>();
 
@@ -14,10 +14,10 @@ function AuthRoutes() {
       initialRouteName="GetStarted"
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="Login" component={LoginPage} />
-      <Stack.Screen name="Register" component={RegisterPage} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPasswordPage} />
-      <Stack.Screen name="GetStarted" component={GetStartedPage} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+      <Stack.Screen name="GetStarted" component={GetStartedScreen} />
     </Stack.Navigator>
   );
 }

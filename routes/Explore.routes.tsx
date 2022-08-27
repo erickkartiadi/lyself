@@ -1,12 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from '@rneui/themed';
-import InDevelopment from '../screen/ErrorPages/InDevelopment';
-import ExplorePage from '../screen/Explore/ExplorePage';
+import InDevelopmentScreen from '../screen/Error/InDevelopmentScreen';
+import ExploreScreen from '../screen/Explore/ExploreScreen';
 import { ExploreRouteParamList } from '../types/routes';
-import ConsultPage from '../screen/Explore/ConsultPage';
+import ConsultScreen from '../screen/Explore/ConsultScreen';
 import RightHeaderComponent from '../components/header/RightHeaderComponent';
-import PsychiatristPage from '../screen/Explore/PsychiatristPage';
+import PsychiatristScreen from '../screen/Explore/PsychiatristScreen';
 
 const Stack = createNativeStackNavigator<ExploreRouteParamList>();
 
@@ -31,16 +31,16 @@ function ExploreRoutes() {
     >
       <Stack.Screen
         name="Explore"
-        component={ExplorePage}
+        component={ExploreScreen}
         options={{ headerTitleAlign: 'left' }}
       />
-      <Stack.Screen name="Consult" component={ConsultPage} />
+      <Stack.Screen name="Consult" component={ConsultScreen} />
       <Stack.Screen
         name="Psychiatrist"
-        component={PsychiatristPage}
+        component={PsychiatristScreen}
         options={{ headerTitle: '', headerRight: () => null }}
       />
-      <Stack.Screen name="InDevelopment" component={InDevelopment} />
+      <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
     </Stack.Navigator>
   );
 }

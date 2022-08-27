@@ -5,7 +5,7 @@ import colorAlpha from 'color-alpha';
 import { Icon } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import BaseCard from './BaseCard';
-import { ExplorePageProps } from '../screen/Explore/ExplorePage';
+import { ExploreScreenProps } from '../screen/Explore/ExploreScreen';
 import { BORDER_RADIUS } from '../theme/styles';
 
 export interface PsychiatristCardProps {
@@ -24,7 +24,7 @@ function PsychiatristCard({
   rating,
 }: PsychiatristCardProps) {
   const { theme } = useTheme();
-  const navigation = useNavigation<ExplorePageProps['navigation']>();
+  const navigation = useNavigation<ExploreScreenProps['navigation']>();
   return (
     <BaseCard
       onPress={() =>

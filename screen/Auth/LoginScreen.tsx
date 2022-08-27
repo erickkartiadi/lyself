@@ -1,35 +1,35 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, Text, useTheme } from '@rneui/themed';
+import { Button, CheckBox, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
-import registerIllustration from '../../assets/images/register-illustration.png';
+import loginIllustration from '../../assets/images/login-illustration.png';
+import useToggle from '../../utils/hooks/useToggle';
 import { InputPassword, InputText } from '../../components/form/Input';
 import ButtonBack from '../../components/ButtonBack';
 
-export type RegisterPageProps = NativeStackScreenProps<
+export type LoginScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
-  'Register'
+  'Login'
 >;
 
-function RegisterPage({ navigation }: RegisterPageProps) {
+function LoginScreen({ navigation }: LoginScreenProps) {
   const { theme } = useTheme();
+  const [isRememberLogin, toggleIsRememberLogin] = useToggle(false);
 
   return (
     <ScrollView
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       <SafeAreaView>
-        <ButtonBack onPress={() => navigation.navigate('Login')} />
+        <ButtonBack onPress={() => navigation.navigate('GetStarted')} />
         <Text h1 bold>
-          Create new account
+          Welcome to Lyself
         </Text>
-        <Text>
-          Just one more step to be part of the {'\n'}Lyself community.
-        </Text>
+        <Text>Login to continue.</Text>
         <View
           style={{
             height: 300,
@@ -38,7 +38,7 @@ function RegisterPage({ navigation }: RegisterPageProps) {
           }}
         >
           <Image
-            source={registerIllustration}
+            source={loginIllustration}
             style={{
               flex: 1,
               width: '80%',
@@ -46,11 +46,35 @@ function RegisterPage({ navigation }: RegisterPageProps) {
             resizeMode="center"
           />
         </View>
-        <InputText label="Name" placeholder="eg. John Doe" />
         <InputText label="Email address" placeholder="example@email.com" />
         <InputPassword />
-        <Button fullWidth onPress={() => navigation.navigate('Login')}>
-          Create Account
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: theme.spacing.lg * -1,
+            marginBottom: theme.spacing.lg,
+          }}
+        >
+          <CheckBox
+            title="Remember Me"
+            checked={isRememberLogin}
+            onPress={() => toggleIsRememberLogin()}
+          />
+          <Text
+            subtitle2
+            style={{
+              color: theme.colors.secondary,
+            }}
+            onPress={() => navigation.navigate('ForgotPassword')}
+          >
+            Forgot Password?
+          </Text>
+        </View>
+        <Button fullWidth onPress={() => navigation.navigate('HomeRoutes')}>
+          Login
         </Button>
         <View
           style={{
@@ -60,20 +84,20 @@ function RegisterPage({ navigation }: RegisterPageProps) {
             marginTop: theme.spacing.xl * 2,
           }}
         >
-          <Text subtitle2>Already have an account? </Text>
+          <Text subtitle2>Didn&apos;t have an account? </Text>
           <Text
             bold
             subtitle2
-            onPress={() => navigation.navigate('Login')}
+            onPress={() => navigation.navigate('Register')}
             style={{
               color: theme.colors.primary,
             }}
           >
-            Login{' '}
+            Sign Up{' '}
           </Text>
         </View>
       </SafeAreaView>
     </ScrollView>
   );
 }
-export default RegisterPage;
+export default LoginScreen;

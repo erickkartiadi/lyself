@@ -80,9 +80,12 @@ export const chatData: ChatProps[] = [
   },
 ];
 
-export type ChatPageProps = NativeStackScreenProps<ChatRouteParamList, 'Chat'>;
+export type ChatScreenProps = NativeStackScreenProps<
+  ChatRouteParamList,
+  'Chat'
+>;
 
-function ChatPage() {
+function ChatScreen() {
   const renderChat = ({ item }: { item: ChatProps }) => (
     <Chat
       avatarUrl={item.avatarUrl}
@@ -102,4 +105,4 @@ function ChatPage() {
   );
 }
 
-export default ChatPage;
+export default ChatScreen;

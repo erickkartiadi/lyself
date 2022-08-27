@@ -8,11 +8,11 @@ import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
 import { AccountRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 
-export type AccountPageProps = NativeStackScreenProps<
+export type AccountScreenProps = NativeStackScreenProps<
   RootRouteParamList & AccountRouteParamList,
   'Account'
 >;
-function AccountPage({ navigation }: AccountPageProps) {
+function AccountScreen({ navigation }: AccountScreenProps) {
   const { theme } = useTheme();
 
   return (
@@ -135,4 +135,4 @@ function AccountPage({ navigation }: AccountPageProps) {
   );
 }
 
-export default AccountPage;
+export default AccountScreen;

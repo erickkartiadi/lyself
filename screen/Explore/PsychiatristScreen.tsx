@@ -9,12 +9,12 @@ import { styles } from '../../theme/styles';
 import SectionTitle from '../../components/SectionTitle';
 import BaseIcon from '../../components/BaseIcon';
 
-export type PsychiatristPageProps = NativeStackScreenProps<
+export type PsychiatristScreenProps = NativeStackScreenProps<
   ExploreRouteParamList,
   'Psychiatrist'
 >;
 
-function PsychiatristPage({ route }: PsychiatristPageProps) {
+function PsychiatristScreen({ route }: PsychiatristScreenProps) {
   const { experience, name, rating, specialty, uri } = route.params;
   const { theme } = useTheme();
 
@@ -127,4 +127,4 @@ function PsychiatristPage({ route }: PsychiatristPageProps) {
   );
 }
 
-export default PsychiatristPage;
+export default PsychiatristScreen;

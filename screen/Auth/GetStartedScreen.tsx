@@ -9,12 +9,12 @@ import { styles } from '../../theme/styles';
 
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
 
-export type GetStartedPageProps = NativeStackScreenProps<
+export type GetStartedScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
   'Register'
 >;
 
-function GetStartedPage({ navigation }: GetStartedPageProps) {
+function GetStartedScreen({ navigation }: GetStartedScreenProps) {
   const { theme } = useTheme();
 
   return (
@@ -176,4 +176,4 @@ function GetStartedPage({ navigation }: GetStartedPageProps) {
   );
 }
 
-export default GetStartedPage;
+export default GetStartedScreen;

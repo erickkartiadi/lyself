@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Button, Text } from '@rneui/themed';
 import { View } from 'react-native';
 import { styles } from '../../theme/styles';
-import { ExplorePageProps } from '../Explore/ExplorePage';
+import { ExploreScreenProps } from '../Explore/ExploreScreen';
 
-function InDevelopment({ navigation }: ExplorePageProps) {
+function InDevelopmentScreen({ navigation }: ExploreScreenProps) {
   return (
     <View
       style={[
@@ -28,4 +28,4 @@ function InDevelopment({ navigation }: ExplorePageProps) {
   );
 }
 
-export default InDevelopment;
+export default InDevelopmentScreen;

@@ -9,7 +9,7 @@ import {
 } from '../components/BottomTabBarIcons';
 import LeftHeaderComponent from '../components/header/LeftHeaderComponent';
 import RightHeaderComponent from '../components/header/RightHeaderComponent';
-import Home from '../screen/Home/Home';
+import HomeScreen from '../screen/Home/Home';
 import ChatRoutes from './Chat.routes';
 import { HomeRouteParamList } from '../types/routes';
 import AccountRoutes from './Account.routes';
@@ -64,7 +64,7 @@ function HomeRoutes() {
           tabBarIcon: HomeTabBarIcon,
         }}
         name="Home"
-        component={Home}
+        component={HomeScreen}
       />
       <Tab.Screen
         name="ExploreRoutes"

@@ -11,12 +11,12 @@ import forgotPasswordIllustration from '../../assets/images/forgot-password-illu
 import ButtonBack from '../../components/ButtonBack';
 import { InputText } from '../../components/form/Input';
 
-export type ForgotPasswordProps = NativeStackScreenProps<
+export type ForgotPasswordScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
   'Login'
 >;
 
-function ForgotPassword({ navigation }: ForgotPasswordProps) {
+function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenProps) {
   return (
     <ScrollView
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
@@ -47,4 +47,4 @@ function ForgotPassword({ navigation }: ForgotPasswordProps) {
     </ScrollView>
   );
 }
-export default ForgotPassword;
+export default ForgotPasswordScreen;

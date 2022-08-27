@@ -10,7 +10,7 @@ import RecommendedActivity from '../../components/widget/RecommendedActivity';
 import { ArticleWidget } from '../../components/widget/Article';
 import BaseBottomSheet from '../../components/BaseBottomSheet';
 
-function Home() {
+function HomeScreen() {
   const { theme } = useTheme();
   const [isBottomSheetVisible, toggleIsBottomSheetVisible] = useToggle(false);
   const [activeWidgets, setActiveWidgets] = useState([
@@ -102,4 +102,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeScreen;

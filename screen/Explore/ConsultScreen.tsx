@@ -47,7 +47,7 @@ export const psychiatristData = [
   },
 ];
 
-function ConsultPage() {
+function ConsultScreen() {
   const scheduleData = {
     psychiatristName: 'Dr. Theresa Web',
     specialty: 'Addiction Psychiatry',
@@ -89,4 +89,4 @@ function ConsultPage() {
     />
   );
 }
-export default ConsultPage;
+export default ConsultScreen;

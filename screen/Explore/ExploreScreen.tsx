@@ -16,7 +16,7 @@ import PlaylistCard, {
 import { ExploreRouteParamList } from '../../types/routes';
 import ActivityMenu from '../../components/ActivityMenu';
 
-export type ExplorePageProps = NativeStackScreenProps<
+export type ExploreScreenProps = NativeStackScreenProps<
   ExploreRouteParamList,
   'Explore'
 >;
@@ -27,7 +27,7 @@ const discovery = {
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
 };
 
-function ExplorePage({ navigation }: ExplorePageProps) {
+function ExploreScreen({ navigation }: ExploreScreenProps) {
   const { theme } = useTheme();
   const [token, setToken] = useState('');
   const [featuredPlaylist, setFeaturedPlaylist] = useState([]);
@@ -171,4 +171,4 @@ function ExplorePage({ navigation }: ExplorePageProps) {
   );
 }
 
-export default ExplorePage;
+export default ExploreScreen;
