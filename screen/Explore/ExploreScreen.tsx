@@ -139,6 +139,7 @@ function ExploreScreen({ navigation }: ExploreScreenProps) {
         {token ? (
           <FlatList
             horizontal
+            overScrollMode="never"
             ItemSeparatorComponent={ViewSeparator}
             showsHorizontalScrollIndicator={false}
             style={styles.noContainerGutter}

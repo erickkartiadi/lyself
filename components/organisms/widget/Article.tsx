@@ -62,6 +62,7 @@ function ArticleWidget() {
     <View style={styles.section}>
       <SectionTitle title="News about mental health" showRightButton />
       <FlatList
+        overScrollMode="never"
         horizontal
         ItemSeparatorComponent={ViewSeparator}
         showsHorizontalScrollIndicator={false}

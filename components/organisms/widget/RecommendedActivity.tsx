@@ -63,6 +63,7 @@ function RecommendedActivity() {
       <SectionTitle title="Recommended activity" />
       <FlatList
         horizontal
+        overScrollMode="never"
         ItemSeparatorComponent={ViewSeparator}
         style={[styles.noContainerGutter, styles.flatListHorizontal]}
         contentContainerStyle={[
