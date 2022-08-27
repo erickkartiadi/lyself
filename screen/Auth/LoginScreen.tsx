@@ -23,6 +23,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
 
   return (
     <ScrollView
+      keyboardShouldPersistTaps="handled"
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       <SafeAreaView>

@@ -20,6 +20,7 @@ export type ForgotPasswordScreenProps = NativeStackScreenProps<
 function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenProps) {
   return (
     <ScrollView
+      keyboardShouldPersistTaps="handled"
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       <SafeAreaView>
