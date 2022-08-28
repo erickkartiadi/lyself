@@ -9,7 +9,7 @@ import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 import loginIllustration from '../../assets/images/login-illustration.png';
 import useToggle from '../../utils/hooks/useToggle';
-import { InputPassword, InputText } from '../../components/atoms/Input';
+import { PasswordInput, TextInput } from '../../components/atoms/Input';
 import LinkButton from '../../components/atoms/LinkButton';
 
 export type LoginScreenProps = NativeStackScreenProps<
@@ -46,8 +46,11 @@ function LoginScreen({ navigation }: LoginScreenProps) {
             resizeMode="center"
           />
         </View>
-        <InputText label="Email address" placeholder="example@email.com" />
-        <InputPassword />
+        <TextInput label="Email address" placeholder="example@email.com" />
+        <PasswordInput
+          label="Password"
+          placeholder="must have at least 8 characters"
+        />
         <View
           style={{
             flex: 1,

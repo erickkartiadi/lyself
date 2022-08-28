@@ -1,11 +1,10 @@
 import { Icon, Input, InputProps, useTheme } from '@rneui/themed';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { BORDER_RADIUS } from '../../theme/styles';
 import useToggle from '../../utils/hooks/useToggle';
 
-function InputText({ label, placeholder, ref, ...others }: InputProps) {
+function TextInput({ label, placeholder, ref, ...rest }: InputProps) {
   const { theme } = useTheme();
-  const inputRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -23,20 +22,19 @@ function InputText({ label, placeholder, ref, ...others }: InputProps) {
       }}
       label={label}
       placeholder={placeholder}
-      ref={inputRef}
-      {...others}
+      {...rest}
     />
   );
 }
 
-function InputPassword() {
+function PasswordInput({ label, placeholder, ...rest }: InputProps) {
   const [isPasswordVisible, togglePasswordVisible] = useToggle(false);
   const { theme } = useTheme();
 
   return (
-    <InputText
-      label="Password"
-      placeholder="must have at least 8 characters"
+    <TextInput
+      label={label}
+      placeholder={placeholder}
       secureTextEntry={!isPasswordVisible}
       rightIcon={
         <Icon
@@ -49,8 +47,9 @@ function InputPassword() {
           onPress={() => togglePasswordVisible()}
         />
       }
+      {...rest}
     />
   );
 }
 
-export { InputPassword, InputText };
+export { PasswordInput, TextInput };

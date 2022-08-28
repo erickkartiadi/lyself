@@ -10,7 +10,7 @@ import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
-import { InputText } from '../../components/atoms/Input';
+import { TextInput } from '../../components/atoms/Input';
 
 export type ForgotPasswordScreenProps = NativeStackScreenProps<
   AuthRouteParamList & RootRouteParamList,
@@ -45,7 +45,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenProps) {
             }}
           />
         </View>
-        <InputText label="Email address" placeholder="example@email.com" />
+        <TextInput label="Email address" placeholder="example@email.com" />
         <Button fullWidth onPress={() => navigation.navigate('Login')}>
           Send Instruction
         </Button>

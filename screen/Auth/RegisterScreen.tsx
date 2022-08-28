@@ -9,7 +9,7 @@ import ButtonBack from '../../components/atoms/ButtonBack';
 import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
 import { styles } from '../../theme/styles';
 import registerIllustration from '../../assets/images/register-illustration.png';
-import { InputPassword, InputText } from '../../components/atoms/Input';
+import { PasswordInput, TextInput } from '../../components/atoms/Input';
 import LinkButton from '../../components/atoms/LinkButton';
 
 export type RegisterScreenProps = NativeStackScreenProps<
@@ -45,9 +45,12 @@ function RegisterScreen({ navigation }: RegisterScreenProps) {
             resizeMode="center"
           />
         </View>
-        <InputText label="Name" placeholder="eg. John Doe" />
-        <InputText label="Email address" placeholder="example@email.com" />
-        <InputPassword />
+        <TextInput label="Name" placeholder="eg. John Doe" />
+        <TextInput label="Email address" placeholder="example@email.com" />
+        <PasswordInput
+          label="Password"
+          placeholder="must have at least 8 characters"
+        />
         <Button fullWidth onPress={() => navigation.navigate('Login')}>
           Create Account
         </Button>
