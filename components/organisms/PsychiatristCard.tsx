@@ -4,9 +4,8 @@ import { View } from 'react-native';
 import colorAlpha from 'color-alpha';
 import { useNavigation } from '@react-navigation/native';
 import BaseCard from '../atoms/BaseCard';
-
-import { ExploreScreenNavigationProps } from '../../screen/Explore/ExploreScreen';
 import Label from '../atoms/Label';
+import { ConsultScreenNavigationProps } from '../../navigation/navigation.types';
 
 export interface PsychiatristCardProps {
   uri: string;
@@ -25,7 +24,7 @@ function PsychiatristCard({
 }: PsychiatristCardProps) {
   const { theme } = useTheme();
   const navigation =
-    useNavigation<ExploreScreenNavigationProps['navigation']>();
+    useNavigation<ConsultScreenNavigationProps['navigation']>();
   return (
     <BaseCard
       onPress={() =>

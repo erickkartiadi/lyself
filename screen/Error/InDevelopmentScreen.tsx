@@ -24,7 +24,7 @@ function InDevelopmentScreen() {
       <Button
         onPress={() => navigation.goBack()}
         type="clear"
-        title="Go back to explore page"
+        title="Go back"
       />
     </View>
   );

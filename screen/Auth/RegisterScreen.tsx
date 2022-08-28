@@ -1,21 +1,14 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, Text } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ButtonBack from '../../components/atoms/ButtonBack';
-
-import { AuthStackParamList, RootStackParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 import registerIllustration from '../../assets/images/register-illustration.png';
 import { PasswordInput, TextInput } from '../../components/atoms/Input';
 import LinkButton from '../../components/atoms/LinkButton';
-
-export type RegisterScreenNavigationProps = NativeStackScreenProps<
-  AuthStackParamList & RootStackParamList,
-  'Register'
->;
+import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   return (

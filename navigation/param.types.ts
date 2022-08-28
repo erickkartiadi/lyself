@@ -1,13 +1,17 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 
-// tree height = 2
-
 type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
+  ConsultStack: NavigatorScreenParams<ConsultStackParamList>;
+  InDevelopment: undefined;
+  // MeditationStack: NavigatorScreenParams<MeditationStackParamList>;
+  // ForumStack: NavigatorScreenParams<ForumStackParamList>;
+  // MusicStack: NavigatorScreenParams<MusicStackParamList>;
+  // TodoStack: NavigatorScreenParams<TodoStackParamList>;
+  // BreathingStack: NavigatorScreenParams<BreathingStackParamList>;
+  // ArticleStack: NavigatorScreenParams<ArticleStackParamList>;
 };
-
-// tree height = 1
 
 type AuthStackParamList = {
   GetStarted: undefined;
@@ -18,15 +22,12 @@ type AuthStackParamList = {
 
 type HomeTabParamList = {
   Home: undefined;
-  ExploreStack: NavigatorScreenParams<ExploreStackParamList>;
-  ChatStack: NavigatorScreenParams<ChatStackParamList>;
-  AccountStack: NavigatorScreenParams<AccountStackParamList>;
+  Explore: undefined;
+  Chat: undefined;
+  Account: undefined;
 };
 
-// tree height = 0
-
-type ExploreStackParamList = {
-  Explore: undefined;
+type ConsultStackParamList = {
   Consult: undefined;
   Psychiatrist: {
     uri: string;
@@ -35,23 +36,11 @@ type ExploreStackParamList = {
     rating: string;
     specialty: string;
   };
-  InDevelopment: undefined;
-};
-
-type ChatStackParamList = {
-  Chat: undefined;
-  Psychiatrist: undefined;
-};
-
-type AccountStackParamList = {
-  Account: undefined;
 };
 
 export {
   RootStackParamList,
   HomeTabParamList,
   AuthStackParamList,
-  ChatStackParamList,
-  ExploreStackParamList,
-  AccountStackParamList,
+  ConsultStackParamList,
 };

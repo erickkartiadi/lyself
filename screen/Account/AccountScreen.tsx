@@ -1,17 +1,12 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Avatar, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import SettingMenu from '../../components/organisms/SettingMenu';
 import SwitchModeSettingMenu from '../../components/organisms/SwitchModeSettingMenu';
-import { AccountStackParamList, RootStackParamList } from '../../types/param';
+import { AccountScreenNavigationProps } from '../../navigation/navigation.types';
 import { styles } from '../../theme/styles';
 
-export type AccountScreenNavigationProps = NativeStackScreenProps<
-  AccountStackParamList & RootStackParamList,
-  'Account'
->;
 function AccountScreen({ navigation }: AccountScreenNavigationProps) {
   const { theme } = useTheme();
 

@@ -1,19 +1,13 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Icon } from '@rneui/base';
 import React from 'react';
 import { Dimensions, Image, View } from 'react-native';
 import { Button, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
-import { AuthStackParamList, HomeTabParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
 import LinkButton from '../../components/atoms/LinkButton';
-
-export type GetStartedScreenNavigationProps = NativeStackScreenProps<
-  AuthStackParamList & HomeTabParamList,
-  'GetStarted'
->;
+import { GetStartedScreenNavigationProps } from '../../navigation/navigation.types';
 
 function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
   const { theme } = useTheme();
@@ -103,7 +97,9 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('Home')}
+                onPress={() =>
+                  navigation.navigate('HomeTab', { screen: 'Home' })
+                }
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.grey3,
@@ -129,7 +125,9 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('Home')}
+                onPress={() =>
+                  navigation.navigate('HomeTab', { screen: 'Home' })
+                }
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.grey3,
@@ -156,7 +154,9 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
 
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('Home')}
+                onPress={() =>
+                  navigation.navigate('HomeTab', { screen: 'Home' })
+                }
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.grey3,

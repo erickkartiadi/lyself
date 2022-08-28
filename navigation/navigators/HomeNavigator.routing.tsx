@@ -10,11 +10,11 @@ import {
 import LeftHeaderComponent from '../../components/organisms/header/LeftHeaderComponent';
 import RightHeaderComponent from '../../components/organisms/header/RightHeaderComponent';
 import HomeScreen from '../../screen/Home/HomeScreen';
-import ChatNavigator from './ChatNavigator.routing';
-import { HomeTabParamList } from '../../types/param';
-import AccountNavigator from './AccountNavigator.routing';
-import ExploreNavigator from './ExploreNavigator.routing';
+import { HomeTabParamList } from '../param.types';
 import { FONT_FAMILY, styles } from '../../theme/styles';
+import ChatScreen from '../../screen/Chat/ChatScreen';
+import AccountScreen from '../../screen/Account/AccountScreen';
+import ExploreScreen from '../../screen/Explore/ExploreScreen';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
@@ -23,7 +23,7 @@ function HomeNavigator() {
 
   return (
     <Tab.Navigator
-      initialRouteName="ExploreStack"
+      initialRouteName="Home"
       screenOptions={{
         headerStyle: {
           elevation: 0,
@@ -67,22 +67,21 @@ function HomeNavigator() {
         component={HomeScreen}
       />
       <Tab.Screen
-        name="ExploreStack"
-        component={ExploreNavigator}
+        name="Explore"
+        component={ExploreScreen}
         options={{
           tabBarIcon: ExploreTabBarIcon,
           title: 'Explore',
-          headerShown: false,
         }}
       />
       <Tab.Screen
-        name="ChatStack"
-        component={ChatNavigator}
+        name="Chat"
+        component={ChatScreen}
         options={{ tabBarIcon: ChatTabBarIcon, title: 'Chat' }}
       />
       <Tab.Screen
-        name="AccountStack"
-        component={AccountNavigator}
+        name="Account"
+        component={AccountScreen}
         options={{
           tabBarIcon: UserTabBarIcon,
           title: 'Account',

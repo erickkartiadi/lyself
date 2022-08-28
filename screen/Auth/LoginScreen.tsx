@@ -1,21 +1,15 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, CheckBox, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ButtonBack from '../../components/atoms/ButtonBack';
-import { AuthStackParamList, HomeTabParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 import loginIllustration from '../../assets/images/login-illustration.png';
 import useToggle from '../../utils/hooks/useToggle';
 import { PasswordInput, TextInput } from '../../components/atoms/Input';
 import LinkButton from '../../components/atoms/LinkButton';
-
-export type LoginScreenNavigationProps = NativeStackScreenProps<
-  AuthStackParamList & HomeTabParamList,
-  'Login'
->;
+import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();
@@ -27,7 +21,11 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       <SafeAreaView>
-        <ButtonBack onPress={() => navigation.navigate('GetStarted')} />
+        <ButtonBack
+          onPress={() =>
+            navigation.navigate('AuthStack', { screen: 'GetStarted' })
+          }
+        />
         <Text h1>Welcome to Lyself</Text>
         <Text>Login to continue.</Text>
         <View
@@ -70,7 +68,10 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             Forgot Password?
           </LinkButton>
         </View>
-        <Button fullWidth onPress={() => navigation.navigate('Home')}>
+        <Button
+          fullWidth
+          onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
+        >
           Login
         </Button>
         <View

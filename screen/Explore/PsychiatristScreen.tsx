@@ -5,12 +5,12 @@ import { Avatar, Button, Text, useTheme } from '@rneui/themed';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import colorAlpha from 'color-alpha';
 import BaseIcon from '../../components/atoms/BaseIcon';
-import { ExploreStackParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 import SectionTitle from '../../components/organisms/SectionTitle';
+import { ConsultStackParamList } from '../../navigation/param.types';
 
 export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
-  ExploreStackParamList,
+  ConsultStackParamList,
   'Psychiatrist'
 >;
 

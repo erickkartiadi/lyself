@@ -1,21 +1,13 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { Button, Text } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ButtonBack from '../../components/atoms/ButtonBack';
-
-import { AuthStackParamList, RootStackParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
-
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import { TextInput } from '../../components/atoms/Input';
-
-export type ForgotPasswordScreenNavigationProps = NativeStackScreenProps<
-  AuthStackParamList & RootStackParamList,
-  'Login'
->;
+import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
 
 function ForgotPasswordScreen({
   navigation,

@@ -2,25 +2,18 @@ import { Button, useTheme } from '@rneui/themed';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import ViewSeparator from '../../components/atoms/BaseDivider';
 import BaseSearchBar from '../../components/atoms/BaseSearchBar';
-import { Activities } from '../../components/atoms/ActivityIcon';
 import { styles } from '../../theme/styles';
 import { ArticleWidget } from '../../components/organisms/widget/Article';
 import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/organisms/widget/PlaylistCard';
-import { ExploreStackParamList } from '../../types/param';
 import ActivityMenu from '../../components/organisms/ActivityMenu';
 import SectionTitle from '../../components/organisms/SectionTitle';
-
-export type ExploreScreenNavigationProps = NativeStackScreenProps<
-  ExploreStackParamList,
-  'Explore'
->;
+import { ExploreScreenNavigationProps } from '../../navigation/navigation.types';
 
 const CLIENT_ID = '189bb29572b34ba29b2c243cae7f6105';
 const discovery = {
@@ -95,20 +88,6 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
     }
   });
 
-  const menus: {
-    activity: Activities;
-    screen: keyof ExploreStackParamList;
-  }[] = [
-    { activity: 'consult', screen: 'Consult' },
-    { activity: 'meditation', screen: 'InDevelopment' },
-    { activity: 'forum', screen: 'InDevelopment' },
-    { activity: 'music', screen: 'InDevelopment' },
-    { activity: 'todo', screen: 'InDevelopment' },
-    { activity: 'breathing', screen: 'InDevelopment' },
-    { activity: 'article', screen: 'InDevelopment' },
-    { activity: 'other', screen: 'InDevelopment' },
-  ];
-
   return (
     <ScrollView
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
@@ -125,15 +104,41 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           },
         ]}
       >
-        {menus.map(({ activity, screen }) => (
-          <ActivityMenu
-            key={activity}
-            activity={activity}
-            onPress={() => {
-              navigation.navigate(screen);
-            }}
-          />
-        ))}
+        {/* {menus.map(({ activity }) => ( */}
+        <ActivityMenu
+          activity="consult"
+          onPress={() =>
+            navigation.navigate('ConsultStack', { screen: 'Consult' })
+          }
+        />
+        <ActivityMenu
+          activity="meditation"
+          onPress={() => navigation.navigate('InDevelopment')}
+        />
+        <ActivityMenu
+          activity="forum"
+          onPress={() => navigation.navigate('InDevelopment')}
+        />
+        <ActivityMenu
+          activity="music"
+          onPress={() => navigation.navigate('InDevelopment')}
+        />
+        <ActivityMenu
+          activity="todo"
+          onPress={() => navigation.navigate('InDevelopment')}
+        />
+        <ActivityMenu
+          activity="breathing"
+          onPress={() => navigation.navigate('InDevelopment')}
+        />
+        <ActivityMenu
+          activity="article"
+          onPress={() => navigation.navigate('InDevelopment')}
+        />
+        <ActivityMenu
+          activity="other"
+          onPress={() => navigation.navigate('InDevelopment')}
+        />
       </View>
       <ArticleWidget />
       <View style={styles.section}>
