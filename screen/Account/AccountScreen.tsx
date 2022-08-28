@@ -5,14 +5,14 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import SettingMenu from '../../components/organisms/SettingMenu';
 import SwitchModeSettingMenu from '../../components/organisms/SwitchModeSettingMenu';
-import { AccountRouteParamList, RootRouteParamList } from '../../types/routes';
+import { AccountStackParamList, RootStackParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 
-export type AccountScreenProps = NativeStackScreenProps<
-  RootRouteParamList & AccountRouteParamList,
+export type AccountScreenNavigationProps = NativeStackScreenProps<
+  AccountStackParamList & RootStackParamList,
   'Account'
 >;
-function AccountScreen({ navigation }: AccountScreenProps) {
+function AccountScreen({ navigation }: AccountScreenNavigationProps) {
   const { theme } = useTheme();
 
   return (
@@ -127,7 +127,9 @@ function AccountScreen({ navigation }: AccountScreenProps) {
             bgColorDark={theme.colors.error}
             iconName="log-out"
             iconType="ionicon"
-            onPress={() => navigation.navigate('AuthRoutes')}
+            onPress={() =>
+              navigation.navigate('AuthStack', { screen: 'GetStarted' })
+            }
           />
         </View>
       </View>

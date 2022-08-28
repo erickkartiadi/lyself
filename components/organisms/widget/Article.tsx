@@ -3,7 +3,7 @@ import React from 'react';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import * as Linking from 'expo-linking';
 import BaseCard from '../../atoms/BaseCard';
-import ViewSeparator from '../../atoms/ViewSeparator';
+import ViewSeparator from '../../atoms/BaseDivider';
 import { ArticleCardProps, dataArticles } from '../../../constant';
 import SectionTitle from '../SectionTitle';
 import { styles } from '../../../theme/styles';

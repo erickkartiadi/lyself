@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Button, Text } from '@rneui/themed';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { styles } from '../../theme/styles';
-import { ExploreScreenProps } from '../Explore/ExploreScreen';
 
-function InDevelopmentScreen({ navigation }: ExploreScreenProps) {
+function InDevelopmentScreen() {
+  const navigation = useNavigation();
+
   return (
     <View
       style={[
@@ -20,7 +22,7 @@ function InDevelopmentScreen({ navigation }: ExploreScreenProps) {
         Sorry, this page is still in development 🚧
       </Text>
       <Button
-        onPress={() => navigation.navigate('Explore')}
+        onPress={() => navigation.goBack()}
         type="clear"
         title="Go back to explore page"
       />

@@ -1,8 +1,5 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-
-import { ChatRouteParamList } from '../../types/routes';
 import Chat, { ChatProps } from '../../components/organisms/Chat';
 
 export const chatData: ChatProps[] = [
@@ -79,11 +76,6 @@ export const chatData: ChatProps[] = [
       'https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
   },
 ];
-
-export type ChatScreenProps = NativeStackScreenProps<
-  ChatRouteParamList,
-  'Chat'
->;
 
 function ChatScreen() {
   const renderChat = ({ item }: { item: ChatProps }) => (

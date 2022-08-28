@@ -5,16 +5,16 @@ import { Avatar, Button, Text, useTheme } from '@rneui/themed';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import colorAlpha from 'color-alpha';
 import BaseIcon from '../../components/atoms/BaseIcon';
-import { ExploreRouteParamList } from '../../types/routes';
+import { ExploreStackParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 import SectionTitle from '../../components/organisms/SectionTitle';
 
-export type PsychiatristScreenProps = NativeStackScreenProps<
-  ExploreRouteParamList,
+export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
+  ExploreStackParamList,
   'Psychiatrist'
 >;
 
-function PsychiatristScreen({ route }: PsychiatristScreenProps) {
+function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
   const { experience, name, rating, specialty, uri } = route.params;
   const { theme } = useTheme();
 

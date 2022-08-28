@@ -1,11 +1,11 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ChatScreen from '../screen/Chat/ChatScreen';
-import { ChatRouteParamList } from '../types/routes';
+import ChatScreen from '../../screen/Chat/ChatScreen';
+import { ChatStackParamList } from '../../types/param';
 
-const Stack = createNativeStackNavigator<ChatRouteParamList>();
+const Stack = createNativeStackNavigator<ChatStackParamList>();
 
-function ChatRoutes() {
+function ChatNavigator() {
   return (
     <Stack.Navigator
       initialRouteName="Chat"
@@ -16,4 +16,4 @@ function ChatRoutes() {
   );
 }
 
-export default ChatRoutes;
+export default ChatNavigator;

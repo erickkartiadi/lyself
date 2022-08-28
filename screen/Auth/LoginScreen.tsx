@@ -5,19 +5,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ButtonBack from '../../components/atoms/ButtonBack';
-import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
+import { AuthStackParamList, HomeTabParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 import loginIllustration from '../../assets/images/login-illustration.png';
 import useToggle from '../../utils/hooks/useToggle';
 import { PasswordInput, TextInput } from '../../components/atoms/Input';
 import LinkButton from '../../components/atoms/LinkButton';
 
-export type LoginScreenProps = NativeStackScreenProps<
-  AuthRouteParamList & RootRouteParamList,
+export type LoginScreenNavigationProps = NativeStackScreenProps<
+  AuthStackParamList & HomeTabParamList,
   'Login'
 >;
 
-function LoginScreen({ navigation }: LoginScreenProps) {
+function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();
   const [isRememberLogin, toggleIsRememberLogin] = useToggle(false);
 
@@ -70,7 +70,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
             Forgot Password?
           </LinkButton>
         </View>
-        <Button fullWidth onPress={() => navigation.navigate('HomeRoutes')}>
+        <Button fullWidth onPress={() => navigation.navigate('Home')}>
           Login
         </Button>
         <View

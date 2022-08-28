@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
-import ViewSeparator from '../../components/atoms/ViewSeparator';
+import ViewSeparator from '../../components/atoms/BaseDivider';
 import BaseSearchBar from '../../components/atoms/BaseSearchBar';
 import { Activities } from '../../components/atoms/ActivityIcon';
 import { styles } from '../../theme/styles';
@@ -13,12 +13,12 @@ import { ArticleWidget } from '../../components/organisms/widget/Article';
 import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/organisms/widget/PlaylistCard';
-import { ExploreRouteParamList } from '../../types/routes';
+import { ExploreStackParamList } from '../../types/param';
 import ActivityMenu from '../../components/organisms/ActivityMenu';
 import SectionTitle from '../../components/organisms/SectionTitle';
 
-export type ExploreScreenProps = NativeStackScreenProps<
-  ExploreRouteParamList,
+export type ExploreScreenNavigationProps = NativeStackScreenProps<
+  ExploreStackParamList,
   'Explore'
 >;
 
@@ -28,7 +28,7 @@ const discovery = {
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
 };
 
-function ExploreScreen({ navigation }: ExploreScreenProps) {
+function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
   const { theme } = useTheme();
   const [token, setToken] = useState('');
   const [featuredPlaylist, setFeaturedPlaylist] = useState([]);
@@ -97,16 +97,16 @@ function ExploreScreen({ navigation }: ExploreScreenProps) {
 
   const menus: {
     activity: Activities;
-    route: keyof ExploreRouteParamList;
+    screen: keyof ExploreStackParamList;
   }[] = [
-    { activity: 'consult', route: 'Consult' },
-    { activity: 'meditation', route: 'InDevelopment' },
-    { activity: 'forum', route: 'InDevelopment' },
-    { activity: 'music', route: 'InDevelopment' },
-    { activity: 'todo', route: 'InDevelopment' },
-    { activity: 'breathing', route: 'InDevelopment' },
-    { activity: 'article', route: 'InDevelopment' },
-    { activity: 'other', route: 'InDevelopment' },
+    { activity: 'consult', screen: 'Consult' },
+    { activity: 'meditation', screen: 'InDevelopment' },
+    { activity: 'forum', screen: 'InDevelopment' },
+    { activity: 'music', screen: 'InDevelopment' },
+    { activity: 'todo', screen: 'InDevelopment' },
+    { activity: 'breathing', screen: 'InDevelopment' },
+    { activity: 'article', screen: 'InDevelopment' },
+    { activity: 'other', screen: 'InDevelopment' },
   ];
 
   return (
@@ -125,11 +125,13 @@ function ExploreScreen({ navigation }: ExploreScreenProps) {
           },
         ]}
       >
-        {menus.map(({ activity, route }) => (
+        {menus.map(({ activity, screen }) => (
           <ActivityMenu
             key={activity}
             activity={activity}
-            onPress={() => navigation.navigate(route)}
+            onPress={() => {
+              navigation.navigate(screen);
+            }}
           />
         ))}
       </View>

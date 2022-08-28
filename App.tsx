@@ -3,10 +3,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useCallback, useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import NavigationContainer from './components/atoms/NavigationContainer';
+import NavigationContainer from './navigation/NavigationContainer';
 import { myTheme } from './theme';
 import { ThemeModeProvider } from './theme/ThemeModeContext';
-import RootRoutes from './routes/Root.routes';
+import RootNavigator from './navigation/navigators/RootNavigator.routing';
 import { customFont } from './theme/styles';
 
 export default function App() {
@@ -40,7 +40,7 @@ export default function App() {
       <SafeAreaProvider onLayout={onLayoutRootView}>
         <ThemeModeProvider>
           <NavigationContainer>
-            <RootRoutes />
+            <RootNavigator />
           </NavigationContainer>
         </ThemeModeProvider>
       </SafeAreaProvider>

@@ -6,18 +6,20 @@ import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ButtonBack from '../../components/atoms/ButtonBack';
 
-import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
+import { AuthStackParamList, RootStackParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import { TextInput } from '../../components/atoms/Input';
 
-export type ForgotPasswordScreenProps = NativeStackScreenProps<
-  AuthRouteParamList & RootRouteParamList,
+export type ForgotPasswordScreenNavigationProps = NativeStackScreenProps<
+  AuthStackParamList & RootStackParamList,
   'Login'
 >;
 
-function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenProps) {
+function ForgotPasswordScreen({
+  navigation,
+}: ForgotPasswordScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"

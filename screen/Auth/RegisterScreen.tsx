@@ -6,18 +6,18 @@ import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import ButtonBack from '../../components/atoms/ButtonBack';
 
-import { AuthRouteParamList, RootRouteParamList } from '../../types/routes';
+import { AuthStackParamList, RootStackParamList } from '../../types/param';
 import { styles } from '../../theme/styles';
 import registerIllustration from '../../assets/images/register-illustration.png';
 import { PasswordInput, TextInput } from '../../components/atoms/Input';
 import LinkButton from '../../components/atoms/LinkButton';
 
-export type RegisterScreenProps = NativeStackScreenProps<
-  AuthRouteParamList & RootRouteParamList,
+export type RegisterScreenNavigationProps = NativeStackScreenProps<
+  AuthStackParamList & RootStackParamList,
   'Register'
 >;
 
-function RegisterScreen({ navigation }: RegisterScreenProps) {
+function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"

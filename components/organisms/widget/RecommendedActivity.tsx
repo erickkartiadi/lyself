@@ -2,7 +2,7 @@ import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { FlatList, GestureResponderEvent, View } from 'react-native';
 import BaseCard from '../../atoms/BaseCard';
-import ViewSeparator from '../../atoms/ViewSeparator';
+import ViewSeparator from '../../atoms/BaseDivider';
 import { RecommendedProps, dataRecommended } from '../../../constant';
 import { comingSoonToast } from '../../../utils/comingSoonToast';
 import ActivityIcon, { Activities } from '../../atoms/ActivityIcon';

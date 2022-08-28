@@ -1,11 +1,11 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AccountRouteParamList } from '../types/routes';
-import AccountScreen from '../screen/Account/AccountScreen';
+import { AccountStackParamList } from '../../types/param';
+import AccountScreen from '../../screen/Account/AccountScreen';
 
-const Stack = createNativeStackNavigator<AccountRouteParamList>();
+const Stack = createNativeStackNavigator<AccountStackParamList>();
 
-function AccountRoutes() {
+function AccountNavigator() {
   return (
     <Stack.Navigator
       initialRouteName="Account"
@@ -16,4 +16,4 @@ function AccountRoutes() {
   );
 }
 
-export default AccountRoutes;
+export default AccountNavigator;

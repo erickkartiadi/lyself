@@ -6,24 +6,24 @@ import {
   ExploreTabBarIcon,
   HomeTabBarIcon,
   UserTabBarIcon,
-} from '../components/atoms/BottomTabBarIcons';
-import LeftHeaderComponent from '../components/organisms/header/LeftHeaderComponent';
-import RightHeaderComponent from '../components/organisms/header/RightHeaderComponent';
-import HomeScreen from '../screen/Home/HomeScreen';
-import ChatRoutes from './Chat.routes';
-import { HomeRouteParamList } from '../types/routes';
-import AccountRoutes from './Account.routes';
-import ExploreRoutes from './Explore.routes';
-import { FONT_FAMILY, styles } from '../theme/styles';
+} from '../../components/atoms/BottomTabBarIcons';
+import LeftHeaderComponent from '../../components/organisms/header/LeftHeaderComponent';
+import RightHeaderComponent from '../../components/organisms/header/RightHeaderComponent';
+import HomeScreen from '../../screen/Home/HomeScreen';
+import ChatNavigator from './ChatNavigator.routing';
+import { HomeTabParamList } from '../../types/param';
+import AccountNavigator from './AccountNavigator.routing';
+import ExploreNavigator from './ExploreNavigator.routing';
+import { FONT_FAMILY, styles } from '../../theme/styles';
 
-const Tab = createBottomTabNavigator<HomeRouteParamList>();
+const Tab = createBottomTabNavigator<HomeTabParamList>();
 
-function HomeRoutes() {
+function HomeNavigator() {
   const { theme } = useTheme();
 
   return (
     <Tab.Navigator
-      initialRouteName="ExploreRoutes"
+      initialRouteName="ExploreStack"
       screenOptions={{
         headerStyle: {
           elevation: 0,
@@ -34,7 +34,7 @@ function HomeRoutes() {
           fontFamily: FONT_FAMILY.bold,
         },
         tabBarStyle: {
-          height: 72,
+          height: 60,
           shadowColor: 'rgba(0, 0, 0, 0.08)',
           elevation: 1,
           borderTopColor: theme.colors.grey4,
@@ -67,8 +67,8 @@ function HomeRoutes() {
         component={HomeScreen}
       />
       <Tab.Screen
-        name="ExploreRoutes"
-        component={ExploreRoutes}
+        name="ExploreStack"
+        component={ExploreNavigator}
         options={{
           tabBarIcon: ExploreTabBarIcon,
           title: 'Explore',
@@ -76,13 +76,13 @@ function HomeRoutes() {
         }}
       />
       <Tab.Screen
-        name="ChatRoutes"
-        component={ChatRoutes}
+        name="ChatStack"
+        component={ChatNavigator}
         options={{ tabBarIcon: ChatTabBarIcon, title: 'Chat' }}
       />
       <Tab.Screen
-        name="AccountRoutes"
-        component={AccountRoutes}
+        name="AccountStack"
+        component={AccountNavigator}
         options={{
           tabBarIcon: UserTabBarIcon,
           title: 'Account',
@@ -92,4 +92,4 @@ function HomeRoutes() {
   );
 }
 
-export default HomeRoutes;
+export default HomeNavigator;

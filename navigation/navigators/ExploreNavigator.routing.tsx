@@ -1,17 +1,17 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from '@rneui/themed';
-import InDevelopmentScreen from '../screen/Error/InDevelopmentScreen';
-import ExploreScreen from '../screen/Explore/ExploreScreen';
-import { ExploreRouteParamList } from '../types/routes';
-import ConsultScreen from '../screen/Explore/ConsultScreen';
-import RightHeaderComponent from '../components/organisms/header/RightHeaderComponent';
-import PsychiatristScreen from '../screen/Explore/PsychiatristScreen';
-import { FONT_FAMILY } from '../theme/styles';
+import InDevelopmentScreen from '../../screen/Error/InDevelopmentScreen';
+import ExploreScreen from '../../screen/Explore/ExploreScreen';
+import { ExploreStackParamList } from '../../types/param';
+import ConsultScreen from '../../screen/Explore/ConsultScreen';
+import RightHeaderComponent from '../../components/organisms/header/RightHeaderComponent';
+import PsychiatristScreen from '../../screen/Explore/PsychiatristScreen';
+import { FONT_FAMILY } from '../../theme/styles';
 
-const Stack = createNativeStackNavigator<ExploreRouteParamList>();
+const Stack = createNativeStackNavigator<ExploreStackParamList>();
 
-function ExploreRoutes() {
+function ExploreNavigator() {
   const { theme } = useTheme();
 
   return (
@@ -46,4 +46,4 @@ function ExploreRoutes() {
   );
 }
 
-export default ExploreRoutes;
+export default ExploreNavigator;
