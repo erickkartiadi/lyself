@@ -7,6 +7,7 @@ import { ExploreRouteParamList } from '../types/routes';
 import ConsultScreen from '../screen/Explore/ConsultScreen';
 import RightHeaderComponent from '../components/organisms/header/RightHeaderComponent';
 import PsychiatristScreen from '../screen/Explore/PsychiatristScreen';
+import { FONT_FAMILY } from '../theme/styles';
 
 const Stack = createNativeStackNavigator<ExploreRouteParamList>();
 
@@ -23,7 +24,7 @@ function ExploreRoutes() {
           backgroundColor: theme.colors.background,
         },
         headerTitleStyle: {
-          fontFamily: 'Quicksand-Bold',
+          fontFamily: FONT_FAMILY.bold,
         },
         headerTitleAlign: 'center',
         headerRight: RightHeaderComponent,

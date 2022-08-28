@@ -3,9 +3,10 @@ import {
   CreateThemeOptions,
   TextProps,
   createTheme,
+  normalize,
 } from '@rneui/themed';
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import { FONT_SIZE, THEME_SPACING } from './styles';
+import { FONT_FAMILY, FONT_SIZE, THEME_SPACING } from './styles';
 
 const lightColors = {
   primary: '#f55c7a',
@@ -70,14 +71,17 @@ const myTheme: CreateThemeOptions = createTheme({
   components: {
     Input: () => ({
       labelStyle: {
-        fontSize: FONT_SIZE.body2,
-        fontFamily: 'Quicksand-Medium',
-        fontWeight: '500',
-        letterSpacing: 0.1,
+        fontSize: FONT_SIZE.body1,
+        letterSpacing: normalize(-0.011),
+        lineHeight: normalize(22),
+        fontFamily: FONT_FAMILY.bold,
+        fontWeight: '700',
       },
       inputStyle: {
-        fontFamily: 'Quicksand',
+        fontFamily: FONT_FAMILY.regular,
         fontSize: FONT_SIZE.body1,
+        letterSpacing: normalize(-0.011),
+        lineHeight: normalize(22),
       },
       inputContainerStyle: {
         borderBottomWidth: 0.75,
@@ -93,15 +97,24 @@ const myTheme: CreateThemeOptions = createTheme({
     },
     SearchBar: {
       style: {
-        fontFamily: 'Quicksand',
+        fontFamily: FONT_FAMILY.regular,
       },
       inputStyle: {
         fontSize: FONT_SIZE.body2,
+        letterSpacing: normalize(-0.006),
+        lineHeight: normalize(20),
       },
     },
     CheckBox: {
-      fontFamily: 'Quicksand-Medium',
-      textStyle: { fontWeight: '500', marginTop: -4 },
+      fontFamily: 'Inter-Medium',
+      textStyle: {
+        fontWeight: '500',
+        fontSize: FONT_SIZE.body2,
+        letterSpacing: normalize(-0.006),
+        lineHeight: normalize(20),
+        // vertically align text with checkbox icon
+        marginTop: -2,
+      },
       containerStyle: {
         padding: 0,
         marginLeft: 0,
@@ -111,97 +124,63 @@ const myTheme: CreateThemeOptions = createTheme({
     Text: (props: TextProps) => ({
       h1Style: {
         fontSize: FONT_SIZE.heading1,
-        fontFamily: 'Quicksand-Medium',
-        fontWeight: '500',
-        letterSpacing: -0.75,
+        letterSpacing: normalize(-0.019),
+        lineHeight: normalize(34),
+        fontFamily: FONT_FAMILY.bold,
+        fontWeight: '700',
         marginBottom: THEME_SPACING.sm,
-        ...(props.medium && {
-          fontFamily: 'Quicksand-Medium',
-          fontWeight: '500',
-        }),
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
       },
       h2Style: {
         fontSize: FONT_SIZE.heading2,
-        fontFamily: 'Quicksand-Medium',
-        fontWeight: '500',
+        letterSpacing: normalize(-0.018),
+        lineHeight: normalize(30),
+        fontFamily: FONT_FAMILY.bold,
+        fontWeight: '700',
         marginBottom: THEME_SPACING.sm,
-        letterSpacing: -0.25,
-        ...(props.medium && {
-          fontFamily: 'Quicksand-Medium',
-          fontWeight: '500',
-        }),
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
       },
       h3Style: {
         fontSize: FONT_SIZE.heading3,
-        fontFamily: 'Quicksand-Medium',
-        fontWeight: '500',
+        letterSpacing: normalize(-0.017),
+        lineHeight: normalize(28),
+        fontFamily: FONT_FAMILY.bold,
+        fontWeight: '700',
         marginBottom: THEME_SPACING.sm,
-        letterSpacing: 0,
-        ...(props.medium && {
-          fontFamily: 'Quicksand-Medium',
-          fontWeight: '500',
-        }),
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
       },
       h4Style: {
         fontSize: FONT_SIZE.heading4,
-        fontFamily: 'Quicksand-Medium',
-        fontWeight: '500',
+        letterSpacing: normalize(-0.014),
+        lineHeight: normalize(25),
+        fontFamily: FONT_FAMILY.bold,
+        fontWeight: '700',
         marginBottom: THEME_SPACING.sm,
-        letterSpacing: 0.125,
-        ...(props.medium && {
-          fontFamily: 'Quicksand-Medium',
-          fontWeight: '500',
-        }),
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
-        }),
       },
       style: {
-        // default
+        // default style
         ...{
           fontSize: FONT_SIZE.body1,
-          fontFamily: 'Quicksand',
+          letterSpacing: normalize(-0.011),
+          lineHeight: normalize(22),
           fontWeight: '400',
-          letterSpacing: 0.5,
         },
         ...(props.subtitle1 && {
           fontSize: FONT_SIZE.body1,
-          fontFamily: 'Quicksand-Medium',
+          letterSpacing: normalize(-0.011),
+          lineHeight: normalize(22),
+          fontFamily: FONT_FAMILY.medium,
           fontWeight: '500',
-          letterSpacing: 0.25,
         }),
         ...(props.subtitle2 && {
           fontSize: FONT_SIZE.body2,
-          fontFamily: 'Quicksand-Medium',
-          fontWeight: '500',
-          letterSpacing: 0.125,
+          letterSpacing: normalize(-0.006),
+          lineHeight: normalize(20),
+          fontFamily: FONT_FAMILY.regular,
+          fontWeight: '400',
         }),
         ...(props.caption && {
           fontSize: FONT_SIZE.caption,
-          fontFamily: 'Quicksand',
+          fontFamily: FONT_FAMILY.regular,
           fontWeight: '400',
-          letterSpacing: 0.4,
-        }),
-        ...(props.medium && {
-          fontFamily: 'Quicksand-Medium',
-          fontWeight: '500',
-        }),
-        ...(props.bold && {
-          fontFamily: 'Quicksand-Bold',
-          fontWeight: 'normal',
+          lineHeight: normalize(16),
         }),
       },
     }),
@@ -211,10 +190,10 @@ const myTheme: CreateThemeOptions = createTheme({
         alignItems: props.fullWidth ? 'stretch' : 'center',
       },
       titleStyle: {
-        fontFamily: 'Quicksand-Medium',
+        fontFamily: FONT_FAMILY.medium,
         fontWeight: '500',
         fontSize: FONT_SIZE.body2,
-        letterSpacing: 1.25,
+        letterSpacing: normalize(1.25),
       },
       size: 'lg',
       uppercase: true,

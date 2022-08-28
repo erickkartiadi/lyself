@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Button, Text, useTheme } from '@rneui/themed';
+import { Button, Text } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -18,8 +18,6 @@ export type RegisterScreenProps = NativeStackScreenProps<
 >;
 
 function RegisterScreen({ navigation }: RegisterScreenProps) {
-  const { theme } = useTheme();
-
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
@@ -27,9 +25,7 @@ function RegisterScreen({ navigation }: RegisterScreenProps) {
     >
       <SafeAreaView>
         <ButtonBack onPress={() => navigation.navigate('Login')} />
-        <Text h1 bold>
-          Create new account
-        </Text>
+        <Text h1>Create new account</Text>
         <Text>
           Just one more step to be part of the {'\n'}Lyself community.
         </Text>
@@ -56,12 +52,14 @@ function RegisterScreen({ navigation }: RegisterScreenProps) {
           Create Account
         </Button>
         <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: theme.spacing.xl * 2,
-          }}
+          style={[
+            styles.section,
+            {
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+          ]}
         >
           <Text subtitle2>Already have an account? </Text>
           <LinkButton to={{ screen: 'Login' }} color="primary">

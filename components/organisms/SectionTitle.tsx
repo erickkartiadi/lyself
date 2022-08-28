@@ -28,11 +28,7 @@ function SectionTitle({
       }}
     >
       <>
-        <Text
-          subtitle1
-          bold
-          h4Style={{ marginBottom: 0, textTransform: 'capitalize' }}
-        >
+        <Text h4 h4Style={{ marginBottom: 0 }}>
           {title}
         </Text>
         {showRightButton && !rightButtonComponent && (

@@ -47,7 +47,7 @@ function AppointmentCard({
             }}
           />
           <View style={{ flex: 1 }}>
-            <Text bold h3 h3Style={{ color: theme.colors.white }}>
+            <Text h3 h3Style={{ color: theme.colors.white }}>
               {psychiatristName}
             </Text>
             <Text
@@ -95,7 +95,11 @@ function AppointmentCard({
               />
               <Text
                 caption
-                style={{ flex: 1, color: theme.colors.white, lineHeight: 20 }}
+                style={{
+                  flex: 1,
+                  color: theme.colors.white,
+                  textAlignVertical: 'center',
+                }}
               >
                 {date}
               </Text>
@@ -104,7 +108,7 @@ function AppointmentCard({
               style={{
                 flexDirection: 'row',
                 width: '39%',
-                alignItems: 'flex-end',
+                alignItems: 'center',
               }}
             >
               <Icon
@@ -114,10 +118,7 @@ function AppointmentCard({
                 color={colorAlpha(theme.colors.white, 0.75)}
                 containerStyle={{ marginRight: theme.spacing.md }}
               />
-              <Text
-                caption
-                style={{ flex: 1, color: theme.colors.white, lineHeight: 20 }}
-              >
+              <Text caption style={{ flex: 1, color: theme.colors.white }}>
                 {time}
               </Text>
             </View>

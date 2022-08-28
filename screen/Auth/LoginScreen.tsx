@@ -28,9 +28,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
     >
       <SafeAreaView>
         <ButtonBack onPress={() => navigation.navigate('GetStarted')} />
-        <Text h1 bold>
-          Welcome to Lyself
-        </Text>
+        <Text h1>Welcome to Lyself</Text>
         <Text>Login to continue.</Text>
         <View
           style={{
@@ -73,14 +71,16 @@ function LoginScreen({ navigation }: LoginScreenProps) {
           Login
         </Button>
         <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: theme.spacing.xl * 2,
-          }}
+          style={[
+            styles.section,
+            {
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+          ]}
         >
-          <Text subtitle2>Didn&apos;t have an account? </Text>
+          <Text>Didn&apos;t have an account? </Text>
           <LinkButton to={{ screen: 'Register' }} color="primary">
             Sign Up
           </LinkButton>

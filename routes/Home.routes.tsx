@@ -14,7 +14,7 @@ import ChatRoutes from './Chat.routes';
 import { HomeRouteParamList } from '../types/routes';
 import AccountRoutes from './Account.routes';
 import ExploreRoutes from './Explore.routes';
-import { styles } from '../theme/styles';
+import { FONT_FAMILY, styles } from '../theme/styles';
 
 const Tab = createBottomTabNavigator<HomeRouteParamList>();
 
@@ -31,7 +31,7 @@ function HomeRoutes() {
           backgroundColor: theme.colors.background,
         },
         headerTitleStyle: {
-          fontFamily: 'Quicksand-Bold',
+          fontFamily: FONT_FAMILY.bold,
         },
         tabBarStyle: {
           height: 72,

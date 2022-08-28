@@ -4,9 +4,9 @@ import {
   ParamListBase,
   useLinkProps,
 } from '@react-navigation/native';
-import { Text, TextProps, TouchableOpacity } from 'react-native';
+import { TextProps, TouchableOpacity } from 'react-native';
 import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo';
-import { useTheme } from '@rneui/themed';
+import { Text, useTheme } from '@rneui/themed';
 
 interface LinkButtonProps<ParamList extends ReactNavigation.RootParamList> {
   to: To<ParamList>;
@@ -36,9 +36,9 @@ function LinkButton({
   return (
     <TouchableOpacity onPress={onPress} {...props} {...rest}>
       <Text
+        subtitle2
         style={{
           color: color != null ? colors[color] : colors.default,
-          fontFamily: 'Quicksand-Bold',
         }}
       >
         {children}

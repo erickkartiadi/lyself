@@ -25,9 +25,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenProps) {
     >
       <SafeAreaView>
         <ButtonBack onPress={() => navigation.navigate('Login')} />
-        <Text h1 bold>
-          Forgot Password?
-        </Text>
+        <Text h1>Forgot Password?</Text>
         <Text>
           Please enter your email address, we&apos;ll send an email with
           instructions to reset your password.

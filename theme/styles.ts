@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { normalize } from '@rneui/themed';
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter';
 
 const THEME_SPACING = {
   xs: 2,
@@ -55,4 +60,26 @@ const FONT_SIZE = {
   caption: normalize(12.64),
 };
 
-export { styles, FONT_SIZE, THEME_SPACING, BORDER_RADIUS };
+// for fontFamily theme styling or component can't use theme font
+const FONT_FAMILY = {
+  regular: 'Inter',
+  medium: 'Inter-Medium',
+  bold: 'Inter-Bold',
+};
+
+// for loading custom fonts: App.tsx
+const customFont = {
+  [FONT_FAMILY.regular]: Inter_400Regular,
+  [FONT_FAMILY.medium]: Inter_500Medium,
+  [FONT_FAMILY.bold]: Inter_700Bold,
+};
+
+export {
+  customFont,
+  styles,
+  FONT_SIZE,
+  THEME_SPACING,
+  BORDER_RADIUS,
+  GUTTER_SIZE,
+  FONT_FAMILY,
+};

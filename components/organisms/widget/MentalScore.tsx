@@ -9,7 +9,12 @@ import { ThemeModeContext } from '../../../theme/ThemeModeContext';
 import StatusCard from './StatusCard';
 import Dropdown from '../Dropdown';
 import SectionTitle from '../SectionTitle';
-import { BORDER_RADIUS, styles } from '../../../theme/styles';
+import {
+  BORDER_RADIUS,
+  FONT_FAMILY,
+  GUTTER_SIZE,
+  styles,
+} from '../../../theme/styles';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';
@@ -86,10 +91,7 @@ function MentalScoreCard() {
             },
           ],
         }}
-        width={
-          Dimensions.get('screen').width + 30 + 0
-          // styles.containerSection.paddingHorizontal * 2
-        }
+        width={Dimensions.get('screen').width + GUTTER_SIZE * 3}
         height={300}
         withInnerLines={false}
         withOuterLines={false}
@@ -104,8 +106,8 @@ function MentalScoreCard() {
           labelColor: () => theme.colors.grey1,
           fillShadowGradientOpacity: isDarkMode ? 0.25 : 0.1,
           propsForLabels: {
-            fontFamily: 'Quicksand-Bold',
-            fontWeight: 'normal',
+            fontFamily: FONT_FAMILY.bold,
+            fontWeight: '700',
           },
           style: {
             borderRadius: BORDER_RADIUS.md,

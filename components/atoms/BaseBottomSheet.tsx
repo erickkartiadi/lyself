@@ -33,9 +33,8 @@ function BaseBottomSheet({
       >
         {headerTitle && (
           <Text
-            subtitle1
-            bold
-            style={{
+            h4
+            h4Style={{
               marginVertical: theme.spacing.xs,
             }}
           >

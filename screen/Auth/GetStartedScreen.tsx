@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Icon } from '@rneui/base';
 import React from 'react';
-import { Dimensions, Image, Platform, View } from 'react-native';
+import { Dimensions, Image, View } from 'react-native';
 import { Button, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -63,8 +63,8 @@ function GetStartedScreen({ navigation }: GetStartedScreenProps) {
                 },
               ]}
             >
-              <Text h2>Start your mental health journey with</Text>
-              <Text h2 h2Style={{ color: theme.colors.primary }}>
+              <Text h1>Start your mental health journey with</Text>
+              <Text h1 h1Style={{ color: theme.colors.primary }}>
                 {' '}
                 Lyself
               </Text>
@@ -101,34 +101,32 @@ function GetStartedScreen({ navigation }: GetStartedScreenProps) {
                 />
                 CONTINUE WITH EMAIL
               </Button>
-              {Platform.OS === 'ios' && (
-                <Button
-                  type="outline"
-                  onPress={() => navigation.navigate('HomeRoutes')}
-                  fullWidth
-                  buttonStyle={{
-                    borderColor: theme.colors.grey3,
-                    backgroundColor: theme.colors.cardBackground,
-                    paddingVertical: theme.spacing.xl,
+              <Button
+                type="outline"
+                onPress={() => navigation.navigate('HomeRoutes')}
+                fullWidth
+                buttonStyle={{
+                  borderColor: theme.colors.grey3,
+                  backgroundColor: theme.colors.cardBackground,
+                  paddingVertical: theme.spacing.xl,
+                }}
+                containerStyle={{ marginBottom: theme.spacing.xl }}
+                titleStyle={{
+                  color: theme.colors.black,
+                  marginLeft: theme.spacing.xl,
+                }}
+              >
+                <Icon
+                  containerStyle={{
+                    position: 'absolute',
+                    left: 28,
                   }}
-                  containerStyle={{ marginBottom: theme.spacing.xl }}
-                  titleStyle={{
-                    color: theme.colors.black,
-                    marginLeft: theme.spacing.xl,
-                  }}
-                >
-                  <Icon
-                    containerStyle={{
-                      position: 'absolute',
-                      left: 28,
-                    }}
-                    type="ionicon"
-                    name="logo-apple"
-                    color={theme.colors.brand.apple.black}
-                  />
-                  CONTINUE WITH APPLE
-                </Button>
-              )}
+                  type="ionicon"
+                  name="logo-apple"
+                  color={theme.colors.brand.apple.black}
+                />
+                CONTINUE WITH APPLE
+              </Button>
               <Button
                 type="outline"
                 onPress={() => navigation.navigate('HomeRoutes')}
@@ -194,7 +192,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenProps) {
               },
             ]}
           >
-            <Text subtitle2>Didn&apos;t have an account? </Text>
+            <Text>Didn&apos;t have an account? </Text>
             <LinkButton to={{ screen: 'Register' }} color="primary">
               Sign Up
             </LinkButton>
