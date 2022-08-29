@@ -11,12 +11,21 @@ import LeftHeaderComponent from '../../components/organisms/header/LeftHeaderCom
 import RightHeaderComponent from '../../components/organisms/header/RightHeaderComponent';
 import HomeScreen from '../../screen/Home/HomeScreen';
 import { HomeTabParamList } from '../param.types';
-import { FONT_FAMILY, styles } from '../../theme/styles';
-import ChatScreen from '../../screen/Chat/ChatScreen';
-import AccountScreen from '../../screen/Account/AccountScreen';
-import ExploreScreen from '../../screen/Explore/ExploreScreen';
+import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../../theme/styles';
+import ChatScreen from '../../screen/Home/ChatScreen';
+import AccountScreen from '../../screen/Home/AccountScreen';
+import ExploreScreen from '../../screen/Home/ExploreScreen';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
+
+export const navigatorScreenOptions = {
+  headerShadowVisible: false,
+  headerTitleStyle: {
+    fontFamily: FONT_FAMILY.bold,
+    fontSize: FONT_SIZE.heading4,
+  },
+  headerRight: RightHeaderComponent,
+};
 
 function HomeNavigator() {
   const { theme } = useTheme();
@@ -25,29 +34,18 @@ function HomeNavigator() {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        headerStyle: {
-          elevation: 0,
-          shadowOpacity: 0,
-          backgroundColor: theme.colors.background,
-        },
-        headerTitleStyle: {
-          fontFamily: FONT_FAMILY.bold,
-        },
+        ...navigatorScreenOptions,
+        headerStyle: { backgroundColor: theme.colors.background },
+        tabBarShowLabel: false,
         tabBarStyle: {
           height: 60,
-          shadowColor: 'rgba(0, 0, 0, 0.08)',
-          elevation: 1,
-          borderTopColor: theme.colors.grey4,
-          borderTopWidth: 0.25,
         },
-        tabBarShowLabel: false,
-        headerRight: RightHeaderComponent,
         headerTitleContainerStyle: { marginStart: 0 },
         headerLeftContainerStyle: {
-          marginStart: styles.container.paddingHorizontal,
+          marginStart: GUTTER_SIZE,
         },
         headerRightContainerStyle: {
-          marginEnd: styles.container.paddingHorizontal,
+          marginEnd: GUTTER_SIZE,
         },
       }}
     >
@@ -56,8 +54,6 @@ function HomeNavigator() {
           headerTitleStyle: { display: 'none' },
           headerStyle: {
             backgroundColor: theme.colors.background,
-            elevation: 0,
-            shadowOpacity: 0,
             height: 90,
           },
           headerLeft: LeftHeaderComponent,

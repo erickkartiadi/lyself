@@ -104,7 +104,6 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           },
         ]}
       >
-        {/* {menus.map(({ activity }) => ( */}
         <ActivityMenu
           activity="consult"
           onPress={() =>
