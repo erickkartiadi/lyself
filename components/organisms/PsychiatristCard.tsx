@@ -9,10 +9,12 @@ import { ConsultScreenNavigationProps } from '../../navigation/navigation.types'
 
 export interface PsychiatristCardProps {
   uri: string;
-  experience: string;
+  experience: number;
+  rating: number;
+  patients: number;
   name: string;
-  rating: string;
   specialty: string;
+  description: string;
 }
 
 function PsychiatristCard({
@@ -21,6 +23,8 @@ function PsychiatristCard({
   specialty,
   name,
   rating,
+  patients,
+  description,
 }: PsychiatristCardProps) {
   const { theme } = useTheme();
   const navigation =
@@ -34,6 +38,8 @@ function PsychiatristCard({
           specialty,
           name,
           rating,
+          patients,
+          description,
         })
       }
     >
@@ -73,7 +79,7 @@ function PsychiatristCard({
               name="briefcase"
               type="ionicon"
             >
-              {experience}
+              {`${experience} yrs`}
             </Label>
           </View>
         </View>

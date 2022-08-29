@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
   section: {
     paddingVertical: THEME_SPACING.xl,
   },
+  sectionSmall: {
+    paddingVertical: THEME_SPACING.lg,
+  },
 
   // fix flatList shadow cut
   flatListHorizontalContainer: {

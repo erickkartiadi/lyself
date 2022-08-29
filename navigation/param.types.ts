@@ -31,10 +31,12 @@ type ConsultStackParamList = {
   Consult: undefined;
   Psychiatrist: {
     uri: string;
-    experience: string;
+    experience: number;
+    patients: number;
     name: string;
-    rating: string;
+    rating: number;
     specialty: string;
+    description: string;
   };
 };
 
