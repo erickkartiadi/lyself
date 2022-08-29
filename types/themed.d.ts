@@ -30,6 +30,7 @@ declare module '@rneui/themed' {
     subtitle1?: boolean;
     subtitle2?: boolean;
     caption?: boolean;
+    small?: boolean;
   }
 
   export interface ButtonProps {

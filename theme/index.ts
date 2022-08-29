@@ -176,6 +176,13 @@ const myTheme: CreateThemeOptions = createTheme({
           fontFamily: FONT_FAMILY.regular,
           fontWeight: '400',
         }),
+        ...(props.small && {
+          fontSize: FONT_SIZE.body2,
+          letterSpacing: normalize(-0.006),
+          lineHeight: normalize(20),
+          fontFamily: FONT_FAMILY.regular,
+          fontWeight: '400',
+        }),
         ...(props.caption && {
           fontSize: FONT_SIZE.caption,
           fontFamily: FONT_FAMILY.regular,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { Avatar, Button, Text, normalize, useTheme } from '@rneui/themed';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import colorAlpha from 'color-alpha';
@@ -9,16 +9,59 @@ import { styles } from '../../theme/styles';
 import SectionTitle from '../../components/organisms/SectionTitle';
 import { ConsultStackParamList } from '../../navigation/param.types';
 import ViewMoreText from '../../components/atoms/ViewMoreText';
+import ViewSeparator from '../../components/atoms/BaseDivider';
+import lorem from '../../utils/genereateLoremIpsum';
+import generateRandomTime from '../../utils/generateRandomTime';
+import generateRandomName from '../../utils/generateRandomName';
+import generateRandomNumber from '../../utils/generateRandomNumber';
+import ReviewCard, {
+  ReviewCardProps,
+} from '../../components/organisms/ReviewCard';
 
 export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
   ConsultStackParamList,
   'Psychiatrist'
 >;
+const dataReview: ReviewCardProps[] = [
+  {
+    uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
+    name: generateRandomName(),
+    review: lorem.generateWords(16),
+    time: generateRandomTime(),
+  },
+  {
+    uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
+    name: generateRandomName(),
+    review: lorem.generateWords(16),
+    time: generateRandomTime(),
+  },
+  {
+    uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
+    name: generateRandomName(),
+    review: lorem.generateWords(16),
+    time: generateRandomTime(),
+  },
+  {
+    uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
+    name: generateRandomName(),
+    review: lorem.generateWords(16),
+    time: generateRandomTime(),
+  },
+];
 
 function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
   const { experience, name, rating, specialty, uri, patients, description } =
     route.params;
   const { theme } = useTheme();
+
+  const renderReview = ({ item }: { item: ReviewCardProps }) => (
+    <ReviewCard
+      name={item.name}
+      time={item.time}
+      uri={item.uri}
+      review={item.review}
+    />
+  );
 
   return (
     <ScrollView
@@ -118,6 +161,22 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
         <View style={styles.sectionSmall}>
           <SectionTitle title="About me" />
           <ViewMoreText>{description}</ViewMoreText>
+        </View>
+        <View style={styles.sectionSmall}>
+          <SectionTitle title="Reviews" />
+          <FlatList
+            horizontal
+            overScrollMode="never"
+            ItemSeparatorComponent={ViewSeparator}
+            style={[styles.noContainerGutter, styles.flatListHorizontal]}
+            contentContainerStyle={[
+              styles.scrollViewContainer,
+              styles.flatListHorizontalContainer,
+            ]}
+            showsHorizontalScrollIndicator={false}
+            data={dataReview}
+            renderItem={renderReview}
+          />
         </View>
       </View>
       <Button fullWidth>Make appointment</Button>
