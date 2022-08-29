@@ -17,7 +17,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       <SafeAreaView>
-        <ButtonBack onPress={() => navigation.navigate('Login')} />
+        <ButtonBack />
         <Text h1>Create new account</Text>
         <Text>
           Just one more step to be part of the {'\n'}Lyself community.

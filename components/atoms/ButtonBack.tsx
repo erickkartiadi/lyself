@@ -1,20 +1,26 @@
 import React from 'react';
-import { Button, ButtonProps, Icon, useTheme } from '@rneui/themed';
+import { Button, Icon, useTheme } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
 
-function ButtonBack({ onPress }: ButtonProps) {
+function ButtonBack() {
   const { theme } = useTheme();
+  const navigation = useNavigation();
+
   return (
     <Button
       type="outline"
-      onPress={onPress}
+      onPress={() => navigation.goBack()}
       containerStyle={{
         alignSelf: 'flex-start',
-        marginBottom: theme.spacing.lg,
+        marginBottom: theme.spacing.xl,
       }}
-      buttonStyle={{ padding: 10, paddingHorizontal: 10 }}
+      buttonStyle={{
+        paddingVertical: theme.spacing.md,
+        paddingHorizontal: theme.spacing.md,
+      }}
     >
       <Icon
-        size={20}
+        size={18}
         name="arrow-back-outline"
         type="ionicon"
         containerStyle={{ aspectRatio: 1, padding: 0 }}

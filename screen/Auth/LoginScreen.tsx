@@ -21,11 +21,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       <SafeAreaView>
-        <ButtonBack
-          onPress={() =>
-            navigation.navigate('AuthStack', { screen: 'GetStarted' })
-          }
-        />
+        <ButtonBack />
         <Text h1>Welcome to Lyself</Text>
         <Text>Login to continue.</Text>
         <View

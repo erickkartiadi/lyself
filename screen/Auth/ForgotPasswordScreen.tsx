@@ -18,7 +18,7 @@ function ForgotPasswordScreen({
       contentContainerStyle={[styles.scrollViewContainer, styles.section]}
     >
       <SafeAreaView>
-        <ButtonBack onPress={() => navigation.navigate('Login')} />
+        <ButtonBack />
         <Text h1>Forgot Password?</Text>
         <Text>
           Please enter your email address, we&apos;ll send an email with
