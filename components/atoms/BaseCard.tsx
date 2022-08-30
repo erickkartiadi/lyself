@@ -9,6 +9,8 @@ interface BaseCardProps {
   disablePadding?: boolean;
   width?: string | number;
   cardStyle?: CardProps['containerStyle'];
+  cardPadding?: 'lg' | 'xl';
+  disablePressAnimation?: boolean;
 }
 
 function BaseCard({
@@ -18,12 +20,18 @@ function BaseCard({
   disablePadding,
   cardStyle,
   width,
+  disablePressAnimation = false,
+  cardPadding: padding = 'xl',
 }: React.PropsWithChildren<CardProps> & PressableProps & BaseCardProps) {
   const { theme } = useTheme();
   const { isDarkMode } = React.useContext(ThemeModeContext);
 
   return (
-    <AnimatedPressable onPress={onPress} style={[containerStyle, { width }]}>
+    <AnimatedPressable
+      disablePressAnimation={disablePressAnimation}
+      onPress={onPress}
+      style={[containerStyle, { width }]}
+    >
       <Card
         containerStyle={[
           {
@@ -36,11 +44,9 @@ function BaseCard({
             },
             shadowOpacity: 0.3,
             shadowRadius: 4.65,
-
             elevation: 12,
-
             borderWidth: 0,
-            padding: disablePadding ? 0 : theme.spacing.xl,
+            padding: disablePadding ? 0 : theme.spacing[padding],
             borderRadius: BORDER_RADIUS.lg,
             overflow: 'hidden',
             backgroundColor: theme.colors.cardBackground,
@@ -57,8 +63,10 @@ function BaseCard({
 }
 
 BaseCard.defaultProps = {
+  disablePressAnimation: false,
   disablePadding: false,
   width: '100%',
+  cardPadding: 'xl',
   cardStyle: {},
 };
 export default BaseCard;

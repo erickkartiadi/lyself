@@ -6,6 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import BaseCard from '../atoms/BaseCard';
 import Label from '../atoms/Label';
 import { ConsultScreenNavigationProps } from '../../navigation/navigation.types';
+import { ReviewCardProps } from './ReviewCard';
+import { EducationCardProps } from './EducationCard';
 
 export interface PsychiatristCardProps {
   uri: string;
@@ -15,6 +17,8 @@ export interface PsychiatristCardProps {
   name: string;
   specialty: string;
   description: string;
+  reviews: ReviewCardProps[];
+  educations: EducationCardProps[];
 }
 
 function PsychiatristCard({
@@ -25,6 +29,8 @@ function PsychiatristCard({
   rating,
   patients,
   description,
+  reviews,
+  educations,
 }: PsychiatristCardProps) {
   const { theme } = useTheme();
   const navigation =
@@ -40,6 +46,8 @@ function PsychiatristCard({
           rating,
           patients,
           description,
+          reviews,
+          educations,
         })
       }
     >

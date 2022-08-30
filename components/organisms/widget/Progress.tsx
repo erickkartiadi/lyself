@@ -7,15 +7,7 @@ import SectionTitle from '../SectionTitle';
 import BaseCard from '../../atoms/BaseCard';
 import { BORDER_RADIUS, styles } from '../../../theme/styles';
 
-interface ProgressCardProps {
-  id: string;
-  title: string;
-  activityType: Activities;
-  progress: number;
-  time: string;
-}
-
-export const dataProgress: ProgressCardProps[] = [
+export const progressData: ProgressCardProps[] = [
   {
     id: '1',
     title: 'Relax',
@@ -38,6 +30,14 @@ export const dataProgress: ProgressCardProps[] = [
     time: '15m',
   },
 ];
+
+export interface ProgressCardProps {
+  id: string;
+  title: string;
+  activityType: Activities;
+  progress: number;
+  time: string;
+}
 
 function ProgressCard({
   activityType,
@@ -108,7 +108,7 @@ function Progress() {
     <View style={styles.section}>
       <SectionTitle title="Continue your progress" />
 
-      {dataProgress.map(({ activityType, id, progress, time, title }) => (
+      {progressData.map(({ activityType, id, progress, time, title }) => (
         <ProgressCard
           activityType={activityType}
           key={id}

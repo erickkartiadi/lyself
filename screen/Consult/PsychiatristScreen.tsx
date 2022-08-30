@@ -10,48 +10,30 @@ import SectionTitle from '../../components/organisms/SectionTitle';
 import { ConsultStackParamList } from '../../navigation/param.types';
 import ViewMoreText from '../../components/atoms/ViewMoreText';
 import ViewSeparator from '../../components/atoms/BaseDivider';
-import lorem from '../../utils/genereateLoremIpsum';
-import generateRandomTime from '../../utils/generateRandomTime';
-import generateRandomName from '../../utils/generateRandomName';
-import generateRandomNumber from '../../utils/generateRandomNumber';
 import ReviewCard, {
   ReviewCardProps,
 } from '../../components/organisms/ReviewCard';
+import EducationCard, {
+  EducationCardProps,
+} from '../../components/organisms/EducationCard';
 
 export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
   ConsultStackParamList,
   'Psychiatrist'
 >;
-const dataReview: ReviewCardProps[] = [
-  {
-    uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
-    name: generateRandomName(),
-    review: lorem.generateWords(16),
-    time: generateRandomTime(),
-  },
-  {
-    uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
-    name: generateRandomName(),
-    review: lorem.generateWords(16),
-    time: generateRandomTime(),
-  },
-  {
-    uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
-    name: generateRandomName(),
-    review: lorem.generateWords(16),
-    time: generateRandomTime(),
-  },
-  {
-    uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
-    name: generateRandomName(),
-    review: lorem.generateWords(16),
-    time: generateRandomTime(),
-  },
-];
 
 function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
-  const { experience, name, rating, specialty, uri, patients, description } =
-    route.params;
+  const {
+    experience,
+    name,
+    rating,
+    specialty,
+    uri,
+    patients,
+    description,
+    reviews,
+    educations,
+  } = route.params;
   const { theme } = useTheme();
 
   const renderReview = ({ item }: { item: ReviewCardProps }) => (
@@ -174,9 +156,35 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               styles.flatListHorizontalContainer,
             ]}
             showsHorizontalScrollIndicator={false}
-            data={dataReview}
+            data={reviews}
             renderItem={renderReview}
           />
+        </View>
+        <View style={styles.sectionSmall}>
+          <SectionTitle title="Education" />
+          {educations
+            .sort(
+              (a: EducationCardProps, b: EducationCardProps) =>
+                b.startYear - a.startYear
+            )
+            .map(
+              ({
+                id,
+                institutionName,
+                startYear,
+                studyPeriod,
+                uri: EducationCardUri,
+              }) => (
+                <EducationCard
+                  id={id}
+                  institutionName={institutionName}
+                  startYear={startYear}
+                  studyPeriod={studyPeriod}
+                  uri={EducationCardUri}
+                  key={institutionName}
+                />
+              )
+            )}
         </View>
       </View>
       <Button fullWidth>Make appointment</Button>

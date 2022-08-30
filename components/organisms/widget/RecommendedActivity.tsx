@@ -3,7 +3,7 @@ import React from 'react';
 import { FlatList, GestureResponderEvent, View } from 'react-native';
 import BaseCard from '../../atoms/BaseCard';
 import ViewSeparator from '../../atoms/BaseDivider';
-import { RecommendedProps, dataRecommended } from '../../../constant';
+import { RecommendedProps, recommendedData } from '../../../constant';
 import { comingSoonToast } from '../../../utils/comingSoonToast';
 import ActivityIcon, { Activities } from '../../atoms/ActivityIcon';
 import SectionTitle from '../SectionTitle';
@@ -71,7 +71,7 @@ function RecommendedActivity() {
           styles.flatListHorizontalContainer,
         ]}
         showsHorizontalScrollIndicator={false}
-        data={dataRecommended}
+        data={recommendedData}
         renderItem={renderRecommended}
         keyExtractor={(item: RecommendedProps) => item.id}
       />

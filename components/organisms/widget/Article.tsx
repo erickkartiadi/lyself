@@ -4,7 +4,7 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 import * as Linking from 'expo-linking';
 import BaseCard from '../../atoms/BaseCard';
 import ViewSeparator from '../../atoms/BaseDivider';
-import { ArticleCardProps, dataArticles } from '../../../constant';
+import { ArticleCardProps, articlesData } from '../../../constant';
 import SectionTitle from '../SectionTitle';
 import { styles } from '../../../theme/styles';
 
@@ -71,7 +71,7 @@ function ArticleWidget() {
           styles.scrollViewContainer,
           styles.flatListHorizontalContainer,
         ]}
-        data={dataArticles}
+        data={articlesData}
         renderItem={renderArticles}
         keyExtractor={(item: ArticleCardProps) => item.title}
       />

@@ -1,4 +1,6 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
+import { EducationCardProps } from '../components/organisms/EducationCard';
+import { ReviewCardProps } from '../components/organisms/ReviewCard';
 
 type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
@@ -37,6 +39,8 @@ type ConsultStackParamList = {
     rating: number;
     specialty: string;
     description: string;
+    reviews: ReviewCardProps[];
+    educations: EducationCardProps[];
   };
 };
 

@@ -25,14 +25,15 @@ function ReviewCard({ uri, name, review, time }: ReviewCardProps) {
 
   const onTextLayout = React.useCallback(
     (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-      toggleIsLengthMore(e.nativeEvent.lines.length >= numberOfLines);
+      toggleIsLengthMore(e.nativeEvent.lines.length > numberOfLines);
     },
     []
   );
 
   return (
     <BaseCard
-      onPress={isLengthMore ? () => toggleIsShowMore() : null}
+      disablePressAnimation={!isLengthMore}
+      onPress={() => toggleIsShowMore()}
       width={Dimensions.get('screen').width / 1.25}
     >
       <View style={{ flex: 1 }}>

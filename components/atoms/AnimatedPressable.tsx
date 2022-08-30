@@ -10,12 +10,14 @@ interface AnimatedPressableProps {
   onPress: PressableProps['onPress'];
   style?: PressableProps['style'];
   children: ReactNode;
+  disablePressAnimation?: boolean;
 }
 
 function AnimatedPressable({
   onPress,
   children,
   style,
+  disablePressAnimation = false,
 }: AnimatedPressableProps) {
   const scaleValue = useSharedValue(1);
   const opacityValue = useSharedValue(1);
@@ -26,12 +28,14 @@ function AnimatedPressable({
   }));
 
   const onPressInAnimation = () => {
+    if (disablePressAnimation) return;
     if (!onPress) return;
     scaleValue.value = withSpring(0.95);
     opacityValue.value = withSpring(0.9);
   };
 
   const onPressOutAnimation = () => {
+    if (disablePressAnimation) return;
     if (!onPress) return;
     scaleValue.value = withSpring(1);
     opacityValue.value = withSpring(1);
@@ -51,6 +55,7 @@ function AnimatedPressable({
 
 AnimatedPressable.defaultProps = {
   style: null,
+  disablePressAnimation: false,
 };
 
 export default AnimatedPressable;
