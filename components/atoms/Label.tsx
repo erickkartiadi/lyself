@@ -7,19 +7,19 @@ import { BORDER_RADIUS } from '../../theme/styles';
 interface LabelProps {
   showIcon?: boolean;
   color?: string;
-  name?: IconProps['name'];
-  type?: IconProps['type'];
-  size?: IconProps['size'];
-  children?: React.ReactNode;
+  iconName?: IconProps['name'];
+  iconType?: IconProps['type'];
+  iconSize?: IconProps['size'];
+  children: React.ReactNode;
   labelSize?: 'sm' | 'md';
 }
 function Label({
   showIcon,
-  name,
-  type,
+  iconName = 'help',
+  iconType = 'ionicon',
   color,
   children,
-  size,
+  iconSize,
   labelSize = 'md',
 }: LabelProps) {
   const { theme } = useTheme();
@@ -42,9 +42,9 @@ function Label({
     >
       {showIcon && (
         <Icon
-          name={name || 'help'}
-          type={type || 'ionicon'}
-          size={size}
+          name={iconName}
+          type={iconType}
+          size={iconSize}
           color={labelColor}
           style={{ marginRight: theme.spacing.sm, marginTop: theme.spacing.xs }}
         />
@@ -57,10 +57,9 @@ function Label({
 Label.defaultProps = {
   showIcon: false,
   color: null,
-  children: null,
-  name: null,
-  type: null,
-  size: 16,
+  iconName: 'help',
+  iconType: 'ionicon',
+  iconSize: 16,
   labelSize: 'md',
 };
 

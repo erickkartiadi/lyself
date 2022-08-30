@@ -16,23 +16,23 @@ export interface ReviewCardProps {
   time: string;
 }
 
-function ReviewCard({ uri, name, review, time }: ReviewCardProps) {
-  const numberOfLines = 3;
+const NUMBER_OF_LINES = 3;
 
+function ReviewCard({ uri, name, review, time }: ReviewCardProps) {
   const { theme } = useTheme();
   const [isShowMore, toggleIsShowMore] = useToggle(false);
   const [isLengthMore, toggleIsLengthMore] = useToggle(false);
 
   const onTextLayout = React.useCallback(
     (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-      toggleIsLengthMore(e.nativeEvent.lines.length > numberOfLines);
+      toggleIsLengthMore(e.nativeEvent.lines.length > NUMBER_OF_LINES);
     },
     []
   );
 
   return (
     <BaseCard
-      disablePressAnimation={!isLengthMore}
+      enablePressAnimation={isLengthMore}
       onPress={() => toggleIsShowMore()}
       width={Dimensions.get('screen').width / 1.25}
     >
@@ -62,7 +62,7 @@ function ReviewCard({ uri, name, review, time }: ReviewCardProps) {
         </View>
         <Text
           onTextLayout={onTextLayout}
-          numberOfLines={isShowMore ? undefined : numberOfLines}
+          numberOfLines={isShowMore ? undefined : NUMBER_OF_LINES}
           small
         >
           {review}

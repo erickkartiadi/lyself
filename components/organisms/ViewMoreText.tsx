@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Text, useTheme } from '@rneui/themed';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 import BaseLink from '../atoms/BaseLink';
+import useToggle from '../../utils/hooks/useToggle';
 
 interface ViewMoreTextProps {
   numberOfLines?: number;
@@ -10,17 +11,13 @@ interface ViewMoreTextProps {
 }
 
 function ViewMoreText({ numberOfLines = 4, children }: ViewMoreTextProps) {
-  const [textShown, setTextShown] = useState(false);
-  const [lengthMore, setLengthMore] = useState(false);
+  const [isShowMore, toggleIsShowMore] = useToggle(false);
+  const [isLengthMore, toggleIsLengthMore] = useToggle(false);
   const { theme } = useTheme();
-
-  const toggleNumberOfLines = () => {
-    setTextShown((prev) => !prev);
-  };
 
   const onTextLayout = useCallback(
     (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-      setLengthMore(e.nativeEvent.lines.length > numberOfLines);
+      toggleIsLengthMore(e.nativeEvent.lines.length > numberOfLines);
     },
     []
   );
@@ -29,18 +26,18 @@ function ViewMoreText({ numberOfLines = 4, children }: ViewMoreTextProps) {
     <>
       <Text
         onTextLayout={onTextLayout}
-        numberOfLines={textShown ? undefined : numberOfLines}
+        numberOfLines={isShowMore ? undefined : numberOfLines}
       >
         {children}
       </Text>
 
-      {lengthMore ? (
+      {isLengthMore ? (
         <BaseLink
           color="primary"
           style={{ marginTop: theme.spacing.md }}
-          onPress={() => toggleNumberOfLines()}
+          onPress={() => toggleIsShowMore()}
         >
-          {textShown ? 'View less' : 'View more'}
+          {isShowMore ? 'View less' : 'View more'}
         </BaseLink>
       ) : null}
     </>

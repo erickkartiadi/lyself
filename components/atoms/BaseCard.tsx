@@ -2,33 +2,33 @@ import * as React from 'react';
 import { Card, CardProps, useTheme } from '@rneui/themed';
 import { PressableProps } from 'react-native';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
-import AnimatedPressable from './AnimatedPressable';
+import AnimatedPressable, { AnimatedPressableProps } from './AnimatedPressable';
 import { BORDER_RADIUS } from '../../theme/styles';
 
 interface BaseCardProps {
-  disablePadding?: boolean;
+  enablePadding?: boolean;
   width?: string | number;
   cardStyle?: CardProps['containerStyle'];
   cardPadding?: 'lg' | 'xl';
-  disablePressAnimation?: boolean;
+  enablePressAnimation?: AnimatedPressableProps['enablePressAnimation'];
 }
 
 function BaseCard({
   children,
   onPress,
   containerStyle,
-  disablePadding,
+  enablePadding,
   cardStyle,
   width,
-  disablePressAnimation = false,
-  cardPadding: padding = 'xl',
-}: React.PropsWithChildren<CardProps> & PressableProps & BaseCardProps) {
+  cardPadding = 'xl',
+  enablePressAnimation,
+}: React.PropsWithChildren<CardProps & BaseCardProps> & PressableProps) {
   const { theme } = useTheme();
   const { isDarkMode } = React.useContext(ThemeModeContext);
 
   return (
     <AnimatedPressable
-      disablePressAnimation={disablePressAnimation}
+      enablePressAnimation={enablePressAnimation}
       onPress={onPress}
       style={[containerStyle, { width }]}
     >
@@ -46,7 +46,7 @@ function BaseCard({
             shadowRadius: 4.65,
             elevation: 12,
             borderWidth: 0,
-            padding: disablePadding ? 0 : theme.spacing[padding],
+            padding: enablePadding ? theme.spacing[cardPadding] : 0,
             borderRadius: BORDER_RADIUS.lg,
             overflow: 'hidden',
             backgroundColor: theme.colors.cardBackground,
@@ -63,10 +63,10 @@ function BaseCard({
 }
 
 BaseCard.defaultProps = {
-  disablePressAnimation: false,
-  disablePadding: false,
+  enablePadding: true,
   width: '100%',
   cardPadding: 'xl',
   cardStyle: {},
+  enablePressAnimation: true,
 };
 export default BaseCard;

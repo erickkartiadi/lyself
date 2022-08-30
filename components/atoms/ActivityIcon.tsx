@@ -19,12 +19,10 @@ function ActivityIcon({
   activity,
   containerStyle,
   size,
-  iconFontSize,
 }: {
   activity: Activities;
   containerStyle?: StyleProp<ViewStyle>;
   size?: number | undefined;
-  iconFontSize?: number;
 }) {
   const { theme } = useTheme();
 
@@ -92,7 +90,7 @@ function ActivityIcon({
       backgroundColor={backgroundColor}
       containerStyle={containerStyle}
       size={size}
-      iconSize={iconFontSize || iconSize}
+      iconSize={iconSize}
       color={theme.colors.white}
       iconType={type}
       iconName={name}
@@ -103,7 +101,6 @@ function ActivityIcon({
 ActivityIcon.defaultProps = {
   containerStyle: {},
   size: 54,
-  iconFontSize: null,
 };
 
 export default ActivityIcon;

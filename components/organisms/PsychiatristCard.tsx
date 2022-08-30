@@ -90,8 +90,8 @@ function PsychiatristCard({
               color={theme.colors.primary}
               showIcon
               labelSize="sm"
-              name="heart"
-              type="ionicon"
+              iconName="heart"
+              iconType="ionicon"
             >
               {rating}
             </Label>
@@ -99,8 +99,8 @@ function PsychiatristCard({
               color={theme.colors.yellow}
               showIcon
               labelSize="sm"
-              name="briefcase"
-              type="ionicon"
+              iconName="briefcase"
+              iconType="ionicon"
             >
               {`${experience} yrs`}
             </Label>

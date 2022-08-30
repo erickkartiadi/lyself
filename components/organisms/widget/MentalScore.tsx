@@ -34,7 +34,7 @@ function MentalScoreCard() {
   const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
-    <BaseCard disablePadding>
+    <BaseCard enablePadding={false}>
       <View
         style={{
           flex: 1,

@@ -3,29 +3,24 @@ import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { Text, useTheme } from '@rneui/themed';
 
 export interface BaseLinkProps {
-  color?: 'primary';
+  color?: 'primary' | 'blue';
   children: React.ReactNode;
 }
 
 function BaseLink({
   onPress,
-  color,
+  color = 'blue',
   children,
   ...rest
 }: TouchableOpacityProps & BaseLinkProps) {
   const { theme } = useTheme();
-
-  const colors = {
-    primary: theme.colors.primary,
-    default: theme.colors.blue,
-  };
 
   return (
     <TouchableOpacity onPress={onPress} {...rest}>
       <Text
         subtitle2
         style={{
-          color: color != null ? colors[color] : colors.default,
+          color: theme.colors[color],
         }}
       >
         {children}
@@ -35,7 +30,7 @@ function BaseLink({
 }
 
 BaseLink.defaultProps = {
-  color: 'default',
+  color: 'blue',
 };
 
 export default BaseLink;

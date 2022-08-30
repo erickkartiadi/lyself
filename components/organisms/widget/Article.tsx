@@ -16,7 +16,7 @@ function ArticleCard({ title, publisher, time, src, url }: ArticleCardProps) {
   };
 
   return (
-    <BaseCard width={280} disablePadding onPress={handleOpenArticle}>
+    <BaseCard width={280} enablePadding={false} onPress={handleOpenArticle}>
       <Image
         containerStyle={{
           width: '100%',

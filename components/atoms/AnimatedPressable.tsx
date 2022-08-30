@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Pressable, PressableProps } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -6,19 +6,18 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-interface AnimatedPressableProps {
+export interface AnimatedPressableProps {
   onPress: PressableProps['onPress'];
   style?: PressableProps['style'];
-  children: ReactNode;
-  disablePressAnimation?: boolean;
+  enablePressAnimation?: boolean;
 }
 
 function AnimatedPressable({
   onPress,
   children,
   style,
-  disablePressAnimation = false,
-}: AnimatedPressableProps) {
+  enablePressAnimation = true,
+}: React.PropsWithChildren<AnimatedPressableProps>) {
   const scaleValue = useSharedValue(1);
   const opacityValue = useSharedValue(1);
 
@@ -28,14 +27,14 @@ function AnimatedPressable({
   }));
 
   const onPressInAnimation = () => {
-    if (disablePressAnimation) return;
+    if (!enablePressAnimation) return;
     if (!onPress) return;
     scaleValue.value = withSpring(0.95);
     opacityValue.value = withSpring(0.9);
   };
 
   const onPressOutAnimation = () => {
-    if (disablePressAnimation) return;
+    if (!enablePressAnimation) return;
     if (!onPress) return;
     scaleValue.value = withSpring(1);
     opacityValue.value = withSpring(1);
@@ -54,8 +53,8 @@ function AnimatedPressable({
 }
 
 AnimatedPressable.defaultProps = {
-  style: null,
-  disablePressAnimation: false,
+  style: {},
+  enablePressAnimation: true,
 };
 
 export default AnimatedPressable;
