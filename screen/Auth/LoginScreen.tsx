@@ -3,12 +3,13 @@ import { Button, CheckBox, Text, useTheme } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import ButtonBack from '../../components/atoms/ButtonBack';
+import BackButton from '../../components/BackButton';
 import { styles } from '../../theme/styles';
 import loginIllustration from '../../assets/images/login-illustration.png';
 import useToggle from '../../utils/hooks/useToggle';
-import { PasswordInput, TextInput } from '../../components/atoms/Input';
-import LinkButton from '../../components/atoms/LinkButton';
+import TextInput from '../../components/forms/Input';
+import PasswordInput from '../../components/forms/PasswordInput';
+import LinkButton from '../../components/LinkButton';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
@@ -21,7 +22,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
       contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       <SafeAreaView>
-        <ButtonBack />
+        <BackButton />
         <Text h1>Welcome to Lyself</Text>
         <Text>Login to continue.</Text>
         <View

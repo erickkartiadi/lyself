@@ -1,4 +1,4 @@
-import { Activities } from '../components/atoms/ActivityIcon';
+import { Activities } from '../components/ActivityIcon';
 import generateRandomNumber from '../utils/generateRandomNumber';
 import lorem from '../utils/generateLoremIpsum';
 import generateRandomName from '../utils/generateRandomName';
@@ -7,21 +7,39 @@ import {
   generateRandomMonth,
   generateTimesAgo,
 } from '../utils/generateRandomTime';
-import { PsychiatristCardProps } from '../components/organisms/PsychiatristCard';
+import { PsychiatristCardProps } from '../components/cards/PsychiatristCard';
+import { ProgressCardProps } from '../components/cards/ProgressCard';
+import { ArticleCardProps } from '../components/cards/ArticleCard';
+
+export const progressData: ProgressCardProps[] = [
+  {
+    id: '1',
+    title: 'Relax',
+    activityType: 'breathing',
+    progress: 67,
+    time: '1m 30s',
+  },
+  {
+    id: '2',
+    title: 'Morning meditation',
+    activityType: 'meditation',
+    progress: 90,
+    time: '1m',
+  },
+  {
+    id: '3',
+    title: 'Chill vibes',
+    activityType: 'music',
+    progress: 40,
+    time: '15m',
+  },
+];
 
 export type RecommendedProps = {
   id: string;
   activity: Activities;
   title: string;
   time: number;
-};
-
-export type ArticleCardProps = {
-  title: string;
-  publisher: string;
-  time: string;
-  src: string;
-  url: string;
 };
 
 const SPECIALTIES = [
@@ -372,28 +390,28 @@ export const articlesData: ArticleCardProps[] = [
     title: 'Supporting Employees Mental Health at Work',
     publisher: 'Rolling Stone',
     time: '1h',
-    src: 'https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
+    uri: 'https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
     url: 'https://www.rollingstone.com/culture-council/articles/supporting-employees-mental-health-work-1376097/',
   },
   {
     title: 'Parental controls and kids mental health',
     publisher: 'Mashable',
     time: '1w',
-    src: 'https://images.unsplash.com/photo-1554410637-1a8267402b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
+    uri: 'https://images.unsplash.com/photo-1554410637-1a8267402b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
     url: 'https://mashable.com/article/screen-time-parenting-styles-teen-mental-health',
   },
   {
     title: 'Mental Health: You must prioritise this!',
     publisher: 'Dailytrust',
     time: '7h',
-    src: 'https://images.unsplash.com/photo-1620147512372-9e00421556bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
+    uri: 'https://images.unsplash.com/photo-1620147512372-9e00421556bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
     url: 'https://dailytrust.com/mental-health-you-must-prioritise-this',
   },
   {
     title: 'Better mental health support for people in crisis',
     publisher: 'GOV.UK',
     time: '4d',
-    src: 'https://images.unsplash.com/photo-1604881990409-b9f246db39da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
+    uri: 'https://images.unsplash.com/photo-1604881990409-b9f246db39da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
     url: 'https://www.gov.uk/government/news/better-mental-health-support-for-people-in-crisis',
   },
 ];

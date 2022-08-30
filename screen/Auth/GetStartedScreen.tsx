@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { styles } from '../../theme/styles';
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
-import LinkButton from '../../components/atoms/LinkButton';
+import LinkButton from '../../components/LinkButton';
 import { GetStartedScreenNavigationProps } from '../../navigation/navigation.types';
 
 function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {

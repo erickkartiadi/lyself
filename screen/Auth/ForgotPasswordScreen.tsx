@@ -3,10 +3,10 @@ import { Button, Text } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import ButtonBack from '../../components/atoms/ButtonBack';
+import BackButton from '../../components/BackButton';
 import { styles } from '../../theme/styles';
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
-import { TextInput } from '../../components/atoms/Input';
+import TextInput from '../../components/forms/Input';
 import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
 
 function ForgotPasswordScreen({
@@ -18,7 +18,7 @@ function ForgotPasswordScreen({
       contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       <SafeAreaView>
-        <ButtonBack />
+        <BackButton />
         <Text h1>Forgot Password?</Text>
         <Text>
           Please enter your email address, we&apos;ll send an email with

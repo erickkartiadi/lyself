@@ -1,6 +1,6 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
-import { EducationCardProps } from '../components/organisms/EducationCard';
-import { ReviewCardProps } from '../components/organisms/ReviewCard';
+import { EducationCardProps } from '../components/cards/EducationCard';
+import { ReviewCardProps } from '../components/cards/ReviewCard';
 
 type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;

@@ -12,20 +12,18 @@ import {
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import colorAlpha from 'color-alpha';
 import * as Linking from 'expo-linking';
-import BaseIcon from '../../components/atoms/BaseIcon';
+import BaseIcon from '../../components/bases/BaseIcon';
 import { BORDER_RADIUS, styles } from '../../theme/styles';
-import SectionTitle from '../../components/organisms/SectionTitle';
+import SectionTitle from '../../components/SectionTitle';
 import { ConsultStackParamList } from '../../navigation/param.types';
-import ViewMoreText from '../../components/organisms/ViewMoreText';
-import ViewSeparator from '../../components/atoms/BaseDivider';
-import ReviewCard, {
-  ReviewCardProps,
-} from '../../components/organisms/ReviewCard';
+import ViewMoreText from '../../components/ViewMoreText';
+import BaseDivider from '../../components/bases/BaseDivider';
+import ReviewCard, { ReviewCardProps } from '../../components/cards/ReviewCard';
 import EducationCard, {
   EducationCardProps,
-} from '../../components/organisms/EducationCard';
-import Label from '../../components/atoms/Label';
-import BaseLink from '../../components/atoms/BaseLink';
+} from '../../components/cards/EducationCard';
+import BaseLabel from '../../components/bases/BaseLabel';
+import BaseLink from '../../components/bases/BaseLink';
 
 export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
   ConsultStackParamList,
@@ -164,7 +162,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
             <FlatList
               horizontal
               overScrollMode="never"
-              ItemSeparatorComponent={ViewSeparator}
+              ItemSeparatorComponent={BaseDivider}
               style={[styles.noContainerGutter, styles.flatListHorizontal]}
               contentContainerStyle={[
                 styles.containerGutter,
@@ -210,7 +208,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                     value !== specialty && array.indexOf(value) === index
                 )
                 .map((each) => (
-                  <Label key={each}>{each}</Label>
+                  <BaseLabel key={each}>{each}</BaseLabel>
                 ))}
             </View>
           </View>

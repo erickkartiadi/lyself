@@ -6,9 +6,9 @@ import {
   ExploreTabBarIcon,
   HomeTabBarIcon,
   UserTabBarIcon,
-} from '../../components/atoms/BottomTabBarIcons';
-import LeftHeaderComponent from '../../components/organisms/header/LeftHeaderComponent';
-import RightHeaderComponent from '../../components/organisms/header/RightHeaderComponent';
+} from '../../components/BottomTabBarIcons';
+import LeftHeader from '../../components/header/LeftHeader';
+import RightHeader from '../../components/header/RightHeader';
 import HomeScreen from '../../screen/Home/HomeScreen';
 import { HomeTabParamList } from '../param.types';
 import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../../theme/styles';
@@ -24,7 +24,7 @@ export const navigatorScreenOptions = {
     fontFamily: FONT_FAMILY.bold,
     fontSize: FONT_SIZE.heading4,
   },
-  headerRight: RightHeaderComponent,
+  headerRight: RightHeader,
 };
 
 function HomeNavigator() {
@@ -56,7 +56,7 @@ function HomeNavigator() {
             backgroundColor: theme.colors.background,
             height: 90,
           },
-          headerLeft: LeftHeaderComponent,
+          headerLeft: LeftHeader,
           tabBarIcon: HomeTabBarIcon,
         }}
         name="Home"

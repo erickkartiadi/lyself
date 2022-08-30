@@ -3,11 +3,12 @@ import { Button, Text } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import ButtonBack from '../../components/atoms/ButtonBack';
+import BackButton from '../../components/BackButton';
 import { styles } from '../../theme/styles';
 import registerIllustration from '../../assets/images/register-illustration.png';
-import { PasswordInput, TextInput } from '../../components/atoms/Input';
-import LinkButton from '../../components/atoms/LinkButton';
+import TextInput from '../../components/forms/Input';
+import PasswordInput from '../../components/forms/PasswordInput';
+import LinkButton from '../../components/LinkButton';
 import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
@@ -17,7 +18,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
       contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       <SafeAreaView>
-        <ButtonBack />
+        <BackButton />
         <Text h1>Create new account</Text>
         <Text>
           Just one more step to be part of the {'\n'}Lyself community.

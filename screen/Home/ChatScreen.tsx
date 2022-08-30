@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import Chat, { ChatProps } from '../../components/organisms/Chat';
+import Chat, { ChatProps } from '../../components/Chat';
 
 export const chatData: ChatProps[] = [
   {

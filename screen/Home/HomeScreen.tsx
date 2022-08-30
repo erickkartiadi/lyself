@@ -4,11 +4,11 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { styles } from '../../theme/styles';
 import useToggle from '../../utils/hooks/useToggle';
-import Progress from '../../components/organisms/widget/Progress';
-import MentalScore from '../../components/organisms/widget/MentalScore';
-import RecommendedActivity from '../../components/organisms/widget/RecommendedActivity';
-import { ArticleWidget } from '../../components/organisms/widget/Article';
-import BaseBottomSheet from '../../components/atoms/BaseBottomSheet';
+import Progress from '../../components/widget/Progress';
+import GraphScore from '../../components/widget/GraphScore';
+import RecommendedActivity from '../../components/widget/RecommendedActivity';
+import Articles from '../../components/widget/Articles';
+import BaseBottomSheet from '../../components/bases/BaseBottomSheet';
 
 function HomeScreen() {
   const { theme } = useTheme();
@@ -23,7 +23,7 @@ function HomeScreen() {
     {
       no: 2,
       active: true,
-      Widget: MentalScore,
+      Widget: GraphScore,
       label: 'Mental Score',
     },
     {
@@ -35,7 +35,7 @@ function HomeScreen() {
     {
       no: 4,
       active: true,
-      Widget: ArticleWidget,
+      Widget: Articles,
       label: 'Article',
     },
   ]);

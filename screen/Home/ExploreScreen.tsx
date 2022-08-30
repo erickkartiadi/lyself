@@ -4,15 +4,15 @@ import { FlatList, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
-import ViewSeparator from '../../components/atoms/BaseDivider';
-import BaseSearchBar from '../../components/atoms/BaseSearchBar';
+import BaseDivider from '../../components/bases/BaseDivider';
+import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import { styles } from '../../theme/styles';
-import { ArticleWidget } from '../../components/organisms/widget/Article';
+import Articles from '../../components/widget/Articles';
 import PlaylistCard, {
   PlaylistCardProps,
-} from '../../components/organisms/widget/PlaylistCard';
-import ActivityMenu from '../../components/organisms/ActivityMenu';
-import SectionTitle from '../../components/organisms/SectionTitle';
+} from '../../components/cards/PlaylistCard';
+import ActivityButton from '../../components/ActivityButton';
+import SectionTitle from '../../components/SectionTitle';
 import { ExploreScreenNavigationProps } from '../../navigation/navigation.types';
 
 const CLIENT_ID = '189bb29572b34ba29b2c243cae7f6105';
@@ -104,49 +104,49 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           },
         ]}
       >
-        <ActivityMenu
+        <ActivityButton
           activity="consult"
           onPress={() =>
             navigation.navigate('ConsultStack', { screen: 'Consult' })
           }
         />
-        <ActivityMenu
+        <ActivityButton
           activity="meditation"
           onPress={() => navigation.navigate('InDevelopment')}
         />
-        <ActivityMenu
+        <ActivityButton
           activity="forum"
           onPress={() => navigation.navigate('InDevelopment')}
         />
-        <ActivityMenu
+        <ActivityButton
           activity="music"
           onPress={() => navigation.navigate('InDevelopment')}
         />
-        <ActivityMenu
+        <ActivityButton
           activity="todo"
           onPress={() => navigation.navigate('InDevelopment')}
         />
-        <ActivityMenu
+        <ActivityButton
           activity="breathing"
           onPress={() => navigation.navigate('InDevelopment')}
         />
-        <ActivityMenu
+        <ActivityButton
           activity="article"
           onPress={() => navigation.navigate('InDevelopment')}
         />
-        <ActivityMenu
+        <ActivityButton
           activity="other"
           onPress={() => navigation.navigate('InDevelopment')}
         />
       </View>
-      <ArticleWidget />
+      <Articles />
       <View style={styles.section}>
         <SectionTitle title="Featured playlist" />
         {token ? (
           <FlatList
             horizontal
             overScrollMode="never"
-            ItemSeparatorComponent={ViewSeparator}
+            ItemSeparatorComponent={BaseDivider}
             showsHorizontalScrollIndicator={false}
             style={styles.noContainerGutter}
             contentContainerStyle={styles.containerGutter}
