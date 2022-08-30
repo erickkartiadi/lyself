@@ -4,7 +4,7 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 import * as Linking from 'expo-linking';
 import BaseCard from '../../atoms/BaseCard';
 import ViewSeparator from '../../atoms/BaseDivider';
-import { ArticleCardProps, articlesData } from '../../../constant';
+import { ArticleCardProps, articlesData } from '../../../constant/constant';
 import SectionTitle from '../SectionTitle';
 import { styles } from '../../../theme/styles';
 
@@ -68,7 +68,7 @@ function ArticleWidget() {
         showsHorizontalScrollIndicator={false}
         style={[styles.noContainerGutter, styles.flatListHorizontal]}
         contentContainerStyle={[
-          styles.scrollViewContainer,
+          styles.containerGutter,
           styles.flatListHorizontalContainer,
         ]}
         data={articlesData}

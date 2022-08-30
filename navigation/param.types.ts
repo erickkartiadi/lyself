@@ -37,10 +37,17 @@ type ConsultStackParamList = {
     patients: number;
     name: string;
     rating: number;
-    specialty: string;
     description: string;
+    specialty: string;
+    otherSpecialties: string[];
     reviews: ReviewCardProps[];
     educations: EducationCardProps[];
+    psychiatristLocation: {
+      name: string;
+      address: string;
+      link: string;
+      uri: string;
+    };
   };
 };
 

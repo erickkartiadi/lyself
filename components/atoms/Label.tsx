@@ -11,11 +11,20 @@ interface LabelProps {
   type?: IconProps['type'];
   size?: IconProps['size'];
   children?: React.ReactNode;
+  labelSize?: 'sm' | 'md';
 }
-function Label({ showIcon, name, type, color, children, size }: LabelProps) {
+function Label({
+  showIcon,
+  name,
+  type,
+  color,
+  children,
+  size,
+  labelSize = 'md',
+}: LabelProps) {
   const { theme } = useTheme();
 
-  const labelColor = color || theme.colors.grey3;
+  const labelColor = color || theme.colors.grey4;
   const labelBackgroundColor = colorAlpha(labelColor, 0.25);
 
   return (
@@ -23,7 +32,7 @@ function Label({ showIcon, name, type, color, children, size }: LabelProps) {
       style={{
         backgroundColor: labelBackgroundColor,
         paddingHorizontal: theme.spacing.lg,
-        paddingVertical: theme.spacing.sm,
+        paddingVertical: theme.spacing[labelSize],
         borderRadius: BORDER_RADIUS.rounded,
         flexDirection: 'row',
         alignItems: 'center',
@@ -52,6 +61,7 @@ Label.defaultProps = {
   name: null,
   type: null,
   size: 16,
+  labelSize: 'md',
 };
 
 export default Label;

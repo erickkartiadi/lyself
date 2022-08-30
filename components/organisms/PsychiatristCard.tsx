@@ -9,28 +9,39 @@ import { ConsultScreenNavigationProps } from '../../navigation/navigation.types'
 import { ReviewCardProps } from './ReviewCard';
 import { EducationCardProps } from './EducationCard';
 
+export type PsychiatristLocation = {
+  name: string;
+  address: string;
+  link: string;
+  uri: string;
+};
+
 export interface PsychiatristCardProps {
   uri: string;
   experience: number;
   rating: number;
   patients: number;
   name: string;
-  specialty: string;
   description: string;
+  specialty: string;
+  otherSpecialties: string[];
   reviews: ReviewCardProps[];
   educations: EducationCardProps[];
+  psychiatristLocation: PsychiatristLocation;
 }
 
 function PsychiatristCard({
   uri,
   experience,
   specialty,
+  otherSpecialties,
   name,
   rating,
   patients,
   description,
   reviews,
   educations,
+  psychiatristLocation,
 }: PsychiatristCardProps) {
   const { theme } = useTheme();
   const navigation =
@@ -42,12 +53,14 @@ function PsychiatristCard({
           uri,
           experience,
           specialty,
+          otherSpecialties,
           name,
           rating,
           patients,
           description,
           reviews,
           educations,
+          psychiatristLocation,
         })
       }
     >
@@ -76,6 +89,7 @@ function PsychiatristCard({
             <Label
               color={theme.colors.primary}
               showIcon
+              labelSize="sm"
               name="heart"
               type="ionicon"
             >
@@ -84,6 +98,7 @@ function PsychiatristCard({
             <Label
               color={theme.colors.yellow}
               showIcon
+              labelSize="sm"
               name="briefcase"
               type="ionicon"
             >

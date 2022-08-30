@@ -1,12 +1,13 @@
-import { Activities } from './components/atoms/ActivityIcon';
-import generateRandomNumber from './utils/generateRandomNumber';
-import lorem from './utils/generateLoremIpsum';
-import generateRandomName from './utils/generateRandomName';
+import { Activities } from '../components/atoms/ActivityIcon';
+import generateRandomNumber from '../utils/generateRandomNumber';
+import lorem from '../utils/generateLoremIpsum';
+import generateRandomName from '../utils/generateRandomName';
 import {
   generateRandomDay,
   generateRandomMonth,
   generateTimesAgo,
-} from './utils/generateRandomTime';
+} from '../utils/generateRandomTime';
+import { PsychiatristCardProps } from '../components/organisms/PsychiatristCard';
 
 export type RecommendedProps = {
   id: string;
@@ -23,9 +24,19 @@ export type ArticleCardProps = {
   url: string;
 };
 
+const SPECIALTIES = [
+  'Addiction',
+  'Child and adolescent',
+  'Geriatric',
+  'Forensic',
+  'Neuropsychiatries',
+  'Organizational',
+  'Nurse practitioner',
+];
+
 export const scheduleData = {
   psychiatristName: `Dr. ${generateRandomName()}`,
-  specialty: 'Addiction Psychiatry',
+  specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
   date: `${generateRandomDay().slice(0, 3)}, ${generateRandomNumber(
     1,
     30
@@ -33,15 +44,31 @@ export const scheduleData = {
   time: '13:00 - 14:30',
 };
 
-export const psychiatristData = [
+const randomAddress = `Jl. ${lorem.generateWords(
+  generateRandomNumber(2, 3)
+)} No. ${generateRandomNumber(1, 99)}`;
+
+export const psychiatristData: PsychiatristCardProps[] = [
   {
     uri: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
     experience: generateRandomNumber(1, 12),
     rating: generateRandomNumber(80, 100),
     patients: generateRandomNumber(20, 100),
-    specialty: 'Addiction Psychiatry',
     name: 'Dr. Usman Yousaf',
     description: lorem.generateParagraphs(1),
+    specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    otherSpecialties: [
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    ],
+    psychiatristLocation: {
+      address: randomAddress,
+      link: '',
+      uri: 'https://picsum.photos/360',
+      name: lorem.generateWords(generateRandomNumber(3, 4)),
+    },
     reviews: [
       {
         uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
@@ -90,9 +117,21 @@ export const psychiatristData = [
     experience: generateRandomNumber(1, 12),
     rating: generateRandomNumber(80, 100),
     patients: generateRandomNumber(20, 100),
-    specialty: 'Neuropsychiatry',
     name: 'Dr. Austin Distel',
     description: lorem.generateParagraphs(1),
+    specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    otherSpecialties: [
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    ],
+    psychiatristLocation: {
+      address: randomAddress,
+      link: '',
+      uri: 'https://picsum.photos/360',
+      name: lorem.generateWords(generateRandomNumber(3, 4)),
+    },
     reviews: [
       {
         uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
@@ -141,9 +180,21 @@ export const psychiatristData = [
     experience: generateRandomNumber(1, 12),
     rating: generateRandomNumber(80, 100),
     patients: generateRandomNumber(20, 100),
-    specialty: 'Neuropsychiatry',
     name: 'Dr. Kirstin Watson',
     description: lorem.generateParagraphs(1),
+    specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    otherSpecialties: [
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    ],
+    psychiatristLocation: {
+      address: randomAddress,
+      link: '',
+      uri: 'https://picsum.photos/360',
+      name: lorem.generateWords(generateRandomNumber(3, 4)),
+    },
     reviews: [
       {
         uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
@@ -193,8 +244,20 @@ export const psychiatristData = [
     rating: generateRandomNumber(80, 100),
     patients: generateRandomNumber(20, 100),
     name: 'Dr. Bruno Rodrigues',
-    specialty: 'Forensic Psychiatry',
     description: lorem.generateParagraphs(1),
+    specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    otherSpecialties: [
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    ],
+    psychiatristLocation: {
+      address: randomAddress,
+      link: '',
+      uri: 'https://picsum.photos/360',
+      name: lorem.generateWords(generateRandomNumber(3, 4)),
+    },
     reviews: [
       {
         uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,
@@ -243,9 +306,21 @@ export const psychiatristData = [
     experience: generateRandomNumber(1, 12),
     rating: generateRandomNumber(80, 100),
     patients: generateRandomNumber(20, 100),
-    specialty: 'Old age psychiatry',
     name: 'Dr. Floyd Miles',
     description: lorem.generateParagraphs(1),
+    specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    otherSpecialties: [
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+      SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+    ],
+    psychiatristLocation: {
+      address: randomAddress,
+      link: '',
+      uri: 'https://picsum.photos/360',
+      name: lorem.generateWords(generateRandomNumber(3, 4)),
+    },
     reviews: [
       {
         uri: `https://picsum.photos/id/${generateRandomNumber(1, 100)}/100`,

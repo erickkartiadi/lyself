@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Avatar, Text, useTheme } from '@rneui/themed';
 import BaseCard from '../atoms/BaseCard';
+import { BORDER_RADIUS } from '../../theme/styles';
 
 export interface EducationCardProps {
   id: number;
@@ -26,7 +27,8 @@ function EducationCard({
         <Avatar
           size={58}
           containerStyle={{
-            borderRadius: theme.spacing.md,
+            backgroundColor: theme.colors.background,
+            borderRadius: BORDER_RADIUS.md,
             borderWidth: 1,
             borderColor: theme.colors.grey5,
             padding: theme.spacing.sm,

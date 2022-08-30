@@ -50,7 +50,7 @@ function HomeScreen() {
 
   return (
     <ScrollView
-      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       {activeWidgets.map(
         ({ no, active, Widget }) => active && <Widget key={no} />

@@ -14,7 +14,7 @@ function SectionTitle({
   title,
   showRightButton,
   rightButtonComponent,
-  screen,
+  screen = 'InDevelopment',
 }: SectionTitleProps) {
   const { theme } = useTheme();
   return (
@@ -34,7 +34,7 @@ function SectionTitle({
         {showRightButton && !rightButtonComponent && (
           <LinkButton
             to={{
-              screen: showRightButton && screen ? screen : 'InDevelopment',
+              screen: showRightButton && screen && screen,
             }}
             color="primary"
           >

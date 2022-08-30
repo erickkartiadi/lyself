@@ -12,7 +12,7 @@ function AccountScreen({ navigation }: AccountScreenNavigationProps) {
 
   return (
     <ScrollView
-      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       <View>
         <View

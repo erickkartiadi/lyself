@@ -3,7 +3,7 @@ import React from 'react';
 import { FlatList, GestureResponderEvent, View } from 'react-native';
 import BaseCard from '../../atoms/BaseCard';
 import ViewSeparator from '../../atoms/BaseDivider';
-import { RecommendedProps, recommendedData } from '../../../constant';
+import { RecommendedProps, recommendedData } from '../../../constant/constant';
 import { comingSoonToast } from '../../../utils/comingSoonToast';
 import ActivityIcon, { Activities } from '../../atoms/ActivityIcon';
 import SectionTitle from '../SectionTitle';
@@ -67,7 +67,7 @@ function RecommendedActivity() {
         ItemSeparatorComponent={ViewSeparator}
         style={[styles.noContainerGutter, styles.flatListHorizontal]}
         contentContainerStyle={[
-          styles.scrollViewContainer,
+          styles.containerGutter,
           styles.flatListHorizontalContainer,
         ]}
         showsHorizontalScrollIndicator={false}

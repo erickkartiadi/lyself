@@ -18,7 +18,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       <SafeAreaView>
         <ButtonBack />

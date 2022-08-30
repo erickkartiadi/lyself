@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: GUTTER_SIZE,
   },
-  scrollViewContainer: {
+  containerGutter: {
     paddingHorizontal: GUTTER_SIZE,
   },
   noContainerGutter: {

@@ -9,7 +9,7 @@ import AppointmentCard from '../../components/organisms/AppointmentCard';
 import PsychiatristCard, {
   PsychiatristCardProps,
 } from '../../components/organisms/PsychiatristCard';
-import { psychiatristData, scheduleData } from '../../constant';
+import { psychiatristData, scheduleData } from '../../constant/constant';
 
 function ConsultScreen() {
   const renderTopPsychiatrist = ({
@@ -19,20 +19,24 @@ function ConsultScreen() {
       name,
       rating,
       specialty,
+      otherSpecialties,
       patients,
       description,
       reviews,
       educations,
+      psychiatristLocation,
     },
   }: {
     item: PsychiatristCardProps;
   }) => (
     <PsychiatristCard
+      psychiatristLocation={psychiatristLocation}
       patients={patients}
       uri={uri}
       experience={experience}
       name={name}
       rating={rating}
+      otherSpecialties={otherSpecialties}
       specialty={specialty}
       description={description}
       reviews={reviews}
@@ -44,7 +48,7 @@ function ConsultScreen() {
     <FlatList
       data={psychiatristData}
       renderItem={renderTopPsychiatrist}
-      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.section]}
       ListHeaderComponent={
         <>
           <BaseSearchBar placeholder="Find a psychiatrist" />

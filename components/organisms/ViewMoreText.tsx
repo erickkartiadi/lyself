@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { Text, useTheme } from '@rneui/themed';
 import { useCallback, useState } from 'react';
-import {
-  NativeSyntheticEvent,
-  Pressable,
-  TextLayoutEventData,
-} from 'react-native';
-import colorAlpha from 'color-alpha';
+import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
+import BaseLink from '../atoms/BaseLink';
 
 interface ViewMoreTextProps {
   numberOfLines?: number;
@@ -24,7 +20,7 @@ function ViewMoreText({ numberOfLines = 4, children }: ViewMoreTextProps) {
 
   const onTextLayout = useCallback(
     (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-      setLengthMore(e.nativeEvent.lines.length >= numberOfLines);
+      setLengthMore(e.nativeEvent.lines.length > numberOfLines);
     },
     []
   );
@@ -39,20 +35,13 @@ function ViewMoreText({ numberOfLines = 4, children }: ViewMoreTextProps) {
       </Text>
 
       {lengthMore ? (
-        <Pressable onPress={toggleNumberOfLines}>
-          {({ pressed }) => (
-            <Text
-              style={{
-                marginTop: theme.spacing.md,
-                color: pressed
-                  ? colorAlpha(theme.colors.primary, 0.25)
-                  : theme.colors.primary,
-              }}
-            >
-              {textShown ? 'View less' : 'View more'}
-            </Text>
-          )}
-        </Pressable>
+        <BaseLink
+          color="primary"
+          style={{ marginTop: theme.spacing.md }}
+          onPress={() => toggleNumberOfLines()}
+        >
+          {textShown ? 'View less' : 'View more'}
+        </BaseLink>
       ) : null}
     </>
   );

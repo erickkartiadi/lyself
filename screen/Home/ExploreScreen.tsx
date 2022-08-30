@@ -90,7 +90,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
 
   return (
     <ScrollView
-      contentContainerStyle={[styles.scrollViewContainer, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       <BaseSearchBar placeholder="Search tools, news or forum" />
       <View
@@ -149,7 +149,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
             ItemSeparatorComponent={ViewSeparator}
             showsHorizontalScrollIndicator={false}
             style={styles.noContainerGutter}
-            contentContainerStyle={styles.scrollViewContainer}
+            contentContainerStyle={styles.containerGutter}
             data={featuredPlaylist}
             renderItem={renderPlaylist}
             keyExtractor={(item: PlaylistCardProps) => item.id}
