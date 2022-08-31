@@ -1,14 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+
 import BaseSearchBar from '../../components/bases/BaseSearchBar';
-import SectionTitle from '../../components/SectionTitle';
-import { styles } from '../../theme/styles';
 import AppointmentCard from '../../components/cards/AppointmentCard';
 import PsychiatristCard, {
   PsychiatristCardProps,
 } from '../../components/cards/PsychiatristCard';
+import SectionTitle from '../../components/SectionTitle';
 import { psychiatristData, scheduleData } from '../../constant/constant';
+import { styles } from '../../theme/styles';
 
 function ConsultScreen() {
   const renderTopPsychiatrist = ({

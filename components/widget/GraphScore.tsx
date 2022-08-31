@@ -1,11 +1,12 @@
 import { useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
+
+import { styles } from '../../theme/styles';
+import MentalScoreCard from '../cards/MentalScoreCard';
 import StatusCard, { StatusCardProps } from '../cards/StatusCard';
 import Dropdown from '../Dropdown';
 import SectionTitle from '../SectionTitle';
-import { styles } from '../../theme/styles';
-import MentalScoreCard from '../cards/MentalScoreCard';
 
 function GraphScore() {
   const { theme } = useTheme();

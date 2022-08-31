@@ -1,9 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import SectionTitle from '../SectionTitle';
+
+import { progressData } from '../../constant/constant';
 import { styles } from '../../theme/styles';
 import ProgressCard from '../cards/ProgressCard';
-import { progressData } from '../../constant/constant';
+import SectionTitle from '../SectionTitle';
 
 function Progress() {
   return (

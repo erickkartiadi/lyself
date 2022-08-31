@@ -1,7 +1,7 @@
 import { Text } from '@rneui/themed';
+import dayjs from 'dayjs';
 import React from 'react';
 import { View } from 'react-native';
-import dayjs from 'dayjs';
 
 function LeftHeader() {
   const currentHour = dayjs().hour();

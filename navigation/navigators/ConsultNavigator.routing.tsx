@@ -1,9 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
 import { useTheme } from '@rneui/themed';
-import { ConsultStackParamList } from '../param.types';
+import React from 'react';
+
 import ConsultScreen from '../../screen/Consult/ConsultScreen';
 import PsychiatristScreen from '../../screen/Consult/PsychiatristScreen';
+import { ConsultStackParamList } from '../param.types';
 import { navigatorScreenOptions } from './HomeNavigator.routing';
 
 const Stack = createNativeStackNavigator<ConsultStackParamList>();

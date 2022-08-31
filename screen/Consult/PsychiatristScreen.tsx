@@ -1,29 +1,30 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   Avatar,
   Button,
   Image,
-  Text,
   normalize,
+  Text,
   useTheme,
 } from '@rneui/themed';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import colorAlpha from 'color-alpha';
 import * as Linking from 'expo-linking';
-import BaseIcon from '../../components/bases/BaseIcon';
-import { BORDER_RADIUS, styles } from '../../theme/styles';
-import SectionTitle from '../../components/SectionTitle';
-import { ConsultStackParamList } from '../../navigation/param.types';
-import ViewMoreText from '../../components/ViewMoreText';
+import * as React from 'react';
+import { View } from 'react-native';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
+
 import BaseDivider from '../../components/bases/BaseDivider';
-import ReviewCard, { ReviewCardProps } from '../../components/cards/ReviewCard';
+import BaseIcon from '../../components/bases/BaseIcon';
+import BaseLabel from '../../components/bases/BaseLabel';
+import BaseLink from '../../components/bases/BaseLink';
 import EducationCard, {
   EducationCardProps,
 } from '../../components/cards/EducationCard';
-import BaseLabel from '../../components/bases/BaseLabel';
-import BaseLink from '../../components/bases/BaseLink';
+import ReviewCard, { ReviewCardProps } from '../../components/cards/ReviewCard';
+import SectionTitle from '../../components/SectionTitle';
+import ViewMoreText from '../../components/ViewMoreText';
+import { ConsultStackParamList } from '../../navigation/param.types';
+import { BORDER_RADIUS, styles } from '../../theme/styles';
 
 export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
   ConsultStackParamList,

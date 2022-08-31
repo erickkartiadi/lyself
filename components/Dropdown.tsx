@@ -1,6 +1,7 @@
 import { Icon, useTheme } from '@rneui/themed';
 import React, { useContext, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
+
 import { ThemeModeContext } from '../theme/ThemeModeContext';
 
 function ArrowDownIcon() {

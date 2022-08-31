@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button, Icon, useTheme } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
+import { Button, Icon, useTheme } from '@rneui/themed';
+import React from 'react';
 
 function BackButton() {
   const { theme } = useTheme();

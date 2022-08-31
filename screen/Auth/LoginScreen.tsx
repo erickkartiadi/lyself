@@ -1,16 +1,17 @@
-import React from 'react';
 import { Button, CheckBox, Text, useTheme } from '@rneui/themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import BackButton from '../../components/BackButton';
-import { styles } from '../../theme/styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import loginIllustration from '../../assets/images/login-illustration.png';
-import useToggle from '../../utils/hooks/useToggle';
+import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
+import { styles } from '../../theme/styles';
+import useToggle from '../../utils/hooks/useToggle';
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();

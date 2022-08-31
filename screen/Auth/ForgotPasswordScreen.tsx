@@ -1,13 +1,14 @@
-import React from 'react';
 import { Button, Text } from '@rneui/themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import BackButton from '../../components/BackButton';
-import { styles } from '../../theme/styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
+import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
+import { styles } from '../../theme/styles';
 
 function ForgotPasswordScreen({
   navigation,

@@ -1,5 +1,6 @@
 import { Switch, useTheme } from '@rneui/themed';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
 import { ThemeModeContext } from '../theme/ThemeModeContext';
 import SettingMenu from './SettingMenu';
 
@@ -7,12 +8,15 @@ function ThemeSwitch() {
   const { isDarkMode, setThemeMode } = useContext(ThemeModeContext);
   const [isOn, setIsOn] = useState(isDarkMode);
 
-  const handleSwitchThemeMode = (value: boolean) => {
-    setThemeMode(value ? 'dark' : 'light');
-    setIsOn(value);
+  useEffect(() => {
+    setIsOn(isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleThemeMode = () => {
+    setThemeMode(isDarkMode ? 'light' : 'dark');
   };
 
-  return <Switch value={isOn} onValueChange={handleSwitchThemeMode} />;
+  return <Switch value={isDarkMode} onValueChange={toggleThemeMode} />;
 }
 
 function SwitchModeSettingMenu() {

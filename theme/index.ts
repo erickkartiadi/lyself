@@ -1,11 +1,12 @@
+import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 import {
   ButtonProps,
-  CreateThemeOptions,
-  TextProps,
   createTheme,
+  CreateThemeOptions,
   normalize,
+  TextProps,
 } from '@rneui/themed';
-import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
+
 import { FONT_FAMILY, FONT_SIZE, THEME_SPACING } from './styles';
 
 const lightColors = {
@@ -234,4 +235,4 @@ const navThemeDark: Theme = {
   },
 };
 
-export { myTheme, navThemeLight, navThemeDark };
+export { myTheme, navThemeDark, navThemeLight };

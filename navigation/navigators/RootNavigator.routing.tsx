@@ -1,12 +1,13 @@
-import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import AuthNavigator from './AuthNavigator.routing';
-import HomeNavigator from './HomeNavigator.routing';
-import { RootStackParamList } from '../param.types';
-import { ThemeModeContext } from '../../theme/ThemeModeContext';
+import React from 'react';
+
 import InDevelopmentScreen from '../../screen/Error/InDevelopmentScreen';
+import { ThemeModeContext } from '../../theme/ThemeModeContext';
+import { RootStackParamList } from '../param.types';
+import AuthNavigator from './AuthNavigator.routing';
 import ConsultNavigator from './ConsultNavigator.routing';
+import HomeNavigator from './HomeNavigator.routing';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

@@ -1,7 +1,8 @@
 import { Icon, Image, Text, useTheme } from '@rneui/themed';
+import * as Linking from 'expo-linking';
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import * as Linking from 'expo-linking';
+
 import BaseCard from '../bases/BaseCard';
 
 export type ArticleCardProps = {

@@ -1,4 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
+
 import { EducationCardProps } from '../components/cards/EducationCard';
 import { ReviewCardProps } from '../components/cards/ReviewCard';
 
@@ -52,8 +53,8 @@ type ConsultStackParamList = {
 };
 
 export {
-  RootStackParamList,
-  HomeTabParamList,
   AuthStackParamList,
   ConsultStackParamList,
+  HomeTabParamList,
+  RootStackParamList,
 };

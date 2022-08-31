@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { Text, useTheme } from '@rneui/themed';
+import * as React from 'react';
 import { useCallback } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
+
 import useToggle from '../utils/hooks/useToggle';
 import BaseLink from './bases/BaseLink';
 

@@ -1,11 +1,12 @@
-import * as React from 'react';
 import { Card, CardProps, useTheme } from '@rneui/themed';
+import * as React from 'react';
 import { PressableProps } from 'react-native';
+
+import { BORDER_RADIUS } from '../../theme/styles';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
 import AnimatedPressable, {
   AnimatedPressableProps,
 } from '../AnimatedPressable';
-import { BORDER_RADIUS } from '../../theme/styles';
 
 interface BaseCardProps {
   enablePadding?: boolean;

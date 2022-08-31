@@ -1,11 +1,12 @@
-import React from 'react';
 import {
   NavigationAction,
   ParamListBase,
   useLinkProps,
 } from '@react-navigation/native';
-import { TextProps } from 'react-native';
 import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo';
+import React from 'react';
+import { TextProps } from 'react-native';
+
 import BaseLink, { BaseLinkProps } from './bases/BaseLink';
 
 interface LinkButtonProps<ParamList extends ReactNavigation.RootParamList> {

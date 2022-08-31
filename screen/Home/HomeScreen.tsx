@@ -2,13 +2,14 @@ import { Button, CheckBox, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import BaseBottomSheet from '../../components/bases/BaseBottomSheet';
+import Articles from '../../components/widget/Articles';
+import GraphScore from '../../components/widget/GraphScore';
+import Progress from '../../components/widget/Progress';
+import RecommendedActivity from '../../components/widget/RecommendedActivity';
 import { styles } from '../../theme/styles';
 import useToggle from '../../utils/hooks/useToggle';
-import Progress from '../../components/widget/Progress';
-import GraphScore from '../../components/widget/GraphScore';
-import RecommendedActivity from '../../components/widget/RecommendedActivity';
-import Articles from '../../components/widget/Articles';
-import BaseBottomSheet from '../../components/bases/BaseBottomSheet';
 
 function HomeScreen() {
   const { theme } = useTheme();

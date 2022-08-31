@@ -1,13 +1,14 @@
-import React from 'react';
-import { Avatar, Text, useTheme } from '@rneui/themed';
-import { View } from 'react-native';
-import colorAlpha from 'color-alpha';
 import { useNavigation } from '@react-navigation/native';
+import { Avatar, Text, useTheme } from '@rneui/themed';
+import colorAlpha from 'color-alpha';
+import React from 'react';
+import { View } from 'react-native';
+
+import { ConsultScreenNavigationProps } from '../../navigation/navigation.types';
 import BaseCard from '../bases/BaseCard';
 import BaseLabel from '../bases/BaseLabel';
-import { ConsultScreenNavigationProps } from '../../navigation/navigation.types';
-import { ReviewCardProps } from './ReviewCard';
 import { EducationCardProps } from './EducationCard';
+import { ReviewCardProps } from './ReviewCard';
 
 export type PsychiatristLocation = {
   name: string;

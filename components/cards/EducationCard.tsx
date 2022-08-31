@@ -1,8 +1,9 @@
+import { Avatar, Text, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import { View } from 'react-native';
-import { Avatar, Text, useTheme } from '@rneui/themed';
-import BaseCard from '../bases/BaseCard';
+
 import { BORDER_RADIUS } from '../../theme/styles';
+import BaseCard from '../bases/BaseCard';
 
 export interface EducationCardProps {
   id: number;

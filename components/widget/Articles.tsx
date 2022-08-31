@@ -1,10 +1,11 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import BaseDivider from '../bases/BaseDivider';
-import SectionTitle from '../SectionTitle';
-import { styles } from '../../theme/styles';
-import ArticleCard, { ArticleCardProps } from '../cards/ArticleCard';
+
 import { articlesData } from '../../constant/constant';
+import { styles } from '../../theme/styles';
+import BaseDivider from '../bases/BaseDivider';
+import ArticleCard, { ArticleCardProps } from '../cards/ArticleCard';
+import SectionTitle from '../SectionTitle';
 
 function Articles() {
   const renderArticles = ({ item }: { item: ArticleCardProps }) => (

@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import * as React from 'react';
 import { useTheme } from '@rneui/themed';
+import * as React from 'react';
+
 import {
   ChatTabBarIcon,
   ExploreTabBarIcon,
@@ -9,12 +10,12 @@ import {
 } from '../../components/BottomTabBarIcons';
 import LeftHeader from '../../components/header/LeftHeader';
 import RightHeader from '../../components/header/RightHeader';
-import HomeScreen from '../../screen/Home/HomeScreen';
-import { HomeTabParamList } from '../param.types';
-import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../../theme/styles';
-import ChatScreen from '../../screen/Home/ChatScreen';
 import AccountScreen from '../../screen/Home/AccountScreen';
+import ChatScreen from '../../screen/Home/ChatScreen';
 import ExploreScreen from '../../screen/Home/ExploreScreen';
+import HomeScreen from '../../screen/Home/HomeScreen';
+import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../../theme/styles';
+import { HomeTabParamList } from '../param.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 

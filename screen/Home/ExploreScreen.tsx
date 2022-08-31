@@ -1,19 +1,20 @@
 import { Button, useTheme } from '@rneui/themed';
+import axios from 'axios';
+import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import axios from 'axios';
-import { ResponseType, useAuthRequest } from 'expo-auth-session';
+
+import ActivityButton from '../../components/ActivityButton';
 import BaseDivider from '../../components/bases/BaseDivider';
 import BaseSearchBar from '../../components/bases/BaseSearchBar';
-import { styles } from '../../theme/styles';
-import Articles from '../../components/widget/Articles';
 import PlaylistCard, {
   PlaylistCardProps,
 } from '../../components/cards/PlaylistCard';
-import ActivityButton from '../../components/ActivityButton';
 import SectionTitle from '../../components/SectionTitle';
+import Articles from '../../components/widget/Articles';
 import { ExploreScreenNavigationProps } from '../../navigation/navigation.types';
+import { styles } from '../../theme/styles';
 
 const CLIENT_ID = '189bb29572b34ba29b2c243cae7f6105';
 const discovery = {

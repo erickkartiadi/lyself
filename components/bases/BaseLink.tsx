@@ -1,6 +1,6 @@
+import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { Text, useTheme } from '@rneui/themed';
 
 export interface BaseLinkProps {
   color?: 'primary' | 'blue';

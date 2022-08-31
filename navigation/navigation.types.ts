@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import {
   AuthStackParamList,
   ConsultStackParamList,
@@ -42,11 +43,11 @@ type ConsultScreenNavigationProps = NativeStackScreenProps<
 >;
 
 export {
-  LoginScreenNavigationProps,
+  AccountScreenNavigationProps,
+  ConsultScreenNavigationProps,
+  ExploreScreenNavigationProps,
   ForgotPasswordScreenNavigationProps,
   GetStartedScreenNavigationProps,
+  LoginScreenNavigationProps,
   RegisterScreenNavigationProps,
-  AccountScreenNavigationProps,
-  ExploreScreenNavigationProps,
-  ConsultScreenNavigationProps,
 };

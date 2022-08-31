@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { View } from 'react-native';
 import { Icon, IconProps, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { BORDER_RADIUS } from '../../theme/styles';
 
 interface LabelProps {

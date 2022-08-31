@@ -3,10 +3,11 @@ import React, { useContext } from 'react';
 import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import BaseCard from '../bases/BaseCard';
-import { ThemeModeContext } from '../../theme/ThemeModeContext';
+
 import { BORDER_RADIUS, FONT_FAMILY, GUTTER_SIZE } from '../../theme/styles';
+import { ThemeModeContext } from '../../theme/ThemeModeContext';
 import generateRandomNumber from '../../utils/generateRandomNumber';
+import BaseCard from '../bases/BaseCard';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';

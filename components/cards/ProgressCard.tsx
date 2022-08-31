@@ -1,10 +1,11 @@
 import { LinearProgress, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
+
+import { BORDER_RADIUS } from '../../theme/styles';
 import { comingSoonToast } from '../../utils/comingSoonToast';
 import ActivityIcon, { Activities } from '../ActivityIcon';
 import BaseCard from '../bases/BaseCard';
-import { BORDER_RADIUS } from '../../theme/styles';
 
 export interface ProgressCardProps {
   id: string;

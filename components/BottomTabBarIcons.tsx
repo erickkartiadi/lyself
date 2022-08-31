@@ -48,4 +48,4 @@ function UserTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   );
 }
 
-export { UserTabBarIcon, HomeTabBarIcon, ExploreTabBarIcon, ChatTabBarIcon };
+export { ChatTabBarIcon, ExploreTabBarIcon, HomeTabBarIcon, UserTabBarIcon };

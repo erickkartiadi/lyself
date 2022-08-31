@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
-import { normalize } from '@rneui/themed';
 import {
   Inter_400Regular,
   Inter_500Medium,
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
+import { normalize } from '@rneui/themed';
+import { StyleSheet } from 'react-native';
 
 const THEME_SPACING = {
   xs: 2,
@@ -78,11 +78,11 @@ const customFont = {
 };
 
 export {
-  customFont,
-  styles,
-  FONT_SIZE,
-  THEME_SPACING,
   BORDER_RADIUS,
-  GUTTER_SIZE,
+  customFont,
   FONT_FAMILY,
+  FONT_SIZE,
+  GUTTER_SIZE,
+  styles,
+  THEME_SPACING,
 };

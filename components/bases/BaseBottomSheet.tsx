@@ -1,6 +1,7 @@
 import { BottomSheet, BottomSheetProps, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
+
 import { styles } from '../../theme/styles';
 
 interface BaseBottomSheetProps {

@@ -1,11 +1,12 @@
 import { Avatar, Icon, Text, useTheme } from '@rneui/themed';
+import colorAlpha from 'color-alpha';
 import React from 'react';
 import { View } from 'react-native';
-import colorAlpha from 'color-alpha';
-import BaseCard from '../bases/BaseCard';
+
+import { BORDER_RADIUS } from '../../theme/styles';
 import useToggle from '../../utils/hooks/useToggle';
 import BaseBottomSheet from '../bases/BaseBottomSheet';
-import { BORDER_RADIUS } from '../../theme/styles';
+import BaseCard from '../bases/BaseCard';
 
 interface AppointmentCardProps {
   psychiatristName: string;

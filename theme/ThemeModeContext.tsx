@@ -1,12 +1,12 @@
+import { ThemeMode, useThemeMode } from '@rneui/themed';
 import React, {
+  createContext,
   PropsWithChildren,
   ReactNode,
-  createContext,
   useCallback,
   useMemo,
   useState,
 } from 'react';
-import { ThemeMode, useThemeMode } from '@rneui/themed';
 
 const ThemeModeContext = createContext({
   isDarkMode: false,

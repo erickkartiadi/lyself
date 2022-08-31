@@ -1,6 +1,7 @@
 import { useTheme } from '@rneui/themed';
 import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
+
 import BaseIcon from './bases/BaseIcon';
 
 export type Activities =

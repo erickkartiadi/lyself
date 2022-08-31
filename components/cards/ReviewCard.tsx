@@ -1,3 +1,4 @@
+import { Avatar, Text, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import {
   Dimensions,
@@ -5,10 +6,9 @@ import {
   TextLayoutEventData,
   View,
 } from 'react-native';
-import { Avatar, Text, useTheme } from '@rneui/themed';
-import BaseCard from '../bases/BaseCard';
 
 import useToggle from '../../utils/hooks/useToggle';
+import BaseCard from '../bases/BaseCard';
 
 export interface ReviewCardProps {
   uri: string;

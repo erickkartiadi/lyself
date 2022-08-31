@@ -1,5 +1,6 @@
 import { Icon, InputProps, useTheme } from '@rneui/themed';
 import React from 'react';
+
 import { BORDER_RADIUS } from '../../theme/styles';
 import useToggle from '../../utils/hooks/useToggle';
 import TextInput from './Input';

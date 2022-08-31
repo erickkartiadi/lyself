@@ -1,6 +1,6 @@
 import { SearchBar, useTheme } from '@rneui/themed';
-
 import React, { useState } from 'react';
+
 import { BORDER_RADIUS } from '../../theme/styles';
 
 interface BaseSearchBarProps {

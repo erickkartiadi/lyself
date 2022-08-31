@@ -1,8 +1,9 @@
 import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { GestureResponderEvent, View } from 'react-native';
-import BaseCard from '../bases/BaseCard';
+
 import ActivityIcon, { Activities } from '../ActivityIcon';
+import BaseCard from '../bases/BaseCard';
 
 interface RecommendedActivityProps {
   onPress: ((event: GestureResponderEvent) => void) | null | undefined;

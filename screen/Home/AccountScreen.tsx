@@ -2,8 +2,9 @@ import { Avatar, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
+
 import SettingMenu from '../../components/SettingMenu';
+import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
 import { AccountScreenNavigationProps } from '../../navigation/navigation.types';
 import { styles } from '../../theme/styles';
 

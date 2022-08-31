@@ -1,13 +1,14 @@
 import { Icon } from '@rneui/base';
+import { Button, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { Dimensions, Image, View } from 'react-native';
-import { Button, Text, useTheme } from '@rneui/themed';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
-import { styles } from '../../theme/styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
 import LinkButton from '../../components/LinkButton';
 import { GetStartedScreenNavigationProps } from '../../navigation/navigation.types';
+import { styles } from '../../theme/styles';
 
 function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
   const { theme } = useTheme();

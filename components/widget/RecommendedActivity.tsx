@@ -1,11 +1,12 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import BaseDivider from '../bases/BaseDivider';
-import { RecommendedProps, recommendedData } from '../../constant/constant';
-import { comingSoonToast } from '../../utils/comingSoonToast';
-import SectionTitle from '../SectionTitle';
+
+import { recommendedData, RecommendedProps } from '../../constant/constant';
 import { styles } from '../../theme/styles';
+import { comingSoonToast } from '../../utils/comingSoonToast';
+import BaseDivider from '../bases/BaseDivider';
 import RecommendedActivityCard from '../cards/RecommendedActivityCard';
+import SectionTitle from '../SectionTitle';
 
 function RecommendedActivity() {
   const renderRecommended = ({ item }: { item: RecommendedProps }) => (

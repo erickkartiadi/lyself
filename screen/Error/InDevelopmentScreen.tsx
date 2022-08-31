@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { Button, Text } from '@rneui/themed';
-import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Button, Text } from '@rneui/themed';
+import * as React from 'react';
+import { View } from 'react-native';
+
 import { styles } from '../../theme/styles';
 
 function InDevelopmentScreen() {

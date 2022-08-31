@@ -1,15 +1,15 @@
 import { Activities } from '../components/ActivityIcon';
-import generateRandomNumber from '../utils/generateRandomNumber';
+import { ArticleCardProps } from '../components/cards/ArticleCard';
+import { ProgressCardProps } from '../components/cards/ProgressCard';
+import { PsychiatristCardProps } from '../components/cards/PsychiatristCard';
 import lorem from '../utils/generateLoremIpsum';
 import generateRandomName from '../utils/generateRandomName';
+import generateRandomNumber from '../utils/generateRandomNumber';
 import {
   generateRandomDay,
   generateRandomMonth,
   generateTimesAgo,
 } from '../utils/generateRandomTime';
-import { PsychiatristCardProps } from '../components/cards/PsychiatristCard';
-import { ProgressCardProps } from '../components/cards/ProgressCard';
-import { ArticleCardProps } from '../components/cards/ArticleCard';
 
 export const progressData: ProgressCardProps[] = [
   {

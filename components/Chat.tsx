@@ -1,8 +1,9 @@
 import { Avatar, Badge, Button, ListItem, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
-import { comingSoonToast } from '../utils/comingSoonToast';
+
 import { styles } from '../theme/styles';
+import { comingSoonToast } from '../utils/comingSoonToast';
 
 function LeftSwipeButton() {
   return (

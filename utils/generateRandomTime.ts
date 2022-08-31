@@ -44,4 +44,4 @@ const generateRandomMonth = () => {
   return months[generateRandomNumber(0, 7)];
 };
 
-export { generateTimesAgo, generateRandomDay, generateRandomMonth };
+export { generateRandomDay, generateRandomMonth, generateTimesAgo };

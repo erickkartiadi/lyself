@@ -1,6 +1,7 @@
 import { Icon, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { ColorValue, View } from 'react-native';
+
 import BaseCard from '../bases/BaseCard';
 
 export interface StatusCardProps {
