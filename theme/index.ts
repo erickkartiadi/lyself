@@ -114,7 +114,7 @@ const myTheme: CreateThemeOptions = createTheme({
         letterSpacing: normalize(-0.006),
         lineHeight: normalize(20),
         // vertically align text with checkbox icon
-        marginTop: -2,
+        marginTop: THEME_SPACING.sm * -1,
       },
       containerStyle: {
         padding: 0,

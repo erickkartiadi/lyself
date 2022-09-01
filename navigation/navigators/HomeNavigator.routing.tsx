@@ -15,7 +15,7 @@ import ChatScreen from '../../screen/Home/ChatScreen';
 import ExploreScreen from '../../screen/Home/ExploreScreen';
 import HomeScreen from '../../screen/Home/HomeScreen';
 import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../../theme/styles';
-import { HomeTabParamList } from '../param.types';
+import { HomeTabParamList } from '../../types/navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 

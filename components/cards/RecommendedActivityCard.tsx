@@ -1,23 +1,22 @@
 import { Text, useTheme } from '@rneui/themed';
-import React from 'react';
-import { GestureResponderEvent, View } from 'react-native';
+import * as React from 'react';
+import { View } from 'react-native';
 
-import ActivityIcon, { Activities } from '../ActivityIcon';
+import { Activity } from '../../types/types';
+import ActivityIcon from '../ActivityIcon';
+import { AnimatedPressableProps } from '../AnimatedPressable';
 import BaseCard from '../bases/BaseCard';
 
-interface RecommendedActivityProps {
-  onPress: ((event: GestureResponderEvent) => void) | null | undefined;
-  activity: Activities;
-  title: string;
-  time: number;
-}
+export interface RecommendedActivityCardProps
+  extends Activity,
+    AnimatedPressableProps {}
 
 function RecommendedActivityCard({
   onPress,
   activity,
   title,
   time,
-}: RecommendedActivityProps) {
+}: RecommendedActivityCardProps) {
   const { theme } = useTheme();
 
   return (
@@ -30,13 +29,13 @@ function RecommendedActivityCard({
         }}
       >
         <ActivityIcon
-          size={58}
+          width={58}
           containerStyle={{ marginRight: theme.spacing.lg }}
-          activity={activity}
+          activityType={activity}
         />
         <View style={{ paddingRight: theme.spacing.xl }}>
           <Text>{title}</Text>
-          <Text subtitle1>{`${time}m`}</Text>
+          <Text subtitle1>{time}</Text>
         </View>
       </View>
     </BaseCard>

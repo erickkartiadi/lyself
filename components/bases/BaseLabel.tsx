@@ -1,4 +1,4 @@
-import { Icon, IconProps, Text, useTheme } from '@rneui/themed';
+import { Icon, IconProps, Text, ThemeSpacing, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as React from 'react';
 import { View } from 'react-native';
@@ -8,21 +8,21 @@ import { BORDER_RADIUS } from '../../theme/styles';
 interface LabelProps {
   showIcon?: boolean;
   color?: string;
+  labelSize?: keyof ThemeSpacing;
   iconName?: IconProps['name'];
   iconType?: IconProps['type'];
   iconSize?: IconProps['size'];
-  children: React.ReactNode;
-  labelSize?: 'sm' | 'md';
 }
+
 function BaseLabel({
-  showIcon,
-  iconName = 'help',
-  iconType = 'ionicon',
-  color,
   children,
+  showIcon,
+  iconType,
   iconSize,
+  color,
   labelSize = 'md',
-}: LabelProps) {
+  iconName = 'help',
+}: React.PropsWithChildren<LabelProps>) {
   const { theme } = useTheme();
 
   const labelColor = color || theme.colors.grey4;
@@ -47,7 +47,7 @@ function BaseLabel({
           type={iconType}
           size={iconSize}
           color={labelColor}
-          style={{ marginRight: theme.spacing.sm, marginTop: theme.spacing.xs }}
+          style={{ marginRight: theme.spacing.sm }}
         />
       )}
       <Text subtitle2>{children}</Text>
@@ -56,11 +56,11 @@ function BaseLabel({
 }
 
 BaseLabel.defaultProps = {
-  showIcon: false,
   color: null,
+  showIcon: false,
+  iconSize: 16,
   iconName: 'help',
   iconType: 'ionicon',
-  iconSize: 16,
   labelSize: 'md',
 };
 

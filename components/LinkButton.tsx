@@ -5,11 +5,11 @@ import {
 } from '@react-navigation/native';
 import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo';
 import React from 'react';
-import { TextProps } from 'react-native';
 
 import BaseLink, { BaseLinkProps } from './bases/BaseLink';
 
-interface LinkButtonProps<ParamList extends ReactNavigation.RootParamList> {
+interface LinkButtonProps<ParamList extends ReactNavigation.RootParamList>
+  extends BaseLinkProps {
   to: To<ParamList>;
   action?: NavigationAction;
 }
@@ -19,7 +19,7 @@ function LinkButton({
   action,
   children,
   ...rest
-}: LinkButtonProps<ParamListBase> & TextProps & BaseLinkProps) {
+}: LinkButtonProps<ParamListBase>) {
   const { onPress, ...props } = useLinkProps({ to, action });
 
   return (

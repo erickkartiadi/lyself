@@ -72,13 +72,11 @@ function HomeScreen() {
         </Button>
       </View>
 
-      {/* TODO Fix type error */}
       <BaseBottomSheet
         modalProps={{}}
         isVisible={isBottomSheetVisible}
         onBackdropPress={toggleIsBottomSheetVisible}
         headerTitle="Widgets"
-        wrapperStyle={{}}
       >
         <View style={{ marginVertical: theme.spacing.md }}>
           {activeWidgets.map(({ no, label, active }) => (

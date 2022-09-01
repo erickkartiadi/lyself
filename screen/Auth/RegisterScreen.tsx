@@ -9,8 +9,8 @@ import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
-import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
 import { styles } from '../../theme/styles';
+import { RegisterScreenNavigationProps } from '../../types/navigation.types';
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   return (

@@ -1,26 +1,13 @@
 import { Image, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
-import React from 'react';
+import * as React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 import { BORDER_RADIUS } from '../../theme/styles';
+import { Playlist } from '../../types/types';
 import AnimatedPressable from '../AnimatedPressable';
 
-export interface PlaylistCardProps {
-  imageUrl: string;
-  title: string;
-  creator: string;
-  spotifyUrl: string;
-  id: string;
-}
-
-function PlaylistCard({
-  imageUrl,
-  id,
-  title,
-  creator,
-  spotifyUrl,
-}: PlaylistCardProps) {
+function PlaylistCard({ imageUrl, id, title, creator, spotifyUrl }: Playlist) {
   const { theme } = useTheme();
 
   const handleOpenSpotifyPlaylist = () => {

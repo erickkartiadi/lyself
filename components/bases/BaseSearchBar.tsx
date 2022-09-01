@@ -1,10 +1,10 @@
-import { SearchBar, useTheme } from '@rneui/themed';
+import { SearchBar, SearchBarProps, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 
 import { BORDER_RADIUS } from '../../theme/styles';
 
 interface BaseSearchBarProps {
-  placeholder: string;
+  placeholder: SearchBarProps['placeholder'];
 }
 
 function BaseSearchBar({ placeholder }: BaseSearchBarProps) {

@@ -1,33 +1,24 @@
 import { useTheme } from '@rneui/themed';
 import React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
 
-import BaseIcon from './bases/BaseIcon';
+import { ActivityType } from '../types/types';
+import BaseIcon, { BaseIconProps } from './bases/BaseIcon';
 
-export type Activities =
-  | 'meditation'
-  | 'consult'
-  | 'forum'
-  | 'breathing'
-  | 'diagnose'
-  | 'other'
-  | 'music'
-  | 'breathing'
-  | 'todo'
-  | 'article';
+export type ActivityTypeIcon = ActivityType | 'other';
+
+interface ActivityIconProps
+  extends Pick<BaseIconProps, 'containerStyle' | 'width'> {
+  activityType: ActivityTypeIcon;
+}
 
 function ActivityIcon({
-  activity,
+  activityType,
   containerStyle,
-  size,
-}: {
-  activity: Activities;
-  containerStyle?: StyleProp<ViewStyle>;
-  size?: number | undefined;
-}) {
+  width,
+}: ActivityIconProps) {
   const { theme } = useTheme();
 
-  const activityType = {
+  const activityIcon = {
     meditation: {
       type: 'material-community',
       name: 'meditation',
@@ -84,24 +75,19 @@ function ActivityIcon({
     },
   };
 
-  const { type, name, backgroundColor, iconSize } = activityType[activity];
+  const { type, name, backgroundColor, iconSize } = activityIcon[activityType];
 
   return (
     <BaseIcon
       backgroundColor={backgroundColor}
       containerStyle={containerStyle}
-      size={size}
-      iconSize={iconSize}
+      width={width}
+      size={iconSize}
+      type={type}
+      name={name}
       color={theme.colors.white}
-      iconType={type}
-      iconName={name}
     />
   );
 }
-
-ActivityIcon.defaultProps = {
-  containerStyle: {},
-  size: 54,
-};
 
 export default ActivityIcon;

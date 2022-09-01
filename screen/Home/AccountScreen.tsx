@@ -5,8 +5,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import SettingMenu from '../../components/SettingMenu';
 import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
-import { AccountScreenNavigationProps } from '../../navigation/navigation.types';
 import { styles } from '../../theme/styles';
+import { AccountScreenNavigationProps } from '../../types/navigation.types';
 
 function AccountScreen({ navigation }: AccountScreenNavigationProps) {
   const { theme } = useTheme();
@@ -49,80 +49,70 @@ function AccountScreen({ navigation }: AccountScreenNavigationProps) {
         <View style={{ paddingVertical: theme.spacing.sm }}>
           <SettingMenu
             title="Profile"
-            bgColor={theme.colors.secondary}
-            bgColorDark={theme.colors.secondary}
-            iconName="person"
-            iconType="ionicon"
+            backgroundColor={theme.colors.secondary}
+            name="person"
+            type="ionicon"
           />
           <SettingMenu
             title="Notification"
-            bgColor={theme.colors.primary}
-            bgColorDark={theme.colors.primary}
-            iconName="notifications"
-            iconType="ionicon"
+            backgroundColor={theme.colors.primary}
+            name="notifications"
+            type="ionicon"
           />
           <SettingMenu
             title="Privacy"
-            bgColor={theme.colors.purple}
-            bgColorDark={theme.colors.purple}
-            iconName="lock-closed"
-            iconType="ionicon"
+            backgroundColor={theme.colors.purple}
+            name="lock-closed"
+            type="ionicon"
           />
         </View>
         <View style={{ paddingVertical: theme.spacing.lg }}>
           <SettingMenu
             title="Setting"
-            bgColor={theme.colors.grey0}
-            bgColorDark={theme.colors.grey2}
-            iconName="settings"
-            iconType="ionicon"
+            backgroundColor={theme.colors.grey0}
+            name="settings"
+            type="ionicon"
           />
           <SettingMenu
             title="Security"
-            bgColor={theme.colors.grey4}
-            bgColorDark={theme.colors.grey4}
-            iconName="shield"
-            iconType="ionicon"
+            backgroundColor={theme.colors.grey4}
+            name="shield"
+            type="ionicon"
           />
           <SettingMenu
             title="Language"
-            bgColor={theme.colors.yellow}
-            bgColorDark={theme.colors.yellow}
-            iconName="globe"
-            iconType="ionicon"
-            value="English"
+            backgroundColor={theme.colors.yellow}
+            name="globe"
+            type="ionicon"
+            caption="English"
           />
         </View>
         <View style={{ paddingVertical: theme.spacing.lg }}>
           <SettingMenu
             title="Ask a Question"
-            bgColor={theme.colors.primary}
-            bgColorDark={theme.colors.primary}
-            iconName="chatbubbles"
-            iconType="ionicon"
+            backgroundColor={theme.colors.primary}
+            name="chatbubbles"
+            type="ionicon"
           />
           <SettingMenu
             title="FAQ"
-            bgColor={theme.colors.blue}
-            bgColorDark={theme.colors.blue}
-            iconName="book"
-            iconType="ionicon"
+            backgroundColor={theme.colors.blue}
+            name="book"
+            type="ionicon"
           />
           <SettingMenu
             title="Become Our Partner"
-            bgColor={theme.colors.success}
-            bgColorDark={theme.colors.success}
-            iconName="handshake"
-            iconType="material-community"
+            backgroundColor={theme.colors.success}
+            name="handshake"
+            type="material-community"
           />
         </View>
         <View style={{ paddingVertical: theme.spacing.lg }}>
           <SettingMenu
             title="Sign Out"
-            bgColor={theme.colors.error}
-            bgColorDark={theme.colors.error}
-            iconName="log-out"
-            iconType="ionicon"
+            backgroundColor={theme.colors.error}
+            name="log-out"
+            type="ionicon"
             onPress={() =>
               navigation.navigate('AuthStack', { screen: 'GetStarted' })
             }

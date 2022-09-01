@@ -9,8 +9,8 @@ import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
-import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 import { styles } from '../../theme/styles';
+import { LoginScreenNavigationProps } from '../../types/navigation.types';
 import useToggle from '../../utils/hooks/useToggle';
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {

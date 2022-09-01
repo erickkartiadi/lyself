@@ -3,25 +3,19 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { BORDER_RADIUS } from '../../theme/styles';
+import { ProgressActivity } from '../../types/types';
 import { comingSoonToast } from '../../utils/comingSoonToast';
-import ActivityIcon, { Activities } from '../ActivityIcon';
+import ActivityIcon from '../ActivityIcon';
 import BaseCard from '../bases/BaseCard';
 
-export interface ProgressCardProps {
-  id: string;
-  title: string;
-  activityType: Activities;
-  progress: number;
-  time: string;
-}
-
-function ProgressCard({
-  activityType,
+// TODO linear gradient progress color
+function ProgressActivityCard({
+  activity,
   id,
   progress,
   time,
   title,
-}: ProgressCardProps) {
+}: ProgressActivity) {
   const { theme } = useTheme();
 
   return (
@@ -36,8 +30,8 @@ function ProgressCard({
         }}
       >
         <ActivityIcon
-          size={64}
-          activity={activityType}
+          width={64}
+          activityType={activity}
           containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View
@@ -50,7 +44,7 @@ function ProgressCard({
           </Text>
           <LinearProgress
             value={progress / 100}
-            color={theme.colors.secondary}
+            color={theme.colors.success}
             variant="determinate"
             style={{
               borderRadius: BORDER_RADIUS.rounded,
@@ -66,10 +60,10 @@ function ProgressCard({
               justifyContent: 'space-between',
             }}
           >
-            <Text caption style={{ color: theme.colors.secondary }}>
+            <Text caption style={{ color: theme.colors.success }}>
               {`${progress}%`}
             </Text>
-            <Text caption style={{ color: theme.colors.grey1 }}>
+            <Text caption style={{ color: theme.colors.grey3 }}>
               {time}
             </Text>
           </View>
@@ -79,4 +73,4 @@ function ProgressCard({
   );
 }
 
-export default ProgressCard;
+export default ProgressActivityCard;

@@ -7,8 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
 import LinkButton from '../../components/LinkButton';
-import { GetStartedScreenNavigationProps } from '../../navigation/navigation.types';
 import { styles } from '../../theme/styles';
+import { GetStartedScreenNavigationProps } from '../../types/navigation.types';
 
 function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
   const { theme } = useTheme();

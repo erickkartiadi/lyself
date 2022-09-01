@@ -1,23 +1,23 @@
-import { Icon, Text, useTheme } from '@rneui/themed';
+import { Icon, IconProps, Text, useTheme } from '@rneui/themed';
 import React from 'react';
-import { ColorValue, View } from 'react-native';
+import { TextStyle, View } from 'react-native';
 
+import { Status } from '../../types/types';
 import BaseCard from '../bases/BaseCard';
 
-export interface StatusCardProps {
-  title: string;
-  caption: string;
-  value: string;
-  color: ColorValue;
-  icon: {
-    type: string;
-    name: string;
-    size: number;
-    color: ColorValue;
-  };
+export interface StatusCardProps extends Status {
+  textColor: TextStyle['color'];
+  icon: IconProps;
 }
 
-function StatusCard({ title, caption, value, color, icon }: StatusCardProps) {
+function StatusCard({
+  title,
+  caption,
+  value,
+  textColor,
+  icon,
+}: StatusCardProps) {
+  const { ...restIconProps } = icon;
   const { theme } = useTheme();
 
   return (
@@ -32,7 +32,7 @@ function StatusCard({ title, caption, value, color, icon }: StatusCardProps) {
         }}
       >
         <View>
-          <Text h2 h2Style={{ color, marginBottom: 0 }}>
+          <Text h2 h2Style={{ color: textColor, marginBottom: 0 }}>
             {value}
           </Text>
           <Text caption>{caption}</Text>
@@ -43,10 +43,7 @@ function StatusCard({ title, caption, value, color, icon }: StatusCardProps) {
               containerStyle={{
                 marginRight: theme.spacing.sm,
               }}
-              type={icon.type}
-              name={icon.name}
-              size={icon.size}
-              color={icon.color}
+              {...restIconProps}
             />
           </View>
         )}

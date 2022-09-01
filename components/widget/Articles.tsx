@@ -3,12 +3,13 @@ import { FlatList, View } from 'react-native';
 
 import { articlesData } from '../../constant/constant';
 import { styles } from '../../theme/styles';
+import { Article } from '../../types/types';
 import BaseDivider from '../bases/BaseDivider';
-import ArticleCard, { ArticleCardProps } from '../cards/ArticleCard';
+import ArticleCard from '../cards/ArticleCard';
 import SectionTitle from '../SectionTitle';
 
 function Articles() {
-  const renderArticles = ({ item }: { item: ArticleCardProps }) => (
+  const renderArticles = ({ item }: { item: Article }) => (
     <ArticleCard
       uri={item.uri}
       time={item.time}
@@ -33,7 +34,6 @@ function Articles() {
         ]}
         data={articlesData}
         renderItem={renderArticles}
-        keyExtractor={(item: ArticleCardProps) => item.title}
       />
     </View>
   );

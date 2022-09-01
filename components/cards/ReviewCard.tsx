@@ -7,19 +7,13 @@ import {
   View,
 } from 'react-native';
 
+import { Review } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
 import BaseCard from '../bases/BaseCard';
 
-export interface ReviewCardProps {
-  uri: string;
-  name: string;
-  review: string;
-  time: string;
-}
-
 const NUMBER_OF_LINES = 3;
 
-function ReviewCard({ uri, name, review, time }: ReviewCardProps) {
+function ReviewCard({ uri, name, review, time }: Review) {
   const { theme } = useTheme();
   const [isShowMore, toggleIsShowMore] = useToggle(false);
   const [isLengthMore, toggleIsLengthMore] = useToggle(false);

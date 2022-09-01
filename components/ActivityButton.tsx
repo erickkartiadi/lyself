@@ -1,21 +1,19 @@
 import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
-import { PressableProps, View } from 'react-native';
+import { View } from 'react-native';
 
-import ActivityIcon, { Activities } from './ActivityIcon';
-import AnimatedPressable from './AnimatedPressable';
+import ActivityIcon, { ActivityTypeIcon } from './ActivityIcon';
+import AnimatedPressable, { AnimatedPressableProps } from './AnimatedPressable';
 
-interface ActivityButtonProps {
-  activity: Activities;
-  onPress: PressableProps['onPress'];
+interface ActivityButtonProps extends Pick<AnimatedPressableProps, 'onPress'> {
+  activityType: ActivityTypeIcon;
 }
 
-function ActivityButton({ activity, onPress }: ActivityButtonProps) {
+function ActivityButton({ activityType, onPress }: ActivityButtonProps) {
   const { theme } = useTheme();
 
   return (
     <View
-      key={activity}
       style={{
         width: '25%',
       }}
@@ -27,8 +25,9 @@ function ActivityButton({ activity, onPress }: ActivityButtonProps) {
         onPress={onPress}
       >
         <ActivityIcon
+          width={54}
           containerStyle={{ alignSelf: 'center' }}
-          activity={activity}
+          activityType={activityType}
         />
         <Text
           subtitle2
@@ -38,7 +37,7 @@ function ActivityButton({ activity, onPress }: ActivityButtonProps) {
             textTransform: 'capitalize',
           }}
         >
-          {activity}
+          {activityType}
         </Text>
       </AnimatedPressable>
     </View>

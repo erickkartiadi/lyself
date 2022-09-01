@@ -4,7 +4,7 @@ import React from 'react';
 
 import InDevelopmentScreen from '../../screen/Error/InDevelopmentScreen';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
-import { RootStackParamList } from '../param.types';
+import { RootStackParamList } from '../../types/navigation.types';
 import AuthNavigator from './AuthNavigator.routing';
 import ConsultNavigator from './ConsultNavigator.routing';
 import HomeNavigator from './HomeNavigator.routing';

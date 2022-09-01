@@ -63,7 +63,7 @@ const FONT_SIZE = {
   caption: normalize(12.64),
 };
 
-// for fontFamily theme styling or component can't use theme font
+// for fontFamily theme styling or component that can't use theme font
 const FONT_FAMILY = {
   regular: 'Inter',
   medium: 'Inter-Medium',

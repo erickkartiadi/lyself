@@ -2,17 +2,16 @@ import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
-export interface BaseLinkProps {
+export interface BaseLinkProps extends TouchableOpacityProps {
   color?: 'primary' | 'blue';
-  children: React.ReactNode;
 }
 
 function BaseLink({
   onPress,
-  color = 'blue',
   children,
+  color = 'blue',
   ...rest
-}: TouchableOpacityProps & BaseLinkProps) {
+}: React.PropsWithChildren<BaseLinkProps>) {
   const { theme } = useTheme();
 
   return (

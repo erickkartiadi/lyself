@@ -1,37 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import { Avatar, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 
-import { ConsultScreenNavigationProps } from '../../navigation/navigation.types';
+import { ConsultScreenNavigationProps } from '../../types/navigation.types';
+import { Psychiatrist } from '../../types/types';
 import BaseCard from '../bases/BaseCard';
 import BaseLabel from '../bases/BaseLabel';
-import { EducationCardProps } from './EducationCard';
-import { ReviewCardProps } from './ReviewCard';
-
-export type PsychiatristLocation = {
-  name: string;
-  address: string;
-  link: string;
-  uri: string;
-};
-
-export interface PsychiatristCardProps {
-  uri: string;
-  experience: number;
-  rating: number;
-  patients: number;
-  name: string;
-  description: string;
-  specialty: string;
-  otherSpecialties: string[];
-  reviews: ReviewCardProps[];
-  educations: EducationCardProps[];
-  psychiatristLocation: PsychiatristLocation;
-}
 
 function PsychiatristCard({
+  id,
   uri,
   experience,
   specialty,
@@ -42,8 +21,8 @@ function PsychiatristCard({
   description,
   reviews,
   educations,
-  psychiatristLocation,
-}: PsychiatristCardProps) {
+  place,
+}: Psychiatrist) {
   const { theme } = useTheme();
   const navigation =
     useNavigation<ConsultScreenNavigationProps['navigation']>();
@@ -51,6 +30,7 @@ function PsychiatristCard({
     <BaseCard
       onPress={() =>
         navigation.navigate('Psychiatrist', {
+          id,
           uri,
           experience,
           specialty,
@@ -61,7 +41,7 @@ function PsychiatristCard({
           description,
           reviews,
           educations,
-          psychiatristLocation,
+          place,
         })
       }
     >

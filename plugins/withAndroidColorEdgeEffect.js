@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 const { withAndroidStyles } = require('@expo/config-plugins');
 
+// Add `<item name="android:colorEdgeEffect">...</item>` to the styles.xml
 function addAndroidColorEdgeEffectToStyles(androidStyles, color) {
-  // Add `<item name="android:colorEdgeEffect">...</item>` to the styles.xml
   let { resources } = androidStyles;
   if (!resources) {
     resources = {

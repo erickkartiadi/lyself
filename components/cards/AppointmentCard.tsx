@@ -4,23 +4,12 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { BORDER_RADIUS } from '../../theme/styles';
+import { Appointment } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
 import BaseBottomSheet from '../bases/BaseBottomSheet';
 import BaseCard from '../bases/BaseCard';
 
-interface AppointmentCardProps {
-  psychiatristName: string;
-  specialty: string;
-  date: string;
-  time: string;
-}
-
-function AppointmentCard({
-  psychiatristName,
-  specialty,
-  date,
-  time,
-}: AppointmentCardProps) {
+function AppointmentCard({ name, specialty, date, time }: Appointment) {
   const { theme } = useTheme();
   const [isBottomSheetVisible, toggleIsBottomSheetVisible] = useToggle(false);
 
@@ -49,7 +38,7 @@ function AppointmentCard({
           />
           <View style={{ flex: 1 }}>
             <Text h3 h3Style={{ color: theme.colors.white }}>
-              {psychiatristName}
+              {name}
             </Text>
             <Text
               subtitle1
@@ -127,7 +116,7 @@ function AppointmentCard({
         </View>
       </BaseCard>
       <BaseBottomSheet
-        headerTitle={psychiatristName}
+        headerTitle={name}
         onBackdropPress={toggleIsBottomSheetVisible}
         isVisible={isBottomSheetVisible}
       >

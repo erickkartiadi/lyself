@@ -1,4 +1,3 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
   Avatar,
   Button,
@@ -17,19 +16,13 @@ import BaseDivider from '../../components/bases/BaseDivider';
 import BaseIcon from '../../components/bases/BaseIcon';
 import BaseLabel from '../../components/bases/BaseLabel';
 import BaseLink from '../../components/bases/BaseLink';
-import EducationCard, {
-  EducationCardProps,
-} from '../../components/cards/EducationCard';
-import ReviewCard, { ReviewCardProps } from '../../components/cards/ReviewCard';
+import EducationCard from '../../components/cards/EducationCard';
+import ReviewCard from '../../components/cards/ReviewCard';
 import SectionTitle from '../../components/SectionTitle';
 import ViewMoreText from '../../components/ViewMoreText';
-import { ConsultStackParamList } from '../../navigation/param.types';
 import { BORDER_RADIUS, styles } from '../../theme/styles';
-
-export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
-  ConsultStackParamList,
-  'Psychiatrist'
->;
+import { PsychiatristScreenNavigationProps } from '../../types/navigation.types';
+import { Education, Review } from '../../types/types';
 
 function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
   const {
@@ -43,12 +36,14 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
     description,
     reviews,
     educations,
-    psychiatristLocation,
+    place,
   } = route.params;
+
   const { theme } = useTheme();
 
-  const renderReview = ({ item }: { item: ReviewCardProps }) => (
+  const renderReview = ({ item }: { item: Review }) => (
     <ReviewCard
+      id={item.id}
       name={item.name}
       time={item.time}
       uri={item.uri}
@@ -91,10 +86,10 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               }}
             >
               <BaseIcon
-                size={normalize(36)}
-                iconSize={normalize(22)}
-                iconType="ionicon"
-                iconName="heart"
+                width={36}
+                size={22}
+                type="ionicon"
+                name="heart"
                 backgroundColor={colorAlpha(theme.colors.primary, 0.25)}
                 color={theme.colors.primary}
                 containerStyle={{ marginRight: theme.spacing.md }}
@@ -114,10 +109,10 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               }}
             >
               <BaseIcon
-                size={normalize(36)}
-                iconSize={normalize(18)}
-                iconType="ionicon"
-                iconName="briefcase"
+                width={36}
+                size={18}
+                type="ionicon"
+                name="briefcase"
                 backgroundColor={colorAlpha(theme.colors.yellow, 0.25)}
                 color={theme.colors.yellow}
                 containerStyle={{ marginRight: theme.spacing.md }}
@@ -136,10 +131,10 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               }}
             >
               <BaseIcon
-                size={normalize(36)}
-                iconSize={normalize(22)}
-                iconType="ionicon"
-                iconName="people"
+                width={normalize(36)}
+                size={normalize(22)}
+                type="ionicon"
+                name="people"
                 backgroundColor={colorAlpha(theme.colors.blue, 0.25)}
                 color={theme.colors.blue}
                 containerStyle={{ marginRight: theme.spacing.md }}
@@ -177,10 +172,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
           <View style={styles.sectionSmall}>
             <SectionTitle title="Education" />
             {educations
-              .sort(
-                (a: EducationCardProps, b: EducationCardProps) =>
-                  b.startYear - a.startYear
-              )
+              .sort((a: Education, b: Education) => b.startYear - a.startYear)
               .map(
                 ({
                   id,
@@ -228,7 +220,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                   borderColor: theme.colors.grey4,
                   marginRight: theme.spacing.xl,
                 }}
-                source={{ uri: psychiatristLocation.uri }}
+                source={{ uri: place.uri }}
               />
               <View style={{ flex: 1 }}>
                 <Text
@@ -239,7 +231,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                     marginBottom: 0,
                   }}
                 >
-                  {psychiatristLocation.name}
+                  {place.name}
                 </Text>
                 <Text
                   subtitle2
@@ -248,7 +240,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                     flex: 1,
                   }}
                 >
-                  {psychiatristLocation.address}
+                  {place.address}
                 </Text>
                 <BaseLink
                   color="primary"
@@ -259,7 +251,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                   }}
                   onPress={() =>
                     Linking.openURL(
-                      `https://www.google.com/maps/search/${psychiatristLocation.name}`
+                      `https://www.google.com/maps/search/${place.name}`
                     )
                   }
                 >

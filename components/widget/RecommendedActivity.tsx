@@ -1,16 +1,23 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 
-import { recommendedData, RecommendedProps } from '../../constant/constant';
+import { recommendedData } from '../../constant/constant';
 import { styles } from '../../theme/styles';
 import { comingSoonToast } from '../../utils/comingSoonToast';
 import BaseDivider from '../bases/BaseDivider';
-import RecommendedActivityCard from '../cards/RecommendedActivityCard';
+import RecommendedActivityCard, {
+  RecommendedActivityCardProps,
+} from '../cards/RecommendedActivityCard';
 import SectionTitle from '../SectionTitle';
 
 function RecommendedActivity() {
-  const renderRecommended = ({ item }: { item: RecommendedProps }) => (
+  const renderRecommended = ({
+    item,
+  }: {
+    item: RecommendedActivityCardProps;
+  }) => (
     <RecommendedActivityCard
+      id={item.id}
       onPress={comingSoonToast}
       key={item.id}
       activity={item.activity}
@@ -34,7 +41,6 @@ function RecommendedActivity() {
         showsHorizontalScrollIndicator={false}
         data={recommendedData}
         renderItem={renderRecommended}
-        keyExtractor={(item: RecommendedProps) => item.id}
       />
     </View>
   );

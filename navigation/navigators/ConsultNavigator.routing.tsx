@@ -4,7 +4,7 @@ import React from 'react';
 
 import ConsultScreen from '../../screen/Consult/ConsultScreen';
 import PsychiatristScreen from '../../screen/Consult/PsychiatristScreen';
-import { ConsultStackParamList } from '../param.types';
+import { ConsultStackParamList } from '../../types/navigation.types';
 import { navigatorScreenOptions } from './HomeNavigator.routing';
 
 const Stack = createNativeStackNavigator<ConsultStackParamList>();

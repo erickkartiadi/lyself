@@ -3,15 +3,8 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { BORDER_RADIUS } from '../../theme/styles';
+import { Education } from '../../types/types';
 import BaseCard from '../bases/BaseCard';
-
-export interface EducationCardProps {
-  id: number;
-  institutionName: string;
-  uri: string;
-  startYear: number;
-  studyPeriod: number;
-}
 
 function EducationCard({
   id,
@@ -19,7 +12,7 @@ function EducationCard({
   uri,
   startYear,
   studyPeriod,
-}: EducationCardProps) {
+}: Education) {
   const { theme } = useTheme();
 
   return (

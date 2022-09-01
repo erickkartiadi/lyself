@@ -1,25 +1,24 @@
 import { BottomSheet, BottomSheetProps, Text, useTheme } from '@rneui/themed';
-import React from 'react';
+import * as React from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 
 import { styles } from '../../theme/styles';
 
-interface BaseBottomSheetProps {
-  headerTitle?: string;
-  wrapperStyle?: StyleProp<ViewStyle>;
-  children: React.ReactNode;
+interface BaseBottomSheetProps extends BottomSheetProps {
+  headerTitle: string;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 function BaseBottomSheet({
   headerTitle,
   children,
-  wrapperStyle,
-  ...props
-}: BaseBottomSheetProps & BottomSheetProps) {
+  containerStyle,
+  ...rest
+}: React.PropsWithChildren<BaseBottomSheetProps>) {
   const { theme } = useTheme();
 
   return (
-    <BottomSheet {...props}>
+    <BottomSheet {...rest}>
       <View
         style={[
           styles.container,
@@ -29,7 +28,7 @@ function BaseBottomSheet({
             backgroundColor: theme.colors.cardBackground,
             paddingVertical: theme.spacing.xl,
           },
-          wrapperStyle,
+          containerStyle,
         ]}
       >
         {headerTitle && (
@@ -50,8 +49,7 @@ function BaseBottomSheet({
 }
 
 BaseBottomSheet.defaultProps = {
-  headerTitle: null,
-  wrapperStyle: {},
+  containerStyle: {},
 };
 
 export default BaseBottomSheet;

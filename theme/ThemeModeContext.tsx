@@ -2,7 +2,6 @@ import { ThemeMode, useThemeMode } from '@rneui/themed';
 import React, {
   createContext,
   PropsWithChildren,
-  ReactNode,
   useCallback,
   useMemo,
   useState,
@@ -14,9 +13,7 @@ const ThemeModeContext = createContext({
   setThemeMode: (mode: ThemeMode): void => {},
 });
 
-function ThemeModeProvider({
-  children,
-}: PropsWithChildren<{ children: ReactNode }>) {
+function ThemeModeProvider({ children }: PropsWithChildren) {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const { setMode } = useThemeMode();
 

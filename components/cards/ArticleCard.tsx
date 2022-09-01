@@ -3,17 +3,10 @@ import * as Linking from 'expo-linking';
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
+import { Article } from '../../types/types';
 import BaseCard from '../bases/BaseCard';
 
-export type ArticleCardProps = {
-  title: string;
-  publisher: string;
-  time: string;
-  uri: string;
-  url: string;
-};
-
-function ArticleCard({ title, publisher, time, uri, url }: ArticleCardProps) {
+function ArticleCard({ title, publisher, time, uri, url }: Article) {
   const { theme } = useTheme();
 
   const handleOpenArticle = () => {
@@ -21,7 +14,7 @@ function ArticleCard({ title, publisher, time, uri, url }: ArticleCardProps) {
   };
 
   return (
-    <BaseCard width={280} enablePadding={false} onPress={handleOpenArticle}>
+    <BaseCard width={280} enableCardPadding={false} onPress={handleOpenArticle}>
       <Image
         containerStyle={{
           width: '100%',

@@ -16,7 +16,7 @@ function GraphScore() {
       title: 'Heart rate',
       caption: 'bpm',
       value: '85',
-      color: theme.colors.primary,
+      textColor: theme.colors.primary,
       icon: {
         type: 'font-awesome-5',
         name: 'heartbeat',
@@ -28,7 +28,7 @@ function GraphScore() {
       title: 'Blood pressure',
       caption: 'mmHg',
       value: '110/80',
-      color: theme.colors.primary,
+      textColor: theme.colors.primary,
       icon: {
         type: 'fontisto',
         name: 'blood-drop',
@@ -40,7 +40,7 @@ function GraphScore() {
       title: 'Screen time',
       caption: 'more than last week',
       value: '3h 10m',
-      color: theme.colors.secondary,
+      textColor: theme.colors.secondary,
       icon: {
         type: '',
         name: '',
@@ -52,7 +52,7 @@ function GraphScore() {
       title: 'Sleep time',
       caption: 'Yesterday',
       value: '8h 2m',
-      color: theme.colors.purple,
+      textColor: theme.colors.purple,
       icon: {
         type: 'ionicon',
         name: 'moon',
@@ -64,7 +64,7 @@ function GraphScore() {
       title: 'Activity',
       caption: 'Completed',
       value: '12',
-      color: theme.colors.primary,
+      textColor: theme.colors.primary,
       icon: {
         type: 'ionicon',
         name: 'body',
@@ -76,7 +76,7 @@ function GraphScore() {
       title: 'Goals',
       caption: 'Completed',
       value: '8',
-      color: theme.colors.success,
+      textColor: theme.colors.success,
       icon: {
         type: 'ionicon',
         name: 'checkmark-done-circle',
@@ -103,13 +103,13 @@ function GraphScore() {
             justifyContent: 'space-between',
           }}
         >
-          {data.map(({ title, caption, value, color, icon }) => (
+          {data.map(({ title, caption, value, textColor: color, icon }) => (
             <StatusCard
               key={title}
               title={title}
               caption={caption}
               value={value}
-              color={color}
+              textColor={color}
               icon={icon}
             />
           ))}

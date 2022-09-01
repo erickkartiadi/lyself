@@ -8,13 +8,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ActivityButton from '../../components/ActivityButton';
 import BaseDivider from '../../components/bases/BaseDivider';
 import BaseSearchBar from '../../components/bases/BaseSearchBar';
-import PlaylistCard, {
-  PlaylistCardProps,
-} from '../../components/cards/PlaylistCard';
+import PlaylistCard from '../../components/cards/PlaylistCard';
 import SectionTitle from '../../components/SectionTitle';
 import Articles from '../../components/widget/Articles';
-import { ExploreScreenNavigationProps } from '../../navigation/navigation.types';
 import { styles } from '../../theme/styles';
+import { ExploreScreenNavigationProps } from '../../types/navigation.types';
 
 const CLIENT_ID = '189bb29572b34ba29b2c243cae7f6105';
 const discovery = {
@@ -106,37 +104,37 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
         ]}
       >
         <ActivityButton
-          activity="consult"
+          activityType="consult"
           onPress={() =>
             navigation.navigate('ConsultStack', { screen: 'Consult' })
           }
         />
         <ActivityButton
-          activity="meditation"
+          activityType="meditation"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
-          activity="forum"
+          activityType="forum"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
-          activity="music"
+          activityType="music"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
-          activity="todo"
+          activityType="todo"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
-          activity="breathing"
+          activityType="breathing"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
-          activity="article"
+          activityType="article"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
-          activity="other"
+          activityType="other"
           onPress={() => navigation.navigate('InDevelopment')}
         />
       </View>
@@ -153,7 +151,6 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
             contentContainerStyle={styles.containerGutter}
             data={featuredPlaylist}
             renderItem={renderPlaylist}
-            keyExtractor={(item: PlaylistCardProps) => item.id}
           />
         ) : (
           <Button

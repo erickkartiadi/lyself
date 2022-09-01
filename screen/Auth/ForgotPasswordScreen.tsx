@@ -7,8 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
-import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
 import { styles } from '../../theme/styles';
+import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';
 
 function ForgotPasswordScreen({
   navigation,

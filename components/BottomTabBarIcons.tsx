@@ -1,7 +1,7 @@
 import { Icon } from '@rneui/themed';
 import * as React from 'react';
 
-export type TabBarIconOptions = {
+type TabBarIconOptions = {
   focused: boolean;
   color: string;
   size: number;

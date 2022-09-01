@@ -1,63 +1,25 @@
-import { Avatar, Badge, Button, ListItem, Text, useTheme } from '@rneui/themed';
+import { Avatar, Badge, ListItem, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 
 import { styles } from '../theme/styles';
-import { comingSoonToast } from '../utils/comingSoonToast';
+import { Chat } from '../types/types';
+import { SwipeableLeftButton, SwipeableRightButton } from './SwipeableButton';
 
-function LeftSwipeButton() {
-  return (
-    <Button
-      fullWidth
-      onPress={comingSoonToast}
-      color="secondary"
-      title="Archive"
-      radius={0}
-      iconPosition="top"
-      containerStyle={{ marginHorizontal: 0 }}
-      icon={{ name: 'archive', color: 'white', type: 'ionicon' }}
-      buttonStyle={{ minHeight: '100%' }}
-    />
-  );
-}
-function RightSwipeButton() {
-  return (
-    <Button
-      fullWidth
-      onPress={comingSoonToast}
-      color="primary"
-      title="Delete"
-      radius={0}
-      iconPosition="top"
-      containerStyle={{ marginHorizontal: 0 }}
-      icon={{ name: 'trash-bin', color: 'white', type: 'ionicon' }}
-      buttonStyle={{ minHeight: '100%' }}
-    />
-  );
-}
-
-export interface ChatProps {
-  name: string;
-  text: string;
-  time: string;
-  unread: number;
-  avatarUrl: string;
-}
-
-function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
+function ChatBox({ name, text, time, unread, uri }: Chat) {
   const { theme } = useTheme();
 
   return (
     <ListItem.Swipeable
-      leftContent={LeftSwipeButton}
-      rightContent={RightSwipeButton}
+      leftContent={SwipeableLeftButton}
+      rightContent={SwipeableRightButton}
       key={name}
       containerStyle={[
         styles.container,
         { backgroundColor: theme.colors.background },
       ]}
     >
-      <Avatar size={62} rounded source={{ uri: avatarUrl }} />
+      <Avatar size={62} rounded source={{ uri }} />
       <ListItem.Content>
         <View
           style={{
@@ -108,4 +70,4 @@ function Chat({ name, text, time, unread, avatarUrl }: ChatProps) {
   );
 }
 
-export default Chat;
+export default ChatBox;

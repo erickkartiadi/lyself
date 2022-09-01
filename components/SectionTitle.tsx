@@ -6,9 +6,9 @@ import LinkButton from './LinkButton';
 
 interface SectionTitleProps {
   title: string;
-  showRightButton?: boolean;
-  rightButtonComponent?: JSX.Element;
   screen?: string;
+  showRightButton?: boolean;
+  rightButtonComponent?: React.ReactNode;
 }
 
 function SectionTitle({

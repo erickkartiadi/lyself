@@ -1,53 +1,27 @@
 import { Icon, Text, useTheme } from '@rneui/themed';
-import React, { useContext } from 'react';
-import { ColorValue, Pressable, PressableProps, View } from 'react-native';
+import React from 'react';
+import { Pressable, PressableProps, View } from 'react-native';
 
 import { BORDER_RADIUS } from '../theme/styles';
-import { ThemeModeContext } from '../theme/ThemeModeContext';
-import BaseIcon from './bases/BaseIcon';
+import BaseIcon, { BaseIconProps } from './bases/BaseIcon';
 
-interface SettingMenuProp {
+interface SettingMenuProp extends Omit<BaseIconProps, 'width'> {
   title: string;
-  bgColor: ColorValue;
-  bgColorDark: ColorValue;
-  iconName: string;
-  iconType: string;
-  rightComponent?: JSX.Element;
-  value?: string | undefined;
+  caption?: string;
   onPress?: PressableProps['onPress'];
-}
-
-function ChevronIcon(value: string | undefined) {
-  const { theme } = useTheme();
-
-  return (
-    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-      <Text style={{ color: theme.colors.grey2 }} caption>
-        {value}
-      </Text>
-      <Icon
-        size={21}
-        containerStyle={{ marginLeft: 3 }}
-        color={theme.colors.grey3}
-        type="ionicon"
-        name="chevron-forward"
-      />
-    </View>
-  );
+  rightComponent?: React.ReactNode;
 }
 
 function SettingMenu({
   title,
-  bgColor,
-  bgColorDark,
-  iconName,
-  iconType,
-  rightComponent: RightComponent,
-  value,
+  rightComponent,
+  caption,
   onPress,
+  backgroundColor,
+  type,
+  name,
 }: SettingMenuProp) {
   const { theme } = useTheme();
-  const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
     <Pressable
@@ -71,16 +45,16 @@ function SettingMenu({
         }}
       >
         <BaseIcon
-          backgroundColor={isDarkMode ? bgColorDark : bgColor}
-          iconSize={18}
-          size={32}
+          backgroundColor={backgroundColor}
           color={theme.colors.white}
+          size={18}
+          width={32}
           containerStyle={{
             marginRight: theme.spacing.lg,
             borderRadius: BORDER_RADIUS.md,
           }}
-          iconType={iconType}
-          iconName={iconName}
+          type={type}
+          name={name}
         />
         <Text>{title}</Text>
       </View>
@@ -89,7 +63,20 @@ function SettingMenu({
           alignItems: 'center',
         }}
       >
-        {RightComponent || ChevronIcon(value)}
+        {rightComponent || (
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ color: theme.colors.grey3 }} caption>
+              {caption}
+            </Text>
+            <Icon
+              size={20}
+              containerStyle={{ marginLeft: theme.spacing.sm }}
+              color={theme.colors.grey3}
+              type="ionicon"
+              name="chevron-forward-outline"
+            />
+          </View>
+        )}
       </View>
     </Pressable>
   );
@@ -97,7 +84,7 @@ function SettingMenu({
 
 SettingMenu.defaultProps = {
   rightComponent: null,
-  value: '',
+  caption: '',
   onPress: (): void => {},
 };
 

@@ -1,11 +1,30 @@
+import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import {
-  AuthStackParamList,
-  ConsultStackParamList,
-  HomeTabParamList,
-  RootStackParamList,
-} from './param.types';
+import { Psychiatrist } from './types';
+
+type RootStackParamList = {
+  AuthStack: NavigatorScreenParams<AuthStackParamList>;
+  HomeTab: NavigatorScreenParams<HomeTabParamList>;
+  ConsultStack: NavigatorScreenParams<ConsultStackParamList>;
+  InDevelopment: undefined;
+};
+type AuthStackParamList = {
+  GetStarted: undefined;
+  Login: undefined;
+  Register: undefined;
+  ForgotPassword: undefined;
+};
+type HomeTabParamList = {
+  Home: undefined;
+  Explore: undefined;
+  Chat: undefined;
+  Account: undefined;
+};
+type ConsultStackParamList = {
+  Consult: undefined;
+  Psychiatrist: Psychiatrist;
+};
 
 type GetStartedScreenNavigationProps = NativeStackScreenProps<
   AuthStackParamList & RootStackParamList,
@@ -42,12 +61,22 @@ type ConsultScreenNavigationProps = NativeStackScreenProps<
   'Consult'
 >;
 
+type PsychiatristScreenNavigationProps = NativeStackScreenProps<
+  ConsultStackParamList,
+  'Psychiatrist'
+>;
+
 export {
   AccountScreenNavigationProps,
+  AuthStackParamList,
   ConsultScreenNavigationProps,
+  ConsultStackParamList,
   ExploreScreenNavigationProps,
   ForgotPasswordScreenNavigationProps,
   GetStartedScreenNavigationProps,
+  HomeTabParamList,
   LoginScreenNavigationProps,
+  PsychiatristScreenNavigationProps,
   RegisterScreenNavigationProps,
+  RootStackParamList,
 };

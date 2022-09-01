@@ -1,4 +1,4 @@
-import { Text, useTheme } from '@rneui/themed';
+import { Text, TextProps, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import { useCallback } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
@@ -6,12 +6,12 @@ import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 import useToggle from '../utils/hooks/useToggle';
 import BaseLink from './bases/BaseLink';
 
-interface ViewMoreTextProps {
-  numberOfLines?: number;
-  children: React.ReactNode;
-}
+type ViewMoreTextProps = Pick<TextProps, 'numberOfLines'>;
 
-function ViewMoreText({ numberOfLines = 4, children }: ViewMoreTextProps) {
+function ViewMoreText({
+  numberOfLines = 4,
+  children,
+}: React.PropsWithChildren<ViewMoreTextProps>) {
   const [isShowMore, toggleIsShowMore] = useToggle(false);
   const [isLengthMore, toggleIsLengthMore] = useToggle(false);
   const { theme } = useTheme();
@@ -32,7 +32,7 @@ function ViewMoreText({ numberOfLines = 4, children }: ViewMoreTextProps) {
         {children}
       </Text>
 
-      {isLengthMore ? (
+      {isLengthMore && (
         <BaseLink
           color="primary"
           style={{ marginTop: theme.spacing.md }}
@@ -40,13 +40,9 @@ function ViewMoreText({ numberOfLines = 4, children }: ViewMoreTextProps) {
         >
           {isShowMore ? 'View less' : 'View more'}
         </BaseLink>
-      ) : null}
+      )}
     </>
   );
 }
-
-ViewMoreText.defaultProps = {
-  numberOfLines: 4,
-};
 
 export default ViewMoreText;

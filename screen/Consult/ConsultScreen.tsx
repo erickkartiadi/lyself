@@ -4,16 +4,16 @@ import { FlatList } from 'react-native-gesture-handler';
 
 import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import AppointmentCard from '../../components/cards/AppointmentCard';
-import PsychiatristCard, {
-  PsychiatristCardProps,
-} from '../../components/cards/PsychiatristCard';
+import PsychiatristCard from '../../components/cards/PsychiatristCard';
 import SectionTitle from '../../components/SectionTitle';
-import { psychiatristData, scheduleData } from '../../constant/constant';
+import { appointmentData, psychiatristData } from '../../constant/constant';
 import { styles } from '../../theme/styles';
+import { Psychiatrist } from '../../types/types';
 
 function ConsultScreen() {
   const renderTopPsychiatrist = ({
     item: {
+      id,
       uri,
       experience,
       name,
@@ -24,13 +24,14 @@ function ConsultScreen() {
       description,
       reviews,
       educations,
-      psychiatristLocation,
+      place,
     },
   }: {
-    item: PsychiatristCardProps;
+    item: Psychiatrist;
   }) => (
     <PsychiatristCard
-      psychiatristLocation={psychiatristLocation}
+      id={id}
+      place={place}
       patients={patients}
       uri={uri}
       experience={experience}
@@ -54,7 +55,7 @@ function ConsultScreen() {
           <BaseSearchBar placeholder="Find a psychiatrist" />
           <View style={styles.section}>
             <SectionTitle title="My Appointment" showRightButton />
-            <AppointmentCard {...scheduleData} />
+            <AppointmentCard {...appointmentData[0]} />
           </View>
           <View style={{ marginTop: styles.section.paddingVertical }}>
             <SectionTitle title="Top Psychiatrist" />

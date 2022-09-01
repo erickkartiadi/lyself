@@ -1,49 +1,46 @@
-import { Icon } from '@rneui/themed';
-import React from 'react';
-import { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import { Icon, IconProps } from '@rneui/themed';
+import * as React from 'react';
+import { ColorValue, FlexStyle } from 'react-native';
 
 import { BORDER_RADIUS } from '../../theme/styles';
+
+export interface BaseIconProps
+  extends Pick<
+    IconProps,
+    'containerStyle' | 'color' | 'size' | 'type' | 'name'
+  > {
+  backgroundColor: ColorValue;
+  width: FlexStyle['width'];
+}
 
 function BaseIcon({
   containerStyle,
   backgroundColor,
-  size,
+  width,
   color,
-  iconSize,
-  iconType,
-  iconName,
-}: {
-  containerStyle?: StyleProp<ViewStyle>;
-  backgroundColor: ColorValue;
-  size: number | undefined;
-  color: ColorValue | number | undefined;
-  iconSize: number;
-  iconType: string;
-  iconName: string;
-}) {
+  size,
+  type,
+  name,
+}: BaseIconProps) {
   return (
     <Icon
       containerStyle={[
         {
           backgroundColor,
           borderRadius: BORDER_RADIUS.rounded,
-          width: size,
+          width,
           aspectRatio: 1,
           justifyContent: 'center',
           alignContent: 'center',
         },
         containerStyle,
       ]}
-      size={iconSize}
+      size={size}
       color={color}
-      type={iconType}
-      name={iconName}
+      type={type}
+      name={name}
     />
   );
 }
-
-BaseIcon.defaultProps = {
-  containerStyle: {},
-};
 
 export default BaseIcon;

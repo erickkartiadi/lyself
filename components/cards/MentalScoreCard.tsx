@@ -6,7 +6,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import { BORDER_RADIUS, FONT_FAMILY, GUTTER_SIZE } from '../../theme/styles';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
-import generateRandomNumber from '../../utils/generateRandomNumber';
+import { generateRandomNumber } from '../../utils/generateRandom';
 import BaseCard from '../bases/BaseCard';
 
 function Emoji({ fill }: { fill: number }) {
@@ -27,7 +27,7 @@ function MentalScoreCard() {
   const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
-    <BaseCard enablePadding={false}>
+    <BaseCard enableCardPadding={false}>
       <View
         style={{
           flex: 1,

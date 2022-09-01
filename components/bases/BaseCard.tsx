@@ -1,6 +1,7 @@
+import { ThemeSpacing } from '@rneui/base';
 import { Card, CardProps, useTheme } from '@rneui/themed';
 import * as React from 'react';
-import { PressableProps } from 'react-native';
+import { FlexStyle, StyleProp, ViewStyle } from 'react-native';
 
 import { BORDER_RADIUS } from '../../theme/styles';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
@@ -8,24 +9,24 @@ import AnimatedPressable, {
   AnimatedPressableProps,
 } from '../AnimatedPressable';
 
-interface BaseCardProps {
-  enablePadding?: boolean;
-  width?: string | number;
+interface BaseCardProps extends AnimatedPressableProps {
+  width?: FlexStyle['width'];
+  cardPadding?: keyof ThemeSpacing;
+  enableCardPadding?: boolean;
   cardStyle?: CardProps['containerStyle'];
-  cardPadding?: 'lg' | 'xl';
-  enablePressAnimation?: AnimatedPressableProps['enablePressAnimation'];
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 function BaseCard({
   children,
   onPress,
   containerStyle,
-  enablePadding,
+  enableCardPadding,
   cardStyle,
   width,
   cardPadding = 'xl',
   enablePressAnimation,
-}: React.PropsWithChildren<CardProps & BaseCardProps> & PressableProps) {
+}: BaseCardProps) {
   const { theme } = useTheme();
   const { isDarkMode } = React.useContext(ThemeModeContext);
 
@@ -49,7 +50,7 @@ function BaseCard({
             shadowRadius: 4.65,
             elevation: 12,
             borderWidth: 0,
-            padding: enablePadding ? theme.spacing[cardPadding] : 0,
+            padding: enableCardPadding ? theme.spacing[cardPadding] : 0,
             borderRadius: BORDER_RADIUS.lg,
             overflow: 'hidden',
             backgroundColor: theme.colors.cardBackground,
@@ -66,10 +67,10 @@ function BaseCard({
 }
 
 BaseCard.defaultProps = {
-  enablePadding: true,
+  enableCardPadding: true,
   width: '100%',
   cardPadding: 'xl',
   cardStyle: {},
-  enablePressAnimation: true,
+  containerStyle: {},
 };
 export default BaseCard;
