@@ -1,5 +1,10 @@
-import { lightColors, ThemeSpacing } from '@rneui/base';
-import { Card, CardProps, useTheme } from '@rneui/themed';
+import {
+  Card,
+  CardProps,
+  lightColors,
+  ThemeSpacing,
+  useTheme,
+} from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as React from 'react';
 import { FlexStyle, StyleProp, ViewStyle } from 'react-native';
@@ -71,4 +76,5 @@ BaseCard.defaultProps = {
   cardStyle: {},
   containerStyle: {},
 };
+
 export default BaseCard;

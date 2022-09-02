@@ -10,7 +10,7 @@ interface BaseAvatarProps extends AvatarProps {
 }
 
 function BaseAvatar({
-  size = BaseAvatar.defaultProps.size,
+  size = 3,
   rounded,
   containerStyle,
   ...rest

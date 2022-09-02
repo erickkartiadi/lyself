@@ -1,5 +1,4 @@
-import { Icon } from '@rneui/base';
-import { Button, Text, useTheme } from '@rneui/themed';
+import { Button, Icon, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { Dimensions, Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
