@@ -40,8 +40,8 @@ function BaseLabel({
   return (
     <View
       style={{
-        shadowColor: colorAlpha(lightColors.black, 0.25),
         ...(!color && {
+          shadowColor: colorAlpha(lightColors.black, 0.25),
           shadowOffset: {
             width: 0,
             height: 1,

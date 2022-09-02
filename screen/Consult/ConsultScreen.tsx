@@ -54,7 +54,11 @@ function ConsultScreen() {
         <>
           <BaseSearchBar placeholder="Find a psychiatrist" />
           <View style={styles.section}>
-            <SectionTitle title="My Appointment" showRightButton />
+            <SectionTitle
+              title="My Appointment"
+              showRightButton
+              screen="Appointment"
+            />
             <AppointmentCard {...appointmentData[0]} />
           </View>
           <View style={{ marginTop: styles.section.paddingVertical }}>

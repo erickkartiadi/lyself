@@ -24,6 +24,7 @@ type HomeTabParamList = {
 type ConsultStackParamList = {
   Consult: undefined;
   Psychiatrist: Psychiatrist;
+  Appointment: undefined;
 };
 
 type GetStartedScreenNavigationProps = NativeStackScreenProps<

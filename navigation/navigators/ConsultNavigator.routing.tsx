@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from '@rneui/themed';
 import React from 'react';
 
+import AppointmentScreen from '../../screen/Consult/AppointmentScreen';
 import ConsultScreen from '../../screen/Consult/ConsultScreen';
 import PsychiatristScreen from '../../screen/Consult/PsychiatristScreen';
 import { ConsultStackParamList } from '../../types/navigation.types';
@@ -27,6 +28,11 @@ function ConsultNavigator() {
         name="Psychiatrist"
         component={PsychiatristScreen}
         options={{ headerTitle: '' }}
+      />
+      <Stack.Screen
+        name="Appointment"
+        component={AppointmentScreen}
+        options={{ headerTitle: 'My Appointment' }}
       />
     </Stack.Navigator>
   );

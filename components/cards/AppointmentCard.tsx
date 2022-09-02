@@ -19,7 +19,6 @@ function AppointmentCard({ name, specialty, date, time, uri }: Appointment) {
       <BaseCard
         cardStyle={{
           backgroundColor: theme.colors.primary,
-          flex: 1,
         }}
         onPress={() => toggleIsBottomSheetVisible()}
       >

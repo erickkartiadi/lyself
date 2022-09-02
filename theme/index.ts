@@ -1,13 +1,13 @@
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import {
-  ButtonProps,
-  createTheme,
-  CreateThemeOptions,
-  normalize,
-  TextProps,
-} from '@rneui/themed';
+import { ButtonProps, createTheme, normalize, TextProps } from '@rneui/themed';
 
-import { BORDER_RADIUS, FONT_FAMILY, FONT_SIZE, THEME_SPACING } from './styles';
+import {
+  BORDER_RADIUS,
+  FONT_FAMILY,
+  FONT_SIZE,
+  GUTTER_SIZE,
+  THEME_SPACING,
+} from './styles';
 
 const lightColors = {
   primary: '#f55c7a',
@@ -67,8 +67,10 @@ const darkColors = {
   },
 };
 
-const myTheme: CreateThemeOptions = createTheme({
+const myTheme = createTheme({
   spacing: { ...THEME_SPACING },
+  lightColors,
+  darkColors,
   components: {
     Input: () => ({
       labelStyle: {
@@ -208,9 +210,20 @@ const myTheme: CreateThemeOptions = createTheme({
       size: 'lg',
       uppercase: true,
     }),
+    Tab: {
+      variant: 'primary',
+      containerStyle: {
+        padding: THEME_SPACING.md,
+        borderRadius: BORDER_RADIUS.rounded,
+        margin: GUTTER_SIZE,
+      },
+    },
+    TabItem: {
+      containerStyle: {
+        borderRadius: BORDER_RADIUS.rounded,
+      },
+    },
   },
-  lightColors,
-  darkColors,
 });
 
 const navThemeLight: Theme = {

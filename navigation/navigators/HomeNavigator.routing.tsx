@@ -23,7 +23,7 @@ export const navigatorScreenOptions = {
   headerShadowVisible: false,
   headerTitleStyle: {
     fontFamily: FONT_FAMILY.bold,
-    fontSize: FONT_SIZE.heading4,
+    fontSize: FONT_SIZE.body1,
   },
   headerRight: RightHeader,
 };
