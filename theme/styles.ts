@@ -18,6 +18,7 @@ const BORDER_RADIUS = {
   rounded: 999,
   md: THEME_SPACING.md,
   lg: THEME_SPACING.lg,
+  xl: THEME_SPACING.xl,
 };
 
 const GUTTER_SIZE = THEME_SPACING.xl;
@@ -39,8 +40,11 @@ const styles = StyleSheet.create({
   section: {
     paddingVertical: THEME_SPACING.xl,
   },
-  sectionSmall: {
+  sectionMedium: {
     paddingVertical: THEME_SPACING.lg,
+  },
+  sectionSmall: {
+    paddingVertical: THEME_SPACING.md,
   },
 
   // fix flatList shadow cut

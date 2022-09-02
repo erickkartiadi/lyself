@@ -3,9 +3,11 @@ import dayjs from 'dayjs';
 import React from 'react';
 import { View } from 'react-native';
 
+import { user } from '../../constant/constant';
+
 function LeftHeader() {
   const currentHour = dayjs().hour();
-  const name = 'Erick Kartiadi';
+  const { name } = user;
   let greeting = 'Howdy';
 
   if (currentHour >= 5 && currentHour <= 11) greeting = 'Good morning';

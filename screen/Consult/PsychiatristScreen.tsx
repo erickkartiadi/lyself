@@ -149,11 +149,11 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
           </View>
         </View>
         <View style={styles.section}>
-          <View style={styles.sectionSmall}>
+          <View style={styles.sectionMedium}>
             <SectionTitle title="About me" />
             <ViewMoreText>{description}</ViewMoreText>
           </View>
-          <View style={styles.sectionSmall}>
+          <View style={styles.sectionMedium}>
             <SectionTitle title="Reviews" />
             <FlatList
               horizontal
@@ -169,7 +169,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               renderItem={renderReview}
             />
           </View>
-          <View style={styles.sectionSmall}>
+          <View style={styles.sectionMedium}>
             <SectionTitle title="Education" />
             {educations
               .sort((a: Education, b: Education) => b.startYear - a.startYear)
@@ -192,7 +192,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                 )
               )}
           </View>
-          <View style={styles.sectionSmall}>
+          <View style={styles.sectionMedium}>
             <SectionTitle title="Other Specialties" />
             <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
               {otherSpecialties
@@ -205,7 +205,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                 ))}
             </View>
           </View>
-          <View style={styles.sectionSmall}>
+          <View style={styles.sectionMedium}>
             <SectionTitle title="Location" />
             <View
               style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
@@ -262,7 +262,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
           </View>
         </View>
       </ScrollView>
-      <View style={[styles.containerGutter, styles.sectionSmall]}>
+      <View style={[styles.containerGutter, styles.section]}>
         <Button fullWidth>Make appointment</Button>
       </View>
     </View>

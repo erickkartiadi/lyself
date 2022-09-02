@@ -29,6 +29,27 @@ const MONTHS = [
   'December',
 ];
 
+const PSYCHIATRIST_AVATAR_URI = [
+  'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/5214995/pexels-photo-5214995.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  'https://images.pexels.com/photos/5452268/pexels-photo-5452268.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  'https://images.pexels.com/photos/6749777/pexels-photo-6749777.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  'https://images.pexels.com/photos/7904485/pexels-photo-7904485.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/8560209/pexels-photo-8560209.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  'https://images.pexels.com/photos/4098150/pexels-photo-4098150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/7176320/pexels-photo-7176320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/4989166/pexels-photo-4989166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/5998466/pexels-photo-5998466.jpeg?auto=compress&cs=tinysrgb&w=1600',
+  'https://images.pexels.com/photos/8460090/pexels-photo-8460090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/5998474/pexels-photo-5998474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/5452292/pexels-photo-5452292.jpeg?auto=compress&cs=tinysrgb&w=1600',
+];
+
 const generateLorem = new LoremIpsum({
   sentencesPerParagraph: {
     max: 6,
@@ -67,14 +88,19 @@ const generateRandomMonth = () =>
 
 const generateRandomName = () =>
   uniqueNamesGenerator({
-    dictionaries: [names, names],
+    dictionaries: [names, names, names],
     separator: ' ',
-    length: generateRandomNumber(0, 3),
+    length: generateRandomNumber(0, 4),
     style: 'capital',
   });
 
+const generateRandomPsychiatristUri = () =>
+  PSYCHIATRIST_AVATAR_URI[
+    generateRandomNumber(0, PSYCHIATRIST_AVATAR_URI.length)
+  ];
+
 const generateRandomImageUri = (size: number) =>
-  `https://picsum.photos/id/${generateRandomNumber(1, 1000)}/${size}`;
+  `https://picsum.photos/id/${generateRandomNumber(1, 100)}/${size}`;
 
 const generateRandomPortraitUri = (size: number) =>
   `https://i.pravatar.cc/${size}?u=${generateRandomNumber(1, 100)}`;
@@ -95,6 +121,7 @@ export {
   generateRandomName,
   generateRandomNumber,
   generateRandomPortraitUri,
+  generateRandomPsychiatristUri,
   generateRandomTimesAgo,
   generateRandomUUID,
 };

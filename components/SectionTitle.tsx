@@ -29,7 +29,7 @@ function SectionTitle({
       }}
     >
       <>
-        <Text h4 h4Style={{ marginBottom: 0 }}>
+        <Text subtitle1 style={{ marginBottom: 0 }}>
           {title}
         </Text>
         {showRightButton && !rightButtonComponent && (
@@ -39,7 +39,7 @@ function SectionTitle({
             }}
             color="primary"
           >
-            See More{' '}
+            See All
           </LinkButton>
         )}
         {showRightButton && rightButtonComponent && (

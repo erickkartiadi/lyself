@@ -2,6 +2,7 @@ import { Icon, useTheme } from '@rneui/themed';
 import React, { useContext, useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+import { BORDER_RADIUS } from '../theme/styles';
 import { ThemeModeContext } from '../theme/ThemeModeContext';
 
 function ArrowDownIcon() {
@@ -73,10 +74,10 @@ function Dropdown() {
         backgroundColor: isDarkMode ? theme.colors.grey1 : theme.colors.white,
         borderColor: theme.colors.greyOutline,
         marginTop: theme.spacing.lg * -1,
-        borderTopLeftRadius: theme.spacing.md,
-        borderTopRightRadius: theme.spacing.md,
-        borderBottomLeftRadius: theme.spacing.md,
-        borderBottomRightRadius: theme.spacing.md,
+        borderTopLeftRadius: BORDER_RADIUS.md,
+        borderTopRightRadius: BORDER_RADIUS.md,
+        borderBottomLeftRadius: BORDER_RADIUS.md,
+        borderBottomRightRadius: BORDER_RADIUS.md,
       }}
     />
   );

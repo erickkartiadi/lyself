@@ -7,7 +7,7 @@ import {
   TextProps,
 } from '@rneui/themed';
 
-import { FONT_FAMILY, FONT_SIZE, THEME_SPACING } from './styles';
+import { BORDER_RADIUS, FONT_FAMILY, FONT_SIZE, THEME_SPACING } from './styles';
 
 const lightColors = {
   primary: '#f55c7a',
@@ -72,10 +72,10 @@ const myTheme: CreateThemeOptions = createTheme({
   components: {
     Input: () => ({
       labelStyle: {
+        fontFamily: FONT_FAMILY.bold,
         fontSize: FONT_SIZE.body1,
         letterSpacing: normalize(-0.011),
         lineHeight: normalize(22),
-        fontFamily: FONT_FAMILY.bold,
         fontWeight: '700',
       },
       inputStyle: {
@@ -101,13 +101,14 @@ const myTheme: CreateThemeOptions = createTheme({
         fontFamily: FONT_FAMILY.regular,
       },
       inputStyle: {
+        fontFamily: FONT_FAMILY.regular,
         fontSize: FONT_SIZE.body2,
         letterSpacing: normalize(-0.006),
         lineHeight: normalize(20),
       },
     },
     CheckBox: {
-      fontFamily: 'Inter-Medium',
+      fontFamily: FONT_FAMILY.medium,
       textStyle: {
         fontWeight: '500',
         fontSize: FONT_SIZE.body2,
@@ -158,6 +159,7 @@ const myTheme: CreateThemeOptions = createTheme({
       style: {
         // default style
         ...{
+          fontFamily: FONT_FAMILY.regular,
           fontSize: FONT_SIZE.body1,
           letterSpacing: normalize(-0.011),
           lineHeight: normalize(22),
@@ -193,7 +195,7 @@ const myTheme: CreateThemeOptions = createTheme({
       },
     }),
     Button: (props: ButtonProps) => ({
-      radius: 100,
+      radius: BORDER_RADIUS.rounded,
       containerStyle: {
         alignItems: props.fullWidth ? 'stretch' : 'center',
       },
