@@ -17,9 +17,16 @@ import {
   generateRandomName,
   generateRandomNumber,
   generateRandomPortraitUri,
+  generateRandomPsychiatristUri,
   generateRandomTimesAgo,
   generateRandomUUID,
 } from '../utils/generateRandom';
+
+export const user = {
+  name: 'Erick Kartiadi',
+  email: 'erickcartiady@gmail.com',
+  uri: generateRandomImageUri(100),
+};
 
 export const progressData: ProgressActivity[] = new Array(
   generateRandomNumber(1, 4)
@@ -36,6 +43,7 @@ export const progressData: ProgressActivity[] = new Array(
 export const appointmentData: Appointment[] = [
   {
     name: `Dr. ${generateRandomName()}`,
+    uri: generateRandomPsychiatristUri(),
     specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
     date: `${generateRandomDay().slice(0, 3)}, ${generateRandomNumber(
       1,
@@ -51,7 +59,7 @@ export const psychiatristData: Array<Psychiatrist> = new Array(
   .fill({})
   .map(() => ({
     id: generateRandomUUID(),
-    uri: generateRandomPortraitUri(300),
+    uri: generateRandomPsychiatristUri(),
     experience: generateRandomNumber(1, 12),
     rating: generateRandomNumber(80, 100),
     patients: generateRandomNumber(20, 100),

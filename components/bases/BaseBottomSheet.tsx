@@ -5,7 +5,7 @@ import { StyleProp, View, ViewStyle } from 'react-native';
 import { styles } from '../../theme/styles';
 
 interface BaseBottomSheetProps extends BottomSheetProps {
-  headerTitle: string;
+  headerTitle?: string;
   containerStyle?: StyleProp<ViewStyle>;
 }
 
@@ -23,19 +23,18 @@ function BaseBottomSheet({
         style={[
           styles.container,
           {
-            borderTopStartRadius: theme.spacing.xl,
-            borderTopEndRadius: theme.spacing.xl,
             backgroundColor: theme.colors.cardBackground,
-            paddingVertical: theme.spacing.xl,
+            paddingTop: theme.spacing.md,
+            paddingBottom: theme.spacing.xl,
           },
           containerStyle,
         ]}
       >
-        {headerTitle && (
+        {headerTitle !== '' && (
           <Text
-            h4
-            h4Style={{
-              marginVertical: theme.spacing.xs,
+            subtitle1
+            style={{
+              marginTop: theme.spacing.md,
             }}
           >
             {headerTitle}
@@ -49,6 +48,7 @@ function BaseBottomSheet({
 }
 
 BaseBottomSheet.defaultProps = {
+  headerTitle: '',
   containerStyle: {},
 };
 

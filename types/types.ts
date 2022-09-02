@@ -94,7 +94,7 @@ type Psychiatrist = {
   patients: number;
 };
 
-type Appointment = Pick<Psychiatrist, 'name' | 'specialty'> & {
+type Appointment = Pick<Psychiatrist, 'name' | 'specialty' | 'uri'> & {
   time: string;
   date: string;
 };

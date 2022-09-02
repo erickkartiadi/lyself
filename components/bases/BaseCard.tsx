@@ -51,7 +51,7 @@ function BaseCard({
             elevation: 12,
             borderWidth: 0,
             padding: enableCardPadding ? theme.spacing[cardPadding] : 0,
-            borderRadius: BORDER_RADIUS.lg,
+            borderRadius: BORDER_RADIUS.xl,
             overflow: 'hidden',
             backgroundColor: theme.colors.cardBackground,
             marginTop: theme.spacing.md,
