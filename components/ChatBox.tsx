@@ -1,9 +1,10 @@
-import { Avatar, Badge, ListItem, Text, useTheme } from '@rneui/themed';
+import { Badge, ListItem, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 
 import { styles } from '../theme/styles';
 import { Chat } from '../types/types';
+import BaseAvatar from './bases/BaseAvatar';
 import { SwipeableLeftButton, SwipeableRightButton } from './SwipeableButton';
 
 function ChatBox({ name, text, time, unread, uri }: Chat) {
@@ -19,7 +20,7 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
         { backgroundColor: theme.colors.background },
       ]}
     >
-      <Avatar size={62} rounded source={{ uri }} />
+      <BaseAvatar rounded size={3.5} source={{ uri }} />
       <ListItem.Content>
         <View
           style={{

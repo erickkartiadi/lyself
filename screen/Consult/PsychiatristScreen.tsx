@@ -1,17 +1,11 @@
-import {
-  Avatar,
-  Button,
-  Image,
-  normalize,
-  Text,
-  useTheme,
-} from '@rneui/themed';
+import { Button, normalize, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
 import { View } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
+import BaseAvatar from '../../components/bases/BaseAvatar';
 import BaseDivider from '../../components/bases/BaseDivider';
 import BaseIcon from '../../components/bases/BaseIcon';
 import BaseLabel from '../../components/bases/BaseLabel';
@@ -20,7 +14,7 @@ import EducationCard from '../../components/cards/EducationCard';
 import ReviewCard from '../../components/cards/ReviewCard';
 import SectionTitle from '../../components/SectionTitle';
 import ViewMoreText from '../../components/ViewMoreText';
-import { BORDER_RADIUS, styles } from '../../theme/styles';
+import { styles } from '../../theme/styles';
 import { PsychiatristScreenNavigationProps } from '../../types/navigation.types';
 import { Education, Review } from '../../types/types';
 
@@ -59,11 +53,11 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.section}>
-          <Avatar
+          <BaseAvatar
             source={{ uri }}
-            size={120}
+            size={7}
             rounded
-            containerStyle={{ marginBottom: theme.spacing.lg }}
+            containerStyle={{ marginBottom: theme.spacing.xl }}
           />
           <View>
             <Text h2>{name}</Text>
@@ -208,16 +202,16 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
           <View style={styles.sectionMedium}>
             <SectionTitle title="Location" />
             <View
-              style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: theme.spacing.md,
+              }}
             >
-              <Image
-                style={{
-                  flex: 1,
-                  aspectRatio: 1,
-                  width: 100,
-                  borderRadius: BORDER_RADIUS.md,
-                  borderWidth: theme.spacing.xs,
-                  borderColor: theme.colors.grey4,
+              <BaseAvatar
+                size={6}
+                containerStyle={{
                   marginRight: theme.spacing.xl,
                 }}
                 source={{ uri: place.uri }}

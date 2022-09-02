@@ -1,8 +1,9 @@
-import { Avatar, Text, useTheme } from '@rneui/themed';
+import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import BaseAvatar from '../../components/bases/BaseAvatar';
 import SettingMenu from '../../components/SettingMenu';
 import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
 import { user } from '../../constant/constant';
@@ -23,14 +24,10 @@ function AccountScreen({ navigation }: AccountScreenNavigationProps) {
             justifyContent: 'center',
           }}
         >
-          <Avatar
+          <BaseAvatar
             rounded
-            size={96}
-            containerStyle={{
-              overflow: 'hidden',
-              elevation: 1,
-              marginBottom: theme.spacing.md,
-            }}
+            size={6}
+            containerStyle={{ marginBottom: theme.spacing.xl }}
             source={{
               uri: 'https://images.unsplash.com/photo-1605979399824-542335ee35d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
             }}

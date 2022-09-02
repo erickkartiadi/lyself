@@ -1,11 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
-import { Avatar, Text, useTheme } from '@rneui/themed';
+import { Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as React from 'react';
 import { View } from 'react-native';
 
 import { ConsultScreenNavigationProps } from '../../types/navigation.types';
 import { Psychiatrist } from '../../types/types';
+import BaseAvatar from '../bases/BaseAvatar';
 import BaseCard from '../bases/BaseCard';
 import BaseLabel from '../bases/BaseLabel';
 
@@ -46,9 +47,9 @@ function PsychiatristCard({
       }
     >
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-        <Avatar
+        <BaseAvatar
           rounded
-          size={84}
+          size={5}
           source={{ uri }}
           containerStyle={{ marginRight: theme.spacing.xl }}
         />

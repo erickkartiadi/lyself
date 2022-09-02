@@ -1,4 +1,4 @@
-import { Avatar, Divider, Icon, ListItem, Text, useTheme } from '@rneui/themed';
+import { Divider, Icon, ListItem, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import React from 'react';
 import { Pressable, View } from 'react-native';
@@ -6,6 +6,7 @@ import { Pressable, View } from 'react-native';
 import { BORDER_RADIUS, styles } from '../../theme/styles';
 import { Appointment } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
+import BaseAvatar from '../bases/BaseAvatar';
 import BaseBottomSheet from '../bases/BaseBottomSheet';
 import BaseCard from '../bases/BaseCard';
 
@@ -29,17 +30,10 @@ function AppointmentCard({ name, specialty, date, time, uri }: Appointment) {
           }}
         >
           {/* TODO add custom avatar */}
-          <Avatar
+          <BaseAvatar
             rounded
-            size={52}
-            containerStyle={{
-              marginRight: theme.spacing.lg,
-              borderWidth: theme.spacing.xs,
-              borderColor: colorAlpha(theme.colors.white, 0.75),
-            }}
-            source={{
-              uri,
-            }}
+            source={{ uri }}
+            containerStyle={{ marginRight: theme.spacing.lg }}
           />
           <View style={{ flex: 1 }}>
             <Text

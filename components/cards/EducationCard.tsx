@@ -1,9 +1,9 @@
-import { Avatar, Text, useTheme } from '@rneui/themed';
+import { Text, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { BORDER_RADIUS } from '../../theme/styles';
 import { Education } from '../../types/types';
+import BaseAvatar from '../bases/BaseAvatar';
 import BaseCard from '../bases/BaseCard';
 
 function EducationCard({
@@ -18,15 +18,9 @@ function EducationCard({
   return (
     <BaseCard cardPadding="lg" key={id}>
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-        <Avatar
-          size={58}
+        <BaseAvatar
           containerStyle={{
-            backgroundColor: theme.colors.background,
-            borderRadius: BORDER_RADIUS.md,
-            borderWidth: 1,
-            borderColor: theme.colors.grey5,
-            padding: theme.spacing.sm,
-            marginRight: theme.spacing.lg,
+            marginRight: theme.spacing.xl,
           }}
           source={{
             uri,

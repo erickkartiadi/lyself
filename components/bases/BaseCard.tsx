@@ -1,10 +1,10 @@
-import { ThemeSpacing } from '@rneui/base';
+import { lightColors, ThemeSpacing } from '@rneui/base';
 import { Card, CardProps, useTheme } from '@rneui/themed';
+import colorAlpha from 'color-alpha';
 import * as React from 'react';
 import { FlexStyle, StyleProp, ViewStyle } from 'react-native';
 
 import { BORDER_RADIUS } from '../../theme/styles';
-import { ThemeModeContext } from '../../theme/ThemeModeContext';
 import AnimatedPressable, {
   AnimatedPressableProps,
 } from '../AnimatedPressable';
@@ -28,7 +28,6 @@ function BaseCard({
   enablePressAnimation,
 }: BaseCardProps) {
   const { theme } = useTheme();
-  const { isDarkMode } = React.useContext(ThemeModeContext);
 
   return (
     <AnimatedPressable
@@ -39,15 +38,14 @@ function BaseCard({
       <Card
         containerStyle={[
           {
-            shadowColor: isDarkMode
-              ? 'rgba(0, 0, 0, 1)'
-              : 'rgba(0, 0, 0, 0.25)',
+            shadowColor: colorAlpha(lightColors.black, 0.25),
             shadowOffset: {
               width: 0,
-              height: 4,
+              height: 6,
             },
-            shadowOpacity: 0.3,
-            shadowRadius: 4.65,
+            shadowOpacity: 0.37,
+            shadowRadius: 7.49,
+
             elevation: 12,
             borderWidth: 0,
             padding: enableCardPadding ? theme.spacing[cardPadding] : 0,

@@ -1,4 +1,4 @@
-import { Avatar, Text, useTheme } from '@rneui/themed';
+import { Text, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import {
   Dimensions,
@@ -9,6 +9,7 @@ import {
 
 import { Review } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
+import BaseAvatar from '../bases/BaseAvatar';
 import BaseCard from '../bases/BaseCard';
 
 const NUMBER_OF_LINES = 3;
@@ -40,10 +41,10 @@ function ReviewCard({ uri, name, review, time }: Review) {
             marginBottom: theme.spacing.lg,
           }}
         >
-          <Avatar
+          <BaseAvatar
             rounded
             containerStyle={{ marginRight: theme.spacing.lg }}
-            size={36}
+            size={2}
             source={{ uri }}
           />
           <View style={{ flex: 1 }}>
