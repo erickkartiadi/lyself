@@ -1,4 +1,11 @@
-import { Icon, IconProps, Text, ThemeSpacing, useTheme } from '@rneui/themed';
+import {
+  Icon,
+  IconProps,
+  lightColors,
+  Text,
+  ThemeSpacing,
+  useTheme,
+} from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as React from 'react';
 import { View } from 'react-native';
@@ -25,12 +32,26 @@ function BaseLabel({
 }: React.PropsWithChildren<LabelProps>) {
   const { theme } = useTheme();
 
-  const labelColor = color || theme.colors.grey4;
-  const labelBackgroundColor = colorAlpha(labelColor, 0.25);
+  const labelColor = color || theme.colors.cardBackground;
+  const labelBackgroundColor = color
+    ? colorAlpha(labelColor, 0.25)
+    : theme.colors.cardBackground;
 
   return (
     <View
       style={{
+        shadowColor: colorAlpha(lightColors.black, 0.25),
+        ...(!color && {
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.18,
+          shadowRadius: 1.0,
+
+          elevation: 1,
+        }),
+
         backgroundColor: labelBackgroundColor,
         paddingHorizontal: theme.spacing.lg,
         paddingVertical: theme.spacing[labelSize],
