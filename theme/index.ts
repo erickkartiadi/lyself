@@ -211,6 +211,30 @@ const myTheme = createTheme({
       size: 'lg',
       uppercase: true,
     }),
+    Dialog: {
+      overlayStyle: {
+        borderRadius: BORDER_RADIUS.md,
+      },
+    },
+    DialogButton: {
+      size: 'md',
+      radius: BORDER_RADIUS.rounded,
+      titleStyle: {
+        fontFamily: FONT_FAMILY.medium,
+        fontWeight: '500',
+        letterSpacing: 0.25,
+        fontSize: FONT_SIZE.caption,
+      },
+    },
+    DialogTitle: {
+      titleProps: {
+        style: {
+          fontFamily: FONT_FAMILY.bold,
+          fontSize: FONT_SIZE.heading4,
+          marginBottom: THEME_SPACING.md,
+        },
+      },
+    },
     Tab: {
       variant: 'primary',
       containerStyle: {

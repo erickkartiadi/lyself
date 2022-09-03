@@ -1,4 +1,4 @@
-import { Button, Icon, ListItem, Text, useTheme } from '@rneui/themed';
+import { Button, Dialog, Icon, ListItem, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
@@ -29,8 +29,11 @@ function AppointmentCard({
   isNearestAppointment,
   isAppointmentCompleted,
 }: AppointmentCardProps) {
-  const { theme } = useTheme();
   const [isBottomSheetVisible, toggleIsBottomSheetVisible] = useToggle(false);
+  const [isDialogVisible, toggleIsDialogVisible] = useToggle(false);
+  const [isDialogLoading, toggleIsDialogLoading] = useToggle(false);
+
+  const { theme } = useTheme();
 
   const backgroundColor = isNearestAppointment
     ? theme.colors.primary
@@ -38,7 +41,6 @@ function AppointmentCard({
   const textColor = isNearestAppointment
     ? theme.colors.white
     : theme.colors.black;
-
   const secondaryColor = isNearestAppointment
     ? theme.colors.primaryDark
     : theme.colors.grey5;
@@ -60,10 +62,18 @@ function AppointmentCard({
   // can only reschedule if it is still more than 2 weeks
   const isCanReschedule = startDate.diff(dayjs(), 'week', true) > 2;
 
-  const handleOnPress = () => {
+  const handleCardOnPress = () => {
     if (isNearestAppointment) {
       toggleIsBottomSheetVisible();
     }
+  };
+
+  const handleCancelAppointment = () => {
+    toggleIsDialogLoading(true);
+    setTimeout(() => {
+      toggleIsDialogLoading(false);
+      toggleIsDialogVisible(false);
+    }, 1000);
   };
 
   return (
@@ -73,7 +83,7 @@ function AppointmentCard({
         cardStyle={{
           backgroundColor,
         }}
-        onPress={handleOnPress}
+        onPress={handleCardOnPress}
       >
         <View
           style={{
@@ -230,6 +240,7 @@ function AppointmentCard({
                 }}
               >
                 <Button
+                  onPress={() => toggleIsDialogVisible(true)}
                   fullWidth
                   uppercase={false}
                   containerStyle={{ flex: 1 }}
@@ -297,6 +308,10 @@ function AppointmentCard({
             android_ripple={{
               color: colorAlpha(theme.colors.grey4, 0.25),
               foreground: true,
+            }}
+            onPress={() => {
+              toggleIsBottomSheetVisible(false);
+              toggleIsDialogVisible(true);
             }}
           >
             <ListItem
@@ -373,6 +388,45 @@ function AppointmentCard({
           </>
         )}
       </BaseBottomSheet>
+      <Dialog
+        overlayStyle={{ backgroundColor: theme.colors.cardBackground }}
+        isVisible={isDialogVisible}
+        onBackdropPress={() => toggleIsDialogVisible(false)}
+      >
+        {isDialogLoading ? (
+          <Dialog.Loading />
+        ) : (
+          <>
+            <Dialog.Title
+              title="Cancel appointment"
+              titleProps={{
+                style: {
+                  color: theme.colors.black,
+                },
+              }}
+            />
+            <Text small style={{ marginBottom: theme.spacing.md }}>
+              Are you sure you want to cancel your appointment with{' '}
+              <Text small style={{ color: theme.colors.primary }}>
+                {name}
+              </Text>{' '}
+              ?
+            </Text>
+            <Dialog.Actions>
+              <Dialog.Button
+                type="solid"
+                title="CONFIRM"
+                onPress={handleCancelAppointment}
+              />
+              <Dialog.Button
+                title="CANCEL"
+                containerStyle={{ marginRight: theme.spacing.md }}
+                onPress={() => toggleIsDialogVisible(false)}
+              />
+            </Dialog.Actions>
+          </>
+        )}
+      </Dialog>
     </>
   );
 }
