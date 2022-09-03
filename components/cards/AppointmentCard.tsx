@@ -1,15 +1,14 @@
-import { Button, Dialog, Icon, ListItem, Text, useTheme } from '@rneui/themed';
+import { Button, Dialog, Icon, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
-import { BORDER_RADIUS, styles } from '../../theme/styles';
+import { BORDER_RADIUS } from '../../theme/styles';
 import { Appointment } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
 import BaseAvatar from '../bases/BaseAvatar';
-import BaseBottomSheet from '../bases/BaseBottomSheet';
 import BaseCard from '../bases/BaseCard';
 import BaseViewSeparator from '../bases/BaseViewSeparator';
 
@@ -29,7 +28,6 @@ function AppointmentCard({
   isNearestAppointment,
   isAppointmentCompleted,
 }: AppointmentCardProps) {
-  const [isBottomSheetVisible, toggleIsBottomSheetVisible] = useToggle(false);
   const [isDialogVisible, toggleIsDialogVisible] = useToggle(false);
   const [isDialogLoading, toggleIsDialogLoading] = useToggle(false);
 
@@ -44,6 +42,9 @@ function AppointmentCard({
   const secondaryColor = isNearestAppointment
     ? theme.colors.primaryDark
     : theme.colors.grey5;
+  const buttonBackgroundColor = isNearestAppointment
+    ? theme.colors.cardBackground
+    : theme.colors.primary;
 
   const startDate = dayjs(date);
   const endDate = startDate.add(durationInMinutes, 'minute');
@@ -62,12 +63,6 @@ function AppointmentCard({
   // can only reschedule if it is still more than 2 weeks
   const isCanReschedule = startDate.diff(dayjs(), 'week', true) > 2;
 
-  const handleCardOnPress = () => {
-    if (isNearestAppointment) {
-      toggleIsBottomSheetVisible();
-    }
-  };
-
   const handleCancelAppointment = () => {
     toggleIsDialogLoading(true);
     setTimeout(() => {
@@ -79,11 +74,9 @@ function AppointmentCard({
   return (
     <>
       <BaseCard
-        enablePressAnimation={isNearestAppointment}
         cardStyle={{
           backgroundColor,
         }}
-        onPress={handleCardOnPress}
       >
         <View
           style={{
@@ -176,7 +169,7 @@ function AppointmentCard({
           </View>
           <View />
         </View>
-        {!isAppointmentCompleted && !isNearestAppointment && (
+        {!isAppointmentCompleted && (
           <>
             {isAppointmentOnGoing && (
               <View
@@ -188,14 +181,12 @@ function AppointmentCard({
                 }}
               >
                 <Button
+                  type="outline"
                   fullWidth
                   uppercase={false}
-                  buttonStyle={{
-                    borderColor: theme.colors.grey3,
-                  }}
-                  titleStyle={{ color: theme.colors.grey2 }}
+                  buttonStyle={{ borderColor: buttonBackgroundColor }}
+                  titleStyle={{ color: buttonBackgroundColor }}
                   containerStyle={{ flex: 1 }}
-                  type="outline"
                   size="md"
                 >
                   <Icon
@@ -205,7 +196,7 @@ function AppointmentCard({
                     containerStyle={{
                       marginRight: theme.spacing.sm,
                     }}
-                    color={theme.colors.grey2}
+                    color={buttonBackgroundColor}
                   />
                   Chat
                 </Button>
@@ -213,7 +204,11 @@ function AppointmentCard({
                 <Button
                   fullWidth
                   uppercase={false}
-                  containerStyle={{ flex: 1 }}
+                  containerStyle={{
+                    flex: 1,
+                  }}
+                  titleStyle={{ color: backgroundColor }}
+                  buttonStyle={{ backgroundColor: buttonBackgroundColor }}
                   type="solid"
                   size="md"
                 >
@@ -224,13 +219,13 @@ function AppointmentCard({
                     containerStyle={{
                       marginRight: theme.spacing.sm,
                     }}
-                    color="white"
+                    color={backgroundColor}
                   />
                   Video Call
                 </Button>
               </View>
             )}
-            {!isNearestAppointment && !isAppointmentOnGoing && (
+            {!isAppointmentOnGoing && !isNearestAppointment && (
               <View
                 style={{
                   marginTop: theme.spacing.xl,
@@ -271,123 +266,6 @@ function AppointmentCard({
           </>
         )}
       </BaseCard>
-      <BaseBottomSheet
-        containerStyle={styles.noContainerGutter}
-        isVisible={isBottomSheetVisible}
-        onBackdropPress={() => toggleIsBottomSheetVisible(false)}
-      >
-        {isCanReschedule && (
-          <Pressable
-            android_ripple={{
-              color: colorAlpha(theme.colors.grey4, 0.25),
-              foreground: true,
-            }}
-          >
-            <ListItem
-              containerStyle={[
-                {
-                  backgroundColor: theme.colors.cardBackground,
-                  paddingVertical: theme.spacing.xl,
-                  margin: 0,
-                },
-              ]}
-            >
-              <Icon
-                type="material-community"
-                name="calendar-clock-outline"
-                color={theme.colors.grey3}
-                size={24}
-                containerStyle={{ marginRight: theme.spacing.xl }}
-              />
-              <Text>Reschedule</Text>
-            </ListItem>
-          </Pressable>
-        )}
-        {!isAppointmentOnGoing ? (
-          <Pressable
-            android_ripple={{
-              color: colorAlpha(theme.colors.grey4, 0.25),
-              foreground: true,
-            }}
-            onPress={() => {
-              toggleIsBottomSheetVisible(false);
-              toggleIsDialogVisible(true);
-            }}
-          >
-            <ListItem
-              containerStyle={[
-                {
-                  backgroundColor: theme.colors.cardBackground,
-                  paddingVertical: theme.spacing.xl,
-                  margin: 0,
-                },
-              ]}
-            >
-              <Icon
-                type="material-community"
-                name="calendar-remove-outline"
-                color={theme.colors.error}
-                size={24}
-                containerStyle={{ marginRight: theme.spacing.xl }}
-              />
-              <Text>Cancel appointment</Text>
-            </ListItem>
-          </Pressable>
-        ) : (
-          <>
-            <Pressable
-              android_ripple={{
-                color: colorAlpha(theme.colors.grey4, 0.25),
-                foreground: true,
-              }}
-            >
-              <ListItem
-                containerStyle={[
-                  {
-                    backgroundColor: theme.colors.cardBackground,
-                    paddingVertical: theme.spacing.xl,
-                    margin: 0,
-                  },
-                ]}
-              >
-                <Icon
-                  type="ionicon"
-                  name="chatbox-outline"
-                  color={theme.colors.blue}
-                  size={24}
-                  containerStyle={{ marginRight: theme.spacing.xl }}
-                />
-                <Text>Join chat</Text>
-              </ListItem>
-            </Pressable>
-            <Pressable
-              android_ripple={{
-                color: colorAlpha(theme.colors.grey4, 0.25),
-                foreground: true,
-              }}
-            >
-              <ListItem
-                containerStyle={[
-                  {
-                    backgroundColor: theme.colors.cardBackground,
-                    paddingVertical: theme.spacing.xl,
-                    margin: 0,
-                  },
-                ]}
-              >
-                <Icon
-                  type="ionicon"
-                  name="md-videocam-outline"
-                  color={theme.colors.primary}
-                  size={24}
-                  containerStyle={{ marginRight: theme.spacing.xl }}
-                />
-                <Text>Join video call</Text>
-              </ListItem>
-            </Pressable>
-          </>
-        )}
-      </BaseBottomSheet>
       <Dialog
         overlayStyle={{ backgroundColor: theme.colors.cardBackground }}
         isVisible={isDialogVisible}

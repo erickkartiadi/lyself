@@ -46,18 +46,11 @@ const appointmentData: Appointment[] = new Array(10).fill({}).map(() => ({
   name: `Dr. ${generateRandomName()}`,
   uri: generateRandomPsychiatristUri(),
   specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
-  // date: new Date(
-  //   2022,
-  //   8,
-  //   30,
-  //   15,
-  //   minutes[generateRandomNumber(0, minutes.length)]
-  // ),
   date: new Date(
     2022,
-    generateRandomNumber(7, 9),
-    generateRandomNumber(2, 4),
-    generateRandomNumber(12, 18),
+    generateRandomNumber(0, 12),
+    generateRandomNumber(0, 30),
+    generateRandomNumber(1, 24),
     minutes[generateRandomNumber(0, minutes.length)]
   ),
   durationInMinutes: 60,
