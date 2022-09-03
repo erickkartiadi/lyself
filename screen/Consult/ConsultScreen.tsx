@@ -6,7 +6,10 @@ import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import AppointmentCard from '../../components/cards/AppointmentCard';
 import PsychiatristCard from '../../components/cards/PsychiatristCard';
 import SectionTitle from '../../components/SectionTitle';
-import { appointmentData, psychiatristData } from '../../constant/constant';
+import {
+  psychiatristData,
+  upcomingAppointmentData,
+} from '../../constant/constant';
 import { styles } from '../../theme/styles';
 import { Psychiatrist } from '../../types/types';
 
@@ -53,14 +56,20 @@ function ConsultScreen() {
       ListHeaderComponent={
         <>
           <BaseSearchBar placeholder="Find a psychiatrist" />
-          <View style={styles.section}>
-            <SectionTitle
-              title="My Appointment"
-              showRightButton
-              screen="Appointment"
-            />
-            <AppointmentCard {...appointmentData[0]} />
-          </View>
+
+          {upcomingAppointmentData.length > 0 && (
+            <View style={styles.section}>
+              <SectionTitle
+                title="Upcoming Appointment"
+                showRightButton
+                screen="Appointment"
+              />
+              <AppointmentCard
+                {...upcomingAppointmentData[0]}
+                isNearestAppointment
+              />
+            </View>
+          )}
           <View style={{ marginTop: styles.section.paddingVertical }}>
             <SectionTitle title="Top Psychiatrist" />
           </View>

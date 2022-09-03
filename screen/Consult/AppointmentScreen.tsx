@@ -1,18 +1,32 @@
-import { lightColors, Tab, TabView, Text, useTheme } from '@rneui/themed';
+import { lightColors, Tab, TabView, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as React from 'react';
+import { FlatList } from 'react-native-gesture-handler';
 
+import AppointmentCard from '../../components/cards/AppointmentCard';
+import {
+  completedAppointmentData,
+  upcomingAppointmentData,
+} from '../../constant/constant';
 import { FONT_FAMILY, FONT_SIZE, styles } from '../../theme/styles';
+import { Appointment } from '../../types/types';
 
 function AppointmentScreen() {
-  const [index, setIndex] = React.useState(0);
+  const [tabIndex, setTabIndex] = React.useState(0);
   const { theme } = useTheme();
+
+  const renderUpcomingAppointment = ({ item }: { item: Appointment }) => (
+    <AppointmentCard {...item} />
+  );
+  const renderCompletedAppointment = ({ item }: { item: Appointment }) => (
+    <AppointmentCard isAppointmentCompleted {...item} />
+  );
 
   return (
     <>
       <Tab
-        value={index}
-        onChange={(e) => setIndex(e)}
+        value={tabIndex}
+        onChange={(e) => setTabIndex(e)}
         containerStyle={{
           backgroundColor: theme.colors.cardBackground,
           shadowColor: colorAlpha(lightColors.black, 0.25),
@@ -24,9 +38,7 @@ function AppointmentScreen() {
           shadowRadius: 7.49,
           elevation: 4,
         }}
-        indicatorStyle={{
-          height: 0,
-        }}
+        disableIndicator
       >
         <Tab.Item
           title="Upcoming"
@@ -50,12 +62,25 @@ function AppointmentScreen() {
         />
       </Tab>
 
-      <TabView value={index} onChange={setIndex} animationType="spring">
-        <TabView.Item style={[styles.container, styles.section]}>
-          <Text h1>Upcoming</Text>
+      <TabView
+        disableSwipe
+        value={tabIndex}
+        onChange={setTabIndex}
+        animationType="spring"
+      >
+        <TabView.Item style={{ width: '100%' }}>
+          <FlatList
+            data={upcomingAppointmentData}
+            renderItem={renderUpcomingAppointment}
+            contentContainerStyle={[styles.containerGutter, styles.section]}
+          />
         </TabView.Item>
-        <TabView.Item style={[styles.container, styles.section]}>
-          <Text h1>Completed</Text>
+        <TabView.Item style={{ width: '100%' }}>
+          <FlatList
+            data={completedAppointmentData}
+            renderItem={renderCompletedAppointment}
+            contentContainerStyle={[styles.containerGutter, styles.section]}
+          />
         </TabView.Item>
       </TabView>
     </>

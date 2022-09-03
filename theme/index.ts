@@ -193,6 +193,7 @@ const myTheme = createTheme({
           fontFamily: FONT_FAMILY.regular,
           fontWeight: '400',
           lineHeight: normalize(16),
+          letterSpacing: normalize(-0.0025),
         }),
       },
     }),
@@ -204,8 +205,8 @@ const myTheme = createTheme({
       titleStyle: {
         fontFamily: FONT_FAMILY.medium,
         fontWeight: '500',
-        fontSize: FONT_SIZE.body2,
-        letterSpacing: normalize(1.25),
+        fontSize: props.size === 'lg' ? FONT_SIZE.body2 : FONT_SIZE.caption,
+        letterSpacing: normalize(props.size === 'lg' ? 1.25 : 0.25),
       },
       size: 'lg',
       uppercase: true,

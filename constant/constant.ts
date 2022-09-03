@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import {
   Activity,
   ACTIVITY_TYPE,
@@ -11,9 +13,7 @@ import {
 import {
   generateLorem,
   generateRandomAddress,
-  generateRandomDay,
   generateRandomImageUri,
-  generateRandomMonth,
   generateRandomName,
   generateRandomNumber,
   generateRandomPortraitUri,
@@ -40,18 +40,50 @@ export const progressData: ProgressActivity[] = new Array(
     time: generateRandomTimesAgo(false),
   }));
 
-export const appointmentData: Appointment[] = [
-  {
-    name: `Dr. ${generateRandomName()}`,
-    uri: generateRandomPsychiatristUri(),
-    specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
-    date: `${generateRandomDay().slice(0, 3)}, ${generateRandomNumber(
-      1,
-      30
-    )} ${generateRandomMonth()}`,
-    time: '13:00 - 14:30',
-  },
-];
+const minutes = [0, 30];
+
+const appointmentData: Appointment[] = new Array(10).fill({}).map(() => ({
+  name: `Dr. ${generateRandomName()}`,
+  uri: generateRandomPsychiatristUri(),
+  specialty: SPECIALTIES[generateRandomNumber(0, SPECIALTIES.length)],
+  // date: new Date(
+  //   2022,
+  //   8,
+  //   30,
+  //   15,
+  //   minutes[generateRandomNumber(0, minutes.length)]
+  // ),
+  date: new Date(
+    2022,
+    generateRandomNumber(7, 9),
+    generateRandomNumber(2, 4),
+    generateRandomNumber(12, 18),
+    minutes[generateRandomNumber(0, minutes.length)]
+  ),
+  durationInMinutes: 60,
+}));
+
+export const upcomingAppointmentData = appointmentData
+  .filter((each) =>
+    dayjs(each.date)
+      .add(each.durationInMinutes, 'minute')
+      .isAfter(dayjs(), 'minute')
+  )
+  .sort(
+    (a, b) =>
+      Date.parse(a.date.toUTCString()) - Date.parse(b.date.toUTCString())
+  );
+
+export const completedAppointmentData = appointmentData
+  .filter((each) =>
+    dayjs(each.date)
+      .add(each.durationInMinutes, 'minute')
+      .isBefore(dayjs(), 'minute')
+  )
+  .sort(
+    (a, b) =>
+      Date.parse(b.date.toUTCString()) - Date.parse(a.date.toUTCString())
+  );
 
 export const psychiatristData: Array<Psychiatrist> = new Array(
   generateRandomNumber(4, 7)

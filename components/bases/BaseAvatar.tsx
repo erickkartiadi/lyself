@@ -34,7 +34,6 @@ function BaseAvatar({
   );
 }
 
-// TODO refactor default props
 BaseAvatar.defaultProps = {
   rounded: false,
   size: 3,

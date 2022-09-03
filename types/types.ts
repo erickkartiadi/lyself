@@ -95,8 +95,8 @@ type Psychiatrist = {
 };
 
 type Appointment = Pick<Psychiatrist, 'name' | 'specialty' | 'uri'> & {
-  time: string;
-  date: string;
+  date: Date;
+  durationInMinutes: number;
 };
 
 type Chat = {

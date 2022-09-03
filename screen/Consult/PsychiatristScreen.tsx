@@ -6,10 +6,10 @@ import { View } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 import BaseAvatar from '../../components/bases/BaseAvatar';
-import BaseDivider from '../../components/bases/BaseDivider';
 import BaseIcon from '../../components/bases/BaseIcon';
 import BaseLabel from '../../components/bases/BaseLabel';
 import BaseLink from '../../components/bases/BaseLink';
+import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import EducationCard from '../../components/cards/EducationCard';
 import ReviewCard from '../../components/cards/ReviewCard';
 import SectionTitle from '../../components/SectionTitle';
@@ -152,7 +152,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
             <FlatList
               horizontal
               overScrollMode="never"
-              ItemSeparatorComponent={BaseDivider}
+              ItemSeparatorComponent={BaseViewSeparator}
               style={[styles.noContainerGutter, styles.flatListHorizontal]}
               contentContainerStyle={[
                 styles.containerGutter,

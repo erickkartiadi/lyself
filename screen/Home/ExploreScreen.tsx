@@ -6,8 +6,8 @@ import { FlatList, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import ActivityButton from '../../components/ActivityButton';
-import BaseDivider from '../../components/bases/BaseDivider';
 import BaseSearchBar from '../../components/bases/BaseSearchBar';
+import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import PlaylistCard from '../../components/cards/PlaylistCard';
 import SectionTitle from '../../components/SectionTitle';
 import Articles from '../../components/widget/Articles';
@@ -145,7 +145,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           <FlatList
             horizontal
             overScrollMode="never"
-            ItemSeparatorComponent={BaseDivider}
+            ItemSeparatorComponent={BaseViewSeparator}
             showsHorizontalScrollIndicator={false}
             style={styles.noContainerGutter}
             contentContainerStyle={styles.containerGutter}

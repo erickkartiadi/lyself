@@ -4,7 +4,7 @@ import { FlatList, View } from 'react-native';
 import { articlesData } from '../../constant/constant';
 import { styles } from '../../theme/styles';
 import { Article } from '../../types/types';
-import BaseDivider from '../bases/BaseDivider';
+import BaseViewSeparator from '../bases/BaseViewSeparator';
 import ArticleCard from '../cards/ArticleCard';
 import SectionTitle from '../SectionTitle';
 
@@ -25,7 +25,7 @@ function Articles() {
       <FlatList
         overScrollMode="never"
         horizontal
-        ItemSeparatorComponent={BaseDivider}
+        ItemSeparatorComponent={BaseViewSeparator}
         showsHorizontalScrollIndicator={false}
         style={[styles.noContainerGutter, styles.flatListHorizontal]}
         contentContainerStyle={[

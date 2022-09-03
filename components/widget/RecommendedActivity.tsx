@@ -4,7 +4,7 @@ import { FlatList, View } from 'react-native';
 import { recommendedData } from '../../constant/constant';
 import { styles } from '../../theme/styles';
 import { comingSoonToast } from '../../utils/comingSoonToast';
-import BaseDivider from '../bases/BaseDivider';
+import BaseViewSeparator from '../bases/BaseViewSeparator';
 import RecommendedActivityCard, {
   RecommendedActivityCardProps,
 } from '../cards/RecommendedActivityCard';
@@ -32,7 +32,7 @@ function RecommendedActivity() {
       <FlatList
         horizontal
         overScrollMode="never"
-        ItemSeparatorComponent={BaseDivider}
+        ItemSeparatorComponent={BaseViewSeparator}
         style={[styles.noContainerGutter, styles.flatListHorizontal]}
         contentContainerStyle={[
           styles.containerGutter,
