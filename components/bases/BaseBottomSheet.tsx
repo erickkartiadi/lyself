@@ -4,7 +4,9 @@ import { StyleProp, View, ViewStyle } from 'react-native';
 
 import { styles } from '../../theme/styles';
 
-interface BaseBottomSheetProps extends BottomSheetProps {
+export interface BaseBottomSheetProps
+  extends BottomSheetProps,
+    React.PropsWithChildren {
   headerTitle?: string;
   containerStyle?: StyleProp<ViewStyle>;
 }
@@ -14,7 +16,7 @@ function BaseBottomSheet({
   children,
   containerStyle,
   ...rest
-}: React.PropsWithChildren<BaseBottomSheetProps>) {
+}: BaseBottomSheetProps) {
   const { theme } = useTheme();
 
   return (

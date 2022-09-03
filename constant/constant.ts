@@ -8,6 +8,7 @@ import {
   Chat,
   ProgressActivity,
   Psychiatrist,
+  Schedule,
   SPECIALTIES,
 } from '../types/types';
 import {
@@ -54,6 +55,24 @@ const appointmentData: Appointment[] = new Array(10).fill({}).map(() => ({
     minutes[generateRandomNumber(0, minutes.length)]
   ),
   durationInMinutes: 60,
+}));
+
+export const scheduleData: Schedule[] = new Array(20).fill({}).map(() => ({
+  date: new Date(
+    2022,
+    generateRandomNumber(0, 12),
+    generateRandomNumber(0, 30),
+    generateRandomNumber(1, 24)
+  ),
+  availableHours: [
+    ...new Set(
+      new Array(generateRandomNumber(1, 24))
+        .fill(0)
+        .map(() => generateRandomNumber(0, 24))
+        .sort((a, b) => a - b)
+    ),
+  ],
+  // availableHours: [0, 1, 2, 3],
 }));
 
 export const upcomingAppointmentData = appointmentData

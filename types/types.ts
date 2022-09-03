@@ -99,6 +99,11 @@ type Appointment = Pick<Psychiatrist, 'name' | 'specialty' | 'uri'> & {
   durationInMinutes: number;
 };
 
+type Schedule = {
+  date: Date;
+  availableHours: number[];
+};
+
 type Chat = {
   name: string;
   text: string;
@@ -124,6 +129,7 @@ export {
   ProgressActivity,
   Psychiatrist,
   Review,
+  Schedule,
   Specialties,
   Status,
 };
