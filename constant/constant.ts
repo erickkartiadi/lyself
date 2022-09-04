@@ -72,7 +72,6 @@ export const scheduleData: Schedule[] = new Array(20).fill({}).map(() => ({
         .sort((a, b) => a - b)
     ),
   ],
-  // availableHours: [0, 1, 2, 3],
 }));
 
 export const upcomingAppointmentData = appointmentData

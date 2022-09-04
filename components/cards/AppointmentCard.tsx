@@ -2,173 +2,18 @@ import { Button, Dialog, Icon, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import objectSupport from 'dayjs/plugin/objectSupport';
 import React from 'react';
 import { View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
-import { scheduleData } from '../../constant/constant';
-import { BORDER_RADIUS, styles } from '../../theme/styles';
-import { Appointment, Schedule } from '../../types/types';
+import { BORDER_RADIUS } from '../../theme/styles';
+import { Appointment } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
 import BaseAvatar from '../bases/BaseAvatar';
-import BaseBottomSheet, {
-  BaseBottomSheetProps,
-} from '../bases/BaseBottomSheet';
 import BaseCard from '../bases/BaseCard';
 import BaseViewSeparator from '../bases/BaseViewSeparator';
-import SectionTitle from '../SectionTitle';
+import RescheduleBottomSheet from '../RescheduleBottomSheet';
 
-dayjs.extend(objectSupport);
 dayjs.extend(isBetween);
-
-function RescheduleBottomSheet({ ...rest }: BaseBottomSheetProps) {
-  const { theme } = useTheme();
-  const [data] = React.useState(scheduleData);
-
-  const [availableHours, setAvailableHours] = React.useState<number[]>([]);
-  const [selectedDateIndex, setSelectedDateIndex] = React.useState(0);
-  const [selectedHourIndex, setSelectedHourIndex] = React.useState(0);
-
-  React.useEffect(() => {
-    if (selectedDateIndex >= 0) {
-      setAvailableHours(data[selectedDateIndex].availableHours);
-      setSelectedHourIndex(0);
-    }
-  }, [selectedDateIndex]);
-
-  const renderScheduleDate = ({
-    item,
-    index,
-  }: {
-    item: Schedule;
-    index: number;
-  }) => {
-    const scheduleDate = dayjs(item.date);
-    const dayOfWeek = scheduleDate.format('ddd');
-    const dateOfMonth = scheduleDate.format('DD');
-    const month = scheduleDate.format('MMM');
-
-    const isSelected = selectedDateIndex === index;
-
-    return (
-      <Button
-        onPress={() => {
-          if (index === selectedDateIndex) {
-            setSelectedDateIndex(-1);
-          } else {
-            setSelectedDateIndex(index);
-          }
-        }}
-        type={isSelected ? 'solid' : 'outline'}
-        buttonStyle={{
-          borderWidth: 0.5,
-          flex: 1,
-          flexDirection: 'column',
-        }}
-      >
-        <Text
-          h2
-          h2Style={{
-            color: isSelected ? theme.colors.white : theme.colors.black,
-          }}
-        >
-          {dateOfMonth}
-        </Text>
-        <Text
-          caption
-          style={{
-            textTransform: 'uppercase',
-            color: isSelected ? theme.colors.white : theme.colors.black,
-          }}
-        >
-          {month}
-        </Text>
-      </Button>
-    );
-  };
-
-  return (
-    <BaseBottomSheet {...rest}>
-      <View style={styles.section}>
-        <SectionTitle title="Schedule" />
-        <FlatList
-          overScrollMode="never"
-          showsHorizontalScrollIndicator={false}
-          data={data}
-          horizontal
-          ItemSeparatorComponent={BaseViewSeparator}
-          renderItem={renderScheduleDate}
-          style={[styles.noContainerGutter, styles.flatListHorizontal]}
-          contentContainerStyle={[
-            styles.containerGutter,
-            styles.flatListHorizontalContainer,
-            styles.sectionSmall,
-          ]}
-        />
-      </View>
-      {selectedDateIndex >= 0 && (
-        <View style={styles.section}>
-          <SectionTitle title="Available Hours" />
-          <View
-            style={[
-              styles.sectionSmall,
-              {
-                flex: 1,
-              },
-            ]}
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'flex-start',
-                marginVertical: -1 * theme.spacing.sm,
-                marginHorizontal: -1 * theme.spacing.sm,
-              }}
-            >
-              {availableHours.map((availableHour, index) => {
-                const isSelected = selectedHourIndex === index;
-                const hour = dayjs({ hour: availableHour });
-                const formattedHour = hour.format('HH:00');
-
-                return (
-                  <View key={availableHour} style={{ width: '20%' }}>
-                    <Button
-                      onPress={() => setSelectedHourIndex(index)}
-                      buttonStyle={{ borderWidth: 0.5 }}
-                      type={isSelected ? 'solid' : 'outline'}
-                      containerStyle={{
-                        alignItems: 'stretch',
-                        marginVertical: theme.spacing.sm,
-                        marginHorizontal: theme.spacing.sm,
-                      }}
-                      size="md"
-                    >
-                      <Text
-                        subtitle2
-                        style={{
-                          color: isSelected
-                            ? theme.colors.white
-                            : theme.colors.black,
-                        }}
-                      >
-                        {formattedHour}
-                      </Text>
-                    </Button>
-                  </View>
-                );
-              })}
-            </View>
-          </View>
-          <View style={{ marginTop: theme.spacing.lg }}>
-            <Button fullWidth>Change Schedule</Button>
-          </View>
-        </View>
-      )}
-    </BaseBottomSheet>
-  );
-}
 
 interface AppointmentCardProps extends Appointment {
   isNearestAppointment?: boolean;
@@ -184,12 +29,12 @@ function AppointmentCard({
   isNearestAppointment,
   isAppointmentCompleted,
 }: AppointmentCardProps) {
+  const { theme } = useTheme();
+
   const [isDialogVisible, toggleIsDialogVisible] = useToggle(false);
   const [isDialogLoading, toggleIsDialogLoading] = useToggle(false);
   const [isRescheduleBottomSheetVisible, toggleIsRescheduleBottomSheetVisible] =
     useToggle(false);
-
-  const { theme } = useTheme();
 
   const backgroundColor = isNearestAppointment
     ? theme.colors.primary
@@ -197,7 +42,7 @@ function AppointmentCard({
   const textColor = isNearestAppointment
     ? theme.colors.white
     : theme.colors.black;
-  const secondaryColor = isNearestAppointment
+  const secondaryBackgroundColor = isNearestAppointment
     ? theme.colors.primaryDark
     : theme.colors.grey5;
   const buttonBackgroundColor = isNearestAppointment
@@ -206,7 +51,6 @@ function AppointmentCard({
 
   const startDate = dayjs(date);
   const endDate = startDate.add(durationInMinutes, 'minute');
-
   const formattedDate = startDate.format('ddd, DD MMMM');
   const formattedStartTime = startDate.format('HH:mm');
   const formattedEndTime = endDate.format('HH:mm');
@@ -270,7 +114,7 @@ function AppointmentCard({
           style={{
             flexDirection: 'row',
             borderRadius: BORDER_RADIUS.lg,
-            backgroundColor: secondaryColor,
+            backgroundColor: secondaryBackgroundColor,
             marginTop: theme.spacing.xl,
             paddingVertical: theme.spacing.md,
             paddingHorizontal: theme.spacing.lg,
