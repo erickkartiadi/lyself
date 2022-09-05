@@ -2,12 +2,15 @@ import { Button, ButtonProps, Text, useTheme } from '@rneui/themed';
 import dayjs from 'dayjs';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import * as React from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, Image, View } from 'react-native';
 
-import { scheduleData } from '../constant/constant';
-import { styles } from '../theme/styles';
+import emptyIllustration from '../assets/images/empty-illustration.png';
+import { MONTHS } from '../constant/constant';
+import { scheduleData } from '../constant/seed';
+import { FONT_SIZE, styles } from '../theme/styles';
 import { Schedule } from '../types/types';
 import BaseBottomSheet, { BaseBottomSheetProps } from './bases/BaseBottomSheet';
+import BasePicker from './bases/BasePicker';
 import BaseViewSeparator from './bases/BaseViewSeparator';
 import SectionTitle from './SectionTitle';
 
@@ -104,18 +107,41 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
 
 function RescheduleBottomSheet({ ...rest }: BaseBottomSheetProps) {
   const { theme } = useTheme();
-  const [data] = React.useState(scheduleData);
+  const [data, setData] = React.useState(scheduleData);
+  const todayMonthIndex = dayjs().get('month');
 
   const [availableHours, setAvailableHours] = React.useState<number[]>([]);
   const [selectedDateIndex, setSelectedDateIndex] = React.useState(0);
   const [selectedTimeIndex, setSelectedTimeIndex] = React.useState(0);
 
+  const [isPickerOpen, setIsPickerOpen] = React.useState(false);
+  const [months, setMonths] = React.useState(
+    MONTHS.map((month) => ({ label: month, value: month }))
+  );
+  const [selectedMonth, setSelectedMonth] = React.useState(
+    months[todayMonthIndex].value
+  );
+
+  // update available hours & reset the index to 0 if selected date changed
   React.useEffect(() => {
     if (selectedDateIndex >= 0) {
       setAvailableHours(data[selectedDateIndex].availableHours);
       setSelectedTimeIndex(0);
     }
   }, [selectedDateIndex]);
+
+  // filter data based on selected month
+  React.useEffect(() => {
+    const selectedMonthIndex = months.findIndex(
+      (month) => month.value === selectedMonth
+    );
+
+    setData(
+      scheduleData.filter(
+        (each) => dayjs(each.date).get('month') === selectedMonthIndex
+      )
+    );
+  }, [selectedMonth]);
 
   const renderDateOption = ({
     item,
@@ -141,23 +167,68 @@ function RescheduleBottomSheet({ ...rest }: BaseBottomSheetProps) {
   return (
     <BaseBottomSheet {...rest}>
       <View style={styles.section}>
-        <SectionTitle title="Schedule" />
-        <FlatList
-          overScrollMode="never"
-          showsHorizontalScrollIndicator={false}
-          data={data}
-          horizontal
-          ItemSeparatorComponent={BaseViewSeparator}
-          renderItem={renderDateOption}
-          style={[styles.noContainerGutter, styles.flatListHorizontal]}
-          contentContainerStyle={[
-            styles.containerGutter,
-            styles.flatListHorizontalContainer,
-            styles.sectionSmall,
-          ]}
+        <SectionTitle
+          title="Schedule"
+          showRightComponent
+          rightComponent={
+            <BasePicker
+              max={3}
+              dropdownWidth={128}
+              iconSize={FONT_SIZE.body2}
+              upIconName="filter"
+              downIconName="filter"
+              iconType="ionicon"
+              open={isPickerOpen}
+              value={selectedMonth}
+              items={months}
+              setOpen={setIsPickerOpen}
+              setValue={setSelectedMonth}
+              setItems={setMonths}
+            />
+          }
         />
+        {data.length > 0 ? (
+          <FlatList
+            overScrollMode="never"
+            showsHorizontalScrollIndicator={false}
+            data={data}
+            horizontal
+            ItemSeparatorComponent={BaseViewSeparator}
+            renderItem={renderDateOption}
+            style={[styles.noContainerGutter, styles.flatListHorizontal]}
+            contentContainerStyle={[
+              styles.containerGutter,
+              styles.flatListHorizontalContainer,
+              styles.sectionSmall,
+            ]}
+          />
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              marginTop: theme.spacing.xl,
+            }}
+          >
+            <View
+              style={{
+                aspectRatio: 1,
+                height: 180,
+                marginBottom: theme.spacing.md,
+              }}
+            >
+              <Image
+                style={{ flex: 1, width: '100%' }}
+                source={emptyIllustration}
+              />
+            </View>
+            <Text caption style={{ color: theme.colors.grey3 }}>
+              There&apos;s no schedule on {selectedMonth}
+            </Text>
+          </View>
+        )}
       </View>
-      {selectedDateIndex >= 0 && (
+      {selectedDateIndex >= 0 && data.length > 0 && (
         <View style={styles.section}>
           <SectionTitle title="Available Hours" />
           <View

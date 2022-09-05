@@ -17,6 +17,7 @@ const THEME_SPACING = {
 
 const BORDER_RADIUS = {
   rounded: 999,
+  sm: THEME_SPACING.sm,
   md: THEME_SPACING.md,
   lg: THEME_SPACING.lg,
   xl: THEME_SPACING.xl,

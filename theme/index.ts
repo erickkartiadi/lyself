@@ -9,6 +9,8 @@ import {
   THEME_SPACING,
 } from './styles';
 
+// TODO change primary light to secondary color
+
 const lightColors = {
   primary: '#f55c7a',
   primaryLight: '#ff8fa9',

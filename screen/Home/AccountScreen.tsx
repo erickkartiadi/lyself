@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BaseAvatar from '../../components/bases/BaseAvatar';
 import SettingMenu from '../../components/SettingMenu';
 import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
-import { user } from '../../constant/constant';
+import { user } from '../../constant/seed';
 import { styles } from '../../theme/styles';
 import { AccountScreenNavigationProps } from '../../types/navigation.types';
 

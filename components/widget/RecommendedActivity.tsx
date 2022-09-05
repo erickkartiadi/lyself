@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 
-import { recommendedData } from '../../constant/constant';
+import { recommendedData } from '../../constant/seed';
 import { styles } from '../../theme/styles';
 import { comingSoonToast } from '../../utils/comingSoonToast';
 import BaseViewSeparator from '../bases/BaseViewSeparator';

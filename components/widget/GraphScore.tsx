@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import { styles } from '../../theme/styles';
 import MentalScoreCard from '../cards/MentalScoreCard';
 import StatusCard, { StatusCardProps } from '../cards/StatusCard';
-import Dropdown from '../Dropdown';
 import SectionTitle from '../SectionTitle';
 
 function GraphScore() {
@@ -87,11 +86,7 @@ function GraphScore() {
   ];
   return (
     <View style={styles.section}>
-      <SectionTitle
-        title="Your stats"
-        showRightButton
-        rightButtonComponent={<Dropdown />}
-      />
+      <SectionTitle title="Your stats" />
       <MentalScoreCard />
       <View>
         <View

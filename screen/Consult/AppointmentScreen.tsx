@@ -1,5 +1,4 @@
 import { lightColors, Tab, TabView, useTheme } from '@rneui/themed';
-import colorAlpha from 'color-alpha';
 import * as React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -7,7 +6,7 @@ import AppointmentCard from '../../components/cards/AppointmentCard';
 import {
   completedAppointmentData,
   upcomingAppointmentData,
-} from '../../constant/constant';
+} from '../../constant/seed';
 import { FONT_FAMILY, FONT_SIZE, styles } from '../../theme/styles';
 import { Appointment } from '../../types/types';
 
@@ -27,23 +26,18 @@ function AppointmentScreen() {
       <Tab
         value={tabIndex}
         onChange={(e) => setTabIndex(e)}
-        containerStyle={{
-          backgroundColor: theme.colors.cardBackground,
-          shadowColor: colorAlpha(lightColors.black, 0.25),
-          shadowOffset: {
-            width: 0,
-            height: 6,
+        containerStyle={[
+          styles.shadowSmall,
+          {
+            backgroundColor: theme.colors.cardBackground,
           },
-          shadowOpacity: 0.37,
-          shadowRadius: 7.49,
-          elevation: 4,
-        }}
+        ]}
         disableIndicator
       >
         <Tab.Item
           title="Upcoming"
           titleStyle={(active) => ({
-            color: active ? theme.colors.white : theme.colors.black,
+            color: active ? lightColors.white : theme.colors.black,
             paddingVertical: 0,
             paddingHorizontal: 0,
             fontFamily: FONT_FAMILY.medium,
@@ -53,7 +47,7 @@ function AppointmentScreen() {
         <Tab.Item
           title="Completed"
           titleStyle={(active) => ({
-            color: active ? theme.colors.white : theme.colors.black,
+            color: active ? lightColors.white : theme.colors.black,
             paddingVertical: 0,
             paddingHorizontal: 0,
             fontFamily: FONT_FAMILY.medium,

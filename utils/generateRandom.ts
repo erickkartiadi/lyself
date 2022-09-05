@@ -4,30 +4,7 @@ import { LoremIpsum } from 'lorem-ipsum';
 import { names, uniqueNamesGenerator } from 'unique-names-generator';
 import { v4 as uuidv4 } from 'uuid';
 
-const DAYS = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-
-const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+import { DAYS, MONTHS } from '../constant/constant';
 
 const PSYCHIATRIST_AVATAR_URI = [
   'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',

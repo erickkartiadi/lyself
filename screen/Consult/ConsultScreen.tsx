@@ -6,10 +6,7 @@ import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import AppointmentCard from '../../components/cards/AppointmentCard';
 import PsychiatristCard from '../../components/cards/PsychiatristCard';
 import SectionTitle from '../../components/SectionTitle';
-import {
-  psychiatristData,
-  upcomingAppointmentData,
-} from '../../constant/constant';
+import { psychiatristData, upcomingAppointmentData } from '../../constant/seed';
 import { styles } from '../../theme/styles';
 import { Psychiatrist } from '../../types/types';
 
@@ -61,7 +58,7 @@ function ConsultScreen() {
             <View style={styles.section}>
               <SectionTitle
                 title="Upcoming Appointment"
-                showRightButton
+                showRightComponent
                 screen="Appointment"
               />
               <AppointmentCard

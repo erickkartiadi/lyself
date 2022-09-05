@@ -7,14 +7,14 @@ import LinkButton from './LinkButton';
 interface SectionTitleProps {
   title: string;
   screen?: string;
-  showRightButton?: boolean;
-  rightButtonComponent?: React.ReactNode;
+  showRightComponent?: boolean;
+  rightComponent?: React.ReactNode;
 }
 
 function SectionTitle({
   title,
-  showRightButton,
-  rightButtonComponent,
+  showRightComponent,
+  rightComponent,
   screen = 'InDevelopment',
 }: SectionTitleProps) {
   const { theme } = useTheme();
@@ -29,21 +29,21 @@ function SectionTitle({
       }}
     >
       <>
-        <Text subtitle1 style={{ marginBottom: 0 }}>
+        <Text subtitle1 style={{ flex: 1 }}>
           {title}
         </Text>
-        {showRightButton && !rightButtonComponent && (
+        {showRightComponent && !rightComponent ? (
           <LinkButton
+            style={{ flexShrink: 1, alignItems: 'flex-end' }}
             to={{
-              screen: showRightButton && screen && screen,
+              screen: showRightComponent && screen && screen,
             }}
             color="primary"
           >
             See All
           </LinkButton>
-        )}
-        {showRightButton && rightButtonComponent && (
-          <View>{rightButtonComponent}</View>
+        ) : (
+          rightComponent && rightComponent
         )}
       </>
     </View>
@@ -51,8 +51,8 @@ function SectionTitle({
 }
 
 SectionTitle.defaultProps = {
-  showRightButton: false,
-  rightButtonComponent: null,
+  showRightComponent: false,
+  rightComponent: null,
   screen: 'InDevelopment',
 };
 

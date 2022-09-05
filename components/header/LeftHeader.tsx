@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import React from 'react';
 import { View } from 'react-native';
 
-import { user } from '../../constant/constant';
+import { user } from '../../constant/seed';
 
 function LeftHeader() {
   const currentHour = dayjs().hour();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 
-import { articlesData } from '../../constant/constant';
+import { articlesData } from '../../constant/seed';
 import { styles } from '../../theme/styles';
 import { Article } from '../../types/types';
 import BaseViewSeparator from '../bases/BaseViewSeparator';
@@ -21,7 +21,7 @@ function Articles() {
 
   return (
     <View style={styles.section}>
-      <SectionTitle title="News about mental health" showRightButton />
+      <SectionTitle title="News about mental health" showRightComponent />
       <FlatList
         overScrollMode="never"
         horizontal

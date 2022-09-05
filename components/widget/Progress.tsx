@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { progressData } from '../../constant/constant';
+import { progressData } from '../../constant/seed';
 import { styles } from '../../theme/styles';
 import ProgressActivityCard from '../cards/ProgressActivityCard';
 import SectionTitle from '../SectionTitle';
