@@ -3,7 +3,8 @@ import {
   Inter_500Medium,
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
-import { normalize } from '@rneui/themed';
+import { lightColors, normalize } from '@rneui/themed';
+import colorAlpha from 'color-alpha';
 import { StyleSheet } from 'react-native';
 
 const THEME_SPACING = {
@@ -53,6 +54,38 @@ const styles = StyleSheet.create({
   },
   flatListHorizontal: {
     marginBottom: THEME_SPACING.xl * -1,
+  },
+
+  // shadow generator -> https://ethercreative.github.io/react-native-shadow-generator/
+  shadow: {
+    shadowColor: colorAlpha(lightColors.black, 0.25),
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+    elevation: 12,
+  },
+  shadowMedium: {
+    shadowColor: colorAlpha(lightColors.black, 0.25),
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
+  },
+  shadowSmall: {
+    shadowColor: colorAlpha(lightColors.black, 0.5),
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.0,
+    elevation: 1,
   },
 });
 

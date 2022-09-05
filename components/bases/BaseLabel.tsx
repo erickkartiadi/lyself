@@ -1,16 +1,9 @@
-import {
-  Icon,
-  IconProps,
-  lightColors,
-  Text,
-  ThemeSpacing,
-  useTheme,
-} from '@rneui/themed';
+import { Icon, IconProps, Text, ThemeSpacing, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import { BORDER_RADIUS, styles } from '../../theme/styles';
 
 interface LabelProps {
   showIcon?: boolean;
@@ -41,15 +34,7 @@ function BaseLabel({
     <View
       style={{
         ...(!color && {
-          shadowColor: colorAlpha(lightColors.black, 0.25),
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 0.18,
-          shadowRadius: 1.0,
-
-          elevation: 1,
+          ...styles.shadowSmall,
         }),
 
         backgroundColor: labelBackgroundColor,

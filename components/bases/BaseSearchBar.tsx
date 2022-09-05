@@ -1,7 +1,7 @@
 import { SearchBar, SearchBarProps, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import { BORDER_RADIUS, styles } from '../../theme/styles';
 
 interface BaseSearchBarProps {
   placeholder: SearchBarProps['placeholder'];
@@ -31,21 +31,14 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
           marginBottom: theme.spacing.xl,
         },
       ]}
-      inputContainerStyle={{
-        backgroundColor: theme.colors.cardBackground,
-        shadowColor: theme.colors.black,
-        shadowOffset: {
-          width: 0,
-          height: 1,
+      inputContainerStyle={[
+        styles.shadowSmall,
+        {
+          backgroundColor: theme.colors.cardBackground,
+          borderRadius: BORDER_RADIUS.rounded,
+          paddingHorizontal: theme.spacing.md,
         },
-        shadowOpacity: 0.2,
-        shadowRadius: 1.41,
-
-        elevation: 1,
-
-        borderRadius: BORDER_RADIUS.rounded,
-        paddingHorizontal: theme.spacing.md,
-      }}
+      ]}
       inputStyle={{
         color: theme.colors.black,
       }}

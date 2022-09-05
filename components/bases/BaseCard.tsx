@@ -1,15 +1,8 @@
-import {
-  Card,
-  CardProps,
-  lightColors,
-  ThemeSpacing,
-  useTheme,
-} from '@rneui/themed';
-import colorAlpha from 'color-alpha';
+import { Card, CardProps, ThemeSpacing, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import { FlexStyle, StyleProp, ViewStyle } from 'react-native';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import { BORDER_RADIUS, styles } from '../../theme/styles';
 import AnimatedPressable, {
   AnimatedPressableProps,
 } from '../AnimatedPressable';
@@ -42,16 +35,8 @@ function BaseCard({
     >
       <Card
         containerStyle={[
+          styles.shadow,
           {
-            shadowColor: colorAlpha(lightColors.black, 0.25),
-            shadowOffset: {
-              width: 0,
-              height: 6,
-            },
-            shadowOpacity: 0.37,
-            shadowRadius: 7.49,
-
-            elevation: 12,
             borderWidth: 0,
             padding: enableCardPadding ? theme.spacing[cardPadding] : 0,
             borderRadius: BORDER_RADIUS.xl,
