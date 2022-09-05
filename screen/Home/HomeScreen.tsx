@@ -74,6 +74,7 @@ function HomeScreen() {
 
       <BaseBottomSheet
         modalProps={{}}
+        toggleBottomSheetVisible={toggleIsBottomSheetVisible}
         isVisible={isBottomSheetVisible}
         onBackdropPress={toggleIsBottomSheetVisible}
         headerTitle="Widgets"

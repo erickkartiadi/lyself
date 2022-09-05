@@ -1,4 +1,4 @@
-import { Button, Dialog, Icon, Text, useTheme } from '@rneui/themed';
+import { Button, Icon, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
@@ -10,6 +10,7 @@ import { Appointment } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
 import BaseAvatar from '../bases/BaseAvatar';
 import BaseCard from '../bases/BaseCard';
+import BaseDialog from '../bases/BaseDialog';
 import BaseViewSeparator from '../bases/BaseViewSeparator';
 import RescheduleBottomSheet from '../RescheduleBottomSheet';
 
@@ -31,8 +32,9 @@ function AppointmentCard({
 }: AppointmentCardProps) {
   const { theme } = useTheme();
 
-  const [isDialogVisible, toggleIsDialogVisible] = useToggle(false);
-  const [isDialogLoading, toggleIsDialogLoading] = useToggle(false);
+  const [isCancelDialogVisible, toggleIsCancelDialogVisible] = useToggle(false);
+  const [isCancelDialogLoading, toggleIsCancelDialogLoading] = useToggle(false);
+
   const [isRescheduleBottomSheetVisible, toggleIsRescheduleBottomSheetVisible] =
     useToggle(false);
 
@@ -66,10 +68,10 @@ function AppointmentCard({
   const isCanReschedule = startDate.diff(dayjs(), 'week', true) > 2;
 
   const handleCancelAppointment = () => {
-    toggleIsDialogLoading(true);
+    toggleIsCancelDialogLoading(true);
     setTimeout(() => {
-      toggleIsDialogLoading(false);
-      toggleIsDialogVisible(false);
+      toggleIsCancelDialogLoading(false);
+      toggleIsCancelDialogVisible(false);
     }, 1000);
   };
 
@@ -237,7 +239,7 @@ function AppointmentCard({
                 }}
               >
                 <Button
-                  onPress={() => toggleIsDialogVisible(true)}
+                  onPress={() => toggleIsCancelDialogVisible(true)}
                   fullWidth
                   uppercase={false}
                   containerStyle={{ flex: 1 }}
@@ -269,48 +271,29 @@ function AppointmentCard({
           </>
         )}
       </BaseCard>
-      <Dialog
-        overlayStyle={{ backgroundColor: theme.colors.cardBackground }}
-        isVisible={isDialogVisible}
-        onBackdropPress={() => toggleIsDialogVisible(false)}
-      >
-        {isDialogLoading ? (
-          <Dialog.Loading />
-        ) : (
-          <>
-            <Dialog.Title
-              title="Cancel appointment"
-              titleProps={{
-                style: {
-                  color: theme.colors.black,
-                },
-              }}
-            />
-            <Text small style={{ marginBottom: theme.spacing.md }}>
-              Are you sure you want to cancel your appointment with{' '}
-              <Text small style={{ color: theme.colors.primary }}>
-                {name}
-              </Text>{' '}
-              ?
-            </Text>
-            <Dialog.Actions>
-              <Dialog.Button
-                type="solid"
-                title="CONFIRM"
-                onPress={handleCancelAppointment}
-              />
-              <Dialog.Button
-                title="CANCEL"
-                containerStyle={{ marginRight: theme.spacing.md }}
-                onPress={() => toggleIsDialogVisible(false)}
-              />
-            </Dialog.Actions>
-          </>
-        )}
-      </Dialog>
+      <BaseDialog
+        title="Cancel Appointment"
+        isDialogLoading={isCancelDialogLoading}
+        isDialogVisible={isCancelDialogVisible}
+        onConfirm={handleCancelAppointment}
+        toggleIsDialogVisible={toggleIsCancelDialogVisible}
+        text={
+          <Text small>
+            Are you sure you want to cancel your appointment with{' '}
+            <Text small style={{ color: theme.colors.primary }}>
+              {name}
+            </Text>{' '}
+            ?
+          </Text>
+        }
+      />
+
       <RescheduleBottomSheet
+        name={name}
+        date={date}
         isVisible={isRescheduleBottomSheetVisible}
         onBackdropPress={() => toggleIsRescheduleBottomSheetVisible(false)}
+        toggleBottomSheetVisible={toggleIsRescheduleBottomSheetVisible}
       />
     </>
   );

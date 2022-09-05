@@ -8,8 +8,10 @@ import emptyIllustration from '../assets/images/empty-illustration.png';
 import { MONTHS } from '../constant/constant';
 import { scheduleData } from '../constant/seed';
 import { FONT_SIZE, styles } from '../theme/styles';
-import { Schedule } from '../types/types';
+import { Appointment, Schedule } from '../types/types';
+import useToggle from '../utils/hooks/useToggle';
 import BaseBottomSheet, { BaseBottomSheetProps } from './bases/BaseBottomSheet';
+import BaseDialog from './bases/BaseDialog';
 import BasePicker from './bases/BasePicker';
 import BaseViewSeparator from './bases/BaseViewSeparator';
 import SectionTitle from './SectionTitle';
@@ -21,6 +23,7 @@ interface DateOptionProps extends Pick<ButtonProps, 'onPress'> {
 
 function DateOption({ date, isSelected, onPress }: DateOptionProps) {
   const { theme } = useTheme();
+
   const dayjsDate = dayjs(date);
   const dayOfWeek = dayjsDate.format('ddd');
   const dateOfMonth = dayjsDate.format('DD');
@@ -74,6 +77,7 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
   const { theme } = useTheme();
   const formattedHour = dayjs({ hour }).format('HH:00');
 
+  // TODO disable already registered date
   return (
     <View style={{ width: '20%' }}>
       <Button
@@ -105,7 +109,16 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
   );
 }
 
-function RescheduleBottomSheet({ ...rest }: BaseBottomSheetProps) {
+interface RescheduleBottomSheetProps
+  extends Pick<Appointment, 'name' | 'date'>,
+    BaseBottomSheetProps {}
+
+function RescheduleBottomSheet({
+  toggleBottomSheetVisible,
+  name,
+  date,
+  ...rest
+}: RescheduleBottomSheetProps) {
   const { theme } = useTheme();
   const [data, setData] = React.useState(scheduleData);
   const todayMonthIndex = dayjs().get('month');
@@ -121,6 +134,11 @@ function RescheduleBottomSheet({ ...rest }: BaseBottomSheetProps) {
   const [selectedMonth, setSelectedMonth] = React.useState(
     months[todayMonthIndex].value
   );
+
+  const [isRescheduleDialogVisible, toggleIsRescheduleDialogVisible] =
+    useToggle(false);
+  const [isRescheduleDialogLoading, toggleIsRescheduleDialogLoading] =
+    useToggle(false);
 
   // update available hours & reset the index to 0 if selected date changed
   React.useEffect(() => {
@@ -151,8 +169,7 @@ function RescheduleBottomSheet({ ...rest }: BaseBottomSheetProps) {
     index: number;
   }) => {
     const handleDateOptionOnPress = () => {
-      // -1 => didn't choose the date option at all
-      setSelectedDateIndex(index === selectedDateIndex ? -1 : index);
+      setSelectedDateIndex(index);
     };
 
     return (
@@ -164,106 +181,146 @@ function RescheduleBottomSheet({ ...rest }: BaseBottomSheetProps) {
     );
   };
 
+  const handleRescheduleAppointment = () => {
+    toggleIsRescheduleDialogLoading(true);
+    setTimeout(() => {
+      toggleIsRescheduleDialogLoading(false);
+      toggleIsRescheduleDialogVisible(false);
+    }, 1000);
+  };
+
   return (
-    <BaseBottomSheet {...rest}>
-      <View style={styles.section}>
-        <SectionTitle
-          title="Schedule"
-          showRightComponent
-          rightComponent={
-            <BasePicker
-              max={3}
-              dropdownWidth={128}
-              iconSize={FONT_SIZE.body2}
-              upIconName="filter"
-              downIconName="filter"
-              iconType="ionicon"
-              open={isPickerOpen}
-              value={selectedMonth}
-              items={months}
-              setOpen={setIsPickerOpen}
-              setValue={setSelectedMonth}
-              setItems={setMonths}
-            />
-          }
-        />
-        {data.length > 0 ? (
-          <FlatList
-            overScrollMode="never"
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            horizontal
-            ItemSeparatorComponent={BaseViewSeparator}
-            renderItem={renderDateOption}
-            style={[styles.noContainerGutter, styles.flatListHorizontal]}
-            contentContainerStyle={[
-              styles.containerGutter,
-              styles.flatListHorizontalContainer,
-              styles.sectionSmall,
-            ]}
+    <>
+      <BaseBottomSheet
+        toggleBottomSheetVisible={toggleBottomSheetVisible}
+        {...rest}
+      >
+        <View style={styles.section}>
+          <SectionTitle
+            title="Schedule"
+            showRightComponent
+            rightComponent={
+              <BasePicker
+                max={3}
+                dropdownWidth={128}
+                iconSize={FONT_SIZE.body2}
+                upIconName="filter"
+                downIconName="filter"
+                iconType="ionicon"
+                open={isPickerOpen}
+                value={selectedMonth}
+                items={months}
+                setOpen={setIsPickerOpen}
+                setValue={setSelectedMonth}
+                setItems={setMonths}
+              />
+            }
           />
-        ) : (
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              marginTop: theme.spacing.xl,
-            }}
-          >
+          {data.length > 0 ? (
+            <FlatList
+              overScrollMode="never"
+              showsHorizontalScrollIndicator={false}
+              data={data}
+              horizontal
+              ItemSeparatorComponent={BaseViewSeparator}
+              renderItem={renderDateOption}
+              style={[styles.noContainerGutter, styles.flatListHorizontal]}
+              contentContainerStyle={[
+                styles.containerGutter,
+                styles.flatListHorizontalContainer,
+                styles.sectionSmall,
+              ]}
+            />
+          ) : (
             <View
               style={{
-                aspectRatio: 1,
-                height: 180,
-                marginBottom: theme.spacing.md,
+                flex: 1,
+                alignItems: 'center',
+                marginTop: theme.spacing.xl,
               }}
             >
-              <Image
-                style={{ flex: 1, width: '100%' }}
-                source={emptyIllustration}
-              />
+              <View
+                style={{
+                  aspectRatio: 1,
+                  height: 180,
+                  marginBottom: theme.spacing.md,
+                }}
+              >
+                <Image
+                  style={{ flex: 1, width: '100%' }}
+                  source={emptyIllustration}
+                />
+              </View>
+              <Text caption style={{ color: theme.colors.grey3 }}>
+                There&apos;s no schedule on {selectedMonth}
+              </Text>
             </View>
-            <Text caption style={{ color: theme.colors.grey3 }}>
-              There&apos;s no schedule on {selectedMonth}
-            </Text>
+          )}
+        </View>
+        {selectedDateIndex >= 0 && data.length > 0 && (
+          <View style={styles.section}>
+            <SectionTitle title="Available Hours" />
+            <View
+              style={[
+                styles.sectionSmall,
+                {
+                  flex: 1,
+                },
+              ]}
+            >
+              <View
+                style={{
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'flex-start',
+                  marginVertical: -1 * theme.spacing.sm,
+                  marginHorizontal: -1 * theme.spacing.sm,
+                }}
+              >
+                {availableHours.map((availableHour, index) => (
+                  <TimeOption
+                    isSelected={selectedTimeIndex === index}
+                    key={availableHour}
+                    hour={availableHour}
+                    onPress={() => setSelectedTimeIndex(index)}
+                  />
+                ))}
+              </View>
+            </View>
+            <View style={{ marginTop: theme.spacing.xl }}>
+              <Button
+                fullWidth
+                onPress={() => {
+                  toggleBottomSheetVisible(false);
+                  toggleIsRescheduleDialogVisible(true);
+                }}
+              >
+                Change Schedule
+              </Button>
+            </View>
           </View>
         )}
-      </View>
-      {selectedDateIndex >= 0 && data.length > 0 && (
-        <View style={styles.section}>
-          <SectionTitle title="Available Hours" />
-          <View
-            style={[
-              styles.sectionSmall,
-              {
-                flex: 1,
-              },
-            ]}
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'flex-start',
-                marginVertical: -1 * theme.spacing.sm,
-                marginHorizontal: -1 * theme.spacing.sm,
-              }}
-            >
-              {availableHours.map((availableHour, index) => (
-                <TimeOption
-                  isSelected={selectedTimeIndex === index}
-                  key={availableHour}
-                  hour={availableHour}
-                  onPress={() => setSelectedTimeIndex(index)}
-                />
-              ))}
-            </View>
-          </View>
-          <View style={{ marginTop: theme.spacing.xl }}>
-            <Button fullWidth>Change Schedule</Button>
-          </View>
-        </View>
-      )}
-    </BaseBottomSheet>
+      </BaseBottomSheet>
+      <BaseDialog
+        title="Reschedule Appointment"
+        isDialogLoading={isRescheduleDialogLoading}
+        isDialogVisible={isRescheduleDialogVisible}
+        onConfirm={handleRescheduleAppointment}
+        toggleIsDialogVisible={toggleIsRescheduleDialogVisible}
+        text={
+          <Text small>
+            Are you sure want to reschedule your appointment with{' '}
+            <Text small>{name}</Text> to{' '}
+            <Text small style={{ color: theme.colors.primary }}>
+              {dayjs(data[selectedDateIndex].date).format('MMMM DD, ')}
+              {dayjs({
+                hour: data[selectedDateIndex].availableHours[selectedTimeIndex],
+              }).format('hh:mm A')}
+            </Text>
+          </Text>
+        }
+      />
+    </>
   );
 }
 

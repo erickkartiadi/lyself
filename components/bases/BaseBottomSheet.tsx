@@ -9,12 +9,14 @@ export interface BaseBottomSheetProps
     React.PropsWithChildren {
   headerTitle?: string;
   containerStyle?: StyleProp<ViewStyle>;
+  toggleBottomSheetVisible: (state?: boolean) => void;
 }
 
 function BaseBottomSheet({
   headerTitle,
   children,
   containerStyle,
+  toggleBottomSheetVisible,
   ...rest
 }: BaseBottomSheetProps) {
   const { theme } = useTheme();
