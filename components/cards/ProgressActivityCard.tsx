@@ -2,6 +2,7 @@ import { LinearProgress, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 
+import { ACTIVITY_ICON } from '../../constant/constant';
 import { BORDER_RADIUS } from '../../theme/styles';
 import { ProgressActivity } from '../../types/types';
 import { comingSoonToast } from '../../utils/comingSoonToast';
@@ -17,6 +18,8 @@ function ProgressActivityCard({
   title,
 }: ProgressActivity) {
   const { theme } = useTheme();
+
+  const activityColor = theme.colors[ACTIVITY_ICON[activity].color] as string;
 
   return (
     <BaseCard key={id} onPress={comingSoonToast}>
@@ -44,8 +47,8 @@ function ProgressActivityCard({
           </Text>
           <LinearProgress
             value={progress / 100}
-            color={theme.colors.success}
             variant="determinate"
+            color={activityColor}
             style={{
               borderRadius: BORDER_RADIUS.rounded,
               height: 5,
@@ -60,7 +63,7 @@ function ProgressActivityCard({
               justifyContent: 'space-between',
             }}
           >
-            <Text caption style={{ color: theme.colors.success }}>
+            <Text caption style={{ color: activityColor }}>
               {`${progress}%`}
             </Text>
             <Text caption style={{ color: theme.colors.grey3 }}>

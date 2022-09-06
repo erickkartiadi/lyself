@@ -1,23 +1,4 @@
-const SPECIALTIES = [
-  'Addiction',
-  'Child and adolescent',
-  'Geriatric',
-  'Forensic',
-  'Neuropsychiatries',
-  'Organizational',
-  'Nurse practitioner',
-] as const;
-
-const ACTIVITY_TYPE = [
-  'article',
-  'breathing',
-  'consult',
-  'diagnose',
-  'forum',
-  'meditation',
-  'music',
-  'todo',
-] as const;
+import { ACTIVITY_TYPE, SPECIALTIES } from '../constant/constant';
 
 // custom primitive type
 type Id = string | number;
