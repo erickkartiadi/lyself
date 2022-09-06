@@ -142,7 +142,7 @@ function RescheduleBottomSheet({
 
   // update available hours & reset the index to 0 if selected date changed
   React.useEffect(() => {
-    if (selectedDateIndex >= 0) {
+    if (selectedDateIndex >= 0 && data.length > 0) {
       setAvailableHours(data[selectedDateIndex].availableHours);
       setSelectedTimeIndex(0);
     }
@@ -311,12 +311,16 @@ function RescheduleBottomSheet({
           <Text small>
             Are you sure want to reschedule your appointment with{' '}
             <Text small>{name}</Text> to{' '}
-            <Text small style={{ color: theme.colors.primary }}>
-              {dayjs(data[selectedDateIndex].date).format('MMMM DD, ')}
-              {dayjs({
-                hour: data[selectedDateIndex].availableHours[selectedTimeIndex],
-              }).format('hh:mm A')}
-            </Text>
+            {data.length > 0 && selectedDateIndex >= 0 && (
+              <Text small style={{ color: theme.colors.primary }}>
+                {dayjs(data[selectedDateIndex]?.date).format('MMMM DD, ')}
+                {dayjs({
+                  hour: data[selectedDateIndex]?.availableHours[
+                    selectedTimeIndex
+                  ],
+                }).format('hh:mm A')}
+              </Text>
+            )}
           </Text>
         }
       />
