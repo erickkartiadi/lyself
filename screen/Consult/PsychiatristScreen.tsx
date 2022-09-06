@@ -244,9 +244,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                     alignItems: 'center',
                   }}
                   onPress={() =>
-                    Linking.openURL(
-                      `https://www.google.com/maps/search/${place.name}`
-                    )
+                    Linking.openURL(`https://www.google.com/maps/search/${place.name}`)
                   }
                 >
                   Open in Google Maps

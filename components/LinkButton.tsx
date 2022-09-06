@@ -1,8 +1,4 @@
-import {
-  NavigationAction,
-  ParamListBase,
-  useLinkProps,
-} from '@react-navigation/native';
+import { NavigationAction, ParamListBase, useLinkProps } from '@react-navigation/native';
 import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo';
 import React from 'react';
 
@@ -14,12 +10,7 @@ interface LinkButtonProps<ParamList extends ReactNavigation.RootParamList>
   action?: NavigationAction;
 }
 
-function LinkButton({
-  to,
-  action,
-  children,
-  ...rest
-}: LinkButtonProps<ParamListBase>) {
+function LinkButton({ to, action, children, ...rest }: LinkButtonProps<ParamListBase>) {
   const { onPress, ...props } = useLinkProps({ to, action });
 
   return (

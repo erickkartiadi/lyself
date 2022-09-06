@@ -7,16 +7,11 @@ import BaseIcon, { BaseIconProps } from './bases/BaseIcon';
 
 export type ActivityTypeIcon = ActivityType | 'other';
 
-interface ActivityIconProps
-  extends Pick<BaseIconProps, 'containerStyle' | 'width'> {
+interface ActivityIconProps extends Pick<BaseIconProps, 'containerStyle' | 'width'> {
   activityType: ActivityTypeIcon;
 }
 
-function ActivityIcon({
-  activityType,
-  containerStyle,
-  width,
-}: ActivityIconProps) {
+function ActivityIcon({ activityType, containerStyle, width }: ActivityIconProps) {
   const { theme } = useTheme();
 
   const { type, name, color, iconSize } = ACTIVITY_ICON[activityType];

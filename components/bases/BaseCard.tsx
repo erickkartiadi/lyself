@@ -3,9 +3,7 @@ import * as React from 'react';
 import { FlexStyle, StyleProp, ViewStyle } from 'react-native';
 
 import { BORDER_RADIUS, styles } from '../../theme/styles';
-import AnimatedPressable, {
-  AnimatedPressableProps,
-} from '../AnimatedPressable';
+import AnimatedPressable, { AnimatedPressableProps } from '../AnimatedPressable';
 
 interface BaseCardProps extends AnimatedPressableProps {
   width?: FlexStyle['width'];

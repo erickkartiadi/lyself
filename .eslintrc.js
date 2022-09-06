@@ -21,10 +21,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'simple-import-sort', 'import'],
   rules: {
-    'react/jsx-filename-extension': [
-      2,
-      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-    ],
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'no-unused-vars': ['off'],
     'react/jsx-props-no-spreading': 'off',
     'simple-import-sort/imports': 'error',

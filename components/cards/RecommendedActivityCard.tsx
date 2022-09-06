@@ -7,9 +7,7 @@ import ActivityIcon from '../ActivityIcon';
 import { AnimatedPressableProps } from '../AnimatedPressable';
 import BaseCard from '../bases/BaseCard';
 
-export interface RecommendedActivityCardProps
-  extends Activity,
-    AnimatedPressableProps {}
+export interface RecommendedActivityCardProps extends Activity, AnimatedPressableProps {}
 
 function RecommendedActivityCard({
   onPress,

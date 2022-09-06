@@ -10,9 +10,7 @@ import TextInput from '../../components/forms/Input';
 import { styles } from '../../theme/styles';
 import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';
 
-function ForgotPasswordScreen({
-  navigation,
-}: ForgotPasswordScreenNavigationProps) {
+function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
@@ -22,8 +20,8 @@ function ForgotPasswordScreen({
         <BackButton />
         <Text h1>Forgot Password?</Text>
         <Text>
-          Please enter your email address, we&apos;ll send an email with
-          instructions to reset your password.
+          Please enter your email address, we&apos;ll send an email with instructions to
+          reset your password.
         </Text>
         <View
           style={{

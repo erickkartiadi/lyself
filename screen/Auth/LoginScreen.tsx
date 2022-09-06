@@ -43,10 +43,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
           />
         </View>
         <TextInput label="Email address" placeholder="example@email.com" />
-        <PasswordInput
-          label="Password"
-          placeholder="must have at least 8 characters"
-        />
+        <PasswordInput label="Password" placeholder="must have at least 8 characters" />
         <View
           style={{
             flex: 1,
@@ -62,9 +59,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             checked={isRememberLogin}
             onPress={() => toggleIsRememberLogin()}
           />
-          <LinkButton to={{ screen: 'ForgotPassword' }}>
-            Forgot Password?
-          </LinkButton>
+          <LinkButton to={{ screen: 'ForgotPassword' }}>Forgot Password?</LinkButton>
         </View>
         <Button
           fullWidth

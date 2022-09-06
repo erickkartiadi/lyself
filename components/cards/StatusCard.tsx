@@ -10,13 +10,7 @@ export interface StatusCardProps extends Status {
   icon: IconProps;
 }
 
-function StatusCard({
-  title,
-  caption,
-  value,
-  textColor,
-  icon,
-}: StatusCardProps) {
+function StatusCard({ title, caption, value, textColor, icon }: StatusCardProps) {
   const { ...restIconProps } = icon;
   const { theme } = useTheme();
 

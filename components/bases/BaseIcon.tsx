@@ -5,10 +5,7 @@ import { ColorValue, FlexStyle } from 'react-native';
 import { BORDER_RADIUS } from '../../theme/styles';
 
 export interface BaseIconProps
-  extends Pick<
-    IconProps,
-    'containerStyle' | 'color' | 'size' | 'type' | 'name'
-  > {
+  extends Pick<IconProps, 'containerStyle' | 'color' | 'size' | 'type' | 'name'> {
   backgroundColor: ColorValue;
   width: FlexStyle['width'];
 }

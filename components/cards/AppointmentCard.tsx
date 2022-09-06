@@ -41,9 +41,7 @@ function AppointmentCard({
   const backgroundColor = isNearestAppointment
     ? theme.colors.primary
     : theme.colors.cardBackground;
-  const textColor = isNearestAppointment
-    ? theme.colors.white
-    : theme.colors.black;
+  const textColor = isNearestAppointment ? theme.colors.white : theme.colors.black;
   const secondaryBackgroundColor = isNearestAppointment
     ? theme.colors.primaryDark
     : theme.colors.grey5;
@@ -57,12 +55,7 @@ function AppointmentCard({
   const formattedStartTime = startDate.format('HH:mm');
   const formattedEndTime = endDate.format('HH:mm');
 
-  const isAppointmentOnGoing = dayjs().isBetween(
-    startDate,
-    endDate,
-    'minute',
-    '[]'
-  );
+  const isAppointmentOnGoing = dayjs().isBetween(startDate, endDate, 'minute', '[]');
 
   // can only reschedule if it is still more than 2 weeks
   const isCanReschedule = startDate.diff(dayjs(), 'week', true) > 2;

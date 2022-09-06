@@ -13,8 +13,7 @@ function BaseViewSeparator({ orientation, spacing = 'md' }: BaseDividerProps) {
   return (
     <View
       style={{
-        marginHorizontal:
-          orientation === 'horizontal' ? theme.spacing[spacing] : 0,
+        marginHorizontal: orientation === 'horizontal' ? theme.spacing[spacing] : 0,
         marginVertical: orientation === 'vertical' ? theme.spacing[spacing] : 0,
       }}
     />

@@ -97,9 +97,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                onPress={() =>
-                  navigation.navigate('HomeTab', { screen: 'Home' })
-                }
+                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.grey3,
@@ -125,9 +123,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                onPress={() =>
-                  navigation.navigate('HomeTab', { screen: 'Home' })
-                }
+                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.grey3,
@@ -154,9 +150,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
 
               <Button
                 type="outline"
-                onPress={() =>
-                  navigation.navigate('HomeTab', { screen: 'Home' })
-                }
+                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.grey3,

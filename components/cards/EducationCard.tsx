@@ -6,13 +6,7 @@ import { Education } from '../../types/types';
 import BaseAvatar from '../bases/BaseAvatar';
 import BaseCard from '../bases/BaseCard';
 
-function EducationCard({
-  id,
-  institutionName,
-  uri,
-  startYear,
-  studyPeriod,
-}: Education) {
+function EducationCard({ id, institutionName, uri, startYear, studyPeriod }: Education) {
   const { theme } = useTheme();
 
   return (

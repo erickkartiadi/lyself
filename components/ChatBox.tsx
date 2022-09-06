@@ -15,10 +15,7 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
       leftContent={SwipeableLeftButton}
       rightContent={SwipeableRightButton}
       key={name}
-      containerStyle={[
-        styles.container,
-        { backgroundColor: theme.colors.background },
-      ]}
+      containerStyle={[styles.container, { backgroundColor: theme.colors.background }]}
     >
       <BaseAvatar rounded size={3.5} source={{ uri }} />
       <ListItem.Content>
@@ -58,11 +55,7 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
               {text}
             </Text>
             {unread > 0 && (
-              <Badge
-                status="primary"
-                badgeStyle={{ borderWidth: 0 }}
-                value={unread}
-              />
+              <Badge status="primary" badgeStyle={{ borderWidth: 0 }} value={unread} />
             )}
           </View>
         </View>

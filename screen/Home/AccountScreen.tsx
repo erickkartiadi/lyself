@@ -107,9 +107,7 @@ function AccountScreen({ navigation }: AccountScreenNavigationProps) {
         backgroundColor={theme.colors.error}
         name="log-out"
         type="ionicon"
-        onPress={() =>
-          navigation.navigate('AuthStack', { screen: 'GetStarted' })
-        }
+        onPress={() => navigation.navigate('AuthStack', { screen: 'GetStarted' })}
       />
     </ScrollView>
   );

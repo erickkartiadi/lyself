@@ -68,9 +68,7 @@ function SettingMenu({
           }}
         >
           {rightComponent || (
-            <View
-              style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
-            >
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
               <Text style={{ color: theme.colors.grey3 }} caption>
                 {caption}
               </Text>

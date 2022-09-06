@@ -50,9 +50,7 @@ function MentalScoreCard() {
           {(fill) => <Emoji fill={fill} />}
         </AnimatedCircularProgress>
 
-        <View
-          style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}
-        >
+        <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
           <Text subtitle1 style={{ color: theme.colors.primary }}>
             Awesome
           </Text>

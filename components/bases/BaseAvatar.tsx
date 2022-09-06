@@ -9,12 +9,7 @@ interface BaseAvatarProps extends AvatarProps {
   size?: number;
 }
 
-function BaseAvatar({
-  size = 3,
-  rounded,
-  containerStyle,
-  ...rest
-}: BaseAvatarProps) {
+function BaseAvatar({ size = 3, rounded, containerStyle, ...rest }: BaseAvatarProps) {
   const { theme } = useTheme();
 
   return (

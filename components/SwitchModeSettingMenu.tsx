@@ -20,9 +20,7 @@ function SwitchModeSettingMenu() {
       name={isDarkMode ? 'moon' : 'sunny'}
       type="ionicon"
       onPress={toggleThemeMode}
-      rightComponent={
-        <Switch value={isDarkMode} onValueChange={toggleThemeMode} />
-      }
+      rightComponent={<Switch value={isDarkMode} onValueChange={toggleThemeMode} />}
     />
   );
 }

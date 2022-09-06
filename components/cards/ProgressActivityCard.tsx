@@ -10,13 +10,7 @@ import ActivityIcon from '../ActivityIcon';
 import BaseCard from '../bases/BaseCard';
 
 // TODO linear gradient progress color
-function ProgressActivityCard({
-  activity,
-  id,
-  progress,
-  time,
-  title,
-}: ProgressActivity) {
+function ProgressActivityCard({ activity, id, progress, time, title }: ProgressActivity) {
   const { theme } = useTheme();
 
   const activityColor = theme.colors[ACTIVITY_ICON[activity].color] as string;

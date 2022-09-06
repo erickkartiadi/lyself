@@ -16,12 +16,9 @@ function ViewMoreText({
   const [isLengthMore, toggleIsLengthMore] = useToggle(false);
   const { theme } = useTheme();
 
-  const onTextLayout = useCallback(
-    (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-      toggleIsLengthMore(e.nativeEvent.lines.length > numberOfLines);
-    },
-    []
-  );
+  const onTextLayout = useCallback((e: NativeSyntheticEvent<TextLayoutEventData>) => {
+    toggleIsLengthMore(e.nativeEvent.lines.length > numberOfLines);
+  }, []);
 
   return (
     <>

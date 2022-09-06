@@ -50,12 +50,8 @@ function HomeScreen() {
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={[styles.containerGutter, styles.section]}
-    >
-      {activeWidgets.map(
-        ({ no, active, Widget }) => active && <Widget key={no} />
-      )}
+    <ScrollView contentContainerStyle={[styles.containerGutter, styles.section]}>
+      {activeWidgets.map(({ no, active, Widget }) => active && <Widget key={no} />)}
       <View style={styles.section}>
         <Button
           fullWidth
@@ -92,11 +88,7 @@ function HomeScreen() {
             />
           ))}
         </View>
-        <Button
-          fullWidth
-          title="Done"
-          onPress={() => toggleIsBottomSheetVisible()}
-        />
+        <Button fullWidth title="Done" onPress={() => toggleIsBottomSheetVisible()} />
       </BaseBottomSheet>
     </ScrollView>
   );

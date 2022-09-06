@@ -14,10 +14,7 @@ function NavigationContainer({ children }: PropsWithChildren) {
   const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
-    <Container
-      linking={linking}
-      theme={isDarkMode ? navThemeDark : navThemeLight}
-    >
+    <Container linking={linking} theme={isDarkMode ? navThemeDark : navThemeLight}>
       {children}
     </Container>
   );

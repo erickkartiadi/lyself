@@ -25,8 +25,7 @@ function PsychiatristCard({
   place,
 }: Psychiatrist) {
   const { theme } = useTheme();
-  const navigation =
-    useNavigation<ConsultScreenNavigationProps['navigation']>();
+  const navigation = useNavigation<ConsultScreenNavigationProps['navigation']>();
   return (
     <BaseCard
       onPress={() =>
@@ -55,10 +54,7 @@ function PsychiatristCard({
         />
         <View style={{ flex: 1 }}>
           <Text subtitle1>{name}</Text>
-          <Text
-            subtitle2
-            style={{ color: colorAlpha(theme.colors.black, 0.75) }}
-          >
+          <Text subtitle2 style={{ color: colorAlpha(theme.colors.black, 0.75) }}>
             {specialty}
           </Text>
           <View

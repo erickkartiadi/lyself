@@ -61,10 +61,7 @@ function ConsultScreen() {
                 showRightComponent
                 screen="Appointment"
               />
-              <AppointmentCard
-                {...upcomingAppointmentData[0]}
-                isNearestAppointment
-              />
+              <AppointmentCard {...upcomingAppointmentData[0]} isNearestAppointment />
             </View>
           )}
           <View style={{ marginTop: styles.section.paddingVertical }}>

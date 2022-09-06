@@ -3,10 +3,7 @@ import * as React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
 import AppointmentCard from '../../components/cards/AppointmentCard';
-import {
-  completedAppointmentData,
-  upcomingAppointmentData,
-} from '../../constant/seed';
+import { completedAppointmentData, upcomingAppointmentData } from '../../constant/seed';
 import { FONT_FAMILY, FONT_SIZE, styles } from '../../theme/styles';
 import { Appointment } from '../../types/types';
 

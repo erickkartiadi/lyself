@@ -11,11 +11,7 @@ import RecommendedActivityCard, {
 import SectionTitle from '../SectionTitle';
 
 function RecommendedActivity() {
-  const renderRecommended = ({
-    item,
-  }: {
-    item: RecommendedActivityCardProps;
-  }) => (
+  const renderRecommended = ({ item }: { item: RecommendedActivityCardProps }) => (
     <RecommendedActivityCard
       id={item.id}
       onPress={comingSoonToast}

@@ -29,9 +29,7 @@ export const user = {
   uri: generateRandomImageUri(100),
 };
 
-export const progressData: ProgressActivity[] = new Array(
-  generateRandomNumber(1, 4)
-)
+export const progressData: ProgressActivity[] = new Array(generateRandomNumber(1, 4))
   .fill({})
   .map(() => ({
     id: generateRandomUUID(),
@@ -73,36 +71,21 @@ export const scheduleData: Schedule[] = new Array(20)
       ),
     ],
   }))
-  .sort(
-    (a, b) =>
-      Date.parse(a.date.toUTCString()) - Date.parse(b.date.toUTCString())
-  );
+  .sort((a, b) => Date.parse(a.date.toUTCString()) - Date.parse(b.date.toUTCString()));
 
 export const upcomingAppointmentData = appointmentData
   .filter((each) =>
-    dayjs(each.date)
-      .add(each.durationInMinutes, 'minute')
-      .isAfter(dayjs(), 'minute')
+    dayjs(each.date).add(each.durationInMinutes, 'minute').isAfter(dayjs(), 'minute')
   )
-  .sort(
-    (a, b) =>
-      Date.parse(a.date.toUTCString()) - Date.parse(b.date.toUTCString())
-  );
+  .sort((a, b) => Date.parse(a.date.toUTCString()) - Date.parse(b.date.toUTCString()));
 
 export const completedAppointmentData = appointmentData
   .filter((each) =>
-    dayjs(each.date)
-      .add(each.durationInMinutes, 'minute')
-      .isBefore(dayjs(), 'minute')
+    dayjs(each.date).add(each.durationInMinutes, 'minute').isBefore(dayjs(), 'minute')
   )
-  .sort(
-    (a, b) =>
-      Date.parse(b.date.toUTCString()) - Date.parse(a.date.toUTCString())
-  );
+  .sort((a, b) => Date.parse(b.date.toUTCString()) - Date.parse(a.date.toUTCString()));
 
-export const psychiatristData: Array<Psychiatrist> = new Array(
-  generateRandomNumber(4, 7)
-)
+export const psychiatristData: Array<Psychiatrist> = new Array(generateRandomNumber(4, 7))
   .fill({})
   .map(() => ({
     id: generateRandomUUID(),
@@ -135,9 +118,7 @@ export const psychiatristData: Array<Psychiatrist> = new Array(
     })),
     educations: new Array(generateRandomNumber(1, 4)).fill({}).map(() => ({
       id: generateRandomUUID(),
-      institutionName: `Univ. ${generateLorem.generateWords(
-        generateRandomNumber(1, 3)
-      )}`,
+      institutionName: `Univ. ${generateLorem.generateWords(generateRandomNumber(1, 3))}`,
       uri: generateRandomImageUri(100),
       startYear: generateRandomNumber(1980, 2022),
       studyPeriod: generateRandomNumber(2, 5),

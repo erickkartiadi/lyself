@@ -38,9 +38,7 @@ function addAndroidColorEdgeEffectToStyles(androidStyles, color) {
     appTheme.item = items;
   }
 
-  let colorEdgeEffect = styles.find(
-    (item) => item.$.name === 'android:colorEdgeEffect'
-  );
+  let colorEdgeEffect = styles.find((item) => item.$.name === 'android:colorEdgeEffect');
   if (colorEdgeEffect) {
     colorEdgeEffect._ = color;
   } else {
@@ -58,10 +56,7 @@ function addAndroidColorEdgeEffectToStyles(androidStyles, color) {
 
 module.exports = function withAndroidColorEdgeEffect(config, { color }) {
   return withAndroidStyles(config, (config) => {
-    config.modResults = addAndroidColorEdgeEffectToStyles(
-      config.modResults,
-      color
-    );
+    config.modResults = addAndroidColorEdgeEffectToStyles(config.modResults, color);
     return config;
   });
 };

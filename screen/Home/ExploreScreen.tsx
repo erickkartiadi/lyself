@@ -88,9 +88,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
   });
 
   return (
-    <ScrollView
-      contentContainerStyle={[styles.containerGutter, styles.section]}
-    >
+    <ScrollView contentContainerStyle={[styles.containerGutter, styles.section]}>
       <BaseSearchBar placeholder="Search tools, news or forum" />
       <View
         style={[
@@ -105,9 +103,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
       >
         <ActivityButton
           activityType="consult"
-          onPress={() =>
-            navigation.navigate('ConsultStack', { screen: 'Consult' })
-          }
+          onPress={() => navigation.navigate('ConsultStack', { screen: 'Consult' })}
         />
         <ActivityButton
           activityType="meditation"

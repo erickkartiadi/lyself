@@ -60,8 +60,7 @@ const generateRandomTimesAgo = (isWithAgo: boolean) => {
 };
 
 const generateRandomDay = () => DAYS[generateRandomNumber(0, DAYS.length)];
-const generateRandomMonth = () =>
-  MONTHS[generateRandomNumber(0, MONTHS.length)];
+const generateRandomMonth = () => MONTHS[generateRandomNumber(0, MONTHS.length)];
 
 const generateRandomName = () =>
   uniqueNamesGenerator({
@@ -72,9 +71,7 @@ const generateRandomName = () =>
   });
 
 const generateRandomPsychiatristUri = () =>
-  PSYCHIATRIST_AVATAR_URI[
-    generateRandomNumber(0, PSYCHIATRIST_AVATAR_URI.length)
-  ];
+  PSYCHIATRIST_AVATAR_URI[generateRandomNumber(0, PSYCHIATRIST_AVATAR_URI.length)];
 
 const generateRandomImageUri = (size: number) =>
   `https://picsum.photos/id/${generateRandomNumber(1, 100)}/${size}`;

@@ -4,9 +4,7 @@ import { StyleProp, View, ViewStyle } from 'react-native';
 
 import { styles } from '../../theme/styles';
 
-export interface BaseBottomSheetProps
-  extends BottomSheetProps,
-    React.PropsWithChildren {
+export interface BaseBottomSheetProps extends BottomSheetProps, React.PropsWithChildren {
   headerTitle?: string;
   containerStyle?: StyleProp<ViewStyle>;
   toggleBottomSheetVisible: (state?: boolean) => void;

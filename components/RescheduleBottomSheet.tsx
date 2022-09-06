@@ -42,9 +42,7 @@ function DateOption({ date, isSelected, onPress }: DateOptionProps) {
         flex: 1,
         flexDirection: 'column',
         borderColor:
-          isToday || isSelected
-            ? theme.colors.primary
-            : theme.colors.greyOutline,
+          isToday || isSelected ? theme.colors.primary : theme.colors.greyOutline,
       }}
     >
       <Text
@@ -84,9 +82,7 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
         onPress={onPress}
         buttonStyle={{
           borderWidth: 0.5,
-          borderColor: isSelected
-            ? theme.colors.primary
-            : theme.colors.greyOutline,
+          borderColor: isSelected ? theme.colors.primary : theme.colors.greyOutline,
         }}
         type={isSelected ? 'solid' : 'outline'}
         containerStyle={{
@@ -131,14 +127,10 @@ function RescheduleBottomSheet({
   const [months, setMonths] = React.useState(
     MONTHS.map((month) => ({ label: month, value: month }))
   );
-  const [selectedMonth, setSelectedMonth] = React.useState(
-    months[todayMonthIndex].value
-  );
+  const [selectedMonth, setSelectedMonth] = React.useState(months[todayMonthIndex].value);
 
-  const [isRescheduleDialogVisible, toggleIsRescheduleDialogVisible] =
-    useToggle(false);
-  const [isRescheduleDialogLoading, toggleIsRescheduleDialogLoading] =
-    useToggle(false);
+  const [isRescheduleDialogVisible, toggleIsRescheduleDialogVisible] = useToggle(false);
+  const [isRescheduleDialogLoading, toggleIsRescheduleDialogLoading] = useToggle(false);
 
   // update available hours & reset the index to 0 if selected date changed
   React.useEffect(() => {
@@ -150,24 +142,14 @@ function RescheduleBottomSheet({
 
   // filter data based on selected month
   React.useEffect(() => {
-    const selectedMonthIndex = months.findIndex(
-      (month) => month.value === selectedMonth
-    );
+    const selectedMonthIndex = months.findIndex((month) => month.value === selectedMonth);
 
     setData(
-      scheduleData.filter(
-        (each) => dayjs(each.date).get('month') === selectedMonthIndex
-      )
+      scheduleData.filter((each) => dayjs(each.date).get('month') === selectedMonthIndex)
     );
   }, [selectedMonth]);
 
-  const renderDateOption = ({
-    item,
-    index,
-  }: {
-    item: Schedule;
-    index: number;
-  }) => {
+  const renderDateOption = ({ item, index }: { item: Schedule; index: number }) => {
     const handleDateOptionOnPress = () => {
       setSelectedDateIndex(index);
     };
@@ -191,10 +173,7 @@ function RescheduleBottomSheet({
 
   return (
     <>
-      <BaseBottomSheet
-        toggleBottomSheetVisible={toggleBottomSheetVisible}
-        {...rest}
-      >
+      <BaseBottomSheet toggleBottomSheetVisible={toggleBottomSheetVisible} {...rest}>
         <View style={styles.section}>
           <SectionTitle
             title="Schedule"
@@ -246,10 +225,7 @@ function RescheduleBottomSheet({
                   marginBottom: theme.spacing.md,
                 }}
               >
-                <Image
-                  style={{ flex: 1, width: '100%' }}
-                  source={emptyIllustration}
-                />
+                <Image style={{ flex: 1, width: '100%' }} source={emptyIllustration} />
               </View>
               <Text caption style={{ color: theme.colors.grey3 }}>
                 There&apos;s no schedule on {selectedMonth}
@@ -315,9 +291,7 @@ function RescheduleBottomSheet({
               <Text small style={{ color: theme.colors.primary }}>
                 {dayjs(data[selectedDateIndex]?.date).format('MMMM DD, ')}
                 {dayjs({
-                  hour: data[selectedDateIndex]?.availableHours[
-                    selectedTimeIndex
-                  ],
+                  hour: data[selectedDateIndex]?.availableHours[selectedTimeIndex],
                 }).format('hh:mm A')}
               </Text>
             )}

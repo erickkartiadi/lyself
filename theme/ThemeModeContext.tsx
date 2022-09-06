@@ -34,9 +34,7 @@ function ThemeModeProvider({ children }: PropsWithChildren) {
   );
 
   return (
-    <ThemeModeContext.Provider value={preferences}>
-      {children}
-    </ThemeModeContext.Provider>
+    <ThemeModeContext.Provider value={preferences}>{children}</ThemeModeContext.Provider>
   );
 }
 export { ThemeModeContext, ThemeModeProvider };

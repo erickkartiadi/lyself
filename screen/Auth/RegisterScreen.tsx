@@ -21,9 +21,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
       <SafeAreaView>
         <BackButton />
         <Text h1>Create new account</Text>
-        <Text>
-          Just one more step to be part of the {'\n'}Lyself community.
-        </Text>
+        <Text>Just one more step to be part of the {'\n'}Lyself community.</Text>
         <View
           style={{
             aspectRatio: 1,
@@ -42,10 +40,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
         </View>
         <TextInput label="Name" placeholder="eg. John Doe" />
         <TextInput label="Email address" placeholder="example@email.com" />
-        <PasswordInput
-          label="Password"
-          placeholder="must have at least 8 characters"
-        />
+        <PasswordInput label="Password" placeholder="must have at least 8 characters" />
         <Button fullWidth onPress={() => navigation.navigate('Login')}>
           Create Account
         </Button>
