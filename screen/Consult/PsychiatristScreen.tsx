@@ -10,10 +10,10 @@ import BaseIcon from '../../components/bases/BaseIcon';
 import BaseLabel from '../../components/bases/BaseLabel';
 import BaseLink from '../../components/bases/BaseLink';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
-import EducationCard from '../../components/cards/EducationCard';
-import ReviewCard from '../../components/cards/ReviewCard';
+import EducationCard from '../../components/consult/EducationCard';
+import ReviewCard from '../../components/consult/ReviewCard';
 import SectionTitle from '../../components/SectionTitle';
-import ViewMoreText from '../../components/ViewMoreText';
+import ShowHideText from '../../components/ShowHideText';
 import { styles } from '../../theme/styles';
 import { PsychiatristScreenNavigationProps } from '../../types/navigation.types';
 import { Education, Review } from '../../types/types';
@@ -145,7 +145,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
         <View style={styles.section}>
           <View style={styles.sectionMedium}>
             <SectionTitle title="About me" />
-            <ViewMoreText>{description}</ViewMoreText>
+            <ShowHideText>{description}</ShowHideText>
           </View>
           <View style={styles.sectionMedium}>
             <SectionTitle title="Reviews" />

@@ -4,8 +4,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import NavigationContainer from './navigation/NavigationContainer';
-import RootNavigator from './navigation/navigators/RootNavigator.routing';
+import NavigationContainer from './components/NavigationContainer';
+import RootNavigator from './navigation/RootNavigator.routing';
 import { myTheme } from './theme';
 import { customFont } from './theme/styles';
 import { ThemeModeProvider } from './theme/ThemeModeContext';

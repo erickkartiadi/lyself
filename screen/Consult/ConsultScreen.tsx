@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import BaseSearchBar from '../../components/bases/BaseSearchBar';
-import AppointmentCard from '../../components/cards/AppointmentCard';
-import PsychiatristCard from '../../components/cards/PsychiatristCard';
+import AppointmentCard from '../../components/consult/AppointmentCard';
+import PsychiatristCard from '../../components/consult/PsychiatristCard';
 import SectionTitle from '../../components/SectionTitle';
 import { psychiatristData, upcomingAppointmentData } from '../../constant/seed';
 import { styles } from '../../theme/styles';

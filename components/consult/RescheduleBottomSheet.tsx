@@ -1,113 +1,24 @@
-import { Button, ButtonProps, Text, useTheme } from '@rneui/themed';
+import { Button, Text, useTheme } from '@rneui/themed';
 import dayjs from 'dayjs';
-import objectSupport from 'dayjs/plugin/objectSupport';
 import * as React from 'react';
 import { FlatList, Image, View } from 'react-native';
 
-import emptyIllustration from '../assets/images/empty-illustration.png';
-import { MONTHS } from '../constant/constant';
-import { scheduleData } from '../constant/seed';
-import { FONT_SIZE, styles } from '../theme/styles';
-import { Appointment, Schedule } from '../types/types';
-import useToggle from '../utils/hooks/useToggle';
-import BaseBottomSheet, { BaseBottomSheetProps } from './bases/BaseBottomSheet';
-import BaseDialog from './bases/BaseDialog';
-import BasePicker from './bases/BasePicker';
-import BaseViewSeparator from './bases/BaseViewSeparator';
-import SectionTitle from './SectionTitle';
+import emptyIllustration from '../../assets/images/empty-illustration.png';
+import { MONTHS } from '../../constant/constant';
+import { scheduleData } from '../../constant/seed';
+import { FONT_SIZE, styles } from '../../theme/styles';
+import { Appointment, Schedule } from '../../types/types';
+import useToggle from '../../utils/hooks/useToggle';
+import BaseBottomSheet, { BaseBottomSheetProps } from '../bases/BaseBottomSheet';
+import BaseDialog from '../bases/BaseDialog';
+import BasePicker from '../bases/BasePicker';
+import BaseViewSeparator from '../bases/BaseViewSeparator';
+import SectionTitle from '../SectionTitle';
+import DateOption from './DateOption';
+import TimeOption from './TimeOption';
 
-interface DateOptionProps extends Pick<ButtonProps, 'onPress'> {
-  date: Date;
-  isSelected: boolean;
-}
-
-function DateOption({ date, isSelected, onPress }: DateOptionProps) {
-  const { theme } = useTheme();
-
-  const dayjsDate = dayjs(date);
-  const dayOfWeek = dayjsDate.format('ddd');
-  const dateOfMonth = dayjsDate.format('DD');
-
-  const isToday = dayjsDate.isSame(dayjs(), 'date');
-
-  const textColor = isToday ? theme.colors.primary : theme.colors.black;
-  const selectedTextColor = isSelected ? theme.colors.white : textColor;
-
-  return (
-    <Button
-      onPress={onPress}
-      type={isSelected ? 'solid' : 'outline'}
-      buttonStyle={{
-        borderWidth: 0.5,
-        flex: 1,
-        flexDirection: 'column',
-        borderColor:
-          isToday || isSelected ? theme.colors.primary : theme.colors.greyOutline,
-      }}
-    >
-      <Text
-        h2
-        h2Style={{
-          color: selectedTextColor,
-        }}
-      >
-        {dateOfMonth}
-      </Text>
-      <Text
-        caption
-        style={{
-          textTransform: 'uppercase',
-          color: selectedTextColor,
-        }}
-      >
-        {dayOfWeek}
-      </Text>
-    </Button>
-  );
-}
-
-dayjs.extend(objectSupport);
-interface TimeOptionProps extends Pick<ButtonProps, 'onPress'> {
-  hour: number;
-  isSelected: boolean;
-}
-function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
-  const { theme } = useTheme();
-  const formattedHour = dayjs({ hour }).format('HH:00');
-
-  // TODO disable already registered date
-  return (
-    <View style={{ width: '20%' }}>
-      <Button
-        onPress={onPress}
-        buttonStyle={{
-          borderWidth: 0.5,
-          borderColor: isSelected ? theme.colors.primary : theme.colors.greyOutline,
-        }}
-        type={isSelected ? 'solid' : 'outline'}
-        containerStyle={{
-          alignItems: 'stretch',
-          marginVertical: theme.spacing.sm,
-          marginHorizontal: theme.spacing.sm,
-        }}
-        size="md"
-      >
-        <Text
-          subtitle2
-          style={{
-            color: isSelected ? theme.colors.white : theme.colors.black,
-          }}
-        >
-          {formattedHour}
-        </Text>
-      </Button>
-    </View>
-  );
-}
-
-interface RescheduleBottomSheetProps
-  extends Pick<Appointment, 'name' | 'date'>,
-    BaseBottomSheetProps {}
+type RescheduleBottomSheetProps = Pick<Appointment, 'name' | 'date'> &
+  BaseBottomSheetProps;
 
 function RescheduleBottomSheet({
   toggleBottomSheetVisible,

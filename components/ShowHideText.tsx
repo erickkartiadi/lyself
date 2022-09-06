@@ -6,12 +6,12 @@ import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 import useToggle from '../utils/hooks/useToggle';
 import BaseLink from './bases/BaseLink';
 
-type ViewMoreTextProps = Pick<TextProps, 'numberOfLines'>;
+type ShowHideTextProps = Pick<TextProps, 'numberOfLines'>;
 
-function ViewMoreText({
+function ShowHideText({
   numberOfLines = 4,
   children,
-}: React.PropsWithChildren<ViewMoreTextProps>) {
+}: React.PropsWithChildren<ShowHideTextProps>) {
   const [isShowMore, toggleIsShowMore] = useToggle(false);
   const [isLengthMore, toggleIsLengthMore] = useToggle(false);
   const { theme } = useTheme();
@@ -42,4 +42,4 @@ function ViewMoreText({
   );
 }
 
-export default ViewMoreText;
+export default ShowHideText;

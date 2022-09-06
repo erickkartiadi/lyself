@@ -12,7 +12,7 @@ import BaseAvatar from '../bases/BaseAvatar';
 import BaseCard from '../bases/BaseCard';
 import BaseDialog from '../bases/BaseDialog';
 import BaseViewSeparator from '../bases/BaseViewSeparator';
-import RescheduleBottomSheet from '../RescheduleBottomSheet';
+import RescheduleBottomSheet from './RescheduleBottomSheet';
 
 dayjs.extend(isBetween);
 

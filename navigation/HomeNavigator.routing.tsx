@@ -7,15 +7,15 @@ import {
   ExploreTabBarIcon,
   HomeTabBarIcon,
   UserTabBarIcon,
-} from '../../components/BottomTabBarIcons';
-import LeftHeader from '../../components/header/LeftHeader';
-import RightHeader from '../../components/header/RightHeader';
-import AccountScreen from '../../screen/Home/AccountScreen';
-import ChatScreen from '../../screen/Home/ChatScreen';
-import ExploreScreen from '../../screen/Home/ExploreScreen';
-import HomeScreen from '../../screen/Home/HomeScreen';
-import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../../theme/styles';
-import { HomeTabParamList } from '../../types/navigation.types';
+} from '../components/BottomTabBarIcons';
+import LeftHeader from '../components/LeftHeader';
+import RightHeader from '../components/RightHeader';
+import AccountScreen from '../screen/Home/AccountScreen';
+import ChatScreen from '../screen/Home/ChatScreen';
+import ExploreScreen from '../screen/Home/ExploreScreen';
+import HomeScreen from '../screen/Home/HomeScreen';
+import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../theme/styles';
+import { HomeTabParamList } from '../types/navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
