@@ -3,12 +3,14 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
 import NavigationContainer from './components/NavigationContainer';
 import RootNavigator from './navigation/RootNavigator.routing';
 import { myTheme } from './theme';
 import { customFont } from './theme/styles';
 import { ThemeModeProvider } from './theme/ThemeModeContext';
+import toastConfig from './theme/toastConfig';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -43,6 +45,7 @@ export default function App() {
           <NavigationContainer>
             <RootNavigator />
           </NavigationContainer>
+          <Toast config={toastConfig} />
         </ThemeModeProvider>
       </SafeAreaProvider>
     </ThemeProvider>

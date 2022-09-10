@@ -1,13 +1,10 @@
-import { ToastAndroid } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 export const showToast = (msg: string) => {
-  ToastAndroid.showWithGravityAndOffset(
-    msg,
-    ToastAndroid.SHORT,
-    ToastAndroid.BOTTOM,
-    25,
-    50
-  );
+  Toast.show({
+    type: 'info',
+    text1: msg,
+  });
 };
 
 export const comingSoonToast = () => showToast('Coming Soon! 🚀');
