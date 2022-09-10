@@ -51,7 +51,7 @@ function MentalScoreCard() {
         </AnimatedCircularProgress>
 
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-          <Text subtitle1 style={{ color: theme.colors.primary }}>
+          <Text subtitle style={{ color: theme.colors.primary }}>
             Awesome
           </Text>
           <Text caption>Keep up the mood</Text>

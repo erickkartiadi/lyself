@@ -30,7 +30,7 @@ function ActivityButton({ activityType, onPress }: ActivityButtonProps) {
           activityType={activityType}
         />
         <Text
-          subtitle2
+          small
           style={{
             marginTop: theme.spacing.md,
             textAlign: 'center',

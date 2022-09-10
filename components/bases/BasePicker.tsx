@@ -6,7 +6,7 @@ import DropDownPicker, {
   ValueType,
 } from 'react-native-dropdown-picker';
 
-import { BORDER_RADIUS, FONT_FAMILY, FONT_SIZE, styles } from '../../theme/styles';
+import { BORDER_RADIUS, FONT, styles } from '../../theme/styles';
 import { ThemeModeContext } from '../../theme/ThemeModeContext';
 
 type BasePickerProps = {
@@ -70,11 +70,12 @@ function BasePicker({
           borderWidth: 0,
           marginVertical: theme.spacing.md * -1,
         }}
-        textStyle={{
-          color: textColor,
-          fontSize: FONT_SIZE.body2,
-          fontFamily: FONT_FAMILY.regular,
-        }}
+        textStyle={[
+          FONT.small,
+          {
+            color: textColor,
+          },
+        ]}
         labelStyle={{
           textAlign: 'right',
           textTransform: 'capitalize',

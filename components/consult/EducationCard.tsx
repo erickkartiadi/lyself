@@ -21,7 +21,7 @@ function EducationCard({ id, institutionName, uri, startYear, studyPeriod }: Edu
           }}
         />
         <View>
-          <Text numberOfLines={1} subtitle1>
+          <Text numberOfLines={1} subtitle>
             {institutionName}
           </Text>
           <Text style={{ color: theme.colors.grey3 }} caption>

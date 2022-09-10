@@ -32,7 +32,7 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
         size="md"
       >
         <Text
-          subtitle2
+          small
           style={{
             color: isSelected ? theme.colors.white : theme.colors.black,
           }}

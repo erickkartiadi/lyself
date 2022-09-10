@@ -53,8 +53,8 @@ function PsychiatristCard({
           containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View style={{ flex: 1 }}>
-          <Text subtitle1>{name}</Text>
-          <Text subtitle2 style={{ color: colorAlpha(theme.colors.black, 0.75) }}>
+          <Text subtitle>{name}</Text>
+          <Text small style={{ color: colorAlpha(theme.colors.black, 0.75) }}>
             {specialty}
           </Text>
           <View

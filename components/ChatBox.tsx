@@ -34,7 +34,7 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
               marginBottom: theme.spacing.sm,
             }}
           >
-            <Text subtitle1 style={{ marginBottom: 0 }}>
+            <Text subtitle style={{ marginBottom: 0 }}>
               {name}
             </Text>
             <Text caption>{time}</Text>
@@ -47,7 +47,7 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
             }}
           >
             <Text
-              subtitle2
+              small
               style={{
                 color: unread > 0 ? theme.colors.grey1 : theme.colors.grey3,
               }}

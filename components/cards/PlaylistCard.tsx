@@ -33,7 +33,7 @@ function PlaylistCard({ imageUrl, id, title, creator, spotifyUrl }: Playlist) {
         }}
       />
       <View style={{ marginTop: theme.spacing.md }}>
-        <Text subtitle1>{title}</Text>
+        <Text subtitle>{title}</Text>
         <Text caption>by {creator}</Text>
       </View>
     </AnimatedPressable>

@@ -16,7 +16,7 @@ function StatusCard({ title, caption, value, textColor, icon }: StatusCardProps)
 
   return (
     <BaseCard key={title} width="48%">
-      <Text subtitle1>{title}</Text>
+      <Text subtitle>{title}</Text>
       <View
         style={{
           flex: 1,

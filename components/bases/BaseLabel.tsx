@@ -56,7 +56,7 @@ function BaseLabel({
           style={{ marginRight: theme.spacing.sm }}
         />
       )}
-      <Text subtitle2>{children}</Text>
+      <Text small>{children}</Text>
     </View>
   );
 }

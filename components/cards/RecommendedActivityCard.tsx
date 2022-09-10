@@ -33,7 +33,7 @@ function RecommendedActivityCard({
         />
         <View style={{ paddingRight: theme.spacing.xl }}>
           <Text>{title}</Text>
-          <Text subtitle1>{time}</Text>
+          <Text subtitle>{time}</Text>
         </View>
       </View>
     </BaseCard>

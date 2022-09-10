@@ -36,7 +36,7 @@ function ProgressActivityCard({ activity, id, progress, time, title }: ProgressA
             flex: 1,
           }}
         >
-          <Text subtitle1 style={{ marginBottom: theme.spacing.sm }}>
+          <Text subtitle style={{ marginBottom: theme.spacing.sm }}>
             {title}
           </Text>
           <LinearProgress

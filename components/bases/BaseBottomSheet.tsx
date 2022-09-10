@@ -34,7 +34,7 @@ function BaseBottomSheet({
       >
         {headerTitle !== '' && (
           <Text
-            subtitle1
+            subtitle
             style={{
               marginTop: theme.spacing.md,
             }}

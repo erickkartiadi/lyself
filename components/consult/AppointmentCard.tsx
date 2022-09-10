@@ -88,7 +88,7 @@ function AppointmentCard({
           />
           <View style={{ flex: 1 }}>
             <Text
-              subtitle1
+              subtitle
               style={{
                 color: textColor,
               }}
@@ -96,7 +96,7 @@ function AppointmentCard({
               {name}
             </Text>
             <Text
-              subtitle2
+              small
               style={{
                 color: colorAlpha(textColor, 0.75),
               }}

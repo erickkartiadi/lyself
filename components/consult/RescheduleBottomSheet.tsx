@@ -6,7 +6,7 @@ import { FlatList, Image, View } from 'react-native';
 import emptyIllustration from '../../assets/images/empty-illustration.png';
 import { MONTHS } from '../../constant/constant';
 import { scheduleData } from '../../constant/seed';
-import { FONT_SIZE, styles } from '../../theme/styles';
+import { styles } from '../../theme/styles';
 import { Appointment, Schedule } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
 import BaseBottomSheet, { BaseBottomSheetProps } from '../bases/BaseBottomSheet';
@@ -93,7 +93,7 @@ function RescheduleBottomSheet({
               <BasePicker
                 max={3}
                 dropdownWidth={128}
-                iconSize={FONT_SIZE.body2}
+                iconSize={16}
                 upIconName="filter"
                 downIconName="filter"
                 iconType="ionicon"

@@ -28,7 +28,7 @@ function ArticleCard({ title, publisher, time, uri, url }: Article) {
           padding: theme.spacing.xl,
         }}
       >
-        <Text subtitle1>{title}</Text>
+        <Text subtitle>{title}</Text>
         <View
           style={{
             flex: 1,

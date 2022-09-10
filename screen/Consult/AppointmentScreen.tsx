@@ -4,7 +4,7 @@ import { FlatList } from 'react-native-gesture-handler';
 
 import AppointmentCard from '../../components/consult/AppointmentCard';
 import { completedAppointmentData, upcomingAppointmentData } from '../../constant/seed';
-import { FONT_FAMILY, FONT_SIZE, styles } from '../../theme/styles';
+import { FONT, styles } from '../../theme/styles';
 import { Appointment } from '../../types/types';
 
 function AppointmentScreen() {
@@ -33,23 +33,25 @@ function AppointmentScreen() {
       >
         <Tab.Item
           title="Upcoming"
-          titleStyle={(active) => ({
-            color: active ? lightColors.white : theme.colors.black,
-            paddingVertical: 0,
-            paddingHorizontal: 0,
-            fontFamily: FONT_FAMILY.medium,
-            fontSize: FONT_SIZE.caption,
-          })}
+          titleStyle={(active) => [
+            FONT.small,
+            {
+              color: active ? lightColors.white : theme.colors.black,
+              paddingVertical: 0,
+              paddingHorizontal: 0,
+            },
+          ]}
         />
         <Tab.Item
           title="Completed"
-          titleStyle={(active) => ({
-            color: active ? lightColors.white : theme.colors.black,
-            paddingVertical: 0,
-            paddingHorizontal: 0,
-            fontFamily: FONT_FAMILY.medium,
-            fontSize: FONT_SIZE.caption,
-          })}
+          titleStyle={(active) => [
+            FONT.small,
+            {
+              color: active ? lightColors.white : theme.colors.black,
+              paddingVertical: 0,
+              paddingHorizontal: 0,
+            },
+          ]}
         />
       </Tab>
 

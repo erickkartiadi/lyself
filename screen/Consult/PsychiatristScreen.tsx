@@ -61,7 +61,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
           />
           <View>
             <Text h2>{name}</Text>
-            <Text subtitle1 style={{ color: theme.colors.grey3 }}>
+            <Text subtitle style={{ color: theme.colors.grey3 }}>
               {specialty}
             </Text>
           </View>
@@ -89,8 +89,8 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                 containerStyle={{ marginRight: theme.spacing.md }}
               />
               <View>
-                <Text subtitle1>{`${rating}%`}</Text>
-                <Text subtitle2 style={{ color: theme.colors.grey3 }}>
+                <Text subtitle>{`${rating}%`}</Text>
+                <Text small style={{ color: theme.colors.grey3 }}>
                   rating
                 </Text>
               </View>
@@ -112,8 +112,8 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                 containerStyle={{ marginRight: theme.spacing.md }}
               />
               <View>
-                <Text subtitle1>{`${experience} yrs`}</Text>
-                <Text subtitle2 style={{ color: theme.colors.grey3 }}>
+                <Text subtitle>{`${experience} yrs`}</Text>
+                <Text small style={{ color: theme.colors.grey3 }}>
                   experience
                 </Text>
               </View>
@@ -134,8 +134,8 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                 containerStyle={{ marginRight: theme.spacing.md }}
               />
               <View>
-                <Text subtitle1>{patients}</Text>
-                <Text subtitle2 style={{ color: theme.colors.grey3 }}>
+                <Text subtitle>{patients}</Text>
+                <Text small style={{ color: theme.colors.grey3 }}>
                   patients
                 </Text>
               </View>
@@ -228,7 +228,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                   {place.name}
                 </Text>
                 <Text
-                  subtitle2
+                  small
                   style={{
                     textTransform: 'capitalize',
                     flex: 1,

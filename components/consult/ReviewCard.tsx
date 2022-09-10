@@ -48,7 +48,7 @@ function ReviewCard({ uri, name, review, time }: Review) {
             source={{ uri }}
           />
           <View style={{ flex: 1 }}>
-            <Text subtitle2 style={{ fontFamily: 'Inter-Medium' }}>
+            <Text small style={{ fontFamily: 'Inter-Medium' }}>
               {name}
             </Text>
             <Text caption style={{ color: theme.colors.grey3 }}>
