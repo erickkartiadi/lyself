@@ -18,7 +18,7 @@ function RootNavigator() {
     <>
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <Stack.Navigator
-        initialRouteName="HomeTab"
+        initialRouteName="AuthStack"
         screenOptions={{
           headerShown: false,
         }}

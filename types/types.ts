@@ -6,6 +6,13 @@ type Name = string;
 type Specialties = typeof SPECIALTIES[number];
 type ActivityType = typeof ACTIVITY_TYPE[number];
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
 // other types
 type Playlist = {
   id: Id;
@@ -113,5 +120,6 @@ export {
   Schedule,
   Specialties,
   Status,
+  User,
 };
 export { ACTIVITY_TYPE, SPECIALTIES };

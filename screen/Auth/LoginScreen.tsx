@@ -1,21 +1,79 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, CheckBox, Text, useTheme } from '@rneui/themed';
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
 import loginIllustration from '../../assets/images/login-illustration.png';
 import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
+import { ErrorResponseData } from '../../services/api/axios.types';
+import { login } from '../../services/api/user';
+import { loginSchema } from '../../services/validation/schema';
 import { styles } from '../../theme/styles';
 import { LoginScreenNavigationProps } from '../../types/navigation.types';
+import { User } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
+
+type LoginFormData = Omit<User, 'id' | 'name'>;
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();
   const [isRememberLogin, toggleIsRememberLogin] = useToggle(false);
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    resolver: yupResolver(loginSchema),
+  });
+
+  const handleLogin = async (data: LoginFormData) => {
+    setIsButtonLoading(true);
+
+    try {
+      await login({ email: data.email, password: data.password });
+
+      // TODO  process token
+
+      navigation.navigate('HomeTab', {
+        screen: 'Home',
+      });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const { statusCode } = error.response?.data as ErrorResponseData;
+
+        if (statusCode === 401) {
+          Toast.show({
+            type: 'error',
+            text1: 'Invalid email or password',
+          });
+        } else {
+          throw new Error();
+        }
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: 'Something went wrong',
+          text2: 'Please try again later',
+        });
+      }
+    }
+
+    setIsButtonLoading(false);
+  };
 
   return (
     <ScrollView
@@ -42,8 +100,39 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             resizeMode="center"
           />
         </View>
-        <TextInput label="Email address" placeholder="example@email.com" />
-        <PasswordInput label="Password" placeholder="must have at least 8 characters" />
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              errorMessage={errors.email && errors.email.message}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              label="Email address"
+              placeholder="example@email.com"
+              textContentType="emailAddress"
+              autoComplete="email"
+              keyboardType="email-address"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <PasswordInput
+              autoComplete="password"
+              textContentType="password"
+              errorMessage={errors.password && errors.password.message}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              label="Password"
+              placeholder="your secret password"
+            />
+          )}
+        />
         <View
           style={{
             flex: 1,
@@ -61,10 +150,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
           />
           <LinkButton to={{ screen: 'ForgotPassword' }}>Forgot Password?</LinkButton>
         </View>
-        <Button
-          fullWidth
-          onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
-        >
+        <Button loading={isButtonLoading} fullWidth onPress={handleSubmit(handleLogin)}>
           Login
         </Button>
         <View
@@ -77,7 +163,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             },
           ]}
         >
-          <Text>Didn&apos;t have an account? </Text>
+          <Text small>Didn&apos;t have an account? </Text>
           <LinkButton to={{ screen: 'Register' }} color="primary">
             Sign Up
           </LinkButton>

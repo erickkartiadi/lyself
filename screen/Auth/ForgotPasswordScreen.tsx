@@ -1,16 +1,52 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
-import React from 'react';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
+import { forgotPasswordSchema } from '../../services/validation/schema';
 import { styles } from '../../theme/styles';
 import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';
+import { User } from '../../types/types';
+
+type ForgotPasswordFormData = Pick<User, 'email'>;
 
 function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProps) {
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ForgotPasswordFormData>({
+    defaultValues: {
+      email: '',
+    },
+    resolver: yupResolver(forgotPasswordSchema),
+  });
+
+  const handleForgotPassword = (data: ForgotPasswordFormData) => {
+    setIsButtonLoading(true);
+
+    reset();
+    Toast.show({
+      type: 'success',
+      text2: `We have sent you a reset password email to ${data.email}. Please check your  inbox.`,
+      visibilityTime: 10000,
+    });
+
+    navigation.navigate('Login');
+
+    setIsButtonLoading(false);
+  };
+
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
@@ -38,8 +74,28 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
             }}
           />
         </View>
-        <TextInput label="Email address" placeholder="example@email.com" />
-        <Button fullWidth onPress={() => navigation.navigate('Login')}>
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              errorMessage={errors.email && errors.email.message}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              label="Email address"
+              placeholder="example@email.com"
+              textContentType="emailAddress"
+              autoComplete="email"
+              keyboardType="email-address"
+            />
+          )}
+        />
+        <Button
+          loading={isButtonLoading}
+          fullWidth
+          onPress={handleSubmit(handleForgotPassword)}
+        >
           Send Instruction
         </Button>
       </SafeAreaView>

@@ -40,8 +40,12 @@ function BaseToast({ color, iconName, iconType, ...rest }: BaseToastProps) {
           paddingVertical: theme.spacing.xl,
         },
       ]}
-      text1Style={[FONT.small, { fontFamily: FONT_FAMILY.medium }]}
-      text2Style={FONT.caption}
+      text1Style={[
+        FONT.small,
+        { fontFamily: FONT_FAMILY.medium, color: theme.colors.black },
+      ]}
+      text2Style={[FONT.caption, { color: theme.colors.grey3 }]}
+      text2NumberOfLines={3}
       contentContainerStyle={{
         paddingLeft: theme.spacing.xl,
       }}

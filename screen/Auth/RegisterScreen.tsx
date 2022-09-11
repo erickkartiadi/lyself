@@ -1,18 +1,85 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
 import registerIllustration from '../../assets/images/register-illustration.png';
 import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
+import { ErrorResponseData } from '../../services/api/axios.types';
+import { register } from '../../services/api/user';
+import { registerSchema } from '../../services/validation/schema';
 import { styles } from '../../theme/styles';
 import { RegisterScreenNavigationProps } from '../../types/navigation.types';
+import { User } from '../../types/types';
+
+type RegisterFormData = Omit<User, 'id'>;
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<RegisterFormData>({
+    defaultValues: {
+      email: '',
+      password: '',
+      name: '',
+    },
+    resolver: yupResolver(registerSchema),
+  });
+
+  const handleRegister = async (data: RegisterFormData) => {
+    setIsButtonLoading(true);
+
+    try {
+      const user = await register({
+        email: data.email,
+        name: data.name,
+        password: data.password,
+      });
+      reset();
+
+      if (!user) {
+        throw new Error();
+      }
+
+      Toast.show({
+        text1: 'Account Created',
+        text2: `We have sent you a confirmation email to ${user.data.email}, please confirm your email address to login.`,
+        visibilityTime: 10000,
+      });
+
+      navigation.navigate('Login');
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        const { message } = error.response?.data as ErrorResponseData;
+
+        Toast.show({
+          type: 'error',
+          text1: message instanceof Array ? message[0] : message,
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: 'Something went wrong',
+          text2: 'Please try again later',
+        });
+      }
+    }
+    setIsButtonLoading(false);
+  };
+
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
@@ -38,10 +105,60 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             resizeMode="center"
           />
         </View>
-        <TextInput label="Name" placeholder="eg. John Doe" />
-        <TextInput label="Email address" placeholder="example@email.com" />
-        <PasswordInput label="Password" placeholder="must have at least 8 characters" />
-        <Button fullWidth onPress={() => navigation.navigate('Login')}>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              errorMessage={errors.name && errors.name.message}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              label="Name"
+              placeholder="eg. John Doe"
+              textContentType="name"
+              autoComplete="name"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              errorMessage={errors.email && errors.email.message}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              label="Email address"
+              placeholder="example@email.com"
+              textContentType="emailAddress"
+              autoComplete="email"
+              keyboardType="email-address"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <PasswordInput
+              autoComplete="password"
+              textContentType="password"
+              errorMessage={errors.password && errors.password.message}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              label="Password"
+              placeholder="your secret password"
+            />
+          )}
+        />
+        <Button
+          loading={isButtonLoading}
+          fullWidth
+          onPress={handleSubmit(handleRegister)}
+        >
           Create Account
         </Button>
         <View
@@ -54,7 +171,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             },
           ]}
         >
-          <Text subtitle2>Already have an account? </Text>
+          <Text small>Already have an account? </Text>
           <LinkButton to={{ screen: 'Login' }} color="primary">
             Login
           </LinkButton>
