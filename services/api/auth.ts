@@ -15,3 +15,9 @@ export async function login(loginDto: Omit<CreateUserDto, 'name'>) {
     ...loginDto,
   });
 }
+
+export async function forgotPassword(email: string) {
+  return axios.post('http://192.168.1.110:3000/auth/forgot-password', {
+    email,
+  });
+}

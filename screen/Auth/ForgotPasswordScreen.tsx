@@ -10,6 +10,7 @@ import Toast from 'react-native-toast-message';
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
+import { forgotPassword } from '../../services/api/auth';
 import { forgotPasswordSchema } from '../../services/validation/schema';
 import { styles } from '../../theme/styles';
 import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';
@@ -32,18 +33,25 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
     resolver: yupResolver(forgotPasswordSchema),
   });
 
-  const handleForgotPassword = (data: ForgotPasswordFormData) => {
+  const handleForgotPassword = async (data: ForgotPasswordFormData) => {
     setIsButtonLoading(true);
 
-    reset();
-    Toast.show({
-      type: 'success',
-      text2: `We have sent you a reset password email to ${data.email}. Please check your  inbox.`,
-      visibilityTime: 10000,
-    });
+    try {
+      await forgotPassword(data.email);
+      reset();
+      Toast.show({
+        type: 'success',
+        text2: `We have sent you a reset password email to ${data.email}. Please check your inbox.`,
+        visibilityTime: 10000,
+      });
 
-    navigation.navigate('Login');
-
+      navigation.navigate('Login');
+    } catch (e) {
+      Toast.show({
+        type: 'error',
+        text2: `Something went wrong`,
+      });
+    }
     setIsButtonLoading(false);
   };
 
