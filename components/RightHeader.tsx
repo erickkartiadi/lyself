@@ -2,8 +2,8 @@ import { Badge, Icon, useTheme } from '@rneui/themed';
 import React, { useContext } from 'react';
 import { View } from 'react-native';
 
+import { ThemeModeContext } from '../context/ThemeModeContext';
 import { BORDER_RADIUS } from '../theme/styles';
-import { ThemeModeContext } from '../theme/ThemeModeContext';
 import { comingSoonToast } from '../utils/comingSoonToast';
 
 function RightHeader() {

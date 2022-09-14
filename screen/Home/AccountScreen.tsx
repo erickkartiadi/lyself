@@ -1,5 +1,5 @@
 import { Text, useTheme } from '@rneui/themed';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -7,11 +7,17 @@ import BaseAvatar from '../../components/bases/BaseAvatar';
 import SettingMenu from '../../components/SettingMenu';
 import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
 import { user } from '../../constant/seed';
+import { AuthContext } from '../../context/AuthContext';
 import { styles } from '../../theme/styles';
 import { AccountScreenNavigationProps } from '../../types/navigation.types';
 
 function AccountScreen({ navigation }: AccountScreenNavigationProps) {
   const { theme } = useTheme();
+  const { logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <ScrollView contentContainerStyle={[styles.section]}>
@@ -107,7 +113,7 @@ function AccountScreen({ navigation }: AccountScreenNavigationProps) {
         backgroundColor={theme.colors.error}
         name="log-out"
         type="ionicon"
-        onPress={() => navigation.navigate('AuthStack', { screen: 'GetStarted' })}
+        onPress={handleLogout}
       />
     </ScrollView>
   );

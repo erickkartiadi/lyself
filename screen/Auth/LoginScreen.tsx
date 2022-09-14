@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, CheckBox, Text, useTheme } from '@rneui/themed';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -13,6 +13,7 @@ import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
+import { AuthContext } from '../../context/AuthContext';
 import { ErrorResponseData } from '../../services/api/axios.types';
 import { login } from '../../services/api/user';
 import { loginSchema } from '../../services/validation/schema';
@@ -27,11 +28,13 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();
   const [isRememberLogin, toggleIsRememberLogin] = useToggle(false);
   const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const authContext = useContext(AuthContext);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<LoginFormData>({
     defaultValues: {
       email: '',
@@ -44,21 +47,24 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
     setIsButtonLoading(true);
 
     try {
-      await login({ email: data.email, password: data.password });
+      const res = await login({ email: data.email, password: data.password });
+      reset();
 
-      // TODO  process token
+      // TODO remember login
+
+      authContext.login(res.data.access_token);
 
       navigation.navigate('HomeTab', {
         screen: 'Home',
       });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        const { statusCode } = error.response?.data as ErrorResponseData;
+        const { statusCode, message } = error.response?.data as ErrorResponseData;
 
         if (statusCode === 401) {
           Toast.show({
             type: 'error',
-            text1: 'Invalid email or password',
+            text1: message instanceof Array ? message[0] : message,
           });
         } else {
           throw new Error();

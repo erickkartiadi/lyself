@@ -5,11 +5,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
-import NavigationContainer from './components/NavigationContainer';
+import { AuthProvider } from './context/AuthContext';
+import { ThemeModeProvider } from './context/ThemeModeContext';
 import RootNavigator from './navigation/RootNavigator.routing';
 import { myTheme } from './theme';
 import { customFont } from './theme/styles';
-import { ThemeModeProvider } from './theme/ThemeModeContext';
 import toastConfig from './theme/toastConfig';
 
 export default function App() {
@@ -39,15 +39,15 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={myTheme}>
-      <SafeAreaProvider onLayout={onLayoutRootView}>
-        <ThemeModeProvider>
-          <NavigationContainer>
+    <AuthProvider>
+      <ThemeProvider theme={myTheme}>
+        <SafeAreaProvider onLayout={onLayoutRootView}>
+          <ThemeModeProvider>
             <RootNavigator />
-          </NavigationContainer>
-          <Toast config={toastConfig} />
-        </ThemeModeProvider>
-      </SafeAreaProvider>
-    </ThemeProvider>
+            <Toast config={toastConfig} />
+          </ThemeModeProvider>
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
