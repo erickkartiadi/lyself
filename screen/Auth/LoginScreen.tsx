@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, CheckBox, Text, useTheme } from '@rneui/themed';
+import { Button, Text, useTheme } from '@rneui/themed';
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -20,14 +20,12 @@ import { loginSchema } from '../../services/validation/schema';
 import { styles } from '../../theme/styles';
 import { LoginScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
-import useToggle from '../../utils/hooks/useToggle';
 import { somethingWentWrongToast } from '../../utils/toast';
 
 type LoginFormData = Omit<User, 'id' | 'name'>;
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();
-  const [isRememberLogin, toggleIsRememberLogin] = useToggle(false);
   const [isButtonLoading, setIsButtonLoading] = useState(false);
   const authContext = useContext(AuthContext);
 
@@ -49,9 +47,6 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
 
     try {
       const res = await login({ email, password });
-
-      // TODO remember login
-
       authContext.login(res.data.access_token);
 
       navigation.navigate('HomeTab', {
@@ -139,16 +134,11 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: theme.spacing.lg * -1,
-            marginBottom: theme.spacing.lg,
+            justifyContent: 'flex-end',
+            marginTop: theme.spacing.xl * -1,
+            marginBottom: theme.spacing.xl * 1.25,
           }}
         >
-          <CheckBox
-            title="Remember Me"
-            checked={isRememberLogin}
-            onPress={() => toggleIsRememberLogin()}
-          />
           <LinkButton to={{ screen: 'ForgotPassword' }}>Forgot Password?</LinkButton>
         </View>
         <Button loading={isButtonLoading} fullWidth onPress={handleSubmit(handleLogin)}>
