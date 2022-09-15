@@ -1,8 +1,8 @@
 import { Button, useTheme } from '@rneui/themed';
-import axios from 'axios';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
+import * as SecureStore from 'expo-secure-store';
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import ActivityButton from '../../components/ActivityButton';
@@ -11,8 +11,10 @@ import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import PlaylistCard from '../../components/cards/PlaylistCard';
 import SectionTitle from '../../components/SectionTitle';
 import Articles from '../../components/widget/Articles';
+import getFeaturedPlaylist from '../../services/api/spotify';
 import { styles } from '../../theme/styles';
 import { ExploreScreenNavigationProps } from '../../types/navigation.types';
+import { somethingWentWrongToast } from '../../utils/toast';
 
 const CLIENT_ID = '189bb29572b34ba29b2c243cae7f6105';
 const discovery = {
@@ -22,8 +24,9 @@ const discovery = {
 
 function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
   const { theme } = useTheme();
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState<string | null>('');
   const [featuredPlaylist, setFeaturedPlaylist] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const renderPlaylist = ({ item }: { item: any }) => {
     const { name, id } = item;
@@ -63,32 +66,57 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
     discovery
   );
 
+  const getSpotifyToken = async () => {
+    const key = 'SPOTIFY_KEY';
+    const spotifyToken = await SecureStore.getItemAsync(key);
+    setToken(spotifyToken);
+  };
+
+  const getPlaylist = async () => {
+    if (token) {
+      try {
+        const res = await getFeaturedPlaylist(token);
+        const { items } = res.data.playlists;
+
+        setFeaturedPlaylist(items);
+      } catch (error) {
+        somethingWentWrongToast();
+      }
+    }
+  };
+
   useEffect(() => {
-    if (response?.type === 'success') {
+    if (response && response?.type === 'success') {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       const { access_token } = response.params;
       setToken(access_token);
+
+      SecureStore.setItemAsync('SPOTIFY_KEY', access_token);
     }
   }, [response]);
 
   useEffect(() => {
-    if (token) {
-      axios('https://api.spotify.com/v1/browse/featured-playlists', {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }).then((res) => {
-        const { items } = res.data.playlists;
-        setFeaturedPlaylist(items);
-      });
-    }
-  });
+    getSpotifyToken();
+    getPlaylist();
+  }, [token]);
+
+  const onRefresh = React.useCallback(async () => {
+    setIsRefreshing(true);
+    await getPlaylist();
+    setIsRefreshing(false);
+  }, []);
 
   return (
-    <ScrollView contentContainerStyle={[styles.containerGutter, styles.section]}>
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={isRefreshing}
+          colors={[theme.colors.primary]}
+          onRefresh={onRefresh}
+        />
+      }
+      contentContainerStyle={[styles.containerGutter, styles.section]}
+    >
       <BaseSearchBar placeholder="Search tools, news or forum" />
       <View
         style={[
