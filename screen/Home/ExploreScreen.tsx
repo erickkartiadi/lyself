@@ -1,3 +1,4 @@
+import { SPOTIFY_CLIENT_ID } from '@env';
 import { Button, useTheme } from '@rneui/themed';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import * as SecureStore from 'expo-secure-store';
@@ -16,7 +17,6 @@ import { styles } from '../../theme/styles';
 import { ExploreScreenNavigationProps } from '../../types/navigation.types';
 import { somethingWentWrongToast } from '../../utils/toast';
 
-const CLIENT_ID = '189bb29572b34ba29b2c243cae7f6105';
 const discovery = {
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
@@ -48,7 +48,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      clientId: CLIENT_ID,
+      clientId: SPOTIFY_CLIENT_ID,
       scopes: [
         'user-read-currently-playing',
         'user-read-recently-played',
@@ -60,7 +60,6 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
         'user-read-private',
       ],
       usePKCE: false,
-      // redirectUri: 'lyself://',
       redirectUri: 'exp://192.168.1.110:19000',
     },
     discovery
