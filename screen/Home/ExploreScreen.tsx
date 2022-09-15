@@ -1,4 +1,4 @@
-import { SPOTIFY_CLIENT_ID } from '@env';
+import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_ID_KEY } from '@env';
 import { Button, useTheme } from '@rneui/themed';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import * as SecureStore from 'expo-secure-store';
@@ -66,8 +66,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
   );
 
   const getSpotifyToken = async () => {
-    const key = 'SPOTIFY_KEY';
-    const spotifyToken = await SecureStore.getItemAsync(key);
+    const spotifyToken = await SecureStore.getItemAsync(SPOTIFY_CLIENT_ID_KEY);
     setToken(spotifyToken);
   };
 
@@ -90,7 +89,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
       const { access_token } = response.params;
       setToken(access_token);
 
-      SecureStore.setItemAsync('SPOTIFY_KEY', access_token);
+      SecureStore.setItemAsync(SPOTIFY_CLIENT_ID_KEY, access_token);
     }
   }, [response]);
 

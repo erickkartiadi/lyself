@@ -4,7 +4,6 @@ import {
   Activity,
   ACTIVITY_TYPE,
   Appointment,
-  Article,
   Chat,
   ProgressActivity,
   Psychiatrist,
@@ -124,38 +123,6 @@ export const psychiatristData: Array<Psychiatrist> = new Array(generateRandomNum
       studyPeriod: generateRandomNumber(2, 5),
     })),
   }));
-// image by: unsplash
-
-export const articlesData: Article[] = [
-  {
-    title: 'Supporting Employees Mental Health at Work',
-    publisher: 'Rolling Stone',
-    time: '1h',
-    uri: 'https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
-    url: 'https://www.rollingstone.com/culture-council/articles/supporting-employees-mental-health-work-1376097/',
-  },
-  {
-    title: 'Parental controls and kids mental health',
-    publisher: 'Mashable',
-    time: '1w',
-    uri: 'https://images.unsplash.com/photo-1554410637-1a8267402b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
-    url: 'https://mashable.com/article/screen-time-parenting-styles-teen-mental-health',
-  },
-  {
-    title: 'Mental Health: You must prioritise this!',
-    publisher: 'Dailytrust',
-    time: '7h',
-    uri: 'https://images.unsplash.com/photo-1620147512372-9e00421556bb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
-    url: 'https://dailytrust.com/mental-health-you-must-prioritise-this',
-  },
-  {
-    title: 'Better mental health support for people in crisis',
-    publisher: 'GOV.UK',
-    time: '4d',
-    uri: 'https://images.unsplash.com/photo-1604881990409-b9f246db39da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80',
-    url: 'https://www.gov.uk/government/news/better-mental-health-support-for-people-in-crisis',
-  },
-];
 
 export const chatData: Chat[] = [
   {

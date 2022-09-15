@@ -51,10 +51,10 @@ type Education = {
 
 type Article = {
   title: string;
-  publisher: string;
-  time: string;
-  uri: string;
+  source: string;
+  publishedAt: string;
   url: string;
+  urlToImage: string;
 };
 
 type Place = {

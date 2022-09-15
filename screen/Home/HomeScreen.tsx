@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import BaseBottomSheet from '../../components/bases/BaseBottomSheet';
-import Articles from '../../components/widget/Articles';
 import GraphScore from '../../components/widget/GraphScore';
 import Progress from '../../components/widget/Progress';
 import RecommendedActivity from '../../components/widget/RecommendedActivity';
@@ -32,12 +31,6 @@ function HomeScreen() {
       active: true,
       Widget: Progress,
       label: 'Activity Progress',
-    },
-    {
-      no: 4,
-      active: true,
-      Widget: Articles,
-      label: 'Article',
     },
   ]);
 

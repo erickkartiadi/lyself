@@ -1,17 +1,24 @@
 import { Icon, Image, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 import { Article } from '../../types/types';
 import BaseCard from '../bases/BaseCard';
 
-function ArticleCard({ title, publisher, time, uri, url }: Article) {
+TimeAgo.addDefaultLocale(en);
+
+function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
   const { theme } = useTheme();
 
   const handleOpenArticle = () => {
     Linking.openURL(url);
   };
+
+  const timeAgo = new TimeAgo('en-US');
+  const formattedTimeAgo = timeAgo.format(Date.parse(publishedAt));
 
   return (
     <BaseCard width={280} enableCardPadding={false} onPress={handleOpenArticle}>
@@ -21,24 +28,27 @@ function ArticleCard({ title, publisher, time, uri, url }: Article) {
           aspectRatio: 4 / 3,
         }}
         PlaceholderContent={<ActivityIndicator />}
-        source={{ uri }}
+        source={{ uri: urlToImage }}
       />
       <View
         style={{
           padding: theme.spacing.xl,
         }}
       >
-        <Text subtitle>{title}</Text>
+        <Text subtitle numberOfLines={3}>
+          {title}
+        </Text>
         <View
           style={{
             flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
+            marginTop: theme.spacing.sm,
           }}
         >
-          <Text caption>{publisher}</Text>
+          <Text caption>{source}</Text>
           <Icon type="entypo" name="dot-single" color={theme.colors.grey4} />
-          <Text caption>{time} ago</Text>
+          <Text caption>{formattedTimeAgo}</Text>
         </View>
       </View>
     </BaseCard>
