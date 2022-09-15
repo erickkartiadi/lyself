@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import { ThemeModeContext } from '../context/ThemeModeContext';
 import { BORDER_RADIUS } from '../theme/styles';
-import { comingSoonToast } from '../utils/comingSoonToast';
+import { comingSoonToast } from '../utils/toast';
 
 function RightHeader() {
   const { theme } = useTheme();

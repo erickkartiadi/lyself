@@ -19,6 +19,7 @@ import { registerSchema } from '../../services/validation/schema';
 import { styles } from '../../theme/styles';
 import { RegisterScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
+import { somethingWentWrongToast } from '../../utils/toast';
 
 type RegisterFormData = Omit<User, 'id'>;
 
@@ -39,30 +40,22 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
     resolver: yupResolver(registerSchema),
   });
 
-  const handleRegister = async (data: RegisterFormData) => {
+  const handleRegister = async ({ email, name, password }: RegisterFormData) => {
     setIsButtonLoading(true);
 
     try {
-      const user = await register({
-        email: data.email,
-        name: data.name,
-        password: data.password,
-      });
-      reset();
-
-      if (!user) {
-        throw new Error();
-      }
+      const user = await register({ email, name, password });
+      if (!user) throw new Error();
 
       Toast.show({
         text1: 'Account Created',
-        text2: `We have sent you a confirmation email to ${user.data.email}, please confirm your email address to login.`,
+        text2: `We have sent you a confirmation email to ${user.data.email}, please confirm your email address.`,
         visibilityTime: 10000,
       });
 
       navigation.navigate('Login');
-    } catch (error: any) {
-      if (axios.isAxiosError(error)) {
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response?.data) {
         const { message } = error.response?.data as ErrorResponseData;
 
         Toast.show({
@@ -70,13 +63,11 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
           text1: message instanceof Array ? message[0] : message,
         });
       } else {
-        Toast.show({
-          type: 'error',
-          text1: 'Something went wrong',
-          text2: 'Please try again later',
-        });
+        somethingWentWrongToast();
       }
     }
+
+    reset();
     setIsButtonLoading(false);
   };
 

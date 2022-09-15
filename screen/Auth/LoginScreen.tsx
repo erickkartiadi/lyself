@@ -21,6 +21,7 @@ import { styles } from '../../theme/styles';
 import { LoginScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
+import { somethingWentWrongToast } from '../../utils/toast';
 
 type LoginFormData = Omit<User, 'id' | 'name'>;
 
@@ -43,12 +44,11 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
     resolver: yupResolver(loginSchema),
   });
 
-  const handleLogin = async (data: LoginFormData) => {
+  const handleLogin = async ({ email, password }: LoginFormData) => {
     setIsButtonLoading(true);
 
     try {
-      const res = await login({ email: data.email, password: data.password });
-      reset();
+      const res = await login({ email, password });
 
       // TODO remember login
 
@@ -58,7 +58,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         screen: 'Home',
       });
     } catch (error) {
-      if (axios.isAxiosError(error)) {
+      if (axios.isAxiosError(error) && error.response?.data) {
         const { statusCode, message } = error.response?.data as ErrorResponseData;
 
         if (statusCode === 401) {
@@ -66,18 +66,13 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             type: 'error',
             text1: message instanceof Array ? message[0] : message,
           });
-        } else {
-          throw new Error();
         }
       } else {
-        Toast.show({
-          type: 'error',
-          text1: 'Something went wrong',
-          text2: 'Please try again later',
-        });
+        somethingWentWrongToast();
       }
     }
 
+    reset();
     setIsButtonLoading(false);
   };
 

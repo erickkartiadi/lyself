@@ -1,7 +1,7 @@
 import { Button } from '@rneui/themed';
 import * as React from 'react';
 
-import { comingSoonToast } from '../utils/comingSoonToast';
+import { comingSoonToast } from '../utils/toast';
 
 function SwipeableLeftButton() {
   return (

@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { ACTIVITY_ICON } from '../../constant/constant';
 import { BORDER_RADIUS } from '../../theme/styles';
 import { ProgressActivity } from '../../types/types';
-import { comingSoonToast } from '../../utils/comingSoonToast';
+import { comingSoonToast } from '../../utils/toast';
 import ActivityIcon from '../ActivityIcon';
 import BaseCard from '../bases/BaseCard';
 

@@ -15,6 +15,7 @@ import { forgotPasswordSchema } from '../../services/validation/schema';
 import { styles } from '../../theme/styles';
 import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
+import { somethingWentWrongToast } from '../../utils/toast';
 
 type ForgotPasswordFormData = Pick<User, 'email'>;
 
@@ -38,7 +39,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
 
     try {
       await forgotPassword(data.email);
-      reset();
+
       Toast.show({
         type: 'success',
         text2: `We have sent you a reset password email to ${data.email}. Please check your inbox.`,
@@ -47,11 +48,10 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
 
       navigation.navigate('Login');
     } catch (e) {
-      Toast.show({
-        type: 'error',
-        text2: `Something went wrong`,
-      });
+      somethingWentWrongToast();
     }
+
+    reset();
     setIsButtonLoading(false);
   };
 
