@@ -19,7 +19,7 @@ type Playlist = {
   creator: string;
   imageUrl: string;
   spotifyUrl: string;
-  title: string;
+  name: string;
 };
 
 type Activity = {

@@ -9,12 +9,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ActivityButton from '../../components/ActivityButton';
 import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
+import ArticleCard from '../../components/cards/ArticleCard';
 import PlaylistCard from '../../components/cards/PlaylistCard';
 import SectionTitle from '../../components/SectionTitle';
-import Articles from '../../components/widget/Articles';
+import getArticles from '../../services/api/news';
 import getFeaturedPlaylist from '../../services/api/spotify';
 import { styles } from '../../theme/styles';
 import { ExploreScreenNavigationProps } from '../../types/navigation.types';
+import { Article, Playlist } from '../../types/types';
 import { somethingWentWrongToast } from '../../utils/toast';
 
 const discovery = {
@@ -22,28 +24,37 @@ const discovery = {
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
 };
 
+const renderPlaylist = ({
+  item: { creator, id, imageUrl, spotifyUrl, name: title },
+}: {
+  item: Playlist;
+}) => (
+  <PlaylistCard
+    key={id}
+    id={id}
+    name={title}
+    imageUrl={imageUrl}
+    creator={creator}
+    spotifyUrl={spotifyUrl}
+  />
+);
+
+const renderArticles = ({ item }: { item: Article }) => (
+  <ArticleCard
+    url={item.url}
+    publishedAt={item.publishedAt}
+    source={item.source}
+    title={item.title}
+    urlToImage={item.urlToImage}
+  />
+);
+
 function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
   const { theme } = useTheme();
   const [token, setToken] = useState<string | null>('');
-  const [featuredPlaylist, setFeaturedPlaylist] = useState([]);
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
-
-  const renderPlaylist = ({ item }: { item: any }) => {
-    const { name, id } = item;
-    const imageUrl = item.images[0].url;
-    const creator = item.owner.display_name;
-    const spotifyUrl = item.external_urls.spotify;
-    return (
-      <PlaylistCard
-        key={id}
-        id={id}
-        title={name}
-        imageUrl={imageUrl}
-        creator={creator}
-        spotifyUrl={spotifyUrl}
-      />
-    );
-  };
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -70,37 +81,58 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
     setToken(spotifyToken);
   };
 
-  const getPlaylist = async () => {
+  const loadPlaylist = async () => {
     if (token) {
       try {
         const res = await getFeaturedPlaylist(token);
-        const { items } = res.data.playlists;
+        const data: Playlist[] = res.data.playlists.items.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          imageUrl: item.images[0].url,
+          creator: item.owner.display_name,
+          spotifyUrl: item.external_urls.spotify,
+        }));
 
-        setFeaturedPlaylist(items);
+        setPlaylists(data);
       } catch (error) {
         somethingWentWrongToast();
       }
     }
   };
 
+  const loadArticles = async () => {
+    const res = await getArticles();
+
+    const data = res.data.articles.map((article: any) => ({
+      title: article.title,
+      source: article.source.name,
+      url: article.url,
+      publishedAt: article.publishedAt,
+      urlToImage: article.urlToImage,
+    }));
+
+    setArticles(data);
+  };
+
   useEffect(() => {
     if (response && response?.type === 'success') {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      const { access_token } = response.params;
-      setToken(access_token);
+      const accessToken = response.params.access_token;
+      setToken(accessToken);
 
-      SecureStore.setItemAsync(SPOTIFY_CLIENT_ID_KEY, access_token);
+      SecureStore.setItemAsync(SPOTIFY_CLIENT_ID_KEY, accessToken);
     }
   }, [response]);
 
   useEffect(() => {
     getSpotifyToken();
-    getPlaylist();
+    loadPlaylist();
+    loadArticles();
   }, [token]);
 
   const onRefresh = React.useCallback(async () => {
     setIsRefreshing(true);
-    await getPlaylist();
+    await loadPlaylist();
+    await loadArticles();
     setIsRefreshing(false);
   }, []);
 
@@ -160,7 +192,22 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           onPress={() => navigation.navigate('InDevelopment')}
         />
       </View>
-      <Articles />
+      <View style={styles.section}>
+        <SectionTitle title="News about mental health" showRightComponent />
+        <FlatList
+          overScrollMode="never"
+          horizontal
+          ItemSeparatorComponent={BaseViewSeparator}
+          showsHorizontalScrollIndicator={false}
+          style={[styles.noContainerGutter, styles.flatListHorizontal]}
+          contentContainerStyle={[
+            styles.containerGutter,
+            styles.flatListHorizontalContainer,
+          ]}
+          data={articles}
+          renderItem={renderArticles}
+        />
+      </View>
       <View style={styles.section}>
         <SectionTitle title="Featured playlist" />
         {token ? (
@@ -171,7 +218,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
             showsHorizontalScrollIndicator={false}
             style={styles.noContainerGutter}
             contentContainerStyle={styles.containerGutter}
-            data={featuredPlaylist}
+            data={playlists}
             renderItem={renderPlaylist}
           />
         ) : (

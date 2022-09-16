@@ -7,7 +7,7 @@ import { BORDER_RADIUS } from '../../theme/styles';
 import { Playlist } from '../../types/types';
 import AnimatedPressable from '../AnimatedPressable';
 
-function PlaylistCard({ imageUrl, id, title, creator, spotifyUrl }: Playlist) {
+function PlaylistCard({ imageUrl, id, name: title, creator, spotifyUrl }: Playlist) {
   const { theme } = useTheme();
 
   const handleOpenSpotifyPlaylist = () => {
