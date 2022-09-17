@@ -40,13 +40,13 @@ function AppointmentCard({
 
   const backgroundColor = isNearestAppointment
     ? theme.colors.primary
-    : theme.colors.cardBackground;
+    : theme.colors.secondary;
   const textColor = isNearestAppointment ? theme.colors.white : theme.colors.black;
   const secondaryBackgroundColor = isNearestAppointment
     ? theme.colors.primaryDark
     : theme.colors.grey5;
   const buttonBackgroundColor = isNearestAppointment
-    ? theme.colors.cardBackground
+    ? theme.colors.secondary
     : theme.colors.primary;
 
   const startDate = dayjs(date);
@@ -237,10 +237,12 @@ function AppointmentCard({
                   uppercase={false}
                   containerStyle={{ flex: 1 }}
                   type="outline"
-                  buttonStyle={{
-                    borderColor: theme.colors.grey3,
-                  }}
-                  titleStyle={{ color: theme.colors.grey2 }}
+                  buttonStyle={
+                    {
+                      // borderColor: theme.colors.greyOutline,
+                    }
+                  }
+                  // titleStyle={{ color: theme.colors.grey2 }}
                   size="md"
                 >
                   Cancel

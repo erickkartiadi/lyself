@@ -26,7 +26,7 @@ function AppointmentScreen() {
         containerStyle={[
           styles.shadowSmall,
           {
-            backgroundColor: theme.colors.cardBackground,
+            backgroundColor: theme.colors.secondary,
           },
         ]}
         disableIndicator

@@ -7,24 +7,32 @@ type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
   ConsultStack: NavigatorScreenParams<ConsultStackParamList>;
+  TodoStack: NavigatorScreenParams<TodoStackParamList>;
   InDevelopment: undefined;
 };
+
 type AuthStackParamList = {
   GetStarted: undefined;
   Login: undefined;
   Register: undefined;
   ForgotPassword: undefined;
 };
+
 type HomeTabParamList = {
   Home: undefined;
   Explore: undefined;
   Chat: undefined;
   Account: undefined;
 };
+
 type ConsultStackParamList = {
   Consult: undefined;
   Psychiatrist: Psychiatrist;
   Appointment: undefined;
+};
+
+type TodoStackParamList = {
+  Todo: undefined;
 };
 
 type GetStartedScreenNavigationProps = NativeStackScreenProps<
@@ -80,4 +88,5 @@ export {
   PsychiatristScreenNavigationProps,
   RegisterScreenNavigationProps,
   RootStackParamList,
+  TodoStackParamList,
 };

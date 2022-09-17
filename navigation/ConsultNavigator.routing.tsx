@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useTheme } from '@rneui/themed';
 import React from 'react';
 
 import AppointmentScreen from '../screen/Consult/AppointmentScreen';
@@ -11,16 +10,12 @@ import { navigatorScreenOptions } from './HomeNavigator.routing';
 const Stack = createNativeStackNavigator<ConsultStackParamList>();
 
 function ConsultNavigator() {
-  const { theme } = useTheme();
-
   return (
     <Stack.Navigator
       initialRouteName="Consult"
       screenOptions={{
         ...navigatorScreenOptions,
-        headerStyle: { backgroundColor: theme.colors.background },
         headerShown: true,
-        headerTitleAlign: 'center',
       }}
     >
       <Stack.Screen name="Consult" component={ConsultScreen} />

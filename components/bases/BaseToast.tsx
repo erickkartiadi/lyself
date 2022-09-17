@@ -28,10 +28,10 @@ function BaseToast({ color, iconName, iconType, ...rest }: BaseToastProps) {
     <RNToast
       {...rest}
       style={[
-        styles.shadow,
+        styles.shadowLarge,
         {
           borderRadius: BORDER_RADIUS.md,
-          backgroundColor: theme.colors.cardBackground,
+          backgroundColor: theme.colors.secondary,
           borderLeftWidth: theme.spacing.sm,
           borderLeftColor: color,
           width: Dimensions.get('window').width - GUTTER_SIZE * 2,

@@ -39,12 +39,12 @@ function GraphScore() {
       title: 'Screen time',
       caption: 'more than last week',
       value: '3h 10m',
-      textColor: theme.colors.secondary,
+      textColor: theme.colors.blue,
       icon: {
         type: '',
         name: '',
         size: 36,
-        color: theme.colors.secondary,
+        color: theme.colors.blue,
       },
     },
     {

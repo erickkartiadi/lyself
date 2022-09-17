@@ -54,6 +54,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
       });
 
       navigation.navigate('Login');
+      reset();
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response?.data) {
         const { message } = error.response?.data as ErrorResponseData;
@@ -67,7 +68,6 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
       }
     }
 
-    reset();
     setIsButtonLoading(false);
   };
 

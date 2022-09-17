@@ -192,11 +192,11 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           onPress={() => navigation.navigate('ConsultStack', { screen: 'Consult' })}
         />
         <ActivityButton
-          activityType="meditation"
+          activityType="stories"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
-          activityType="forum"
+          activityType="meditation"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
@@ -205,7 +205,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
         />
         <ActivityButton
           activityType="todo"
-          onPress={() => navigation.navigate('InDevelopment')}
+          onPress={() => navigation.navigate('TodoStack', { screen: 'Todo' })}
         />
         <ActivityButton
           activityType="breathing"

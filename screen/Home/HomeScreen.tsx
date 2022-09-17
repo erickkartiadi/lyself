@@ -72,7 +72,7 @@ function HomeScreen() {
           {activeWidgets.map(({ no, label, active }) => (
             <CheckBox
               containerStyle={{
-                backgroundColor: theme.colors.cardBackground,
+                backgroundColor: theme.colors.secondary,
               }}
               key={no}
               title={label}

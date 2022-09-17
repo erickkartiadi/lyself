@@ -4,9 +4,7 @@ declare module '@rneui/themed' {
   export interface Colors {
     primaryLight: string;
     primaryDark: string;
-    secondaryLight: string;
-    secondaryDark: string;
-    cardBackground: string;
+    secondary: string;
     purple: string;
     yellow: string;
     blue: string;

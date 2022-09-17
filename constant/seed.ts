@@ -57,7 +57,7 @@ export const scheduleData: Schedule[] = new Array(20)
   .map(() => ({
     date: new Date(
       2022,
-      generateRandomNumber(0, 12),
+      generateRandomNumber(7, 9),
       generateRandomNumber(0, 30),
       generateRandomNumber(1, 24)
     ),

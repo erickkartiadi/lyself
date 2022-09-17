@@ -89,12 +89,12 @@ function MentalScoreCard() {
         withHorizontalLabels={false}
         xLabelsOffset={-42}
         chartConfig={{
-          backgroundColor: theme.colors.cardBackground,
-          backgroundGradientFrom: theme.colors.cardBackground,
-          backgroundGradientTo: theme.colors.cardBackground,
+          backgroundColor: theme.colors.secondary,
+          backgroundGradientFrom: theme.colors.secondary,
+          backgroundGradientTo: theme.colors.secondary,
           decimalPlaces: 0,
           color: () => theme.colors.primary,
-          labelColor: () => theme.colors.grey1,
+          labelColor: () => theme.colors.black,
           fillShadowGradientOpacity: isDarkMode ? 0.25 : 0.1,
           propsForLabels: {
             fontFamily: FONT_FAMILY.bold,

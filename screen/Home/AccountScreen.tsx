@@ -9,9 +9,8 @@ import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
 import { user } from '../../constant/seed';
 import { AuthContext } from '../../context/AuthContext';
 import { styles } from '../../theme/styles';
-import { AccountScreenNavigationProps } from '../../types/navigation.types';
 
-function AccountScreen({ navigation }: AccountScreenNavigationProps) {
+function AccountScreen() {
   const { theme } = useTheme();
   const { logout } = useContext(AuthContext);
 
@@ -50,7 +49,7 @@ function AccountScreen({ navigation }: AccountScreenNavigationProps) {
       <View style={styles.sectionSmall}>
         <SettingMenu
           title="Profile"
-          backgroundColor={theme.colors.secondary}
+          backgroundColor={theme.colors.blue}
           name="person"
           type="ionicon"
         />

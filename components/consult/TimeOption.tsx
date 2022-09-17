@@ -14,16 +14,18 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
   const { theme } = useTheme();
   const formattedHour = dayjs({ hour }).format('HH:00');
 
+  const backgroundColor = isSelected ? theme.colors.primary : theme.colors.secondary;
+
   // TODO disable already registered date
   return (
     <View style={{ width: '20%' }}>
       <Button
         onPress={onPress}
         buttonStyle={{
-          borderWidth: 0.5,
+          backgroundColor,
+          borderWidth: 0,
           borderColor: isSelected ? theme.colors.primary : theme.colors.greyOutline,
         }}
-        type={isSelected ? 'solid' : 'outline'}
         containerStyle={{
           alignItems: 'stretch',
           marginVertical: theme.spacing.sm,

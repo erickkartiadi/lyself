@@ -100,8 +100,8 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={{
-                  borderColor: theme.colors.grey3,
-                  backgroundColor: theme.colors.cardBackground,
+                  borderColor: theme.colors.greyOutline,
+                  backgroundColor: theme.colors.secondary,
                   paddingVertical: theme.spacing.xl,
                 }}
                 containerStyle={{ marginBottom: theme.spacing.xl }}
@@ -126,8 +126,8 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={{
-                  borderColor: theme.colors.grey3,
-                  backgroundColor: theme.colors.cardBackground,
+                  borderColor: theme.colors.greyOutline,
+                  backgroundColor: theme.colors.secondary,
                   paddingVertical: theme.spacing.xl,
                 }}
                 containerStyle={{ marginBottom: theme.spacing.xl }}
@@ -153,8 +153,8 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={{
-                  borderColor: theme.colors.grey3,
-                  backgroundColor: theme.colors.cardBackground,
+                  borderColor: theme.colors.greyOutline,
+                  backgroundColor: theme.colors.secondary,
                   paddingVertical: theme.spacing.xl,
                 }}
                 containerStyle={{ marginBottom: theme.spacing.xl }}
@@ -186,7 +186,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               },
             ]}
           >
-            <Text>Didn&apos;t have an account? </Text>
+            <Text small>Didn&apos;t have an account? </Text>
             <LinkButton to={{ screen: 'Register' }} color="primary">
               Sign Up
             </LinkButton>

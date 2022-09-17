@@ -3,12 +3,12 @@ import * as React from 'react';
 
 import { comingSoonToast } from '../utils/toast';
 
-function SwipeableLeftButton() {
+function SwipeableRightButton() {
   return (
     <Button
       fullWidth
       onPress={comingSoonToast}
-      color="secondary"
+      color="primary"
       title="Archive"
       radius={0}
       iconPosition="top"
@@ -18,12 +18,12 @@ function SwipeableLeftButton() {
     />
   );
 }
-function SwipeableRightButton() {
+function SwipeableLeftButton() {
   return (
     <Button
       fullWidth
       onPress={comingSoonToast}
-      color="primary"
+      color="error"
       title="Delete"
       radius={0}
       iconPosition="top"

@@ -17,18 +17,18 @@ function DateOption({ date, isSelected, onPress }: DateOptionProps) {
   const isToday = dayjsDate.isSame(dayjs(), 'date');
 
   const textColor = isToday ? theme.colors.primary : theme.colors.black;
+
+  const backgroundColor = isSelected ? theme.colors.primary : theme.colors.secondary;
   const selectedTextColor = isSelected ? theme.colors.white : textColor;
 
   return (
     <Button
       onPress={onPress}
-      type={isSelected ? 'solid' : 'outline'}
       buttonStyle={{
-        borderWidth: 0.5,
+        backgroundColor,
+        borderWidth: 0,
         flex: 1,
         flexDirection: 'column',
-        borderColor:
-          isToday || isSelected ? theme.colors.primary : theme.colors.greyOutline,
       }}
     >
       <Text

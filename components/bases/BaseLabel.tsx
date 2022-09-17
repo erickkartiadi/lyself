@@ -25,10 +25,10 @@ function BaseLabel({
 }: React.PropsWithChildren<LabelProps>) {
   const { theme } = useTheme();
 
-  const labelColor = color || theme.colors.cardBackground;
+  const labelColor = color || theme.colors.secondary;
   const labelBackgroundColor = color
     ? colorAlpha(labelColor, 0.25)
-    : theme.colors.cardBackground;
+    : theme.colors.secondary;
 
   return (
     <View

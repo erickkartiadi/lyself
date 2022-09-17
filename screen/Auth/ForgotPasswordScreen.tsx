@@ -47,11 +47,11 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
       });
 
       navigation.navigate('Login');
+      reset();
     } catch (e) {
       somethingWentWrongToast();
     }
 
-    reset();
     setIsButtonLoading(false);
   };
 

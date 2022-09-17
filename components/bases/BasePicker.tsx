@@ -29,9 +29,7 @@ function BasePicker({
   const { theme } = useTheme();
 
   // update theme color if theme mode changed
-  const backgroundColor = isDarkMode
-    ? theme.colors.cardBackground
-    : theme.colors.cardBackground;
+  const backgroundColor = theme.colors.background;
   const borderColor = isDarkMode ? theme.colors.greyOutline : theme.colors.greyOutline;
   const textColor = isDarkMode ? theme.colors.black : theme.colors.black;
 

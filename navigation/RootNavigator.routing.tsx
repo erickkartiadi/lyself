@@ -12,6 +12,7 @@ import { RootStackParamList } from '../types/navigation.types';
 import AuthNavigator from './AuthNavigator.routing';
 import ConsultNavigator from './ConsultNavigator.routing';
 import HomeNavigator from './HomeNavigator.routing';
+import TodoNavigator from './TodoNavigator.routing';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const prefix = Linking.createURL('/');
@@ -41,6 +42,7 @@ function RootNavigator() {
           <>
             <Stack.Screen name="HomeTab" component={HomeNavigator} />
             <Stack.Screen name="ConsultStack" component={ConsultNavigator} />
+            <Stack.Screen name="TodoStack" component={TodoNavigator} />
             <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
           </>
         ) : (

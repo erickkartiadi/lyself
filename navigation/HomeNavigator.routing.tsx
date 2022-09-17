@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useTheme } from '@rneui/themed';
 import * as React from 'react';
 
 import {
@@ -14,7 +13,7 @@ import AccountScreen from '../screen/Home/AccountScreen';
 import ChatScreen from '../screen/Home/ChatScreen';
 import ExploreScreen from '../screen/Home/ExploreScreen';
 import HomeScreen from '../screen/Home/HomeScreen';
-import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../theme/styles';
+import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE, styles } from '../theme/styles';
 import { HomeTabParamList } from '../types/navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
@@ -22,25 +21,26 @@ const Tab = createBottomTabNavigator<HomeTabParamList>();
 export const navigatorScreenOptions = {
   headerShadowVisible: false,
   headerTitleStyle: {
-    fontFamily: FONT_FAMILY.bold,
-    fontSize: FONT_SIZE.body1,
+    fontFamily: FONT_FAMILY.medium,
+    fontSize: FONT_SIZE.heading4,
   },
   headerRight: RightHeader,
 };
 
 function HomeNavigator() {
-  const { theme } = useTheme();
-
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
         ...navigatorScreenOptions,
-        headerStyle: { backgroundColor: theme.colors.background },
         tabBarShowLabel: false,
-        tabBarStyle: {
-          height: 60,
-        },
+        tabBarStyle: [
+          styles.shadowMedium,
+          {
+            borderTopWidth: 0,
+            height: 70,
+          },
+        ],
         headerTitleContainerStyle: { marginStart: 0 },
         headerLeftContainerStyle: {
           marginStart: GUTTER_SIZE,
@@ -54,7 +54,6 @@ function HomeNavigator() {
         options={{
           headerTitleStyle: { display: 'none' },
           headerStyle: {
-            backgroundColor: theme.colors.background,
             height: 90,
           },
           headerLeft: LeftHeader,

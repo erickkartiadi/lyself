@@ -25,7 +25,7 @@ function BaseBottomSheet({
         style={[
           styles.container,
           {
-            backgroundColor: theme.colors.cardBackground,
+            backgroundColor: theme.colors.background,
             paddingTop: theme.spacing.md,
             paddingBottom: theme.spacing.xl,
           },

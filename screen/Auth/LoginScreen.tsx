@@ -52,6 +52,8 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
       navigation.navigate('HomeTab', {
         screen: 'Home',
       });
+
+      reset();
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data) {
         const { statusCode, message } = error.response?.data as ErrorResponseData;
@@ -67,7 +69,6 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
       }
     }
 
-    reset();
     setIsButtonLoading(false);
   };
 

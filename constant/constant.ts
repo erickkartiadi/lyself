@@ -45,10 +45,10 @@ const ACTIVITY_ICON: {
     color: 'primary',
     iconSize: 32,
   },
-  forum: {
+  stories: {
     type: 'material-community',
     name: 'forum',
-    color: 'secondary',
+    color: 'blue',
     iconSize: 26,
   },
   article: {
@@ -78,7 +78,7 @@ const ACTIVITY_ICON: {
   todo: {
     type: 'ionicon',
     name: 'checkmark-done-sharp',
-    color: 'secondary',
+    color: 'success',
     iconSize: 32,
   },
   other: {
@@ -103,8 +103,7 @@ const ACTIVITY_TYPE = [
   'article',
   'breathing',
   'consult',
-  'diagnose',
-  'forum',
+  'stories',
   'meditation',
   'music',
   'todo',

@@ -16,8 +16,8 @@ function LeftHeader() {
 
   return (
     <View>
-      <Text>{greeting}</Text>
-      <Text h3>{name}</Text>
+      <Text caption>{greeting}</Text>
+      <Text h4>{name}</Text>
     </View>
   );
 }
