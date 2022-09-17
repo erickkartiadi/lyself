@@ -1,4 +1,4 @@
-import { Button, normalize, Text, useTheme } from '@rneui/themed';
+import { Button, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
@@ -125,8 +125,8 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               }}
             >
               <BaseIcon
-                width={normalize(36)}
-                size={normalize(22)}
+                width={36}
+                size={22}
                 type="ionicon"
                 name="people"
                 backgroundColor={colorAlpha(theme.colors.blue, 0.25)}
