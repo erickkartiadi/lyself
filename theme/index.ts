@@ -89,9 +89,7 @@ const myTheme = createTheme({
       },
     },
     SearchBar: {
-      style: {
-        fontFamily: FONT_FAMILY.regular,
-      },
+      style: [FONT.small],
       inputStyle: FONT.regular,
     },
     CheckBox: {

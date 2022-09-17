@@ -1,13 +1,13 @@
 import { Image, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 
 import { BORDER_RADIUS } from '../../theme/styles';
 import { Playlist } from '../../types/types';
 import AnimatedPressable from '../AnimatedPressable';
 
-function PlaylistCard({ imageUrl, id, name: title, creator, spotifyUrl }: Playlist) {
+function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
   const { theme } = useTheme();
 
   const handleOpenSpotifyPlaylist = () => {
@@ -26,14 +26,13 @@ function PlaylistCard({ imageUrl, id, name: title, creator, spotifyUrl }: Playli
           aspectRatio: 1,
           borderRadius: BORDER_RADIUS.md,
         }}
-        PlaceholderContent={<ActivityIndicator />}
         childrenContainerStyle={{ width: '100%' }}
         source={{
           uri: imageUrl,
         }}
       />
       <View style={{ marginTop: theme.spacing.md }}>
-        <Text subtitle>{title}</Text>
+        <Text subtitle>{name}</Text>
         <Text caption>by {creator}</Text>
       </View>
     </AnimatedPressable>

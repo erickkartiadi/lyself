@@ -1,4 +1,4 @@
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_ID_KEY } from '@env';
+import { SPOTIFY_CLIENT_ID, SPOTIFY_EXPIRES_TIME_KEY } from '@env';
 import { Button, useTheme } from '@rneui/themed';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import * as SecureStore from 'expo-secure-store';
@@ -11,9 +11,15 @@ import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import ArticleCard from '../../components/cards/ArticleCard';
 import PlaylistCard from '../../components/cards/PlaylistCard';
+import ArticleCardPlaceholder from '../../components/placeholder/ArticleCardPlaceholder';
+import PlaylistCardPlaceholder from '../../components/placeholder/PlaylistCardPlaceholder';
 import SectionTitle from '../../components/SectionTitle';
 import getArticles from '../../services/api/news';
-import getFeaturedPlaylist from '../../services/api/spotify';
+import {
+  fetchAccessToken,
+  fetchFeaturedPlaylist,
+  fetchRefreshToken,
+} from '../../services/api/spotify';
 import { styles } from '../../theme/styles';
 import { ExploreScreenNavigationProps } from '../../types/navigation.types';
 import { Article, Playlist } from '../../types/types';
@@ -49,16 +55,38 @@ const renderArticles = ({ item }: { item: Article }) => (
   />
 );
 
+const renderEmptyArticles = () => (
+  <View style={{ width: '100%', flexDirection: 'row' }}>
+    <ArticleCardPlaceholder />
+    <BaseViewSeparator />
+    <ArticleCardPlaceholder />
+    <BaseViewSeparator />
+    <ArticleCardPlaceholder />
+  </View>
+);
+
+const renderEmptyPlaylists = () => (
+  <View style={{ width: '100%', flexDirection: 'row' }}>
+    <PlaylistCardPlaceholder />
+    <BaseViewSeparator />
+    <PlaylistCardPlaceholder />
+    <BaseViewSeparator />
+    <PlaylistCardPlaceholder />
+    <BaseViewSeparator />
+    <PlaylistCardPlaceholder />
+  </View>
+);
+
 function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
   const { theme } = useTheme();
-  const [token, setToken] = useState<string | null>('');
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [articles, setArticles] = useState<Article[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isSpotifyTokenAvailable, setIsSpotifyTokenAvailable] = useState(false);
 
   const [request, response, promptAsync] = useAuthRequest(
     {
-      responseType: ResponseType.Token,
+      responseType: ResponseType.Code,
       clientId: SPOTIFY_CLIENT_ID,
       scopes: [
         'user-read-currently-playing',
@@ -76,15 +104,19 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
     discovery
   );
 
-  const getSpotifyToken = async () => {
-    const spotifyToken = await SecureStore.getItemAsync(SPOTIFY_CLIENT_ID_KEY);
-    setToken(spotifyToken);
-  };
-
   const loadPlaylist = async () => {
-    if (token) {
-      try {
-        const res = await getFeaturedPlaylist(token);
+    const tokenExpirationTime = await SecureStore.getItemAsync(SPOTIFY_EXPIRES_TIME_KEY);
+    const isTokenExpired =
+      !tokenExpirationTime ||
+      new Date().getTime() > parseInt(tokenExpirationTime || '0', 10);
+
+    try {
+      if (isTokenExpired) {
+        await fetchRefreshToken();
+        await loadPlaylist();
+      } else {
+        setIsSpotifyTokenAvailable(true);
+        const res = await fetchFeaturedPlaylist();
         const data: Playlist[] = res.data.playlists.items.map((item: any) => ({
           id: item.id,
           name: item.name,
@@ -92,11 +124,10 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           creator: item.owner.display_name,
           spotifyUrl: item.external_urls.spotify,
         }));
-
         setPlaylists(data);
-      } catch (error) {
-        somethingWentWrongToast();
       }
+    } catch (error) {
+      somethingWentWrongToast();
     }
   };
 
@@ -110,29 +141,26 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
       publishedAt: article.publishedAt,
       urlToImage: article.urlToImage,
     }));
-
     setArticles(data);
   };
 
   useEffect(() => {
     if (response && response?.type === 'success') {
-      const accessToken = response.params.access_token;
-      setToken(accessToken);
-
-      SecureStore.setItemAsync(SPOTIFY_CLIENT_ID_KEY, accessToken);
+      fetchAccessToken(response.params.code);
     }
   }, [response]);
 
   useEffect(() => {
-    getSpotifyToken();
-    loadPlaylist();
-    loadArticles();
-  }, [token]);
+    (async () => {
+      await loadArticles();
+      await loadPlaylist();
+    })();
+  }, []);
 
   const onRefresh = React.useCallback(async () => {
     setIsRefreshing(true);
-    await loadPlaylist();
     await loadArticles();
+    await loadPlaylist();
     setIsRefreshing(false);
   }, []);
 
@@ -193,10 +221,11 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
         />
       </View>
       <View style={styles.section}>
-        <SectionTitle title="News about mental health" showRightComponent />
+        <SectionTitle title="Articles about mental health" showRightComponent />
         <FlatList
           overScrollMode="never"
           horizontal
+          ListEmptyComponent={renderEmptyArticles}
           ItemSeparatorComponent={BaseViewSeparator}
           showsHorizontalScrollIndicator={false}
           style={[styles.noContainerGutter, styles.flatListHorizontal]}
@@ -210,7 +239,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
       </View>
       <View style={styles.section}>
         <SectionTitle title="Featured playlist" />
-        {token ? (
+        {isSpotifyTokenAvailable ? (
           <FlatList
             horizontal
             overScrollMode="never"
@@ -220,6 +249,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
             contentContainerStyle={styles.containerGutter}
             data={playlists}
             renderItem={renderPlaylist}
+            ListEmptyComponent={renderEmptyPlaylists}
           />
         ) : (
           <Button
