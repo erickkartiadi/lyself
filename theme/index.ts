@@ -11,57 +11,31 @@ import {
 } from './styles';
 
 const lightColors = {
-  primary: '#f55c7a',
-  primaryLight: '#ff8fa9',
-  primaryDark: '#bd244e',
-  secondary: '#F6F4F4',
-  background: '#FEFCFD',
-  purple: '#8a5cf5',
-  yellow: '#f3b700',
-  blue: '#35A7FF',
-  success: '#00AB4C',
-  error: '#E61025',
-  brand: {
-    spotify: {
-      green: '#1db954',
-    },
-    google: {
-      red: '#ea4335',
-    },
-    facebook: {
-      blue: '#1877f2',
-    },
-    apple: {
-      black: '#000000',
-    },
-  },
+  primary: '#F55C7A',
+  primaryDark: '#D0385C',
+  secondary: '#BD8087',
+  background: '#FFFFFF',
+  cardBackground: '#F4F7F9',
+  blue: '#00A3FF',
+  purple: '#9C5FAE',
+  spotify: '#1db954',
+  google: '#ea4335',
+  facebook: '#1877f2',
+  apple: '#000000',
 };
 
 const darkColors = {
   primary: '#EF617E',
-  primaryLight: '#bd244e',
-  primaryDark: '#ff8fa9',
-  secondary: '#1D1D1D',
-  purple: '#8C61EF',
-  yellow: '#ECB309',
-  blue: '#3AA6F8',
-  error: '#BF3644',
-  background: '#141414',
-  success: '#139B50',
-  brand: {
-    spotify: {
-      green: '#23B455',
-    },
-    google: {
-      red: '#E3483A',
-    },
-    facebook: {
-      blue: '#1F77EA',
-    },
-    apple: {
-      black: '#FFFFFF',
-    },
-  },
+  primaryDark: '#F38399',
+  secondary: '#B57078',
+  background: '#121212',
+  cardBackground: '#232323',
+  blue: '#0096ED',
+  purple: '#9454A7',
+  spotify: '#1BAC4E',
+  google: '#E83221',
+  facebook: '#0E6DE9',
+  apple: '#FFFFFF',
 };
 
 const myTheme = createTheme({

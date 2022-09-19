@@ -107,8 +107,8 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                 size={18}
                 type="ionicon"
                 name="briefcase"
-                backgroundColor={colorAlpha(theme.colors.yellow, 0.25)}
-                color={theme.colors.yellow}
+                backgroundColor={colorAlpha(theme.colors.warning, 0.25)}
+                color={theme.colors.warning}
                 containerStyle={{ marginRight: theme.spacing.md }}
               />
               <View>

@@ -34,7 +34,7 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
       inputContainerStyle={[
         styles.shadowSmall,
         {
-          backgroundColor: theme.colors.secondary,
+          backgroundColor: theme.colors.cardBackground,
           borderRadius: BORDER_RADIUS.rounded,
           paddingHorizontal: theme.spacing.md,
         },

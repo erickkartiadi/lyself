@@ -18,7 +18,7 @@ function DateOption({ date, isSelected, onPress }: DateOptionProps) {
 
   const textColor = isToday ? theme.colors.primary : theme.colors.black;
 
-  const backgroundColor = isSelected ? theme.colors.primary : theme.colors.secondary;
+  const backgroundColor = isSelected ? theme.colors.primary : theme.colors.cardBackground;
   const selectedTextColor = isSelected ? theme.colors.white : textColor;
 
   return (

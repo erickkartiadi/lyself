@@ -28,7 +28,7 @@ function BaseLabel({
   const labelColor = color || theme.colors.secondary;
   const labelBackgroundColor = color
     ? colorAlpha(labelColor, 0.25)
-    : theme.colors.secondary;
+    : theme.colors.cardBackground;
 
   return (
     <View

@@ -36,7 +36,7 @@ const ACTIVITY_ICON: {
   meditation: {
     type: 'material-community',
     name: 'meditation',
-    color: 'yellow',
+    color: 'blue',
     iconSize: 42,
   },
   consult: {
@@ -48,7 +48,7 @@ const ACTIVITY_ICON: {
   stories: {
     type: 'material-community',
     name: 'forum',
-    color: 'blue',
+    color: 'primary',
     iconSize: 26,
   },
   article: {
@@ -78,7 +78,7 @@ const ACTIVITY_ICON: {
   todo: {
     type: 'ionicon',
     name: 'checkmark-done-sharp',
-    color: 'success',
+    color: 'blue',
     iconSize: 32,
   },
   other: {

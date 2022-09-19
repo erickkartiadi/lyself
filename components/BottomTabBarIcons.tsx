@@ -41,7 +41,7 @@ function UserTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   return (
     <Icon
       type="ionicon"
-      name={focused ? 'person-circle' : 'person-circle-outline'}
+      name={focused ? 'person' : 'person-outline'}
       color={color}
       size={size}
     />

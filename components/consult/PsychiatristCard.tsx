@@ -74,7 +74,7 @@ function PsychiatristCard({
               {rating}
             </BaseLabel>
             <BaseLabel
-              color={theme.colors.yellow}
+              color={theme.colors.warning}
               showIcon
               labelSize="sm"
               iconName="briefcase"

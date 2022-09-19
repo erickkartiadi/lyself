@@ -14,7 +14,7 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
   const { theme } = useTheme();
   const formattedHour = dayjs({ hour }).format('HH:00');
 
-  const backgroundColor = isSelected ? theme.colors.primary : theme.colors.secondary;
+  const backgroundColor = isSelected ? theme.colors.primary : theme.colors.cardBackground;
 
   // TODO disable already registered date
   return (
@@ -24,7 +24,6 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
         buttonStyle={{
           backgroundColor,
           borderWidth: 0,
-          borderColor: isSelected ? theme.colors.primary : theme.colors.greyOutline,
         }}
         containerStyle={{
           alignItems: 'stretch',

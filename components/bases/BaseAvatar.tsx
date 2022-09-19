@@ -20,7 +20,7 @@ function BaseAvatar({ size = 3, rounded, containerStyle, ...rest }: BaseAvatarPr
         {
           overflow: 'hidden',
           borderWidth: 0.5,
-          borderColor: colorAlpha(theme.colors.black, 0.5),
+          borderColor: colorAlpha(theme.colors.greyOutline, 0.5),
           borderRadius: rounded ? BORDER_RADIUS.rounded : BORDER_RADIUS.md,
         },
         containerStyle,

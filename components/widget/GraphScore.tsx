@@ -56,7 +56,7 @@ function GraphScore() {
         type: 'ionicon',
         name: 'moon',
         size: 36,
-        color: theme.colors.yellow,
+        color: theme.colors.warning,
       },
     },
     {

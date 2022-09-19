@@ -23,7 +23,6 @@ import {
 import { styles } from '../../theme/styles';
 import { ExploreScreenNavigationProps } from '../../types/navigation.types';
 import { Article, Playlist } from '../../types/types';
-import { somethingWentWrongToast } from '../../utils/toast';
 
 const discovery = {
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
@@ -127,7 +126,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
         setPlaylists(data);
       }
     } catch (error) {
-      somethingWentWrongToast();
+      // somethingWentWrongToast();
     }
   };
 
@@ -169,6 +168,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
       refreshControl={
         <RefreshControl
           refreshing={isRefreshing}
+          progressBackgroundColor={theme.colors.cardBackground}
           colors={[theme.colors.primary]}
           onRefresh={onRefresh}
         />
@@ -200,7 +200,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
-          activityType="music"
+          activityType="breathing"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
@@ -208,7 +208,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           onPress={() => navigation.navigate('TodoStack', { screen: 'Todo' })}
         />
         <ActivityButton
-          activityType="breathing"
+          activityType="music"
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <ActivityButton
@@ -257,7 +257,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
             title="Connect to Spotify"
             iconPosition="left"
             icon={{ type: 'fontisto', name: 'spotify' }}
-            color={theme.colors.brand.spotify.green}
+            color={theme.colors.spotify}
             onPress={() => promptAsync()}
             containerStyle={{ marginTop: theme.spacing.lg }}
           />

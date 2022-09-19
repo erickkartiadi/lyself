@@ -25,7 +25,7 @@ function BaseDialog({
 
   return (
     <Dialog
-      overlayStyle={{ backgroundColor: theme.colors.secondary }}
+      overlayStyle={{ backgroundColor: theme.colors.cardBackground }}
       isVisible={isDialogVisible}
       onBackdropPress={() => toggleIsDialogVisible(false)}
     >

@@ -31,7 +31,7 @@ function BaseToast({ color, iconName, iconType, ...rest }: BaseToastProps) {
         styles.shadowLarge,
         {
           borderRadius: BORDER_RADIUS.md,
-          backgroundColor: theme.colors.secondary,
+          backgroundColor: theme.colors.background,
           borderLeftWidth: theme.spacing.sm,
           borderLeftColor: color,
           width: Dimensions.get('window').width - GUTTER_SIZE * 2,

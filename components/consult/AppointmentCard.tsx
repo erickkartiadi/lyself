@@ -40,7 +40,7 @@ function AppointmentCard({
 
   const backgroundColor = isNearestAppointment
     ? theme.colors.primary
-    : theme.colors.secondary;
+    : theme.colors.cardBackground;
   const textColor = isNearestAppointment ? theme.colors.white : theme.colors.black;
   const secondaryBackgroundColor = isNearestAppointment
     ? theme.colors.primaryDark
@@ -239,10 +239,11 @@ function AppointmentCard({
                   type="outline"
                   buttonStyle={
                     {
+                      // backgroundColor: theme.colors.background,
                       // borderColor: theme.colors.greyOutline,
                     }
                   }
-                  // titleStyle={{ color: theme.colors.grey2 }}
+                  // titleStyle={{ color: theme.colors.black }}
                   size="md"
                 >
                   Cancel

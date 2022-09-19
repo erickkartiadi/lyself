@@ -71,9 +71,6 @@ function HomeScreen() {
         <View style={{ marginVertical: theme.spacing.md }}>
           {activeWidgets.map(({ no, label, active }) => (
             <CheckBox
-              containerStyle={{
-                backgroundColor: theme.colors.secondary,
-              }}
               key={no}
               title={label}
               checked={active}

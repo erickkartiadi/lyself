@@ -101,7 +101,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.greyOutline,
-                  backgroundColor: theme.colors.secondary,
                   paddingVertical: theme.spacing.xl,
                 }}
                 containerStyle={{ marginBottom: theme.spacing.xl }}
@@ -117,7 +116,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                   }}
                   type="ionicon"
                   name="logo-apple"
-                  color={theme.colors.brand.apple.black}
+                  color={theme.colors.apple}
                 />
                 CONTINUE WITH APPLE
               </Button>
@@ -127,7 +126,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.greyOutline,
-                  backgroundColor: theme.colors.secondary,
                   paddingVertical: theme.spacing.xl,
                 }}
                 containerStyle={{ marginBottom: theme.spacing.xl }}
@@ -143,7 +141,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                   }}
                   type="ionicon"
                   name="logo-google"
-                  color={theme.colors.brand.google.red}
+                  color={theme.colors.google}
                 />
                 CONTINUE WITH GOOGLE
               </Button>
@@ -154,7 +152,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 fullWidth
                 buttonStyle={{
                   borderColor: theme.colors.greyOutline,
-                  backgroundColor: theme.colors.secondary,
                   paddingVertical: theme.spacing.xl,
                 }}
                 containerStyle={{ marginBottom: theme.spacing.xl }}
@@ -170,7 +167,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                   }}
                   type="ionicon"
                   name="logo-facebook"
-                  color={theme.colors.brand.facebook.blue}
+                  color={theme.colors.facebook}
                 />
                 CONTINUE WITH FACEBOOK
               </Button>

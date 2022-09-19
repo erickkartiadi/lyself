@@ -16,7 +16,7 @@ function SwitchModeSettingMenu() {
   return (
     <SettingMenu
       title={isDarkMode ? 'Dark mode' : 'Light mode'}
-      backgroundColor={isDarkMode ? theme.colors.purple : theme.colors.yellow}
+      backgroundColor={isDarkMode ? theme.colors.purple : theme.colors.warning}
       name={isDarkMode ? 'moon' : 'sunny'}
       type="ionicon"
       onPress={toggleThemeMode}

@@ -81,7 +81,7 @@ function AccountScreen() {
         />
         <SettingMenu
           title="Language"
-          backgroundColor={theme.colors.yellow}
+          backgroundColor={theme.colors.warning}
           name="globe"
           type="ionicon"
           caption="English"
