@@ -13,13 +13,13 @@ import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
-import { AuthContext } from '../../context/AuthContext';
-import { login } from '../../services/api/auth';
-import { loginSchema } from '../../services/validation/schema';
+import { login } from '../../services/api/lyself/auth';
+import { ErrorResponseData } from '../../services/axios/axios.types';
 import { styles } from '../../theme/styles';
-import { ErrorResponseData } from '../../types/axios.types';
 import { LoginScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
+import { loginSchema } from '../../utils/constant/validation/auth.schema';
+import { AuthContext } from '../../utils/context/AuthContext';
 import { somethingWentWrongToast } from '../../utils/toast';
 
 type LoginFormData = Omit<User, 'id' | 'name'>;
@@ -56,7 +56,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
       reset();
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data) {
-        const { statusCode, message } = error.response?.data as ErrorResponseData;
+        const { statusCode, message } = error.response.data as ErrorResponseData;
 
         if (statusCode === 401) {
           Toast.show({

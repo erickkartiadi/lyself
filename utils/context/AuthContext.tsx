@@ -1,3 +1,4 @@
+import { USER_TOKEN_KEY } from '@env';
 import * as SecureStore from 'expo-secure-store';
 import * as React from 'react';
 import { createContext, PropsWithChildren } from 'react';
@@ -15,26 +16,24 @@ const AuthContext = createContext<AuthContextInterface>({
   logout: (): void => {},
 });
 
-const KEY = 'USER_TOKEN';
-
 function AuthProvider({ children }: PropsWithChildren) {
   const [userToken, setUserToken] = React.useState<string | null>(null);
 
   const login = React.useCallback(
     async (token: string) => {
       setUserToken(token);
-      await SecureStore.setItemAsync(KEY, token);
+      await SecureStore.setItemAsync(USER_TOKEN_KEY, token);
     },
     [userToken]
   );
 
   const logout = React.useCallback(async () => {
     setUserToken(null);
-    await SecureStore.deleteItemAsync(KEY);
+    await SecureStore.deleteItemAsync(USER_TOKEN_KEY);
   }, [userToken]);
 
   const isLoggedIn = async () => {
-    const currentToken = await SecureStore.getItemAsync(KEY);
+    const currentToken = await SecureStore.getItemAsync(USER_TOKEN_KEY);
     setUserToken(currentToken);
   };
 

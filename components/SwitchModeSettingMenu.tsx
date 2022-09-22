@@ -1,7 +1,7 @@
 import { Switch, useTheme } from '@rneui/themed';
 import React, { useContext } from 'react';
 
-import { ThemeModeContext } from '../context/ThemeModeContext';
+import { ThemeModeContext } from '../utils/context/ThemeModeContext';
 import SettingMenu from './SettingMenu';
 
 function SwitchModeSettingMenu() {

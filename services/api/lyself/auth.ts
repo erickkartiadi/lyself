@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { User } from '../../types/types';
+import { User } from '../../../types/types';
 
 type CreateUserDto = Omit<User, 'id'>;
 

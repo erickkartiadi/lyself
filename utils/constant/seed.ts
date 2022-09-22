@@ -9,7 +9,7 @@ import {
   Psychiatrist,
   Schedule,
   SPECIALTIES,
-} from '../types/types';
+} from '../../types/types';
 import {
   generateLorem,
   generateRandomAddress,
@@ -20,7 +20,7 @@ import {
   generateRandomPsychiatristUri,
   generateRandomTimesAgo,
   generateRandomUUID,
-} from '../utils/generateRandom';
+} from '../generateRandom';
 
 export const user = {
   name: 'Erick Kartiadi',

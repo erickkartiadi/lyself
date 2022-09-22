@@ -3,12 +3,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Linking from 'expo-linking';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { Host } from 'react-native-portalize';
 
-import { AuthContext } from '../context/AuthContext';
-import { ThemeModeContext } from '../context/ThemeModeContext';
 import InDevelopmentScreen from '../screen/Error/InDevelopmentScreen';
 import { navThemeDark, navThemeLight } from '../theme';
 import { RootStackParamList } from '../types/navigation.types';
+import { AuthContext } from '../utils/context/AuthContext';
+import { ThemeModeContext } from '../utils/context/ThemeModeContext';
 import AuthNavigator from './AuthNavigator.routing';
 import ConsultNavigator from './ConsultNavigator.routing';
 import HomeNavigator from './HomeNavigator.routing';
@@ -32,23 +33,25 @@ function RootNavigator() {
       theme={isDarkMode ? navThemeDark : navThemeLight}
     >
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
-      <Stack.Navigator
-        initialRouteName="HomeTab"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        {userToken ? (
-          <>
-            <Stack.Screen name="HomeTab" component={HomeNavigator} />
-            <Stack.Screen name="ConsultStack" component={ConsultNavigator} />
-            <Stack.Screen name="TodoStack" component={TodoNavigator} />
-            <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
-          </>
-        ) : (
-          <Stack.Screen name="AuthStack" component={AuthNavigator} />
-        )}
-      </Stack.Navigator>
+      <Host>
+        <Stack.Navigator
+          initialRouteName="HomeTab"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          {userToken ? (
+            <>
+              <Stack.Screen name="HomeTab" component={HomeNavigator} />
+              <Stack.Screen name="ConsultStack" component={ConsultNavigator} />
+              <Stack.Screen name="TodoStack" component={TodoNavigator} />
+              <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
+            </>
+          ) : (
+            <Stack.Screen name="AuthStack" component={AuthNavigator} />
+          )}
+        </Stack.Navigator>
+      </Host>
     </NavigationContainer>
   );
 }

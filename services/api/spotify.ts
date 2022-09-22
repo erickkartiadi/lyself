@@ -5,9 +5,10 @@ import {
   SPOTIFY_REFRESH_TOKEN_KEY,
   SPOTIFY_TOKEN_KEY,
 } from '@env';
-import axios from 'axios';
 import { Buffer } from 'buffer';
 import * as SecureStore from 'expo-secure-store';
+
+import { spotifyInstance } from '../axios/axios';
 
 const clientId = SPOTIFY_CLIENT_ID;
 const clientSecret = SPOTIFY_CLIENT_SECRET;
@@ -16,7 +17,7 @@ const redirectUri = SPOTIFY_CLIENT_SECRET;
 export async function fetchFeaturedPlaylist() {
   const token = await SecureStore.getItemAsync(SPOTIFY_TOKEN_KEY);
 
-  return axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
+  return spotifyInstance.get('https://api.spotify.com/v1/browse/featured-playlists', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -26,7 +27,7 @@ export async function fetchFeaturedPlaylist() {
 }
 
 export async function fetchAccessToken(code: string) {
-  const res = await axios.post('https://accounts.spotify.com/api/token', null, {
+  const res = await spotifyInstance.post('https://accounts.spotify.com/api/token', null, {
     headers: {
       Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString(
         'base64'
@@ -58,7 +59,7 @@ export async function fetchAccessToken(code: string) {
 export async function fetchRefreshToken() {
   const refreshToken = await SecureStore.getItemAsync(SPOTIFY_REFRESH_TOKEN_KEY);
 
-  const res = await axios.post('https://accounts.spotify.com/api/token', null, {
+  const res = await spotifyInstance.post('https://accounts.spotify.com/api/token', null, {
     headers: {
       Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString(
         'base64'

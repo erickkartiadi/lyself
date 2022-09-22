@@ -1,8 +1,8 @@
 import { useTheme } from '@rneui/themed';
 import React from 'react';
 
-import { ACTIVITY_ICON } from '../constant/constant';
 import { ActivityType } from '../types/types';
+import { ACTIVITY_ICON } from '../utils/constant/constant';
 import BaseIcon, { BaseIconProps } from './bases/BaseIcon';
 
 export type ActivityTypeIcon = ActivityType | 'other';

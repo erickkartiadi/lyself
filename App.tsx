@@ -2,15 +2,17 @@ import { ThemeProvider } from '@rneui/themed';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
-import { AuthProvider } from './context/AuthContext';
-import { ThemeModeProvider } from './context/ThemeModeContext';
 import RootNavigator from './navigation/RootNavigator.routing';
+import loadAxiosInterceptor from './services/axios/axios';
 import { myTheme } from './theme';
 import { customFont } from './theme/styles';
 import toastConfig from './theme/toastConfig';
+import { AuthProvider } from './utils/context/AuthContext';
+import { ThemeModeProvider } from './utils/context/ThemeModeContext';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -20,6 +22,7 @@ export default function App() {
       try {
         await SplashScreen.preventAutoHideAsync();
         await Font.loadAsync(customFont);
+        loadAxiosInterceptor();
       } finally {
         setAppIsReady(true);
       }
@@ -41,12 +44,14 @@ export default function App() {
   return (
     <AuthProvider>
       <ThemeProvider theme={myTheme}>
-        <SafeAreaProvider onLayout={onLayoutRootView}>
-          <ThemeModeProvider>
-            <RootNavigator />
-            <Toast config={toastConfig} />
-          </ThemeModeProvider>
-        </SafeAreaProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <SafeAreaProvider onLayout={onLayoutRootView}>
+            <ThemeModeProvider>
+              <RootNavigator />
+              <Toast config={toastConfig} />
+            </ThemeModeProvider>
+          </SafeAreaProvider>
+        </GestureHandlerRootView>
       </ThemeProvider>
     </AuthProvider>
   );

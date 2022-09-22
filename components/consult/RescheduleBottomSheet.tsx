@@ -4,10 +4,10 @@ import * as React from 'react';
 import { FlatList, Image, View } from 'react-native';
 
 import emptyIllustration from '../../assets/images/empty-illustration.png';
-import { MONTHS } from '../../constant/constant';
-import { scheduleData } from '../../constant/seed';
 import { styles } from '../../theme/styles';
 import { Appointment, Schedule } from '../../types/types';
+import { MONTHS } from '../../utils/constant/constant';
+import { scheduleData } from '../../utils/constant/seed';
 import useToggle from '../../utils/hooks/useToggle';
 import BaseBottomSheet, { BaseBottomSheetProps } from '../bases/BaseBottomSheet';
 import BaseDialog from '../bases/BaseDialog';

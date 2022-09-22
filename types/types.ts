@@ -1,4 +1,4 @@
-import { ACTIVITY_TYPE, SPECIALTIES } from '../constant/constant';
+import { ACTIVITY_TYPE, SPECIALTIES } from '../utils/constant/constant';
 
 // custom primitive type
 type Id = string | number;
@@ -106,6 +106,17 @@ type Status = {
   caption: string;
 };
 
+type TodoImportance = 'high' | 'medium' | 'low' | 'none';
+
+type Todo = {
+  id: string;
+  todo: string;
+  completed: boolean;
+  importanceLevel: TodoImportance;
+  note: string;
+  reminderTime: Date | null;
+};
+
 export {
   Activity,
   ActivityType,
@@ -120,6 +131,8 @@ export {
   Schedule,
   Specialties,
   Status,
+  Todo,
+  TodoImportance,
   User,
 };
 export { ACTIVITY_TYPE, SPECIALTIES };

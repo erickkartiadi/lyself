@@ -4,8 +4,8 @@ import { Dimensions, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
-import { ThemeModeContext } from '../../context/ThemeModeContext';
 import { BORDER_RADIUS, FONT_FAMILY, GUTTER_SIZE } from '../../theme/styles';
+import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { generateRandomNumber } from '../../utils/generateRandom';
 import BaseCard from '../bases/BaseCard';
 

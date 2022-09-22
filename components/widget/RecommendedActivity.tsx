@@ -1,8 +1,8 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 
-import { recommendedData } from '../../constant/seed';
 import { styles } from '../../theme/styles';
+import { recommendedData } from '../../utils/constant/seed';
 import { comingSoonToast } from '../../utils/toast';
 import BaseViewSeparator from '../bases/BaseViewSeparator';
 import RecommendedActivityCard, {

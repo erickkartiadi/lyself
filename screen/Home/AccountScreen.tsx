@@ -6,9 +6,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BaseAvatar from '../../components/bases/BaseAvatar';
 import SettingMenu from '../../components/SettingMenu';
 import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
-import { user } from '../../constant/seed';
-import { AuthContext } from '../../context/AuthContext';
 import { styles } from '../../theme/styles';
+import { user } from '../../utils/constant/seed';
+import { AuthContext } from '../../utils/context/AuthContext';
 
 function AccountScreen() {
   const { theme } = useTheme();

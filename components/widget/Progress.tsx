@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { progressData } from '../../constant/seed';
 import { styles } from '../../theme/styles';
+import { progressData } from '../../utils/constant/seed';
 import ProgressActivityCard from '../cards/ProgressActivityCard';
 import SectionTitle from '../SectionTitle';
 

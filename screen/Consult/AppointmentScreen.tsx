@@ -3,9 +3,12 @@ import * as React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
 import AppointmentCard from '../../components/consult/AppointmentCard';
-import { completedAppointmentData, upcomingAppointmentData } from '../../constant/seed';
 import { FONT, styles } from '../../theme/styles';
 import { Appointment } from '../../types/types';
+import {
+  completedAppointmentData,
+  upcomingAppointmentData,
+} from '../../utils/constant/seed';
 
 function AppointmentScreen() {
   const [tabIndex, setTabIndex] = React.useState(0);

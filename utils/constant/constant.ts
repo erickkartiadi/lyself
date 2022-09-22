@@ -89,6 +89,13 @@ const ACTIVITY_ICON: {
   },
 };
 
+const TODO_IMPORTANCE_COLORS: { [key: string]: keyof Colors } = {
+  high: 'error',
+  medium: 'warning',
+  low: 'blue',
+  none: 'grey3',
+};
+
 const SPECIALTIES = [
   'Addiction',
   'Child and adolescent',
@@ -109,4 +116,11 @@ const ACTIVITY_TYPE = [
   'todo',
 ] as const;
 
-export { ACTIVITY_ICON, ACTIVITY_TYPE, DAYS, MONTHS, SPECIALTIES };
+export {
+  ACTIVITY_ICON,
+  ACTIVITY_TYPE,
+  DAYS,
+  MONTHS,
+  SPECIALTIES,
+  TODO_IMPORTANCE_COLORS,
+};

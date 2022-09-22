@@ -10,11 +10,11 @@ import Toast from 'react-native-toast-message';
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
-import { forgotPassword } from '../../services/api/auth';
-import { forgotPasswordSchema } from '../../services/validation/schema';
+import { forgotPassword } from '../../services/api/lyself/auth';
 import { styles } from '../../theme/styles';
 import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
+import { forgotPasswordSchema } from '../../utils/constant/validation/auth.schema';
 import { somethingWentWrongToast } from '../../utils/toast';
 
 type ForgotPasswordFormData = Pick<User, 'email'>;

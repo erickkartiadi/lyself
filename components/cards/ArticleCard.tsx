@@ -4,7 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { Article } from '../../types/types';
-import formatTimeAgo from '../../utils/formatTimeAgo';
+import { formatTimeAgo } from '../../utils/formatTimeAgo';
 import BaseCard from '../bases/BaseCard';
 
 function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {

@@ -13,12 +13,12 @@ import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
-import { register } from '../../services/api/auth';
-import { registerSchema } from '../../services/validation/schema';
+import { register } from '../../services/api/lyself/auth';
+import { ErrorResponseData } from '../../services/axios/axios.types';
 import { styles } from '../../theme/styles';
-import { ErrorResponseData } from '../../types/axios.types';
 import { RegisterScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
+import { registerSchema } from '../../utils/constant/validation/auth.schema';
 import { somethingWentWrongToast } from '../../utils/toast';
 
 type RegisterFormData = Omit<User, 'id'>;

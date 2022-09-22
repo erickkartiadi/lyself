@@ -3,8 +3,10 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
 
-function formatTimeAgo(date: string) {
+export function formatTimeAgo(date: string) {
   return dayjs(date).fromNow();
 }
 
-export default formatTimeAgo;
+export function formatReminderTime(date: Date) {
+  return dayjs(date).format('DD MMM YYYY, hh:mm A');
+}

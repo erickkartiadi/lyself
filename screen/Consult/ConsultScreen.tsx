@@ -6,9 +6,9 @@ import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import AppointmentCard from '../../components/consult/AppointmentCard';
 import PsychiatristCard from '../../components/consult/PsychiatristCard';
 import SectionTitle from '../../components/SectionTitle';
-import { psychiatristData, upcomingAppointmentData } from '../../constant/seed';
 import { styles } from '../../theme/styles';
 import { Psychiatrist } from '../../types/types';
+import { psychiatristData, upcomingAppointmentData } from '../../utils/constant/seed';
 
 function ConsultScreen() {
   const renderTopPsychiatrist = ({

@@ -2,8 +2,8 @@ import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
 import ChatBox from '../../components/ChatBox';
-import { chatData } from '../../constant/seed';
 import { Chat } from '../../types/types';
+import { chatData } from '../../utils/constant/seed';
 
 function ChatScreen() {
   const renderChat = ({ item }: { item: Chat }) => (

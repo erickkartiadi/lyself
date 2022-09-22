@@ -6,8 +6,8 @@ import DropDownPicker, {
   ValueType,
 } from 'react-native-dropdown-picker';
 
-import { ThemeModeContext } from '../../context/ThemeModeContext';
 import { BORDER_RADIUS, FONT, styles } from '../../theme/styles';
+import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 
 type BasePickerProps = {
   upIconName: IconProps['name'];
