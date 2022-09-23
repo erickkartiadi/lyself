@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
 import { USER_TOKEN_KEY } from '@env';
 import axios, { AxiosRequestConfig } from 'axios';

@@ -1,3 +1,4 @@
+import { Icon } from '@rneui/base';
 import { Button, ButtonProps, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import React, { Dispatch, RefObject, SetStateAction } from 'react';
@@ -20,13 +21,15 @@ interface TodoBottomSheetProps extends ModalizeProps, Pick<Todo, 'completed'> {
   bottomSheetRef: RefObject<Modalize>;
   currentReminderTime: Todo['reminderTime'];
   currentImportanceLevel: Todo['importanceLevel'];
-  onCheckboxPress: (checked: boolean) => void;
   control: Control<TodoFormData>;
   setCurrentReminderTime: Dispatch<SetStateAction<Todo['reminderTime']>>;
   setCurrentImportanceLevel: Dispatch<SetStateAction<Todo['importanceLevel']>>;
   onSubmit: ButtonProps['onPress'];
+  onDeletePress?: ButtonProps['onPress'];
   onClose?: () => void;
+  onCheckboxPress: (checked: boolean) => void;
   isButtonVisible?: boolean;
+  isEditing?: boolean;
 }
 
 function TodoBottomSheet({
@@ -41,6 +44,8 @@ function TodoBottomSheet({
   onSubmit,
   onClose,
   isButtonVisible,
+  isEditing,
+  onDeletePress,
 }: TodoBottomSheetProps) {
   const { theme } = useTheme();
 
@@ -151,14 +156,32 @@ function TodoBottomSheet({
             </ScrollView>
           </View>
           {isButtonVisible && (
-            <Button
-              onPress={onSubmit}
-              radius="md"
-              containerStyle={{ marginTop: theme.spacing.xl }}
-              fullWidth
-            >
-              SAVE
-            </Button>
+            <View style={{ flexDirection: 'row', marginTop: theme.spacing.xl }}>
+              {/* TODO add delete function */}
+              {isEditing && (
+                <Button
+                  radius="md"
+                  type="outline"
+                  containerStyle={{ marginRight: theme.spacing.md }}
+                  onPress={onDeletePress}
+                >
+                  <Icon
+                    name="trash"
+                    type="ionicon"
+                    size={21}
+                    color={theme.colors.error}
+                  />
+                </Button>
+              )}
+              <Button
+                onPress={onSubmit}
+                radius="md"
+                containerStyle={{ flex: 1 }}
+                fullWidth
+              >
+                {isEditing ? 'update' : 'save'}
+              </Button>
+            </View>
           )}
         </View>
       </Modalize>
@@ -169,6 +192,8 @@ function TodoBottomSheet({
 TodoBottomSheet.defaultProps = {
   isButtonVisible: true,
   onClose: () => {},
+  onDeletePress: () => {},
+  isEditing: true,
 };
 
 export default TodoBottomSheet;

@@ -3,7 +3,7 @@ import { Button, useTheme } from '@rneui/themed';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import * as SecureStore from 'expo-secure-store';
 import React, { useEffect, useState } from 'react';
-import { FlatList, RefreshControl, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import ActivityButton from '../../components/ActivityButton';
@@ -11,8 +11,9 @@ import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import ArticleCard from '../../components/cards/ArticleCard';
 import PlaylistCard from '../../components/cards/PlaylistCard';
-import ArticleCardPlaceholder from '../../components/empty/ArticleCardPlaceholder';
-import PlaylistCardPlaceholder from '../../components/empty/PlaylistCardPlaceholder';
+import ArticleCardPlaceholder from '../../components/loading/ArticleCardPlaceholder';
+import PlaylistCardPlaceholder from '../../components/loading/PlaylistCardPlaceholder';
+import RefreshControl from '../../components/loading/RefreshControl';
 import SectionTitle from '../../components/SectionTitle';
 import getArticles from '../../services/api/news';
 import {
@@ -165,14 +166,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
 
   return (
     <ScrollView
-      refreshControl={
-        <RefreshControl
-          refreshing={isRefreshing}
-          progressBackgroundColor={theme.colors.cardBackground}
-          colors={[theme.colors.primary]}
-          onRefresh={onRefresh}
-        />
-      }
+      refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
       contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       <BaseSearchBar placeholder="Search tools, news or forum" />

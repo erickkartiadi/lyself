@@ -1,22 +1,20 @@
-import { FAB, useTheme } from '@rneui/themed';
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import { FAB, Text, useTheme } from '@rneui/themed';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FlatList, RefreshControl } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
-import Toast from 'react-native-toast-message';
 
 import BaseIcon from '../../components/bases/BaseIcon';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
-import TodoEmptyMessage from '../../components/empty/TodoEmptyMessage';
+import RefreshControl from '../../components/loading/RefreshControl';
+import TodoEmptyMessage from '../../components/loading/TodoEmptyMessage';
 import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
-import { createTodo, fetchTodo } from '../../services/api/lyself/todo';
-import { ErrorResponseData } from '../../services/axios/axios.types';
+import { createTodo, fetchTodos } from '../../services/api/lyself/todo';
 import { styles } from '../../theme/styles';
 import { Todo } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
-import { somethingWentWrongToast } from '../../utils/toast';
 import LoadingScreen from '../Others/LoadingScreen';
 
 const renderTodoList = ({
@@ -35,16 +33,26 @@ const renderTodoList = ({
 );
 
 function TodoScreen() {
-  const [todoList, setTodoList] = useState<Todo[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-
   const { theme } = useTheme();
 
-  const [currentImportanceLevel, setCurrentImportanceLevel] =
+  const queryClient = useQueryClient();
+  const { isLoading, error, data, isFetching, refetch } = useQuery<Todo[]>(
+    ['todos'],
+    fetchTodos
+  );
+  const mutation = useMutation(createTodo, {
+    onSuccess: (newTodo: Todo) => {
+      queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) => [
+        ...(oldTodos || []),
+        newTodo,
+      ]);
+    },
+  });
+
+  const [isCompleted, toggleIsCompleted] = useToggle(false);
+  const [newImportanceLevel, setNewImportanceLevel] =
     useState<Todo['importanceLevel']>('none');
-  const [currentReminderTime, setCurrentReminderTime] =
-    useState<Todo['reminderTime']>(null);
+  const [newReminderTime, setNewReminderTime] = useState<Todo['reminderTime']>(null);
   const { control, handleSubmit, reset, watch } = useForm<TodoFormData>({
     defaultValues: {
       todo: '',
@@ -52,67 +60,35 @@ function TodoScreen() {
     },
   });
 
-  const watchTodo = watch('todo', '');
-
-  const [isChecked, toggleIsChecked] = useToggle(false);
-
-  const handleCheckboxPress = (checked: boolean) => {
-    toggleIsChecked();
-  };
-
   const bottomSheetRef = useRef<Modalize>(null);
 
-  const loadTodos = async () => {
-    const res = await fetchTodo();
-    setTodoList(res.data.todos);
-  };
-
-  const onRefresh = React.useCallback(async () => {
-    setIsRefreshing(true);
-    await loadTodos();
-    setIsRefreshing(false);
-  }, []);
-
   const handleAddTodo = async ({ todo, note }: TodoFormData) => {
+    bottomSheetRef.current?.close();
+
     if (todo === '' || todo === null) return;
-    try {
-      await createTodo({
-        completed: isChecked,
-        importanceLevel: currentImportanceLevel,
-        note,
-        todo,
-        reminderTime: currentReminderTime,
-      });
 
-      bottomSheetRef.current?.close();
-      await loadTodos();
-      setCurrentImportanceLevel('none');
-      setCurrentReminderTime(null);
-      reset();
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.data) {
-        const { message } = error.response.data as ErrorResponseData;
+    mutation.mutate({
+      completed: isCompleted,
+      importanceLevel: newImportanceLevel,
+      note,
+      todo,
+      reminderTime: newReminderTime,
+    });
 
-        Toast.show({
-          type: 'error',
-          text2: message instanceof Array ? message[0] : message,
-        });
-      } else {
-        somethingWentWrongToast();
-      }
-    }
+    setNewImportanceLevel('none');
+    setNewReminderTime(null);
+    reset();
   };
-
-  // TODO lottie files loading
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      await loadTodos();
-      setIsLoading(false);
-    })();
-  }, []);
 
   if (isLoading) return <LoadingScreen />;
+
+  // TODO add 404 page
+  if (error)
+    return (
+      <View>
+        <Text h4>Something went wrong</Text>
+      </View>
+    );
 
   return (
     <>
@@ -125,17 +101,10 @@ function TodoScreen() {
           styles.flatListHorizontalContainer,
           { flexGrow: 1 },
         ]}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            progressBackgroundColor={theme.colors.cardBackground}
-            colors={[theme.colors.primary]}
-            onRefresh={onRefresh}
-          />
-        }
+        refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
         ListEmptyComponent={<TodoEmptyMessage />}
         showsHorizontalScrollIndicator={false}
-        data={todoList}
+        data={data}
         renderItem={renderTodoList}
       />
       <FAB
@@ -158,12 +127,13 @@ function TodoScreen() {
         bottomSheetRef={bottomSheetRef}
         completed={false}
         control={control}
-        currentImportanceLevel={currentImportanceLevel}
-        currentReminderTime={currentReminderTime}
-        onCheckboxPress={handleCheckboxPress}
-        setCurrentImportanceLevel={setCurrentImportanceLevel}
-        setCurrentReminderTime={setCurrentReminderTime}
-        isButtonVisible={watchTodo !== ''}
+        currentImportanceLevel={newImportanceLevel}
+        currentReminderTime={newReminderTime}
+        onCheckboxPress={() => toggleIsCompleted()}
+        setCurrentImportanceLevel={setNewImportanceLevel}
+        setCurrentReminderTime={setNewReminderTime}
+        isButtonVisible={watch('todo', '') !== ''}
+        isEditing={false}
       />
     </>
   );

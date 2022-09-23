@@ -1,11 +1,13 @@
 import { Icon, ListItem, Text, useTheme } from '@rneui/themed';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import colorAlpha from 'color-alpha';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
+import { useDebounce } from 'use-debounce';
 
-import { deleteTodo, toggleTodo, updateTodo } from '../../services/api/lyself/todo';
+import { deleteTodo, updateTodo } from '../../services/api/lyself/todo';
 import { BORDER_RADIUS } from '../../theme/styles';
 import { Todo } from '../../types/types';
 import { TODO_IMPORTANCE_COLORS } from '../../utils/constant/constant';
@@ -26,15 +28,21 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
       note,
     },
   });
-  const watchTodo = watch('todo', todo);
-  const [isChecked, toggleIsChecked] = useToggle(completed);
+  const [isCompleted, toggleIsCompleted] = useToggle(completed);
+  const [debouncedIsCompleted] = useDebounce(isCompleted, 1000);
+
+  const queryClient = useQueryClient();
+  const deleteMutation = useMutation(deleteTodo, {
+    onSuccess: (todos) => queryClient.setQueriesData(['todos'], todos),
+  });
+
+  const updateMutation = useMutation(updateTodo, {
+    onSuccess: (todos) => queryClient.setQueriesData(['todos'], todos),
+  });
 
   const importanceColor = theme.colors[
     TODO_IMPORTANCE_COLORS[currentImportanceLevel]
   ] as string;
-
-  const formattedReminderTime =
-    currentReminderTime && formatReminderTime(currentReminderTime);
 
   const bottomSheetRef = useRef<Modalize>(null);
 
@@ -42,30 +50,38 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     bottomSheetRef.current?.open();
   };
 
-  const handleEditTodo = async (todoFormData: TodoFormData) => {
+  const handleUpdateTodo = async (todoFormData: TodoFormData) => {
     if (todoFormData.todo === '') {
-      await deleteTodo(id);
-      return;
+      deleteMutation.mutate(id);
     }
 
-    await updateTodo(id, {
-      completed: isChecked,
+    await updateMutation.mutateAsync({
+      id,
+      completed: isCompleted,
       importanceLevel: currentImportanceLevel,
-      note: todoFormData.note,
       reminderTime: currentReminderTime,
+      note: todoFormData.note,
       todo: todoFormData.todo,
     });
+
+    bottomSheetRef.current?.close();
   };
 
   const handleDeleteTodo = async () => {
-    await deleteTodo(id);
+    deleteMutation.mutate(id);
   };
 
+  // update todo if checkbox has changed for 1 second
   useEffect(() => {
-    (async () => {
-      await toggleTodo(id, isChecked);
-    })();
-  }, [isChecked]);
+    updateMutation.mutateAsync({
+      completed: debouncedIsCompleted,
+      id,
+      importanceLevel: currentImportanceLevel,
+      reminderTime: currentReminderTime,
+      note: watch('note', note),
+      todo: watch('todo', todo),
+    });
+  }, [debouncedIsCompleted]);
 
   return (
     <>
@@ -92,8 +108,8 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         >
           <TodoCheckbox
             boxOutlineColor={importanceColor}
-            checked={isChecked}
-            onCheckboxPress={() => toggleIsChecked()}
+            checked={isCompleted}
+            onCheckboxPress={() => toggleIsCompleted()}
             size={25}
           />
           <View
@@ -105,14 +121,14 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
             <Text
               numberOfLines={1}
               style={{
-                color: isChecked ? theme.colors.grey3 : theme.colors.black,
-                textDecorationLine: isChecked ? 'line-through' : 'none',
+                color: isCompleted ? theme.colors.grey3 : theme.colors.black,
+                textDecorationLine: isCompleted ? 'line-through' : 'none',
                 width: '90%',
               }}
             >
-              {watchTodo}
+              {watch('todo', todo)}
             </Text>
-            {!isChecked && currentReminderTime && (
+            {!isCompleted && currentReminderTime && (
               <View
                 style={{
                   marginTop: theme.spacing.md,
@@ -132,7 +148,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
                   containerStyle={{ marginRight: theme.spacing.md }}
                 />
                 <Text caption style={{ color: theme.colors.grey3 }}>
-                  {formattedReminderTime}
+                  {formatReminderTime(currentReminderTime)}
                 </Text>
               </View>
             )}
@@ -140,17 +156,24 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         </View>
       </ListItem.Swipeable>
       <TodoBottomSheet
-        onSubmit={() => {
-          handleSubmit(handleEditTodo);
-          bottomSheetRef.current?.close();
+        onSubmit={handleSubmit(handleUpdateTodo)}
+        onDeletePress={handleDeleteTodo}
+        onClose={async () => {
+          updateMutation.mutate({
+            id,
+            completed: isCompleted,
+            importanceLevel: currentImportanceLevel,
+            reminderTime: currentReminderTime,
+            note: watch('note', note),
+            todo: watch('todo', todo),
+          });
         }}
-        onClose={handleSubmit(handleEditTodo)}
         bottomSheetRef={bottomSheetRef}
-        completed={isChecked}
+        completed={isCompleted}
         control={control}
         currentImportanceLevel={currentImportanceLevel}
         currentReminderTime={currentReminderTime}
-        onCheckboxPress={() => toggleIsChecked()}
+        onCheckboxPress={() => toggleIsCompleted()}
         setCurrentImportanceLevel={setCurrentImportanceLevel}
         setCurrentReminderTime={setCurrentReminderTime}
       />

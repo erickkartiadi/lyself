@@ -31,6 +31,7 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
         <Text subtitle numberOfLines={3}>
           {title}
         </Text>
+        {/* FIXME fix text overflow */}
         <View
           style={{
             flex: 1,
