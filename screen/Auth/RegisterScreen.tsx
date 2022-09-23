@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
@@ -14,7 +13,6 @@ import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
 import { register } from '../../services/api/lyself/auth';
-import { ErrorResponseData } from '../../services/axios/axios.types';
 import { styles } from '../../theme/styles';
 import { RegisterScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
@@ -24,8 +22,6 @@ import { somethingWentWrongToast } from '../../utils/toast';
 type RegisterFormData = Omit<User, 'id'>;
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
-
   const {
     control,
     handleSubmit,
@@ -40,35 +36,27 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
     resolver: yupResolver(registerSchema),
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleRegister = async ({ email, name, password }: RegisterFormData) => {
-    setIsButtonLoading(true);
+    setIsLoading(true);
 
     try {
-      const user = await register({ email, name, password });
-      if (!user) throw new Error();
+      await register({ email, name, password });
 
       Toast.show({
-        text1: 'Account Created',
-        text2: `We have sent you a confirmation email to ${user.data.email}, please confirm your email address.`,
-        visibilityTime: 10000,
+        type: 'success',
+        text1: 'Email confirmation sent',
+        text2: `We have sent you a confirmation email to ${email}, please confirm your email address.`,
       });
-
       navigation.navigate('Login');
-      reset();
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error) && error.response?.data) {
-        const { message } = error.response?.data as ErrorResponseData;
 
-        Toast.show({
-          type: 'error',
-          text1: message instanceof Array ? message[0] : message,
-        });
-      } else {
-        somethingWentWrongToast();
-      }
+      reset();
+    } catch (error) {
+      if (error) somethingWentWrongToast();
     }
 
-    setIsButtonLoading(false);
+    setIsLoading(false);
   };
 
   return (
@@ -145,11 +133,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             />
           )}
         />
-        <Button
-          loading={isButtonLoading}
-          fullWidth
-          onPress={handleSubmit(handleRegister)}
-        >
+        <Button loading={isLoading} fullWidth onPress={handleSubmit(handleRegister)}>
           Create Account
         </Button>
         <View

@@ -39,17 +39,15 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
 
     try {
       await forgotPassword(data.email);
-
       Toast.show({
         type: 'success',
         text2: `We have sent you a reset password email to ${data.email}. Please check your inbox.`,
         visibilityTime: 10000,
       });
-
       navigation.navigate('Login');
       reset();
-    } catch (e) {
-      somethingWentWrongToast();
+    } catch (error) {
+      if (error) somethingWentWrongToast();
     }
 
     setIsButtonLoading(false);

@@ -1,23 +1,24 @@
-import axios from 'axios';
-
 import { User } from '../../../types/types';
+import { apiClient } from '../../axios/axios';
 
 type CreateUserDto = Omit<User, 'id'>;
 
-export async function register(createUserDto: CreateUserDto) {
-  return axios.post('http://192.168.1.110:3000/auth/register', {
+export async function register(createUserDto: CreateUserDto): Promise<User> {
+  const res = await apiClient.post('/auth/register', {
     ...createUserDto,
   });
+
+  return res.data;
 }
 
 export async function login(loginDto: Omit<CreateUserDto, 'name'>) {
-  return axios.post('http://192.168.1.110:3000/auth/login', {
+  return apiClient.post('/auth/login', {
     ...loginDto,
   });
 }
 
 export async function forgotPassword(email: string) {
-  return axios.post('http://192.168.1.110:3000/auth/forgot-password', {
+  return apiClient.post('/auth/forgot-password', {
     email,
   });
 }

@@ -24,6 +24,7 @@ import {
 import { styles } from '../../theme/styles';
 import { ExploreScreenNavigationProps } from '../../types/navigation.types';
 import { Article, Playlist } from '../../types/types';
+import { somethingWentWrongToast } from '../../utils/toast';
 
 const discovery = {
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
@@ -127,7 +128,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
         setPlaylists(data);
       }
     } catch (error) {
-      // somethingWentWrongToast();
+      somethingWentWrongToast();
     }
   };
 

@@ -1,12 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text, useTheme } from '@rneui/themed';
-import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Toast from 'react-native-toast-message';
 
 import loginIllustration from '../../assets/images/login-illustration.png';
 import BackButton from '../../components/BackButton';
@@ -14,7 +12,6 @@ import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
 import { login } from '../../services/api/lyself/auth';
-import { ErrorResponseData } from '../../services/axios/axios.types';
 import { styles } from '../../theme/styles';
 import { LoginScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
@@ -55,18 +52,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
 
       reset();
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.data) {
-        const { statusCode, message } = error.response.data as ErrorResponseData;
-
-        if (statusCode === 401) {
-          Toast.show({
-            type: 'error',
-            text1: message instanceof Array ? message[0] : message,
-          });
-        }
-      } else {
-        somethingWentWrongToast();
-      }
+      if (error) somethingWentWrongToast();
     }
 
     setIsButtonLoading(false);
