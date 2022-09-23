@@ -2,7 +2,7 @@ import { Button, ButtonProps, useTheme } from '@rneui/themed';
 import * as React from 'react';
 
 import { TodoImportance } from '../../types/types';
-import { TODO_IMPORTANCE_COLORS } from '../../utils/constant/constant';
+import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
 
 interface TodoImportanceButtonProps {
   onPress: ButtonProps['onPress'];
@@ -19,7 +19,7 @@ function TodoImportanceButton({
 
   const isSelected = currentImportanceLevel === importanceLevel;
 
-  const importanceColor = theme.colors[TODO_IMPORTANCE_COLORS[importanceLevel]] as string;
+  const importanceColor = theme.colors[IMPORTANCE_COLORS[importanceLevel]] as string;
   const backgroundColor = isSelected ? importanceColor : theme.colors.cardBackground;
 
   const textColor = isSelected ? theme.colors.white : theme.colors.black;

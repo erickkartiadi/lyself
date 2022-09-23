@@ -16,6 +16,7 @@ declare module '@rneui/themed' {
 
   export interface TextProps {
     subtitle?: boolean;
+    subtitle2?: boolean;
     caption?: boolean;
     small?: boolean;
   }

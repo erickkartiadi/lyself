@@ -24,7 +24,7 @@ function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
         containerStyle={{
           width: '100%',
           aspectRatio: 1,
-          borderRadius: BORDER_RADIUS.md,
+          borderRadius: BORDER_RADIUS.xl,
         }}
         childrenContainerStyle={{ width: '100%' }}
         source={{
@@ -32,8 +32,10 @@ function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
         }}
       />
       <View style={{ marginTop: theme.spacing.md }}>
-        <Text subtitle>{name}</Text>
-        <Text caption>by {creator}</Text>
+        <Text subtitle2>{name}</Text>
+        <Text caption style={{ marginTop: theme.spacing.sm, color: theme.colors.grey3 }}>
+          by {creator}
+        </Text>
       </View>
     </AnimatedPressable>
   );

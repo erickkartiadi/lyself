@@ -10,7 +10,7 @@ import { useDebounce } from 'use-debounce';
 import { deleteTodo, updateTodo } from '../../services/api/lyself/todo';
 import { BORDER_RADIUS } from '../../theme/styles';
 import { Todo } from '../../types/types';
-import { TODO_IMPORTANCE_COLORS } from '../../utils/constant/constant';
+import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
 import useToggle from '../../utils/hooks/useToggle';
 import TodoBottomSheet, { TodoFormData } from './TodoBottomSheet';
@@ -41,7 +41,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
   });
 
   const importanceColor = theme.colors[
-    TODO_IMPORTANCE_COLORS[currentImportanceLevel]
+    IMPORTANCE_COLORS[currentImportanceLevel]
   ] as string;
 
   const bottomSheetRef = useRef<Modalize>(null);

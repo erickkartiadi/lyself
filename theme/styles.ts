@@ -154,6 +154,13 @@ const FONT: { [key: string]: StyleProp<TextStyle> } = {
     fontFamily: FONT_FAMILY.medium,
     fontWeight: '500',
   },
+  subtitle2: {
+    fontSize: FONT_SIZE.body2,
+    letterSpacing: normalize(-0.006),
+    lineHeight: normalize(20),
+    fontFamily: FONT_FAMILY.medium,
+    fontWeight: '500',
+  },
   small: {
     fontSize: FONT_SIZE.body2,
     letterSpacing: normalize(-0.006),

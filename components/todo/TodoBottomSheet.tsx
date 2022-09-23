@@ -9,7 +9,7 @@ import { Portal } from 'react-native-portalize';
 
 import { FONT, styles } from '../../theme/styles';
 import { Todo } from '../../types/types';
-import { TODO_IMPORTANCE_COLORS } from '../../utils/constant/constant';
+import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
 import SectionTitle from '../SectionTitle';
 import TodoCheckbox from './TodoCheckbox';
 import TodoImportanceButton from './TodoImportanceButton';
@@ -50,7 +50,7 @@ function TodoBottomSheet({
   const { theme } = useTheme();
 
   const importanceColor = theme.colors[
-    TODO_IMPORTANCE_COLORS[currentImportanceLevel]
+    IMPORTANCE_COLORS[currentImportanceLevel]
   ] as string;
 
   return (

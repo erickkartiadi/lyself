@@ -3,9 +3,10 @@ import * as Linking from 'expo-linking';
 import React from 'react';
 import { View } from 'react-native';
 
+import { BORDER_RADIUS } from '../../theme/styles';
 import { Article } from '../../types/types';
 import { formatTimeAgo } from '../../utils/formatTimeAgo';
-import BaseCard from '../bases/BaseCard';
+import AnimatedPressable from '../AnimatedPressable';
 
 function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
   const { theme } = useTheme();
@@ -15,23 +16,32 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
   };
 
   return (
-    <BaseCard width={280} enableCardPadding={false} onPress={handleOpenArticle}>
+    // <BaseCard
+    //   cardStyle={{ backgroundColor: 'transparent' }}
+    //   width={320}
+    //   enableCardPadding={false}
+    //   onPress={handleOpenArticle}
+    // >
+    <AnimatedPressable
+      style={{ width: 320, marginTop: theme.spacing.md }}
+      onPress={handleOpenArticle}
+    >
       <Image
         containerStyle={{
           width: '100%',
           aspectRatio: 4 / 3,
         }}
+        borderRadius={BORDER_RADIUS.xl}
         source={{ uri: urlToImage }}
       />
       <View
         style={{
-          padding: theme.spacing.xl,
+          marginTop: theme.spacing.xl,
         }}
       >
         <Text subtitle numberOfLines={3}>
           {title}
         </Text>
-        {/* FIXME fix text overflow */}
         <View
           style={{
             flex: 1,
@@ -40,12 +50,16 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
             marginTop: theme.spacing.sm,
           }}
         >
-          <Text caption>{source}</Text>
-          <Icon type="entypo" name="dot-single" color={theme.colors.grey4} />
-          <Text caption>{formatTimeAgo(publishedAt)}</Text>
+          <Text caption style={{ color: theme.colors.grey3 }}>
+            {source}
+          </Text>
+          <Icon type="entypo" name="dot-single" color={theme.colors.grey3} />
+          <Text caption style={{ color: theme.colors.grey3 }}>
+            {formatTimeAgo(publishedAt)}
+          </Text>
         </View>
       </View>
-    </BaseCard>
+    </AnimatedPressable>
   );
 }
 

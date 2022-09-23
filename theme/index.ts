@@ -15,7 +15,7 @@ const lightColors = {
   primaryDark: '#D0385C',
   secondary: '#BD8087',
   background: '#FFFFFF',
-  cardBackground: '#F4F7F9',
+  cardBackground: '#F9FBFC',
   blue: '#00A3FF',
   purple: '#9C5FAE',
   spotify: '#1db954',
@@ -104,6 +104,7 @@ const myTheme = createTheme({
       style: [
         FONT.regular,
         props.subtitle && FONT.subtitle,
+        props.subtitle2 && FONT.subtitle2,
         props.small && FONT.small,
         props.caption && FONT.caption,
       ],
