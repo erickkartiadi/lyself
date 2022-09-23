@@ -2,19 +2,19 @@ import { Skeleton, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 
-import BaseCard from '../bases/BaseCard';
+import { BORDER_RADIUS } from '../../theme/styles';
 
 function ArticleCardPlaceholder() {
   const { theme } = useTheme();
 
   return (
-    <BaseCard width={280} enablePressAnimation={false} enableCardPadding={false}>
-      <Skeleton height={210} />
-      <View style={{ padding: theme.spacing.xl }}>
-        <Skeleton height={48} />
-        <Skeleton style={{ marginTop: theme.spacing.md }} height={16} width={120} />
-      </View>
-    </BaseCard>
+    <View style={{ marginTop: theme.spacing.md }}>
+      <Skeleton width={320} height={240} style={{ borderRadius: BORDER_RADIUS.xl }} />
+
+      <Skeleton circle height={16} style={{ marginTop: theme.spacing.xl }} />
+      <Skeleton circle height={16} style={{ marginTop: theme.spacing.md }} />
+      <Skeleton circle style={{ marginTop: theme.spacing.md }} height={16} width={200} />
+    </View>
   );
 }
 

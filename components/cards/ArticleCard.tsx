@@ -16,12 +16,6 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
   };
 
   return (
-    // <BaseCard
-    //   cardStyle={{ backgroundColor: 'transparent' }}
-    //   width={320}
-    //   enableCardPadding={false}
-    //   onPress={handleOpenArticle}
-    // >
     <AnimatedPressable
       style={{ width: 320, marginTop: theme.spacing.md }}
       onPress={handleOpenArticle}

@@ -1,7 +1,5 @@
 import { ACTIVITY_TYPE, SPECIALTIES } from '../utils/constant/constant';
 
-// custom primitive type
-type Id = string | number;
 type Name = string;
 type Specialties = typeof SPECIALTIES[number];
 type ActivityType = typeof ACTIVITY_TYPE[number];
@@ -13,9 +11,8 @@ interface User {
   password: string;
 }
 
-// other types
 type Playlist = {
-  id: Id;
+  id: string;
   creator: string;
   imageUrl: string;
   spotifyUrl: string;
@@ -23,7 +20,7 @@ type Playlist = {
 };
 
 type Activity = {
-  id: Id;
+  id: string;
   title: string;
   time: string;
   activity: ActivityType;
@@ -34,7 +31,7 @@ type ProgressActivity = Activity & {
 };
 
 type Review = {
-  id: Id;
+  id: string;
   name: Name;
   review: string;
   time: string;
@@ -42,7 +39,7 @@ type Review = {
 };
 
 type Education = {
-  id: Id;
+  id: string;
   institutionName: string;
   startYear: number;
   studyPeriod: number;
@@ -58,7 +55,7 @@ type Article = {
 };
 
 type Place = {
-  id: Id;
+  id: string;
   address: string;
   googleMapLink: string;
   name: string;
@@ -66,7 +63,7 @@ type Place = {
 };
 
 type Psychiatrist = {
-  id: Id;
+  id: string;
   name: Name;
   uri: string;
   description: string;

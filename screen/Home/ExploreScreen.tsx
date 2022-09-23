@@ -1,10 +1,9 @@
-import { SPOTIFY_CLIENT_ID, SPOTIFY_EXPIRES_TIME_KEY } from '@env';
+import { SPOTIFY_CLIENT_ID } from '@env';
 import { Button, useTheme } from '@rneui/themed';
+import { useQuery } from '@tanstack/react-query';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
-import * as SecureStore from 'expo-secure-store';
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { FlatList, ScrollView, View } from 'react-native';
 
 import ActivityButton from '../../components/ActivityButton';
 import BaseSearchBar from '../../components/bases/BaseSearchBar';
@@ -15,16 +14,11 @@ import ArticleCardPlaceholder from '../../components/placeholder/ArticleCardPlac
 import PlaylistCardPlaceholder from '../../components/placeholder/PlaylistCardPlaceholder';
 import RefreshControl from '../../components/placeholder/RefreshControl';
 import SectionTitle from '../../components/SectionTitle';
-import getArticles from '../../services/api/news';
-import {
-  fetchAccessToken,
-  fetchFeaturedPlaylist,
-  fetchRefreshToken,
-} from '../../services/api/spotify';
+import fetchNews from '../../services/api/news';
+import { fetchAccessToken, fetchFeaturedPlaylist } from '../../services/api/spotify';
 import { styles } from '../../theme/styles';
 import { ExploreScreenNavigationProps } from '../../types/navigation.types';
 import { Article, Playlist } from '../../types/types';
-import { somethingWentWrongToast } from '../../utils/toast';
 
 const discovery = {
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
@@ -80,10 +74,12 @@ const renderEmptyPlaylists = () => (
 
 function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
   const { theme } = useTheme();
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const [isSpotifyTokenAvailable, setIsSpotifyTokenAvailable] = useState(false);
+
+  const articlesQuery = useQuery<Article[]>(['articles'], fetchNews);
+  const spotifyQuery = useQuery<Playlist[]>(['playlist'], fetchFeaturedPlaylist, {
+    onSuccess: () => setIsSpotifyTokenAvailable(true),
+  });
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -105,69 +101,23 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
     discovery
   );
 
-  const loadPlaylist = async () => {
-    const tokenExpirationTime = await SecureStore.getItemAsync(SPOTIFY_EXPIRES_TIME_KEY);
-    const isTokenExpired =
-      !tokenExpirationTime ||
-      new Date().getTime() > parseInt(tokenExpirationTime || '0', 10);
-
-    try {
-      if (isTokenExpired) {
-        await fetchRefreshToken();
-        await loadPlaylist();
-      } else {
-        setIsSpotifyTokenAvailable(true);
-        const res = await fetchFeaturedPlaylist();
-        const data: Playlist[] = res.data.playlists.items.map((item: any) => ({
-          id: item.id,
-          name: item.name,
-          imageUrl: item.images[0].url,
-          creator: item.owner.display_name,
-          spotifyUrl: item.external_urls.spotify,
-        }));
-        setPlaylists(data);
-      }
-    } catch (error) {
-      somethingWentWrongToast();
-    }
-  };
-
-  const loadArticles = async () => {
-    const res = await getArticles();
-
-    const data = res.data.articles.map((article: any) => ({
-      title: article.title,
-      source: article.source.name,
-      url: article.url,
-      publishedAt: article.publishedAt,
-      urlToImage: article.urlToImage,
-    }));
-    setArticles(data);
-  };
-
   useEffect(() => {
     if (response && response?.type === 'success') {
       fetchAccessToken(response.params.code);
     }
   }, [response]);
 
-  useEffect(() => {
-    (async () => {
-      await loadArticles();
-      await loadPlaylist();
-    })();
-  }, []);
-
-  const onRefresh = React.useCallback(async () => {
-    setIsRefreshing(true);
-    await loadArticles();
-    await loadPlaylist();
-    setIsRefreshing(false);
-  }, []);
-
   return (
     <ScrollView
-      refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+      refreshControl={
+        <RefreshControl
+          refreshing={articlesQuery.isFetching || spotifyQuery.isFetching}
+          onRefresh={async () => {
+            await articlesQuery.refetch();
+            await spotifyQuery.refetch();
+          }}
+        />
+      }
       contentContainerStyle={[styles.containerGutter, styles.section]}
     >
       <BaseSearchBar placeholder="Search tools, news or forum" />
@@ -228,7 +178,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
             styles.containerGutter,
             styles.flatListHorizontalContainer,
           ]}
-          data={articles}
+          data={articlesQuery.data}
           renderItem={renderArticles}
         />
       </View>
@@ -242,7 +192,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
             showsHorizontalScrollIndicator={false}
             style={styles.noContainerGutter}
             contentContainerStyle={styles.containerGutter}
-            data={playlists}
+            data={spotifyQuery.data}
             renderItem={renderPlaylist}
             ListEmptyComponent={renderEmptyPlaylists}
           />

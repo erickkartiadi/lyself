@@ -237,13 +237,6 @@ function AppointmentCard({
                   uppercase={false}
                   containerStyle={{ flex: 1 }}
                   type="outline"
-                  buttonStyle={
-                    {
-                      // backgroundColor: theme.colors.background,
-                      // borderColor: theme.colors.greyOutline,
-                    }
-                  }
-                  // titleStyle={{ color: theme.colors.black }}
                   size="md"
                 >
                   Cancel
