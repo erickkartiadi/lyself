@@ -1,21 +1,22 @@
-import { FAB, Text, useTheme } from '@rneui/themed';
+import { FAB, useTheme } from '@rneui/themed';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import BaseIcon from '../../components/bases/BaseIcon';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
-import RefreshControl from '../../components/loading/RefreshControl';
-import TodoEmptyMessage from '../../components/loading/TodoEmptyMessage';
+import RefreshControl from '../../components/placeholder/RefreshControl';
 import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
 import { createTodo, fetchTodos } from '../../services/api/lyself/todo';
 import { styles } from '../../theme/styles';
 import { Todo } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
+import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
+import TodoEmptyScreen from '../Others/TodoEmptyScreen';
 
 const renderTodoList = ({
   item: { id, importanceLevel, reminderTime, todo, note, completed },
@@ -36,7 +37,7 @@ function TodoScreen() {
   const { theme } = useTheme();
 
   const queryClient = useQueryClient();
-  const { isLoading, error, data, isFetching, refetch } = useQuery<Todo[]>(
+  const { isLoading, isError, data, isFetching, refetch } = useQuery<Todo[]>(
     ['todos'],
     fetchTodos
   );
@@ -81,14 +82,7 @@ function TodoScreen() {
   };
 
   if (isLoading) return <LoadingScreen />;
-
-  // TODO add 404 page
-  if (error)
-    return (
-      <View>
-        <Text h4>Something went wrong</Text>
-      </View>
-    );
+  if (isError) return <ErrorScreen />;
 
   return (
     <>
@@ -102,7 +96,7 @@ function TodoScreen() {
           { flexGrow: 1 },
         ]}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
-        ListEmptyComponent={<TodoEmptyMessage />}
+        ListEmptyComponent={<TodoEmptyScreen />}
         showsHorizontalScrollIndicator={false}
         data={data}
         renderItem={renderTodoList}

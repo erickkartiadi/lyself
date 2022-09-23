@@ -6,7 +6,7 @@ import noDataImageDark from '../../assets/images/no-data-image-dark.png';
 import noDataImageLight from '../../assets/images/no-data-image-light.png';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 
-function TodoEmptyMessage() {
+function TodoEmptyScreen() {
   const { isDarkMode } = React.useContext(ThemeModeContext);
   const { theme } = useTheme();
 
@@ -21,8 +21,8 @@ function TodoEmptyMessage() {
       <View
         style={{
           aspectRatio: 1,
-          width: 96,
-          marginBottom: theme.spacing.lg,
+          width: 160,
+          marginBottom: theme.spacing.xl,
         }}
       >
         <Image
@@ -30,11 +30,14 @@ function TodoEmptyMessage() {
           source={isDarkMode ? noDataImageDark : noDataImageLight}
         />
       </View>
-      <Text small style={{ marginBottom: 48 }}>
-        Your todo list is empty
+      <Text h4 style={{ marginBottom: theme.spacing.sm }}>
+        Your list is empty
+      </Text>
+      <Text small style={{ marginBottom: 96, color: theme.colors.grey3 }}>
+        Tap &quot; + &quot; button to add new list
       </Text>
     </View>
   );
 }
 
-export default TodoEmptyMessage;
+export default TodoEmptyScreen;

@@ -11,9 +11,9 @@ import BaseSearchBar from '../../components/bases/BaseSearchBar';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import ArticleCard from '../../components/cards/ArticleCard';
 import PlaylistCard from '../../components/cards/PlaylistCard';
-import ArticleCardPlaceholder from '../../components/loading/ArticleCardPlaceholder';
-import PlaylistCardPlaceholder from '../../components/loading/PlaylistCardPlaceholder';
-import RefreshControl from '../../components/loading/RefreshControl';
+import ArticleCardPlaceholder from '../../components/placeholder/ArticleCardPlaceholder';
+import PlaylistCardPlaceholder from '../../components/placeholder/PlaylistCardPlaceholder';
+import RefreshControl from '../../components/placeholder/RefreshControl';
 import SectionTitle from '../../components/SectionTitle';
 import getArticles from '../../services/api/news';
 import {

@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/78d64a9e-b2e7-4f52-9684-5009b95981e7"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -21,6 +22,7 @@
       "buildNumber": "1.0.0",
       "bundleIdentifier": "com.erickkartiadi.lyself"
     },
+
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -36,7 +38,7 @@
         "projectId": "78d64a9e-b2e7-4f52-9684-5009b95981e7"
       }
     },
-
+    "jsEngine": "hermes",
     "plugins": [
       [
         "./utils/plugins/withAndroidColorEdgeEffect",
@@ -44,8 +46,10 @@
           "color": "#F55C7A"
         }
       ]
-    ]
+    ],
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   },
-
   "name": "lyself"
 }

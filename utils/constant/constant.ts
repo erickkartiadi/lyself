@@ -89,7 +89,7 @@ const ACTIVITY_ICON: {
   },
 };
 
-const TODO_IMPORTANCE_COLORS: { [key: string]: keyof Colors } = {
+const IMPORTANCE_COLORS: { [key: string]: keyof Colors } = {
   high: 'error',
   medium: 'warning',
   low: 'blue',
@@ -122,5 +122,5 @@ export {
   DAYS,
   MONTHS,
   SPECIALTIES,
-  TODO_IMPORTANCE_COLORS,
+  IMPORTANCE_COLORS as TODO_IMPORTANCE_COLORS,
 };
