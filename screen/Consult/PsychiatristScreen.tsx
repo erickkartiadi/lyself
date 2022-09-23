@@ -1,4 +1,4 @@
-import { Button, Text, useTheme } from '@rneui/themed';
+import { FAB, Text, useTheme } from '@rneui/themed';
 import colorAlpha from 'color-alpha';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
@@ -14,7 +14,7 @@ import EducationCard from '../../components/consult/EducationCard';
 import ReviewCard from '../../components/consult/ReviewCard';
 import SectionTitle from '../../components/SectionTitle';
 import ShowHideText from '../../components/ShowHideText';
-import { styles } from '../../theme/styles';
+import { BORDER_RADIUS, GUTTER_SIZE, styles } from '../../theme/styles';
 import { PsychiatristScreenNavigationProps } from '../../types/navigation.types';
 import { Education, Review } from '../../types/types';
 
@@ -254,9 +254,13 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
           </View>
         </View>
       </ScrollView>
-      <View style={[styles.containerGutter, styles.section]}>
-        <Button fullWidth>Make appointment</Button>
-      </View>
+      <FAB
+        color={theme.colors.primary}
+        title="Make appointment"
+        buttonStyle={{ borderRadius: BORDER_RADIUS.rounded }}
+        containerStyle={{ flex: 1, elevation: 0, padding: GUTTER_SIZE }}
+        style={{ position: 'absolute', bottom: 0 }}
+      />
     </View>
   );
 }

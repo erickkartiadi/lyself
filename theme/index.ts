@@ -123,6 +123,15 @@ const myTheme = createTheme({
       size: 'lg',
       uppercase: true,
     }),
+    FAB: {
+      titleStyle: {
+        fontFamily: FONT_FAMILY.medium,
+        fontWeight: '500',
+        fontSize: FONT_SIZE.body2,
+        letterSpacing: normalize(1.25),
+      },
+      upperCase: true,
+    },
     Dialog: {
       overlayStyle: {
         borderRadius: BORDER_RADIUS.md,

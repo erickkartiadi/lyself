@@ -157,7 +157,6 @@ function TodoBottomSheet({
           </View>
           {isButtonVisible && (
             <View style={{ flexDirection: 'row', marginTop: theme.spacing.xl }}>
-              {/* TODO add delete function */}
               {isEditing && (
                 <Button
                   radius="md"
