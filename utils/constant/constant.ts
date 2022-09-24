@@ -66,7 +66,7 @@ const ACTIVITY_ICON: {
   diagnose: {
     type: 'font-awesome-5',
     name: 'diagnoses',
-    color: 'yellow',
+    color: 'warning',
     iconSize: 26,
   },
   music: {

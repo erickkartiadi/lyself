@@ -1,13 +1,10 @@
-import { FAB, Text, useTheme } from '@rneui/themed';
-import colorAlpha from 'color-alpha';
+import { Chip, FAB, Icon, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
 import { View } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 import BaseAvatar from '../../components/bases/BaseAvatar';
-import BaseIcon from '../../components/bases/BaseIcon';
-import BaseLabel from '../../components/bases/BaseLabel';
 import BaseLink from '../../components/bases/BaseLink';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import EducationCard from '../../components/consult/EducationCard';
@@ -17,6 +14,7 @@ import ShowHideText from '../../components/ShowHideText';
 import { BORDER_RADIUS, GUTTER_SIZE, styles } from '../../theme/styles';
 import { PsychiatristScreenNavigationProps } from '../../types/navigation.types';
 import { Education, Review } from '../../types/types';
+import colorAlpha from '../../utils/colorAlpha';
 
 function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
   const {
@@ -49,10 +47,10 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
     <View style={{ flex: 1 }}>
       <ScrollView
         overScrollMode="never"
-        contentContainerStyle={[styles.containerGutter]}
+        contentContainerStyle={[styles.containerGutter, { paddingBottom: 64 }]}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.section}>
+        <View style={styles.sectionLarge}>
           <BaseAvatar
             source={{ uri }}
             size={7}
@@ -61,9 +59,7 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
           />
           <View>
             <Text h2>{name}</Text>
-            <Text subtitle style={{ color: theme.colors.grey3 }}>
-              {specialty}
-            </Text>
+            <Text color={theme.colors.grey3}>{specialty}</Text>
           </View>
           <View
             style={{
@@ -76,21 +72,24 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginRight: theme.spacing.xl * 1.5,
+                marginRight: theme.spacing.xl,
               }}
             >
-              <BaseIcon
-                width={36}
-                size={22}
-                type="ionicon"
+              <Icon
                 name="heart"
-                backgroundColor={colorAlpha(theme.colors.primary, 0.25)}
+                type="ionicon"
+                size={22}
                 color={theme.colors.primary}
-                containerStyle={{ marginRight: theme.spacing.md }}
+                containerStyle={{
+                  padding: theme.spacing.md,
+                  borderRadius: BORDER_RADIUS.rounded,
+                  marginRight: theme.spacing.md,
+                  backgroundColor: colorAlpha(theme.colors.primary, 0.25),
+                }}
               />
               <View>
-                <Text subtitle>{`${rating}%`}</Text>
-                <Text small style={{ color: theme.colors.grey3 }}>
+                <Text subtitle2>{`${rating}%`}</Text>
+                <Text caption color={theme.colors.grey3}>
                   rating
                 </Text>
               </View>
@@ -99,21 +98,24 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginRight: theme.spacing.xl * 1.5,
+                marginRight: theme.spacing.xl,
               }}
             >
-              <BaseIcon
-                width={36}
-                size={18}
-                type="ionicon"
-                name="briefcase"
-                backgroundColor={colorAlpha(theme.colors.warning, 0.25)}
+              <Icon
+                name="work"
+                type="material-icon"
+                size={22}
                 color={theme.colors.warning}
-                containerStyle={{ marginRight: theme.spacing.md }}
+                containerStyle={{
+                  padding: theme.spacing.md,
+                  borderRadius: BORDER_RADIUS.rounded,
+                  marginRight: theme.spacing.md,
+                  backgroundColor: colorAlpha(theme.colors.warning, 0.25),
+                }}
               />
               <View>
-                <Text subtitle>{`${experience} yrs`}</Text>
-                <Text small style={{ color: theme.colors.grey3 }}>
+                <Text subtitle2>{`${experience} yrs`}</Text>
+                <Text caption color={theme.colors.grey3}>
                   experience
                 </Text>
               </View>
@@ -122,27 +124,31 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
+                marginRight: theme.spacing.xl,
               }}
             >
-              <BaseIcon
-                width={36}
-                size={22}
-                type="ionicon"
+              <Icon
                 name="people"
-                backgroundColor={colorAlpha(theme.colors.blue, 0.25)}
+                type="ionicon"
+                size={22}
                 color={theme.colors.blue}
-                containerStyle={{ marginRight: theme.spacing.md }}
+                containerStyle={{
+                  padding: theme.spacing.md,
+                  borderRadius: BORDER_RADIUS.rounded,
+                  marginRight: theme.spacing.md,
+                  backgroundColor: colorAlpha(theme.colors.blue, 0.25),
+                }}
               />
               <View>
-                <Text subtitle>{patients}</Text>
-                <Text small style={{ color: theme.colors.grey3 }}>
+                <Text subtitle2>{`${patients}`}</Text>
+                <Text caption color={theme.colors.grey3}>
                   patients
                 </Text>
               </View>
             </View>
           </View>
         </View>
-        <View style={styles.section}>
+        <View style={styles.sectionLarge}>
           <View style={styles.sectionMedium}>
             <SectionTitle title="About me" />
             <ShowHideText>{description}</ShowHideText>
@@ -153,11 +159,8 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
               horizontal
               overScrollMode="never"
               ItemSeparatorComponent={BaseViewSeparator}
-              style={[styles.noContainerGutter, styles.flatListHorizontal]}
-              contentContainerStyle={[
-                styles.containerGutter,
-                styles.flatListHorizontalContainer,
-              ]}
+              style={[styles.noContainerGutter]}
+              contentContainerStyle={[styles.containerGutter]}
               showsHorizontalScrollIndicator={false}
               data={reviews}
               renderItem={renderReview}
@@ -195,7 +198,16 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
                     value !== specialty && array.indexOf(value) === index
                 )
                 .map((each) => (
-                  <BaseLabel key={each}>{each}</BaseLabel>
+                  <Chip
+                    title={each}
+                    key={each}
+                    color={theme.colors.cardBackground}
+                    titleStyle={{ color: theme.colors.black }}
+                    containerStyle={{
+                      marginRight: theme.spacing.md,
+                      marginBottom: theme.spacing.md,
+                    }}
+                  />
                 ))}
             </View>
           </View>

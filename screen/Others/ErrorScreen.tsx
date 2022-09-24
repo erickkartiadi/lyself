@@ -28,7 +28,7 @@ function ErrorScreen() {
         <Text h4 style={{ marginBottom: theme.spacing.sm }}>
           Something went wrong
         </Text>
-        <Text small style={{ marginBottom: 96, color: theme.colors.grey3 }}>
+        <Text small color={theme.colors.grey3} style={{ marginBottom: 96 }}>
           Please try again later
         </Text>
       </View>

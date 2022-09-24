@@ -56,10 +56,10 @@ function ProgressActivityCard({ activity, id, progress, time, title }: ProgressA
               justifyContent: 'space-between',
             }}
           >
-            <Text caption style={{ color: activityColor }}>
+            <Text caption color={activityColor}>
               {`${progress}%`}
             </Text>
-            <Text caption style={{ color: theme.colors.grey3 }}>
+            <Text caption color={theme.colors.grey3}>
               {time}
             </Text>
           </View>

@@ -16,7 +16,6 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
 
   const backgroundColor = isSelected ? theme.colors.primary : theme.colors.cardBackground;
 
-  // TODO disable already registered date
   return (
     <View style={{ width: '20%' }}>
       <Button

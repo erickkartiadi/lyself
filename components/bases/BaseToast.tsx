@@ -1,4 +1,4 @@
-import { IconProps, useTheme } from '@rneui/themed';
+import { Icon, IconProps, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import { Dimensions, View } from 'react-native';
 import {
@@ -13,15 +13,13 @@ import {
   GUTTER_SIZE,
   styles,
 } from '../../theme/styles';
-import BaseIcon from './BaseIcon';
 
 interface BaseToastProps extends RNToastProps {
   color: string;
-  iconName: IconProps['name'];
-  iconType: IconProps['type'];
+  icon: Pick<IconProps, 'name' | 'type'>;
 }
 
-function BaseToast({ color, iconName, iconType, ...rest }: BaseToastProps) {
+function BaseToast({ color, icon: { name, type }, ...rest }: BaseToastProps) {
   const { theme } = useTheme();
 
   return (
@@ -51,13 +49,17 @@ function BaseToast({ color, iconName, iconType, ...rest }: BaseToastProps) {
       }}
       renderLeadingIcon={() => (
         <View style={{ justifyContent: 'center' }}>
-          <BaseIcon
-            size={20}
-            width={30}
-            name={iconName}
-            type={iconType}
+          <Icon
+            size={22}
+            name={name}
+            type={type}
             backgroundColor={color}
-            containerStyle={{ borderRadius: BORDER_RADIUS.rounded }}
+            iconStyle={{
+              padding: theme.spacing.sm,
+            }}
+            containerStyle={{
+              borderRadius: BORDER_RADIUS.rounded,
+            }}
             color={theme.colors.white}
           />
         </View>
@@ -71,8 +73,10 @@ function SuccessToast({ ...rest }: RNToastProps) {
 
   return (
     <BaseToast
-      iconName="checkmark-sharp"
-      iconType="ionicon"
+      icon={{
+        name: 'checkmark',
+        type: 'ionicon',
+      }}
       color={theme.colors.success}
       {...rest}
     />
@@ -84,8 +88,10 @@ function ErrorToast({ ...rest }: RNToastProps) {
 
   return (
     <BaseToast
-      iconName="close-sharp"
-      iconType="ionicon"
+      icon={{
+        name: 'close',
+        type: 'material-community',
+      }}
       color={theme.colors.error}
       {...rest}
     />
@@ -97,8 +103,10 @@ function InfoToast({ ...rest }: RNToastProps) {
 
   return (
     <BaseToast
-      iconName="information-sharp"
-      iconType="ionicon"
+      icon={{
+        name: 'information',
+        type: 'ionicon',
+      }}
       color={theme.colors.blue}
       {...rest}
     />

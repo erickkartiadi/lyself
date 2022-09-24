@@ -61,7 +61,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.containerGutter, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
@@ -133,7 +133,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         </Button>
         <View
           style={[
-            styles.section,
+            styles.sectionLarge,
             {
               flexDirection: 'row',
               justifyContent: 'center',

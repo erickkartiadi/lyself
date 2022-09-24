@@ -118,7 +118,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           }}
         />
       }
-      contentContainerStyle={[styles.containerGutter, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
     >
       <BaseSearchBar placeholder="Search tools, news or forum" />
       <View
@@ -165,7 +165,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           onPress={() => navigation.navigate('InDevelopment')}
         />
       </View>
-      <View style={styles.section}>
+      <View style={styles.sectionLarge}>
         <SectionTitle title="Articles about mental health" showRightComponent />
         <FlatList
           overScrollMode="never"
@@ -173,16 +173,13 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           ListEmptyComponent={renderEmptyArticles}
           ItemSeparatorComponent={BaseViewSeparator}
           showsHorizontalScrollIndicator={false}
-          style={[styles.noContainerGutter, styles.flatListHorizontal]}
-          contentContainerStyle={[
-            styles.containerGutter,
-            styles.flatListHorizontalContainer,
-          ]}
+          style={[styles.noContainerGutter]}
+          contentContainerStyle={[styles.containerGutter]}
           data={articlesQuery.data}
           renderItem={renderArticles}
         />
       </View>
-      <View style={styles.section}>
+      <View style={styles.sectionLarge}>
         <SectionTitle title="Featured playlist" />
         {isSpotifyTokenAvailable ? (
           <FlatList

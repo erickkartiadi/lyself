@@ -1,15 +1,15 @@
-import { Icon, Text, useTheme } from '@rneui/themed';
+import { Icon, IconProps, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { Pressable, PressableProps, View } from 'react-native';
 
 import { BORDER_RADIUS, styles } from '../theme/styles';
-import BaseIcon, { BaseIconProps } from './bases/BaseIcon';
 
-interface SettingMenuProp extends Omit<BaseIconProps, 'width'> {
+interface SettingMenuProp {
   title: string;
   caption?: string;
   onPress?: PressableProps['onPress'];
   rightComponent?: React.ReactNode;
+  icon: Pick<IconProps, 'type' | 'name' | 'backgroundColor'>;
 }
 
 function SettingMenu({
@@ -17,9 +17,7 @@ function SettingMenu({
   rightComponent,
   caption,
   onPress,
-  backgroundColor,
-  type,
-  name,
+  icon: { backgroundColor, type, name },
 }: SettingMenuProp) {
   const { theme } = useTheme();
 
@@ -32,7 +30,7 @@ function SettingMenu({
           width: '100%',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingVertical: theme.spacing.lg,
+          paddingVertical: theme.spacing.md,
         },
       ]}
       android_ripple={{ color: theme.colors.grey4 }}
@@ -48,19 +46,23 @@ function SettingMenu({
         ]}
       >
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <BaseIcon
+          <Icon
             backgroundColor={backgroundColor}
-            color={theme.colors.white}
-            size={18}
-            width={32}
-            containerStyle={{
-              marginRight: theme.spacing.lg,
-              borderRadius: BORDER_RADIUS.md,
-            }}
-            type={type}
             name={name}
+            type={type}
+            color={theme.colors.white}
+            size={16}
+            iconStyle={{
+              padding: theme.spacing.md,
+              borderRadius: BORDER_RADIUS.rounded,
+            }}
+            containerStyle={{
+              marginRight: theme.spacing.xl,
+            }}
           />
-          <Text>{title}</Text>
+          <Text subtitle2 color={theme.colors.grey1}>
+            {title}
+          </Text>
         </View>
         <View
           style={{
@@ -69,15 +71,12 @@ function SettingMenu({
         >
           {rightComponent || (
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ color: theme.colors.grey3 }} caption>
-                {caption}
-              </Text>
+              <Text caption>{caption}</Text>
               <Icon
-                size={20}
+                size={18}
                 containerStyle={{ marginLeft: theme.spacing.sm }}
-                color={theme.colors.grey3}
                 type="ionicon"
-                name="chevron-forward-outline"
+                name="chevron-forward"
               />
             </View>
           )}

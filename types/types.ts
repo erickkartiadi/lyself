@@ -75,7 +75,6 @@ type Psychiatrist = {
   reviews: Review[];
   specialty: Specialties;
 
-  // TODO change patients to Patient[]
   patients: number;
 };
 

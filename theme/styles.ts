@@ -4,8 +4,9 @@ import {
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
 import { lightColors, normalize } from '@rneui/themed';
-import colorAlpha from 'color-alpha';
 import { StyleProp, StyleSheet, TextStyle } from 'react-native';
+
+import colorAlpha from '../utils/colorAlpha';
 
 const THEME_SPACING = {
   xs: 2,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   noContainerGutter: {
     marginHorizontal: GUTTER_SIZE * -1,
   },
-  section: {
+  sectionLarge: {
     paddingVertical: THEME_SPACING.xl,
   },
   sectionMedium: {
@@ -47,14 +48,6 @@ const styles = StyleSheet.create({
   },
   sectionSmall: {
     paddingVertical: THEME_SPACING.md,
-  },
-
-  // fix flatList shadow cut
-  flatListHorizontalContainer: {
-    paddingBottom: THEME_SPACING.xl,
-  },
-  flatListHorizontal: {
-    marginBottom: THEME_SPACING.xl * -1,
   },
 
   // shadow generator -> https://ethercreative.github.io/react-native-shadow-generator/

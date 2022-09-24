@@ -1,5 +1,5 @@
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import { ButtonProps, createTheme, normalize, TextProps } from '@rneui/themed';
+import { ButtonProps, ChipProps, createTheme, normalize, TextProps } from '@rneui/themed';
 
 import {
   BORDER_RADIUS,
@@ -76,6 +76,9 @@ const myTheme = createTheme({
         paddingVertical: THEME_SPACING.md,
       },
     },
+    Icon: {
+      containerStyle: { aspectRatio: 1 },
+    },
     Text: (props: TextProps) => ({
       h1Style: [
         FONT.heading1,
@@ -107,8 +110,10 @@ const myTheme = createTheme({
         props.subtitle2 && FONT.subtitle2,
         props.small && FONT.small,
         props.caption && FONT.caption,
+        { ...(props.color && { color: props.color }) },
       ],
     }),
+
     Button: (props: ButtonProps) => ({
       radius: BORDER_RADIUS.rounded,
       containerStyle: {
@@ -165,6 +170,9 @@ const myTheme = createTheme({
         borderRadius: BORDER_RADIUS.rounded,
       },
     },
+    Chip: (props: ChipProps) => ({
+      titleStyle: props.size === 'md' ? FONT.small : FONT.caption,
+    }),
   },
 });
 

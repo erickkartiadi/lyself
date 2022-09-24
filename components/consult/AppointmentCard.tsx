@@ -1,9 +1,9 @@
 import { Button, Icon, Text, useTheme } from '@rneui/themed';
-import colorAlpha from 'color-alpha';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import React from 'react';
+import React, { useRef } from 'react';
 import { View } from 'react-native';
+import { Modalize } from 'react-native-modalize';
 
 import { BORDER_RADIUS } from '../../theme/styles';
 import { Appointment } from '../../types/types';
@@ -35,9 +35,6 @@ function AppointmentCard({
   const [isCancelDialogVisible, toggleIsCancelDialogVisible] = useToggle(false);
   const [isCancelDialogLoading, toggleIsCancelDialogLoading] = useToggle(false);
 
-  const [isRescheduleBottomSheetVisible, toggleIsRescheduleBottomSheetVisible] =
-    useToggle(false);
-
   const backgroundColor = isNearestAppointment
     ? theme.colors.primary
     : theme.colors.cardBackground;
@@ -68,6 +65,8 @@ function AppointmentCard({
     }, 1000);
   };
 
+  const bottomSheetRef = useRef<Modalize>(null);
+
   return (
     <>
       <BaseCard
@@ -87,19 +86,12 @@ function AppointmentCard({
             containerStyle={{ marginRight: theme.spacing.lg }}
           />
           <View style={{ flex: 1 }}>
-            <Text
-              subtitle
-              style={{
-                color: textColor,
-              }}
-            >
+            <Text subtitle color={textColor}>
               {name}
             </Text>
             <Text
               small
-              style={{
-                color: colorAlpha(textColor, 0.75),
-              }}
+              color={isNearestAppointment ? theme.colors.grey5 : theme.colors.grey3}
             >
               {specialty}
             </Text>
@@ -126,14 +118,14 @@ function AppointmentCard({
               type="ionicon"
               name="calendar"
               size={20}
-              color={colorAlpha(textColor, 0.75)}
+              color={textColor}
               containerStyle={{ marginRight: theme.spacing.md }}
             />
             <Text
               caption
+              color={textColor}
               style={{
                 flex: 1,
-                color: colorAlpha(textColor, 0.75),
                 textAlignVertical: 'center',
               }}
             >
@@ -152,15 +144,10 @@ function AppointmentCard({
               type="ionicon"
               name="time"
               size={20}
-              color={colorAlpha(textColor, 0.75)}
+              color={textColor}
               containerStyle={{ marginRight: theme.spacing.md }}
             />
-            <Text
-              caption
-              style={{
-                color: colorAlpha(textColor, 0.75),
-              }}
-            >
+            <Text caption color={textColor}>
               {`${formattedStartTime} - ${formattedEndTime}`}
             </Text>
           </View>
@@ -245,7 +232,7 @@ function AppointmentCard({
                   <>
                     <BaseViewSeparator spacing="md" />
                     <Button
-                      onPress={() => toggleIsRescheduleBottomSheetVisible(true)}
+                      onPress={() => bottomSheetRef.current?.open()}
                       fullWidth
                       uppercase={false}
                       containerStyle={{ flex: 1 }}
@@ -269,7 +256,7 @@ function AppointmentCard({
         text={
           <Text small>
             Are you sure you want to cancel your appointment with{' '}
-            <Text small style={{ color: theme.colors.primary }}>
+            <Text small color={theme.colors.primary}>
               {name}
             </Text>{' '}
             ?
@@ -277,13 +264,7 @@ function AppointmentCard({
         }
       />
 
-      <RescheduleBottomSheet
-        name={name}
-        date={date}
-        isVisible={isRescheduleBottomSheetVisible}
-        onBackdropPress={() => toggleIsRescheduleBottomSheetVisible(false)}
-        toggleBottomSheetVisible={toggleIsRescheduleBottomSheetVisible}
-      />
+      <RescheduleBottomSheet bottomSheetRef={bottomSheetRef} name={name} />
     </>
   );
 }

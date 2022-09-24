@@ -1,5 +1,4 @@
 import { Avatar, AvatarProps, useTheme } from '@rneui/themed';
-import colorAlpha from 'color-alpha';
 import * as React from 'react';
 
 import { BORDER_RADIUS, GUTTER_SIZE } from '../../theme/styles';
@@ -20,7 +19,7 @@ function BaseAvatar({ size = 3, rounded, containerStyle, ...rest }: BaseAvatarPr
         {
           overflow: 'hidden',
           borderWidth: 0.5,
-          borderColor: colorAlpha(theme.colors.greyOutline, 0.5),
+          borderColor: theme.colors.greyOutline,
           borderRadius: rounded ? BORDER_RADIUS.rounded : BORDER_RADIUS.md,
         },
         containerStyle,

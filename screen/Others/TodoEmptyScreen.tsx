@@ -33,7 +33,7 @@ function TodoEmptyScreen() {
       <Text h4 style={{ marginBottom: theme.spacing.sm }}>
         Your list is empty
       </Text>
-      <Text small style={{ marginBottom: 96, color: theme.colors.grey3 }}>
+      <Text small style={{ marginBottom: 96 }} color={theme.colors.grey3}>
         Tap &quot; + &quot; button to add new list
       </Text>
     </View>

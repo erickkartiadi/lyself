@@ -1,14 +1,17 @@
-import { useTheme } from '@rneui/themed';
+import { Icon, IconProps, useTheme } from '@rneui/themed';
 import React from 'react';
+import { FlexStyle } from 'react-native';
 
+import { BORDER_RADIUS } from '../theme/styles';
 import { ActivityType } from '../types/types';
 import { ACTIVITY_ICON } from '../utils/constant/constant';
-import BaseIcon, { BaseIconProps } from './bases/BaseIcon';
 
 export type ActivityTypeIcon = ActivityType | 'other';
 
-interface ActivityIconProps extends Pick<BaseIconProps, 'containerStyle' | 'width'> {
+interface ActivityIconProps {
   activityType: ActivityTypeIcon;
+  width: FlexStyle['width'];
+  containerStyle: IconProps['containerStyle'];
 }
 
 function ActivityIcon({ activityType, containerStyle, width }: ActivityIconProps) {
@@ -18,14 +21,21 @@ function ActivityIcon({ activityType, containerStyle, width }: ActivityIconProps
   const activityColor = theme.colors[color] as string;
 
   return (
-    <BaseIcon
-      backgroundColor={activityColor}
-      containerStyle={containerStyle}
-      width={width}
+    <Icon
       size={iconSize}
-      type={type}
       name={name}
+      type={type}
       color={theme.colors.white}
+      containerStyle={[
+        {
+          backgroundColor: activityColor,
+          width,
+          borderRadius: BORDER_RADIUS.rounded,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        containerStyle,
+      ]}
     />
   );
 }

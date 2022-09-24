@@ -23,17 +23,14 @@ function RecommendedActivity() {
   );
 
   return (
-    <View style={styles.section}>
+    <View style={styles.sectionLarge}>
       <SectionTitle title="Recommended activity" />
       <FlatList
         horizontal
         overScrollMode="never"
         ItemSeparatorComponent={BaseViewSeparator}
-        style={[styles.noContainerGutter, styles.flatListHorizontal]}
-        contentContainerStyle={[
-          styles.containerGutter,
-          styles.flatListHorizontalContainer,
-        ]}
+        style={[styles.noContainerGutter]}
+        contentContainerStyle={[styles.containerGutter]}
         showsHorizontalScrollIndicator={false}
         data={recommendedData}
         renderItem={renderRecommended}

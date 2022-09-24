@@ -16,8 +16,8 @@ export async function deleteTodo(id: string): Promise<Todo[]> {
   return res.data.todos;
 }
 
-export async function updateTodo({ id, ...others }: UpdateTodoDto): Promise<Todo[]> {
-  const res = await apiClient.patch(`/todo/${id}`, others);
+export async function updateTodo({ id, ...rest }: UpdateTodoDto): Promise<Todo[]> {
+  const res = await apiClient.patch(`/todo/${id}`, rest);
 
   return res.data.todos;
 }

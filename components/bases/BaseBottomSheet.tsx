@@ -1,57 +1,38 @@
-import { BottomSheet, BottomSheetProps, Text, useTheme } from '@rneui/themed';
+import { useTheme } from '@rneui/themed';
 import * as React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { Modalize, ModalizeProps } from 'react-native-modalize';
+import { IHandles } from 'react-native-modalize/lib/options';
+import { Portal } from 'react-native-portalize';
 
-import { styles } from '../../theme/styles';
+import colorAlpha from '../../utils/colorAlpha';
 
-export interface BaseBottomSheetProps extends BottomSheetProps, React.PropsWithChildren {
-  headerTitle?: string;
-  containerStyle?: StyleProp<ViewStyle>;
-  toggleBottomSheetVisible: (state?: boolean) => void;
+export interface BaseBottomSheetProps extends ModalizeProps {
+  bottomSheetRef: React.RefObject<IHandles>;
 }
 
 function BaseBottomSheet({
-  headerTitle,
   children,
-  containerStyle,
-  toggleBottomSheetVisible,
+  bottomSheetRef,
+  modalStyle,
   ...rest
 }: BaseBottomSheetProps) {
   const { theme } = useTheme();
 
   return (
-    <BottomSheet {...rest}>
-      <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: theme.colors.background,
-            paddingTop: theme.spacing.md,
-            paddingBottom: theme.spacing.xl,
-          },
-          containerStyle,
-        ]}
+    <Portal>
+      <Modalize
+        ref={bottomSheetRef}
+        closeOnOverlayTap
+        adjustToContentHeight
+        overlayStyle={{ backgroundColor: colorAlpha(theme.colors.grey3, 0.5) }}
+        handleStyle={{ backgroundColor: theme.colors.background }}
+        modalStyle={[{ backgroundColor: theme.colors.background }, modalStyle]}
+        {...rest}
       >
-        {headerTitle !== '' && (
-          <Text
-            subtitle
-            style={{
-              marginTop: theme.spacing.md,
-            }}
-          >
-            {headerTitle}
-          </Text>
-        )}
-
         {children}
-      </View>
-    </BottomSheet>
+      </Modalize>
+    </Portal>
   );
 }
-
-BaseBottomSheet.defaultProps = {
-  headerTitle: '',
-  containerStyle: {},
-};
 
 export default BaseBottomSheet;

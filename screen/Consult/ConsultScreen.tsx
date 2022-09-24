@@ -49,13 +49,13 @@ function ConsultScreen() {
     <FlatList
       data={psychiatristData}
       renderItem={renderTopPsychiatrist}
-      contentContainerStyle={[styles.containerGutter, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
       ListHeaderComponent={
         <>
           <BaseSearchBar placeholder="Find a psychiatrist" />
 
           {upcomingAppointmentData.length > 0 && (
-            <View style={styles.section}>
+            <View style={styles.sectionLarge}>
               <SectionTitle
                 title="Upcoming Appointment"
                 showRightComponent
@@ -64,7 +64,7 @@ function ConsultScreen() {
               <AppointmentCard {...upcomingAppointmentData[0]} isNearestAppointment />
             </View>
           )}
-          <View style={{ marginTop: styles.section.paddingVertical }}>
+          <View style={{ marginTop: styles.sectionLarge.paddingVertical }}>
             <SectionTitle title="Top Psychiatrist" />
           </View>
         </>

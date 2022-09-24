@@ -44,11 +44,11 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
             marginTop: theme.spacing.sm,
           }}
         >
-          <Text caption style={{ color: theme.colors.grey3 }}>
+          <Text caption color={theme.colors.grey3}>
             {source}
           </Text>
           <Icon type="entypo" name="dot-single" color={theme.colors.grey3} />
-          <Text caption style={{ color: theme.colors.grey3 }}>
+          <Text caption color={theme.colors.grey3}>
             {formatTimeAgo(publishedAt)}
           </Text>
         </View>

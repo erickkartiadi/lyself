@@ -62,7 +62,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.containerGutter, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
@@ -138,7 +138,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
         </Button>
         <View
           style={[
-            styles.section,
+            styles.sectionLarge,
             {
               flexDirection: 'row',
               justifyContent: 'center',

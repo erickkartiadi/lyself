@@ -19,12 +19,7 @@ function BackButton() {
         paddingHorizontal: theme.spacing.md,
       }}
     >
-      <Icon
-        size={18}
-        name="arrow-back-outline"
-        type="ionicon"
-        containerStyle={{ aspectRatio: 1, padding: 0 }}
-      />
+      <Icon size={20} name="arrow-back-outline" type="ionicon" />
     </Button>
   );
 }

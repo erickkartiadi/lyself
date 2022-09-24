@@ -17,15 +17,9 @@ import SectionTitle from '../SectionTitle';
 import DateOption from './DateOption';
 import TimeOption from './TimeOption';
 
-type RescheduleBottomSheetProps = Pick<Appointment, 'name' | 'date'> &
-  BaseBottomSheetProps;
+type RescheduleBottomSheetProps = Pick<Appointment, 'name'> & BaseBottomSheetProps;
 
-function RescheduleBottomSheet({
-  toggleBottomSheetVisible,
-  name,
-  date,
-  ...rest
-}: RescheduleBottomSheetProps) {
+function RescheduleBottomSheet({ name, bottomSheetRef }: RescheduleBottomSheetProps) {
   const { theme } = useTheme();
   const [data, setData] = React.useState(scheduleData);
   const todayMonthIndex = dayjs().get('month');
@@ -84,8 +78,11 @@ function RescheduleBottomSheet({
 
   return (
     <>
-      <BaseBottomSheet toggleBottomSheetVisible={toggleBottomSheetVisible} {...rest}>
-        <View style={styles.section}>
+      <BaseBottomSheet
+        modalStyle={styles.containerGutter}
+        bottomSheetRef={bottomSheetRef}
+      >
+        <View style={styles.sectionLarge}>
           <SectionTitle
             title="Schedule"
             showRightComponent
@@ -114,12 +111,8 @@ function RescheduleBottomSheet({
               horizontal
               ItemSeparatorComponent={BaseViewSeparator}
               renderItem={renderDateOption}
-              style={[styles.noContainerGutter, styles.flatListHorizontal]}
-              contentContainerStyle={[
-                styles.containerGutter,
-                styles.flatListHorizontalContainer,
-                styles.sectionSmall,
-              ]}
+              style={[styles.noContainerGutter]}
+              contentContainerStyle={[styles.containerGutter]}
             />
           ) : (
             <View
@@ -138,14 +131,14 @@ function RescheduleBottomSheet({
               >
                 <Image style={{ flex: 1, width: '100%' }} source={emptyIllustration} />
               </View>
-              <Text caption style={{ color: theme.colors.grey3 }}>
+              <Text caption color={theme.colors.grey3}>
                 There&apos;s no schedule on {selectedMonth}
               </Text>
             </View>
           )}
         </View>
         {selectedDateIndex >= 0 && data.length > 0 && (
-          <View style={styles.section}>
+          <View style={styles.sectionLarge}>
             <SectionTitle title="Available Hours" />
             <View
               style={[
@@ -178,7 +171,7 @@ function RescheduleBottomSheet({
               <Button
                 fullWidth
                 onPress={() => {
-                  toggleBottomSheetVisible(false);
+                  bottomSheetRef.current?.close();
                   toggleIsRescheduleDialogVisible(true);
                 }}
               >
@@ -199,7 +192,7 @@ function RescheduleBottomSheet({
             Are you sure want to reschedule your appointment with{' '}
             <Text small>{name}</Text> to{' '}
             {data.length > 0 && selectedDateIndex >= 0 && (
-              <Text small style={{ color: theme.colors.primary }}>
+              <Text small color={theme.colors.primary}>
                 {dayjs(data[selectedDateIndex]?.date).format('MMMM DD, ')}
                 {dayjs({
                   hour: data[selectedDateIndex]?.availableHours[selectedTimeIndex],

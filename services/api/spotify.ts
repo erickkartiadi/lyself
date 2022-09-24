@@ -58,6 +58,7 @@ type SpotifyPlaylist = {
     type: string;
     uri: string;
   };
+  tracks: SpotifyTrack;
   public: boolean;
   snapshot_id: string;
   type: string;

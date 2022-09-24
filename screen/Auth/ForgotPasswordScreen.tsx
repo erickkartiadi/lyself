@@ -56,7 +56,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.containerGutter, styles.section]}
+      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />

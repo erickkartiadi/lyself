@@ -1,18 +1,17 @@
 import { Button, CheckBox, useTheme } from '@rneui/themed';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Modalize } from 'react-native-modalize';
 
 import BaseBottomSheet from '../../components/bases/BaseBottomSheet';
 import GraphScore from '../../components/widget/GraphScore';
 import Progress from '../../components/widget/Progress';
 import RecommendedActivity from '../../components/widget/RecommendedActivity';
 import { styles } from '../../theme/styles';
-import useToggle from '../../utils/hooks/useToggle';
 
 function HomeScreen() {
   const { theme } = useTheme();
-  const [isBottomSheetVisible, toggleIsBottomSheetVisible] = useToggle(false);
   const [activeWidgets, setActiveWidgets] = useState([
     {
       no: 1,
@@ -34,6 +33,8 @@ function HomeScreen() {
     },
   ]);
 
+  const bottomSheetRef = useRef<Modalize>(null);
+
   const handleEditWidget = (no: number) => {
     setActiveWidgets((prevState) =>
       prevState.map((widget) =>
@@ -43,9 +44,9 @@ function HomeScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={[styles.containerGutter, styles.section]}>
+    <ScrollView contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}>
       {activeWidgets.map(({ no, active, Widget }) => active && <Widget key={no} />)}
-      <View style={styles.section}>
+      <View style={styles.sectionLarge}>
         <Button
           fullWidth
           color="primary"
@@ -55,20 +56,16 @@ function HomeScreen() {
             name: 'edit',
             color: 'white',
           }}
-          onPress={() => toggleIsBottomSheetVisible()}
+          onPress={() => bottomSheetRef.current?.open()}
         >
           Edit Widget
         </Button>
       </View>
-
       <BaseBottomSheet
-        modalProps={{}}
-        toggleBottomSheetVisible={toggleIsBottomSheetVisible}
-        isVisible={isBottomSheetVisible}
-        onBackdropPress={toggleIsBottomSheetVisible}
-        headerTitle="Widgets"
+        bottomSheetRef={bottomSheetRef}
+        modalStyle={[styles.containerGutter]}
       >
-        <View style={{ marginVertical: theme.spacing.md }}>
+        <View style={styles.sectionLarge}>
           {activeWidgets.map(({ no, label, active }) => (
             <CheckBox
               key={no}
@@ -78,7 +75,12 @@ function HomeScreen() {
             />
           ))}
         </View>
-        <Button fullWidth title="Done" onPress={() => toggleIsBottomSheetVisible()} />
+        <Button
+          containerStyle={{ marginBottom: theme.spacing.xl }}
+          fullWidth
+          title="Done"
+          onPress={() => bottomSheetRef.current?.close()}
+        />
       </BaseBottomSheet>
     </ScrollView>
   );

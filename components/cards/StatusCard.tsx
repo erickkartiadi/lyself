@@ -26,7 +26,7 @@ function StatusCard({ title, caption, value, textColor, icon }: StatusCardProps)
         }}
       >
         <View>
-          <Text h2 h2Style={{ color: textColor, marginBottom: 0 }}>
+          <Text h2 color={textColor} h2Style={{ marginBottom: 0 }}>
             {value}
           </Text>
           <Text caption>{caption}</Text>

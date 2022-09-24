@@ -23,7 +23,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
       <SafeAreaView>
         <View
           style={[
-            styles.section,
+            styles.sectionLarge,
             {
               flex: 1,
               minHeight: Dimensions.get('window').height,
@@ -51,21 +51,21 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
           <View style={[styles.container]}>
             <Text
               style={[
-                styles.section,
+                styles.sectionLarge,
                 {
                   textAlign: 'center',
                 },
               ]}
             >
               <Text h1>Start your mental health journey with</Text>
-              <Text h1 h1Style={{ color: theme.colors.primary }}>
+              <Text h1 color={theme.colors.primary}>
                 {' '}
                 Lyself
               </Text>
             </Text>
             <View
               style={[
-                styles.section,
+                styles.sectionLarge,
                 {
                   flex: 1,
                   justifyContent: 'center',
@@ -175,7 +175,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
           </View>
           <View
             style={[
-              styles.section,
+              styles.sectionLarge,
               {
                 flexDirection: 'row',
                 justifyContent: 'center',

@@ -51,7 +51,7 @@ function ReviewCard({ uri, name, review, time }: Review) {
             <Text small style={{ fontFamily: 'Inter-Medium' }}>
               {name}
             </Text>
-            <Text caption style={{ color: theme.colors.grey3 }}>
+            <Text caption color={theme.colors.grey3}>
               {time}
             </Text>
           </View>

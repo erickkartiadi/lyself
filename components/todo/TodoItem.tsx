@@ -1,6 +1,5 @@
-import { Icon, ListItem, Text, useTheme } from '@rneui/themed';
+import { Chip, ListItem, Text, useTheme } from '@rneui/themed';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import colorAlpha from 'color-alpha';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
@@ -8,11 +7,12 @@ import { Modalize } from 'react-native-modalize';
 import { useDebounce } from 'use-debounce';
 
 import { deleteTodo, updateTodo } from '../../services/api/lyself/todo';
-import { BORDER_RADIUS } from '../../theme/styles';
 import { Todo } from '../../types/types';
+import colorAlpha from '../../utils/colorAlpha';
 import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
 import useToggle from '../../utils/hooks/useToggle';
+import { somethingWentWrongToast } from '../../utils/toast';
 import TodoBottomSheet, { TodoFormData } from './TodoBottomSheet';
 import TodoCheckbox from './TodoCheckbox';
 import TodoSwipeableRight from './TodoSwipeableRight';
@@ -54,15 +54,18 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     if (todoFormData.todo === '') {
       deleteMutation.mutate(id);
     }
-
-    await updateMutation.mutateAsync({
-      id,
-      completed: isCompleted,
-      importanceLevel: currentImportanceLevel,
-      reminderTime: currentReminderTime,
-      note: todoFormData.note,
-      todo: todoFormData.todo,
-    });
+    try {
+      await updateMutation.mutateAsync({
+        id,
+        completed: isCompleted,
+        importanceLevel: currentImportanceLevel,
+        reminderTime: currentReminderTime,
+        note: todoFormData.note,
+        todo: todoFormData.todo,
+      });
+    } catch (error) {
+      if (error) somethingWentWrongToast();
+    }
 
     bottomSheetRef.current?.close();
   };
@@ -87,7 +90,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     <>
       <ListItem.Swipeable
         android_ripple={{
-          color: colorAlpha(theme.colors.grey3, 0.1),
+          color: colorAlpha(theme.colors.grey4, 0.1),
           foreground: true,
         }}
         leftContent={<TodoSwipeableRight onPress={handleDeleteTodo} />}
@@ -129,28 +132,22 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
               {watch('todo', todo)}
             </Text>
             {!isCompleted && currentReminderTime && (
-              <View
-                style={{
-                  marginTop: theme.spacing.md,
+              <Chip
+                containerStyle={{
                   alignSelf: 'flex-start',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  backgroundColor: theme.colors.cardBackground,
-                  padding: theme.spacing.sm,
-                  borderRadius: BORDER_RADIUS.sm,
+                  marginTop: theme.spacing.md,
                 }}
-              >
-                <Icon
-                  name="notifications-outline"
-                  type="ionicon"
-                  size={16}
-                  color={theme.colors.grey3}
-                  containerStyle={{ marginRight: theme.spacing.md }}
-                />
-                <Text caption style={{ color: theme.colors.grey3 }}>
-                  {formatReminderTime(currentReminderTime)}
-                </Text>
-              </View>
+                color={theme.colors.cardBackground}
+                icon={{
+                  name: 'notifications-outline',
+                  type: 'ionicon',
+                  size: 16,
+                  color: theme.colors.grey3,
+                }}
+                size="sm"
+                titleStyle={{ color: theme.colors.grey3 }}
+                title={formatReminderTime(currentReminderTime)}
+              />
             )}
           </View>
         </View>

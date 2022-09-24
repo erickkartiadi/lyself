@@ -5,7 +5,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import BaseAvatar from '../../components/bases/BaseAvatar';
 import SettingMenu from '../../components/SettingMenu';
-import SwitchModeSettingMenu from '../../components/SwitchModeSettingMenu';
 import { styles } from '../../theme/styles';
 import { user } from '../../utils/constant/seed';
 import { AuthContext } from '../../utils/context/AuthContext';
@@ -19,8 +18,8 @@ function AccountScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={[styles.section]}>
-      <View style={styles.section}>
+    <ScrollView contentContainerStyle={[styles.sectionLarge]}>
+      <View style={styles.sectionLarge}>
         <View
           style={{
             flex: 1,
@@ -38,80 +37,77 @@ function AccountScreen() {
             }}
           />
           <Text h4>{user.name}</Text>
-          <Text caption style={{ color: theme.colors.grey2 }}>
+          <Text caption color={theme.colors.grey3}>
             {user.email}
           </Text>
         </View>
       </View>
       <View style={styles.sectionSmall}>
-        <SwitchModeSettingMenu />
-      </View>
-      <View style={styles.sectionSmall}>
         <SettingMenu
           title="Profile"
-          backgroundColor={theme.colors.blue}
-          name="person"
-          type="ionicon"
+          icon={{ backgroundColor: theme.colors.blue, name: 'person', type: 'ionicon' }}
         />
         <SettingMenu
           title="Notification"
-          backgroundColor={theme.colors.primary}
-          name="notifications"
-          type="ionicon"
+          icon={{
+            backgroundColor: theme.colors.primary,
+            name: 'notifications',
+            type: 'ionicon',
+          }}
         />
         <SettingMenu
           title="Privacy"
-          backgroundColor={theme.colors.purple}
-          name="lock-closed"
-          type="ionicon"
+          icon={{
+            backgroundColor: theme.colors.purple,
+            name: 'lock-closed',
+            type: 'ionicon',
+          }}
         />
       </View>
       <View style={styles.sectionSmall}>
         <SettingMenu
           title="Setting"
-          backgroundColor={theme.colors.grey0}
-          name="settings"
-          type="ionicon"
+          icon={{
+            backgroundColor: theme.colors.grey0,
+            name: 'settings',
+            type: 'ionicon',
+          }}
         />
         <SettingMenu
           title="Security"
-          backgroundColor={theme.colors.grey4}
-          name="shield"
-          type="ionicon"
+          icon={{ backgroundColor: theme.colors.grey4, name: 'shield', type: 'ionicon' }}
         />
         <SettingMenu
           title="Language"
-          backgroundColor={theme.colors.warning}
-          name="globe"
-          type="ionicon"
+          icon={{ backgroundColor: theme.colors.warning, name: 'globe', type: 'ionicon' }}
           caption="English"
         />
       </View>
       <View style={styles.sectionSmall}>
         <SettingMenu
           title="Ask a Question"
-          backgroundColor={theme.colors.primary}
-          name="chatbubbles"
-          type="ionicon"
+          icon={{
+            backgroundColor: theme.colors.primary,
+            name: 'chatbubbles',
+            type: 'ionicon',
+          }}
         />
         <SettingMenu
           title="FAQ"
-          backgroundColor={theme.colors.blue}
-          name="book"
-          type="ionicon"
+          icon={{ backgroundColor: theme.colors.blue, name: 'book', type: 'ionicon' }}
         />
         <SettingMenu
           title="Become Our Partner"
-          backgroundColor={theme.colors.success}
-          name="handshake"
-          type="material-community"
+          icon={{
+            backgroundColor: theme.colors.success,
+            name: 'handshake',
+            type: 'material-community',
+          }}
         />
       </View>
       <SettingMenu
         title="Sign Out"
-        backgroundColor={theme.colors.error}
-        name="log-out"
-        type="ionicon"
+        icon={{ backgroundColor: theme.colors.error, name: 'log-out', type: 'ionicon' }}
         onPress={handleLogout}
       />
     </ScrollView>

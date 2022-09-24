@@ -85,7 +85,7 @@ function GraphScore() {
     },
   ];
   return (
-    <View style={styles.section}>
+    <View style={styles.sectionLarge}>
       <SectionTitle title="Your stats" />
       <MentalScoreCard />
       <View>

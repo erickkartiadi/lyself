@@ -1,17 +1,15 @@
-import { FAB, useTheme } from '@rneui/themed';
+import { FAB, Icon, useTheme } from '@rneui/themed';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FlatList } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
-import BaseIcon from '../../components/bases/BaseIcon';
 import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import RefreshControl from '../../components/placeholder/RefreshControl';
 import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
 import { createTodo, fetchTodos } from '../../services/api/lyself/todo';
-import { styles } from '../../theme/styles';
 import { Todo } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
 import ErrorScreen from '../Others/ErrorScreen';
@@ -89,12 +87,7 @@ function TodoScreen() {
       <FlatList
         overScrollMode="never"
         ItemSeparatorComponent={BaseViewSeparator}
-        style={[styles.noContainerGutter, styles.flatListHorizontal]}
-        contentContainerStyle={[
-          styles.containerGutter,
-          styles.flatListHorizontalContainer,
-          { flexGrow: 1 },
-        ]}
+        contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
         ListEmptyComponent={<TodoEmptyScreen />}
         showsHorizontalScrollIndicator={false}
@@ -105,16 +98,7 @@ function TodoScreen() {
         color={theme.colors.primary}
         placement="right"
         onPress={() => bottomSheetRef.current?.open()}
-        icon={
-          <BaseIcon
-            name="add"
-            type="ionicon"
-            size={28}
-            backgroundColor="transparent"
-            color={theme.colors.white}
-            width={32}
-          />
-        }
+        icon={<Icon name="add" type="ionicon" size={28} color={theme.colors.white} />}
       />
       <TodoBottomSheet
         onSubmit={handleSubmit(handleAddTodo)}

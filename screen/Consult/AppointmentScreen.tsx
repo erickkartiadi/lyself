@@ -68,14 +68,14 @@ function AppointmentScreen() {
           <FlatList
             data={upcomingAppointmentData}
             renderItem={renderUpcomingAppointment}
-            contentContainerStyle={[styles.containerGutter, styles.section]}
+            contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
           />
         </TabView.Item>
         <TabView.Item style={{ width: '100%' }}>
           <FlatList
             data={completedAppointmentData}
             renderItem={renderCompletedAppointment}
-            contentContainerStyle={[styles.containerGutter, styles.section]}
+            contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
           />
         </TabView.Item>
       </TabView>

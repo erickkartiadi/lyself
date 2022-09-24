@@ -8,7 +8,7 @@ import SectionTitle from '../SectionTitle';
 
 function Progress() {
   return (
-    <View style={styles.section}>
+    <View style={styles.sectionLarge}>
       <SectionTitle title="Continue your progress" />
       {progressData.map(({ activity, id, progress, time, title }) => (
         <ProgressActivityCard
