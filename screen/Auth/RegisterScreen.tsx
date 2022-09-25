@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
-import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -12,7 +13,7 @@ import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
-import { register } from '../../services/api/lyself/auth';
+import { register } from '../../services/api/auth/auth.api';
 import { styles } from '../../theme/styles';
 import { RegisterScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
@@ -36,14 +37,8 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
     resolver: yupResolver(registerSchema),
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleRegister = async ({ email, name, password }: RegisterFormData) => {
-    setIsLoading(true);
-
-    try {
-      await register({ email, name, password });
-
+  const mutation = useMutation(register, {
+    onSuccess: ({ email }) => {
       Toast.show({
         type: 'success',
         text1: 'Email confirmation sent',
@@ -52,11 +47,29 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
       navigation.navigate('Login');
 
       reset();
+    },
+  });
+
+  const handleRegister = async (registerFormData: RegisterFormData) => {
+    // setIsLoading(true);
+
+    try {
+      mutation.mutate(registerFormData);
+      // await register({ email, name, password });
+
+      // Toast.show({
+      //   type: 'success',
+      //   text1: 'Email confirmation sent',
+      //   text2: `We have sent you a confirmation email to ${email}, please confirm your email address.`,
+      // });
+      // navigation.navigate('Login');
+
+      // reset();
     } catch (error) {
       if (error) somethingWentWrongToast();
     }
 
-    setIsLoading(false);
+    // setIsLoading(false);
   };
 
   return (
@@ -133,7 +146,11 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             />
           )}
         />
-        <Button loading={isLoading} fullWidth onPress={handleSubmit(handleRegister)}>
+        <Button
+          loading={mutation.isLoading}
+          fullWidth
+          onPress={handleSubmit(handleRegister)}
+        >
           Create Account
         </Button>
         <View

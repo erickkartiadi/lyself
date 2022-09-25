@@ -20,7 +20,6 @@ function SettingMenu({
   icon: { backgroundColor, type, name },
 }: SettingMenuProp) {
   const { theme } = useTheme();
-
   return (
     <Pressable
       style={[
@@ -64,23 +63,22 @@ function SettingMenu({
             {title}
           </Text>
         </View>
-        <View
-          style={{
-            alignItems: 'center',
-          }}
-        >
-          {rightComponent || (
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-              <Text caption>{caption}</Text>
-              <Icon
-                size={18}
-                containerStyle={{ marginLeft: theme.spacing.sm }}
-                type="ionicon"
-                name="chevron-forward"
-              />
-            </View>
-          )}
-        </View>
+        {rightComponent || (
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Text caption>{caption}</Text>
+            <Icon
+              size={18}
+              containerStyle={{ marginLeft: theme.spacing.sm }}
+              type="ionicon"
+              name="chevron-forward"
+            />
+          </View>
+        )}
       </View>
     </Pressable>
   );

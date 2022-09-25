@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
-import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -10,7 +11,7 @@ import Toast from 'react-native-toast-message';
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
-import { forgotPassword } from '../../services/api/lyself/auth';
+import { forgotPassword } from '../../services/api/auth/auth.api';
 import { styles } from '../../theme/styles';
 import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
@@ -20,8 +21,6 @@ import { somethingWentWrongToast } from '../../utils/toast';
 type ForgotPasswordFormData = Pick<User, 'email'>;
 
 function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProps) {
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
-
   const {
     control,
     handleSubmit,
@@ -34,23 +33,29 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
     resolver: yupResolver(forgotPasswordSchema),
   });
 
-  const handleForgotPassword = async (data: ForgotPasswordFormData) => {
-    setIsButtonLoading(true);
-
-    try {
-      await forgotPassword(data.email);
+  const mutation = useMutation(forgotPassword, {
+    onSuccess: ({
+      envelope: {
+        to: [email],
+      },
+    }) => {
       Toast.show({
         type: 'success',
-        text2: `We have sent you a reset password email to ${data.email}. Please check your inbox.`,
+        text1: 'Email sent',
+        text2: `We have sent you a reset password email to ${email}. Please check your inbox.`,
         visibilityTime: 10000,
       });
       navigation.navigate('Login');
       reset();
+    },
+  });
+
+  const handleForgotPassword = async (forgotPasswordFormData: ForgotPasswordFormData) => {
+    try {
+      mutation.mutate(forgotPasswordFormData);
     } catch (error) {
       if (error) somethingWentWrongToast();
     }
-
-    setIsButtonLoading(false);
   };
 
   return (
@@ -98,7 +103,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
           )}
         />
         <Button
-          loading={isButtonLoading}
+          loading={mutation.isLoading}
           fullWidth
           onPress={handleSubmit(handleForgotPassword)}
         >

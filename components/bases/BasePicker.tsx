@@ -43,7 +43,6 @@ function BasePicker({
   return (
     <View style={{ flex: 1 }}>
       <DropDownPicker
-        {...rest}
         listMode="SCROLLVIEW"
         dropDownContainerStyle={[
           styles.shadowMedium,
@@ -85,6 +84,7 @@ function BasePicker({
         listItemLabelStyle={{ textTransform: 'capitalize' }}
         selectedItemLabelStyle={{ color: theme.colors.primary }}
         showTickIcon={false}
+        {...rest}
       />
     </View>
   );

@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text, useTheme } from '@rneui/themed';
-import React, { useContext, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import React, { useContext } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -11,7 +12,7 @@ import BackButton from '../../components/BackButton';
 import TextInput from '../../components/forms/Input';
 import PasswordInput from '../../components/forms/PasswordInput';
 import LinkButton from '../../components/LinkButton';
-import { login } from '../../services/api/lyself/auth';
+import { login } from '../../services/api/auth/auth.api';
 import { styles } from '../../theme/styles';
 import { LoginScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
@@ -23,7 +24,6 @@ type LoginFormData = Omit<User, 'id' | 'name'>;
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
   const authContext = useContext(AuthContext);
 
   const {
@@ -39,23 +39,23 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
     resolver: yupResolver(loginSchema),
   });
 
-  const handleLogin = async ({ email, password }: LoginFormData) => {
-    setIsButtonLoading(true);
-
-    try {
-      const res = await login({ email, password });
-      authContext.login(res.data.access_token);
-
+  const mutation = useMutation(login, {
+    onSuccess: ({ access_token }) => {
+      authContext.login(access_token);
       navigation.navigate('HomeTab', {
         screen: 'Home',
       });
 
       reset();
+    },
+  });
+
+  const handleLogin = async (loginFormData: LoginFormData) => {
+    try {
+      mutation.mutate(loginFormData);
     } catch (error) {
       if (error) somethingWentWrongToast();
     }
-
-    setIsButtonLoading(false);
   };
 
   return (
@@ -128,7 +128,11 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         >
           <LinkButton to={{ screen: 'ForgotPassword' }}>Forgot Password?</LinkButton>
         </View>
-        <Button loading={isButtonLoading} fullWidth onPress={handleSubmit(handleLogin)}>
+        <Button
+          loading={mutation.isLoading}
+          fullWidth
+          onPress={handleSubmit(handleLogin)}
+        >
           Login
         </Button>
         <View

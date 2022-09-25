@@ -12,6 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "jsEngine": "hermes",
+    "primaryColor": "#F55C7A",
+    "platforms": ["android"],
     "updates": {
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/78d64a9e-b2e7-4f52-9684-5009b95981e7"
