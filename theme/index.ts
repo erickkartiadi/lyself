@@ -15,7 +15,7 @@ const lightColors = {
   primaryDark: '#D0385C',
   secondary: '#BD8087',
   background: '#FFFFFF',
-  cardBackground: '#F9FBFC',
+  cardBackground: '#F2F6F9',
   blue: '#00A3FF',
   purple: '#9C5FAE',
   spotify: '#1db954',

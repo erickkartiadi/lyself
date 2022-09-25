@@ -1,52 +1,27 @@
 import { FAB, Icon, useTheme } from '@rneui/themed';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FlatList } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { Modalize } from 'react-native-modalize';
 
-import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
 import RefreshControl from '../../components/placeholder/RefreshControl';
 import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
-import { createTodo, fetchTodos } from '../../services/api/lyself/todo';
+import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks';
+import { styles } from '../../theme/styles';
+import { TodoScreenNavigationProps } from '../../types/navigation.types';
 import { Todo } from '../../types/types';
+import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useToggle from '../../utils/hooks/useToggle';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
 import TodoEmptyScreen from '../Others/TodoEmptyScreen';
 
-const renderTodoList = ({
-  item: { id, importanceLevel, reminderTime, todo, note, completed },
-}: {
-  item: Todo;
-}) => (
-  <TodoItem
-    id={id}
-    note={note}
-    todo={todo}
-    reminderTime={reminderTime}
-    importanceLevel={importanceLevel}
-    completed={completed}
-  />
-);
-
-function TodoScreen() {
+function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   const { theme } = useTheme();
 
-  const queryClient = useQueryClient();
-  const { isLoading, isError, data, isFetching, refetch } = useQuery<Todo[]>(
-    ['todos'],
-    fetchTodos
-  );
-  const mutation = useMutation(createTodo, {
-    onSuccess: (newTodo: Todo) => {
-      queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) => [
-        ...(oldTodos || []),
-        newTodo,
-      ]);
-    },
-  });
+  const { isLoading, isError, data, isFetching, refetch } = useGetTodos();
+  const mutation = useCreateTodo();
 
   const [isCompleted, toggleIsCompleted] = useToggle(false);
   const [newImportanceLevel, setNewImportanceLevel] =
@@ -79,24 +54,32 @@ function TodoScreen() {
     reset();
   };
 
+  // issue: header hide screen after layout animation run
+  // https://github.com/software-mansion/react-native-reanimated/issues/2906
+  // temporary fix by add padding
+  useApplyHeaderWorkaround(navigation.setOptions);
+
   if (isLoading) return <LoadingScreen />;
   if (isError) return <ErrorScreen />;
-
   return (
     <>
-      <FlatList
+      {/* FIXME cannot use FlatList, because exiting animation won't work */}
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
         overScrollMode="never"
-        ItemSeparatorComponent={BaseViewSeparator}
-        contentContainerStyle={{ flexGrow: 1 }}
-        refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
-        ListEmptyComponent={<TodoEmptyScreen />}
         showsHorizontalScrollIndicator={false}
-        data={data}
-        renderItem={renderTodoList}
-      />
+        refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
+        contentContainerStyle={[styles.sectionLarge, { flex: 1 }]}
+      >
+        {data.length <= 0 ? (
+          <TodoEmptyScreen />
+        ) : (
+          data.map((props) => <TodoItem key={props.id} {...props} />)
+        )}
+      </ScrollView>
       <FAB
-        color={theme.colors.primary}
         placement="right"
+        color={theme.colors.primary}
         onPress={() => bottomSheetRef.current?.open()}
         icon={<Icon name="add" type="ionicon" size={28} color={theme.colors.white} />}
       />

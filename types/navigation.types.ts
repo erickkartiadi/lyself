@@ -42,7 +42,7 @@ type GetStartedScreenNavigationProps = NativeStackScreenProps<
 
 type LoginScreenNavigationProps = NativeStackScreenProps<
   AuthStackParamList & RootStackParamList,
-  'AuthStack'
+  'Login'
 >;
 
 type ForgotPasswordScreenNavigationProps = NativeStackScreenProps<
@@ -59,6 +59,7 @@ type ExploreScreenNavigationProps = NativeStackScreenProps<
   HomeTabParamList & RootStackParamList,
   'Explore'
 >;
+type TodoScreenNavigationProps = NativeStackScreenProps<TodoStackParamList, 'Todo'>;
 
 type AccountScreenNavigationProps = NativeStackScreenProps<
   HomeTabParamList & RootStackParamList,
@@ -88,5 +89,6 @@ export {
   PsychiatristScreenNavigationProps,
   RegisterScreenNavigationProps,
   RootStackParamList,
+  TodoScreenNavigationProps,
   TodoStackParamList,
 };

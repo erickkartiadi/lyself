@@ -1,14 +1,21 @@
 import { Chip, ListItem, Text, useTheme } from '@rneui/themed';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
+import Animated, {
+  Layout,
+  LightSpeedInLeft,
+  LightSpeedOutLeft,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import { useDebounce } from 'use-debounce';
 
-import { deleteTodo, updateTodo } from '../../services/api/lyself/todo';
+import { useDeleteTodo, useUpdateTodo } from '../../services/api/todos/todos.hooks';
+import { BORDER_RADIUS, GUTTER_SIZE, styles } from '../../theme/styles';
 import { Todo } from '../../types/types';
-import colorAlpha from '../../utils/colorAlpha';
 import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
 import useToggle from '../../utils/hooks/useToggle';
@@ -31,14 +38,8 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
   const [isCompleted, toggleIsCompleted] = useToggle(completed);
   const [debouncedIsCompleted] = useDebounce(isCompleted, 1000);
 
-  const queryClient = useQueryClient();
-  const deleteMutation = useMutation(deleteTodo, {
-    onSuccess: (todos) => queryClient.setQueriesData(['todos'], todos),
-  });
-
-  const updateMutation = useMutation(updateTodo, {
-    onSuccess: (todos) => queryClient.setQueriesData(['todos'], todos),
-  });
+  const updateMutation = useUpdateTodo();
+  const deleteMutation = useDeleteTodo();
 
   const importanceColor = theme.colors[
     IMPORTANCE_COLORS[currentImportanceLevel]
@@ -70,10 +71,6 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     bottomSheetRef.current?.close();
   };
 
-  const handleDeleteTodo = async () => {
-    deleteMutation.mutate(id);
-  };
-
   // update todo if checkbox has changed for 1 second
   useEffect(() => {
     updateMutation.mutateAsync({
@@ -86,28 +83,61 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     });
   }, [debouncedIsCompleted]);
 
+  const handleDeleteTodo = async () => {
+    deleteMutation.mutate(id);
+  };
+
+  const scaleValue = useSharedValue(1);
+
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [{ scale: scaleValue.value }],
+  }));
+
+  const onPressInAnimation = () => {
+    scaleValue.value = withSpring(0.95);
+  };
+
+  const onPressOutAnimation = () => {
+    scaleValue.value = withSpring(1);
+  };
+
   return (
-    <>
+    <Animated.View
+      layout={Layout.springify()}
+      entering={LightSpeedInLeft}
+      style={animatedStyles}
+      exiting={LightSpeedOutLeft}
+    >
       <ListItem.Swipeable
-        android_ripple={{
-          color: colorAlpha(theme.colors.grey4, 0.1),
-          foreground: true,
-        }}
-        leftContent={<TodoSwipeableRight onPress={handleDeleteTodo} />}
         rightContent={<TodoSwipeableRight onPress={handleDeleteTodo} />}
-        containerStyle={{
-          backgroundColor: theme.colors.background,
-          paddingHorizontal: theme.spacing.xl,
-          paddingVertical: theme.spacing.lg,
-        }}
+        rightWidth={120}
+        containerStyle={[
+          styles.containerGutter,
+          {
+            padding: 0,
+            marginRight: GUTTER_SIZE,
+            borderRadius: BORDER_RADIUS.md,
+            backgroundColor: theme.colors.background,
+            marginBottom: theme.spacing.md,
+          },
+        ]}
+        rightStyle={{ marginBottom: theme.spacing.md }}
+        onPressIn={onPressInAnimation}
+        onPressOut={onPressOutAnimation}
         onPress={showBottomSheet}
       >
         <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'flex-start',
-          }}
+          style={[
+            {
+              marginRight: GUTTER_SIZE * -1,
+              backgroundColor: theme.colors.cardBackground,
+              padding: theme.spacing.xl,
+              borderRadius: BORDER_RADIUS.md,
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'flex-start',
+            },
+          ]}
         >
           <TodoCheckbox
             boxOutlineColor={importanceColor}
@@ -137,15 +167,14 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
                   alignSelf: 'flex-start',
                   marginTop: theme.spacing.md,
                 }}
-                color={theme.colors.cardBackground}
+                color={theme.colors.background}
                 icon={{
                   name: 'notifications-outline',
                   type: 'ionicon',
                   size: 16,
-                  color: theme.colors.grey3,
+                  color: theme.colors.grey1,
                 }}
-                size="sm"
-                titleStyle={{ color: theme.colors.grey3 }}
+                titleStyle={{ color: theme.colors.grey1 }}
                 title={formatReminderTime(currentReminderTime)}
               />
             )}
@@ -174,7 +203,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         setCurrentImportanceLevel={setCurrentImportanceLevel}
         setCurrentReminderTime={setCurrentReminderTime}
       />
-    </>
+    </Animated.View>
   );
 }
 
