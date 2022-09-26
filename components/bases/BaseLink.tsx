@@ -10,12 +10,12 @@ function BaseLink({
   onPress,
   children,
   color = 'blue',
-  ...rest
+  ...props
 }: React.PropsWithChildren<BaseLinkProps>) {
   const { theme } = useTheme();
 
   return (
-    <TouchableOpacity onPress={onPress} {...rest}>
+    <TouchableOpacity onPress={onPress} {...props}>
       <Text
         small
         style={{

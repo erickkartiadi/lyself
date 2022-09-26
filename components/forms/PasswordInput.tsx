@@ -5,7 +5,7 @@ import { BORDER_RADIUS } from '../../theme/styles';
 import useToggle from '../../utils/hooks/useToggle';
 import TextInput from './Input';
 
-function PasswordInput({ label, placeholder, ...rest }: InputProps) {
+function PasswordInput({ label, placeholder, ...props }: InputProps) {
   const [isPasswordVisible, togglePasswordVisible] = useToggle(false);
   const { theme } = useTheme();
 
@@ -25,7 +25,7 @@ function PasswordInput({ label, placeholder, ...rest }: InputProps) {
           onPress={() => togglePasswordVisible()}
         />
       }
-      {...rest}
+      {...props}
     />
   );
 }

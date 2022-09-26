@@ -16,8 +16,6 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
   const { isDarkMode } = useContext(ThemeModeContext);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
-  const formattedReminderTime = reminderTime && formatReminderTime(reminderTime);
-
   const hideDatePicker = () => {
     setIsDatePickerVisible(false);
   };
@@ -56,7 +54,7 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
           color={reminderTime ? theme.colors.primary : theme.colors.black}
           containerStyle={{ marginRight: theme.spacing.lg }}
         />
-        {reminderTime ? formattedReminderTime : 'Remind Me'}
+        {reminderTime ? formatReminderTime(reminderTime) : 'Remind Me'}
         {reminderTime && (
           <Icon
             name="close"

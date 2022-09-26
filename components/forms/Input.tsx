@@ -9,7 +9,7 @@ function TextInput({
   ref,
   onBlur,
   errorMessage,
-  ...rest
+  ...props
 }: InputProps) {
   const { theme } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
@@ -39,7 +39,7 @@ function TextInput({
       ]}
       label={label}
       placeholder={placeholder}
-      {...rest}
+      {...props}
     />
   );
 }

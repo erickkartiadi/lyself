@@ -1,5 +1,5 @@
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import { ButtonProps, ChipProps, createTheme, normalize, TextProps } from '@rneui/themed';
+import { ButtonProps, createTheme, normalize, TextProps } from '@rneui/themed';
 
 import {
   BORDER_RADIUS,
@@ -15,7 +15,7 @@ const lightColors = {
   primaryDark: '#D0385C',
   secondary: '#BD8087',
   background: '#FFFFFF',
-  cardBackground: '#F2F6F9',
+  cardBackground: '#F6F9FB',
   blue: '#00A3FF',
   purple: '#9C5FAE',
   spotify: '#1db954',
@@ -170,9 +170,9 @@ const myTheme = createTheme({
         borderRadius: BORDER_RADIUS.rounded,
       },
     },
-    Chip: (props: ChipProps) => ({
-      titleStyle: props.size === 'md' ? FONT.small : FONT.caption,
-    }),
+    Chip: {
+      titleStyle: FONT.small,
+    },
   },
 });
 

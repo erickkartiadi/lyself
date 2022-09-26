@@ -11,7 +11,7 @@ export interface StatusCardProps extends Status {
 }
 
 function StatusCard({ title, caption, value, textColor, icon }: StatusCardProps) {
-  const { ...restIconProps } = icon;
+  const { ...iconProps } = icon;
   const { theme } = useTheme();
 
   return (
@@ -37,7 +37,7 @@ function StatusCard({ title, caption, value, textColor, icon }: StatusCardProps)
               containerStyle={{
                 marginRight: theme.spacing.sm,
               }}
-              {...restIconProps}
+              {...iconProps}
             />
           </View>
         )}

@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
   // shadow generator -> https://ethercreative.github.io/react-native-shadow-generator/
   shadowLarge: {
-    shadowColor: colorAlpha(lightColors.black, 0.5),
+    shadowColor: colorAlpha(lightColors.black, 0.25),
     shadowOffset: {
       width: 0,
       height: 6,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
   shadowMedium: {
-    shadowColor: colorAlpha(lightColors.black, 0.5),
+    shadowColor: colorAlpha(lightColors.black, 0.25),
     shadowOffset: {
       width: 0,
       height: 3,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
   shadowSmall: {
-    shadowColor: colorAlpha(lightColors.black, 0.5),
+    shadowColor: colorAlpha(lightColors.black, 0.25),
     shadowOffset: {
       width: 0,
       height: 1,

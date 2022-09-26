@@ -10,11 +10,11 @@ interface LinkButtonProps<ParamList extends ReactNavigation.RootParamList>
   action?: NavigationAction;
 }
 
-function LinkButton({ to, action, children, ...rest }: LinkButtonProps<ParamListBase>) {
-  const { onPress, ...props } = useLinkProps({ to, action });
+function LinkButton({ to, action, children, ...props }: LinkButtonProps<ParamListBase>) {
+  const { onPress, ...linkProps } = useLinkProps({ to, action });
 
   return (
-    <BaseLink onPress={onPress} {...props} {...rest}>
+    <BaseLink onPress={onPress} {...linkProps} {...props}>
       {children}
     </BaseLink>
   );

@@ -1,11 +1,11 @@
 import { Button, ButtonProps } from '@rneui/themed';
 import * as React from 'react';
 
-import { BORDER_RADIUS, GUTTER_SIZE } from '../../theme/styles';
+import { BORDER_RADIUS } from '../../theme/styles';
 
-type TodoSwipeableRightProps = Pick<ButtonProps, 'onPress'>;
+type TodoSwipeableRightProps = Pick<ButtonProps, 'onPress' | 'loading'>;
 
-function TodoSwipeableRight({ onPress }: TodoSwipeableRightProps) {
+function TodoSwipeableRight({ onPress, loading }: TodoSwipeableRightProps) {
   return (
     <Button
       fullWidth
@@ -14,8 +14,8 @@ function TodoSwipeableRight({ onPress }: TodoSwipeableRightProps) {
       radius={BORDER_RADIUS.md}
       iconPosition="top"
       icon={{ name: 'trash', color: 'white', type: 'ionicon', size: 24 }}
-      containerStyle={{ marginRight: GUTTER_SIZE }}
       buttonStyle={{ minHeight: '100%' }}
+      loading={loading}
     />
   );
 }

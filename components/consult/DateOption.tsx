@@ -1,6 +1,8 @@
-import { Button, ButtonProps, Text, useTheme } from '@rneui/themed';
+import { ButtonProps, Text, useTheme } from '@rneui/themed';
 import dayjs from 'dayjs';
 import * as React from 'react';
+
+import BaseChoiceChip from '../bases/BaseChoiceChip';
 
 interface DateOptionProps extends Pick<ButtonProps, 'onPress'> {
   date: Date;
@@ -17,18 +19,17 @@ function DateOption({ date, isSelected, onPress }: DateOptionProps) {
   const isToday = dayjsDate.isSame(dayjs(), 'date');
 
   const textColor = isToday ? theme.colors.primary : theme.colors.black;
-
-  const backgroundColor = isSelected ? theme.colors.primary : theme.colors.cardBackground;
-  const selectedTextColor = isSelected ? theme.colors.white : textColor;
+  const selectedTextColor = isSelected ? theme.colors.primary : textColor;
 
   return (
-    <Button
+    <BaseChoiceChip
+      isSelected={isSelected}
       onPress={onPress}
       buttonStyle={{
-        backgroundColor,
-        borderWidth: 0,
         flex: 1,
         flexDirection: 'column',
+        paddingHorizontal: theme.spacing.xl,
+        paddingVertical: theme.spacing.lg,
       }}
     >
       <Text
@@ -48,7 +49,7 @@ function DateOption({ date, isSelected, onPress }: DateOptionProps) {
       >
         {dayOfWeek}
       </Text>
-    </Button>
+    </BaseChoiceChip>
   );
 }
 

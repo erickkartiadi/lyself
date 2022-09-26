@@ -8,13 +8,13 @@ interface BaseAvatarProps extends AvatarProps {
   size?: number;
 }
 
-function BaseAvatar({ size = 3, rounded, containerStyle, ...rest }: BaseAvatarProps) {
+function BaseAvatar({ size = 3, rounded, containerStyle, ...props }: BaseAvatarProps) {
   const { theme } = useTheme();
 
   return (
     <Avatar
       size={size * GUTTER_SIZE}
-      {...rest}
+      {...props}
       containerStyle={[
         {
           overflow: 'hidden',

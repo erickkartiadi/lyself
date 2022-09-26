@@ -1,26 +1,92 @@
-import { FAB, Icon, useTheme } from '@rneui/themed';
-import React, { useRef, useState } from 'react';
+import { FAB, Icon, Text, useTheme } from '@rneui/themed';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Modalize } from 'react-native-modalize';
 
+import BaseBottomSheet from '../../components/bases/BaseBottomSheet';
+import BaseChoiceChip from '../../components/bases/BaseChoiceChip';
 import RefreshControl from '../../components/placeholder/RefreshControl';
+import SectionTitle from '../../components/SectionTitle';
 import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
 import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks';
-import { styles } from '../../theme/styles';
+import { BORDER_RADIUS, styles } from '../../theme/styles';
 import { TodoScreenNavigationProps } from '../../types/navigation.types';
 import { Todo } from '../../types/types';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useToggle from '../../utils/hooks/useToggle';
+import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
 import TodoEmptyScreen from '../Others/TodoEmptyScreen';
 
+const sortItems: {
+  label: string;
+  sort: TodoSort;
+  orderBy: OrderBy;
+}[] = [
+  {
+    label: 'High priority',
+    sort: 'importanceLevel',
+    orderBy: 'DESC',
+  },
+  {
+    label: 'Low priority',
+    sort: 'importanceLevel',
+    orderBy: 'ASC',
+  },
+
+  {
+    label: 'Soon',
+    sort: 'reminderTime',
+    orderBy: 'ASC',
+  },
+  {
+    label: 'Later',
+    sort: 'reminderTime',
+    orderBy: 'DESC',
+  },
+];
+
+const filterItems: {
+  label: string;
+  filter: TodoFilter;
+}[] = [
+  {
+    label: 'Todo',
+    filter: 'Todo',
+  },
+  {
+    label: 'All',
+    filter: 'All',
+  },
+
+  {
+    label: 'Completed',
+    filter: 'Completed',
+  },
+];
 function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   const { theme } = useTheme();
 
-  const { isLoading, isError, data, isFetching, refetch } = useGetTodos();
+  const [selectedSort, setSelectedSort] = useState<{
+    sort: TodoSort;
+    orderBy: OrderBy;
+  }>({
+    sort: 'importanceLevel',
+    orderBy: 'DESC',
+  });
+
+  const [selectedFilter, setSelectedFilter] = useState<TodoFilter>('Todo');
+
+  const { isLoading, isError, data, isFetching, refetch } = useGetTodos(
+    selectedFilter,
+    selectedSort.sort,
+    selectedSort.orderBy
+  );
+
   const mutation = useCreateTodo();
 
   const [isCompleted, toggleIsCompleted] = useToggle(false);
@@ -34,11 +100,10 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
     },
   });
 
-  const bottomSheetRef = useRef<Modalize>(null);
+  const todoBottomSheetRef = useRef<Modalize>(null);
+  const filterBottomSheetRef = useRef<Modalize>(null);
 
   const handleAddTodo = async ({ todo, note }: TodoFormData) => {
-    bottomSheetRef.current?.close();
-
     if (todo === '' || todo === null) return;
 
     mutation.mutate({
@@ -49,6 +114,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
       reminderTime: newReminderTime,
     });
 
+    todoBottomSheetRef.current?.close();
     setNewImportanceLevel('none');
     setNewReminderTime(null);
     reset();
@@ -59,6 +125,41 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   // temporary fix by add padding
   useApplyHeaderWorkaround(navigation.setOptions);
 
+  // FIXME cannot update a component (`NativeStackNavigator`)
+  navigation.setOptions({
+    headerRight: React.useCallback(
+      () => (
+        <View>
+          <Icon
+            name="filter"
+            type="ionicon"
+            onPress={() => filterBottomSheetRef.current?.open()}
+            iconStyle={{
+              color:
+                !(
+                  selectedSort.sort === 'importanceLevel' &&
+                  selectedSort.orderBy === 'DESC'
+                ) || selectedFilter !== 'Todo'
+                  ? theme.colors.primary
+                  : theme.colors.black,
+            }}
+            containerStyle={{
+              borderRadius: BORDER_RADIUS.rounded,
+              aspectRatio: 1,
+            }}
+          />
+        </View>
+      ),
+      [selectedSort, selectedFilter]
+    ),
+  });
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: selectedFilter,
+    });
+  }, [selectedFilter]);
+
   if (isLoading) return <LoadingScreen />;
   if (isError) return <ErrorScreen />;
   return (
@@ -66,26 +167,34 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
       {/* FIXME cannot use FlatList, because exiting animation won't work */}
       <ScrollView
         keyboardShouldPersistTaps="handled"
-        overScrollMode="never"
         showsHorizontalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
-        contentContainerStyle={[styles.sectionLarge, { flex: 1 }]}
+        contentContainerStyle={[
+          styles.sectionLarge,
+          styles.containerGutter,
+          { flexGrow: 1 },
+        ]}
       >
         {data.length <= 0 ? (
           <TodoEmptyScreen />
         ) : (
-          data.map((props) => <TodoItem key={props.id} {...props} />)
+          <>
+            {data.map((props) => (
+              <TodoItem key={props.id} {...props} />
+            ))}
+          </>
         )}
       </ScrollView>
       <FAB
         placement="right"
         color={theme.colors.primary}
-        onPress={() => bottomSheetRef.current?.open()}
+        onPress={() => todoBottomSheetRef.current?.open()}
         icon={<Icon name="add" type="ionicon" size={28} color={theme.colors.white} />}
       />
       <TodoBottomSheet
+        isSaveLoading={mutation.isLoading}
         onSubmit={handleSubmit(handleAddTodo)}
-        bottomSheetRef={bottomSheetRef}
+        bottomSheetRef={todoBottomSheetRef}
         completed={false}
         control={control}
         currentImportanceLevel={newImportanceLevel}
@@ -96,6 +205,64 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         isButtonVisible={watch('todo', '') !== ''}
         isEditing={false}
       />
+      <BaseBottomSheet
+        bottomSheetRef={filterBottomSheetRef}
+        modalStyle={[styles.containerGutter, styles.sectionLarge]}
+      >
+        <Text h2>Filter</Text>
+        <View style={[styles.sectionLarge]}>
+          <SectionTitle title="Sort" />
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              marginTop: theme.spacing.sm,
+            }}
+          >
+            {sortItems.map(({ label, sort, orderBy }) => (
+              <BaseChoiceChip
+                key={label}
+                containerStyle={{
+                  marginRight: theme.spacing.md,
+                  marginBottom: theme.spacing.md,
+                }}
+                onPress={() => setSelectedSort({ orderBy, sort })}
+                isSelected={
+                  selectedSort.sort === sort && selectedSort.orderBy === orderBy
+                }
+              >
+                {label}
+              </BaseChoiceChip>
+            ))}
+          </View>
+        </View>
+        <View style={[styles.sectionLarge]}>
+          <SectionTitle title="Filter" />
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              marginTop: theme.spacing.sm,
+            }}
+          >
+            {filterItems.map(({ label, filter }) => (
+              <BaseChoiceChip
+                key={label}
+                containerStyle={{
+                  marginRight: theme.spacing.md,
+                  marginBottom: theme.spacing.md,
+                }}
+                onPress={() => setSelectedFilter(filter)}
+                isSelected={selectedFilter === filter}
+              >
+                {label}
+              </BaseChoiceChip>
+            ))}
+          </View>
+        </View>
+      </BaseBottomSheet>
     </>
   );
 }

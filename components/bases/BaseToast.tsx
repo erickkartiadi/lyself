@@ -19,12 +19,12 @@ interface BaseToastProps extends RNToastProps {
   icon: Pick<IconProps, 'name' | 'type'>;
 }
 
-function BaseToast({ color, icon: { name, type }, ...rest }: BaseToastProps) {
+function BaseToast({ color, icon: { name, type }, ...props }: BaseToastProps) {
   const { theme } = useTheme();
 
   return (
     <RNToast
-      {...rest}
+      {...props}
       style={[
         styles.shadowLarge,
         {
@@ -68,7 +68,7 @@ function BaseToast({ color, icon: { name, type }, ...rest }: BaseToastProps) {
   );
 }
 
-function SuccessToast({ ...rest }: RNToastProps) {
+function SuccessToast({ ...props }: RNToastProps) {
   const { theme } = useTheme();
 
   return (
@@ -78,12 +78,12 @@ function SuccessToast({ ...rest }: RNToastProps) {
         type: 'ionicon',
       }}
       color={theme.colors.success}
-      {...rest}
+      {...props}
     />
   );
 }
 
-function ErrorToast({ ...rest }: RNToastProps) {
+function ErrorToast({ ...props }: RNToastProps) {
   const { theme } = useTheme();
 
   return (
@@ -93,12 +93,12 @@ function ErrorToast({ ...rest }: RNToastProps) {
         type: 'material-community',
       }}
       color={theme.colors.error}
-      {...rest}
+      {...props}
     />
   );
 }
 
-function InfoToast({ ...rest }: RNToastProps) {
+function InfoToast({ ...props }: RNToastProps) {
   const { theme } = useTheme();
 
   return (
@@ -108,7 +108,7 @@ function InfoToast({ ...rest }: RNToastProps) {
         type: 'ionicon',
       }}
       color={theme.colors.blue}
-      {...rest}
+      {...props}
     />
   );
 }

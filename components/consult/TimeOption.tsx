@@ -1,8 +1,10 @@
-import { Button, ButtonProps, Text, useTheme } from '@rneui/themed';
+import { ButtonProps, useTheme } from '@rneui/themed';
 import dayjs from 'dayjs';
 import objectSupport from 'dayjs/plugin/objectSupport';
 import * as React from 'react';
 import { View } from 'react-native';
+
+import BaseChoiceChip from '../bases/BaseChoiceChip';
 
 dayjs.extend(objectSupport);
 
@@ -14,32 +16,18 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
   const { theme } = useTheme();
   const formattedHour = dayjs({ hour }).format('HH:00');
 
-  const backgroundColor = isSelected ? theme.colors.primary : theme.colors.cardBackground;
-
   return (
     <View style={{ width: '20%' }}>
-      <Button
-        onPress={onPress}
-        buttonStyle={{
-          backgroundColor,
-          borderWidth: 0,
-        }}
+      <BaseChoiceChip
+        isSelected={isSelected}
         containerStyle={{
-          alignItems: 'stretch',
-          marginVertical: theme.spacing.sm,
           marginHorizontal: theme.spacing.sm,
+          marginVertical: theme.spacing.sm,
         }}
-        size="md"
+        onPress={onPress}
       >
-        <Text
-          small
-          style={{
-            color: isSelected ? theme.colors.white : theme.colors.black,
-          }}
-        >
-          {formattedHour}
-        </Text>
-      </Button>
+        {formattedHour}
+      </BaseChoiceChip>
     </View>
   );
 }

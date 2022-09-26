@@ -4,8 +4,6 @@ import { Modalize, ModalizeProps } from 'react-native-modalize';
 import { IHandles } from 'react-native-modalize/lib/options';
 import { Portal } from 'react-native-portalize';
 
-import colorAlpha from '../../utils/colorAlpha';
-
 export interface BaseBottomSheetProps extends ModalizeProps {
   bottomSheetRef: React.RefObject<IHandles>;
 }
@@ -14,7 +12,7 @@ function BaseBottomSheet({
   children,
   bottomSheetRef,
   modalStyle,
-  ...rest
+  ...props
 }: BaseBottomSheetProps) {
   const { theme } = useTheme();
 
@@ -24,10 +22,9 @@ function BaseBottomSheet({
         ref={bottomSheetRef}
         closeOnOverlayTap
         adjustToContentHeight
-        overlayStyle={{ backgroundColor: colorAlpha(theme.colors.grey3, 0.5) }}
         handleStyle={{ backgroundColor: theme.colors.background }}
         modalStyle={[{ backgroundColor: theme.colors.background }, modalStyle]}
-        {...rest}
+        {...props}
       >
         {children}
       </Modalize>

@@ -23,7 +23,7 @@ function BasePicker({
   iconType,
   iconSize,
   dropdownWidth,
-  ...rest
+  ...props
 }: BasePickerProps & DropDownPickerProps<ValueType>) {
   const { isDarkMode } = React.useContext(ThemeModeContext);
   const { theme } = useTheme();
@@ -84,7 +84,7 @@ function BasePicker({
         listItemLabelStyle={{ textTransform: 'capitalize' }}
         selectedItemLabelStyle={{ color: theme.colors.primary }}
         showTickIcon={false}
-        {...rest}
+        {...props}
       />
     </View>
   );

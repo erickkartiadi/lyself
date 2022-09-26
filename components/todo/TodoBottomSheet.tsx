@@ -27,6 +27,8 @@ interface TodoBottomSheetProps extends BaseBottomSheetProps, Pick<Todo, 'complet
   onCheckboxPress: (checked: boolean) => void;
   isButtonVisible?: boolean;
   isEditing?: boolean;
+  isDeleteLoading?: boolean;
+  isSaveLoading: boolean;
 }
 
 function TodoBottomSheet({
@@ -43,6 +45,8 @@ function TodoBottomSheet({
   isButtonVisible,
   isEditing,
   onDeletePress,
+  isDeleteLoading,
+  isSaveLoading,
 }: TodoBottomSheetProps) {
   const { theme } = useTheme();
 
@@ -65,7 +69,7 @@ function TodoBottomSheet({
           }}
         >
           <TodoCheckbox
-            boxOutlineColor={importanceColor}
+            color={importanceColor}
             checked={completed}
             onCheckboxPress={onCheckboxPress}
             size={28}
@@ -150,6 +154,7 @@ function TodoBottomSheet({
           <View style={{ flexDirection: 'row', marginTop: theme.spacing.xl }}>
             {isEditing && (
               <Button
+                loading={isDeleteLoading}
                 radius="md"
                 type="outline"
                 containerStyle={{ marginRight: theme.spacing.md }}
@@ -158,7 +163,13 @@ function TodoBottomSheet({
                 <Icon name="trash" type="ionicon" size={21} color={theme.colors.error} />
               </Button>
             )}
-            <Button onPress={onSubmit} radius="md" containerStyle={{ flex: 1 }} fullWidth>
+            <Button
+              loading={isSaveLoading}
+              onPress={onSubmit}
+              radius="md"
+              containerStyle={{ flex: 1 }}
+              fullWidth
+            >
               {isEditing ? 'update' : 'save'}
             </Button>
           </View>
@@ -173,6 +184,7 @@ TodoBottomSheet.defaultProps = {
   onClose: () => {},
   onDeletePress: () => {},
   isEditing: true,
+  isDeleteLoading: false,
 };
 
 export default TodoBottomSheet;

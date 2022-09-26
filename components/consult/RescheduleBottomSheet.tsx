@@ -78,11 +78,8 @@ function RescheduleBottomSheet({ name, bottomSheetRef }: RescheduleBottomSheetPr
 
   return (
     <>
-      <BaseBottomSheet
-        modalStyle={styles.containerGutter}
-        bottomSheetRef={bottomSheetRef}
-      >
-        <View style={styles.sectionLarge}>
+      <BaseBottomSheet bottomSheetRef={bottomSheetRef}>
+        <View style={[styles.sectionLarge, styles.container]}>
           <SectionTitle
             title="Schedule"
             showRightComponent
@@ -138,7 +135,7 @@ function RescheduleBottomSheet({ name, bottomSheetRef }: RescheduleBottomSheetPr
           )}
         </View>
         {selectedDateIndex >= 0 && data.length > 0 && (
-          <View style={styles.sectionLarge}>
+          <View style={[styles.sectionLarge, styles.container]}>
             <SectionTitle title="Available Hours" />
             <View
               style={[

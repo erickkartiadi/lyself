@@ -33,16 +33,16 @@ function BaseCard({
     >
       <Card
         containerStyle={[
-          styles.shadowLarge,
+          styles.shadowSmall,
           {
-            elevation: 0,
             borderWidth: 0,
             padding: enableCardPadding ? theme.spacing[cardPadding] : 0,
-            borderRadius: BORDER_RADIUS.xl,
+            borderRadius: BORDER_RADIUS.lg,
             overflow: 'hidden',
             backgroundColor: theme.colors.cardBackground,
             marginTop: theme.spacing.md,
             marginBottom: theme.spacing.md,
+            borderColor: theme.colors.grey5,
           },
           cardStyle,
         ]}

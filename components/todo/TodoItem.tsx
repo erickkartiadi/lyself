@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import Animated, {
-  Layout,
   LightSpeedInLeft,
   LightSpeedOutLeft,
+  SequencedTransition,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -14,7 +14,7 @@ import Animated, {
 import { useDebounce } from 'use-debounce';
 
 import { useDeleteTodo, useUpdateTodo } from '../../services/api/todos/todos.hooks';
-import { BORDER_RADIUS, GUTTER_SIZE, styles } from '../../theme/styles';
+import { BORDER_RADIUS } from '../../theme/styles';
 import { Todo } from '../../types/types';
 import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
@@ -103,25 +103,28 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
 
   return (
     <Animated.View
-      layout={Layout.springify()}
+      layout={SequencedTransition}
       entering={LightSpeedInLeft}
       style={animatedStyles}
       exiting={LightSpeedOutLeft}
     >
       <ListItem.Swipeable
-        rightContent={<TodoSwipeableRight onPress={handleDeleteTodo} />}
-        rightWidth={120}
+        rightContent={
+          <TodoSwipeableRight
+            onPress={handleDeleteTodo}
+            loading={deleteMutation.isLoading}
+          />
+        }
+        rightWidth={80}
         containerStyle={[
-          styles.containerGutter,
           {
             padding: 0,
-            marginRight: GUTTER_SIZE,
             borderRadius: BORDER_RADIUS.md,
             backgroundColor: theme.colors.background,
             marginBottom: theme.spacing.md,
           },
         ]}
-        rightStyle={{ marginBottom: theme.spacing.md }}
+        rightStyle={{ marginBottom: theme.spacing.md, paddingLeft: theme.spacing.md }}
         onPressIn={onPressInAnimation}
         onPressOut={onPressOutAnimation}
         onPress={showBottomSheet}
@@ -129,7 +132,6 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         <View
           style={[
             {
-              marginRight: GUTTER_SIZE * -1,
               backgroundColor: theme.colors.cardBackground,
               padding: theme.spacing.xl,
               borderRadius: BORDER_RADIUS.md,
@@ -140,7 +142,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
           ]}
         >
           <TodoCheckbox
-            boxOutlineColor={importanceColor}
+            color={importanceColor}
             checked={isCompleted}
             onCheckboxPress={() => toggleIsCompleted()}
             size={25}
@@ -156,6 +158,8 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
               style={{
                 color: isCompleted ? theme.colors.grey3 : theme.colors.black,
                 textDecorationLine: isCompleted ? 'line-through' : 'none',
+                textDecorationStyle: 'solid',
+                textDecorationColor: importanceColor,
                 width: '90%',
               }}
             >
@@ -194,6 +198,8 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
             todo: watch('todo', todo),
           });
         }}
+        isSaveLoading={updateMutation.isLoading}
+        isDeleteLoading={deleteMutation.isLoading}
         bottomSheetRef={bottomSheetRef}
         completed={isCompleted}
         control={control}
