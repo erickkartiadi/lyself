@@ -19,6 +19,7 @@ import { Todo } from '../../types/types';
 import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
 import useToggle from '../../utils/hooks/useToggle';
+import normalize from '../../utils/normalize';
 import { somethingWentWrongToast } from '../../utils/toast';
 import TodoBottomSheet, { TodoFormData } from './TodoBottomSheet';
 import TodoCheckbox from './TodoCheckbox';
@@ -115,7 +116,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
             loading={deleteMutation.isLoading}
           />
         }
-        rightWidth={80}
+        rightWidth={normalize(80)}
         containerStyle={[
           {
             padding: 0,
@@ -145,7 +146,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
             color={importanceColor}
             checked={isCompleted}
             onCheckboxPress={() => toggleIsCompleted()}
-            size={25}
+            size={normalize(24)}
           />
           <View
             style={{

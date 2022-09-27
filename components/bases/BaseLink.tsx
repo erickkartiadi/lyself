@@ -17,7 +17,6 @@ function BaseLink({
   return (
     <TouchableOpacity onPress={onPress} {...props}>
       <Text
-        small
         style={{
           color: theme.colors[color],
         }}

@@ -30,16 +30,14 @@ function AccountScreen() {
         >
           <BaseAvatar
             rounded
-            size={6}
+            size={7}
             containerStyle={{ marginBottom: theme.spacing.xl }}
             source={{
               uri: 'https://images.unsplash.com/photo-1605979399824-542335ee35d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
             }}
           />
-          <Text h4>{user.name}</Text>
-          <Text caption color={theme.colors.grey3}>
-            {user.email}
-          </Text>
+          <Text h3>{user.name}</Text>
+          <Text color={theme.colors.grey3}>{user.email}</Text>
         </View>
       </View>
       <View style={styles.sectionSmall}>

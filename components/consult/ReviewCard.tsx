@@ -47,14 +47,11 @@ function ReviewCard({ uri, name, review, time }: Review) {
           <BaseAvatar
             rounded
             containerStyle={{ marginRight: theme.spacing.lg }}
-            size={2}
             source={{ uri }}
           />
           <View style={{ flex: 1 }}>
-            <Text small style={{ fontFamily: 'Inter-Medium' }}>
-              {name}
-            </Text>
-            <Text caption color={theme.colors.grey3}>
+            <Text subtitle3>{name}</Text>
+            <Text small color={theme.colors.grey3}>
               {time}
             </Text>
           </View>

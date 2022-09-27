@@ -34,7 +34,7 @@ function SectionTitle({
       ]}
     >
       <>
-        <Text subtitle style={{ flex: 1 }}>
+        <Text h4 style={{ flex: 1 }}>
           {title}
         </Text>
         {showRightComponent && !rightComponent ? (

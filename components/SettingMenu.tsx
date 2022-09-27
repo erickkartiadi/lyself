@@ -3,6 +3,7 @@ import React from 'react';
 import { Pressable, PressableProps, View } from 'react-native';
 
 import { BORDER_RADIUS, styles } from '../theme/styles';
+import normalize from '../utils/normalize';
 
 interface SettingMenuProp {
   title: string;
@@ -50,7 +51,7 @@ function SettingMenu({
             name={name}
             type={type}
             color={theme.colors.white}
-            size={16}
+            size={normalize(18)}
             iconStyle={{
               padding: theme.spacing.md,
               borderRadius: BORDER_RADIUS.rounded,
@@ -59,7 +60,7 @@ function SettingMenu({
               marginRight: theme.spacing.xl,
             }}
           />
-          <Text subtitle2 color={theme.colors.grey1}>
+          <Text subtitle color={theme.colors.grey1}>
             {title}
           </Text>
         </View>
@@ -70,9 +71,9 @@ function SettingMenu({
               alignItems: 'center',
             }}
           >
-            <Text caption>{caption}</Text>
+            <Text small>{caption}</Text>
             <Icon
-              size={18}
+              size={normalize(18)}
               containerStyle={{ marginLeft: theme.spacing.sm }}
               type="ionicon"
               name="chevron-forward"

@@ -2,6 +2,7 @@ import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 
+import normalize from '../utils/normalize';
 import ActivityIcon, { ActivityTypeIcon } from './ActivityIcon';
 import AnimatedPressable, { AnimatedPressableProps } from './AnimatedPressable';
 
@@ -25,12 +26,11 @@ function ActivityButton({ activityType, onPress }: ActivityButtonProps) {
         onPress={onPress}
       >
         <ActivityIcon
-          width={54}
+          width={normalize(62)}
           containerStyle={{ alignSelf: 'center' }}
           activityType={activityType}
         />
         <Text
-          small
           style={{
             marginTop: theme.spacing.md,
             textAlign: 'center',

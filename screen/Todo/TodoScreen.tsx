@@ -14,8 +14,8 @@ import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks
 import { BORDER_RADIUS, styles } from '../../theme/styles';
 import { TodoScreenNavigationProps } from '../../types/navigation.types';
 import { Todo } from '../../types/types';
-import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useToggle from '../../utils/hooks/useToggle';
+import normalize from '../../utils/normalize';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
@@ -122,7 +122,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   // issue: header hide screen after layout animation run
   // https://github.com/software-mansion/react-native-reanimated/issues/2906
   // temporary fix by add padding
-  useApplyHeaderWorkaround(navigation.setOptions);
+  // useApplyHeaderWorkaround(navigation.setOptions);
 
   // FIXME cannot update a component (`NativeStackNavigator`)
   navigation.setOptions({
@@ -188,7 +188,14 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         placement="right"
         color={theme.colors.primary}
         onPress={() => todoBottomSheetRef.current?.open()}
-        icon={<Icon name="add" type="ionicon" size={28} color={theme.colors.white} />}
+        icon={
+          <Icon
+            name="add"
+            type="ionicon"
+            size={normalize(30)}
+            color={theme.colors.white}
+          />
+        }
       />
       <TodoBottomSheet
         isSaveLoading={mutation.isLoading}

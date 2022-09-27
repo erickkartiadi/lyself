@@ -17,7 +17,7 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
       key={name}
       containerStyle={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <BaseAvatar rounded size={3.5} source={{ uri }} />
+      <BaseAvatar rounded size={4} source={{ uri }} />
       <ListItem.Content>
         <View
           style={{
@@ -34,7 +34,7 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
               marginBottom: theme.spacing.sm,
             }}
           >
-            <Text subtitle style={{ marginBottom: 0 }}>
+            <Text h4 style={{ marginBottom: 0 }}>
               {name}
             </Text>
             <Text caption>{time}</Text>
@@ -47,7 +47,6 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
             }}
           >
             <Text
-              small
               style={{
                 color: unread > 0 ? theme.colors.grey1 : theme.colors.grey3,
               }}

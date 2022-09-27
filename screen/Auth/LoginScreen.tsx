@@ -145,7 +145,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             },
           ]}
         >
-          <Text small>Didn&apos;t have an account? </Text>
+          <Text>Didn&apos;t have an account? </Text>
           <LinkButton to={{ screen: 'Register' }} color="primary">
             Sign Up
           </LinkButton>

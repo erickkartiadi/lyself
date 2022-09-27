@@ -48,9 +48,9 @@ function PsychiatristCard({
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
         <BaseAvatar
           rounded
-          size={5}
+          size={6}
           source={{ uri }}
-          containerStyle={{ marginRight: theme.spacing.lg }}
+          containerStyle={{ marginRight: theme.spacing.xl }}
         />
         <View style={{ flex: 1 }}>
           <Text subtitle>{name}</Text>

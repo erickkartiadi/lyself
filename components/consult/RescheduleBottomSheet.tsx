@@ -9,6 +9,7 @@ import { Appointment, Schedule } from '../../types/types';
 import { MONTHS } from '../../utils/constant/constant';
 import { scheduleData } from '../../utils/constant/seed';
 import useToggle from '../../utils/hooks/useToggle';
+import normalize from '../../utils/normalize';
 import BaseBottomSheet, { BaseBottomSheetProps } from '../bases/BaseBottomSheet';
 import BaseDialog from '../bases/BaseDialog';
 import BasePicker from '../bases/BasePicker';
@@ -86,8 +87,8 @@ function RescheduleBottomSheet({ name, bottomSheetRef }: RescheduleBottomSheetPr
             rightComponent={
               <BasePicker
                 max={3}
-                dropdownWidth={128}
-                iconSize={16}
+                dropdownWidth={normalize(128)}
+                iconSize={normalize(16)}
                 upIconName="filter"
                 downIconName="filter"
                 iconType="ionicon"

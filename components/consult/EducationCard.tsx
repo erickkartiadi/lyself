@@ -24,7 +24,7 @@ function EducationCard({ id, institutionName, uri, startYear, studyPeriod }: Edu
           <Text numberOfLines={1} subtitle>
             {institutionName}
           </Text>
-          <Text color={theme.colors.grey3} caption>
+          <Text color={theme.colors.grey3} small>
             {`${startYear} - ${startYear + studyPeriod}`}
           </Text>
         </View>

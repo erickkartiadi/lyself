@@ -1,42 +1,14 @@
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import { ButtonProps, createTheme, normalize, TextProps } from '@rneui/themed';
+import { ButtonProps, createTheme, TextProps } from '@rneui/themed';
 
 import {
   BORDER_RADIUS,
+  darkColors,
   FONT,
-  FONT_FAMILY,
-  FONT_SIZE,
   GUTTER_SIZE,
+  lightColors,
   THEME_SPACING,
 } from './styles';
-
-const lightColors = {
-  primary: '#F55C7A',
-  primaryDark: '#D0385C',
-  secondary: '#BD8087',
-  background: '#FFFFFF',
-  cardBackground: '#F6F9FB',
-  blue: '#00A3FF',
-  purple: '#9C5FAE',
-  spotify: '#1db954',
-  google: '#ea4335',
-  facebook: '#1877f2',
-  apple: '#000000',
-};
-
-const darkColors = {
-  primary: '#EF617E',
-  primaryDark: '#F38399',
-  secondary: '#B57078',
-  background: '#121212',
-  cardBackground: '#232323',
-  blue: '#0096ED',
-  purple: '#9454A7',
-  spotify: '#1BAC4E',
-  google: '#E83221',
-  facebook: '#0E6DE9',
-  apple: '#FFFFFF',
-};
 
 const myTheme = createTheme({
   spacing: { ...THEME_SPACING },
@@ -47,7 +19,7 @@ const myTheme = createTheme({
       labelStyle: FONT.subtitle,
       inputStyle: FONT.regular,
       inputContainerStyle: {
-        borderBottomWidth: 0.75,
+        borderBottomWidth: 1,
       },
       containerStyle: { paddingHorizontal: 0 },
     }),
@@ -59,7 +31,7 @@ const myTheme = createTheme({
       },
     },
     SearchBar: {
-      style: [FONT.small],
+      style: [FONT.regular],
       inputStyle: FONT.regular,
     },
     CheckBox: {
@@ -80,34 +52,15 @@ const myTheme = createTheme({
       containerStyle: { aspectRatio: 1 },
     },
     Text: (props: TextProps) => ({
-      h1Style: [
-        FONT.heading1,
-        {
-          marginBottom: THEME_SPACING.sm,
-        },
-      ],
-      h2Style: [
-        FONT.heading2,
-        {
-          marginBottom: THEME_SPACING.sm,
-        },
-      ],
-      h3Style: [
-        FONT.heading3,
-        {
-          marginBottom: THEME_SPACING.sm,
-        },
-      ],
-      h4Style: [
-        FONT.heading4,
-        {
-          marginBottom: THEME_SPACING.sm,
-        },
-      ],
+      h1Style: [FONT.heading1],
+      h2Style: [FONT.heading2],
+      h3Style: [FONT.heading3],
+      h4Style: [FONT.heading4],
       style: [
         FONT.regular,
         props.subtitle && FONT.subtitle,
         props.subtitle2 && FONT.subtitle2,
+        props.subtitle3 && FONT.subtitle3,
         props.small && FONT.small,
         props.caption && FONT.caption,
         { ...(props.color && { color: props.color }) },
@@ -119,23 +72,12 @@ const myTheme = createTheme({
       containerStyle: {
         alignItems: props.fullWidth ? 'stretch' : 'center',
       },
-      titleStyle: {
-        fontFamily: FONT_FAMILY.medium,
-        fontWeight: '500',
-        fontSize: props.size === 'lg' ? FONT_SIZE.body2 : FONT_SIZE.caption,
-        letterSpacing: normalize(props.size === 'lg' ? 1.25 : 0.25),
-      },
+      titleStyle: [FONT.subtitle3],
       size: 'lg',
       uppercase: true,
     }),
     FAB: {
-      titleStyle: {
-        fontFamily: FONT_FAMILY.medium,
-        fontWeight: '500',
-        fontSize: FONT_SIZE.body2,
-        letterSpacing: normalize(1.25),
-      },
-      upperCase: true,
+      titleStyle: [FONT.subtitle3],
     },
     Dialog: {
       overlayStyle: {

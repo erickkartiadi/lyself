@@ -4,6 +4,7 @@ export const comingSoonToast = () =>
   Toast.show({
     type: 'info',
     text1: 'Coming soon 🚀',
+    text2: 'Something really cool is coming.',
   });
 
 export const somethingWentWrongToast = () =>

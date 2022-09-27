@@ -32,8 +32,8 @@ function RecommendedActivityCard({
           activityType={activity}
         />
         <View style={{ paddingRight: theme.spacing.xl }}>
-          <Text>{title}</Text>
-          <Text subtitle>{time}</Text>
+          <Text subtitle>{title}</Text>
+          <Text color={theme.colors.grey3}>{time}</Text>
         </View>
       </View>
     </BaseCard>

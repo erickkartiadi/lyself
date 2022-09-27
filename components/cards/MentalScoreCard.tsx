@@ -7,6 +7,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { BORDER_RADIUS, FONT_FAMILY, GUTTER_SIZE } from '../../theme/styles';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { generateRandomNumber } from '../../utils/generateRandom';
+import normalize from '../../utils/normalize';
 import BaseCard from '../bases/BaseCard';
 
 function Emoji({ fill }: { fill: number }) {
@@ -38,7 +39,7 @@ function MentalScoreCard() {
         }}
       >
         <AnimatedCircularProgress
-          size={64}
+          size={normalize(72)}
           width={theme.spacing.md}
           fill={generateRandomNumber(10, 100)}
           tintColor={theme.colors.warning}
@@ -51,10 +52,10 @@ function MentalScoreCard() {
         </AnimatedCircularProgress>
 
         <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-          <Text subtitle color={theme.colors.primary}>
+          <Text h3 color={theme.colors.primary}>
             Awesome
           </Text>
-          <Text caption>Keep up the mood</Text>
+          <Text small>Keep up the mood</Text>
         </View>
       </View>
       <LineChart
@@ -82,8 +83,8 @@ function MentalScoreCard() {
             },
           ],
         }}
-        width={Dimensions.get('screen').width + GUTTER_SIZE * 3}
-        height={300}
+        width={Dimensions.get('screen').width + GUTTER_SIZE * 5}
+        height={normalize(335, 'height')}
         withInnerLines={false}
         withOuterLines={false}
         withHorizontalLabels={false}

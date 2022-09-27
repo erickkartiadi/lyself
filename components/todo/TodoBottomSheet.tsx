@@ -7,6 +7,7 @@ import { ScrollView, TextInput, View } from 'react-native';
 import { FONT, styles } from '../../theme/styles';
 import { Todo } from '../../types/types';
 import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
+import normalize from '../../utils/normalize';
 import BaseBottomSheet, { BaseBottomSheetProps } from '../bases/BaseBottomSheet';
 import SectionTitle from '../SectionTitle';
 import TodoCheckbox from './TodoCheckbox';
@@ -72,7 +73,7 @@ function TodoBottomSheet({
             color={importanceColor}
             checked={completed}
             onCheckboxPress={onCheckboxPress}
-            size={28}
+            size={normalize(32)}
           />
           <Controller
             control={control}
@@ -160,7 +161,12 @@ function TodoBottomSheet({
                 containerStyle={{ marginRight: theme.spacing.md }}
                 onPress={onDeletePress}
               >
-                <Icon name="trash" type="ionicon" size={21} color={theme.colors.error} />
+                <Icon
+                  name="trash"
+                  type="ionicon"
+                  size={normalize(22)}
+                  color={theme.colors.error}
+                />
               </Button>
             )}
             <Button

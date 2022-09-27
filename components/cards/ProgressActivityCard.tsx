@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { BORDER_RADIUS } from '../../theme/styles';
 import { ProgressActivity } from '../../types/types';
 import { ACTIVITY_ICON } from '../../utils/constant/constant';
+import normalize from '../../utils/normalize';
 import { comingSoonToast } from '../../utils/toast';
 import ActivityIcon from '../ActivityIcon';
 import BaseCard from '../bases/BaseCard';
@@ -26,7 +27,7 @@ function ProgressActivityCard({ activity, id, progress, time, title }: ProgressA
         }}
       >
         <ActivityIcon
-          width={64}
+          width={normalize(64)}
           activityType={activity}
           containerStyle={{ marginRight: theme.spacing.xl }}
         />

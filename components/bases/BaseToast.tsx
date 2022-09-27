@@ -13,6 +13,7 @@ import {
   GUTTER_SIZE,
   styles,
 } from '../../theme/styles';
+import normalize from '../../utils/normalize';
 
 interface BaseToastProps extends RNToastProps {
   color: string;
@@ -25,7 +26,7 @@ function BaseToast({ color, icon: { name, type }, ...props }: BaseToastProps) {
   const renderLeadingIcon = () => (
     <View style={{ justifyContent: 'center' }}>
       <Icon
-        size={22}
+        size={normalize(24)}
         name={name}
         type={type}
         backgroundColor={color}
@@ -57,10 +58,10 @@ function BaseToast({ color, icon: { name, type }, ...props }: BaseToastProps) {
         },
       ]}
       text1Style={[
-        FONT.small,
+        FONT.subtitle,
         { fontFamily: FONT_FAMILY.medium, color: theme.colors.black },
       ]}
-      text2Style={[FONT.caption, { color: theme.colors.grey3 }]}
+      text2Style={[FONT.small, { color: theme.colors.grey3 }]}
       text2NumberOfLines={3}
       contentContainerStyle={{
         paddingLeft: theme.spacing.xl,

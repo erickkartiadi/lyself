@@ -8,7 +8,7 @@ import AccountScreen from '../screen/Home/AccountScreen';
 import ChatScreen from '../screen/Home/ChatScreen';
 import ExploreScreen from '../screen/Home/ExploreScreen';
 import HomeScreen from '../screen/Home/HomeScreen';
-import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE, styles } from '../theme/styles';
+import { FONT_FAMILY, GUTTER_SIZE, styles } from '../theme/styles';
 import { HomeTabParamList } from '../types/navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
@@ -17,7 +17,6 @@ export const navigatorScreenOptions = {
   headerShadowVisible: false,
   headerTitleStyle: {
     fontFamily: FONT_FAMILY.medium,
-    fontSize: FONT_SIZE.heading4,
   },
   headerRight: RightHeader,
 };

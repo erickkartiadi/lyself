@@ -12,12 +12,12 @@ function LeftHeader() {
 
   if (currentHour >= 5 && currentHour <= 11) greeting = 'Good morning';
   else if (currentHour >= 12 && currentHour <= 16) greeting = 'Good afternoon';
-  else greeting = 'Good night';
+  else greeting = 'Good evening';
 
   return (
     <View>
-      <Text caption>{greeting}</Text>
-      <Text h4>{name}</Text>
+      <Text>{greeting}</Text>
+      <Text h3>{name}</Text>
     </View>
   );
 }

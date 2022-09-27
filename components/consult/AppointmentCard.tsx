@@ -8,6 +8,7 @@ import { Modalize } from 'react-native-modalize';
 import { BORDER_RADIUS } from '../../theme/styles';
 import { Appointment } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
+import normalize from '../../utils/normalize';
 import BaseAvatar from '../bases/BaseAvatar';
 import BaseCard from '../bases/BaseCard';
 import BaseDialog from '../bases/BaseDialog';
@@ -87,6 +88,7 @@ function AppointmentCard({
           }}
         >
           <BaseAvatar
+            size={4}
             rounded
             source={{ uri }}
             containerStyle={{ marginRight: theme.spacing.lg }}
@@ -123,12 +125,12 @@ function AppointmentCard({
             <Icon
               type="ionicon"
               name="calendar"
-              size={20}
+              size={normalize(24)}
               color={textColor}
               containerStyle={{ marginRight: theme.spacing.md }}
             />
             <Text
-              caption
+              small
               color={textColor}
               style={{
                 flex: 1,
@@ -149,11 +151,11 @@ function AppointmentCard({
             <Icon
               type="ionicon"
               name="time"
-              size={20}
+              size={normalize(24)}
               color={textColor}
               containerStyle={{ marginRight: theme.spacing.md }}
             />
-            <Text caption color={textColor}>
+            <Text small color={textColor}>
               {`${formattedStartTime} - ${formattedEndTime}`}
             </Text>
           </View>
@@ -182,7 +184,7 @@ function AppointmentCard({
                   <Icon
                     type="ionicon"
                     name="chatbox-ellipses"
-                    size={14}
+                    size={normalize(14)}
                     containerStyle={{
                       marginRight: theme.spacing.sm,
                     }}
@@ -205,7 +207,7 @@ function AppointmentCard({
                   <Icon
                     type="ionicon"
                     name="videocam"
-                    size={14}
+                    size={normalize(14)}
                     containerStyle={{
                       marginRight: theme.spacing.sm,
                     }}

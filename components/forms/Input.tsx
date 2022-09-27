@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { FONT } from '../../theme/styles';
 
+// TODO update input styles
 function TextInput({
   label,
   placeholder,

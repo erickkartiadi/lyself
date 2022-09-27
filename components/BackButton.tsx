@@ -2,6 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Button, Icon, useTheme } from '@rneui/themed';
 import React from 'react';
 
+import normalize from '../utils/normalize';
+
 function BackButton() {
   const { theme } = useTheme();
   const navigation = useNavigation();
@@ -21,7 +23,7 @@ function BackButton() {
         paddingHorizontal: theme.spacing.md,
       }}
     >
-      <Icon size={20} name="arrow-back-outline" type="ionicon" />
+      <Icon size={normalize(24)} name="arrow-back-outline" type="ionicon" />
     </Button>
   );
 }

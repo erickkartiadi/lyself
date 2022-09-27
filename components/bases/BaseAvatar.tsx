@@ -2,6 +2,7 @@ import { Avatar, AvatarProps, useTheme } from '@rneui/themed';
 import * as React from 'react';
 
 import { BORDER_RADIUS, GUTTER_SIZE } from '../../theme/styles';
+import normalize from '../../utils/normalize';
 
 interface BaseAvatarProps extends AvatarProps {
   rounded?: boolean;
@@ -13,7 +14,7 @@ function BaseAvatar({ size = 3, rounded, containerStyle, ...props }: BaseAvatarP
 
   return (
     <Avatar
-      size={size * GUTTER_SIZE}
+      size={normalize(size * GUTTER_SIZE)}
       {...props}
       containerStyle={[
         {

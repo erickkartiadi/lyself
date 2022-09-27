@@ -2,6 +2,7 @@ import { SearchBar, SearchBarProps, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 
 import { BORDER_RADIUS, styles } from '../../theme/styles';
+import normalize from '../../utils/normalize';
 
 interface BaseSearchBarProps {
   placeholder: SearchBarProps['placeholder'];
@@ -46,13 +47,13 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
       searchIcon={{
         name: 'search1',
         type: 'antdesign',
-        size: 20,
+        size: normalize(22),
         color: theme.colors.grey2,
       }}
       clearIcon={{
         name: 'clear',
         type: 'material',
-        size: 20,
+        size: normalize(22),
         color: theme.colors.grey2,
       }}
     />

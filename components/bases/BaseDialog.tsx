@@ -45,9 +45,7 @@ function BaseDialog({
               },
             }}
           />
-          <Text small style={{ marginBottom: theme.spacing.md }}>
-            {text}
-          </Text>
+          <Text style={{ marginBottom: theme.spacing.md }}>{text}</Text>
           <Dialog.Actions>
             <Dialog.Button type="solid" title="CONFIRM" onPress={onConfirm} />
             <Dialog.Button

@@ -51,25 +51,11 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   });
 
   const handleRegister = async (registerFormData: RegisterFormData) => {
-    // setIsLoading(true);
-
     try {
       mutation.mutate(registerFormData);
-      // await register({ email, name, password });
-
-      // Toast.show({
-      //   type: 'success',
-      //   text1: 'Email confirmation sent',
-      //   text2: `We have sent you a confirmation email to ${email}, please confirm your email address.`,
-      // });
-      // navigation.navigate('Login');
-
-      // reset();
     } catch (error) {
       if (error) somethingWentWrongToast();
     }
-
-    // setIsLoading(false);
   };
 
   return (
@@ -163,7 +149,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             },
           ]}
         >
-          <Text small>Already have an account? </Text>
+          <Text>Already have an account? </Text>
           <LinkButton to={{ screen: 'Login' }} color="primary">
             Login
           </LinkButton>
