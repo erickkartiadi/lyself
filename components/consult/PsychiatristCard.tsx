@@ -25,25 +25,26 @@ function PsychiatristCard({
 }: Psychiatrist) {
   const { theme } = useTheme();
   const navigation = useNavigation<ConsultScreenNavigationProps['navigation']>();
+
+  const showPsychiatristDetail = () => {
+    navigation.navigate('Psychiatrist', {
+      id,
+      uri,
+      experience,
+      specialty,
+      otherSpecialties,
+      name,
+      rating,
+      patients,
+      description,
+      reviews,
+      educations,
+      place,
+    });
+  };
+
   return (
-    <BaseCard
-      onPress={() =>
-        navigation.navigate('Psychiatrist', {
-          id,
-          uri,
-          experience,
-          specialty,
-          otherSpecialties,
-          name,
-          rating,
-          patients,
-          description,
-          reviews,
-          educations,
-          place,
-        })
-      }
-    >
+    <BaseCard onPress={showPsychiatristDetail}>
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
         <BaseAvatar
           rounded

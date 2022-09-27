@@ -22,7 +22,7 @@ function InDevelopmentScreen() {
       <Text h4 style={{ textAlign: 'center' }}>
         Sorry, this page is still in development 🚧
       </Text>
-      <Button onPress={() => navigation.goBack()} type="clear" title="Go back" />
+      <Button onPress={navigation.goBack} type="clear" title="Go back" />
     </View>
   );
 }

@@ -32,8 +32,8 @@ function AppointmentCard({
 }: AppointmentCardProps) {
   const { theme } = useTheme();
 
-  const [isCancelDialogVisible, toggleIsCancelDialogVisible] = useToggle(false);
-  const [isCancelDialogLoading, toggleIsCancelDialogLoading] = useToggle(false);
+  const [isCancelDialogVisible, setIsCancelDialogVisible] = useToggle(false);
+  const [isCancelDialogLoading, setIsCancelDialogLoading] = useToggle(false);
 
   const backgroundColor = isNearestAppointment
     ? theme.colors.primary
@@ -58,14 +58,20 @@ function AppointmentCard({
   const isCanReschedule = startDate.diff(dayjs(), 'week', true) > 2;
 
   const handleCancelAppointment = () => {
-    toggleIsCancelDialogLoading(true);
+    setIsCancelDialogLoading(true);
     setTimeout(() => {
-      toggleIsCancelDialogLoading(false);
-      toggleIsCancelDialogVisible(false);
+      setIsCancelDialogLoading(false);
+      setIsCancelDialogVisible(false);
     }, 1000);
   };
 
   const bottomSheetRef = useRef<Modalize>(null);
+
+  const hideCancelDialog = () => setIsCancelDialogVisible(true);
+
+  const hideBottomSheet = () => {
+    bottomSheetRef.current?.open();
+  };
 
   return (
     <>
@@ -219,7 +225,7 @@ function AppointmentCard({
                 }}
               >
                 <Button
-                  onPress={() => toggleIsCancelDialogVisible(true)}
+                  onPress={hideCancelDialog}
                   fullWidth
                   uppercase={false}
                   containerStyle={{ flex: 1 }}
@@ -232,7 +238,7 @@ function AppointmentCard({
                   <>
                     <BaseViewSeparator spacing="md" />
                     <Button
-                      onPress={() => bottomSheetRef.current?.open()}
+                      onPress={hideBottomSheet}
                       fullWidth
                       uppercase={false}
                       containerStyle={{ flex: 1 }}
@@ -252,7 +258,7 @@ function AppointmentCard({
         isDialogLoading={isCancelDialogLoading}
         isDialogVisible={isCancelDialogVisible}
         onConfirm={handleCancelAppointment}
-        toggleIsDialogVisible={toggleIsCancelDialogVisible}
+        toggleIsDialogVisible={setIsCancelDialogVisible}
         text={
           <Text small>
             Are you sure you want to cancel your appointment with{' '}

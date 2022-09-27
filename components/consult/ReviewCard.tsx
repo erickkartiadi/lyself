@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { Review } from '../../types/types';
-import useToggle from '../../utils/hooks/useToggle';
 import BaseAvatar from '../bases/BaseAvatar';
 import BaseCard from '../bases/BaseCard';
 
@@ -16,20 +15,24 @@ const NUMBER_OF_LINES = 3;
 
 function ReviewCard({ uri, name, review, time }: Review) {
   const { theme } = useTheme();
-  const [isShowMore, toggleIsShowMore] = useToggle(false);
-  const [isLengthMore, toggleIsLengthMore] = useToggle(false);
+  const [isShowMore, setIsShowMore] = React.useState(false);
+  const [isLengthMore, setIsLengthMore] = React.useState(false);
 
   const onTextLayout = React.useCallback(
     (e: NativeSyntheticEvent<TextLayoutEventData>) => {
-      toggleIsLengthMore(e.nativeEvent.lines.length > NUMBER_OF_LINES);
+      setIsLengthMore(e.nativeEvent.lines.length > NUMBER_OF_LINES);
     },
     []
   );
 
+  const toggleShowMore = () => {
+    setIsShowMore((prev) => !prev);
+  };
+
   return (
     <BaseCard
       enablePressAnimation={isLengthMore}
-      onPress={() => toggleIsShowMore()}
+      onPress={toggleShowMore}
       width={Dimensions.get('screen').width / 1.25}
     >
       <View style={{ flex: 1 }}>

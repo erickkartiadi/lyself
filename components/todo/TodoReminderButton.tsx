@@ -16,6 +16,10 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
   const { isDarkMode } = useContext(ThemeModeContext);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
+  const showDatePicker = () => {
+    setIsDatePickerVisible(true);
+  };
+
   const hideDatePicker = () => {
     setIsDatePickerVisible(false);
   };
@@ -45,7 +49,7 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
           textAlign: 'left',
         }}
         radius="sm"
-        onPress={() => setIsDatePickerVisible(true)}
+        onPress={showDatePicker}
       >
         <Icon
           name="notifications-outline"

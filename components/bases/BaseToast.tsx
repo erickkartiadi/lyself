@@ -22,6 +22,24 @@ interface BaseToastProps extends RNToastProps {
 function BaseToast({ color, icon: { name, type }, ...props }: BaseToastProps) {
   const { theme } = useTheme();
 
+  const renderLeadingIcon = () => (
+    <View style={{ justifyContent: 'center' }}>
+      <Icon
+        size={22}
+        name={name}
+        type={type}
+        backgroundColor={color}
+        iconStyle={{
+          padding: theme.spacing.sm,
+        }}
+        containerStyle={{
+          borderRadius: BORDER_RADIUS.rounded,
+        }}
+        color={theme.colors.white}
+      />
+    </View>
+  );
+
   return (
     <RNToast
       {...props}
@@ -47,23 +65,7 @@ function BaseToast({ color, icon: { name, type }, ...props }: BaseToastProps) {
       contentContainerStyle={{
         paddingLeft: theme.spacing.xl,
       }}
-      renderLeadingIcon={() => (
-        <View style={{ justifyContent: 'center' }}>
-          <Icon
-            size={22}
-            name={name}
-            type={type}
-            backgroundColor={color}
-            iconStyle={{
-              padding: theme.spacing.sm,
-            }}
-            containerStyle={{
-              borderRadius: BORDER_RADIUS.rounded,
-            }}
-            color={theme.colors.white}
-          />
-        </View>
-      )}
+      renderLeadingIcon={renderLeadingIcon}
     />
   );
 }

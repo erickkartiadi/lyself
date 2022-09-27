@@ -6,10 +6,12 @@ function BackButton() {
   const { theme } = useTheme();
   const navigation = useNavigation();
 
+  const goBack = () => navigation.goBack();
+
   return (
     <Button
       type="outline"
-      onPress={() => navigation.goBack()}
+      onPress={goBack}
       containerStyle={{
         alignSelf: 'flex-start',
         marginBottom: theme.spacing.xl,

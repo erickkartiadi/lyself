@@ -1,8 +1,7 @@
 import { FAB, Icon, Text, useTheme } from '@rneui/themed';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import BaseBottomSheet from '../../components/bases/BaseBottomSheet';

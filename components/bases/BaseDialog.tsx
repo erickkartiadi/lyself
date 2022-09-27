@@ -23,11 +23,15 @@ function BaseDialog({
 }: BaseDialogProps) {
   const { theme } = useTheme();
 
+  const hideDialog = () => {
+    toggleIsDialogVisible(false);
+  };
+
   return (
     <Dialog
       overlayStyle={{ backgroundColor: theme.colors.cardBackground }}
       isVisible={isDialogVisible}
-      onBackdropPress={() => toggleIsDialogVisible(false)}
+      onBackdropPress={hideDialog}
     >
       {isDialogLoading ? (
         <Dialog.Loading />
@@ -49,7 +53,7 @@ function BaseDialog({
             <Dialog.Button
               title="CANCEL"
               containerStyle={{ marginRight: theme.spacing.md }}
-              onPress={() => toggleIsDialogVisible(false)}
+              onPress={hideDialog}
             />
           </Dialog.Actions>
         </>

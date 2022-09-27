@@ -3,7 +3,6 @@ import * as React from 'react';
 import { useCallback } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 
-import useToggle from '../utils/hooks/useToggle';
 import BaseLink from './bases/BaseLink';
 
 type ShowHideTextProps = Pick<TextProps, 'numberOfLines'>;
@@ -12,13 +11,17 @@ function ShowHideText({
   numberOfLines = 4,
   children,
 }: React.PropsWithChildren<ShowHideTextProps>) {
-  const [isShowMore, toggleIsShowMore] = useToggle(false);
-  const [isLengthMore, toggleIsLengthMore] = useToggle(false);
+  const [isShowMore, setIsShowMore] = React.useState(false);
+  const [isLengthMore, setIsLengthMore] = React.useState(false);
   const { theme } = useTheme();
 
   const onTextLayout = useCallback((e: NativeSyntheticEvent<TextLayoutEventData>) => {
-    toggleIsLengthMore(e.nativeEvent.lines.length > numberOfLines);
+    setIsLengthMore(e.nativeEvent.lines.length > numberOfLines);
   }, []);
+
+  const toggleIsShowMore = () => {
+    setIsShowMore((prev) => !prev);
+  };
 
   return (
     <>
@@ -33,7 +36,7 @@ function ShowHideText({
         <BaseLink
           color="primary"
           style={{ marginTop: theme.spacing.md }}
-          onPress={() => toggleIsShowMore()}
+          onPress={toggleIsShowMore}
         >
           {isShowMore ? 'View less' : 'View more'}
         </BaseLink>
