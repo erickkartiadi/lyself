@@ -14,6 +14,7 @@ import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks
 import { BORDER_RADIUS, styles } from '../../theme/styles';
 import { TodoScreenNavigationProps } from '../../types/navigation.types';
 import { Todo } from '../../types/types';
+import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useToggle from '../../utils/hooks/useToggle';
 import normalize from '../../utils/normalize';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
@@ -119,43 +120,37 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
     reset();
   };
 
-  // issue: header hide screen after layout animation run
-  // https://github.com/software-mansion/react-native-reanimated/issues/2906
-  // temporary fix by add padding
-  // useApplyHeaderWorkaround(navigation.setOptions);
-
-  // FIXME cannot update a component (`NativeStackNavigator`)
-  navigation.setOptions({
-    headerRight: React.useCallback(
-      () => (
-        <View>
-          <Icon
-            name="filter"
-            type="ionicon"
-            onPress={() => filterBottomSheetRef.current?.open()}
-            iconStyle={{
-              color:
-                !(
-                  selectedSort.sort === 'importanceLevel' &&
-                  selectedSort.orderBy === 'DESC'
-                ) || selectedFilter !== 'Todo'
-                  ? theme.colors.primary
-                  : theme.colors.black,
-            }}
-            containerStyle={{
-              borderRadius: BORDER_RADIUS.rounded,
-              aspectRatio: 1,
-            }}
-          />
-        </View>
-      ),
-      [selectedSort, selectedFilter]
+  const filterHeaderRight = React.useCallback(
+    () => (
+      <View>
+        <Icon
+          name="filter"
+          type="ionicon"
+          onPress={() => filterBottomSheetRef.current?.open()}
+          iconStyle={{
+            color:
+              !(
+                selectedSort.sort === 'importanceLevel' && selectedSort.orderBy === 'DESC'
+              ) || selectedFilter !== 'Todo'
+                ? theme.colors.primary
+                : theme.colors.black,
+          }}
+          containerStyle={{
+            borderRadius: BORDER_RADIUS.rounded,
+            aspectRatio: 1,
+          }}
+        />
+      </View>
     ),
-  });
+    [selectedSort, selectedFilter]
+  );
+
+  useApplyHeaderWorkaround(navigation.setOptions);
 
   useEffect(() => {
     navigation.setOptions({
       headerTitle: selectedFilter,
+      headerRight: filterHeaderRight,
     });
   }, [selectedFilter]);
 

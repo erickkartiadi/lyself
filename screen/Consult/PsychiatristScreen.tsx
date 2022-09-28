@@ -15,10 +15,10 @@ import { BORDER_RADIUS, GUTTER_SIZE, styles } from '../../theme/styles';
 import { PsychiatristScreenNavigationProps } from '../../types/navigation.types';
 import { Education, Review } from '../../types/types';
 import colorAlpha from '../../utils/colorAlpha';
+import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import normalize from '../../utils/normalize';
 
-// FIXME header overlay screen
-function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
+function PsychiatristScreen({ route, navigation }: PsychiatristScreenNavigationProps) {
   const {
     experience,
     name,
@@ -44,6 +44,8 @@ function PsychiatristScreen({ route }: PsychiatristScreenNavigationProps) {
       review={item.review}
     />
   );
+
+  useApplyHeaderWorkaround(navigation.setOptions);
 
   return (
     <View style={{ flex: 1 }}>
