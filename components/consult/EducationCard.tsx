@@ -3,16 +3,16 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { Education } from '../../types/types';
-import BaseAvatar from '../bases/BaseAvatar';
-import BaseCard from '../bases/BaseCard';
+import Avatar from '../base/Avatar';
+import Card from '../base/Card';
 
 function EducationCard({ id, institutionName, uri, startYear, studyPeriod }: Education) {
   const { theme } = useTheme();
 
   return (
-    <BaseCard cardPadding="lg" key={id}>
+    <Card cardPadding="lg" key={id}>
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-        <BaseAvatar
+        <Avatar
           containerStyle={{
             marginRight: theme.spacing.xl,
           }}
@@ -29,7 +29,7 @@ function EducationCard({ id, institutionName, uri, startYear, studyPeriod }: Edu
           </Text>
         </View>
       </View>
-    </BaseCard>
+    </Card>
   );
 }
 

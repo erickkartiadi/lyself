@@ -6,15 +6,14 @@ import { View } from 'react-native';
 import { styles } from '../../theme/styles';
 import { ConsultScreenNavigationProps } from '../../types/navigation.types';
 import { Psychiatrist } from '../../types/types';
-import BaseAvatar from '../bases/BaseAvatar';
-import BaseCard from '../bases/BaseCard';
+import Avatar from '../base/Avatar';
+import Card from '../base/Card';
 
 function PsychiatristCard({
   id,
   uri,
   experience,
   specialty,
-  otherSpecialties,
   name,
   rating,
   patients,
@@ -32,7 +31,6 @@ function PsychiatristCard({
       uri,
       experience,
       specialty,
-      otherSpecialties,
       name,
       rating,
       patients,
@@ -44,11 +42,11 @@ function PsychiatristCard({
   };
 
   return (
-    <BaseCard onPress={showPsychiatristDetail}>
+    <Card onPress={showPsychiatristDetail}>
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-        <BaseAvatar
+        <Avatar
           rounded
-          size={6}
+          size={5.5}
           source={{ uri }}
           containerStyle={{ marginRight: theme.spacing.xl }}
         />
@@ -69,7 +67,7 @@ function PsychiatristCard({
             <Chip
               titleStyle={{ color: theme.colors.black }}
               title={`${rating}%`}
-              color={theme.colors.background}
+              color="secondary"
               icon={{
                 name: 'heart',
                 type: 'ionicon',
@@ -83,7 +81,7 @@ function PsychiatristCard({
             <Chip
               titleStyle={{ color: theme.colors.black }}
               title={`${experience} yrs`}
-              color={theme.colors.background}
+              color="secondary"
               icon={{
                 name: 'work',
                 type: 'material-icon',
@@ -97,7 +95,7 @@ function PsychiatristCard({
             <Chip
               titleStyle={{ color: theme.colors.black }}
               title={`${patients}`}
-              color={theme.colors.background}
+              color="secondary"
               icon={{
                 name: 'people',
                 type: 'ionicon',
@@ -111,7 +109,7 @@ function PsychiatristCard({
           </View>
         </View>
       </View>
-    </BaseCard>
+    </Card>
   );
 }
 

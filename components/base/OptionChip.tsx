@@ -1,20 +1,18 @@
 import { Chip, ChipProps, Colors, useTheme } from '@rneui/themed';
 import * as React from 'react';
 
-import colorAlpha from '../../utils/colorAlpha';
-
-interface BaseChoiceChipProps extends ChipProps {
+interface OptionChipProps extends ChipProps {
   isSelected: boolean;
   chipColor?: keyof Colors;
 }
 
-function BaseChoiceChip({
+function OptionChip({
   buttonStyle,
   isSelected,
   titleStyle,
   chipColor = 'primary',
   ...props
-}: BaseChoiceChipProps) {
+}: OptionChipProps) {
   const { theme } = useTheme();
 
   const selectedColor = theme.colors[chipColor] as string;
@@ -23,27 +21,25 @@ function BaseChoiceChip({
     <Chip
       buttonStyle={[
         {
-          borderWidth: 0.5,
-          borderColor: isSelected ? selectedColor : theme.colors.greyOutline,
+          borderWidth: 0,
         },
         buttonStyle,
       ]}
       titleStyle={[
         {
-          color: isSelected ? selectedColor : theme.colors.black,
+          color: isSelected ? theme.colors.white : theme.colors.black,
           paddingHorizontal: 0,
         },
         titleStyle,
       ]}
-      color={colorAlpha(selectedColor, 0.25)}
-      type={isSelected ? 'solid' : 'outline'}
+      color={isSelected ? selectedColor : theme.colors.secondary}
       {...props}
     />
   );
 }
 
-BaseChoiceChip.defaultProps = {
+OptionChip.defaultProps = {
   chipColor: 'primary',
 };
 
-export default BaseChoiceChip;
+export default OptionChip;

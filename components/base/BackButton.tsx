@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Button, Icon, useTheme } from '@rneui/themed';
 import React from 'react';
 
-import normalize from '../utils/normalize';
+import normalize from '../../utils/normalize';
 
 function BackButton() {
   const { theme } = useTheme();

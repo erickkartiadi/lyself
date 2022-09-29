@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import { Review } from '../../types/types';
-import BaseAvatar from '../bases/BaseAvatar';
-import BaseCard from '../bases/BaseCard';
+import Avatar from '../base/Avatar';
+import Card from '../base/Card';
 
 const NUMBER_OF_LINES = 3;
 
@@ -30,7 +30,7 @@ function ReviewCard({ uri, name, review, time }: Review) {
   };
 
   return (
-    <BaseCard
+    <Card
       enablePressAnimation={isLengthMore}
       onPress={toggleShowMore}
       width={Dimensions.get('screen').width / 1.25}
@@ -44,7 +44,7 @@ function ReviewCard({ uri, name, review, time }: Review) {
             marginBottom: theme.spacing.lg,
           }}
         >
-          <BaseAvatar
+          <Avatar
             rounded
             containerStyle={{ marginRight: theme.spacing.lg }}
             source={{ uri }}
@@ -64,7 +64,7 @@ function ReviewCard({ uri, name, review, time }: Review) {
           {review}
         </Text>
       </View>
-    </BaseCard>
+    </Card>
   );
 }
 

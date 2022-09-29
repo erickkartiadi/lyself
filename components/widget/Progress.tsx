@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { styles } from '../../theme/styles';
 import { progressData } from '../../utils/constant/seed';
 import ProgressActivityCard from '../cards/ProgressActivityCard';
-import SectionTitle from '../SectionTitle';
+import SectionTitle from '../layout/SectionTitle';
 
 function Progress() {
   return (

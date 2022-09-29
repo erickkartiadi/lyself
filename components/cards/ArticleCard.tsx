@@ -1,4 +1,4 @@
-import { Icon, Image, Text, useTheme } from '@rneui/themed';
+import { Icon, Image, Skeleton, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
 import React from 'react';
 import { View } from 'react-native';
@@ -6,7 +6,7 @@ import { View } from 'react-native';
 import { BORDER_RADIUS } from '../../theme/styles';
 import { Article } from '../../types/types';
 import { formatTimeAgo } from '../../utils/formatTimeAgo';
-import AnimatedPressable from '../AnimatedPressable';
+import AnimatedPressable from '../base/AnimatedPressable';
 
 function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
   const { theme } = useTheme();
@@ -58,3 +58,17 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
 }
 
 export default ArticleCard;
+
+export function ArticleCardPlaceholder() {
+  const { theme } = useTheme();
+
+  return (
+    <View style={{ marginTop: theme.spacing.md }}>
+      <Skeleton width={320} height={240} style={{ borderRadius: BORDER_RADIUS.xl }} />
+
+      <Skeleton circle height={16} style={{ marginTop: theme.spacing.xl }} />
+      <Skeleton circle height={16} style={{ marginTop: theme.spacing.md }} />
+      <Skeleton circle style={{ marginTop: theme.spacing.md }} height={16} width={200} />
+    </View>
+  );
+}

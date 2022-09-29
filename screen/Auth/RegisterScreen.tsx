@@ -9,10 +9,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 import registerIllustration from '../../assets/images/register-illustration.png';
-import BackButton from '../../components/BackButton';
-import TextInput from '../../components/forms/Input';
-import PasswordInput from '../../components/forms/PasswordInput';
-import LinkButton from '../../components/LinkButton';
+import BackButton from '../../components/base/BackButton';
+import TextInput from '../../components/base/Input';
+import NavLink from '../../components/base/NavLink';
+import PasswordInput from '../../components/base/PasswordInput';
 import { register } from '../../services/api/auth/auth.api';
 import { styles } from '../../theme/styles';
 import { RegisterScreenNavigationProps } from '../../types/navigation.types';
@@ -150,9 +150,9 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
           ]}
         >
           <Text>Already have an account? </Text>
-          <LinkButton to={{ screen: 'Login' }} color="primary">
+          <NavLink to={{ screen: 'Login' }} color="primary">
             Login
-          </LinkButton>
+          </NavLink>
         </View>
       </SafeAreaView>
     </ScrollView>

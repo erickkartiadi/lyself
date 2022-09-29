@@ -10,9 +10,10 @@ import normalize from '../utils/normalize';
 export const lightColors = {
   primary: '#F55C7A',
   primaryDark: '#D0385C',
-  secondary: '#BD8087',
-  background: '#FFFFFF',
-  cardBackground: '#F6F9FB',
+  secondary: '#E8EDF2',
+  background: '#FBFCFD',
+  cardBackground: '#FFFFFF',
+  searchBg: '#E8EDF2',
   blue: '#00A3FF',
   purple: '#9C5FAE',
   spotify: '#1db954',
@@ -24,9 +25,10 @@ export const lightColors = {
 export const darkColors = {
   primary: '#EF617E',
   primaryDark: '#F38399',
-  secondary: '#B57078',
+  secondary: '#303337',
+  searchBg: '#303337',
   background: '#121212',
-  cardBackground: '#232323',
+  cardBackground: '#191B1C',
   blue: '#0096ED',
   purple: '#9454A7',
   spotify: '#1BAC4E',
@@ -77,21 +79,9 @@ export const styles = StyleSheet.create({
     paddingVertical: THEME_SPACING.md,
   },
 
-  // TODO update shadow style
   // shadow generator -> https://ethercreative.github.io/react-native-shadow-generator/
   shadowLarge: {
-    // shadowColor: colorAlpha(lightColors.black, 0.25),
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
-
-    elevation: 12,
-  },
-  shadowMedium: {
-    // shadowColor: colorAlpha(lightColors.black, 0.25),
+    shadowColor: '#rgba(0,0,0,0.1)',
     shadowOffset: {
       width: 0,
       height: 3,
@@ -101,16 +91,27 @@ export const styles = StyleSheet.create({
 
     elevation: 6,
   },
+  shadowMedium: {
+    shadowColor: '#rgba(0,0,0,0.1)',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
+  },
   shadowSmall: {
-    // shadowColor: colorAlpha(lightColors.black, 0.25),
+    shadowColor: '#rgba(0,0,0,0.1)',
     shadowOffset: {
       width: 0,
       height: 1,
     },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
 
-    elevation: 1,
+    elevation: 2,
   },
 });
 

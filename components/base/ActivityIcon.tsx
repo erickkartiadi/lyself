@@ -2,9 +2,9 @@ import { Icon, IconProps, useTheme } from '@rneui/themed';
 import React from 'react';
 import { FlexStyle } from 'react-native';
 
-import { BORDER_RADIUS } from '../theme/styles';
-import { ActivityType } from '../types/types';
-import { ACTIVITY_ICON } from '../utils/constant/constant';
+import { BORDER_RADIUS } from '../../theme/styles';
+import { ActivityType } from '../../types/types';
+import { ACTIVITY_ICON } from '../../utils/constant/constant';
 
 export type ActivityTypeIcon = ActivityType | 'other';
 

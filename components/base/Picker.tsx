@@ -9,7 +9,7 @@ import DropDownPicker, {
 import { BORDER_RADIUS, FONT, styles } from '../../theme/styles';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 
-type BasePickerProps = {
+type PickerProps = {
   upIconName: IconProps['name'];
   downIconName: IconProps['name'];
   iconSize: IconProps['size'];
@@ -17,14 +17,14 @@ type BasePickerProps = {
   dropdownWidth: FlexStyle['width'];
 };
 
-function BasePicker({
+function Picker({
   upIconName,
   downIconName,
   iconType,
   iconSize,
   dropdownWidth,
   ...props
-}: BasePickerProps & DropDownPickerProps<ValueType>) {
+}: PickerProps & DropDownPickerProps<ValueType>) {
   const { isDarkMode } = React.useContext(ThemeModeContext);
   const { theme } = useTheme();
 
@@ -90,4 +90,4 @@ function BasePicker({
   );
 }
 
-export default BasePicker;
+export default Picker;

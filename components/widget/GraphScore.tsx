@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { styles } from '../../theme/styles';
 import MentalScoreCard from '../cards/MentalScoreCard';
 import StatusCard, { StatusCardProps } from '../cards/StatusCard';
-import SectionTitle from '../SectionTitle';
+import SectionTitle from '../layout/SectionTitle';
 
 function GraphScore() {
   const { theme } = useTheme();

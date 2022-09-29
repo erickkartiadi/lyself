@@ -3,14 +3,17 @@ import * as React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
 import AppointmentCard from '../../components/consult/AppointmentCard';
+import VerticalSeparator from '../../components/layout/VerticalSeparator';
 import { FONT, styles } from '../../theme/styles';
+import { AppointmentScreenNavigationProps } from '../../types/navigation.types';
 import { Appointment } from '../../types/types';
 import {
   completedAppointmentData,
   upcomingAppointmentData,
 } from '../../utils/constant/seed';
+import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 
-function AppointmentScreen() {
+function AppointmentScreen({ navigation }: AppointmentScreenNavigationProps) {
   const [tabIndex, setTabIndex] = React.useState(0);
   const { theme } = useTheme();
 
@@ -21,15 +24,18 @@ function AppointmentScreen() {
     <AppointmentCard isAppointmentCompleted {...item} />
   );
 
+  useApplyHeaderWorkaround(navigation.setOptions);
+
   return (
     <>
+      {/* TODO hide tab on scroll */}
       <Tab
         value={tabIndex}
         onChange={(e) => setTabIndex(e)}
         containerStyle={[
           styles.shadowSmall,
           {
-            backgroundColor: theme.colors.cardBackground,
+            backgroundColor: theme.colors.secondary,
           },
         ]}
         disableIndicator
@@ -68,6 +74,7 @@ function AppointmentScreen() {
           <FlatList
             data={upcomingAppointmentData}
             renderItem={renderUpcomingAppointment}
+            ItemSeparatorComponent={VerticalSeparator}
             contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
           />
         </TabView.Item>
@@ -75,6 +82,7 @@ function AppointmentScreen() {
           <FlatList
             data={completedAppointmentData}
             renderItem={renderCompletedAppointment}
+            ItemSeparatorComponent={VerticalSeparator}
             contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
           />
         </TabView.Item>

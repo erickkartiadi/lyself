@@ -1,19 +1,24 @@
-import { Card, CardProps, ThemeSpacing, useTheme } from '@rneui/themed';
+import {
+  Card as RNECard,
+  CardProps as RNECardProps,
+  ThemeSpacing,
+  useTheme,
+} from '@rneui/themed';
 import * as React from 'react';
 import { FlexStyle, StyleProp, ViewStyle } from 'react-native';
 
 import { BORDER_RADIUS, styles } from '../../theme/styles';
-import AnimatedPressable, { AnimatedPressableProps } from '../AnimatedPressable';
+import AnimatedPressable, { AnimatedPressableProps } from './AnimatedPressable';
 
-interface BaseCardProps extends AnimatedPressableProps {
+interface CardProps extends AnimatedPressableProps {
   width?: FlexStyle['width'];
   cardPadding?: keyof ThemeSpacing;
   enableCardPadding?: boolean;
-  cardStyle?: CardProps['containerStyle'];
+  cardStyle?: RNECardProps['containerStyle'];
   containerStyle?: StyleProp<ViewStyle>;
 }
 
-function BaseCard({
+function Card({
   children,
   onPress,
   containerStyle,
@@ -22,7 +27,7 @@ function BaseCard({
   width,
   cardPadding = 'xl',
   enablePressAnimation,
-}: BaseCardProps) {
+}: CardProps) {
   const { theme } = useTheme();
 
   return (
@@ -31,29 +36,27 @@ function BaseCard({
       onPress={onPress}
       style={[containerStyle, { width }]}
     >
-      <Card
+      <RNECard
         containerStyle={[
-          styles.shadowSmall,
+          styles.shadowLarge,
           {
-            borderWidth: 0,
-            padding: enableCardPadding ? theme.spacing[cardPadding] : 0,
+            borderWidth: 0.35,
             borderRadius: BORDER_RADIUS.lg,
-            overflow: 'hidden',
-            backgroundColor: theme.colors.cardBackground,
-            marginTop: theme.spacing.md,
-            marginBottom: theme.spacing.md,
             borderColor: theme.colors.grey5,
+            padding: enableCardPadding ? theme.spacing[cardPadding] : 0,
+            backgroundColor: theme.colors.cardBackground,
+            marginTop: 0,
           },
           cardStyle,
         ]}
       >
         {children}
-      </Card>
+      </RNECard>
     </AnimatedPressable>
   );
 }
 
-BaseCard.defaultProps = {
+Card.defaultProps = {
   enableCardPadding: true,
   width: '100%',
   cardPadding: 'xl',
@@ -61,4 +64,4 @@ BaseCard.defaultProps = {
   containerStyle: {},
 };
 
-export default BaseCard;
+export default Card;

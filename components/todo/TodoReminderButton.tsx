@@ -1,4 +1,4 @@
-import { Button, Icon, useTheme } from '@rneui/themed';
+import { Icon, useTheme } from '@rneui/themed';
 import React, { useContext, useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
@@ -6,6 +6,8 @@ import { BORDER_RADIUS } from '../../theme/styles';
 import { Todo } from '../../types/types';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
+import normalize from '../../utils/normalize';
+import OptionChip from '../base/OptionChip';
 
 interface TodoReminderButtonProps extends Pick<Todo, 'reminderTime'> {
   setReminderTime: React.Dispatch<React.SetStateAction<Date | null>>;
@@ -41,37 +43,47 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
         accentColor={theme.colors.primary}
         minimumDate={new Date()}
       />
-      <Button
+      {/* <Button
         containerStyle={{ alignItems: 'flex-start', flex: 1 }}
-        buttonStyle={{ backgroundColor: theme.colors.cardBackground }}
+        buttonStyle={{ backgroundColor: theme.colors.searchBg }}
         titleStyle={{
           color: reminderTime ? theme.colors.primary : theme.colors.black,
           textAlign: 'left',
         }}
         radius="sm"
         onPress={showDatePicker}
+      > */}
+      <OptionChip
+        isSelected={reminderTime !== null}
+        radius="sm"
+        onPress={showDatePicker}
+        size="lg"
+        uppercase
+        containerStyle={{ alignItems: 'flex-start', flex: 1 }}
       >
         <Icon
-          name="notifications-outline"
+          name="notifications"
           type="ionicon"
-          size={18}
-          color={reminderTime ? theme.colors.primary : theme.colors.black}
+          size={normalize(20)}
+          color={reminderTime ? theme.colors.white : theme.colors.black}
           containerStyle={{ marginRight: theme.spacing.lg }}
         />
         {reminderTime ? formatReminderTime(reminderTime) : 'Remind Me'}
         {reminderTime && (
           <Icon
             name="close"
-            onPress={() => setReminderTime(null)}
             type="ionicon"
-            size={18}
+            onPress={() => setReminderTime(null)}
+            size={normalize(20)}
+            color={theme.colors.black}
             containerStyle={{
               marginLeft: theme.spacing.xl * 1.5,
               borderRadius: BORDER_RADIUS.rounded,
             }}
           />
         )}
-      </Button>
+      </OptionChip>
+      {/* </Button> */}
     </>
   );
 }

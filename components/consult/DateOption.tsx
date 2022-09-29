@@ -2,7 +2,7 @@ import { ButtonProps, Text, useTheme } from '@rneui/themed';
 import dayjs from 'dayjs';
 import * as React from 'react';
 
-import BaseChoiceChip from '../bases/BaseChoiceChip';
+import OptionChip from '../base/OptionChip';
 
 interface DateOptionProps extends Pick<ButtonProps, 'onPress'> {
   date: Date;
@@ -16,32 +16,29 @@ function DateOption({ date, isSelected, onPress }: DateOptionProps) {
   const dayOfWeek = dayjsDate.format('ddd');
   const dateOfMonth = dayjsDate.format('DD');
 
-  const isToday = dayjsDate.isSame(dayjs(), 'date');
-
-  const textColor = isToday ? theme.colors.primary : theme.colors.black;
-  const selectedTextColor = isSelected ? theme.colors.primary : textColor;
+  const selectedTextColor = isSelected ? theme.colors.white : theme.colors.black;
 
   return (
-    <BaseChoiceChip
+    <OptionChip
       isSelected={isSelected}
       onPress={onPress}
       buttonStyle={{
         flex: 1,
         flexDirection: 'column',
+        paddingVertical: theme.spacing.xl,
         paddingHorizontal: theme.spacing.xl,
-        paddingVertical: theme.spacing.lg,
       }}
     >
       <Text
-        h2
-        h2Style={{
+        h1
+        h1Style={{
           color: selectedTextColor,
         }}
       >
         {dateOfMonth}
       </Text>
       <Text
-        caption
+        small
         style={{
           textTransform: 'uppercase',
           color: selectedTextColor,
@@ -49,7 +46,7 @@ function DateOption({ date, isSelected, onPress }: DateOptionProps) {
       >
         {dayOfWeek}
       </Text>
-    </BaseChoiceChip>
+    </OptionChip>
   );
 }
 

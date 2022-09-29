@@ -8,7 +8,7 @@ import { BORDER_RADIUS, FONT_FAMILY, GUTTER_SIZE } from '../../theme/styles';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { generateRandomNumber } from '../../utils/generateRandom';
 import normalize from '../../utils/normalize';
-import BaseCard from '../bases/BaseCard';
+import Card from '../base/Card';
 
 function Emoji({ fill }: { fill: number }) {
   let currentEmoji = '😁';
@@ -28,7 +28,7 @@ function MentalScoreCard() {
   const { isDarkMode } = useContext(ThemeModeContext);
 
   return (
-    <BaseCard enableCardPadding={false}>
+    <Card enableCardPadding={false} containerStyle={{ marginBottom: theme.spacing.xl }}>
       <View
         style={{
           flex: 1,
@@ -116,7 +116,7 @@ function MentalScoreCard() {
           paddingBottom: -58,
         }}
       />
-    </BaseCard>
+    </Card>
   );
 }
 export default MentalScoreCard;

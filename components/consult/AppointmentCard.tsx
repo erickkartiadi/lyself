@@ -9,10 +9,10 @@ import { BORDER_RADIUS } from '../../theme/styles';
 import { Appointment } from '../../types/types';
 import useToggle from '../../utils/hooks/useToggle';
 import normalize from '../../utils/normalize';
-import BaseAvatar from '../bases/BaseAvatar';
-import BaseCard from '../bases/BaseCard';
-import BaseDialog from '../bases/BaseDialog';
-import BaseViewSeparator from '../bases/BaseViewSeparator';
+import Avatar from '../base/Avatar';
+import Card from '../base/Card';
+import Dialog from '../base/Dialog';
+import HorizontalSeparator from '../layout/HorizontalSeparator';
 import RescheduleBottomSheet from './RescheduleBottomSheet';
 
 dayjs.extend(isBetween);
@@ -42,7 +42,7 @@ function AppointmentCard({
   const textColor = isNearestAppointment ? theme.colors.white : theme.colors.black;
   const secondaryBackgroundColor = isNearestAppointment
     ? theme.colors.primaryDark
-    : theme.colors.grey5;
+    : theme.colors.secondary;
   const buttonBackgroundColor = isNearestAppointment
     ? theme.colors.secondary
     : theme.colors.primary;
@@ -76,7 +76,7 @@ function AppointmentCard({
 
   return (
     <>
-      <BaseCard
+      <Card
         cardStyle={{
           backgroundColor,
         }}
@@ -87,8 +87,8 @@ function AppointmentCard({
             alignItems: 'center',
           }}
         >
-          <BaseAvatar
-            size={4}
+          <Avatar
+            size={3.5}
             rounded
             source={{ uri }}
             containerStyle={{ marginRight: theme.spacing.lg }}
@@ -192,7 +192,7 @@ function AppointmentCard({
                   />
                   Chat
                 </Button>
-                <BaseViewSeparator spacing="sm" />
+                <HorizontalSeparator spacing="sm" />
                 <Button
                   fullWidth
                   uppercase={false}
@@ -238,7 +238,7 @@ function AppointmentCard({
                 </Button>
                 {isCanReschedule && (
                   <>
-                    <BaseViewSeparator spacing="md" />
+                    <HorizontalSeparator spacing="md" />
                     <Button
                       onPress={hideBottomSheet}
                       fullWidth
@@ -254,8 +254,8 @@ function AppointmentCard({
             )}
           </>
         )}
-      </BaseCard>
-      <BaseDialog
+      </Card>
+      <Dialog
         title="Cancel Appointment"
         isDialogLoading={isCancelDialogLoading}
         isDialogVisible={isCancelDialogVisible}

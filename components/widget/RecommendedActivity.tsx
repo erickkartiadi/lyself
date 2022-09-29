@@ -4,11 +4,11 @@ import { FlatList, View } from 'react-native';
 import { styles } from '../../theme/styles';
 import { recommendedData } from '../../utils/constant/seed';
 import { comingSoonToast } from '../../utils/toast';
-import BaseViewSeparator from '../bases/BaseViewSeparator';
 import RecommendedActivityCard, {
   RecommendedActivityCardProps,
 } from '../cards/RecommendedActivityCard';
-import SectionTitle from '../SectionTitle';
+import HorizontalSeparator from '../layout/HorizontalSeparator';
+import SectionTitle from '../layout/SectionTitle';
 
 function RecommendedActivity() {
   const renderRecommended = ({ item }: { item: RecommendedActivityCardProps }) => (
@@ -28,7 +28,7 @@ function RecommendedActivity() {
       <FlatList
         horizontal
         overScrollMode="never"
-        ItemSeparatorComponent={BaseViewSeparator}
+        ItemSeparatorComponent={HorizontalSeparator}
         style={[styles.noContainerGutter]}
         contentContainerStyle={[styles.containerGutter]}
         showsHorizontalScrollIndicator={false}

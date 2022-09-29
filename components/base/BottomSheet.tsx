@@ -4,16 +4,16 @@ import { Modalize, ModalizeProps } from 'react-native-modalize';
 import { IHandles } from 'react-native-modalize/lib/options';
 import { Portal } from 'react-native-portalize';
 
-export interface BaseBottomSheetProps extends ModalizeProps {
+export interface BottomSheetProps extends ModalizeProps {
   bottomSheetRef: React.RefObject<IHandles>;
 }
 
-function BaseBottomSheet({
+function BottomSheet({
   children,
   bottomSheetRef,
   modalStyle,
   ...props
-}: BaseBottomSheetProps) {
+}: BottomSheetProps) {
   const { theme } = useTheme();
 
   return (
@@ -32,4 +32,4 @@ function BaseBottomSheet({
   );
 }
 
-export default BaseBottomSheet;
+export default BottomSheet;

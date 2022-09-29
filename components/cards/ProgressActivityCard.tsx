@@ -7,8 +7,8 @@ import { ProgressActivity } from '../../types/types';
 import { ACTIVITY_ICON } from '../../utils/constant/constant';
 import normalize from '../../utils/normalize';
 import { comingSoonToast } from '../../utils/toast';
-import ActivityIcon from '../ActivityIcon';
-import BaseCard from '../bases/BaseCard';
+import ActivityIcon from '../base/ActivityIcon';
+import Card from '../base/Card';
 
 function ProgressActivityCard({ activity, id, progress, time, title }: ProgressActivity) {
   const { theme } = useTheme();
@@ -16,7 +16,11 @@ function ProgressActivityCard({ activity, id, progress, time, title }: ProgressA
   const activityColor = theme.colors[ACTIVITY_ICON[activity].color] as string;
 
   return (
-    <BaseCard key={id} onPress={comingSoonToast}>
+    <Card
+      key={id}
+      containerStyle={{ marginBottom: theme.spacing.xl }}
+      onPress={comingSoonToast}
+    >
       <View
         style={{
           flex: 1,
@@ -66,7 +70,7 @@ function ProgressActivityCard({ activity, id, progress, time, title }: ProgressA
           </View>
         </View>
       </View>
-    </BaseCard>
+    </Card>
   );
 }
 

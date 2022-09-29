@@ -1,9 +1,8 @@
-import { Icon, IconProps, Text, useTheme } from '@rneui/themed';
+import { Icon, IconProps, normalize, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { Pressable, PressableProps, View } from 'react-native';
 
-import { BORDER_RADIUS, styles } from '../theme/styles';
-import normalize from '../utils/normalize';
+import { BORDER_RADIUS, styles } from '../../theme/styles';
 
 interface SettingMenuProp {
   title: string;

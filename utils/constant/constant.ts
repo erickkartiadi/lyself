@@ -1,6 +1,6 @@
 import { Colors } from '@rneui/themed';
 
-const DAYS = [
+export const DAYS = [
   'Sunday',
   'Monday',
   'Tuesday',
@@ -10,7 +10,7 @@ const DAYS = [
   'Saturday',
 ];
 
-const MONTHS = [
+export const MONTHS = [
   'January',
   'February',
   'March',
@@ -25,7 +25,7 @@ const MONTHS = [
   'December',
 ];
 
-const ACTIVITY_ICON: {
+export const ACTIVITY_ICON: {
   [key: string]: {
     type: string;
     name: string;
@@ -89,14 +89,14 @@ const ACTIVITY_ICON: {
   },
 };
 
-const IMPORTANCE_COLORS: { [key: string]: keyof Colors } = {
+export const IMPORTANCE_COLORS: { [key: string]: keyof Colors } = {
   high: 'error',
   medium: 'warning',
   low: 'blue',
   none: 'grey3',
 };
 
-const SPECIALTIES = [
+export const SPECIALTIES = [
   'Addiction',
   'Child and adolescent',
   'Geriatric',
@@ -106,7 +106,7 @@ const SPECIALTIES = [
   'Nurse practitioner',
 ] as const;
 
-const ACTIVITY_TYPE = [
+export const ACTIVITY_TYPE = [
   'article',
   'breathing',
   'consult',
@@ -115,5 +115,3 @@ const ACTIVITY_TYPE = [
   'music',
   'todo',
 ] as const;
-
-export { ACTIVITY_ICON, ACTIVITY_TYPE, DAYS, IMPORTANCE_COLORS, MONTHS, SPECIALTIES };

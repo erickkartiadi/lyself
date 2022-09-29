@@ -2,7 +2,7 @@ import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 
-import normalize from '../utils/normalize';
+import normalize from '../../utils/normalize';
 import ActivityIcon, { ActivityTypeIcon } from './ActivityIcon';
 import AnimatedPressable, { AnimatedPressableProps } from './AnimatedPressable';
 

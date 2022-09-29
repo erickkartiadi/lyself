@@ -8,15 +8,16 @@ import { FONT, styles } from '../../theme/styles';
 import { Todo } from '../../types/types';
 import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
 import normalize from '../../utils/normalize';
-import BaseBottomSheet, { BaseBottomSheetProps } from '../bases/BaseBottomSheet';
-import SectionTitle from '../SectionTitle';
+import { importanceLevelItems } from '../../utils/sort';
+import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
+import OptionChip from '../base/OptionChip';
+import SectionTitle from '../layout/SectionTitle';
 import TodoCheckbox from './TodoCheckbox';
-import TodoImportanceButton from './TodoImportanceButton';
 import TodoReminderButton from './TodoReminderButton';
 
 export type TodoFormData = Pick<Todo, 'todo' | 'note'>;
 
-interface TodoBottomSheetProps extends BaseBottomSheetProps, Pick<Todo, 'completed'> {
+interface TodoBottomSheetProps extends BottomSheetProps, Pick<Todo, 'completed'> {
   currentReminderTime: Todo['reminderTime'];
   currentImportanceLevel: Todo['importanceLevel'];
   control: Control<TodoFormData>;
@@ -30,6 +31,7 @@ interface TodoBottomSheetProps extends BaseBottomSheetProps, Pick<Todo, 'complet
   isEditing?: boolean;
   isDeleteLoading?: boolean;
   isSaveLoading: boolean;
+  buttonTitle: string;
 }
 
 function TodoBottomSheet({
@@ -48,6 +50,7 @@ function TodoBottomSheet({
   onDeletePress,
   isDeleteLoading,
   isSaveLoading,
+  buttonTitle,
 }: TodoBottomSheetProps) {
   const { theme } = useTheme();
 
@@ -56,7 +59,7 @@ function TodoBottomSheet({
   ] as string;
 
   return (
-    <BaseBottomSheet
+    <BottomSheet
       scrollViewProps={{ keyboardShouldPersistTaps: 'handled' }}
       bottomSheetRef={bottomSheetRef}
       onClose={onClose}
@@ -104,10 +107,7 @@ function TodoBottomSheet({
             name="note"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                style={[
-                  FONT.small,
-                  { textAlignVertical: 'top', color: theme.colors.grey2 },
-                ]}
+                style={[{ textAlignVertical: 'top' }]}
                 placeholder="Add note"
                 placeholderTextColor={theme.colors.grey3}
                 onChangeText={onChange}
@@ -129,26 +129,20 @@ function TodoBottomSheet({
         <View style={styles.sectionMedium}>
           <SectionTitle title="Importance" />
           <ScrollView horizontal showsVerticalScrollIndicator={false}>
-            <TodoImportanceButton
-              importanceLevel="none"
-              onPress={() => setCurrentImportanceLevel('none')}
-              currentImportanceLevel={currentImportanceLevel}
-            />
-            <TodoImportanceButton
-              importanceLevel="low"
-              onPress={() => setCurrentImportanceLevel('low')}
-              currentImportanceLevel={currentImportanceLevel}
-            />
-            <TodoImportanceButton
-              importanceLevel="medium"
-              onPress={() => setCurrentImportanceLevel('medium')}
-              currentImportanceLevel={currentImportanceLevel}
-            />
-            <TodoImportanceButton
-              importanceLevel="high"
-              onPress={() => setCurrentImportanceLevel('high')}
-              currentImportanceLevel={currentImportanceLevel}
-            />
+            {importanceLevelItems.map(({ importance, label }) => (
+              <OptionChip
+                size="lg"
+                containerStyle={{ marginRight: theme.spacing.md }}
+                chipColor={IMPORTANCE_COLORS[importance]}
+                radius="sm"
+                uppercase
+                key={importance}
+                isSelected={importance === currentImportanceLevel}
+                onPress={() => setCurrentImportanceLevel(importance)}
+              >
+                {label}
+              </OptionChip>
+            ))}
           </ScrollView>
         </View>
         {isButtonVisible && (
@@ -158,7 +152,9 @@ function TodoBottomSheet({
                 loading={isDeleteLoading}
                 radius="md"
                 type="outline"
-                containerStyle={{ marginRight: theme.spacing.md }}
+                containerStyle={{
+                  marginRight: theme.spacing.md,
+                }}
                 onPress={onDeletePress}
               >
                 <Icon
@@ -176,12 +172,12 @@ function TodoBottomSheet({
               containerStyle={{ flex: 1 }}
               fullWidth
             >
-              {isEditing ? 'update' : 'save'}
+              {buttonTitle}
             </Button>
           </View>
         )}
       </View>
-    </BaseBottomSheet>
+    </BottomSheet>
   );
 }
 

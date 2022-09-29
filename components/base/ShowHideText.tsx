@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useCallback } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 
-import BaseLink from './bases/BaseLink';
+import ButtonLink from './Link';
 
 type ShowHideTextProps = Pick<TextProps, 'numberOfLines'>;
 
@@ -33,13 +33,13 @@ function ShowHideText({
       </Text>
 
       {isLengthMore && (
-        <BaseLink
+        <ButtonLink
           color="primary"
           style={{ marginTop: theme.spacing.md }}
           onPress={toggleIsShowMore}
         >
           {isShowMore ? 'View less' : 'View more'}
-        </BaseLink>
+        </ButtonLink>
       )}
     </>
   );

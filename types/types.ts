@@ -1,17 +1,17 @@
 import { ACTIVITY_TYPE, SPECIALTIES } from '../utils/constant/constant';
 
-type Name = string;
-type Specialties = typeof SPECIALTIES[number];
-type ActivityType = typeof ACTIVITY_TYPE[number];
+export type Name = string;
+export type Specialties = typeof SPECIALTIES[number];
+export type ActivityType = typeof ACTIVITY_TYPE[number];
 
-interface User {
+export type User = {
   id: string;
   name: string;
   email: string;
   password: string;
-}
+};
 
-type Playlist = {
+export type Playlist = {
   id: string;
   creator: string;
   imageUrl: string;
@@ -19,18 +19,18 @@ type Playlist = {
   name: string;
 };
 
-type Activity = {
+export type Activity = {
   id: string;
   title: string;
   time: string;
   activity: ActivityType;
 };
 
-type ProgressActivity = Activity & {
+export type ProgressActivity = Activity & {
   progress: number;
 };
 
-type Review = {
+export type Review = {
   id: string;
   name: Name;
   review: string;
@@ -38,7 +38,7 @@ type Review = {
   uri: string;
 };
 
-type Education = {
+export type Education = {
   id: string;
   institutionName: string;
   startYear: number;
@@ -46,7 +46,7 @@ type Education = {
   uri: string;
 };
 
-type Article = {
+export type Article = {
   title: string;
   source: string;
   publishedAt: string;
@@ -54,7 +54,7 @@ type Article = {
   urlToImage: string;
 };
 
-type Place = {
+export type Place = {
   id: string;
   address: string;
   googleMapLink: string;
@@ -62,7 +62,7 @@ type Place = {
   uri: string;
 };
 
-type Psychiatrist = {
+export type Psychiatrist = {
   id: string;
   name: Name;
   uri: string;
@@ -70,7 +70,6 @@ type Psychiatrist = {
   experience: number;
   rating: number;
   educations: Education[];
-  otherSpecialties: Specialties[];
   place: Place;
   reviews: Review[];
   specialty: Specialties;
@@ -78,17 +77,17 @@ type Psychiatrist = {
   patients: number;
 };
 
-type Appointment = Pick<Psychiatrist, 'name' | 'specialty' | 'uri'> & {
+export type Appointment = Pick<Psychiatrist, 'name' | 'specialty' | 'uri'> & {
   date: Date;
   durationInMinutes: number;
 };
 
-type Schedule = {
+export type Schedule = {
   date: Date;
   availableHours: number[];
 };
 
-type Chat = {
+export type Chat = {
   name: string;
   text: string;
   time: string;
@@ -96,15 +95,15 @@ type Chat = {
   unread: number;
 };
 
-type Status = {
+export type Status = {
   title: string;
   value: string;
   caption: string;
 };
 
-type TodoImportance = 'high' | 'medium' | 'low' | 'none';
+export type TodoImportance = 'high' | 'medium' | 'low' | 'none';
 
-type Todo = {
+export type Todo = {
   id: string;
   todo: string;
   completed: boolean;
@@ -112,23 +111,3 @@ type Todo = {
   note: string;
   reminderTime: Date | null;
 };
-
-export {
-  Activity,
-  ActivityType,
-  Appointment,
-  Article,
-  Chat,
-  Education,
-  Playlist,
-  ProgressActivity,
-  Psychiatrist,
-  Review,
-  Schedule,
-  Specialties,
-  Status,
-  Todo,
-  TodoImportance,
-  User,
-};
-export { ACTIVITY_TYPE, SPECIALTIES };

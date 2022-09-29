@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
-import ChatBox from '../../components/ChatBox';
+import ChatBox from '../../components/base/ChatBox';
 import { Chat } from '../../types/types';
 import { chatData } from '../../utils/constant/seed';
 

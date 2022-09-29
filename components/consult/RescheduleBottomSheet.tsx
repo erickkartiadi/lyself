@@ -10,15 +10,15 @@ import { MONTHS } from '../../utils/constant/constant';
 import { scheduleData } from '../../utils/constant/seed';
 import useToggle from '../../utils/hooks/useToggle';
 import normalize from '../../utils/normalize';
-import BaseBottomSheet, { BaseBottomSheetProps } from '../bases/BaseBottomSheet';
-import BaseDialog from '../bases/BaseDialog';
-import BasePicker from '../bases/BasePicker';
-import BaseViewSeparator from '../bases/BaseViewSeparator';
-import SectionTitle from '../SectionTitle';
+import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
+import Dialog from '../base/Dialog';
+import Picker from '../base/Picker';
+import HorizontalSeparator from '../layout/HorizontalSeparator';
+import SectionTitle from '../layout/SectionTitle';
 import DateOption from './DateOption';
 import TimeOption from './TimeOption';
 
-type RescheduleBottomSheetProps = Pick<Appointment, 'name'> & BaseBottomSheetProps;
+type RescheduleBottomSheetProps = Pick<Appointment, 'name'> & BottomSheetProps;
 
 function RescheduleBottomSheet({ name, bottomSheetRef }: RescheduleBottomSheetProps) {
   const { theme } = useTheme();
@@ -79,13 +79,13 @@ function RescheduleBottomSheet({ name, bottomSheetRef }: RescheduleBottomSheetPr
 
   return (
     <>
-      <BaseBottomSheet bottomSheetRef={bottomSheetRef}>
+      <BottomSheet bottomSheetRef={bottomSheetRef}>
         <View style={[styles.sectionLarge, styles.container]}>
           <SectionTitle
             title="Schedule"
             showRightComponent
             rightComponent={
-              <BasePicker
+              <Picker
                 max={3}
                 dropdownWidth={normalize(128)}
                 iconSize={normalize(16)}
@@ -107,7 +107,7 @@ function RescheduleBottomSheet({ name, bottomSheetRef }: RescheduleBottomSheetPr
               showsHorizontalScrollIndicator={false}
               data={data}
               horizontal
-              ItemSeparatorComponent={BaseViewSeparator}
+              ItemSeparatorComponent={HorizontalSeparator}
               renderItem={renderDateOption}
               style={[styles.noContainerGutter]}
               contentContainerStyle={[styles.containerGutter]}
@@ -178,8 +178,8 @@ function RescheduleBottomSheet({ name, bottomSheetRef }: RescheduleBottomSheetPr
             </View>
           </View>
         )}
-      </BaseBottomSheet>
-      <BaseDialog
+      </BottomSheet>
+      <Dialog
         title="Reschedule Appointment"
         isDialogLoading={isRescheduleDialogLoading}
         isDialogVisible={isRescheduleDialogVisible}

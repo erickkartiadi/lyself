@@ -3,7 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { Psychiatrist } from './types';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
   ConsultStack: NavigatorScreenParams<ConsultStackParamList>;
@@ -11,84 +11,75 @@ type RootStackParamList = {
   InDevelopment: undefined;
 };
 
-type AuthStackParamList = {
+export type AuthStackParamList = {
   GetStarted: undefined;
   Login: undefined;
   Register: undefined;
   ForgotPassword: undefined;
 };
 
-type HomeTabParamList = {
+export type HomeTabParamList = {
   Home: undefined;
   Explore: undefined;
   Chat: undefined;
   Account: undefined;
 };
 
-type ConsultStackParamList = {
+export type ConsultStackParamList = {
   Consult: undefined;
   Psychiatrist: Psychiatrist;
   Appointment: undefined;
 };
 
-type TodoStackParamList = {
+export type TodoStackParamList = {
   Todo: undefined;
 };
 
-type GetStartedScreenNavigationProps = NativeStackScreenProps<
+export type GetStartedScreenNavigationProps = NativeStackScreenProps<
   AuthStackParamList & RootStackParamList,
   'GetStarted'
 >;
 
-type LoginScreenNavigationProps = NativeStackScreenProps<
+export type LoginScreenNavigationProps = NativeStackScreenProps<
   AuthStackParamList & RootStackParamList,
   'Login'
 >;
 
-type ForgotPasswordScreenNavigationProps = NativeStackScreenProps<
+export type ForgotPasswordScreenNavigationProps = NativeStackScreenProps<
   AuthStackParamList,
   'ForgotPassword'
 >;
 
-type RegisterScreenNavigationProps = NativeStackScreenProps<
+export type RegisterScreenNavigationProps = NativeStackScreenProps<
   AuthStackParamList,
   'Register'
 >;
 
-type ExploreScreenNavigationProps = NativeStackScreenProps<
+export type ExploreScreenNavigationProps = NativeStackScreenProps<
   HomeTabParamList & RootStackParamList,
   'Explore'
 >;
-type TodoScreenNavigationProps = NativeStackScreenProps<TodoStackParamList, 'Todo'>;
+export type TodoScreenNavigationProps = NativeStackScreenProps<
+  TodoStackParamList,
+  'Todo'
+>;
 
-type AccountScreenNavigationProps = NativeStackScreenProps<
+export type AccountScreenNavigationProps = NativeStackScreenProps<
   HomeTabParamList & RootStackParamList,
   'Account'
 >;
 
-type ConsultScreenNavigationProps = NativeStackScreenProps<
+export type ConsultScreenNavigationProps = NativeStackScreenProps<
   ConsultStackParamList,
   'Consult'
 >;
 
-type PsychiatristScreenNavigationProps = NativeStackScreenProps<
+export type AppointmentScreenNavigationProps = NativeStackScreenProps<
+  ConsultStackParamList,
+  'Appointment'
+>;
+
+export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
   ConsultStackParamList,
   'Psychiatrist'
 >;
-
-export {
-  AccountScreenNavigationProps,
-  AuthStackParamList,
-  ConsultScreenNavigationProps,
-  ConsultStackParamList,
-  ExploreScreenNavigationProps,
-  ForgotPasswordScreenNavigationProps,
-  GetStartedScreenNavigationProps,
-  HomeTabParamList,
-  LoginScreenNavigationProps,
-  PsychiatristScreenNavigationProps,
-  RegisterScreenNavigationProps,
-  RootStackParamList,
-  TodoScreenNavigationProps,
-  TodoStackParamList,
-};

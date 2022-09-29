@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
-import LinkButton from '../../components/LinkButton';
+import NavLink from '../../components/base/NavLink';
 import { styles } from '../../theme/styles';
 import { GetStartedScreenNavigationProps } from '../../types/navigation.types';
 
@@ -184,9 +184,9 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
             ]}
           >
             <Text>Didn&apos;t have an account? </Text>
-            <LinkButton to={{ screen: 'Register' }} color="primary">
+            <NavLink to={{ screen: 'Register' }} color="primary">
               Sign Up
-            </LinkButton>
+            </NavLink>
           </View>
         </View>
       </SafeAreaView>

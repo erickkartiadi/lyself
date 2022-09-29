@@ -1,16 +1,17 @@
-import { Chip, FAB, Icon, Text, useTheme } from '@rneui/themed';
+import { FAB, Icon, Text, useTheme } from '@rneui/themed';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
 import { View } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
-import BaseAvatar from '../../components/bases/BaseAvatar';
-import BaseLink from '../../components/bases/BaseLink';
-import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
+import Avatar from '../../components/base/Avatar';
+import Card from '../../components/base/Card';
+import ButtonLink from '../../components/base/Link';
+import ShowHideText from '../../components/base/ShowHideText';
 import EducationCard from '../../components/consult/EducationCard';
 import ReviewCard from '../../components/consult/ReviewCard';
-import SectionTitle from '../../components/SectionTitle';
-import ShowHideText from '../../components/ShowHideText';
+import HorizontalSeparator from '../../components/layout/HorizontalSeparator';
+import SectionTitle from '../../components/layout/SectionTitle';
 import { BORDER_RADIUS, GUTTER_SIZE, styles } from '../../theme/styles';
 import { PsychiatristScreenNavigationProps } from '../../types/navigation.types';
 import { Education, Review } from '../../types/types';
@@ -24,7 +25,6 @@ function PsychiatristScreen({ route, navigation }: PsychiatristScreenNavigationP
     name,
     rating,
     specialty,
-    otherSpecialties,
     uri,
     patients,
     description,
@@ -55,7 +55,7 @@ function PsychiatristScreen({ route, navigation }: PsychiatristScreenNavigationP
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.sectionLarge}>
-          <BaseAvatar
+          <Avatar
             source={{ uri }}
             size={7}
             rounded
@@ -166,7 +166,7 @@ function PsychiatristScreen({ route, navigation }: PsychiatristScreenNavigationP
             <FlatList
               horizontal
               overScrollMode="never"
-              ItemSeparatorComponent={BaseViewSeparator}
+              ItemSeparatorComponent={HorizontalSeparator}
               style={[styles.noContainerGutter]}
               contentContainerStyle={[styles.containerGutter]}
               showsHorizontalScrollIndicator={false}
@@ -198,79 +198,52 @@ function PsychiatristScreen({ route, navigation }: PsychiatristScreenNavigationP
               )}
           </View>
           <View style={styles.sectionMedium}>
-            <SectionTitle title="Other Specialties" />
-            <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-              {otherSpecialties
-                .filter(
-                  (value, index, array) =>
-                    value !== specialty && array.indexOf(value) === index
-                )
-                .map((each) => (
-                  <Chip
-                    title={each}
-                    key={each}
-                    color={theme.colors.cardBackground}
-                    titleStyle={{ color: theme.colors.black }}
-                    containerStyle={{
-                      marginRight: theme.spacing.md,
-                      marginBottom: theme.spacing.md,
-                    }}
-                  />
-                ))}
-            </View>
-          </View>
-          <View style={styles.sectionMedium}>
             <SectionTitle title="Location" />
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginTop: theme.spacing.md,
-              }}
-            >
-              <BaseAvatar
-                size={6}
-                containerStyle={{
-                  marginRight: theme.spacing.xl,
-                }}
-                source={{ uri: place.uri }}
-              />
-              <View style={{ flex: 1 }}>
-                <Text
-                  subtitle
-                  style={{
-                    textTransform: 'capitalize',
-                    flex: 1,
-                    marginBottom: 0,
+            <Card containerStyle={{ flex: 1 }}>
+              <View style={{ flex: 1, flexDirection: 'row' }}>
+                <Avatar
+                  size={6}
+                  containerStyle={{
+                    marginRight: theme.spacing.xl,
                   }}
-                >
-                  {place.name}
-                </Text>
-                <Text
-                  small
-                  style={{
-                    textTransform: 'capitalize',
-                    flex: 1,
-                  }}
-                >
-                  {place.address}
-                </Text>
-                <BaseLink
-                  color="primary"
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}
-                  onPress={() =>
-                    Linking.openURL(`https://www.google.com/maps/search/${place.name}`)
-                  }
-                >
-                  Open in Google Maps
-                </BaseLink>
+                  source={{ uri: place.uri }}
+                />
+                <View style={{ flex: 1 }}>
+                  <Text
+                    subtitle
+                    style={{
+                      textTransform: 'capitalize',
+                      flex: 1,
+                      marginBottom: 0,
+                    }}
+                  >
+                    {place.name}
+                  </Text>
+                  <Text
+                    small
+                    style={{
+                      textTransform: 'capitalize',
+                      flex: 1,
+                    }}
+                  >
+                    {place.address}
+                  </Text>
+                  <ButtonLink
+                    color="primary"
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                    onPress={() =>
+                      Linking.openURL(`https://www.google.com/maps/search/${place.name}`)
+                    }
+                  >
+                    Open in Google Maps
+                  </ButtonLink>
+                </View>
               </View>
-            </View>
+            </Card>
           </View>
         </View>
       </ScrollView>

@@ -2,22 +2,19 @@ import { Badge, ListItem, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 
-import { styles } from '../theme/styles';
-import { Chat } from '../types/types';
-import BaseAvatar from './bases/BaseAvatar';
-import { SwipeableLeftButton, SwipeableRightButton } from './SwipeableButton';
+import { styles } from '../../theme/styles';
+import { Chat } from '../../types/types';
+import Avatar from './Avatar';
 
 function ChatBox({ name, text, time, unread, uri }: Chat) {
   const { theme } = useTheme();
 
   return (
-    <ListItem.Swipeable
-      leftContent={SwipeableLeftButton}
-      rightContent={SwipeableRightButton}
+    <ListItem
       key={name}
       containerStyle={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <BaseAvatar rounded size={4} source={{ uri }} />
+      <Avatar rounded size={4} source={{ uri }} />
       <ListItem.Content>
         <View
           style={{
@@ -59,7 +56,7 @@ function ChatBox({ name, text, time, unread, uri }: Chat) {
           </View>
         </View>
       </ListItem.Content>
-    </ListItem.Swipeable>
+    </ListItem>
   );
 }
 

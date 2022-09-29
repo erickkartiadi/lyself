@@ -2,16 +2,16 @@ import { Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
-export interface BaseLinkProps extends TouchableOpacityProps {
+export interface ButtonLinkProps extends TouchableOpacityProps {
   color?: 'primary' | 'blue';
 }
 
-function BaseLink({
+function ButtonLink({
   onPress,
   children,
   color = 'blue',
   ...props
-}: React.PropsWithChildren<BaseLinkProps>) {
+}: React.PropsWithChildren<ButtonLinkProps>) {
   const { theme } = useTheme();
 
   return (
@@ -27,8 +27,8 @@ function BaseLink({
   );
 }
 
-BaseLink.defaultProps = {
+ButtonLink.defaultProps = {
   color: 'blue',
 };
 
-export default BaseLink;
+export default ButtonLink;

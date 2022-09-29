@@ -113,7 +113,7 @@ const myTheme = createTheme({
       },
     },
     Chip: {
-      titleStyle: FONT.small,
+      titleStyle: [FONT.subtitle3],
     },
   },
 });

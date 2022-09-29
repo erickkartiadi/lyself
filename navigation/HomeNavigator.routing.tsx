@@ -2,8 +2,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from '@rneui/themed';
 import * as React from 'react';
 
-import LeftHeader from '../components/header/LeftHeader';
-import RightHeader from '../components/header/RightHeader';
+import LeftHeader from '../components/layout/LeftHeader';
+import RightHeader from '../components/layout/RightHeader';
 import AccountScreen from '../screen/Home/AccountScreen';
 import ChatScreen from '../screen/Home/ChatScreen';
 import ExploreScreen from '../screen/Home/ExploreScreen';

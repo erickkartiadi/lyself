@@ -3,9 +3,9 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { Activity } from '../../types/types';
-import ActivityIcon from '../ActivityIcon';
-import { AnimatedPressableProps } from '../AnimatedPressable';
-import BaseCard from '../bases/BaseCard';
+import ActivityIcon from '../base/ActivityIcon';
+import { AnimatedPressableProps } from '../base/AnimatedPressable';
+import Card from '../base/Card';
 
 export interface RecommendedActivityCardProps extends Activity, AnimatedPressableProps {}
 
@@ -18,7 +18,7 @@ function RecommendedActivityCard({
   const { theme } = useTheme();
 
   return (
-    <BaseCard containerStyle={{ flex: 1 }} onPress={onPress}>
+    <Card containerStyle={{ flex: 1 }} onPress={onPress}>
       <View
         style={{
           flex: 1,
@@ -36,7 +36,7 @@ function RecommendedActivityCard({
           <Text color={theme.colors.grey3}>{time}</Text>
         </View>
       </View>
-    </BaseCard>
+    </Card>
   );
 }
 

@@ -9,8 +9,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
-import BackButton from '../../components/BackButton';
-import TextInput from '../../components/forms/Input';
+import BackButton from '../../components/base/BackButton';
+import TextInput from '../../components/base/Input';
 import { forgotPassword } from '../../services/api/auth/auth.api';
 import { styles } from '../../theme/styles';
 import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';

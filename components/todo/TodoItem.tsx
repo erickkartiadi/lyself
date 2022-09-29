@@ -1,4 +1,4 @@
-import { Chip, ListItem, Text, useTheme } from '@rneui/themed';
+import { Icon, ListItem, Text, useTheme } from '@rneui/themed';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
@@ -7,9 +7,6 @@ import Animated, {
   LightSpeedInLeft,
   LightSpeedOutLeft,
   SequencedTransition,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
 } from 'react-native-reanimated';
 import { useDebounce } from 'use-debounce';
 
@@ -21,6 +18,7 @@ import { formatReminderTime } from '../../utils/formatTimeAgo';
 import useToggle from '../../utils/hooks/useToggle';
 import normalize from '../../utils/normalize';
 import { somethingWentWrongToast } from '../../utils/toast';
+import Card from '../base/Card';
 import TodoBottomSheet, { TodoFormData } from './TodoBottomSheet';
 import TodoCheckbox from './TodoCheckbox';
 import TodoSwipeableRight from './TodoSwipeableRight';
@@ -69,8 +67,12 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
       if (error) somethingWentWrongToast();
     }
 
+    // FIXME conflict with delete mutation
     bottomSheetRef.current?.close();
   };
+
+  const watchTodo = watch('todo', todo);
+  const watchNote = watch('note', note);
 
   // update todo if checkbox has changed for 1 second
   useEffect(() => {
@@ -79,8 +81,8 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
       id,
       importanceLevel: currentImportanceLevel,
       reminderTime: currentReminderTime,
-      note: watch('note', note),
-      todo: watch('todo', todo),
+      note: watchNote,
+      todo: watchTodo,
     });
   }, [debouncedIsCompleted]);
 
@@ -88,25 +90,10 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     deleteMutation.mutate(id);
   };
 
-  const scaleValue = useSharedValue(1);
-
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{ scale: scaleValue.value }],
-  }));
-
-  const onPressInAnimation = () => {
-    scaleValue.value = withSpring(0.95);
-  };
-
-  const onPressOutAnimation = () => {
-    scaleValue.value = withSpring(1);
-  };
-
   return (
     <Animated.View
       layout={SequencedTransition}
       entering={LightSpeedInLeft}
-      style={animatedStyles}
       exiting={LightSpeedOutLeft}
     >
       <ListItem.Swipeable
@@ -126,67 +113,61 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
           },
         ]}
         rightStyle={{ marginBottom: theme.spacing.md, paddingLeft: theme.spacing.md }}
-        onPressIn={onPressInAnimation}
-        onPressOut={onPressOutAnimation}
-        onPress={showBottomSheet}
       >
-        <View
-          style={[
-            {
-              backgroundColor: theme.colors.cardBackground,
-              padding: theme.spacing.xl,
-              borderRadius: BORDER_RADIUS.md,
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-            },
-          ]}
-        >
-          <TodoCheckbox
-            color={importanceColor}
-            checked={isCompleted}
-            onCheckboxPress={() => toggleIsCompleted()}
-            size={normalize(24)}
-          />
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'column',
-            }}
-          >
-            <Text
-              numberOfLines={1}
+        <Card onPress={showBottomSheet}>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            <TodoCheckbox
+              color={importanceColor}
+              checked={isCompleted}
+              onCheckboxPress={() => toggleIsCompleted()}
+              size={normalize(28)}
+            />
+            <View
               style={{
-                color: isCompleted ? theme.colors.grey3 : theme.colors.black,
-                textDecorationLine: isCompleted ? 'line-through' : 'none',
-                textDecorationStyle: 'solid',
-                textDecorationColor: importanceColor,
-                width: '90%',
+                flex: 1,
+                flexDirection: 'column',
               }}
             >
-              {watch('todo', todo)}
-            </Text>
-            {!isCompleted && currentReminderTime && (
-              <Chip
-                containerStyle={{
-                  alignSelf: 'flex-start',
-                  marginTop: theme.spacing.md,
+              <Text
+                subtitle
+                numberOfLines={1}
+                style={{
+                  color: isCompleted ? theme.colors.grey3 : theme.colors.black,
+                  textDecorationLine: isCompleted ? 'line-through' : 'none',
+                  textDecorationStyle: 'solid',
+                  textDecorationColor: importanceColor,
+                  width: '90%',
                 }}
-                color={theme.colors.background}
-                icon={{
-                  name: 'notifications-outline',
-                  type: 'ionicon',
-                  size: 16,
-                  color: theme.colors.grey1,
-                }}
-                titleStyle={{ color: theme.colors.grey1 }}
-                title={formatReminderTime(currentReminderTime)}
-              />
-            )}
+              >
+                {watchTodo}
+              </Text>
+              {!isCompleted && currentReminderTime && (
+                <View
+                  style={{
+                    marginTop: theme.spacing.xs,
+                    flex: 1,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Icon
+                    containerStyle={{ marginRight: theme.spacing.sm }}
+                    name="notifications-outline"
+                    type="ionicon"
+                    size={16}
+                    color={theme.colors.grey3}
+                  />
+                  <Text small color={theme.colors.grey3}>
+                    {formatReminderTime(currentReminderTime)}
+                  </Text>
+                </View>
+              )}
+            </View>
           </View>
-        </View>
+        </Card>
       </ListItem.Swipeable>
       <TodoBottomSheet
+        buttonTitle={watchTodo === '' ? 'DELETE' : 'UPDATE'}
         onSubmit={handleSubmit(handleUpdateTodo)}
         onDeletePress={handleDeleteTodo}
         onClose={async () => {
@@ -195,8 +176,8 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
             completed: isCompleted,
             importanceLevel: currentImportanceLevel,
             reminderTime: currentReminderTime,
-            note: watch('note', note),
-            todo: watch('todo', todo),
+            note: watchNote,
+            todo: watchTodo,
           });
         }}
         isSaveLoading={updateMutation.isLoading}

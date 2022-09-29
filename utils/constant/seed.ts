@@ -2,13 +2,11 @@ import dayjs from 'dayjs';
 
 import {
   Activity,
-  ACTIVITY_TYPE,
   Appointment,
   Chat,
   ProgressActivity,
   Psychiatrist,
   Schedule,
-  SPECIALTIES,
 } from '../../types/types';
 import {
   generateLorem,
@@ -21,6 +19,7 @@ import {
   generateRandomTimesAgo,
   generateRandomUUID,
 } from '../generateRandom';
+import { ACTIVITY_TYPE, SPECIALTIES } from './constant';
 
 export const user = {
   name: 'Erick Kartiadi',

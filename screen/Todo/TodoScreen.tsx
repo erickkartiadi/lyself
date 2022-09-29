@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
-import BaseBottomSheet from '../../components/bases/BaseBottomSheet';
-import BaseChoiceChip from '../../components/bases/BaseChoiceChip';
-import RefreshControl from '../../components/placeholder/RefreshControl';
-import SectionTitle from '../../components/SectionTitle';
+import BottomSheet from '../../components/base/BottomSheet';
+import OptionChip from '../../components/base/OptionChip';
+import RefreshControl from '../../components/layout/RefreshControl';
+import SectionTitle from '../../components/layout/SectionTitle';
 import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
 import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks';
@@ -193,6 +193,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         }
       />
       <TodoBottomSheet
+        buttonTitle="SAVE"
         isSaveLoading={mutation.isLoading}
         onSubmit={handleSubmit(handleAddTodo)}
         bottomSheetRef={todoBottomSheetRef}
@@ -206,7 +207,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         isButtonVisible={watch('todo', '') !== ''}
         isEditing={false}
       />
-      <BaseBottomSheet
+      <BottomSheet
         bottomSheetRef={filterBottomSheetRef}
         modalStyle={[styles.containerGutter, styles.sectionLarge]}
       >
@@ -222,19 +223,20 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             }}
           >
             {sortItems.map(({ label, sort, orderBy }) => (
-              <BaseChoiceChip
+              <OptionChip
                 key={label}
                 containerStyle={{
                   marginRight: theme.spacing.md,
                   marginBottom: theme.spacing.md,
                 }}
+                size="lg"
                 onPress={() => setSelectedSort({ orderBy, sort })}
                 isSelected={
                   selectedSort.sort === sort && selectedSort.orderBy === orderBy
                 }
               >
                 {label}
-              </BaseChoiceChip>
+              </OptionChip>
             ))}
           </View>
         </View>
@@ -249,21 +251,22 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             }}
           >
             {filterItems.map(({ label, filter }) => (
-              <BaseChoiceChip
+              <OptionChip
                 key={label}
                 containerStyle={{
                   marginRight: theme.spacing.md,
                   marginBottom: theme.spacing.md,
                 }}
+                size="lg"
                 onPress={() => setSelectedFilter(filter)}
                 isSelected={selectedFilter === filter}
               >
                 {label}
-              </BaseChoiceChip>
+              </OptionChip>
             ))}
           </View>
         </View>
-      </BaseBottomSheet>
+      </BottomSheet>
     </>
   );
 }

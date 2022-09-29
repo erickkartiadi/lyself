@@ -2,15 +2,18 @@ import React from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-import BaseSearchBar from '../../components/bases/BaseSearchBar';
+import SearchBar from '../../components/base/SearchBar';
 import AppointmentCard from '../../components/consult/AppointmentCard';
 import PsychiatristCard from '../../components/consult/PsychiatristCard';
-import SectionTitle from '../../components/SectionTitle';
+import SectionTitle from '../../components/layout/SectionTitle';
+import VerticalSeparator from '../../components/layout/VerticalSeparator';
 import { styles } from '../../theme/styles';
+import { ConsultScreenNavigationProps } from '../../types/navigation.types';
 import { Psychiatrist } from '../../types/types';
 import { psychiatristData, upcomingAppointmentData } from '../../utils/constant/seed';
+import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 
-function ConsultScreen() {
+function ConsultScreen({ navigation }: ConsultScreenNavigationProps) {
   const renderTopPsychiatrist = ({
     item: {
       id,
@@ -19,7 +22,6 @@ function ConsultScreen() {
       name,
       rating,
       specialty,
-      otherSpecialties,
       patients,
       description,
       reviews,
@@ -37,7 +39,6 @@ function ConsultScreen() {
       experience={experience}
       name={name}
       rating={rating}
-      otherSpecialties={otherSpecialties}
       specialty={specialty}
       description={description}
       reviews={reviews}
@@ -45,14 +46,17 @@ function ConsultScreen() {
     />
   );
 
+  useApplyHeaderWorkaround(navigation.setOptions);
+
   return (
     <FlatList
       data={psychiatristData}
       renderItem={renderTopPsychiatrist}
+      ItemSeparatorComponent={VerticalSeparator}
       contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
       ListHeaderComponent={
         <>
-          <BaseSearchBar placeholder="Find a psychiatrist" />
+          <SearchBar placeholder="Find a psychiatrist" />
 
           {upcomingAppointmentData.length > 0 && (
             <View style={styles.sectionLarge}>

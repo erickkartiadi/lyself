@@ -1,4 +1,4 @@
-import { Todo } from '../types/types';
+import { Todo, TodoImportance } from '../types/types';
 
 export type OrderBy = 'ASC' | 'DESC';
 
@@ -22,22 +22,27 @@ export const sortISOStringDate = (
 export type TodoSort = 'importanceLevel' | 'reminderTime';
 export type TodoFilter = 'Completed' | 'Todo' | 'All';
 
-export const importanceLevelRank: {
-  [key in Todo['importanceLevel']]: { level: number };
-} = {
-  high: {
-    level: 3,
+export const importanceLevelItems: {
+  importance: TodoImportance;
+  label: string;
+}[] = [
+  {
+    importance: 'high',
+    label: 'High',
   },
-  medium: {
-    level: 2,
+  {
+    importance: 'medium',
+    label: 'Medium',
   },
-  low: {
-    level: 1,
+  {
+    importance: 'low',
+    label: 'Low',
   },
-  none: {
-    level: 0,
+  {
+    importance: 'none',
+    label: 'none',
   },
-};
+];
 
 export const sortReminderTime = (todos: Todo[], orderBy: OrderBy) => {
   const haveReminderTime = todos

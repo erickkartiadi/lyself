@@ -8,10 +8,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import loginIllustration from '../../assets/images/login-illustration.png';
-import BackButton from '../../components/BackButton';
-import TextInput from '../../components/forms/Input';
-import PasswordInput from '../../components/forms/PasswordInput';
-import LinkButton from '../../components/LinkButton';
+import BackButton from '../../components/base/BackButton';
+import TextInput from '../../components/base/Input';
+import NavLink from '../../components/base/NavLink';
+import PasswordInput from '../../components/base/PasswordInput';
 import { login } from '../../services/api/auth/auth.api';
 import { styles } from '../../theme/styles';
 import { LoginScreenNavigationProps } from '../../types/navigation.types';
@@ -126,7 +126,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             marginBottom: theme.spacing.xl * 1.25,
           }}
         >
-          <LinkButton to={{ screen: 'ForgotPassword' }}>Forgot Password?</LinkButton>
+          <NavLink to={{ screen: 'ForgotPassword' }}>Forgot Password?</NavLink>
         </View>
         <Button
           loading={mutation.isLoading}
@@ -146,9 +146,9 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
           ]}
         >
           <Text>Didn&apos;t have an account? </Text>
-          <LinkButton to={{ screen: 'Register' }} color="primary">
+          <NavLink to={{ screen: 'Register' }} color="primary">
             Sign Up
-          </LinkButton>
+          </NavLink>
         </View>
       </SafeAreaView>
     </ScrollView>

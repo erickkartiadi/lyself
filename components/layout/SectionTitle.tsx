@@ -1,8 +1,8 @@
-import { Text, useTheme } from '@rneui/themed';
+import { Text, ThemeSpacing, useTheme } from '@rneui/themed';
 import React from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 
-import LinkButton from './LinkButton';
+import NavLink from '../base/NavLink';
 
 interface SectionTitleProps {
   title: string;
@@ -10,6 +10,7 @@ interface SectionTitleProps {
   showRightComponent?: boolean;
   rightComponent?: React.ReactNode;
   containerStyle?: StyleProp<ViewStyle>;
+  marginBottom?: keyof ThemeSpacing;
 }
 
 function SectionTitle({
@@ -18,6 +19,7 @@ function SectionTitle({
   rightComponent,
   screen = 'InDevelopment',
   containerStyle,
+  marginBottom = 'xl',
 }: SectionTitleProps) {
   const { theme } = useTheme();
   return (
@@ -28,7 +30,7 @@ function SectionTitle({
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: theme.spacing.md,
+          marginBottom: theme.spacing[marginBottom],
         },
         containerStyle,
       ]}
@@ -38,7 +40,7 @@ function SectionTitle({
           {title}
         </Text>
         {showRightComponent && !rightComponent ? (
-          <LinkButton
+          <NavLink
             style={{ flexShrink: 1, alignItems: 'flex-end' }}
             to={{
               screen: showRightComponent && screen && screen,
@@ -46,7 +48,7 @@ function SectionTitle({
             color="primary"
           >
             See All
-          </LinkButton>
+          </NavLink>
         ) : (
           rightComponent && rightComponent
         )}
@@ -58,6 +60,7 @@ function SectionTitle({
 SectionTitle.defaultProps = {
   showRightComponent: false,
   rightComponent: null,
+  marginBottom: 'xl',
   screen: 'InDevelopment',
   containerStyle: {},
 };

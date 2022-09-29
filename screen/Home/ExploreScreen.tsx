@@ -5,15 +5,15 @@ import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import React, { useEffect, useState } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
 
-import ActivityButton from '../../components/ActivityButton';
-import BaseSearchBar from '../../components/bases/BaseSearchBar';
-import BaseViewSeparator from '../../components/bases/BaseViewSeparator';
-import ArticleCard from '../../components/cards/ArticleCard';
-import PlaylistCard from '../../components/cards/PlaylistCard';
-import ArticleCardPlaceholder from '../../components/placeholder/ArticleCardPlaceholder';
-import PlaylistCardPlaceholder from '../../components/placeholder/PlaylistCardPlaceholder';
-import RefreshControl from '../../components/placeholder/RefreshControl';
-import SectionTitle from '../../components/SectionTitle';
+import ActivityButton from '../../components/base/ActivityButton';
+import SearchBar from '../../components/base/SearchBar';
+import ArticleCard, { ArticleCardPlaceholder } from '../../components/cards/ArticleCard';
+import PlaylistCard, {
+  PlaylistCardPlaceholder,
+} from '../../components/cards/PlaylistCard';
+import HorizontalSeparator from '../../components/layout/HorizontalSeparator';
+import RefreshControl from '../../components/layout/RefreshControl';
+import SectionTitle from '../../components/layout/SectionTitle';
 import fetchNews from '../../services/api/news';
 import { fetchAccessToken, fetchFeaturedPlaylist } from '../../services/api/spotify';
 import { styles } from '../../theme/styles';
@@ -53,9 +53,9 @@ const renderArticles = ({ item }: { item: Article }) => (
 const renderEmptyArticles = () => (
   <View style={{ width: '100%', flexDirection: 'row' }}>
     <ArticleCardPlaceholder />
-    <BaseViewSeparator />
+    <HorizontalSeparator />
     <ArticleCardPlaceholder />
-    <BaseViewSeparator />
+    <HorizontalSeparator />
     <ArticleCardPlaceholder />
   </View>
 );
@@ -63,11 +63,11 @@ const renderEmptyArticles = () => (
 const renderEmptyPlaylists = () => (
   <View style={{ width: '100%', flexDirection: 'row' }}>
     <PlaylistCardPlaceholder />
-    <BaseViewSeparator />
+    <HorizontalSeparator />
     <PlaylistCardPlaceholder />
-    <BaseViewSeparator />
+    <HorizontalSeparator />
     <PlaylistCardPlaceholder />
-    <BaseViewSeparator />
+    <HorizontalSeparator />
     <PlaylistCardPlaceholder />
   </View>
 );
@@ -120,7 +120,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
       }
       contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
     >
-      <BaseSearchBar placeholder="Search tools, news or forum" />
+      <SearchBar placeholder="Search tools, news or forum" />
       <View
         style={[
           styles.noContainerGutter,
@@ -171,7 +171,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           overScrollMode="never"
           horizontal
           ListEmptyComponent={renderEmptyArticles}
-          ItemSeparatorComponent={BaseViewSeparator}
+          ItemSeparatorComponent={HorizontalSeparator}
           showsHorizontalScrollIndicator={false}
           style={[styles.noContainerGutter]}
           contentContainerStyle={[styles.containerGutter]}
@@ -185,7 +185,7 @@ function ExploreScreen({ navigation }: ExploreScreenNavigationProps) {
           <FlatList
             horizontal
             overScrollMode="never"
-            ItemSeparatorComponent={BaseViewSeparator}
+            ItemSeparatorComponent={HorizontalSeparator}
             showsHorizontalScrollIndicator={false}
             style={styles.noContainerGutter}
             contentContainerStyle={styles.containerGutter}

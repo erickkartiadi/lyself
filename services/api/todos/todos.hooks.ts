@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { Todo } from '../../../types/types';
 import {
-  importanceLevelRank,
+  importanceLevelItems,
   OrderBy,
   sortNumber,
   sortReminderTime,
@@ -26,8 +26,12 @@ export const useGetTodos = (
 
       const sorted = filtered.sort((a, b) =>
         sortNumber(
-          importanceLevelRank[a.importanceLevel].level,
-          importanceLevelRank[b.importanceLevel].level,
+          importanceLevelItems.findIndex(
+            ({ importance }) => importance === a.importanceLevel
+          ),
+          importanceLevelItems.findIndex(
+            ({ importance }) => importance === b.importanceLevel
+          ),
           orderBy
         )
       );

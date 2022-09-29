@@ -3,7 +3,7 @@ import React from 'react';
 import { TextStyle, View } from 'react-native';
 
 import { Status } from '../../types/types';
-import BaseCard from '../bases/BaseCard';
+import Card from '../base/Card';
 
 export interface StatusCardProps extends Status {
   textColor: TextStyle['color'];
@@ -15,7 +15,7 @@ function StatusCard({ title, caption, value, textColor, icon }: StatusCardProps)
   const { theme } = useTheme();
 
   return (
-    <BaseCard key={title} width="48%">
+    <Card key={title} containerStyle={{ marginBottom: theme.spacing.xl }} width="48%">
       <Text subtitle>{title}</Text>
       <View
         style={{
@@ -42,7 +42,7 @@ function StatusCard({ title, caption, value, textColor, icon }: StatusCardProps)
           </View>
         )}
       </View>
-    </BaseCard>
+    </Card>
   );
 }
 export default StatusCard;

@@ -15,12 +15,12 @@ import {
 } from '../../theme/styles';
 import normalize from '../../utils/normalize';
 
-interface BaseToastProps extends RNToastProps {
+interface ToastProps extends RNToastProps {
   color: string;
   icon: Pick<IconProps, 'name' | 'type'>;
 }
 
-function BaseToast({ color, icon: { name, type }, ...props }: BaseToastProps) {
+function Toast({ color, icon: { name, type }, ...props }: ToastProps) {
   const { theme } = useTheme();
 
   const renderLeadingIcon = () => (
@@ -48,7 +48,7 @@ function BaseToast({ color, icon: { name, type }, ...props }: BaseToastProps) {
         styles.shadowLarge,
         {
           borderRadius: BORDER_RADIUS.md,
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.cardBackground,
           borderLeftWidth: theme.spacing.sm,
           borderLeftColor: color,
           width: Dimensions.get('window').width - GUTTER_SIZE * 2,
@@ -71,11 +71,11 @@ function BaseToast({ color, icon: { name, type }, ...props }: BaseToastProps) {
   );
 }
 
-function SuccessToast({ ...props }: RNToastProps) {
+export function SuccessToast({ ...props }: RNToastProps) {
   const { theme } = useTheme();
 
   return (
-    <BaseToast
+    <Toast
       icon={{
         name: 'checkmark',
         type: 'ionicon',
@@ -86,11 +86,11 @@ function SuccessToast({ ...props }: RNToastProps) {
   );
 }
 
-function ErrorToast({ ...props }: RNToastProps) {
+export function ErrorToast({ ...props }: RNToastProps) {
   const { theme } = useTheme();
 
   return (
-    <BaseToast
+    <Toast
       icon={{
         name: 'close',
         type: 'material-community',
@@ -101,11 +101,11 @@ function ErrorToast({ ...props }: RNToastProps) {
   );
 }
 
-function InfoToast({ ...props }: RNToastProps) {
+export function InfoToast({ ...props }: RNToastProps) {
   const { theme } = useTheme();
 
   return (
-    <BaseToast
+    <Toast
       icon={{
         name: 'information',
         type: 'ionicon',
@@ -115,5 +115,3 @@ function InfoToast({ ...props }: RNToastProps) {
     />
   );
 }
-
-export { ErrorToast, InfoToast, SuccessToast };

@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Modalize } from 'react-native-modalize';
 
-import BaseBottomSheet from '../../components/bases/BaseBottomSheet';
+import BottomSheet from '../../components/base/BottomSheet';
 import GraphScore from '../../components/widget/GraphScore';
 import Progress from '../../components/widget/Progress';
 import RecommendedActivity from '../../components/widget/RecommendedActivity';
@@ -61,10 +61,7 @@ function HomeScreen() {
           Edit Widget
         </Button>
       </View>
-      <BaseBottomSheet
-        bottomSheetRef={bottomSheetRef}
-        modalStyle={[styles.containerGutter]}
-      >
+      <BottomSheet bottomSheetRef={bottomSheetRef} modalStyle={[styles.containerGutter]}>
         <View style={styles.sectionLarge}>
           {activeWidgets.map(({ no, label, active }) => (
             <CheckBox
@@ -81,7 +78,7 @@ function HomeScreen() {
           title="Done"
           onPress={() => bottomSheetRef.current?.close()}
         />
-      </BaseBottomSheet>
+      </BottomSheet>
     </ScrollView>
   );
 }

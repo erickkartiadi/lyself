@@ -1,14 +1,18 @@
-import { SearchBar, SearchBarProps, useTheme } from '@rneui/themed';
+import {
+  SearchBar as RNESearchBar,
+  SearchBarProps as RNESearchBarProps,
+  useTheme,
+} from '@rneui/themed';
 import React, { useState } from 'react';
 
-import { BORDER_RADIUS, styles } from '../../theme/styles';
+import { BORDER_RADIUS } from '../../theme/styles';
 import normalize from '../../utils/normalize';
 
-interface BaseSearchBarProps {
-  placeholder: SearchBarProps['placeholder'];
+interface SearchBarProps {
+  placeholder: RNESearchBarProps['placeholder'];
 }
 
-function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
+function SearchBar({ placeholder }: SearchBarProps) {
   const [searchText, setSearchText] = useState('');
   const { theme } = useTheme();
 
@@ -17,7 +21,7 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
   };
 
   return (
-    <SearchBar
+    <RNESearchBar
       selectionColor={theme.colors.primary}
       placeholder={placeholder}
       onChangeText={updateSearch}
@@ -33,9 +37,8 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
         },
       ]}
       inputContainerStyle={[
-        styles.shadowSmall,
         {
-          backgroundColor: theme.colors.cardBackground,
+          backgroundColor: theme.colors.searchBg,
           borderRadius: BORDER_RADIUS.rounded,
           paddingHorizontal: theme.spacing.md,
         },
@@ -45,19 +48,20 @@ function BaseSearchBar({ placeholder }: BaseSearchBarProps) {
       }}
       value={searchText}
       searchIcon={{
-        name: 'search1',
-        type: 'antdesign',
-        size: normalize(22),
-        color: theme.colors.grey2,
+        name: 'search-outline',
+        type: 'ionicon',
+        size: normalize(24),
+        color: theme.colors.grey3,
       }}
       clearIcon={{
-        name: 'clear',
-        type: 'material',
-        size: normalize(22),
-        color: theme.colors.grey2,
+        name: 'close-outline',
+        type: 'ionicon',
+        size: normalize(24),
+        color: theme.colors.grey3,
+        containerStyle: { borderRadius: BORDER_RADIUS.rounded },
       }}
     />
   );
 }
 
-export default BaseSearchBar;
+export default SearchBar;

@@ -4,7 +4,7 @@ import objectSupport from 'dayjs/plugin/objectSupport';
 import * as React from 'react';
 import { View } from 'react-native';
 
-import BaseChoiceChip from '../bases/BaseChoiceChip';
+import OptionChip from '../base/OptionChip';
 
 dayjs.extend(objectSupport);
 
@@ -18,7 +18,7 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
 
   return (
     <View style={{ width: '20%' }}>
-      <BaseChoiceChip
+      <OptionChip
         isSelected={isSelected}
         containerStyle={{
           marginHorizontal: theme.spacing.sm,
@@ -27,7 +27,7 @@ function TimeOption({ hour, isSelected, onPress }: TimeOptionProps) {
         onPress={onPress}
       >
         {formattedHour}
-      </BaseChoiceChip>
+      </OptionChip>
     </View>
   );
 }

@@ -1,26 +1,27 @@
-import { DialogButtonProps, DialogProps } from '@rneui/base';
-import { Dialog, Text, useTheme } from '@rneui/themed';
+import {
+  DialogButtonProps as RNEDialogButtonProps,
+  DialogProps as RNEDialogProps,
+} from '@rneui/base';
+import { Dialog as RNEDialog, Text, useTheme } from '@rneui/themed';
 import * as React from 'react';
 
-interface BaseDialogProps extends DialogProps {
+interface DialogProps extends RNEDialogProps {
   isDialogLoading?: boolean;
   isDialogVisible: boolean;
   toggleIsDialogVisible: (state?: boolean) => void;
-
   title: string;
   text: string | React.ReactNode;
-
-  onConfirm: DialogButtonProps['onPress'];
+  onConfirm: RNEDialogButtonProps['onPress'];
 }
-
-function BaseDialog({
+// TODO redesign dialog
+function Dialog({
   isDialogLoading,
   isDialogVisible,
   toggleIsDialogVisible,
   title,
   onConfirm,
   text,
-}: BaseDialogProps) {
+}: DialogProps) {
   const { theme } = useTheme();
 
   const hideDialog = () => {
@@ -28,16 +29,16 @@ function BaseDialog({
   };
 
   return (
-    <Dialog
+    <RNEDialog
       overlayStyle={{ backgroundColor: theme.colors.cardBackground }}
       isVisible={isDialogVisible}
       onBackdropPress={hideDialog}
     >
       {isDialogLoading ? (
-        <Dialog.Loading />
+        <RNEDialog.Loading />
       ) : (
         <>
-          <Dialog.Title
+          <RNEDialog.Title
             title={title}
             titleProps={{
               style: {
@@ -46,22 +47,22 @@ function BaseDialog({
             }}
           />
           <Text style={{ marginBottom: theme.spacing.md }}>{text}</Text>
-          <Dialog.Actions>
-            <Dialog.Button type="solid" title="CONFIRM" onPress={onConfirm} />
-            <Dialog.Button
+          <RNEDialog.Actions>
+            <RNEDialog.Button type="solid" title="CONFIRM" onPress={onConfirm} />
+            <RNEDialog.Button
               title="CANCEL"
               containerStyle={{ marginRight: theme.spacing.md }}
               onPress={hideDialog}
             />
-          </Dialog.Actions>
+          </RNEDialog.Actions>
         </>
       )}
-    </Dialog>
+    </RNEDialog>
   );
 }
 
-BaseDialog.defaultProps = {
+Dialog.defaultProps = {
   isDialogLoading: false,
 };
 
-export default BaseDialog;
+export default Dialog;
