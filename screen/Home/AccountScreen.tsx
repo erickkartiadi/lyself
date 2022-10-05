@@ -1,20 +1,25 @@
 import { Text, useTheme } from '@rneui/themed';
-import React, { useContext } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import Avatar from '../../components/base/Avatar';
 import SettingMenu from '../../components/base/SettingMenu';
+import { logout } from '../../services/api/auth/auth.api';
 import { styles } from '../../theme/styles';
-import { user } from '../../utils/constant/seed';
 import { AuthContext } from '../../utils/context/AuthContext';
+import { somethingWentWrongToast } from '../../utils/toast';
 
 function AccountScreen() {
   const { theme } = useTheme();
-  const { logout } = useContext(AuthContext);
+  const { user } = React.useContext(AuthContext);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      somethingWentWrongToast();
+    }
   };
 
   return (
@@ -28,16 +33,28 @@ function AccountScreen() {
             justifyContent: 'center',
           }}
         >
-          <Avatar
-            rounded
-            size={7}
-            containerStyle={{ marginBottom: theme.spacing.xl }}
-            source={{
-              uri: 'https://images.unsplash.com/photo-1605979399824-542335ee35d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=360&q=80',
-            }}
-          />
-          <Text h3>{user.name}</Text>
-          <Text color={theme.colors.grey3}>{user.email}</Text>
+          {user?.photoURL ? (
+            <Avatar
+              rounded
+              size={7}
+              containerStyle={{ marginBottom: theme.spacing.xl }}
+              source={{
+                uri: user.photoURL,
+              }}
+            />
+          ) : (
+            <Avatar
+              rounded
+              size={7}
+              icon={{ name: 'person', type: 'ionicon', color: theme.colors.grey3 }}
+              containerStyle={{
+                backgroundColor: theme.colors.secondary,
+                marginBottom: theme.spacing.xl,
+              }}
+            />
+          )}
+          <Text h3>{user?.displayName}</Text>
+          <Text color={theme.colors.grey3}>{user?.email}</Text>
         </View>
       </View>
       <View style={styles.sectionSmall}>

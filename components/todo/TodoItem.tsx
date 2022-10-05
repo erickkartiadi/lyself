@@ -171,6 +171,10 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         onSubmit={handleSubmit(handleUpdateTodo)}
         onDeletePress={handleDeleteTodo}
         onClose={async () => {
+          if (watchTodo === '') {
+            deleteMutation.mutate(id);
+          }
+
           updateMutation.mutate({
             id,
             completed: isCompleted,

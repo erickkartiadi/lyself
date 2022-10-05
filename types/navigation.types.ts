@@ -40,6 +40,11 @@ export type GetStartedScreenNavigationProps = NativeStackScreenProps<
   'GetStarted'
 >;
 
+export type HomeScreenNavigationProps = NativeStackScreenProps<
+  HomeTabParamList & RootStackParamList,
+  'Home'
+>;
+
 export type LoginScreenNavigationProps = NativeStackScreenProps<
   AuthStackParamList & RootStackParamList,
   'Login'
@@ -55,10 +60,6 @@ export type RegisterScreenNavigationProps = NativeStackScreenProps<
   'Register'
 >;
 
-export type ExploreScreenNavigationProps = NativeStackScreenProps<
-  HomeTabParamList & RootStackParamList,
-  'Explore'
->;
 export type TodoScreenNavigationProps = NativeStackScreenProps<
   TodoStackParamList,
   'Todo'

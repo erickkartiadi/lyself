@@ -34,11 +34,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
   });
 
   const mutation = useMutation(forgotPassword, {
-    onSuccess: ({
-      envelope: {
-        to: [email],
-      },
-    }) => {
+    onSuccess: (email) => {
       Toast.show({
         type: 'success',
         text1: 'Email sent',

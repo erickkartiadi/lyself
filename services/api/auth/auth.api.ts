@@ -1,26 +1,55 @@
+import Constant from 'expo-constants';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  UserCredential,
+} from 'firebase/auth';
+
 import { User } from '../../../types/types';
-import { apiClient } from '../../axios/axios';
+import app from '../../firebase/firebase';
+
+const auth = getAuth(app);
 
 type CreateUserDto = Omit<User, 'id'>;
 
-export async function register(createUserDto: CreateUserDto): Promise<User> {
-  const res = await apiClient.post('/auth/register', createUserDto);
+export async function register({
+  email,
+  password,
+  name,
+}: CreateUserDto): Promise<UserCredential> {
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  await sendEmailVerification(userCredential.user);
+  await updateProfile(userCredential.user, {
+    displayName: name,
+  });
 
-  return res.data;
+  return userCredential;
 }
 
-export async function login(
-  loginDto: Omit<CreateUserDto, 'name'>
-): Promise<{ access_token: string }> {
-  const res = await apiClient.post('/auth/login', loginDto);
+export async function login({
+  email,
+  password,
+}: Omit<CreateUserDto, 'name'>): Promise<UserCredential> {
+  const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-  return res.data;
+  return userCredential;
 }
 
-export async function forgotPassword(
-  forgotPasswordDto: Pick<CreateUserDto, 'email'>
-): Promise<{ envelope: { from: string; to: string[] } }> {
-  const res = await apiClient.post('/auth/forgot-password', forgotPasswordDto);
+export async function logout() {
+  await signOut(auth);
+}
 
-  return res.data;
+export async function forgotPassword({ email }: Pick<CreateUserDto, 'email'>) {
+  const redirectUri = Constant.manifest?.extra?.redirectUri;
+
+  await sendPasswordResetEmail(auth, email, {
+    url: redirectUri,
+    handleCodeInApp: false,
+  });
+  return email;
 }

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-param-reassign */
 
-import { API_BASE_URL, USER_TOKEN_KEY } from '@env';
 import axios, { AxiosRequestConfig } from 'axios';
+import Constant from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
 import Toast from 'react-native-toast-message';
 
 import { ErrorResponseData } from './axios.types';
 
 export const apiClient = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: Constant.manifest?.extra?.apiBaseUrl,
 });
 export const newsClient = axios.create();
 export const spotifyClient = axios.create();
@@ -19,7 +19,7 @@ export default function loadAxiosInterceptor() {
   apiClient.interceptors.request.use(async (config: AxiosRequestConfig<any>) => {
     if (config.headers === undefined) config.headers = {};
 
-    const token = await SecureStore.getItemAsync(USER_TOKEN_KEY);
+    const token = await SecureStore.getItemAsync(Constant.manifest?.extra?.userTokenKey);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

@@ -159,7 +159,6 @@ export const FONT: { [key in Font]: StyleProp<TextStyle> } = {
     lineHeight: normalize(30),
     fontFamily: FONT_FAMILY.bold,
     fontWeight: 'normal',
-    // fontWeight: '800',
   },
   heading3: {
     fontSize: FONT_SIZE.heading3,

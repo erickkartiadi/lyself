@@ -1,11 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text, useTheme } from '@rneui/themed';
 import { useMutation } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import { FirebaseError } from 'firebase/app';
+import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
 import loginIllustration from '../../assets/images/login-illustration.png';
 import BackButton from '../../components/base/BackButton';
@@ -17,14 +19,11 @@ import { styles } from '../../theme/styles';
 import { LoginScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
 import { loginSchema } from '../../utils/constant/validation/auth.schema';
-import { AuthContext } from '../../utils/context/AuthContext';
-import { somethingWentWrongToast } from '../../utils/toast';
 
 type LoginFormData = Omit<User, 'id' | 'name'>;
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();
-  const authContext = useContext(AuthContext);
 
   const {
     control,
@@ -40,22 +39,24 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   });
 
   const mutation = useMutation(login, {
-    onSuccess: ({ access_token }) => {
-      authContext.login(access_token);
+    onSuccess: () => {
       navigation.navigate('HomeTab', {
         screen: 'Home',
       });
 
       reset();
     },
+    onError: (error: FirebaseError) => {
+      Toast.show({
+        type: 'error',
+        text1: error.name,
+        text2: error.message,
+      });
+    },
   });
 
   const handleLogin = async (loginFormData: LoginFormData) => {
-    try {
-      mutation.mutate(loginFormData);
-    } catch (error) {
-      if (error) somethingWentWrongToast();
-    }
+    mutation.mutate(loginFormData);
   };
 
   return (

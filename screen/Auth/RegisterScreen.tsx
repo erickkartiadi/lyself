@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
 import { useMutation } from '@tanstack/react-query';
+import { FirebaseError } from 'firebase/app';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
@@ -18,7 +19,6 @@ import { styles } from '../../theme/styles';
 import { RegisterScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
 import { registerSchema } from '../../utils/constant/validation/auth.schema';
-import { somethingWentWrongToast } from '../../utils/toast';
 
 type RegisterFormData = Omit<User, 'id'>;
 
@@ -38,7 +38,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   });
 
   const mutation = useMutation(register, {
-    onSuccess: ({ email }) => {
+    onSuccess: ({ user: { email } }) => {
       Toast.show({
         type: 'success',
         text1: 'Email confirmation sent',
@@ -48,14 +48,17 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
 
       reset();
     },
+    onError: (error: FirebaseError) => {
+      Toast.show({
+        type: 'error',
+        text1: error.name,
+        text2: error.message,
+      });
+    },
   });
 
   const handleRegister = async (registerFormData: RegisterFormData) => {
-    try {
-      mutation.mutate(registerFormData);
-    } catch (error) {
-      if (error) somethingWentWrongToast();
-    }
+    mutation.mutate(registerFormData);
   };
 
   return (

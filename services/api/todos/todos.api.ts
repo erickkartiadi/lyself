@@ -1,29 +1,42 @@
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  getFirestore,
+  setDoc,
+} from 'firebase/firestore';
+
 import { Todo } from '../../../types/types';
-import { apiClient } from '../../axios/axios';
+import app from '../../firebase/firebase';
 
 type CreateTodoDto = Omit<Todo, 'id'>;
 type UpdateTodoDto = Todo;
 
+const db = getFirestore(app);
+
 export async function createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {
-  const res = await apiClient.post('/todo', createTodoDto);
+  const todoRef = await addDoc(collection(db, 'todos'), createTodoDto);
 
-  return res.data;
+  return { ...createTodoDto, id: todoRef.id } as Todo;
 }
 
-export async function deleteTodo(id: string): Promise<Todo[]> {
-  const res = await apiClient.delete(`/todo/${id}`);
-
-  return res.data.todos;
+export async function deleteTodo(id: string): Promise<string> {
+  await deleteDoc(doc(db, 'todos', id));
+  return id;
 }
 
-export async function updateTodo({ id, ...rest }: UpdateTodoDto): Promise<Todo[]> {
-  const res = await apiClient.patch(`/todo/${id}`, rest);
+export async function updateTodo({ id, ...rest }: UpdateTodoDto): Promise<Todo> {
+  await setDoc(doc(db, 'todos', id), rest);
 
-  return res.data.todos;
+  return { id, ...rest };
 }
 
 export async function fetchTodos(): Promise<Todo[]> {
-  const res = await apiClient.get('/todo');
-
-  return res.data.todos;
+  const querySnapshot = await getDocs(collection(db, 'todos'));
+  return querySnapshot.docs.map((document) => ({
+    ...document.data(),
+    id: document.id,
+  })) as Todo[];
 }

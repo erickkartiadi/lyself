@@ -27,20 +27,20 @@ export const importanceLevelItems: {
   label: string;
 }[] = [
   {
-    importance: 'high',
-    label: 'High',
-  },
-  {
-    importance: 'medium',
-    label: 'Medium',
+    importance: 'none',
+    label: 'none',
   },
   {
     importance: 'low',
     label: 'Low',
   },
   {
-    importance: 'none',
-    label: 'none',
+    importance: 'medium',
+    label: 'Medium',
+  },
+  {
+    importance: 'high',
+    label: 'High',
   },
 ];
 

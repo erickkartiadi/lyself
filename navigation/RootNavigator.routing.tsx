@@ -20,12 +20,11 @@ const prefix = Linking.createURL('/');
 
 function RootNavigator() {
   const { isDarkMode } = React.useContext(ThemeModeContext);
+  const { user } = React.useContext(AuthContext);
 
   const linking = {
     prefixes: [prefix],
   };
-
-  const { userToken } = React.useContext(AuthContext);
 
   return (
     <NavigationContainer
@@ -40,7 +39,7 @@ function RootNavigator() {
             headerShown: false,
           }}
         >
-          {userToken ? (
+          {user ? (
             <>
               <Stack.Screen name="HomeTab" component={HomeNavigator} />
               <Stack.Screen name="ConsultStack" component={ConsultNavigator} />

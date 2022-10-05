@@ -1,4 +1,4 @@
-import { NEWS_API_KEY } from '@env';
+import Constant from 'expo-constants';
 
 import { Article } from '../../types/types';
 import { newsClient } from '../axios/axios';
@@ -22,7 +22,7 @@ export default async function fetchNews(): Promise<Article[]> {
     params: {
       q: '"mental health"',
       pageSize: 10,
-      apiKey: NEWS_API_KEY,
+      apiKey: Constant.manifest?.extra?.newsApiKey,
     },
   });
 

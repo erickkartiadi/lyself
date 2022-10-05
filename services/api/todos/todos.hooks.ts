@@ -61,7 +61,13 @@ export const useUpdateTodo = () => {
   const queryClient = useQueryClient();
 
   return useMutation(updateTodo, {
-    onSuccess: (todos) => queryClient.setQueriesData(['todos'], todos),
+    onSuccess: (todo) =>
+      queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) =>
+        oldTodos?.map((oldTodo) => {
+          if (oldTodo.id === todo.id) return { ...oldTodo, ...todo };
+          return oldTodo;
+        })
+      ),
   });
 };
 
@@ -69,8 +75,10 @@ export const useDeleteTodo = () => {
   const queryClient = useQueryClient();
 
   return useMutation(deleteTodo, {
-    onSuccess: (todos) => {
-      queryClient.setQueriesData(['todos'], todos);
+    onSuccess: (todoId) => {
+      queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) =>
+        oldTodos?.filter((todo) => todo.id !== todoId)
+      );
     },
   });
 };

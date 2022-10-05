@@ -1,84 +1,149 @@
-import { Button, CheckBox, useTheme } from '@rneui/themed';
-import React, { useRef, useState } from 'react';
-import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Modalize } from 'react-native-modalize';
+import { Button, useTheme } from '@rneui/themed';
+import { useQuery } from '@tanstack/react-query';
+import { ResponseType, useAuthRequest } from 'expo-auth-session';
+import { discovery } from 'expo-auth-session/build/providers/Google';
+import Constant from 'expo-constants';
+import React, { useEffect, useState } from 'react';
+import { FlatList, ScrollView, View } from 'react-native';
 
-import BottomSheet from '../../components/base/BottomSheet';
-import GraphScore from '../../components/widget/GraphScore';
-import Progress from '../../components/widget/Progress';
-import RecommendedActivity from '../../components/widget/RecommendedActivity';
+import ArticleCard, { ArticleCardPlaceholder } from '../../components/cards/ArticleCard';
+import PlaylistCard, {
+  PlaylistCardPlaceholder,
+} from '../../components/cards/PlaylistCard';
+import HorizontalSeparator from '../../components/layout/HorizontalSeparator';
+import SectionTitle from '../../components/layout/SectionTitle';
+import fetchNews from '../../services/api/news';
+import { fetchAccessToken, fetchFeaturedPlaylist } from '../../services/api/spotify';
 import { styles } from '../../theme/styles';
+import { HomeScreenNavigationProps } from '../../types/navigation.types';
+import { Article, Playlist } from '../../types/types';
 
-function HomeScreen() {
+const renderArticles = ({ item }: { item: Article }) => (
+  <ArticleCard
+    url={item.url}
+    publishedAt={item.publishedAt}
+    source={item.source}
+    title={item.title}
+    urlToImage={item.urlToImage}
+  />
+);
+
+const renderEmptyPlaylists = () => (
+  <View style={{ width: '100%', flexDirection: 'row' }}>
+    <PlaylistCardPlaceholder />
+    <HorizontalSeparator />
+    <PlaylistCardPlaceholder />
+    <HorizontalSeparator />
+    <PlaylistCardPlaceholder />
+    <HorizontalSeparator />
+    <PlaylistCardPlaceholder />
+  </View>
+);
+
+const renderEmptyArticles = () => (
+  <View style={{ width: '100%', flexDirection: 'row' }}>
+    <ArticleCardPlaceholder />
+    <HorizontalSeparator />
+    <ArticleCardPlaceholder />
+    <HorizontalSeparator />
+    <ArticleCardPlaceholder />
+  </View>
+);
+const renderPlaylist = ({
+  item: { creator, id, imageUrl, spotifyUrl, name: title },
+}: {
+  item: Playlist;
+}) => (
+  <PlaylistCard
+    key={id}
+    id={id}
+    name={title}
+    imageUrl={imageUrl}
+    creator={creator}
+    spotifyUrl={spotifyUrl}
+  />
+);
+
+function HomeScreen({ navigation }: HomeScreenNavigationProps) {
   const { theme } = useTheme();
-  const [activeWidgets, setActiveWidgets] = useState([
-    {
-      no: 1,
-      active: true,
-      Widget: RecommendedActivity,
-      label: 'Recommended Activity',
-    },
-    {
-      no: 2,
-      active: true,
-      Widget: GraphScore,
-      label: 'Mental Score',
-    },
-    {
-      no: 3,
-      active: true,
-      Widget: Progress,
-      label: 'Activity Progress',
-    },
-  ]);
+  const [isSpotifyTokenAvailable, setIsSpotifyTokenAvailable] = useState(false);
 
-  const bottomSheetRef = useRef<Modalize>(null);
+  const articlesQuery = useQuery<Article[]>(['articles'], fetchNews);
+  const spotifyQuery = useQuery<Playlist[]>(['playlist'], fetchFeaturedPlaylist, {
+    onSuccess: () => setIsSpotifyTokenAvailable(true),
+  });
 
-  const handleEditWidget = (no: number) => {
-    setActiveWidgets((prevState) =>
-      prevState.map((widget) =>
-        widget.no === no ? { ...widget, active: !widget.active } : widget
-      )
-    );
-  };
+  const [request, response, promptAsync] = useAuthRequest(
+    {
+      responseType: ResponseType.Code,
+      clientId: Constant?.manifest?.extra?.spotifyClientId,
+      scopes: [
+        'user-read-currently-playing',
+        'user-read-recently-played',
+        'user-read-playback-state',
+        'user-top-read',
+        'user-modify-playback-state',
+        'streaming',
+        'user-read-email',
+        'user-read-private',
+      ],
+      usePKCE: false,
+      redirectUri: 'exp://192.168.1.110:19000',
+    },
+    discovery
+  );
+
+  useEffect(() => {
+    if (response && response?.type === 'success') {
+      fetchAccessToken(response.params.code);
+    }
+  }, [response]);
 
   return (
     <ScrollView contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}>
-      {activeWidgets.map(({ no, active, Widget }) => active && <Widget key={no} />)}
+      <Button onPress={() => navigation.navigate('TodoStack', { screen: 'Todo' })}>
+        go to todo
+      </Button>
       <View style={styles.sectionLarge}>
-        <Button
-          fullWidth
-          color="primary"
-          iconPosition="left"
-          icon={{
-            type: 'material',
-            name: 'edit',
-            color: 'white',
-          }}
-          onPress={() => bottomSheetRef.current?.open()}
-        >
-          Edit Widget
-        </Button>
-      </View>
-      <BottomSheet bottomSheetRef={bottomSheetRef} modalStyle={[styles.containerGutter]}>
-        <View style={styles.sectionLarge}>
-          {activeWidgets.map(({ no, label, active }) => (
-            <CheckBox
-              key={no}
-              title={label}
-              checked={active}
-              onPress={() => handleEditWidget(no)}
-            />
-          ))}
-        </View>
-        <Button
-          containerStyle={{ marginBottom: theme.spacing.xl }}
-          fullWidth
-          title="Done"
-          onPress={() => bottomSheetRef.current?.close()}
+        <SectionTitle title="Articles about mental health" showRightComponent />
+        <FlatList
+          overScrollMode="never"
+          horizontal
+          ListEmptyComponent={renderEmptyArticles}
+          ItemSeparatorComponent={HorizontalSeparator}
+          showsHorizontalScrollIndicator={false}
+          style={[styles.noContainerGutter]}
+          contentContainerStyle={[styles.containerGutter]}
+          data={articlesQuery.data}
+          renderItem={renderArticles}
         />
-      </BottomSheet>
+      </View>
+      <View style={styles.sectionLarge}>
+        <SectionTitle title="Featured playlist" />
+        {isSpotifyTokenAvailable ? (
+          <FlatList
+            horizontal
+            overScrollMode="never"
+            ItemSeparatorComponent={HorizontalSeparator}
+            showsHorizontalScrollIndicator={false}
+            style={styles.noContainerGutter}
+            contentContainerStyle={styles.containerGutter}
+            data={spotifyQuery.data}
+            renderItem={renderPlaylist}
+            ListEmptyComponent={renderEmptyPlaylists}
+          />
+        ) : (
+          <Button
+            fullWidth
+            title="Connect to Spotify"
+            iconPosition="left"
+            icon={{ type: 'fontisto', name: 'spotify' }}
+            color={theme.colors.spotify}
+            onPress={() => promptAsync()}
+            containerStyle={{ marginTop: theme.spacing.lg }}
+          />
+        )}
+      </View>
     </ScrollView>
   );
 }

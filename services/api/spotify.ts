@@ -1,19 +1,16 @@
-import {
-  SPOTIFY_CLIENT_ID,
-  SPOTIFY_CLIENT_SECRET,
-  SPOTIFY_EXPIRES_TIME_KEY,
-  SPOTIFY_REFRESH_TOKEN_KEY,
-  SPOTIFY_TOKEN_KEY,
-} from '@env';
 import { Buffer } from 'buffer';
+import Constant from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
 
 import { Playlist } from '../../types/types';
 import { spotifyClient } from '../axios/axios';
 
-const clientId = SPOTIFY_CLIENT_ID;
-const clientSecret = SPOTIFY_CLIENT_SECRET;
-const redirectUri = SPOTIFY_CLIENT_SECRET;
+const clientId = Constant.manifest?.extra?.spotifyClientId;
+const clientSecret = Constant.manifest?.extra?.spotifyClientSecret;
+const redirectUri = Constant.manifest?.extra?.redirectUri;
+const spotifyExpiresTimeKey = Constant.manifest?.extra?.spotifyExpiresTimeKey;
+const spotifyRefreshTokenKey = Constant.manifest?.extra?.spotifyRefreshTokenKey;
+const spotifyTokenKey = Constant.manifest?.extra?.spotifyTokenKey;
 
 type SpotifyImage = {
   url: string;
@@ -88,15 +85,15 @@ export async function fetchAccessToken(code: string): Promise<void> {
 
   const expirationTime = new Date().getTime() + expiresIn * 1000;
 
-  await SecureStore.setItemAsync(SPOTIFY_TOKEN_KEY, accessToken);
-  await SecureStore.setItemAsync(SPOTIFY_REFRESH_TOKEN_KEY, refreshToken);
-  await SecureStore.setItemAsync(SPOTIFY_EXPIRES_TIME_KEY, expirationTime.toString());
+  await SecureStore.setItemAsync(spotifyTokenKey, accessToken);
+  await SecureStore.setItemAsync(spotifyRefreshTokenKey, refreshToken);
+  await SecureStore.setItemAsync(spotifyExpiresTimeKey, expirationTime.toString());
 
-  SecureStore.getItemAsync(SPOTIFY_TOKEN_KEY);
+  SecureStore.getItemAsync(spotifyTokenKey);
 }
 
 export async function fetchRefreshToken(): Promise<void> {
-  const refreshToken = await SecureStore.getItemAsync(SPOTIFY_REFRESH_TOKEN_KEY);
+  const refreshToken = await SecureStore.getItemAsync(spotifyRefreshTokenKey);
 
   const res = await spotifyClient.post('https://accounts.spotify.com/api/token', null, {
     headers: {
@@ -114,13 +111,13 @@ export async function fetchRefreshToken(): Promise<void> {
   const { access_token: newAccessToken, expires_in: expiresIn } = res.data;
 
   const expirationTime = new Date().getTime() + expiresIn * 1000;
-  await SecureStore.setItemAsync(SPOTIFY_TOKEN_KEY, newAccessToken);
-  await SecureStore.setItemAsync(SPOTIFY_EXPIRES_TIME_KEY, expirationTime.toString());
+  await SecureStore.setItemAsync(spotifyTokenKey, newAccessToken);
+  await SecureStore.setItemAsync(spotifyExpiresTimeKey, expirationTime.toString());
 }
 
 export async function fetchFeaturedPlaylist(): Promise<Playlist[]> {
-  const token = await SecureStore.getItemAsync(SPOTIFY_TOKEN_KEY);
-  const tokenExpirationTime = await SecureStore.getItemAsync(SPOTIFY_EXPIRES_TIME_KEY);
+  const token = await SecureStore.getItemAsync(spotifyTokenKey);
+  const tokenExpirationTime = await SecureStore.getItemAsync(spotifyExpiresTimeKey);
   const isTokenExpired =
     !tokenExpirationTime ||
     new Date().getTime() > parseInt(tokenExpirationTime || '0', 10);

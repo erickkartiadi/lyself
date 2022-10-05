@@ -1,3 +1,5 @@
+import './services/firebase/firebase';
+
 import { ThemeProvider } from '@rneui/themed';
 import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as Font from 'expo-font';
