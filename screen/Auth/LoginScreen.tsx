@@ -14,9 +14,9 @@ import BackButton from '../../components/base/BackButton';
 import TextInput from '../../components/base/Input';
 import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
+import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 import { login } from '../../services/api/auth/auth.api';
 import { styles } from '../../theme/styles';
-import { LoginScreenNavigationProps } from '../../types/navigation.types';
 import { User } from '../../types/types';
 import { loginSchema } from '../../utils/constant/validation/auth.schema';
 

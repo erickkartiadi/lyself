@@ -13,7 +13,7 @@ import { useDebounce } from 'use-debounce';
 import { useDeleteTodo, useUpdateTodo } from '../../services/api/todos/todos.hooks';
 import { BORDER_RADIUS } from '../../theme/styles';
 import { Todo } from '../../types/types';
-import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
+import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
 import useToggle from '../../utils/hooks/useToggle';
 import normalize from '../../utils/normalize';
@@ -51,9 +51,6 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
   };
 
   const handleUpdateTodo = async (todoFormData: TodoFormData) => {
-    if (todoFormData.todo === '') {
-      deleteMutation.mutate(id);
-    }
     try {
       await updateMutation.mutateAsync({
         id,
@@ -67,7 +64,6 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
       if (error) somethingWentWrongToast();
     }
 
-    // FIXME conflict with delete mutation
     bottomSheetRef.current?.close();
   };
 
@@ -132,14 +128,17 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
                 subtitle
                 numberOfLines={1}
                 style={{
-                  color: isCompleted ? theme.colors.grey3 : theme.colors.black,
+                  color:
+                    isCompleted || watchTodo === ''
+                      ? theme.colors.grey3
+                      : theme.colors.black,
                   textDecorationLine: isCompleted ? 'line-through' : 'none',
                   textDecorationStyle: 'solid',
                   textDecorationColor: importanceColor,
                   width: '90%',
                 }}
               >
-                {watchTodo}
+                {watchTodo === '' ? 'No title' : watchTodo}
               </Text>
               {!isCompleted && currentReminderTime && (
                 <View
@@ -171,10 +170,6 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         onSubmit={handleSubmit(handleUpdateTodo)}
         onDeletePress={handleDeleteTodo}
         onClose={async () => {
-          if (watchTodo === '') {
-            deleteMutation.mutate(id);
-          }
-
           updateMutation.mutate({
             id,
             completed: isCompleted,

@@ -6,7 +6,7 @@ import { ScrollView, TextInput, View } from 'react-native';
 
 import { FONT, styles } from '../../theme/styles';
 import { Todo } from '../../types/types';
-import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
+import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import normalize from '../../utils/normalize';
 import { importanceLevelItems } from '../../utils/sort';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';

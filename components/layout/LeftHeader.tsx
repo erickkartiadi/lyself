@@ -1,13 +1,13 @@
 import { Text } from '@rneui/themed';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 
-import { user } from '../../utils/constant/seed';
+import { AuthContext } from '../../utils/context/AuthContext';
 
 function LeftHeader() {
+  const { user } = useContext(AuthContext);
   const currentHour = dayjs().hour();
-  const { name } = user;
   let greeting = 'Howdy';
 
   if (currentHour >= 5 && currentHour <= 11) greeting = 'Good morning';
@@ -17,7 +17,7 @@ function LeftHeader() {
   return (
     <View>
       <Text>{greeting}</Text>
-      <Text h3>{name}</Text>
+      <Text h3>{user?.displayName}</Text>
     </View>
   );
 }

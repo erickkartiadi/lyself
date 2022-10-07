@@ -3,12 +3,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import Avatar from '../../components/base/Avatar';
-import SettingMenu from '../../components/base/SettingMenu';
-import { logout } from '../../services/api/auth/auth.api';
-import { styles } from '../../theme/styles';
-import { AuthContext } from '../../utils/context/AuthContext';
-import { somethingWentWrongToast } from '../../utils/toast';
+import Avatar from '../components/base/Avatar';
+import SettingMenu from '../components/base/SettingMenu';
+import { logout } from '../services/api/auth/auth.api';
+import { styles } from '../theme/styles';
+import { AuthContext } from '../utils/context/AuthContext';
+import { somethingWentWrongToast } from '../utils/toast';
 
 function AccountScreen() {
   const { theme } = useTheme();

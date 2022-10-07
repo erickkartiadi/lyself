@@ -2,8 +2,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 
 import TodoScreen from '../screen/Todo/TodoScreen';
-import { TodoStackParamList } from '../types/navigation.types';
 import { navigatorScreenOptions } from './HomeNavigator.routing';
+import { TodoStackParamList } from './navigation.types';
 
 const Stack = createNativeStackNavigator<TodoStackParamList>();
 

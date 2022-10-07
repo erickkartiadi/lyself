@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native';
 
 import { styles } from '../../theme/styles';
 
-function ExploreScreen() {
+function StoriesScreen() {
   return (
     <ScrollView contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}>
       <Text h1>Forum</Text>
@@ -12,4 +12,4 @@ function ExploreScreen() {
   );
 }
 
-export default ExploreScreen;
+export default StoriesScreen;

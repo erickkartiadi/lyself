@@ -10,9 +10,9 @@ import RefreshControl from '../../components/layout/RefreshControl';
 import SectionTitle from '../../components/layout/SectionTitle';
 import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
+import { TodoScreenNavigationProps } from '../../navigation/navigation.types';
 import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks';
 import { BORDER_RADIUS, styles } from '../../theme/styles';
-import { TodoScreenNavigationProps } from '../../types/navigation.types';
 import { Todo } from '../../types/types';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useToggle from '../../utils/hooks/useToggle';
@@ -20,7 +20,7 @@ import normalize from '../../utils/normalize';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
-import TodoEmptyScreen from '../Others/TodoEmptyScreen';
+import TodoEmptyScreen from './TodoEmptyScreen';
 
 const sortItems: {
   label: string;

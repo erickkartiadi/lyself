@@ -7,12 +7,11 @@ import { Host } from 'react-native-portalize';
 
 import InDevelopmentScreen from '../screen/Error/InDevelopmentScreen';
 import { navThemeDark, navThemeLight } from '../theme';
-import { RootStackParamList } from '../types/navigation.types';
 import { AuthContext } from '../utils/context/AuthContext';
 import { ThemeModeContext } from '../utils/context/ThemeModeContext';
 import AuthNavigator from './AuthNavigator.routing';
-import ConsultNavigator from './ConsultNavigator.routing';
 import HomeNavigator from './HomeNavigator.routing';
+import { RootStackParamList } from './navigation.types';
 import TodoNavigator from './TodoNavigator.routing';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -42,7 +41,6 @@ function RootNavigator() {
           {user ? (
             <>
               <Stack.Screen name="HomeTab" component={HomeNavigator} />
-              <Stack.Screen name="ConsultStack" component={ConsultNavigator} />
               <Stack.Screen name="TodoStack" component={TodoNavigator} />
               <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
             </>

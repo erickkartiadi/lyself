@@ -1,12 +1,9 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { Psychiatrist } from './types';
-
 export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
-  ConsultStack: NavigatorScreenParams<ConsultStackParamList>;
   TodoStack: NavigatorScreenParams<TodoStackParamList>;
   InDevelopment: undefined;
 };
@@ -20,15 +17,9 @@ export type AuthStackParamList = {
 
 export type HomeTabParamList = {
   Home: undefined;
-  Explore: undefined;
-  Chat: undefined;
+  Stories: undefined;
+  Notification: undefined;
   Account: undefined;
-};
-
-export type ConsultStackParamList = {
-  Consult: undefined;
-  Psychiatrist: Psychiatrist;
-  Appointment: undefined;
 };
 
 export type TodoStackParamList = {
@@ -68,19 +59,4 @@ export type TodoScreenNavigationProps = NativeStackScreenProps<
 export type AccountScreenNavigationProps = NativeStackScreenProps<
   HomeTabParamList & RootStackParamList,
   'Account'
->;
-
-export type ConsultScreenNavigationProps = NativeStackScreenProps<
-  ConsultStackParamList,
-  'Consult'
->;
-
-export type AppointmentScreenNavigationProps = NativeStackScreenProps<
-  ConsultStackParamList,
-  'Appointment'
->;
-
-export type PsychiatristScreenNavigationProps = NativeStackScreenProps<
-  ConsultStackParamList,
-  'Psychiatrist'
 >;

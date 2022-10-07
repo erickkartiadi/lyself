@@ -1,4 +1,4 @@
-import { Button, useTheme } from '@rneui/themed';
+import { Button, Text, useTheme } from '@rneui/themed';
 import { useQuery } from '@tanstack/react-query';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
 import { discovery } from 'expo-auth-session/build/providers/Google';
@@ -6,17 +6,16 @@ import Constant from 'expo-constants';
 import React, { useEffect, useState } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
 
-import ArticleCard, { ArticleCardPlaceholder } from '../../components/cards/ArticleCard';
-import PlaylistCard, {
-  PlaylistCardPlaceholder,
-} from '../../components/cards/PlaylistCard';
-import HorizontalSeparator from '../../components/layout/HorizontalSeparator';
-import SectionTitle from '../../components/layout/SectionTitle';
-import fetchNews from '../../services/api/news';
-import { fetchAccessToken, fetchFeaturedPlaylist } from '../../services/api/spotify';
-import { styles } from '../../theme/styles';
-import { HomeScreenNavigationProps } from '../../types/navigation.types';
-import { Article, Playlist } from '../../types/types';
+import Card from '../components/base/Card';
+import ArticleCard, { ArticleCardPlaceholder } from '../components/cards/ArticleCard';
+import PlaylistCard, { PlaylistCardPlaceholder } from '../components/cards/PlaylistCard';
+import HorizontalSeparator from '../components/layout/HorizontalSeparator';
+import SectionTitle from '../components/layout/SectionTitle';
+import { HomeScreenNavigationProps } from '../navigation/navigation.types';
+import fetchNews from '../services/api/news';
+import { fetchAccessToken, fetchFeaturedPlaylist } from '../services/api/spotify';
+import { styles } from '../theme/styles';
+import { Article, Playlist } from '../types/types';
 
 const renderArticles = ({ item }: { item: Article }) => (
   <ArticleCard
@@ -100,10 +99,18 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
   }, [response]);
 
   return (
-    <ScrollView contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}>
-      <Button onPress={() => navigation.navigate('TodoStack', { screen: 'Todo' })}>
-        go to todo
-      </Button>
+    <ScrollView contentContainerStyle={[styles.containerGutter]}>
+      <View style={styles.sectionLarge}>
+        <Card>
+          <Text h4>Meditation Guide</Text>
+        </Card>
+        <Card>
+          <Text h4>Breathing Guide</Text>
+        </Card>
+      </View>
+      <View style={styles.sectionLarge}>
+        <SectionTitle title="My Goal" showRightComponent />
+      </View>
       <View style={styles.sectionLarge}>
         <SectionTitle title="Articles about mental health" showRightComponent />
         <FlatList

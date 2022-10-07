@@ -4,12 +4,12 @@ import * as React from 'react';
 
 import LeftHeader from '../components/layout/LeftHeader';
 import RightHeader from '../components/layout/RightHeader';
-import AccountScreen from '../screen/Home/AccountScreen';
-import ChatScreen from '../screen/Home/ChatScreen';
-import ExploreScreen from '../screen/Home/ExploreScreen';
-import HomeScreen from '../screen/Home/HomeScreen';
+import AccountScreen from '../screen/AccountScreen';
+import HomeScreen from '../screen/HomeScreen';
+import NotificationScreen from '../screen/NotificationScreen';
+import StoriesScreen from '../screen/Stories/StoriesScreen';
 import { FONT_FAMILY, GUTTER_SIZE, styles } from '../theme/styles';
-import { HomeTabParamList } from '../types/navigation.types';
+import { HomeTabParamList } from './navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
@@ -36,7 +36,7 @@ function ExploreTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   return (
     <Icon
       type="ionicon"
-      name={focused ? 'compass' : 'compass-outline'}
+      name={focused ? 'chatbubbles' : 'chatbubbles-outline'}
       color={color}
       size={size}
     />
@@ -46,7 +46,7 @@ function ChatTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   return (
     <Icon
       type="ionicon"
-      name={focused ? 'chatbox' : 'chatbox-outline'}
+      name={focused ? 'notifications' : 'notifications-outline'}
       color={color}
       size={size}
     />
@@ -99,17 +99,17 @@ function HomeNavigator() {
         component={HomeScreen}
       />
       <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
+        name="Stories"
+        component={StoriesScreen}
         options={{
           tabBarIcon: ExploreTabBarIcon,
-          title: 'Explore',
+          title: 'Stories',
         }}
       />
       <Tab.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={{ tabBarIcon: ChatTabBarIcon, title: 'Chat' }}
+        name="Notification"
+        component={NotificationScreen}
+        options={{ tabBarIcon: ChatTabBarIcon, title: 'Notification' }}
       />
       <Tab.Screen
         name="Account"
