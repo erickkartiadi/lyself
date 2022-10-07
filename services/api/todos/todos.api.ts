@@ -6,20 +6,21 @@ import { auth, createCollection } from '../../firebase/firebase';
 type CreateTodoDto = Omit<Todo, 'id'>;
 type UpdateTodoDto = Todo;
 
-const { currentUser } = auth;
-
-const todosCol = (() => {
-  if (!currentUser) throw new Error('Unauthorized');
-  return createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
-})();
-
 export async function createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  const todosCol = createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
+
   const todoDoc = await addDoc(todosCol, createTodoDto);
 
   return { ...createTodoDto, id: todoDoc.id } as Todo;
 }
 
 export async function deleteTodo(id: string): Promise<string> {
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  const todosCol = createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
+
   const todoDoc = doc(todosCol, id);
 
   await deleteDoc(todoDoc);
@@ -31,6 +32,10 @@ export async function updateTodo({
   id,
   ...updatedTodoData
 }: UpdateTodoDto): Promise<Todo> {
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  const todosCol = createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
+
   const todoDoc = doc(todosCol, id);
   await updateDoc(todoDoc, updatedTodoData);
 
@@ -38,8 +43,11 @@ export async function updateTodo({
 }
 
 export async function fetchTodos(): Promise<Todo[]> {
-  const querySnapshot = await getDocs(todosCol);
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  const todosCol = createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
 
+  const querySnapshot = await getDocs(todosCol);
   return querySnapshot.docs.map((document) => ({
     ...document.data(),
     id: document.id,
