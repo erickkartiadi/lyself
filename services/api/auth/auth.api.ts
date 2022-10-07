@@ -1,19 +1,15 @@
 import Constant from 'expo-constants';
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
-  signOut,
   updateProfile,
   UserCredential,
 } from 'firebase/auth';
 
 import { User } from '../../../types/types';
-import app from '../../firebase/firebase';
-
-const auth = getAuth(app);
+import { auth } from '../../firebase/firebase';
 
 type CreateUserDto = Omit<User, 'id'>;
 
@@ -38,10 +34,6 @@ export async function login({
   const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
   return userCredential;
-}
-
-export async function logout() {
-  await signOut(auth);
 }
 
 export async function forgotPassword({ email }: Pick<CreateUserDto, 'email'>) {

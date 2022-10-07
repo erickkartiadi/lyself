@@ -14,7 +14,8 @@ import { createTodo, deleteTodo, fetchTodos, updateTodo } from './todos.api';
 export const useGetTodos = (
   filter: TodoFilter,
   sort: TodoSort,
-  orderBy: OrderBy = 'ASC'
+  orderBy: OrderBy = 'ASC',
+  limit?: number
 ) =>
   useQuery<Todo[]>(['todos'], fetchTodos, {
     select: (data) => {
@@ -40,7 +41,7 @@ export const useGetTodos = (
         return sortReminderTime(sorted, orderBy);
       }
 
-      return sorted;
+      return sorted.slice(0, limit);
     },
   });
 

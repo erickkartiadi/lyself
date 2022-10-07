@@ -68,6 +68,7 @@ const filterItems: {
     filter: 'Completed',
   },
 ];
+
 function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   const { theme } = useTheme();
 

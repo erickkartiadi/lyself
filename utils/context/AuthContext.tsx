@@ -1,21 +1,25 @@
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import * as React from 'react';
 import { createContext, PropsWithChildren } from 'react';
 
-import app from '../../services/firebase/firebase';
+import { auth } from '../../services/firebase/firebase';
 
 interface AuthContextInterface {
   user: User | undefined;
+  logout: () => void;
 }
-
-const auth = getAuth(app);
 
 const AuthContext = createContext<AuthContextInterface>({
   user: undefined,
+  logout: () => {},
 });
 
 function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = React.useState<User | undefined>();
+
+  const logout = async () => {
+    await signOut(auth);
+  };
 
   React.useEffect(() => {
     const subscribed = onAuthStateChanged(auth, (currentUser) => {
@@ -25,14 +29,16 @@ function AuthProvider({ children }: PropsWithChildren) {
         setUser(undefined);
       }
     });
+
     return subscribed;
-  }, []);
+  }, [user, setUser, logout]);
 
   const authValue = React.useMemo(
     () => ({
       user,
+      logout,
     }),
-    [user]
+    [user, logout]
   );
 
   return <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>;

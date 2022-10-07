@@ -4,7 +4,6 @@ import { ScrollView, View } from 'react-native';
 
 import Card from '../components/base/Card';
 import ArticleSection from '../components/section/ArticleSection';
-import SpotifySection from '../components/section/SpotifySection';
 import TodoSection from '../components/section/TodoSection';
 import { HomeScreenNavigationProps } from '../navigation/navigation.types';
 import { styles } from '../theme/styles';
@@ -19,10 +18,13 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
         <Card>
           <Text h4>Breathing Guide</Text>
         </Card>
+        <Card onPress={() => navigation.navigate('TodoStack', { screen: 'Todo' })}>
+          <Text h4>Goals</Text>
+        </Card>
       </View>
       <TodoSection />
       <ArticleSection />
-      <SpotifySection />
+      {/* <SpotifySection /> */}
     </ScrollView>
   );
 }

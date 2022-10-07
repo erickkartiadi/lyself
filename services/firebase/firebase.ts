@@ -1,5 +1,12 @@
 import Constants from 'expo-constants';
 import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import {
+  collection,
+  CollectionReference,
+  DocumentData,
+  getFirestore,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: Constants.manifest?.extra?.firebaseApiKey,
@@ -13,3 +20,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export default app;
+
+export const auth = getAuth(app);
+
+export const db = getFirestore(app);
+
+export const createCollection = <T = DocumentData>(
+  path: string,
+  ...pathSegments: string[]
+) => collection(db, path, ...pathSegments) as CollectionReference<T>;

@@ -1,5 +1,5 @@
 import { Icon, ListItem, Text, useTheme } from '@rneui/themed';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
@@ -8,7 +8,7 @@ import Animated, {
   LightSpeedOutLeft,
   SequencedTransition,
 } from 'react-native-reanimated';
-import { useDebounce } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { useDeleteTodo, useUpdateTodo } from '../../services/api/todos/todos.hooks';
 import { BORDER_RADIUS } from '../../theme/styles';
@@ -23,19 +23,30 @@ import TodoBottomSheet, { TodoFormData } from './TodoBottomSheet';
 import TodoCheckbox from './TodoCheckbox';
 import TodoSwipeableRight from './TodoSwipeableRight';
 
-function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: Todo) {
+interface TodoItemProps {
+  enableAnimation?: boolean;
+}
+
+function TodoItem({
+  importanceLevel,
+  reminderTime,
+  todo,
+  note,
+  completed,
+  id,
+  enableAnimation,
+}: Todo & TodoItemProps) {
   const { theme } = useTheme();
 
   const [currentImportanceLevel, setCurrentImportanceLevel] = useState(importanceLevel);
   const [currentReminderTime, setCurrentReminderTime] = useState(reminderTime);
-  const { control, watch, handleSubmit } = useForm<TodoFormData>({
+  const { control, watch } = useForm<TodoFormData>({
     defaultValues: {
       todo,
       note,
     },
   });
   const [isCompleted, toggleIsCompleted] = useToggle(completed);
-  const [debouncedIsCompleted] = useDebounce(isCompleted, 1000);
 
   const updateMutation = useUpdateTodo();
   const deleteMutation = useDeleteTodo();
@@ -50,47 +61,43 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     bottomSheetRef.current?.open();
   };
 
-  const handleUpdateTodo = async (todoFormData: TodoFormData) => {
+  const watchTodo = watch('todo', todo);
+  const watchNote = watch('note', note);
+
+  // close bottom sheet also update todo
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+  };
+
+  const handleUpdateTodo = async () => {
     try {
-      await updateMutation.mutateAsync({
+      updateMutation.mutate({
         id,
         completed: isCompleted,
         importanceLevel: currentImportanceLevel,
         reminderTime: currentReminderTime,
-        note: todoFormData.note,
-        todo: todoFormData.todo,
+        note: watchNote,
+        todo: watchTodo,
       });
     } catch (error) {
       if (error) somethingWentWrongToast();
     }
-
-    bottomSheetRef.current?.close();
   };
 
-  const watchTodo = watch('todo', todo);
-  const watchNote = watch('note', note);
-
-  // update todo if checkbox has changed for 1 second
-  useEffect(() => {
-    updateMutation.mutateAsync({
-      completed: debouncedIsCompleted,
-      id,
-      importanceLevel: currentImportanceLevel,
-      reminderTime: currentReminderTime,
-      note: watchNote,
-      todo: watchTodo,
-    });
-  }, [debouncedIsCompleted]);
+  const debounceToggleTodo = useDebouncedCallback(() => {
+    handleUpdateTodo();
+  }, 500);
 
   const handleDeleteTodo = async () => {
     deleteMutation.mutate(id);
   };
+  // FIXME fix invalid date
 
   return (
     <Animated.View
-      layout={SequencedTransition}
-      entering={LightSpeedInLeft}
-      exiting={LightSpeedOutLeft}
+      layout={enableAnimation ? SequencedTransition : undefined}
+      entering={enableAnimation ? LightSpeedInLeft : undefined}
+      exiting={enableAnimation ? LightSpeedOutLeft : undefined}
     >
       <ListItem.Swipeable
         rightContent={
@@ -115,7 +122,10 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
             <TodoCheckbox
               color={importanceColor}
               checked={isCompleted}
-              onCheckboxPress={() => toggleIsCompleted()}
+              onCheckboxPress={() => {
+                toggleIsCompleted();
+                debounceToggleTodo();
+              }}
               size={normalize(28)}
             />
             <View
@@ -167,18 +177,9 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
       </ListItem.Swipeable>
       <TodoBottomSheet
         buttonTitle={watchTodo === '' ? 'DELETE' : 'UPDATE'}
-        onSubmit={handleSubmit(handleUpdateTodo)}
+        onSubmit={closeBottomSheet}
         onDeletePress={handleDeleteTodo}
-        onClose={async () => {
-          updateMutation.mutate({
-            id,
-            completed: isCompleted,
-            importanceLevel: currentImportanceLevel,
-            reminderTime: currentReminderTime,
-            note: watchNote,
-            todo: watchTodo,
-          });
-        }}
+        onClose={handleUpdateTodo}
         isSaveLoading={updateMutation.isLoading}
         isDeleteLoading={deleteMutation.isLoading}
         bottomSheetRef={bottomSheetRef}
@@ -193,5 +194,9 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     </Animated.View>
   );
 }
+
+TodoItem.defaultProps = {
+  enableAnimation: true,
+};
 
 export default TodoItem;

@@ -1,4 +1,4 @@
-import './services/firebase/firebase';
+// import './services/firebase/firebase';
 
 import { ThemeProvider } from '@rneui/themed';
 import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -11,7 +11,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 import RootNavigator from './navigation/RootNavigator.routing';
-import loadAxiosInterceptor from './services/axios/axios';
 import { myTheme } from './theme';
 import { customFont } from './theme/styles';
 import toastConfig from './theme/toastConfig';
@@ -38,7 +37,6 @@ export default function App() {
       try {
         await SplashScreen.preventAutoHideAsync();
         await Font.loadAsync(customFont);
-        loadAxiosInterceptor();
       } finally {
         setAppIsReady(true);
       }
