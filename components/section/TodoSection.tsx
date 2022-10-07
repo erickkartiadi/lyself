@@ -18,7 +18,7 @@ function TodoSection() {
     <View style={styles.sectionLarge}>
       <SectionTitle title="My Goal" showRightComponent screen="TodoStack" />
       {data?.map((props: Todo) => (
-        <TodoItem key={props.id} {...props} />
+        <TodoItem enableAnimation={false} key={props.id} {...props} />
       ))}
     </View>
   );

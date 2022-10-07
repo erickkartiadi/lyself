@@ -91,7 +91,6 @@ function TodoItem({
   const handleDeleteTodo = async () => {
     deleteMutation.mutate(id);
   };
-  // FIXME fix invalid date
 
   return (
     <Animated.View

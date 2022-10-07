@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 export type User = {
   id: string;
   name: string;
@@ -29,5 +31,5 @@ export type Todo = {
   completed: boolean;
   importanceLevel: TodoImportance;
   note: string;
-  reminderTime: Date | null;
+  reminderTime: Timestamp | null;
 };

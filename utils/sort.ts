@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 import { Todo, TodoImportance } from '../types/types';
 
 export type OrderBy = 'ASC' | 'DESC';
@@ -48,9 +50,9 @@ export const sortReminderTime = (todos: Todo[], orderBy: OrderBy) => {
   const haveReminderTime = todos
     .filter((todo) => todo.reminderTime !== null)
     .sort((a, b) =>
-      sortISOStringDate(
-        a.reminderTime as unknown as string,
-        b.reminderTime as unknown as string,
+      sortNumber(
+        a.reminderTime?.seconds as Timestamp['seconds'],
+        b.reminderTime?.seconds as Timestamp['seconds'],
         orderBy
       )
     );

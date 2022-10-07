@@ -1,4 +1,5 @@
 import { Icon, useTheme } from '@rneui/themed';
+import { Timestamp } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
@@ -10,7 +11,7 @@ import normalize from '../../utils/normalize';
 import OptionChip from '../base/OptionChip';
 
 interface TodoReminderButtonProps extends Pick<Todo, 'reminderTime'> {
-  setReminderTime: React.Dispatch<React.SetStateAction<Date | null>>;
+  setReminderTime: React.Dispatch<React.SetStateAction<Todo['reminderTime']>>;
 }
 
 function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButtonProps) {
@@ -27,7 +28,7 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
   };
 
   const handleDatePickerConfirm = (date: Date) => {
-    setReminderTime(date);
+    setReminderTime(Timestamp.fromDate(date));
     hideDatePicker();
   };
 
@@ -43,16 +44,6 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
         accentColor={theme.colors.primary}
         minimumDate={new Date()}
       />
-      {/* <Button
-        containerStyle={{ alignItems: 'flex-start', flex: 1 }}
-        buttonStyle={{ backgroundColor: theme.colors.searchBg }}
-        titleStyle={{
-          color: reminderTime ? theme.colors.primary : theme.colors.black,
-          textAlign: 'left',
-        }}
-        radius="sm"
-        onPress={showDatePicker}
-      > */}
       <OptionChip
         isSelected={reminderTime !== null}
         radius="sm"
