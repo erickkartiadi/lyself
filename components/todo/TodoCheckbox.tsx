@@ -1,7 +1,7 @@
 import React from 'react';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-import { FONT } from '../../theme/styles';
+import { FONT } from '../../theme/theme';
 
 interface TodoCheckboxProps {
   onCheckboxPress: (checked: boolean) => void;

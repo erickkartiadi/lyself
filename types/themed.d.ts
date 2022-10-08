@@ -8,7 +8,12 @@ declare module '@rneui/themed' {
     cardBackground: string;
     secondary: string;
     purple: string;
+    yellow: string;
+    yellowDark: string;
+    blueLight: string;
     blue: string;
+    green: string;
+    greenLight: string;
     spotify: string;
     google: string;
     facebook: string;

@@ -4,36 +4,39 @@ import { Image, View } from 'react-native';
 
 import noDataImageDark from '../../assets/images/no-data-image-dark.png';
 import noDataImageLight from '../../assets/images/no-data-image-light.png';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
+import normalize from '../../utils/normalize';
 
 function TodoEmptyScreen() {
   const { isDarkMode } = React.useContext(ThemeModeContext);
   const { theme } = useTheme();
 
   return (
-    <View
-      style={{
-        flexGrow: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <View style={[appStyles.justifyCenter, appStyles.alignCenter, appStyles.flexGrow]}>
       <View
-        style={{
-          aspectRatio: 1,
-          width: 160,
-          marginBottom: theme.spacing.xl,
-        }}
+        style={[
+          spacing.mb_xl,
+          {
+            aspectRatio: 1,
+            width: 160,
+          },
+        ]}
       >
         <Image
-          style={{ flex: 1, width: '100%' }}
+          style={[appStyles.flex, appStyles.w100]}
           source={isDarkMode ? noDataImageDark : noDataImageLight}
         />
       </View>
-      <Text h4 style={{ marginBottom: theme.spacing.sm }}>
+      <Text h4 style={spacing.mb_sm}>
         Your list is empty
       </Text>
-      <Text small style={{ marginBottom: 96 }} color={theme.colors.grey3}>
+      <Text
+        small
+        style={{ marginBottom: normalize(96, 'height') }}
+        color={theme.colors.grey3}
+      >
         Tap &quot; + &quot; button to add new list
       </Text>
     </View>

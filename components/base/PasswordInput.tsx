@@ -1,7 +1,8 @@
 import { Icon, InputProps, useTheme } from '@rneui/themed';
 import React from 'react';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS } from '../../theme/theme';
 import useToggle from '../../utils/hooks/useToggle';
 import TextInput from './Input';
 
@@ -20,7 +21,7 @@ function PasswordInput({ label, placeholder, ...props }: InputProps) {
           type="ionicon"
           containerStyle={{ borderRadius: BORDER_RADIUS.rounded }}
           size={24}
-          iconStyle={{ padding: theme.spacing.sm }}
+          iconStyle={spacing.p_sm}
           color={theme.colors.black}
           onPress={() => togglePasswordVisible()}
         />

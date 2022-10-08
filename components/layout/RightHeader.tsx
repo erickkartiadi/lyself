@@ -2,7 +2,9 @@ import { Badge, Icon, useTheme } from '@rneui/themed';
 import React, { useContext } from 'react';
 import { View } from 'react-native';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS } from '../../theme/theme';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { comingSoonToast } from '../../utils/toast';
 
@@ -15,17 +17,19 @@ function RightHeader() {
   };
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <View style={[appStyles.flexDirRow, appStyles.alignCenter]}>
       <View>
         <Icon
           name={isDarkMode ? 'moon-outline' : 'sunny-outline'}
           type="ionicon"
           onPress={toggleThemeMode}
-          containerStyle={{
-            borderRadius: BORDER_RADIUS.rounded,
-            aspectRatio: 1,
-            marginRight: theme.spacing.lg,
-          }}
+          containerStyle={[
+            spacing.mr_lg,
+            {
+              borderRadius: BORDER_RADIUS.rounded,
+              aspectRatio: 1,
+            },
+          ]}
           color={theme.colors.black}
           underlayColor={theme.colors.primary}
         />

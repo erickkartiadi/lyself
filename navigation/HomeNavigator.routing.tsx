@@ -8,7 +8,8 @@ import AccountScreen from '../screen/AccountScreen';
 import HomeScreen from '../screen/HomeScreen';
 import NotificationScreen from '../screen/NotificationScreen';
 import StoriesScreen from '../screen/Stories/StoriesScreen';
-import { FONT_FAMILY, GUTTER_SIZE, styles } from '../theme/styles';
+import appStyles from '../theme/appStyles';
+import { FONT_FAMILY, GUTTER_SIZE } from '../theme/theme';
 import { HomeTabParamList } from './navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
@@ -71,7 +72,7 @@ function HomeNavigator() {
         ...navigatorScreenOptions,
         tabBarShowLabel: false,
         tabBarStyle: [
-          styles.shadowMedium,
+          appStyles.shadowMedium,
           {
             borderTopWidth: 0,
             height: 70,

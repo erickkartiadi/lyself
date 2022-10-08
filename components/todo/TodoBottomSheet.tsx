@@ -4,7 +4,9 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { ScrollView, TextInput, View } from 'react-native';
 
-import { FONT, styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
+import { FONT } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import normalize from '../../utils/normalize';
@@ -64,14 +66,8 @@ function TodoBottomSheet({
       bottomSheetRef={bottomSheetRef}
       onClose={onClose}
     >
-      <View style={[styles.container, styles.sectionLarge]}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            marginBottom: theme.spacing.md,
-          }}
-        >
+      <View style={[appStyles.container, appStyles.sectionLarge]}>
+        <View style={[appStyles.flex, appStyles.flexDirRow, spacing.mb_md]}>
           <TodoCheckbox
             color={importanceColor}
             checked={completed}
@@ -85,9 +81,9 @@ function TodoBottomSheet({
               <TextInput
                 style={[
                   FONT.heading3,
+                  appStyles.flex,
                   {
                     color: theme.colors.black,
-                    flex: 1,
                   },
                 ]}
                 placeholder="What are you planning today?"
@@ -100,7 +96,7 @@ function TodoBottomSheet({
             )}
           />
         </View>
-        <View style={styles.sectionMedium}>
+        <View style={appStyles.sectionMedium}>
           <SectionTitle title="Note" />
           <Controller
             control={control}
@@ -119,20 +115,20 @@ function TodoBottomSheet({
             )}
           />
         </View>
-        <View style={styles.sectionMedium}>
+        <View style={appStyles.sectionMedium}>
           <SectionTitle title="Reminder" />
           <TodoReminderButton
             setReminderTime={setCurrentReminderTime}
             reminderTime={currentReminderTime}
           />
         </View>
-        <View style={styles.sectionMedium}>
+        <View style={appStyles.sectionMedium}>
           <SectionTitle title="Importance" />
           <ScrollView horizontal showsVerticalScrollIndicator={false}>
             {importanceLevelItems.map(({ importance, label }) => (
               <OptionChip
                 size="lg"
-                containerStyle={{ marginRight: theme.spacing.md }}
+                containerStyle={spacing.mr_md}
                 chipColor={IMPORTANCE_COLORS[importance]}
                 radius="sm"
                 uppercase
@@ -146,15 +142,13 @@ function TodoBottomSheet({
           </ScrollView>
         </View>
         {isButtonVisible && (
-          <View style={{ flexDirection: 'row', marginTop: theme.spacing.xl }}>
+          <View style={[appStyles.flexDirRow, spacing.mt_xl]}>
             {isEditing && (
               <Button
                 loading={isDeleteLoading}
                 radius="md"
                 type="outline"
-                containerStyle={{
-                  marginRight: theme.spacing.md,
-                }}
+                containerStyle={spacing.mr_md}
                 onPress={onDeletePress}
               >
                 <Icon
@@ -169,7 +163,7 @@ function TodoBottomSheet({
               loading={isSaveLoading}
               onPress={onSubmit}
               radius="md"
-              containerStyle={{ flex: 1 }}
+              containerStyle={appStyles.flex}
               fullWidth
             >
               {buttonTitle}

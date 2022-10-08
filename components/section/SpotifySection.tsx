@@ -7,14 +7,15 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
 import { fetchAccessToken, fetchFeaturedPlaylist } from '../../services/api/spotify';
-import { styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
 import { Playlist } from '../../types/types';
 import PlaylistCard, { PlaylistCardPlaceholder } from '../cards/PlaylistCard';
 import HorizontalSeparator from '../layout/HorizontalSeparator';
 import SectionTitle from '../layout/SectionTitle';
 
 const renderEmptyPlaylists = () => (
-  <View style={{ width: '100%', flexDirection: 'row' }}>
+  <View style={[appStyles.w100, appStyles.flexDirRow]}>
     <PlaylistCardPlaceholder />
     <HorizontalSeparator />
     <PlaylistCardPlaceholder />
@@ -74,7 +75,7 @@ function SpotifySection() {
   }, [response]);
 
   return (
-    <View style={styles.sectionLarge}>
+    <View style={appStyles.sectionLarge}>
       <SectionTitle title="Featured playlist" />
       {isSpotifyTokenAvailable ? (
         <FlatList
@@ -82,8 +83,8 @@ function SpotifySection() {
           overScrollMode="never"
           ItemSeparatorComponent={HorizontalSeparator}
           showsHorizontalScrollIndicator={false}
-          style={styles.noContainerGutter}
-          contentContainerStyle={styles.containerGutter}
+          style={appStyles.noContainerGutter}
+          contentContainerStyle={appStyles.containerGutter}
           data={spotifyQuery.data}
           renderItem={renderPlaylist}
           ListEmptyComponent={renderEmptyPlaylists}
@@ -96,7 +97,7 @@ function SpotifySection() {
           icon={{ type: 'fontisto', name: 'spotify' }}
           color={theme.colors.spotify}
           onPress={() => promptAsync()}
-          containerStyle={{ marginTop: theme.spacing.lg }}
+          containerStyle={spacing.mt_lg}
         />
       )}
     </View>

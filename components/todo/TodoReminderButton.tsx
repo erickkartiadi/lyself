@@ -3,7 +3,9 @@ import { Timestamp } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
@@ -50,14 +52,14 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
         onPress={showDatePicker}
         size="lg"
         uppercase
-        containerStyle={{ alignItems: 'flex-start', flex: 1 }}
+        containerStyle={[appStyles.flex, appStyles.alignStart]}
       >
         <Icon
           name="notifications"
           type="ionicon"
           size={normalize(20)}
           color={reminderTime ? theme.colors.white : theme.colors.black}
-          containerStyle={{ marginRight: theme.spacing.lg }}
+          containerStyle={spacing.mr_lg}
         />
         {reminderTime ? formatReminderTime(reminderTime) : 'Remind Me'}
         {reminderTime && (

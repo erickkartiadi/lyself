@@ -1,7 +1,7 @@
 import { Input, InputProps, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 
-import { FONT } from '../../theme/styles';
+import { FONT } from '../../theme/theme';
 
 // TODO update input styles
 function TextInput({

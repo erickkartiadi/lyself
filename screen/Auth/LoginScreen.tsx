@@ -16,7 +16,7 @@ import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 import { login } from '../../services/api/auth/auth.api';
-import { styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
 import { User } from '../../types/types';
 import { loginSchema } from '../../utils/constant/validation/auth.schema';
 
@@ -62,25 +62,24 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
+      contentContainerStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
         <Text h1>Welcome to Lyself</Text>
         <Text>Login to continue.</Text>
         <View
-          style={{
-            aspectRatio: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          style={[
+            appStyles.alignCenter,
+            appStyles.justifyCenter,
+            {
+              aspectRatio: 1,
+            },
+          ]}
         >
           <Image
             source={loginIllustration}
-            style={{
-              flex: 1,
-              width: '100%',
-            }}
+            style={[appStyles.flex, appStyles.w100]}
             resizeMode="center"
           />
         </View>
@@ -118,14 +117,17 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
           )}
         />
         <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            marginTop: theme.spacing.xl * -1,
-            marginBottom: theme.spacing.xl * 1.25,
-          }}
+          style={[
+            appStyles.flex,
+            appStyles.w100,
+            appStyles.flexDirRow,
+            appStyles.alignCenter,
+            appStyles.justifyEnd,
+            {
+              marginTop: theme.spacing.xl * -1,
+              marginBottom: theme.spacing.xl * 1.25,
+            },
+          ]}
         >
           <NavLink to={{ screen: 'ForgotPassword' }}>Forgot Password?</NavLink>
         </View>
@@ -138,12 +140,10 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         </Button>
         <View
           style={[
-            styles.sectionLarge,
-            {
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            },
+            appStyles.sectionLarge,
+            appStyles.flexDirRow,
+            appStyles.justifyCenter,
+            appStyles.alignCenter,
           ]}
         >
           <Text>Didn&apos;t have an account? </Text>

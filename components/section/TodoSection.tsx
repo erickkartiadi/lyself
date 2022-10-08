@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { useGetTodos } from '../../services/api/todos/todos.hooks';
-import { styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
 import { Todo } from '../../types/types';
 import SectionTitle from '../layout/SectionTitle';
 import TodoItem from '../todo/TodoItem';
@@ -15,7 +15,7 @@ function TodoSection() {
   }
 
   return (
-    <View style={styles.sectionLarge}>
+    <View style={appStyles.sectionLarge}>
       <SectionTitle title="My Goal" showRightComponent screen="TodoStack" />
       {data?.map((props: Todo) => (
         <TodoItem enableAnimation={false} key={props.id} {...props} />

@@ -2,11 +2,13 @@ import { Text } from '@rneui/themed';
 import React from 'react';
 import { ScrollView } from 'react-native';
 
-import { styles } from '../theme/styles';
+import appStyles from '../theme/appStyles';
 
 function NotificationScreen() {
   return (
-    <ScrollView contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}>
+    <ScrollView
+      contentContainerStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
+    >
       <Text h1>Notification</Text>
     </ScrollView>
   );

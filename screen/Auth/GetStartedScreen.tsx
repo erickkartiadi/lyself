@@ -7,32 +7,27 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
 import NavLink from '../../components/base/NavLink';
 import { GetStartedScreenNavigationProps } from '../../navigation/navigation.types';
-import { styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
 
 function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
   const { theme } = useTheme();
 
   return (
-    <ScrollView
-      style={[
-        {
-          flex: 1,
-        },
-      ]}
-    >
+    <ScrollView style={appStyles.flex}>
       <SafeAreaView>
         <View
           style={[
-            styles.sectionLarge,
+            appStyles.sectionLarge,
+            appStyles.flex,
             {
-              flex: 1,
               minHeight: Dimensions.get('window').height,
             },
           ]}
         >
           <View
             style={[
-              styles.noContainerGutter,
+              appStyles.noContainerGutter,
               {
                 aspectRatio: 4 / 3,
               },
@@ -40,18 +35,13 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
           >
             <Image
               source={getStartedIllustration}
-              style={[
-                {
-                  width: '100%',
-                  flex: 1,
-                },
-              ]}
+              style={[appStyles.flex, appStyles.w100]}
             />
           </View>
-          <View style={[styles.container]}>
+          <View style={[appStyles.container]}>
             <Text
               style={[
-                styles.sectionLarge,
+                appStyles.sectionLarge,
                 {
                   textAlign: 'center',
                 },
@@ -65,9 +55,9 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
             </Text>
             <View
               style={[
-                styles.sectionLarge,
+                appStyles.sectionLarge,
+                appStyles.flex,
                 {
-                  flex: 1,
                   justifyContent: 'center',
                 },
               ]}
@@ -75,14 +65,14 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               <Button
                 onPress={() => navigation.navigate('Login')}
                 fullWidth
-                buttonStyle={{
-                  paddingVertical: theme.spacing.xl,
-                }}
-                containerStyle={{ marginBottom: theme.spacing.xl }}
-                titleStyle={{
-                  color: theme.colors.white,
-                  marginLeft: theme.spacing.xl,
-                }}
+                buttonStyle={spacing.py_xl}
+                containerStyle={spacing.mb_xl}
+                titleStyle={[
+                  spacing.ml_xl,
+                  {
+                    color: theme.colors.white,
+                  },
+                ]}
               >
                 <Icon
                   containerStyle={{
@@ -99,15 +89,19 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 type="outline"
                 onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
-                buttonStyle={{
-                  borderColor: theme.colors.greyOutline,
-                  paddingVertical: theme.spacing.xl,
-                }}
-                containerStyle={{ marginBottom: theme.spacing.xl }}
-                titleStyle={{
-                  color: theme.colors.black,
-                  marginLeft: theme.spacing.xl,
-                }}
+                buttonStyle={[
+                  spacing.py_xl,
+                  {
+                    borderColor: theme.colors.greyOutline,
+                  },
+                ]}
+                containerStyle={spacing.mb_xl}
+                titleStyle={[
+                  spacing.ml_xl,
+                  {
+                    color: theme.colors.black,
+                  },
+                ]}
               >
                 <Icon
                   containerStyle={{
@@ -124,15 +118,19 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 type="outline"
                 onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
-                buttonStyle={{
-                  borderColor: theme.colors.greyOutline,
-                  paddingVertical: theme.spacing.xl,
-                }}
-                containerStyle={{ marginBottom: theme.spacing.xl }}
-                titleStyle={{
-                  color: theme.colors.black,
-                  marginLeft: theme.spacing.xl,
-                }}
+                buttonStyle={[
+                  spacing.py_xl,
+                  {
+                    borderColor: theme.colors.greyOutline,
+                  },
+                ]}
+                containerStyle={spacing.mb_xl}
+                titleStyle={[
+                  spacing.ml_xl,
+                  {
+                    color: theme.colors.black,
+                  },
+                ]}
               >
                 <Icon
                   containerStyle={{
@@ -150,15 +148,19 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
                 type="outline"
                 onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
-                buttonStyle={{
-                  borderColor: theme.colors.greyOutline,
-                  paddingVertical: theme.spacing.xl,
-                }}
-                containerStyle={{ marginBottom: theme.spacing.xl }}
-                titleStyle={{
-                  color: theme.colors.black,
-                  marginLeft: theme.spacing.xl,
-                }}
+                buttonStyle={[
+                  spacing.py_xl,
+                  {
+                    borderColor: theme.colors.greyOutline,
+                  },
+                ]}
+                containerStyle={spacing.mb_xl}
+                titleStyle={[
+                  spacing.ml_xl,
+                  {
+                    color: theme.colors.black,
+                  },
+                ]}
               >
                 <Icon
                   containerStyle={{
@@ -175,12 +177,10 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
           </View>
           <View
             style={[
-              styles.sectionLarge,
-              {
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              },
+              appStyles.sectionLarge,
+              appStyles.flexDirRow,
+              appStyles.alignCenter,
+              appStyles.justifyCenter,
             ]}
           >
             <Text>Didn&apos;t have an account? </Text>

@@ -16,7 +16,7 @@ import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
 import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
 import { register } from '../../services/api/auth/auth.api';
-import { styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
 import { User } from '../../types/types';
 import { registerSchema } from '../../utils/constant/validation/auth.schema';
 
@@ -64,25 +64,24 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
+      contentContainerStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
         <Text h1>Create new account</Text>
         <Text>Just one more step to be part of the {'\n'}Lyself community.</Text>
         <View
-          style={{
-            aspectRatio: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          style={[
+            appStyles.justifyCenter,
+            appStyles.alignCenter,
+            {
+              aspectRatio: 1,
+            },
+          ]}
         >
           <Image
             source={registerIllustration}
-            style={{
-              flex: 1,
-              width: '100%',
-            }}
+            style={[appStyles.flex, appStyles.w100]}
             resizeMode="center"
           />
         </View>
@@ -144,12 +143,10 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
         </Button>
         <View
           style={[
-            styles.sectionLarge,
-            {
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            },
+            appStyles.sectionLarge,
+            appStyles.flexDirRow,
+            appStyles.justifyCenter,
+            appStyles.alignCenter,
           ]}
         >
           <Text>Already have an account? </Text>

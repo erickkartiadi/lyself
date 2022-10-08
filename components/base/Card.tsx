@@ -7,7 +7,8 @@ import {
 import * as React from 'react';
 import { FlexStyle, StyleProp, ViewStyle } from 'react-native';
 
-import { BORDER_RADIUS, styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import { BORDER_RADIUS } from '../../theme/theme';
 import AnimatedPressable, { AnimatedPressableProps } from './AnimatedPressable';
 
 interface CardProps extends AnimatedPressableProps {
@@ -38,7 +39,7 @@ function Card({
     >
       <RNECard
         containerStyle={[
-          styles.shadowLarge,
+          appStyles.shadowLarge,
           {
             borderWidth: 0.35,
             borderRadius: BORDER_RADIUS.lg,

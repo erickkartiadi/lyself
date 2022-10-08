@@ -3,8 +3,11 @@ import * as Linking from 'expo-linking';
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS } from '../../theme/theme';
 import { Playlist } from '../../types/types';
+import normalize from '../../utils/normalize';
 import AnimatedPressable from '../base/AnimatedPressable';
 
 function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
@@ -18,22 +21,24 @@ function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
     <AnimatedPressable
       key={id}
       onPress={handleOpenSpotifyPlaylist}
-      style={{ marginTop: theme.spacing.md, width: 160 }}
+      style={[spacing.mt_md, { width: normalize(160) }]}
     >
       <Image
-        containerStyle={{
-          width: '100%',
-          aspectRatio: 1,
-          borderRadius: BORDER_RADIUS.xl,
-        }}
+        containerStyle={[
+          appStyles.w100,
+          {
+            aspectRatio: 1,
+            borderRadius: BORDER_RADIUS.xl,
+          },
+        ]}
         childrenContainerStyle={{ width: '100%' }}
         source={{
           uri: imageUrl,
         }}
       />
-      <View style={{ marginTop: theme.spacing.md }}>
+      <View style={spacing.mt_md}>
         <Text subtitle2>{name}</Text>
-        <Text caption color={theme.colors.grey3} style={{ marginTop: theme.spacing.sm }}>
+        <Text caption color={theme.colors.grey3} style={spacing.mt_sm}>
           by {creator}
         </Text>
       </View>
@@ -44,13 +49,15 @@ function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
 export default PlaylistCard;
 
 export function PlaylistCardPlaceholder() {
-  const { theme } = useTheme();
-
   return (
-    <View style={{ marginTop: theme.spacing.md }}>
-      <Skeleton height={160} width={160} style={{ borderRadius: BORDER_RADIUS.lg }} />
-      <Skeleton style={{ marginTop: theme.spacing.lg }} height={16} />
-      <Skeleton style={{ marginTop: theme.spacing.sm }} height={16} width={120} />
+    <View style={spacing.mt_md}>
+      <Skeleton
+        height={normalize(160)}
+        width={normalize(160)}
+        style={{ borderRadius: BORDER_RADIUS.lg }}
+      />
+      <Skeleton style={spacing.mt_lg} height={16} />
+      <Skeleton style={spacing.mt_sm} height={16} width={120} />
     </View>
   );
 }

@@ -1,8 +1,9 @@
-import { Text, TextProps, useTheme } from '@rneui/themed';
+import { Text, TextProps } from '@rneui/themed';
 import * as React from 'react';
 import { useCallback } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 
+import spacing from '../../theme/spacing';
 import ButtonLink from './Link';
 
 type ShowHideTextProps = Pick<TextProps, 'numberOfLines'>;
@@ -13,7 +14,6 @@ function ShowHideText({
 }: React.PropsWithChildren<ShowHideTextProps>) {
   const [isShowMore, setIsShowMore] = React.useState(false);
   const [isLengthMore, setIsLengthMore] = React.useState(false);
-  const { theme } = useTheme();
 
   const onTextLayout = useCallback((e: NativeSyntheticEvent<TextLayoutEventData>) => {
     setIsLengthMore(e.nativeEvent.lines.length > numberOfLines);
@@ -33,11 +33,7 @@ function ShowHideText({
       </Text>
 
       {isLengthMore && (
-        <ButtonLink
-          color="primary"
-          style={{ marginTop: theme.spacing.md }}
-          onPress={toggleIsShowMore}
-        >
+        <ButtonLink color="primary" style={spacing.mt_md} onPress={toggleIsShowMore}>
           {isShowMore ? 'View less' : 'View more'}
         </ButtonLink>
       )}

@@ -13,7 +13,7 @@ import BackButton from '../../components/base/BackButton';
 import TextInput from '../../components/base/Input';
 import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
 import { forgotPassword } from '../../services/api/auth/auth.api';
-import { styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
 import { User } from '../../types/types';
 import { forgotPasswordSchema } from '../../utils/constant/validation/auth.schema';
 import { somethingWentWrongToast } from '../../utils/toast';
@@ -57,7 +57,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
+      contentContainerStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
@@ -67,18 +67,17 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
           reset your password.
         </Text>
         <View
-          style={{
-            flex: 1,
-            aspectRatio: 1,
-            alignItems: 'center',
-          }}
+          style={[
+            appStyles.flex,
+            appStyles.alignCenter,
+            {
+              aspectRatio: 1,
+            },
+          ]}
         >
           <Image
             source={forgotPasswordIllustration}
-            style={{
-              flex: 1,
-              width: '100%',
-            }}
+            style={[appStyles.flex, appStyles.w100]}
           />
         </View>
         <Controller

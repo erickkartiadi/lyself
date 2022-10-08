@@ -6,13 +6,9 @@ import {
   BaseToastProps as RNToastProps,
 } from 'react-native-toast-message';
 
-import {
-  BORDER_RADIUS,
-  FONT,
-  FONT_FAMILY,
-  GUTTER_SIZE,
-  styles,
-} from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS, FONT, FONT_FAMILY, GUTTER_SIZE } from '../../theme/theme';
 import normalize from '../../utils/normalize';
 
 interface ToastProps extends RNToastProps {
@@ -30,9 +26,7 @@ function Toast({ color, icon: { name, type }, ...props }: ToastProps) {
         name={name}
         type={type}
         backgroundColor={color}
-        iconStyle={{
-          padding: theme.spacing.sm,
-        }}
+        iconStyle={spacing.p_md}
         containerStyle={{
           borderRadius: BORDER_RADIUS.rounded,
         }}
@@ -45,16 +39,16 @@ function Toast({ color, icon: { name, type }, ...props }: ToastProps) {
     <RNToast
       {...props}
       style={[
-        styles.shadowLarge,
+        appStyles.shadowLarge,
+        spacing.py_xl,
+        spacing.px_xl,
         {
           borderRadius: BORDER_RADIUS.md,
           backgroundColor: theme.colors.cardBackground,
           borderLeftWidth: theme.spacing.sm,
           borderLeftColor: color,
           width: Dimensions.get('window').width - GUTTER_SIZE * 2,
-          paddingHorizontal: theme.spacing.xl,
           height: '100%',
-          paddingVertical: theme.spacing.xl,
         },
       ]}
       text1Style={[
@@ -63,9 +57,7 @@ function Toast({ color, icon: { name, type }, ...props }: ToastProps) {
       ]}
       text2Style={[FONT.small, { color: theme.colors.grey3 }]}
       text2NumberOfLines={3}
-      contentContainerStyle={{
-        paddingLeft: theme.spacing.xl,
-      }}
+      contentContainerStyle={spacing.pl_xl}
       renderLeadingIcon={renderLeadingIcon}
     />
   );

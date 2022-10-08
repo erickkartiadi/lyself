@@ -12,7 +12,8 @@ import Toast from 'react-native-toast-message';
 
 import RootNavigator from './navigation/RootNavigator.routing';
 import { myTheme } from './theme';
-import { customFont } from './theme/styles';
+import appStyles from './theme/appStyles';
+import { customFont } from './theme/theme';
 import toastConfig from './theme/toastConfig';
 import { AuthProvider } from './utils/context/AuthContext';
 import { ThemeModeProvider } from './utils/context/ThemeModeContext';
@@ -59,7 +60,7 @@ export default function App() {
   return (
     <AuthProvider>
       <ThemeProvider theme={myTheme}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView style={appStyles.flex}>
           <SafeAreaProvider onLayout={onLayoutRootView}>
             <ThemeModeProvider>
               <QueryClientProvider client={queryClient}>

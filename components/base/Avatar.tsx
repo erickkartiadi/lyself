@@ -5,7 +5,7 @@ import {
 } from '@rneui/themed';
 import * as React from 'react';
 
-import { BORDER_RADIUS, GUTTER_SIZE } from '../../theme/styles';
+import { BORDER_RADIUS, GUTTER_SIZE } from '../../theme/theme';
 import normalize from '../../utils/normalize';
 
 interface AvatarProps extends RNEAvatarProps {

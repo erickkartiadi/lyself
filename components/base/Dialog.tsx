@@ -5,6 +5,8 @@ import {
 import { Dialog as RNEDialog, Text, useTheme } from '@rneui/themed';
 import * as React from 'react';
 
+import spacing from '../../theme/spacing';
+
 interface DialogProps extends RNEDialogProps {
   isDialogLoading?: boolean;
   isDialogVisible: boolean;
@@ -46,12 +48,12 @@ function Dialog({
               },
             }}
           />
-          <Text style={{ marginBottom: theme.spacing.md }}>{text}</Text>
+          <Text style={spacing.mb_md}>{text}</Text>
           <RNEDialog.Actions>
             <RNEDialog.Button type="solid" title="CONFIRM" onPress={onConfirm} />
             <RNEDialog.Button
               title="CANCEL"
-              containerStyle={{ marginRight: theme.spacing.md }}
+              containerStyle={spacing.mr_md}
               onPress={hideDialog}
             />
           </RNEDialog.Actions>

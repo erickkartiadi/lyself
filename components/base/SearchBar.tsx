@@ -5,7 +5,8 @@ import {
 } from '@rneui/themed';
 import React, { useState } from 'react';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS } from '../../theme/theme';
 import normalize from '../../utils/normalize';
 
 interface SearchBarProps {
@@ -26,6 +27,7 @@ function SearchBar({ placeholder }: SearchBarProps) {
       placeholder={placeholder}
       onChangeText={updateSearch}
       containerStyle={[
+        spacing.mb_xl,
         {
           paddingHorizontal: 0,
           backgroundColor: 'transparent',
@@ -33,14 +35,13 @@ function SearchBar({ placeholder }: SearchBarProps) {
           borderBottomWidth: 0,
           borderWidth: 0,
           elevation: 0,
-          marginBottom: theme.spacing.xl,
         },
       ]}
       inputContainerStyle={[
+        spacing.px_md,
         {
           backgroundColor: theme.colors.searchBg,
           borderRadius: BORDER_RADIUS.rounded,
-          paddingHorizontal: theme.spacing.md,
         },
       ]}
       inputStyle={{

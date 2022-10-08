@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from '@rneui/themed';
 import * as React from 'react';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import { BORDER_RADIUS } from '../../theme/theme';
 
 type TodoSwipeableRightProps = Pick<ButtonProps, 'onPress' | 'loading'>;
 

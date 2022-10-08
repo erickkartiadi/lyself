@@ -3,9 +3,12 @@ import * as Linking from 'expo-linking';
 import React from 'react';
 import { View } from 'react-native';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS } from '../../theme/theme';
 import { Article } from '../../types/types';
 import { formatTimeAgo } from '../../utils/formatTimeAgo';
+import normalize from '../../utils/normalize';
 import AnimatedPressable from '../base/AnimatedPressable';
 
 function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
@@ -17,32 +20,30 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
 
   return (
     <AnimatedPressable
-      style={{ width: 320, marginTop: theme.spacing.md }}
+      style={[spacing.mt_md, { width: normalize(320) }]}
       onPress={handleOpenArticle}
     >
       <Image
-        containerStyle={{
-          width: '100%',
-          aspectRatio: 4 / 3,
-        }}
+        containerStyle={[
+          appStyles.w100,
+          {
+            aspectRatio: 4 / 3,
+          },
+        ]}
         borderRadius={BORDER_RADIUS.xl}
         source={{ uri: urlToImage }}
       />
-      <View
-        style={{
-          marginTop: theme.spacing.xl,
-        }}
-      >
+      <View style={spacing.mt_xl}>
         <Text subtitle numberOfLines={3}>
           {title}
         </Text>
         <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginTop: theme.spacing.sm,
-          }}
+          style={[
+            appStyles.flex,
+            appStyles.flexDirRow,
+            appStyles.alignCenter,
+            spacing.mt_sm,
+          ]}
         >
           <Text caption color={theme.colors.grey3}>
             {source}
@@ -60,15 +61,17 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
 export default ArticleCard;
 
 export function ArticleCardPlaceholder() {
-  const { theme } = useTheme();
-
   return (
-    <View style={{ marginTop: theme.spacing.md }}>
-      <Skeleton width={320} height={240} style={{ borderRadius: BORDER_RADIUS.xl }} />
+    <View style={spacing.mt_md}>
+      <Skeleton
+        width={normalize(320)}
+        height={240}
+        style={{ borderRadius: BORDER_RADIUS.xl }}
+      />
 
-      <Skeleton circle height={16} style={{ marginTop: theme.spacing.xl }} />
-      <Skeleton circle height={16} style={{ marginTop: theme.spacing.md }} />
-      <Skeleton circle style={{ marginTop: theme.spacing.md }} height={16} width={200} />
+      <Skeleton circle height={16} style={spacing.mt_xl} />
+      <Skeleton circle height={16} style={spacing.mt_md} />
+      <Skeleton circle style={spacing.mt_md} height={16} width={200} />
     </View>
   );
 }

@@ -8,7 +8,7 @@ import {
   GUTTER_SIZE,
   lightColors,
   THEME_SPACING,
-} from './styles';
+} from './theme';
 
 const myTheme = createTheme({
   spacing: { ...THEME_SPACING },

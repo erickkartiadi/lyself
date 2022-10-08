@@ -6,7 +6,8 @@ import DropDownPicker, {
   ValueType,
 } from 'react-native-dropdown-picker';
 
-import { BORDER_RADIUS, FONT, styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import { BORDER_RADIUS, FONT } from '../../theme/theme';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 
 type PickerProps = {
@@ -41,11 +42,12 @@ function Picker({
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={appStyles.flex}>
       <DropDownPicker
         listMode="SCROLLVIEW"
         dropDownContainerStyle={[
-          styles.shadowMedium,
+          appStyles.shadowMedium,
+          appStyles.alignSelfEnd,
           {
             borderWidth: 0.25,
             borderColor,
@@ -58,7 +60,6 @@ function Picker({
             borderBottomEndRadius: BORDER_RADIUS.sm,
             borderBottomStartRadius: BORDER_RADIUS.sm,
 
-            alignSelf: 'flex-end',
             width: dropdownWidth,
           },
         ]}

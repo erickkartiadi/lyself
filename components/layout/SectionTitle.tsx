@@ -2,6 +2,7 @@ import { Text, ThemeSpacing, useTheme } from '@rneui/themed';
 import React from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 
+import appStyles from '../../theme/appStyles';
 import NavLink from '../base/NavLink';
 
 interface SectionTitleProps {
@@ -25,23 +26,23 @@ function SectionTitle({
   return (
     <View
       style={[
+        appStyles.flex,
+        appStyles.flexDirRow,
+        appStyles.justifyBetween,
+        appStyles.alignCenter,
         {
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
           marginBottom: theme.spacing[marginBottom],
         },
         containerStyle,
       ]}
     >
       <>
-        <Text h4 style={{ flex: 1 }}>
+        <Text h4 style={appStyles.flex}>
           {title}
         </Text>
         {showRightComponent && !rightComponent ? (
           <NavLink
-            style={{ flexShrink: 1, alignItems: 'flex-end' }}
+            style={[appStyles.alignEnd, appStyles.flexShrink]}
             to={{
               screen: showRightComponent && screen && screen,
             }}

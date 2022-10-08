@@ -5,7 +5,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Avatar from '../components/base/Avatar';
 import SettingMenu from '../components/base/SettingMenu';
-import { styles } from '../theme/styles';
+import appStyles from '../theme/appStyles';
+import spacing from '../theme/spacing';
 import { AuthContext } from '../utils/context/AuthContext';
 import { somethingWentWrongToast } from '../utils/toast';
 
@@ -22,21 +23,21 @@ function AccountScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={[styles.sectionLarge]}>
-      <View style={styles.sectionLarge}>
+    <ScrollView contentContainerStyle={[appStyles.sectionLarge]}>
+      <View style={appStyles.sectionLarge}>
         <View
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+          style={[
+            appStyles.flex,
+            appStyles.flexDirCol,
+            appStyles.alignCenter,
+            appStyles.justifyCenter,
+          ]}
         >
           {user?.photoURL ? (
             <Avatar
               rounded
               size={7}
-              containerStyle={{ marginBottom: theme.spacing.xl }}
+              containerStyle={spacing.mb_xl}
               source={{
                 uri: user.photoURL,
               }}
@@ -46,17 +47,19 @@ function AccountScreen() {
               rounded
               size={7}
               icon={{ name: 'person', type: 'ionicon', color: theme.colors.grey3 }}
-              containerStyle={{
-                backgroundColor: theme.colors.secondary,
-                marginBottom: theme.spacing.xl,
-              }}
+              containerStyle={[
+                spacing.mb_xl,
+                {
+                  backgroundColor: theme.colors.secondary,
+                },
+              ]}
             />
           )}
           <Text h3>{user?.displayName}</Text>
           <Text color={theme.colors.grey3}>{user?.email}</Text>
         </View>
       </View>
-      <View style={styles.sectionSmall}>
+      <View style={appStyles.sectionSmall}>
         <SettingMenu
           title="Profile"
           icon={{ backgroundColor: theme.colors.blue, name: 'person', type: 'ionicon' }}
@@ -78,7 +81,7 @@ function AccountScreen() {
           }}
         />
       </View>
-      <View style={styles.sectionSmall}>
+      <View style={appStyles.sectionSmall}>
         <SettingMenu
           title="Setting"
           icon={{
@@ -97,7 +100,7 @@ function AccountScreen() {
           caption="English"
         />
       </View>
-      <View style={styles.sectionSmall}>
+      <View style={appStyles.sectionSmall}>
         <SettingMenu
           title="Ask a Question"
           icon={{

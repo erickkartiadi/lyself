@@ -3,7 +3,7 @@ import {
   Inter_500Medium,
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
-import { StyleProp, StyleSheet, TextStyle } from 'react-native';
+import { StyleProp, TextStyle } from 'react-native';
 
 import normalize from '../utils/normalize';
 
@@ -14,7 +14,12 @@ export const lightColors = {
   background: '#FBFCFD',
   cardBackground: '#FFFFFF',
   searchBg: '#E8EDF2',
+  yellow: '#F8E596',
+  yellowDark: '#CBA50D',
+  blueLight: '#80D0FF',
   blue: '#00A3FF',
+  green: '#3BA71B',
+  greenLight: '#92E977',
   purple: '#9C5FAE',
   spotify: '#1db954',
   google: '#ea4335',
@@ -27,9 +32,14 @@ export const darkColors = {
   primaryDark: '#F38399',
   secondary: '#303337',
   searchBg: '#303337',
+  yellow: '#CBA50D',
+  yellowDark: '#F8E596',
   background: '#121212',
   cardBackground: '#191B1C',
-  blue: '#0096ED',
+  green: '#92E977',
+  greenLight: '#3BA71B',
+  blue: '#80D0FF',
+  blueLight: '#00A3FF',
   purple: '#9454A7',
   spotify: '#1BAC4E',
   google: '#E83221',
@@ -54,66 +64,6 @@ export const BORDER_RADIUS = {
 };
 
 export const GUTTER_SIZE = THEME_SPACING.xl;
-
-export const styles = StyleSheet.create({
-  containerFluid: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    paddingHorizontal: GUTTER_SIZE,
-  },
-  containerGutter: {
-    paddingHorizontal: GUTTER_SIZE,
-  },
-  noContainerGutter: {
-    marginHorizontal: GUTTER_SIZE * -1,
-  },
-  sectionLarge: {
-    paddingVertical: THEME_SPACING.xl,
-  },
-  sectionMedium: {
-    paddingVertical: THEME_SPACING.lg,
-  },
-  sectionSmall: {
-    paddingVertical: THEME_SPACING.md,
-  },
-
-  // shadow generator -> https://ethercreative.github.io/react-native-shadow-generator/
-  shadowLarge: {
-    shadowColor: '#rgba(0,0,0,0.1)',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-
-    elevation: 6,
-  },
-  shadowMedium: {
-    shadowColor: '#rgba(0,0,0,0.1)',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-
-    elevation: 4,
-  },
-  shadowSmall: {
-    shadowColor: '#rgba(0,0,0,0.1)',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
-  },
-});
 
 // scale: 1.125 - major second
 export const FONT_SIZE = {

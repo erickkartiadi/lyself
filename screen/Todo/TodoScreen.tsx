@@ -12,7 +12,9 @@ import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomS
 import TodoItem from '../../components/todo/TodoItem';
 import { TodoScreenNavigationProps } from '../../navigation/navigation.types';
 import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks';
-import { BORDER_RADIUS, styles } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useToggle from '../../utils/hooks/useToggle';
@@ -165,9 +167,9 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         showsHorizontalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
         contentContainerStyle={[
-          styles.sectionLarge,
-          styles.containerGutter,
-          { flexGrow: 1 },
+          appStyles.sectionLarge,
+          appStyles.containerGutter,
+          appStyles.flexGrow,
         ]}
       >
         {data.length <= 0 ? (
@@ -210,26 +212,23 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
       />
       <BottomSheet
         bottomSheetRef={filterBottomSheetRef}
-        modalStyle={[styles.containerGutter, styles.sectionLarge]}
+        modalStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
       >
         <Text h2>Filter</Text>
-        <View style={[styles.sectionLarge]}>
+        <View style={[appStyles.sectionLarge]}>
           <SectionTitle title="Sort" />
           <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              marginTop: theme.spacing.sm,
-            }}
+            style={[
+              appStyles.flex,
+              appStyles.flexDirRow,
+              spacing.mt_sm,
+              appStyles.flexWrap,
+            ]}
           >
             {sortItems.map(({ label, sort, orderBy }) => (
               <OptionChip
                 key={label}
-                containerStyle={{
-                  marginRight: theme.spacing.md,
-                  marginBottom: theme.spacing.md,
-                }}
+                containerStyle={[spacing.mr_md, spacing.mb_md]}
                 size="lg"
                 onPress={() => setSelectedSort({ orderBy, sort })}
                 isSelected={
@@ -241,23 +240,20 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             ))}
           </View>
         </View>
-        <View style={[styles.sectionLarge]}>
+        <View style={[appStyles.sectionLarge]}>
           <SectionTitle title="Filter" />
           <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              marginTop: theme.spacing.sm,
-            }}
+            style={[
+              appStyles.flex,
+              appStyles.flexDirRow,
+              spacing.mt_sm,
+              appStyles.flexWrap,
+            ]}
           >
             {filterItems.map(({ label, filter }) => (
               <OptionChip
                 key={label}
-                containerStyle={{
-                  marginRight: theme.spacing.md,
-                  marginBottom: theme.spacing.md,
-                }}
+                containerStyle={[spacing.mr_md, spacing.mr_md]}
                 size="lg"
                 onPress={() => setSelectedFilter(filter)}
                 isSelected={selectedFilter === filter}

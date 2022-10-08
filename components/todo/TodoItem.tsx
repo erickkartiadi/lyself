@@ -11,7 +11,9 @@ import Animated, {
 import { useDebouncedCallback } from 'use-debounce';
 
 import { useDeleteTodo, useUpdateTodo } from '../../services/api/todos/todos.hooks';
-import { BORDER_RADIUS } from '../../theme/styles';
+import appStyles from '../../theme/appStyles';
+import spacing from '../../theme/spacing';
+import { BORDER_RADIUS } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTimeAgo';
@@ -107,17 +109,17 @@ function TodoItem({
         }
         rightWidth={normalize(80)}
         containerStyle={[
+          spacing.mb_md,
           {
             padding: 0,
             borderRadius: BORDER_RADIUS.md,
             backgroundColor: theme.colors.background,
-            marginBottom: theme.spacing.md,
           },
         ]}
-        rightStyle={{ marginBottom: theme.spacing.md, paddingLeft: theme.spacing.md }}
+        rightStyle={[spacing.mb_md, spacing.pl_md]}
       >
         <Card onPress={showBottomSheet}>
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <View style={[appStyles.flex, appStyles.flexDirRow, appStyles.alignCenter]}>
             <TodoCheckbox
               color={importanceColor}
               checked={isCompleted}
@@ -127,12 +129,7 @@ function TodoItem({
               }}
               size={normalize(28)}
             />
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'column',
-              }}
-            >
+            <View style={[appStyles.flex, appStyles.flexDirCol]}>
               <Text
                 subtitle
                 numberOfLines={1}
@@ -151,15 +148,15 @@ function TodoItem({
               </Text>
               {!isCompleted && currentReminderTime && (
                 <View
-                  style={{
-                    marginTop: theme.spacing.xs,
-                    flex: 1,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}
+                  style={[
+                    appStyles.flex,
+                    appStyles.flexDirRow,
+                    appStyles.alignCenter,
+                    spacing.mt_xs,
+                  ]}
                 >
                   <Icon
-                    containerStyle={{ marginRight: theme.spacing.sm }}
+                    containerStyle={spacing.mr_sm}
                     name="notifications-outline"
                     type="ionicon"
                     size={16}
