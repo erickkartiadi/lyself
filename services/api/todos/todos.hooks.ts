@@ -2,6 +2,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { Todo } from '../../../types/types';
 import {
+  cancelNotification,
+  sendTodoReminderNotification,
+} from '../../../utils/notifications';
+import {
   importanceLevelItems,
   OrderBy,
   sortNumber,
@@ -50,6 +54,14 @@ export const useCreateTodo = () => {
 
   return useMutation(createTodo, {
     onSuccess: (newTodo: Todo) => {
+      sendTodoReminderNotification(
+        newTodo.id,
+        'Todo',
+        newTodo.todo,
+        newTodo.reminderTime,
+        newTodo.completed
+      );
+
       queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) => [
         ...(oldTodos || []),
         newTodo,
@@ -62,13 +74,22 @@ export const useUpdateTodo = () => {
   const queryClient = useQueryClient();
 
   return useMutation(updateTodo, {
-    onSuccess: (todo) =>
+    onSuccess: (todo) => {
+      sendTodoReminderNotification(
+        todo.id,
+        'Todo',
+        todo.todo,
+        todo.reminderTime,
+        todo.completed
+      );
+
       queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) =>
         oldTodos?.map((oldTodo) => {
           if (oldTodo.id === todo.id) return { ...oldTodo, ...todo };
           return oldTodo;
         })
-      ),
+      );
+    },
   });
 };
 
@@ -77,6 +98,8 @@ export const useDeleteTodo = () => {
 
   return useMutation(deleteTodo, {
     onSuccess: (todoId) => {
+      cancelNotification(todoId);
+
       queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) =>
         oldTodos?.filter((todo) => todo.id !== todoId)
       );

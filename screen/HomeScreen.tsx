@@ -1,4 +1,5 @@
 import { useTheme } from '@rneui/themed';
+import * as Linking from 'expo-linking';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
@@ -52,7 +53,10 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
           text="Organize your task and goal"
           colorLight={theme.colors.greenLight}
           colorDark={theme.colors.green}
-          onPress={() => navigation.navigate('TodoStack', { screen: 'Todo' })}
+          onPress={() => {
+            // navigation.navigate('TodoStack', { screen: 'Todo' });
+            Linking.openURL('exp://192.168.0.128:19000/todo');
+          }}
         />
       </View>
       <TodoSection />

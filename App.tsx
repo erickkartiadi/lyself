@@ -19,6 +19,7 @@ import { AuthProvider } from './utils/context/AuthContext';
 import { ThemeModeProvider } from './utils/context/ThemeModeContext';
 import useAppState from './utils/hooks/useAppState';
 import useOnlineManager from './utils/hooks/useOnlineManager';
+import useRegisterNotification from './utils/hooks/useRegisterNotification';
 
 // refetch on focus
 function onAppStateChange(status: AppStateStatus) {
@@ -28,10 +29,10 @@ function onAppStateChange(status: AppStateStatus) {
 }
 
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
   useOnlineManager();
   useAppState(onAppStateChange);
-
-  const [appIsReady, setAppIsReady] = useState(false);
+  useRegisterNotification();
 
   useEffect(() => {
     async function prepare() {

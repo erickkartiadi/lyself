@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { LinkingOptions, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Linking from 'expo-linking';
 import { StatusBar } from 'expo-status-bar';
@@ -21,15 +21,18 @@ function RootNavigator() {
   const { isDarkMode } = React.useContext(ThemeModeContext);
   const { user } = React.useContext(AuthContext);
 
-  const linking = {
+  const linking: LinkingOptions<RootStackParamList> = {
     prefixes: [prefix],
+    config: {
+      screens: {
+        TodoStack: 'todo',
+        AuthStack: '*',
+      },
+    },
   };
 
   return (
-    <NavigationContainer
-      linking={linking}
-      theme={isDarkMode ? navThemeDark : navThemeLight}
-    >
+    <NavigationContainer theme={isDarkMode ? navThemeDark : navThemeLight}>
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <Host>
         <Stack.Navigator

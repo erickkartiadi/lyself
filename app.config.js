@@ -39,6 +39,13 @@ export default {
           color: '#F55C7A',
         },
       ],
+      [
+        'expo-notifications',
+        {
+          icon: './assets/adaptive-icon.png',
+          color: '#ffffff',
+        },
+      ],
     ],
     extra: {
       mode: 'development',
