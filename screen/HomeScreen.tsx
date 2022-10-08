@@ -1,5 +1,4 @@
 import { useTheme } from '@rneui/themed';
-import * as Linking from 'expo-linking';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
@@ -11,6 +10,7 @@ import meditationIllustrationLight from '../assets/images/meditation-light.png';
 import ActivityCard from '../components/cards/ActivityCard';
 import VerticalSeparator from '../components/layout/VerticalSeparator';
 import ArticleSection from '../components/section/ArticleSection';
+import SpotifySection from '../components/section/SpotifySection';
 import TodoSection from '../components/section/TodoSection';
 import { HomeScreenNavigationProps } from '../navigation/navigation.types';
 import appStyles from '../theme/appStyles';
@@ -54,14 +54,13 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
           colorLight={theme.colors.greenLight}
           colorDark={theme.colors.green}
           onPress={() => {
-            // navigation.navigate('TodoStack', { screen: 'Todo' });
-            Linking.openURL('exp://192.168.0.128:19000/todo');
+            navigation.navigate('TodoStack', { screen: 'Todo' });
           }}
         />
       </View>
       <TodoSection />
       <ArticleSection />
-      {/* <SpotifySection /> */}
+      <SpotifySection />
     </ScrollView>
   );
 }

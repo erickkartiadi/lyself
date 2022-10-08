@@ -1,7 +1,6 @@
 import { Button, useTheme } from '@rneui/themed';
 import { useQuery } from '@tanstack/react-query';
 import { ResponseType, useAuthRequest } from 'expo-auth-session';
-import { discovery } from 'expo-auth-session/build/providers/Google';
 import Constant from 'expo-constants';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
@@ -25,7 +24,10 @@ const renderEmptyPlaylists = () => (
     <PlaylistCardPlaceholder />
   </View>
 );
-
+const discovery = {
+  authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+  tokenEndpoint: 'https://accounts.spotify.com/api/token',
+};
 const renderPlaylist = ({
   item: { creator, id, imageUrl, spotifyUrl, name: title },
 }: {
@@ -63,13 +65,17 @@ function SpotifySection() {
         'user-read-private',
       ],
       usePKCE: false,
-      redirectUri: 'exp://192.168.1.110:19000',
+      redirectUri: Constant?.manifest?.extra?.redirectUri,
     },
     discovery
   );
 
   useEffect(() => {
+    console.log('here');
+
     if (response && response?.type === 'success') {
+      console.log('success');
+
       fetchAccessToken(response.params.code);
     }
   }, [response]);
