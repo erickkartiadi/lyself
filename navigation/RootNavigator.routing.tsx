@@ -32,7 +32,10 @@ function RootNavigator() {
   };
 
   return (
-    <NavigationContainer theme={isDarkMode ? navThemeDark : navThemeLight}>
+    <NavigationContainer
+      linking={linking}
+      theme={isDarkMode ? navThemeDark : navThemeLight}
+    >
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <Host>
         <Stack.Navigator

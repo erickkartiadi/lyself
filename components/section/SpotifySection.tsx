@@ -71,11 +71,7 @@ function SpotifySection() {
   );
 
   useEffect(() => {
-    console.log('here');
-
     if (response && response?.type === 'success') {
-      console.log('success');
-
       fetchAccessToken(response.params.code);
     }
   }, [response]);

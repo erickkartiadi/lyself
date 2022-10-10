@@ -38,6 +38,7 @@ export async function login({
 
 export async function forgotPassword({ email }: Pick<CreateUserDto, 'email'>) {
   const redirectUri = Constant.manifest?.extra?.redirectUri;
+  console.log(redirectUri);
 
   await sendPasswordResetEmail(auth, email, {
     url: redirectUri,
