@@ -1,4 +1,5 @@
 import { Icon, ListItem, Text, useTheme } from '@rneui/themed';
+import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
@@ -94,6 +95,9 @@ function TodoItem({
     deleteMutation.mutate(id);
   };
 
+  const isPastDue =
+    !isCompleted && dayjs(currentReminderTime?.toDate()).isBefore(dayjs(), 'minute');
+
   return (
     <Animated.View
       layout={enableAnimation ? SequencedTransition : undefined}
@@ -160,9 +164,9 @@ function TodoItem({
                     name="notifications-outline"
                     type="ionicon"
                     size={16}
-                    color={theme.colors.grey3}
+                    color={isPastDue ? theme.colors.error : theme.colors.grey3}
                   />
-                  <Text small color={theme.colors.grey3}>
+                  <Text small color={isPastDue ? theme.colors.error : theme.colors.grey3}>
                     {formatReminderTime(currentReminderTime)}
                   </Text>
                 </View>
