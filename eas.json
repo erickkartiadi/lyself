@@ -8,11 +8,17 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal"
-    },
-    "apk": {
+      "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "APP_ENV": "staging",
+        "REDIRECT_URI": "lyself://",
+        "SPOTIFY_TOKEN_KEY": "SPOTIFY_TOKEN",
+        "SPOTIFY_REFRESH_TOKEN_KEY": "SPOTIFY_REFRESH_TOKEN",
+        "SPOTIFY_EXPIRES_TIME_KEY": "SPOTIFY_EXPIRES_TIME",
+        "USER_TOKEN_KEY": "USER_TOKEN"
       }
     },
     "production": {}
