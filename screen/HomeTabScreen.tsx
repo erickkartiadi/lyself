@@ -16,7 +16,7 @@ import { HomeScreenNavigationProps } from '../navigation/navigation.types';
 import appStyles from '../theme/appStyles';
 import { ThemeModeContext } from '../utils/context/ThemeModeContext';
 
-function HomeScreen({ navigation }: HomeScreenNavigationProps) {
+function HomeTabScreen({ navigation }: HomeScreenNavigationProps) {
   const { isDarkMode } = React.useContext(ThemeModeContext);
   const { theme } = useTheme();
 
@@ -65,4 +65,4 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
   );
 }
 
-export default HomeScreen;
+export default HomeTabScreen;

@@ -10,7 +10,7 @@ import spacing from '../theme/spacing';
 import { AuthContext } from '../utils/context/AuthContext';
 import { somethingWentWrongToast } from '../utils/toast';
 
-function AccountScreen() {
+function AccountTabScreen() {
   const { theme } = useTheme();
   const { user, logout } = React.useContext(AuthContext);
 
@@ -131,4 +131,4 @@ function AccountScreen() {
   );
 }
 
-export default AccountScreen;
+export default AccountTabScreen;

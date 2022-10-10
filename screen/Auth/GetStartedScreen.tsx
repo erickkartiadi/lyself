@@ -87,7 +87,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={[
                   spacing.py_xl,
@@ -116,7 +115,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={[
                   spacing.py_xl,
@@ -146,7 +144,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
 
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
                 fullWidth
                 buttonStyle={[
                   spacing.py_xl,

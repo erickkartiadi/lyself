@@ -12,6 +12,7 @@ import { ThemeModeContext } from '../utils/context/ThemeModeContext';
 import AuthNavigator from './AuthNavigator.routing';
 import HomeNavigator from './HomeNavigator.routing';
 import { RootStackParamList } from './navigation.types';
+import StoryNavigator from './StoryNavigator.routing';
 import TodoNavigator from './TodoNavigator.routing';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +49,7 @@ function RootNavigator() {
             <>
               <Stack.Screen name="HomeTab" component={HomeNavigator} />
               <Stack.Screen name="TodoStack" component={TodoNavigator} />
+              <Stack.Screen name="StoryStack" component={StoryNavigator} />
               <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
             </>
           ) : (

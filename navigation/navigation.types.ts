@@ -5,6 +5,7 @@ export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
   TodoStack: NavigatorScreenParams<TodoStackParamList>;
+  StoryStack: NavigatorScreenParams<StoryStackParamList>;
   InDevelopment: undefined;
 };
 
@@ -17,7 +18,7 @@ export type AuthStackParamList = {
 
 export type HomeTabParamList = {
   Home: undefined;
-  Stories: undefined;
+  Story: undefined;
   Notification: undefined;
   Account: undefined;
 };
@@ -26,14 +27,13 @@ export type TodoStackParamList = {
   Todo: undefined;
 };
 
+export type StoryStackParamList = {
+  AddStory: undefined;
+};
+
 export type GetStartedScreenNavigationProps = NativeStackScreenProps<
   AuthStackParamList & RootStackParamList,
   'GetStarted'
->;
-
-export type HomeScreenNavigationProps = NativeStackScreenProps<
-  HomeTabParamList & RootStackParamList,
-  'Home'
 >;
 
 export type LoginScreenNavigationProps = NativeStackScreenProps<
@@ -51,6 +51,11 @@ export type RegisterScreenNavigationProps = NativeStackScreenProps<
   'Register'
 >;
 
+export type HomeScreenNavigationProps = NativeStackScreenProps<
+  HomeTabParamList & RootStackParamList,
+  'Home'
+>;
+
 export type TodoScreenNavigationProps = NativeStackScreenProps<
   TodoStackParamList,
   'Todo'
@@ -59,4 +64,9 @@ export type TodoScreenNavigationProps = NativeStackScreenProps<
 export type AccountScreenNavigationProps = NativeStackScreenProps<
   HomeTabParamList & RootStackParamList,
   'Account'
+>;
+
+export type StoryTabScreenNavigationProps = NativeStackScreenProps<
+  HomeTabParamList & RootStackParamList,
+  'Story'
 >;

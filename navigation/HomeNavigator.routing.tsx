@@ -4,12 +4,11 @@ import * as React from 'react';
 
 import LeftHeader from '../components/layout/LeftHeader';
 import RightHeader from '../components/layout/RightHeader';
-import AccountScreen from '../screen/AccountScreen';
-import HomeScreen from '../screen/HomeScreen';
-import NotificationScreen from '../screen/NotificationScreen';
-import StoriesScreen from '../screen/Stories/StoriesScreen';
-import appStyles from '../theme/appStyles';
-import { FONT_FAMILY, GUTTER_SIZE } from '../theme/theme';
+import AccountTabScreen from '../screen/AccountTabScreen';
+import HomeTabScreen from '../screen/HomeTabScreen';
+import NotificationTabScreen from '../screen/NotificationTabScreen';
+import StoryTabScreen from '../screen/Story/StoryTabScreen';
+import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../theme/theme';
 import { HomeTabParamList } from './navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
@@ -18,6 +17,7 @@ export const navigatorScreenOptions = {
   headerShadowVisible: false,
   headerTitleStyle: {
     fontFamily: FONT_FAMILY.medium,
+    fontSize: FONT_SIZE.heading3,
   },
   headerRight: RightHeader,
 };
@@ -72,7 +72,6 @@ function HomeNavigator() {
         ...navigatorScreenOptions,
         tabBarShowLabel: false,
         tabBarStyle: [
-          appStyles.shadowMedium,
           {
             borderTopWidth: 0,
             height: 70,
@@ -97,11 +96,11 @@ function HomeNavigator() {
           tabBarIcon: HomeTabBarIcon,
         }}
         name="Home"
-        component={HomeScreen}
+        component={HomeTabScreen}
       />
       <Tab.Screen
-        name="Stories"
-        component={StoriesScreen}
+        name="Story"
+        component={StoryTabScreen}
         options={{
           tabBarIcon: ExploreTabBarIcon,
           title: 'Stories',
@@ -109,12 +108,12 @@ function HomeNavigator() {
       />
       <Tab.Screen
         name="Notification"
-        component={NotificationScreen}
+        component={NotificationTabScreen}
         options={{ tabBarIcon: ChatTabBarIcon, title: 'Notification' }}
       />
       <Tab.Screen
         name="Account"
-        component={AccountScreen}
+        component={AccountTabScreen}
         options={{
           tabBarIcon: UserTabBarIcon,
           title: 'Account',

@@ -18,6 +18,7 @@ function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = React.useState<User | undefined>();
 
   const logout = async () => {
+    setUser(undefined);
     await signOut(auth);
   };
 
@@ -31,7 +32,7 @@ function AuthProvider({ children }: PropsWithChildren) {
     });
 
     return subscribed;
-  }, [user, setUser, logout]);
+  }, [user]);
 
   const authValue = React.useMemo(
     () => ({

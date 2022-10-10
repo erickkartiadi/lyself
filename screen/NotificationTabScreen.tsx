@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native';
 
 import appStyles from '../theme/appStyles';
 
-function NotificationScreen() {
+function NotificationTabScreen() {
   return (
     <ScrollView
       contentContainerStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
@@ -14,4 +14,4 @@ function NotificationScreen() {
   );
 }
 
-export default NotificationScreen;
+export default NotificationTabScreen;
