@@ -8,23 +8,26 @@ import {
   Text,
   useTheme,
 } from '@rneui/themed';
+import { Timestamp } from 'firebase/firestore';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import ButtonLink from '../../components/base/Link';
 import TextInput from '../../components/base/TextInput';
 import { AddStoryScreenNavigationProps } from '../../navigation/navigation.types';
+import { useCreateStory } from '../../services/api/story/story.hooks';
 import appStyles from '../../theme/appStyles';
 import spacing from '../../theme/spacing';
 import { FONT } from '../../theme/theme';
+import { Story } from '../../types/types';
+import { AuthContext } from '../../utils/context/AuthContext';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import normalize from '../../utils/normalize';
+import { somethingWentWrongToast } from '../../utils/toast';
 
-export type StoryFormData = {
-  title: string;
-  content: string;
-};
+export type StoryFormData = Pick<Story, 'content' | 'title'>;
 
 const useStyles = makeStyles((theme) => ({
   colorGrey3: {
@@ -40,13 +43,58 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
       title: '',
     },
   });
+  const { user } = React.useContext(AuthContext);
+
+  const storyMutation = useCreateStory();
 
   const styles = useStyles();
 
   useApplyHeaderWorkaround(navigation.setOptions);
 
+  // TODO anonymous post
+  const handlePostStory = ({ content, title }: StoryFormData) => {
+    if (!user) {
+      somethingWentWrongToast();
+      return;
+    }
+
+    if (title === '') {
+      Toast.show({
+        type: 'error',
+        text1: 'Title is empty',
+        text2: 'You must add title to your story',
+      });
+      return;
+    }
+
+    storyMutation.mutate(
+      {
+        anonymous: false,
+        content,
+        title,
+        userId: user.uid,
+        createdAt: Timestamp.fromDate(new Date()),
+      },
+      {
+        onSuccess: () => {
+          Toast.show({
+            type: 'success',
+            text1: 'Success',
+            text2: 'Your story has been created',
+          });
+          reset();
+          navigation.goBack();
+        },
+      }
+    );
+  };
+
   const postButton = React.useCallback(
-    () => <ButtonLink color="primary">POST</ButtonLink>,
+    () => (
+      <ButtonLink color="primary" onPress={handleSubmit(handlePostStory)}>
+        POST
+      </ButtonLink>
+    ),
     []
   );
   React.useEffect(() => {
@@ -79,7 +127,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           name="content"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              containerStyle={spacing.mt_md}
+              containerStyle={spacing.mt_sm}
               enableErrorMessage={false}
               showBorder={false}
               placeholder="Type your story here."

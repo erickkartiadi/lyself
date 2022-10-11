@@ -33,3 +33,12 @@ export type Todo = {
   note: string;
   reminderTime: Timestamp | null;
 };
+
+export type Story = {
+  title: string;
+  content: string;
+  createdAt: Timestamp;
+  updatedAt: string;
+  anonymous: boolean;
+  userId: string;
+};

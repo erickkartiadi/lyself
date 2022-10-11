@@ -40,8 +40,7 @@ function TextInput({
       selectionColor={theme.colors.primary}
       inputContainerStyle={[
         {
-          borderColor:
-            isFocused || errorMessage ? theme.colors.primary : theme.colors.greyOutline,
+          borderColor: errorMessage ? theme.colors.primary : theme.colors.greyOutline,
           borderBottomWidth: showBorder ? 1 : 0,
         },
         inputContainerStyle,
