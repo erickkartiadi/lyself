@@ -89,9 +89,6 @@ function HomeNavigator() {
       <Tab.Screen
         options={{
           headerTitleStyle: { display: 'none' },
-          headerStyle: {
-            height: 90,
-          },
           headerLeft: LeftHeader,
           tabBarIcon: HomeTabBarIcon,
         }}

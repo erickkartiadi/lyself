@@ -123,27 +123,25 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
     reset();
   };
 
-  const filterHeaderRight = React.useCallback(
+  const filterButton = React.useCallback(
     () => (
-      <View>
-        <Icon
-          name="filter"
-          type="ionicon"
-          onPress={() => filterBottomSheetRef.current?.open()}
-          iconStyle={{
-            color:
-              !(
-                selectedSort.sort === 'importanceLevel' && selectedSort.orderBy === 'DESC'
-              ) || selectedFilter !== 'Todo'
-                ? theme.colors.primary
-                : theme.colors.black,
-          }}
-          containerStyle={{
-            borderRadius: BORDER_RADIUS.rounded,
-            aspectRatio: 1,
-          }}
-        />
-      </View>
+      <Icon
+        name="filter"
+        type="ionicon"
+        onPress={() => filterBottomSheetRef.current?.open()}
+        iconStyle={{
+          color:
+            !(
+              selectedSort.sort === 'importanceLevel' && selectedSort.orderBy === 'DESC'
+            ) || selectedFilter !== 'Todo'
+              ? theme.colors.primary
+              : theme.colors.black,
+        }}
+        containerStyle={{
+          borderRadius: BORDER_RADIUS.rounded,
+          aspectRatio: 1,
+        }}
+      />
     ),
     [selectedSort, selectedFilter]
   );
@@ -153,7 +151,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: selectedFilter,
-      headerRight: filterHeaderRight,
+      headerRight: filterButton,
     });
   }, [selectedFilter]);
 

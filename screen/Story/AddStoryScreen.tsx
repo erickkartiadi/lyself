@@ -12,6 +12,7 @@ import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 
+import ButtonLink from '../../components/base/Link';
 import TextInput from '../../components/base/TextInput';
 import { AddStoryScreenNavigationProps } from '../../navigation/navigation.types';
 import appStyles from '../../theme/appStyles';
@@ -44,6 +45,16 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
   useApplyHeaderWorkaround(navigation.setOptions);
 
+  const postButton = React.useCallback(
+    () => <ButtonLink color="primary">POST</ButtonLink>,
+    []
+  );
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: postButton,
+    });
+  }, []);
+
   return (
     <ScrollView contentContainerStyle={[appStyles.container]}>
       <View style={appStyles.sectionSmall}>
@@ -71,7 +82,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
               containerStyle={spacing.mt_md}
               enableErrorMessage={false}
               showBorder={false}
-              placeholder="Type your text"
+              placeholder="Type your story here."
               multiline
               onBlur={onBlur}
               onChangeText={onChange}
