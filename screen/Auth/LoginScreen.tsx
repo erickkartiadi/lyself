@@ -11,9 +11,9 @@ import Toast from 'react-native-toast-message';
 
 import loginIllustration from '../../assets/images/login-illustration.png';
 import BackButton from '../../components/base/BackButton';
-import TextInput from '../../components/base/Input';
 import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
+import TextInput from '../../components/base/TextInput';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 import { login } from '../../services/api/auth/auth.api';
 import appStyles from '../../theme/appStyles';

@@ -10,7 +10,7 @@ import Toast from 'react-native-toast-message';
 
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import BackButton from '../../components/base/BackButton';
-import TextInput from '../../components/base/Input';
+import TextInput from '../../components/base/TextInput';
 import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
 import { forgotPassword } from '../../services/api/auth/auth.api';
 import appStyles from '../../theme/appStyles';

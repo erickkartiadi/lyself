@@ -95,6 +95,7 @@ export type Font =
   | 'small'
   | 'caption';
 
+// TODO move font to styles
 export const FONT: { [key in Font]: StyleProp<TextStyle> } = {
   heading1: {
     fontSize: FONT_SIZE.heading1,

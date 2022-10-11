@@ -4,7 +4,7 @@ import React from 'react';
 import spacing from '../../theme/spacing';
 import { BORDER_RADIUS } from '../../theme/theme';
 import useToggle from '../../utils/hooks/useToggle';
-import TextInput from './Input';
+import TextInput from './TextInput';
 
 function PasswordInput({ label, placeholder, ...props }: InputProps) {
   const [isPasswordVisible, togglePasswordVisible] = useToggle(false);

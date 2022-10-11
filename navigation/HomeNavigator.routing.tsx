@@ -67,7 +67,7 @@ function UserTabBarIcon({ focused, color, size }: TabBarIconOptions) {
 function HomeNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Story"
       screenOptions={{
         ...navigatorScreenOptions,
         tabBarShowLabel: false,

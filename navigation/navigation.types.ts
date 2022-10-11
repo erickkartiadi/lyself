@@ -61,6 +61,11 @@ export type TodoScreenNavigationProps = NativeStackScreenProps<
   'Todo'
 >;
 
+export type AddStoryScreenNavigationProps = NativeStackScreenProps<
+  StoryStackParamList,
+  'AddStory'
+>;
+
 export type AccountScreenNavigationProps = NativeStackScreenProps<
   HomeTabParamList & RootStackParamList,
   'Account'

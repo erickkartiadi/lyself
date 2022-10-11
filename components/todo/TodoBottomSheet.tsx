@@ -2,7 +2,7 @@ import { Icon } from '@rneui/base';
 import { Button, ButtonProps, useTheme } from '@rneui/themed';
 import React, { Dispatch, SetStateAction } from 'react';
 import { Control, Controller } from 'react-hook-form';
-import { ScrollView, TextInput, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import appStyles from '../../theme/appStyles';
 import spacing from '../../theme/spacing';
@@ -13,6 +13,7 @@ import normalize from '../../utils/normalize';
 import { importanceLevelItems } from '../../utils/sort';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
 import OptionChip from '../base/OptionChip';
+import TextInput from '../base/TextInput';
 import SectionTitle from '../layout/SectionTitle';
 import TodoCheckbox from './TodoCheckbox';
 import TodoReminderButton from './TodoReminderButton';
@@ -67,7 +68,7 @@ function TodoBottomSheet({
       onClose={onClose}
     >
       <View style={[appStyles.container, appStyles.sectionLarge]}>
-        <View style={[appStyles.flex, appStyles.flexDirRow, spacing.mb_md]}>
+        <View style={[appStyles.flex, appStyles.flexDirRow]}>
           <TodoCheckbox
             color={importanceColor}
             checked={completed}
@@ -79,16 +80,12 @@ function TodoBottomSheet({
             name="todo"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                style={[
-                  FONT.heading3,
-                  appStyles.flex,
-                  {
-                    color: theme.colors.black,
-                  },
-                ]}
+                showBorder={false}
+                enableErrorMessage={false}
                 placeholder="What are you planning today?"
-                placeholderTextColor={theme.colors.grey3}
-                selectionColor={theme.colors.primary}
+                multiline
+                containerStyle={appStyles.flex}
+                inputStyle={FONT.heading3}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -97,18 +94,17 @@ function TodoBottomSheet({
           />
         </View>
         <View style={appStyles.sectionMedium}>
-          <SectionTitle title="Note" />
+          <SectionTitle title="Note" marginBottom="xs" />
           <Controller
             control={control}
             name="note"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                style={[{ textAlignVertical: 'top' }]}
+                showBorder={false}
+                enableErrorMessage={false}
                 placeholder="Add note"
-                placeholderTextColor={theme.colors.grey3}
                 onChangeText={onChange}
                 onBlur={onBlur}
-                selectionColor={theme.colors.primary}
                 value={value}
                 multiline
               />

@@ -88,6 +88,7 @@ function TodoItem({
   };
 
   const debounceToggleTodo = useDebouncedCallback(() => {
+    // TODO don't update if current completed == completed
     handleUpdateTodo();
   }, 500);
 
