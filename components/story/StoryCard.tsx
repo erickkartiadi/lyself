@@ -24,10 +24,10 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
           size={2.75}
           containerStyle={[spacing.mr_lg]}
           rounded
-          avatarUrl={data?.photoURL}
+          avatarUrl={anonymous ? null : data?.photoURL}
         />
         <View>
-          <Text subtitle2>{data?.displayName}</Text>
+          <Text subtitle2>{anonymous ? 'Anonymous' : data?.displayName}</Text>
           <Text caption color={theme.colors.grey3}>
             {formatTimeAgo(createdAt.toDate())}
           </Text>

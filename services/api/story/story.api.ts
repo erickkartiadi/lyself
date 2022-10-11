@@ -3,8 +3,8 @@ import { addDoc, getDocs } from 'firebase/firestore';
 import { Story } from '../../../types/types';
 import { createCollection } from '../../firebase/firebase';
 
-type CreateStoryDto = Omit<Story, 'updatedAt'>;
-type UpdateTodoDto = Story;
+export type CreateStoryDto = Omit<Story, 'updatedAt'>;
+export type UpdateTodoDto = Story;
 
 const storyCol = createCollection<Story>('story');
 

@@ -13,8 +13,6 @@ export async function createUser(createUserDto: CreateUserDto) {
 }
 
 export async function getUser(uid: User['uid']): Promise<User | undefined> {
-  console.log('fetch user 1x');
-
   const todoDoc = doc(usersCol, uid);
   const querySnapshot = await getDoc(todoDoc);
 

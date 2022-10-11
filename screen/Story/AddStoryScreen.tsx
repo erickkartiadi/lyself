@@ -1,13 +1,4 @@
-import {
-  Button,
-  Chip,
-  Divider,
-  Icon,
-  makeStyles,
-  Switch,
-  Text,
-  useTheme,
-} from '@rneui/themed';
+import { Button, Chip, Divider, Icon, makeStyles, Text, useTheme } from '@rneui/themed';
 import { Timestamp } from 'firebase/firestore';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -15,19 +6,18 @@ import { ScrollView, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 import ButtonLink from '../../components/base/Link';
+import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
 import { AddStoryScreenNavigationProps } from '../../navigation/navigation.types';
+import { CreateStoryDto } from '../../services/api/story/story.api';
 import { useCreateStory } from '../../services/api/story/story.hooks';
 import appStyles from '../../theme/appStyles';
 import spacing from '../../theme/spacing';
 import { FONT } from '../../theme/theme';
-import { Story } from '../../types/types';
 import { AuthContext } from '../../utils/context/AuthContext';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import normalize from '../../utils/normalize';
 import { somethingWentWrongToast } from '../../utils/toast';
-
-export type StoryFormData = Pick<Story, 'content' | 'title'>;
 
 const useStyles = makeStyles((theme) => ({
   colorGrey3: {
@@ -37,10 +27,11 @@ const useStyles = makeStyles((theme) => ({
 
 function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
   const { theme } = useTheme();
-  const { control, handleSubmit, reset, watch } = useForm<StoryFormData>({
+  const { control, handleSubmit, reset } = useForm<CreateStoryDto>({
     defaultValues: {
       content: '',
       title: '',
+      anonymous: false,
     },
   });
   const { user } = React.useContext(AuthContext);
@@ -52,7 +43,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
   useApplyHeaderWorkaround(navigation.setOptions);
 
   // TODO anonymous post
-  const handlePostStory = ({ content, title }: StoryFormData) => {
+  const handlePostStory = ({ content, title, anonymous }: CreateStoryDto) => {
     if (!user) {
       somethingWentWrongToast();
       return;
@@ -69,7 +60,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
     storyMutation.mutate(
       {
-        anonymous: false,
+        anonymous,
         content,
         title,
         userId: user.uid,
@@ -216,7 +207,13 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             People cannot see your profile on this story
           </Text>
         </View>
-        <Switch />
+        <Controller
+          control={control}
+          name="anonymous"
+          render={({ field: { onChange, value } }) => (
+            <SwitchToggle value={value} onValueChange={onChange} />
+          )}
+        />
       </View>
     </ScrollView>
   );
