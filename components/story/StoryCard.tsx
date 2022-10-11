@@ -3,14 +3,19 @@ import React from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import useGetUser from '../../services/api/user/users.hooks';
 import appStyles from '../../theme/appStyles';
 import spacing from '../../theme/spacing';
+import { Story } from '../../types/types';
+import { formatTimeAgo } from '../../utils/formatTime';
 import normalize from '../../utils/normalize';
 import Avatar from '../base/Avatar';
 import Card from '../base/Card';
 
-function StoryCard() {
+function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
   const { theme } = useTheme();
+
+  const { data } = useGetUser(userId);
 
   return (
     <Card>
@@ -19,27 +24,25 @@ function StoryCard() {
           size={2.75}
           containerStyle={[spacing.mr_lg]}
           rounded
-          source={{ uri: 'https://i.pravatar.cc/150' }}
+          avatarUrl={data?.photoURL}
         />
         <View>
-          <Text subtitle2>Tessa Adam</Text>
+          <Text subtitle2>{data?.displayName}</Text>
           <Text caption color={theme.colors.grey3}>
-            1h ago
+            {formatTimeAgo(createdAt.toDate())}
           </Text>
         </View>
       </View>
 
       <View style={spacing.my_xl}>
         <Text numberOfLines={3} h4>
-          Mental illness can be comfortable
+          {title}
         </Text>
-        <Text style={spacing.mt_sm} small numberOfLines={6}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut nam incidunt
-          deleniti veniam labore? Cupiditate, ab repudiandae aut itaque deleniti rem quia
-          voluptatum unde quam quibusdam? Ad ex voluptates quisquam quod? Aliquam illo ex
-          odio quisquam rerum culpa, nulla quasi voluptas! Et atque quas in rem qui facere
-          commodi adipisci!
-        </Text>
+        {content !== '' && (
+          <Text style={spacing.mt_sm} small numberOfLines={6}>
+            {content}
+          </Text>
+        )}
       </View>
       <View style={appStyles.flexDirRow}>
         <Chip

@@ -7,7 +7,7 @@ import appStyles from '../../theme/appStyles';
 import spacing from '../../theme/spacing';
 import { BORDER_RADIUS } from '../../theme/theme';
 import { Article } from '../../types/types';
-import { formatTimeAgo } from '../../utils/formatTimeAgo';
+import { formatTimeAgo } from '../../utils/formatTime';
 import normalize from '../../utils/normalize';
 import AnimatedPressable from '../base/AnimatedPressable';
 

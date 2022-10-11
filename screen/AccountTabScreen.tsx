@@ -33,28 +33,7 @@ function AccountTabScreen() {
             appStyles.justifyCenter,
           ]}
         >
-          {user?.photoURL ? (
-            <Avatar
-              rounded
-              size={7}
-              containerStyle={spacing.mb_xl}
-              source={{
-                uri: user.photoURL,
-              }}
-            />
-          ) : (
-            <Avatar
-              rounded
-              size={7}
-              icon={{ name: 'person', type: 'ionicon', color: theme.colors.grey3 }}
-              containerStyle={[
-                spacing.mb_xl,
-                {
-                  backgroundColor: theme.colors.secondary,
-                },
-              ]}
-            />
-          )}
+          <Avatar size={7} containerStyle={spacing.mb_xl} avatarUrl={user?.photoURL} />
           <Text h3>{user?.displayName}</Text>
           <Text color={theme.colors.grey3}>{user?.email}</Text>
         </View>

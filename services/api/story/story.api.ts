@@ -1,4 +1,4 @@
-import { addDoc } from 'firebase/firestore';
+import { addDoc, getDocs } from 'firebase/firestore';
 
 import { Story } from '../../../types/types';
 import { createCollection } from '../../firebase/firebase';
@@ -6,8 +6,18 @@ import { createCollection } from '../../firebase/firebase';
 type CreateStoryDto = Omit<Story, 'updatedAt'>;
 type UpdateTodoDto = Story;
 
+const storyCol = createCollection<Story>('story');
+
+export async function fetchStories(): Promise<Story[]> {
+  const querySnapshot = await getDocs(storyCol);
+
+  return querySnapshot.docs.map((document) => ({
+    ...document.data(),
+    id: document.id,
+  }));
+}
+
 export async function createStory(createStoryDto: CreateStoryDto): Promise<void> {
-  const storyCol = createCollection('story');
   await addDoc(storyCol, createStoryDto);
 }
 

@@ -1,24 +1,33 @@
 import { FAB, Icon, useTheme } from '@rneui/themed';
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 
+import RefreshControl from '../../components/layout/RefreshControl';
+import VerticalSeparator from '../../components/layout/VerticalSeparator';
 import StoryCard from '../../components/story/StoryCard';
 import { StoryTabScreenNavigationProps } from '../../navigation/navigation.types';
+import { useGetStories } from '../../services/api/story/story.hooks';
 import appStyles from '../../theme/appStyles';
 import normalize from '../../utils/normalize';
 
 function StoryTabScreen({ navigation }: StoryTabScreenNavigationProps) {
   const { theme } = useTheme();
 
+  const { data, isFetching, refetch } = useGetStories();
+
   return (
-    <ScrollView
-      contentContainerStyle={[
-        appStyles.containerGutter,
-        appStyles.sectionLarge,
-        appStyles.flex,
-      ]}
-    >
-      <StoryCard />
+    <>
+      <FlatList
+        contentContainerStyle={[
+          appStyles.flexGrow,
+          appStyles.containerGutter,
+          appStyles.sectionLarge,
+        ]}
+        refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
+        ItemSeparatorComponent={VerticalSeparator}
+        renderItem={({ item }) => <StoryCard {...item} />}
+        data={data}
+      />
       <FAB
         placement="right"
         color={theme.colors.primary}
@@ -32,7 +41,7 @@ function StoryTabScreen({ navigation }: StoryTabScreenNavigationProps) {
           />
         }
       />
-    </ScrollView>
+    </>
   );
 }
 

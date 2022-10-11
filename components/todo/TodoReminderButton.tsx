@@ -8,7 +8,7 @@ import spacing from '../../theme/spacing';
 import { BORDER_RADIUS } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
-import { formatReminderTime } from '../../utils/formatTimeAgo';
+import { formatReminderTime } from '../../utils/formatTime';
 import normalize from '../../utils/normalize';
 import OptionChip from '../base/OptionChip';
 

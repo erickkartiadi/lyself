@@ -17,7 +17,7 @@ import spacing from '../../theme/spacing';
 import { BORDER_RADIUS } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
-import { formatReminderTime } from '../../utils/formatTimeAgo';
+import { formatReminderTime } from '../../utils/formatTime';
 import useToggle from '../../utils/hooks/useToggle';
 import normalize from '../../utils/normalize';
 import { somethingWentWrongToast } from '../../utils/toast';

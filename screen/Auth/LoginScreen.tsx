@@ -15,12 +15,9 @@ import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
 import TextInput from '../../components/base/TextInput';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
-import { login } from '../../services/api/auth/auth.api';
+import { login, LoginDto } from '../../services/api/auth/auth.api';
 import appStyles from '../../theme/appStyles';
-import { User } from '../../types/types';
 import { loginSchema } from '../../utils/constant/validation/auth.schema';
-
-type LoginFormData = Omit<User, 'id' | 'name'>;
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const { theme } = useTheme();
@@ -30,7 +27,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<LoginFormData>({
+  } = useForm<LoginDto>({
     defaultValues: {
       email: '',
       password: '',
@@ -55,7 +52,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
     },
   });
 
-  const handleLogin = async (loginFormData: LoginFormData) => {
+  const handleLogin = async (loginFormData: LoginDto) => {
     mutation.mutate(loginFormData);
   };
 

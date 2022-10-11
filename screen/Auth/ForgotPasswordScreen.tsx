@@ -12,13 +12,10 @@ import forgotPasswordIllustration from '../../assets/images/forgot-password-illu
 import BackButton from '../../components/base/BackButton';
 import TextInput from '../../components/base/TextInput';
 import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
-import { forgotPassword } from '../../services/api/auth/auth.api';
+import { forgotPassword, ForgotPasswordDto } from '../../services/api/auth/auth.api';
 import appStyles from '../../theme/appStyles';
-import { User } from '../../types/types';
 import { forgotPasswordSchema } from '../../utils/constant/validation/auth.schema';
 import { somethingWentWrongToast } from '../../utils/toast';
-
-type ForgotPasswordFormData = Pick<User, 'email'>;
 
 function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProps) {
   const {
@@ -26,7 +23,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ForgotPasswordFormData>({
+  } = useForm<ForgotPasswordDto>({
     defaultValues: {
       email: '',
     },
@@ -46,7 +43,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
     },
   });
 
-  const handleForgotPassword = async (forgotPasswordFormData: ForgotPasswordFormData) => {
+  const handleForgotPassword = async (forgotPasswordFormData: ForgotPasswordDto) => {
     try {
       mutation.mutate(forgotPasswordFormData);
     } catch (error) {

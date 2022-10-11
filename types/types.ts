@@ -1,11 +1,7 @@
+import { User as FirebaseUser } from 'firebase/auth';
 import { Timestamp } from 'firebase/firestore';
 
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-};
+export type User = Pick<FirebaseUser, 'displayName' | 'email' | 'photoURL' | 'uid'>;
 
 export type Playlist = {
   id: string;

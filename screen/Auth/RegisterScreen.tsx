@@ -15,12 +15,9 @@ import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
 import TextInput from '../../components/base/TextInput';
 import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
-import { register } from '../../services/api/auth/auth.api';
+import { register, RegisterUserDto } from '../../services/api/auth/auth.api';
 import appStyles from '../../theme/appStyles';
-import { User } from '../../types/types';
 import { registerSchema } from '../../utils/constant/validation/auth.schema';
-
-type RegisterFormData = Omit<User, 'id'>;
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   const {
@@ -28,7 +25,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<RegisterFormData>({
+  } = useForm<RegisterUserDto>({
     defaultValues: {
       email: '',
       password: '',
@@ -57,7 +54,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
     },
   });
 
-  const handleRegister = async (registerFormData: RegisterFormData) => {
+  const handleRegister = async (registerFormData: RegisterUserDto) => {
     mutation.mutate(registerFormData);
   };
 

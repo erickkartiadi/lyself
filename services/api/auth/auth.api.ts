@@ -8,35 +8,48 @@ import {
   UserCredential,
 } from 'firebase/auth';
 
-import { User } from '../../../types/types';
 import { auth } from '../../firebase/firebase';
+import { createUser } from '../user/users.api';
 
-type CreateUserDto = Omit<User, 'id'>;
+export type RegisterUserDto = {
+  email: string;
+  password: string;
+  name: string;
+};
+export type LoginDto = Omit<RegisterUserDto, 'name'>;
+export type ForgotPasswordDto = Pick<RegisterUserDto, 'email'>;
 
 export async function register({
   email,
   password,
   name,
-}: CreateUserDto): Promise<UserCredential> {
+}: RegisterUserDto): Promise<UserCredential> {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  await sendEmailVerification(userCredential.user);
-  await updateProfile(userCredential.user, {
+  const { user } = userCredential;
+
+  await sendEmailVerification(user);
+  await updateProfile(user, {
     displayName: name,
+  });
+
+  // store user data to firestore
+  await createUser({
+    displayName: user.displayName,
+    email: user.email,
+    photoURL: user.photoURL,
+    uid: user.uid,
   });
 
   return userCredential;
 }
 
-export async function login({
-  email,
-  password,
-}: Omit<CreateUserDto, 'name'>): Promise<UserCredential> {
+export async function login({ email, password }: LoginDto): Promise<UserCredential> {
   const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
   return userCredential;
 }
 
-export async function forgotPassword({ email }: Pick<CreateUserDto, 'email'>) {
+export async function forgotPassword({ email }: ForgotPasswordDto) {
   const redirectUri = Constant.manifest?.extra?.redirectUri;
 
   await sendPasswordResetEmail(auth, email, {

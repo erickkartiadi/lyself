@@ -6,7 +6,9 @@ import { Todo } from '../types/types';
 
 dayjs.extend(relativeTime);
 
-export function formatTimeAgo(date: string) {
+export function formatTimeAgo(
+  date: string | number | dayjs.Dayjs | Date | null | undefined
+) {
   return dayjs(date).fromNow();
 }
 
