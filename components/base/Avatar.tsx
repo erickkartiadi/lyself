@@ -14,6 +14,7 @@ interface AvatarProps extends RNEAvatarProps {
   avatarUrl?: string | null;
 }
 
+// TODO create custom useStyles hook
 const useStyles = makeStyles((theme) => ({
   avatarContainer: {
     overflow: 'hidden',

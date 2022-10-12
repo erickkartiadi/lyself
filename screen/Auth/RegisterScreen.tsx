@@ -131,11 +131,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             />
           )}
         />
-        <Button
-          loading={mutation.isLoading}
-          fullWidth
-          onPress={handleSubmit(handleRegister)}
-        >
+        <Button loading={mutation.isLoading} onPress={handleSubmit(handleRegister)}>
           Create Account
         </Button>
         <View

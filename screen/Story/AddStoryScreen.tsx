@@ -3,8 +3,10 @@ import { Timestamp } from 'firebase/firestore';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
+import { Modalize } from 'react-native-modalize';
 import Toast from 'react-native-toast-message';
 
+import BottomSheet from '../../components/base/BottomSheet';
 import ButtonLink from '../../components/base/Link';
 import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
@@ -94,128 +96,115 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
     });
   }, []);
 
-  return (
-    <ScrollView contentContainerStyle={[appStyles.container]}>
-      <View style={appStyles.sectionSmall}>
-        <Controller
-          control={control}
-          name="title"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              enableErrorMessage={false}
-              showBorder={false}
-              inputStyle={FONT.heading2}
-              placeholder="Title"
-              multiline
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="content"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              containerStyle={spacing.mt_sm}
-              enableErrorMessage={false}
-              showBorder={false}
-              placeholder="Type your story here."
-              multiline
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-        />
-      </View>
-      <View style={[spacing.mt_md, appStyles.flexDirRow, appStyles.flexWrap]}>
-        <Chip
-          radius="sm"
-          color="secondary"
-          titleStyle={styles.colorGrey3}
-          containerStyle={[spacing.mr_md, spacing.mb_md]}
-        >
-          Mental Health
-        </Chip>
-        <Chip
-          radius="sm"
-          color="secondary"
-          titleStyle={styles.colorGrey3}
-          containerStyle={spacing.mr_md}
-        >
-          War
-        </Chip>
-        <Chip
-          radius="sm"
-          color="secondary"
-          titleStyle={styles.colorGrey3}
-          containerStyle={spacing.mr_md}
-        >
-          Addiction
-        </Chip>
-        <Chip
-          radius="sm"
-          color="secondary"
-          titleStyle={styles.colorGrey3}
-          containerStyle={spacing.mr_md}
-        >
-          PTSD
-        </Chip>
-        <Chip
-          radius="sm"
-          color="secondary"
-          titleStyle={styles.colorGrey3}
-          containerStyle={spacing.mr_md}
-        >
-          Insomnia
-        </Chip>
-        <Chip
-          radius="sm"
-          color="secondary"
-          titleStyle={styles.colorGrey3}
-          containerStyle={spacing.mr_md}
-        >
-          Work
-        </Chip>
+  const categoryBottomSheetRef = React.useRef<Modalize>(null);
+  const handleShowBottomSheet = () => categoryBottomSheetRef.current?.open();
 
-        <Button
-          type="outline"
-          size="md"
-          buttonStyle={{ borderColor: theme.colors.grey3 }}
-          titleStyle={styles.colorGrey3}
-          uppercase={false}
-        >
-          <Icon
-            containerStyle={spacing.mr_sm}
-            size={normalize(18)}
-            name="tag-plus-outline"
-            color={theme.colors.grey3}
-            type="material-community"
+  return (
+    <>
+      <ScrollView contentContainerStyle={[appStyles.container]}>
+        <View style={appStyles.sectionSmall}>
+          <Controller
+            control={control}
+            name="title"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                enableErrorMessage={false}
+                showBorder={false}
+                inputStyle={FONT.heading2}
+                placeholder="Title"
+                multiline
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
           />
-          Add Category
-        </Button>
-      </View>
-      <Divider style={spacing.my_xl} />
-      <View
-        style={[appStyles.flexDirRow, appStyles.justifyBetween, appStyles.alignCenter]}
-      >
-        <View>
-          <Text subtitle2>Anonymous post</Text>
-          <Text small color={theme.colors.grey3}>
-            People cannot see your profile on this story
-          </Text>
+          <Controller
+            control={control}
+            name="content"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                containerStyle={spacing.mt_sm}
+                enableErrorMessage={false}
+                showBorder={false}
+                placeholder="Type your story here."
+                multiline
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+          />
         </View>
-        <Controller
-          control={control}
-          name="anonymous"
-          render={({ field: { onChange, value } }) => (
-            <SwitchToggle value={value} onValueChange={onChange} />
-          )}
-        />
-      </View>
-    </ScrollView>
+        <View style={[spacing.mt_md, appStyles.flexDirRow]}>
+          <Chip
+            radius="sm"
+            color="secondary"
+            titleStyle={styles.colorGrey3}
+            containerStyle={[spacing.mr_md, spacing.mb_md]}
+          >
+            Mental Health
+          </Chip>
+          <Chip
+            radius="sm"
+            color="secondary"
+            titleStyle={styles.colorGrey3}
+            containerStyle={spacing.mr_md}
+          >
+            War
+          </Chip>
+          <View>
+            <Button
+              type="outline"
+              size="md"
+              uppercase={false}
+              onPress={handleShowBottomSheet}
+            >
+              <Icon
+                containerStyle={spacing.mr_sm}
+                size={normalize(18)}
+                name="tag-plus-outline"
+                color={theme.colors.primary}
+                type="material-community"
+              />
+              Add Category
+            </Button>
+          </View>
+        </View>
+        <Divider style={spacing.my_xl} />
+        <View
+          style={[appStyles.flexDirRow, appStyles.justifyBetween, appStyles.alignCenter]}
+        >
+          <View>
+            <Text subtitle2>Anonymous post</Text>
+            <Text small color={theme.colors.grey3}>
+              People cannot see your profile on this story
+            </Text>
+          </View>
+          <Controller
+            control={control}
+            name="anonymous"
+            render={({ field: { onChange, value } }) => (
+              <SwitchToggle value={value} onValueChange={onChange} />
+            )}
+          />
+        </View>
+      </ScrollView>
+      <BottomSheet bottomSheetRef={categoryBottomSheetRef}>
+        <View style={[appStyles.container, appStyles.sectionLarge]}>
+          <Text subtitle>Select Category</Text>
+          <View>
+            {/* <Checkbox
+              text="Category"
+              color={theme.colors.primary}
+              fillColor={theme.colors.primary}
+              checked
+              onCheckboxPress={() => console.log('checked')}
+            /> */}
+          </View>
+        </View>
+      </BottomSheet>
+    </>
   );
 }
 

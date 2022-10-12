@@ -64,7 +64,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
             >
               <Button
                 onPress={() => navigation.navigate('Login')}
-                fullWidth
                 buttonStyle={spacing.py_xl}
                 containerStyle={spacing.mb_xl}
                 titleStyle={[
@@ -87,7 +86,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                fullWidth
                 buttonStyle={[
                   spacing.py_xl,
                   {
@@ -115,7 +113,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                fullWidth
                 buttonStyle={[
                   spacing.py_xl,
                   {
@@ -144,7 +141,6 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
 
               <Button
                 type="outline"
-                fullWidth
                 buttonStyle={[
                   spacing.py_xl,
                   {

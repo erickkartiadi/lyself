@@ -26,6 +26,10 @@ function TextInput({
   const { theme } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
+  let borderColor = theme.colors.grey4;
+  if (isFocused) borderColor = theme.colors.grey2;
+  if (errorMessage) borderColor = theme.colors.error;
+
   return (
     <Input
       onFocus={() => setIsFocused(true)}
@@ -40,7 +44,7 @@ function TextInput({
       selectionColor={theme.colors.primary}
       inputContainerStyle={[
         {
-          borderColor: errorMessage ? theme.colors.primary : theme.colors.greyOutline,
+          borderColor,
           borderBottomWidth: showBorder ? 1 : 0,
         },
         inputContainerStyle,

@@ -28,8 +28,4 @@ declare module '@rneui/themed' {
     small?: boolean;
     color?: TextStyle['color'];
   }
-
-  export interface ButtonProps {
-    fullWidth?: boolean;
-  }
 }

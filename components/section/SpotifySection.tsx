@@ -93,7 +93,6 @@ function SpotifySection() {
         />
       ) : (
         <Button
-          fullWidth
           title="Connect to Spotify"
           iconPosition="left"
           icon={{ type: 'fontisto', name: 'spotify' }}

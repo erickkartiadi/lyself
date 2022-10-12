@@ -128,11 +128,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         >
           <NavLink to={{ screen: 'ForgotPassword' }}>Forgot Password?</NavLink>
         </View>
-        <Button
-          loading={mutation.isLoading}
-          fullWidth
-          onPress={handleSubmit(handleLogin)}
-        >
+        <Button loading={mutation.isLoading} onPress={handleSubmit(handleLogin)}>
           Login
         </Button>
         <View

@@ -8,7 +8,6 @@ type TodoSwipeableRightProps = Pick<ButtonProps, 'onPress' | 'loading'>;
 function TodoSwipeableRight({ onPress, loading }: TodoSwipeableRightProps) {
   return (
     <Button
-      fullWidth
       onPress={onPress}
       color="error"
       radius={BORDER_RADIUS.md}

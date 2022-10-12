@@ -22,8 +22,8 @@ import useToggle from '../../utils/hooks/useToggle';
 import normalize from '../../utils/normalize';
 import { somethingWentWrongToast } from '../../utils/toast';
 import Card from '../base/Card';
+import Checkbox from '../base/Checkbox';
 import TodoBottomSheet, { TodoFormData } from './TodoBottomSheet';
-import TodoCheckbox from './TodoCheckbox';
 import TodoSwipeableRight from './TodoSwipeableRight';
 
 interface TodoItemProps {
@@ -54,9 +54,9 @@ function TodoItem({
   const updateMutation = useUpdateTodo();
   const deleteMutation = useDeleteTodo();
 
-  const importanceColor = theme.colors[
-    IMPORTANCE_COLORS[currentImportanceLevel]
-  ] as string;
+  const importanceColor = isCompleted
+    ? theme.colors.success
+    : (theme.colors[IMPORTANCE_COLORS[currentImportanceLevel]] as string);
 
   const bottomSheetRef = useRef<Modalize>(null);
 
@@ -123,10 +123,16 @@ function TodoItem({
         ]}
         rightStyle={[spacing.mb_md, spacing.pl_md]}
       >
-        <Card onPress={showBottomSheet}>
+        <Card
+          onPress={showBottomSheet}
+          cardStyle={{
+            borderLeftWidth: theme.spacing.sm,
+            borderStartColor: importanceColor,
+          }}
+        >
           <View style={[appStyles.flex, appStyles.flexDirRow, appStyles.alignCenter]}>
-            <TodoCheckbox
-              color={importanceColor}
+            <Checkbox
+              fillColor={importanceColor}
               checked={isCompleted}
               onCheckboxPress={() => {
                 toggleIsCompleted();
@@ -137,16 +143,13 @@ function TodoItem({
             <View style={[appStyles.flex, appStyles.flexDirCol]}>
               <Text
                 subtitle
-                numberOfLines={1}
+                numberOfLines={3}
                 style={{
                   color:
                     isCompleted || watchTodo === ''
                       ? theme.colors.grey3
                       : theme.colors.black,
                   textDecorationLine: isCompleted ? 'line-through' : 'none',
-                  textDecorationStyle: 'solid',
-                  textDecorationColor: importanceColor,
-                  width: '90%',
                 }}
               >
                 {watchTodo === '' ? 'No title' : watchTodo}

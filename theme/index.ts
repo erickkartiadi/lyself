@@ -69,9 +69,6 @@ const myTheme = createTheme({
 
     Button: (props: ButtonProps) => ({
       radius: BORDER_RADIUS.rounded,
-      containerStyle: {
-        alignItems: props.fullWidth ? 'stretch' : 'center',
-      },
       titleStyle: [FONT.subtitle3],
       size: 'lg',
       uppercase: true,

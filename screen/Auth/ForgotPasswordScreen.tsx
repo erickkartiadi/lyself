@@ -94,11 +94,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
             />
           )}
         />
-        <Button
-          loading={mutation.isLoading}
-          fullWidth
-          onPress={handleSubmit(handleForgotPassword)}
-        >
+        <Button loading={mutation.isLoading} onPress={handleSubmit(handleForgotPassword)}>
           Send Instruction
         </Button>
       </SafeAreaView>

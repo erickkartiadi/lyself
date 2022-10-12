@@ -12,10 +12,10 @@ import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import normalize from '../../utils/normalize';
 import { importanceLevelItems } from '../../utils/sort';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
+import Checkbox from '../base/Checkbox';
 import OptionChip from '../base/OptionChip';
 import TextInput from '../base/TextInput';
 import SectionTitle from '../layout/SectionTitle';
-import TodoCheckbox from './TodoCheckbox';
 import TodoReminderButton from './TodoReminderButton';
 
 export type TodoFormData = Pick<Todo, 'todo' | 'note'>;
@@ -57,9 +57,9 @@ function TodoBottomSheet({
 }: TodoBottomSheetProps) {
   const { theme } = useTheme();
 
-  const importanceColor = theme.colors[
-    IMPORTANCE_COLORS[currentImportanceLevel]
-  ] as string;
+  const importanceColor = completed
+    ? theme.colors.success
+    : (theme.colors[IMPORTANCE_COLORS[currentImportanceLevel]] as string);
 
   return (
     <BottomSheet
@@ -69,11 +69,11 @@ function TodoBottomSheet({
     >
       <View style={[appStyles.container, appStyles.sectionLarge]}>
         <View style={[appStyles.flex, appStyles.flexDirRow]}>
-          <TodoCheckbox
-            color={importanceColor}
+          <Checkbox
             checked={completed}
             onCheckboxPress={onCheckboxPress}
             size={normalize(32)}
+            fillColor={importanceColor}
           />
           <Controller
             control={control}
@@ -160,7 +160,6 @@ function TodoBottomSheet({
               onPress={onSubmit}
               radius="md"
               containerStyle={appStyles.flex}
-              fullWidth
             >
               {buttonTitle}
             </Button>
