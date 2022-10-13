@@ -1,10 +1,10 @@
-import { Badge, Icon, useTheme } from '@rneui/themed';
+import { Icon, useTheme } from '@rneui/themed';
 import React, { useContext } from 'react';
-import { View } from 'react-native';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
-import { comingSoonToast } from '../../utils/toast';
 
 function RightHeader() {
   const { theme } = useTheme();
@@ -15,40 +15,14 @@ function RightHeader() {
   };
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <View>
-        <Icon
-          name={isDarkMode ? 'moon-outline' : 'sunny-outline'}
-          type="ionicon"
-          onPress={toggleThemeMode}
-          containerStyle={{
-            borderRadius: BORDER_RADIUS.rounded,
-            aspectRatio: 1,
-            marginRight: theme.spacing.lg,
-          }}
-          color={theme.colors.black}
-          underlayColor={theme.colors.primary}
-        />
-      </View>
-      <View>
-        <Badge
-          status="error"
-          badgeStyle={{ borderColor: 'transparent' }}
-          containerStyle={{ position: 'absolute', right: theme.spacing.sm }}
-        />
-        <Icon
-          name="notifications-outline"
-          type="ionicon"
-          onPress={comingSoonToast}
-          containerStyle={{
-            borderRadius: BORDER_RADIUS.rounded,
-            aspectRatio: 1,
-          }}
-          color={theme.colors.black}
-          underlayColor={theme.colors.primary}
-        />
-      </View>
-    </View>
+    <Icon
+      name={isDarkMode ? 'moon-outline' : 'sunny-outline'}
+      type="ionicon"
+      onPress={toggleThemeMode}
+      containerStyle={[spacing.mr_lg, border.rounded, layout.aspectRatioSquare]}
+      color={theme.colors.black}
+      underlayColor={theme.colors.primary}
+    />
   );
 }
 

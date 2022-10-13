@@ -5,28 +5,49 @@ import {
 } from '@rneui/themed';
 import * as React from 'react';
 
-import { BORDER_RADIUS, GUTTER_SIZE } from '../../theme/styles';
-import normalize from '../../utils/normalize';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import useStyles from '../../utils/hooks/useStyles';
 
 interface AvatarProps extends RNEAvatarProps {
-  rounded?: boolean;
-  size?: number;
+  avatarUrl?: string | null;
 }
 
-function Avatar({ size = 3, rounded, containerStyle, ...props }: AvatarProps) {
+function Avatar({ rounded, containerStyle, avatarUrl: photoUrl, ...props }: AvatarProps) {
   const { theme } = useTheme();
 
+  const styles = useStyles();
+
+  if (photoUrl) {
+    return (
+      <RNEAvatar
+        {...props}
+        rounded
+        source={{
+          uri: photoUrl,
+        }}
+        containerStyle={[
+          layout.overflowHidden,
+          styles.borderGrey5,
+          border.width_xs,
+          containerStyle,
+        ]}
+      />
+    );
+  }
   return (
     <RNEAvatar
-      size={normalize(size * GUTTER_SIZE)}
       {...props}
+      rounded
+      icon={{
+        name: 'person',
+        type: 'ionicon',
+        color: theme.colors.grey3,
+      }}
       containerStyle={[
-        {
-          overflow: 'hidden',
-          borderWidth: 0.25,
-          borderColor: theme.colors.grey5,
-          borderRadius: rounded ? BORDER_RADIUS.rounded : BORDER_RADIUS.md,
-        },
+        styles.borderGrey5,
+        border.width_xs,
+        styles.secondaryBackground,
         containerStyle,
       ]}
     />
@@ -34,8 +55,7 @@ function Avatar({ size = 3, rounded, containerStyle, ...props }: AvatarProps) {
 }
 
 Avatar.defaultProps = {
-  rounded: false,
-  size: 3,
+  avatarUrl: null,
 };
 
 export default Avatar;

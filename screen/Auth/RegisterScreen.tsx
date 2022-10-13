@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
 import { useMutation } from '@tanstack/react-query';
+import { FirebaseError } from 'firebase/app';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
@@ -10,17 +11,13 @@ import Toast from 'react-native-toast-message';
 
 import registerIllustration from '../../assets/images/register-illustration.png';
 import BackButton from '../../components/base/BackButton';
-import TextInput from '../../components/base/Input';
 import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
-import { register } from '../../services/api/auth/auth.api';
-import { styles } from '../../theme/styles';
-import { RegisterScreenNavigationProps } from '../../types/navigation.types';
-import { User } from '../../types/types';
+import TextInput from '../../components/base/TextInput';
+import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
+import { register, RegisterUserDto } from '../../services/api/auth/auth.api';
+import layout from '../../styles/layout';
 import { registerSchema } from '../../utils/constant/validation/auth.schema';
-import { somethingWentWrongToast } from '../../utils/toast';
-
-type RegisterFormData = Omit<User, 'id'>;
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   const {
@@ -28,7 +25,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<RegisterFormData>({
+  } = useForm<RegisterUserDto>({
     defaultValues: {
       email: '',
       password: '',
@@ -38,7 +35,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   });
 
   const mutation = useMutation(register, {
-    onSuccess: ({ email }) => {
+    onSuccess: ({ user: { email } }) => {
       Toast.show({
         type: 'success',
         text1: 'Email confirmation sent',
@@ -48,38 +45,34 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
 
       reset();
     },
+    onError: (error: FirebaseError) => {
+      Toast.show({
+        type: 'error',
+        text1: error.name,
+        text2: error.message,
+      });
+    },
   });
 
-  const handleRegister = async (registerFormData: RegisterFormData) => {
-    try {
-      mutation.mutate(registerFormData);
-    } catch (error) {
-      if (error) somethingWentWrongToast();
-    }
+  const handleRegister = async (registerFormData: RegisterUserDto) => {
+    mutation.mutate(registerFormData);
   };
 
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
+      contentContainerStyle={[layout.containerGutter, layout.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
         <Text h1>Create new account</Text>
         <Text>Just one more step to be part of the {'\n'}Lyself community.</Text>
         <View
-          style={{
-            aspectRatio: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          style={[layout.justifyCenter, layout.alignCenter, layout.aspectRatioSquare]}
         >
           <Image
             source={registerIllustration}
-            style={{
-              flex: 1,
-              width: '100%',
-            }}
+            style={[layout.flex, layout.w100]}
             resizeMode="center"
           />
         </View>
@@ -132,21 +125,15 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             />
           )}
         />
-        <Button
-          loading={mutation.isLoading}
-          fullWidth
-          onPress={handleSubmit(handleRegister)}
-        >
+        <Button loading={mutation.isLoading} onPress={handleSubmit(handleRegister)}>
           Create Account
         </Button>
         <View
           style={[
-            styles.sectionLarge,
-            {
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            },
+            layout.sectionLarge,
+            layout.flexDirRow,
+            layout.justifyCenter,
+            layout.alignCenter,
           ]}
         >
           <Text>Already have an account? </Text>

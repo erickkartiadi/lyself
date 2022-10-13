@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { LinkingOptions, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Linking from 'expo-linking';
 import { StatusBar } from 'expo-status-bar';
@@ -7,12 +7,12 @@ import { Host } from 'react-native-portalize';
 
 import InDevelopmentScreen from '../screen/Error/InDevelopmentScreen';
 import { navThemeDark, navThemeLight } from '../theme';
-import { RootStackParamList } from '../types/navigation.types';
 import { AuthContext } from '../utils/context/AuthContext';
 import { ThemeModeContext } from '../utils/context/ThemeModeContext';
 import AuthNavigator from './AuthNavigator.routing';
-import ConsultNavigator from './ConsultNavigator.routing';
 import HomeNavigator from './HomeNavigator.routing';
+import { RootStackParamList } from './navigation.types';
+import StoryNavigator from './StoryNavigator.routing';
 import TodoNavigator from './TodoNavigator.routing';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -20,12 +20,17 @@ const prefix = Linking.createURL('/');
 
 function RootNavigator() {
   const { isDarkMode } = React.useContext(ThemeModeContext);
+  const { user } = React.useContext(AuthContext);
 
-  const linking = {
+  const linking: LinkingOptions<RootStackParamList> = {
     prefixes: [prefix],
+    config: {
+      screens: {
+        TodoStack: 'todo',
+        AuthStack: '*',
+      },
+    },
   };
-
-  const { userToken } = React.useContext(AuthContext);
 
   return (
     <NavigationContainer
@@ -40,11 +45,11 @@ function RootNavigator() {
             headerShown: false,
           }}
         >
-          {userToken ? (
+          {user ? (
             <>
               <Stack.Screen name="HomeTab" component={HomeNavigator} />
-              <Stack.Screen name="ConsultStack" component={ConsultNavigator} />
               <Stack.Screen name="TodoStack" component={TodoNavigator} />
+              <Stack.Screen name="StoryStack" component={StoryNavigator} />
               <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
             </>
           ) : (

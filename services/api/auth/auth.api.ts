@@ -1,26 +1,60 @@
-import { User } from '../../../types/types';
-import { apiClient } from '../../axios/axios';
+import Constant from 'expo-constants';
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  updateProfile,
+  UserCredential,
+} from 'firebase/auth';
 
-type CreateUserDto = Omit<User, 'id'>;
+import { auth } from '../../firebase/firebase';
+import { createUser } from '../user/users.api';
 
-export async function register(createUserDto: CreateUserDto): Promise<User> {
-  const res = await apiClient.post('/auth/register', createUserDto);
+export type RegisterUserDto = {
+  email: string;
+  password: string;
+  name: string;
+};
+export type LoginDto = Omit<RegisterUserDto, 'name'>;
+export type ForgotPasswordDto = Pick<RegisterUserDto, 'email'>;
 
-  return res.data;
+export async function register({
+  email,
+  password,
+  name,
+}: RegisterUserDto): Promise<UserCredential> {
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const { user } = userCredential;
+
+  await sendEmailVerification(user);
+  await updateProfile(user, {
+    displayName: name,
+  });
+
+  // store user data to firestore
+  await createUser({
+    displayName: user.displayName,
+    email: user.email,
+    photoURL: user.photoURL,
+    uid: user.uid,
+  });
+
+  return userCredential;
 }
 
-export async function login(
-  loginDto: Omit<CreateUserDto, 'name'>
-): Promise<{ access_token: string }> {
-  const res = await apiClient.post('/auth/login', loginDto);
+export async function login({ email, password }: LoginDto): Promise<UserCredential> {
+  const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-  return res.data;
+  return userCredential;
 }
 
-export async function forgotPassword(
-  forgotPasswordDto: Pick<CreateUserDto, 'email'>
-): Promise<{ envelope: { from: string; to: string[] } }> {
-  const res = await apiClient.post('/auth/forgot-password', forgotPasswordDto);
+export async function forgotPassword({ email }: ForgotPasswordDto) {
+  const redirectUri = Constant.manifest?.extra?.redirectUri;
 
-  return res.data;
+  await sendPasswordResetEmail(auth, email, {
+    url: redirectUri,
+    handleCodeInApp: false,
+  });
+  return email;
 }

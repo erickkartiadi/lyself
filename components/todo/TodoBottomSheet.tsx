@@ -2,17 +2,20 @@ import { Icon } from '@rneui/base';
 import { Button, ButtonProps, useTheme } from '@rneui/themed';
 import React, { Dispatch, SetStateAction } from 'react';
 import { Control, Controller } from 'react-hook-form';
-import { ScrollView, TextInput, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
-import { FONT, styles } from '../../theme/styles';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { heading3 } from '../../styles/typhography';
+import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
-import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
-import normalize from '../../utils/normalize';
+import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { importanceLevelItems } from '../../utils/sort';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
+import Checkbox from '../base/Checkbox';
 import OptionChip from '../base/OptionChip';
+import TextInput from '../base/TextInput';
 import SectionTitle from '../layout/SectionTitle';
-import TodoCheckbox from './TodoCheckbox';
 import TodoReminderButton from './TodoReminderButton';
 
 export type TodoFormData = Pick<Todo, 'todo' | 'note'>;
@@ -54,9 +57,9 @@ function TodoBottomSheet({
 }: TodoBottomSheetProps) {
   const { theme } = useTheme();
 
-  const importanceColor = theme.colors[
-    IMPORTANCE_COLORS[currentImportanceLevel]
-  ] as string;
+  const importanceColor = completed
+    ? theme.colors.success
+    : (theme.colors[IMPORTANCE_COLORS[currentImportanceLevel]] as string);
 
   return (
     <BottomSheet
@@ -64,35 +67,26 @@ function TodoBottomSheet({
       bottomSheetRef={bottomSheetRef}
       onClose={onClose}
     >
-      <View style={[styles.container, styles.sectionLarge]}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            marginBottom: theme.spacing.md,
-          }}
-        >
-          <TodoCheckbox
-            color={importanceColor}
+      <View style={[layout.container, layout.sectionLarge]}>
+        <View style={[layout.flex, layout.flexDirRow]}>
+          {/* FIXME checkbox wont toggle */}
+          <Checkbox
             checked={completed}
             onCheckboxPress={onCheckboxPress}
-            size={normalize(32)}
+            size={SIZING['4xl']}
+            fillColor={importanceColor}
           />
           <Controller
             control={control}
             name="todo"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                style={[
-                  FONT.heading3,
-                  {
-                    color: theme.colors.black,
-                    flex: 1,
-                  },
-                ]}
+                showBorder={false}
+                enableErrorMessage={false}
                 placeholder="What are you planning today?"
-                placeholderTextColor={theme.colors.grey3}
-                selectionColor={theme.colors.primary}
+                multiline
+                containerStyle={layout.flex}
+                inputStyle={heading3}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -100,39 +94,38 @@ function TodoBottomSheet({
             )}
           />
         </View>
-        <View style={styles.sectionMedium}>
-          <SectionTitle title="Note" />
+        <View style={layout.sectionMedium}>
+          <SectionTitle title="Note" marginBottom="sm" />
           <Controller
             control={control}
             name="note"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                style={[{ textAlignVertical: 'top' }]}
+                showBorder={false}
+                enableErrorMessage={false}
                 placeholder="Add note"
-                placeholderTextColor={theme.colors.grey3}
                 onChangeText={onChange}
                 onBlur={onBlur}
-                selectionColor={theme.colors.primary}
                 value={value}
                 multiline
               />
             )}
           />
         </View>
-        <View style={styles.sectionMedium}>
+        <View style={layout.sectionMedium}>
           <SectionTitle title="Reminder" />
           <TodoReminderButton
             setReminderTime={setCurrentReminderTime}
             reminderTime={currentReminderTime}
           />
         </View>
-        <View style={styles.sectionMedium}>
+        <View style={layout.sectionMedium}>
           <SectionTitle title="Importance" />
           <ScrollView horizontal showsVerticalScrollIndicator={false}>
             {importanceLevelItems.map(({ importance, label }) => (
               <OptionChip
                 size="lg"
-                containerStyle={{ marginRight: theme.spacing.md }}
+                containerStyle={spacing.mr_md}
                 chipColor={IMPORTANCE_COLORS[importance]}
                 radius="sm"
                 uppercase
@@ -146,21 +139,19 @@ function TodoBottomSheet({
           </ScrollView>
         </View>
         {isButtonVisible && (
-          <View style={{ flexDirection: 'row', marginTop: theme.spacing.xl }}>
+          <View style={[layout.flexDirRow, spacing.mt_xl]}>
             {isEditing && (
               <Button
                 loading={isDeleteLoading}
                 radius="md"
                 type="outline"
-                containerStyle={{
-                  marginRight: theme.spacing.md,
-                }}
+                containerStyle={spacing.mr_md}
                 onPress={onDeletePress}
               >
                 <Icon
                   name="trash"
                   type="ionicon"
-                  size={normalize(22)}
+                  size={SIZING['3xl']}
                   color={theme.colors.error}
                 />
               </Button>
@@ -169,8 +160,7 @@ function TodoBottomSheet({
               loading={isSaveLoading}
               onPress={onSubmit}
               radius="md"
-              containerStyle={{ flex: 1 }}
-              fullWidth
+              containerStyle={layout.flex}
             >
               {buttonTitle}
             </Button>

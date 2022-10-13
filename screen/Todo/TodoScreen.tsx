@@ -10,17 +10,19 @@ import RefreshControl from '../../components/layout/RefreshControl';
 import SectionTitle from '../../components/layout/SectionTitle';
 import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
+import { TodoScreenNavigationProps } from '../../navigation/navigation.types';
 import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks';
-import { BORDER_RADIUS, styles } from '../../theme/styles';
-import { TodoScreenNavigationProps } from '../../types/navigation.types';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useToggle from '../../utils/hooks/useToggle';
-import normalize from '../../utils/normalize';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
-import TodoEmptyScreen from '../Others/TodoEmptyScreen';
+import TodoEmptyScreen from './TodoEmptyScreen';
 
 const sortItems: {
   label: string;
@@ -68,6 +70,7 @@ const filterItems: {
     filter: 'Completed',
   },
 ];
+
 function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   const { theme } = useTheme();
 
@@ -120,27 +123,22 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
     reset();
   };
 
-  const filterHeaderRight = React.useCallback(
+  const filterButton = React.useCallback(
     () => (
-      <View>
-        <Icon
-          name="filter"
-          type="ionicon"
-          onPress={() => filterBottomSheetRef.current?.open()}
-          iconStyle={{
-            color:
-              !(
-                selectedSort.sort === 'importanceLevel' && selectedSort.orderBy === 'DESC'
-              ) || selectedFilter !== 'Todo'
-                ? theme.colors.primary
-                : theme.colors.black,
-          }}
-          containerStyle={{
-            borderRadius: BORDER_RADIUS.rounded,
-            aspectRatio: 1,
-          }}
-        />
-      </View>
+      <Icon
+        name="filter"
+        type="ionicon"
+        onPress={() => filterBottomSheetRef.current?.open()}
+        iconStyle={{
+          color:
+            !(
+              selectedSort.sort === 'importanceLevel' && selectedSort.orderBy === 'DESC'
+            ) || selectedFilter !== 'Todo'
+              ? theme.colors.primary
+              : theme.colors.black,
+        }}
+        containerStyle={[border.rounded, layout.aspectRatioSquare]}
+      />
     ),
     [selectedSort, selectedFilter]
   );
@@ -150,7 +148,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: selectedFilter,
-      headerRight: filterHeaderRight,
+      headerRight: filterButton,
     });
   }, [selectedFilter]);
 
@@ -164,9 +162,9 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         showsHorizontalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
         contentContainerStyle={[
-          styles.sectionLarge,
-          styles.containerGutter,
-          { flexGrow: 1 },
+          layout.sectionLarge,
+          layout.containerGutter,
+          layout.flexGrow,
         ]}
       >
         {data.length <= 0 ? (
@@ -187,7 +185,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
           <Icon
             name="add"
             type="ionicon"
-            size={normalize(30)}
+            size={SIZING['4xl']}
             color={theme.colors.white}
           />
         }
@@ -209,26 +207,16 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
       />
       <BottomSheet
         bottomSheetRef={filterBottomSheetRef}
-        modalStyle={[styles.containerGutter, styles.sectionLarge]}
+        modalStyle={[layout.containerGutter, layout.sectionLarge]}
       >
         <Text h2>Filter</Text>
-        <View style={[styles.sectionLarge]}>
+        <View style={[layout.sectionLarge]}>
           <SectionTitle title="Sort" />
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              marginTop: theme.spacing.sm,
-            }}
-          >
+          <View style={[layout.flex, layout.flexDirRow, spacing.mt_sm, layout.flexWrap]}>
             {sortItems.map(({ label, sort, orderBy }) => (
               <OptionChip
                 key={label}
-                containerStyle={{
-                  marginRight: theme.spacing.md,
-                  marginBottom: theme.spacing.md,
-                }}
+                containerStyle={[spacing.mr_md, spacing.mb_md]}
                 size="lg"
                 onPress={() => setSelectedSort({ orderBy, sort })}
                 isSelected={
@@ -240,23 +228,13 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             ))}
           </View>
         </View>
-        <View style={[styles.sectionLarge]}>
+        <View style={[layout.sectionLarge]}>
           <SectionTitle title="Filter" />
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              marginTop: theme.spacing.sm,
-            }}
-          >
+          <View style={[layout.flex, layout.flexDirRow, spacing.mt_sm, layout.flexWrap]}>
             {filterItems.map(({ label, filter }) => (
               <OptionChip
                 key={label}
-                containerStyle={{
-                  marginRight: theme.spacing.md,
-                  marginBottom: theme.spacing.md,
-                }}
+                containerStyle={[spacing.mr_md, spacing.mr_md]}
                 size="lg"
                 onPress={() => setSelectedFilter(filter)}
                 isSelected={selectedFilter === filter}

@@ -8,15 +8,16 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
+import { ErrorToast, InfoToast, SuccessToast } from './components/base/Toast';
 import RootNavigator from './navigation/RootNavigator.routing';
-import loadAxiosInterceptor from './services/axios/axios';
+import layout from './styles/layout';
 import { myTheme } from './theme';
-import { customFont } from './theme/styles';
-import toastConfig from './theme/toastConfig';
+import { customFont } from './theme/theme';
 import { AuthProvider } from './utils/context/AuthContext';
 import { ThemeModeProvider } from './utils/context/ThemeModeContext';
 import useAppState from './utils/hooks/useAppState';
 import useOnlineManager from './utils/hooks/useOnlineManager';
+import useRegisterNotification from './utils/hooks/useRegisterNotification';
 
 // refetch on focus
 function onAppStateChange(status: AppStateStatus) {
@@ -26,21 +27,21 @@ function onAppStateChange(status: AppStateStatus) {
 }
 
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
   useOnlineManager();
   useAppState(onAppStateChange);
-
-  const [appIsReady, setAppIsReady] = useState(false);
+  useRegisterNotification();
 
   useEffect(() => {
     async function prepare() {
       try {
         await SplashScreen.preventAutoHideAsync();
         await Font.loadAsync(customFont);
-        loadAxiosInterceptor();
       } finally {
         setAppIsReady(true);
       }
     }
+
     prepare();
   }, []);
 
@@ -59,13 +60,19 @@ export default function App() {
   return (
     <AuthProvider>
       <ThemeProvider theme={myTheme}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView style={layout.flex}>
           <SafeAreaProvider onLayout={onLayoutRootView}>
             <ThemeModeProvider>
               <QueryClientProvider client={queryClient}>
                 <RootNavigator />
               </QueryClientProvider>
-              <Toast config={toastConfig} />
+              <Toast
+                config={{
+                  success: SuccessToast,
+                  error: ErrorToast,
+                  info: InfoToast,
+                }}
+              />
             </ThemeModeProvider>
           </SafeAreaProvider>
         </GestureHandlerRootView>

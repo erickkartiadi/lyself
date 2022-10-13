@@ -4,20 +4,20 @@ import * as React from 'react';
 
 import LeftHeader from '../components/layout/LeftHeader';
 import RightHeader from '../components/layout/RightHeader';
-import AccountScreen from '../screen/Home/AccountScreen';
-import ChatScreen from '../screen/Home/ChatScreen';
-import ExploreScreen from '../screen/Home/ExploreScreen';
-import HomeScreen from '../screen/Home/HomeScreen';
-import { FONT_FAMILY, GUTTER_SIZE, styles } from '../theme/styles';
-import { HomeTabParamList } from '../types/navigation.types';
+import AccountTabScreen from '../screen/AccountTabScreen';
+import HomeTabScreen from '../screen/HomeTabScreen';
+import NotificationTabScreen from '../screen/NotificationTabScreen';
+import StoryTabScreen from '../screen/Story/StoryTabScreen';
+import layout from '../styles/layout';
+import { font } from '../styles/typhography';
+import { GUTTER_SIZE, SIZING } from '../theme/theme';
+import { HomeTabParamList } from './navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 export const navigatorScreenOptions = {
   headerShadowVisible: false,
-  headerTitleStyle: {
-    fontFamily: FONT_FAMILY.medium,
-  },
+  headerTitleStyle: [font.size_xl, font.weight_normal],
   headerRight: RightHeader,
 };
 
@@ -36,7 +36,7 @@ function ExploreTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   return (
     <Icon
       type="ionicon"
-      name={focused ? 'compass' : 'compass-outline'}
+      name={focused ? 'chatbubbles' : 'chatbubbles-outline'}
       color={color}
       size={size}
     />
@@ -46,7 +46,7 @@ function ChatTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   return (
     <Icon
       type="ionicon"
-      name={focused ? 'chatbox' : 'chatbox-outline'}
+      name={focused ? 'notifications' : 'notifications-outline'}
       color={color}
       size={size}
     />
@@ -66,15 +66,14 @@ function UserTabBarIcon({ focused, color, size }: TabBarIconOptions) {
 function HomeNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Story"
       screenOptions={{
         ...navigatorScreenOptions,
+
         tabBarShowLabel: false,
         tabBarStyle: [
-          styles.shadowMedium,
           {
-            borderTopWidth: 0,
-            height: 70,
+            height: SIZING['8xl'],
           },
         ],
         headerTitleContainerStyle: { marginStart: 0 },
@@ -88,32 +87,29 @@ function HomeNavigator() {
     >
       <Tab.Screen
         options={{
-          headerTitleStyle: { display: 'none' },
-          headerStyle: {
-            height: 90,
-          },
+          headerTitleStyle: layout.displayNone,
           headerLeft: LeftHeader,
           tabBarIcon: HomeTabBarIcon,
         }}
         name="Home"
-        component={HomeScreen}
+        component={HomeTabScreen}
       />
       <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
+        name="Story"
+        component={StoryTabScreen}
         options={{
           tabBarIcon: ExploreTabBarIcon,
-          title: 'Explore',
+          title: 'Stories',
         }}
       />
       <Tab.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={{ tabBarIcon: ChatTabBarIcon, title: 'Chat' }}
+        name="Notification"
+        component={NotificationTabScreen}
+        options={{ tabBarIcon: ChatTabBarIcon, title: 'Notification' }}
       />
       <Tab.Screen
         name="Account"
-        component={AccountScreen}
+        component={AccountTabScreen}
         options={{
           tabBarIcon: UserTabBarIcon,
           title: 'Account',

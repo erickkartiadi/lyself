@@ -1,5 +1,6 @@
 import { Icon, ListItem, Text, useTheme } from '@rneui/themed';
-import React, { useEffect, useRef, useState } from 'react';
+import dayjs from 'dayjs';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
@@ -8,41 +9,54 @@ import Animated, {
   LightSpeedOutLeft,
   SequencedTransition,
 } from 'react-native-reanimated';
-import { useDebounce } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { useDeleteTodo, useUpdateTodo } from '../../services/api/todos/todos.hooks';
-import { BORDER_RADIUS } from '../../theme/styles';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
-import { IMPORTANCE_COLORS } from '../../utils/constant/constant';
-import { formatReminderTime } from '../../utils/formatTimeAgo';
+import IMPORTANCE_COLORS from '../../utils/constant/constant';
+import { formatReminderTime } from '../../utils/formatTime';
 import useToggle from '../../utils/hooks/useToggle';
-import normalize from '../../utils/normalize';
 import { somethingWentWrongToast } from '../../utils/toast';
 import Card from '../base/Card';
+import Checkbox from '../base/Checkbox';
 import TodoBottomSheet, { TodoFormData } from './TodoBottomSheet';
-import TodoCheckbox from './TodoCheckbox';
 import TodoSwipeableRight from './TodoSwipeableRight';
 
-function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: Todo) {
+interface TodoItemProps {
+  enableAnimation?: boolean;
+}
+
+function TodoItem({
+  importanceLevel,
+  reminderTime,
+  todo,
+  note,
+  completed,
+  id,
+  enableAnimation,
+}: Todo & TodoItemProps) {
   const { theme } = useTheme();
 
   const [currentImportanceLevel, setCurrentImportanceLevel] = useState(importanceLevel);
   const [currentReminderTime, setCurrentReminderTime] = useState(reminderTime);
-  const { control, watch, handleSubmit } = useForm<TodoFormData>({
+  const { control, watch } = useForm<TodoFormData>({
     defaultValues: {
       todo,
       note,
     },
   });
   const [isCompleted, toggleIsCompleted] = useToggle(completed);
-  const [debouncedIsCompleted] = useDebounce(isCompleted, 1000);
 
   const updateMutation = useUpdateTodo();
   const deleteMutation = useDeleteTodo();
 
-  const importanceColor = theme.colors[
-    IMPORTANCE_COLORS[currentImportanceLevel]
-  ] as string;
+  const importanceColor = isCompleted
+    ? theme.colors.success
+    : (theme.colors[IMPORTANCE_COLORS[currentImportanceLevel]] as string);
 
   const bottomSheetRef = useRef<Modalize>(null);
 
@@ -50,51 +64,47 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     bottomSheetRef.current?.open();
   };
 
-  const handleUpdateTodo = async (todoFormData: TodoFormData) => {
-    if (todoFormData.todo === '') {
-      deleteMutation.mutate(id);
-    }
+  const watchTodo = watch('todo', todo);
+  const watchNote = watch('note', note);
+
+  // close bottom sheet also update todo
+  const closeBottomSheet = () => {
+    bottomSheetRef.current?.close();
+  };
+
+  const handleUpdateTodo = async () => {
     try {
-      await updateMutation.mutateAsync({
+      updateMutation.mutate({
         id,
         completed: isCompleted,
         importanceLevel: currentImportanceLevel,
         reminderTime: currentReminderTime,
-        note: todoFormData.note,
-        todo: todoFormData.todo,
+        note: watchNote,
+        todo: watchTodo,
       });
     } catch (error) {
       if (error) somethingWentWrongToast();
     }
-
-    // FIXME conflict with delete mutation
-    bottomSheetRef.current?.close();
   };
 
-  const watchTodo = watch('todo', todo);
-  const watchNote = watch('note', note);
-
-  // update todo if checkbox has changed for 1 second
-  useEffect(() => {
-    updateMutation.mutateAsync({
-      completed: debouncedIsCompleted,
-      id,
-      importanceLevel: currentImportanceLevel,
-      reminderTime: currentReminderTime,
-      note: watchNote,
-      todo: watchTodo,
-    });
-  }, [debouncedIsCompleted]);
+  const debounceToggleTodo = useDebouncedCallback(() => {
+    // TODO don't update if current completed == completed
+    handleUpdateTodo();
+  }, 500);
 
   const handleDeleteTodo = async () => {
     deleteMutation.mutate(id);
   };
 
+  const isPastDue =
+    !isCompleted && dayjs(currentReminderTime?.toDate()).isBefore(dayjs(), 'minute');
+  const pastDueColor = isPastDue ? theme.colors.error : theme.colors.grey3;
+
   return (
     <Animated.View
-      layout={SequencedTransition}
-      entering={LightSpeedInLeft}
-      exiting={LightSpeedOutLeft}
+      layout={enableAnimation ? SequencedTransition : undefined}
+      entering={enableAnimation ? LightSpeedInLeft : undefined}
+      exiting={enableAnimation ? LightSpeedOutLeft : undefined}
     >
       <ListItem.Swipeable
         rightContent={
@@ -103,61 +113,60 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
             loading={deleteMutation.isLoading}
           />
         }
-        rightWidth={normalize(80)}
-        containerStyle={[
-          {
-            padding: 0,
-            borderRadius: BORDER_RADIUS.md,
-            backgroundColor: theme.colors.background,
-            marginBottom: theme.spacing.md,
-          },
-        ]}
-        rightStyle={{ marginBottom: theme.spacing.md, paddingLeft: theme.spacing.md }}
+        rightWidth={SIZING['8xl']}
+        containerStyle={[spacing.mb_md, spacing.p_0, border.radius_md]}
+        rightStyle={[spacing.mb_md, spacing.pl_md]}
       >
-        <Card onPress={showBottomSheet}>
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-            <TodoCheckbox
-              color={importanceColor}
+        <Card
+          onPress={showBottomSheet}
+          cardStyle={[
+            border.left_width_xl,
+            {
+              borderStartColor: importanceColor,
+            },
+          ]}
+        >
+          <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
+            <Checkbox
+              fillColor={importanceColor}
               checked={isCompleted}
-              onCheckboxPress={() => toggleIsCompleted()}
-              size={normalize(28)}
-            />
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'column',
+              onCheckboxPress={() => {
+                toggleIsCompleted();
+                debounceToggleTodo();
               }}
-            >
+              size={SIZING['4xl']}
+            />
+            <View style={[layout.flex, layout.flexDirCol]}>
               <Text
                 subtitle
-                numberOfLines={1}
+                numberOfLines={3}
                 style={{
-                  color: isCompleted ? theme.colors.grey3 : theme.colors.black,
+                  color:
+                    isCompleted || watchTodo === ''
+                      ? theme.colors.grey3
+                      : theme.colors.black,
                   textDecorationLine: isCompleted ? 'line-through' : 'none',
-                  textDecorationStyle: 'solid',
-                  textDecorationColor: importanceColor,
-                  width: '90%',
                 }}
               >
-                {watchTodo}
+                {watchTodo === '' ? 'No title' : watchTodo}
               </Text>
               {!isCompleted && currentReminderTime && (
                 <View
-                  style={{
-                    marginTop: theme.spacing.xs,
-                    flex: 1,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}
+                  style={[
+                    layout.flex,
+                    layout.flexDirRow,
+                    layout.alignCenter,
+                    spacing.mt_xs,
+                  ]}
                 >
                   <Icon
-                    containerStyle={{ marginRight: theme.spacing.sm }}
+                    containerStyle={spacing.mr_sm}
                     name="notifications-outline"
                     type="ionicon"
-                    size={16}
-                    color={theme.colors.grey3}
+                    size={SIZING.xl}
+                    color={pastDueColor}
                   />
-                  <Text small color={theme.colors.grey3}>
+                  <Text small style={{ color: pastDueColor }}>
                     {formatReminderTime(currentReminderTime)}
                   </Text>
                 </View>
@@ -168,18 +177,9 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
       </ListItem.Swipeable>
       <TodoBottomSheet
         buttonTitle={watchTodo === '' ? 'DELETE' : 'UPDATE'}
-        onSubmit={handleSubmit(handleUpdateTodo)}
+        onSubmit={closeBottomSheet}
         onDeletePress={handleDeleteTodo}
-        onClose={async () => {
-          updateMutation.mutate({
-            id,
-            completed: isCompleted,
-            importanceLevel: currentImportanceLevel,
-            reminderTime: currentReminderTime,
-            note: watchNote,
-            todo: watchTodo,
-          });
-        }}
+        onClose={handleUpdateTodo}
         isSaveLoading={updateMutation.isLoading}
         isDeleteLoading={deleteMutation.isLoading}
         bottomSheetRef={bottomSheetRef}
@@ -194,5 +194,9 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     </Animated.View>
   );
 }
+
+TodoItem.defaultProps = {
+  enableAnimation: true,
+};
 
 export default TodoItem;

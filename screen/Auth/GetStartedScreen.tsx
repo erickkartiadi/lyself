@@ -6,89 +6,55 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
 import NavLink from '../../components/base/NavLink';
-import { styles } from '../../theme/styles';
-import { GetStartedScreenNavigationProps } from '../../types/navigation.types';
+import { GetStartedScreenNavigationProps } from '../../navigation/navigation.types';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { text } from '../../styles/typhography';
+import { SIZING } from '../../theme/theme';
+import useStyles from '../../utils/hooks/useStyles';
 
 function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
   const { theme } = useTheme();
 
+  const styles = useStyles();
+
   return (
-    <ScrollView
-      style={[
-        {
-          flex: 1,
-        },
-      ]}
-    >
+    <ScrollView style={layout.flex}>
       <SafeAreaView>
         <View
           style={[
-            styles.sectionLarge,
+            layout.sectionLarge,
+            layout.flex,
             {
-              flex: 1,
               minHeight: Dimensions.get('window').height,
             },
           ]}
         >
-          <View
-            style={[
-              styles.noContainerGutter,
-              {
-                aspectRatio: 4 / 3,
-              },
-            ]}
-          >
-            <Image
-              source={getStartedIllustration}
-              style={[
-                {
-                  width: '100%',
-                  flex: 1,
-                },
-              ]}
-            />
+          <View style={[layout.noContainerGutter, layout.aspectRatioFourThree]}>
+            <Image source={getStartedIllustration} style={[layout.flex, layout.w100]} />
           </View>
-          <View style={[styles.container]}>
-            <Text
-              style={[
-                styles.sectionLarge,
-                {
-                  textAlign: 'center',
-                },
-              ]}
-            >
+          <View style={[layout.container]}>
+            <Text style={[layout.sectionLarge, text.center]}>
               <Text h1>Start your mental health journey with</Text>
-              <Text h1 color={theme.colors.primary}>
+              <Text h1 h1Style={styles.textPrimary}>
                 {' '}
                 Lyself
               </Text>
             </Text>
-            <View
-              style={[
-                styles.sectionLarge,
-                {
-                  flex: 1,
-                  justifyContent: 'center',
-                },
-              ]}
-            >
+            <View style={[layout.sectionLarge, layout.flex, layout.justifyCenter]}>
               <Button
                 onPress={() => navigation.navigate('Login')}
-                fullWidth
-                buttonStyle={{
-                  paddingVertical: theme.spacing.xl,
-                }}
-                containerStyle={{ marginBottom: theme.spacing.xl }}
-                titleStyle={{
-                  color: theme.colors.white,
-                  marginLeft: theme.spacing.xl,
-                }}
+                buttonStyle={spacing.py_xl}
+                containerStyle={spacing.mb_xl}
+                titleStyle={[spacing.ml_xl, styles.textWhite]}
               >
                 <Icon
-                  containerStyle={{
-                    position: 'absolute',
-                    left: 28,
-                  }}
+                  containerStyle={[
+                    layout.positionAbsolute,
+                    {
+                      left: SIZING['4xl'],
+                    },
+                  ]}
                   type="ionicon"
                   name="mail"
                   color={theme.colors.white}
@@ -97,23 +63,17 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
-                fullWidth
-                buttonStyle={{
-                  borderColor: theme.colors.greyOutline,
-                  paddingVertical: theme.spacing.xl,
-                }}
-                containerStyle={{ marginBottom: theme.spacing.xl }}
-                titleStyle={{
-                  color: theme.colors.black,
-                  marginLeft: theme.spacing.xl,
-                }}
+                buttonStyle={[spacing.py_xl, styles.borderGrey3]}
+                containerStyle={spacing.mb_xl}
+                titleStyle={[spacing.ml_xl, styles.textBlack]}
               >
                 <Icon
-                  containerStyle={{
-                    position: 'absolute',
-                    left: 28,
-                  }}
+                  containerStyle={[
+                    layout.positionAbsolute,
+                    {
+                      left: SIZING['4xl'],
+                    },
+                  ]}
                   type="ionicon"
                   name="logo-apple"
                   color={theme.colors.apple}
@@ -122,23 +82,17 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
-                fullWidth
-                buttonStyle={{
-                  borderColor: theme.colors.greyOutline,
-                  paddingVertical: theme.spacing.xl,
-                }}
-                containerStyle={{ marginBottom: theme.spacing.xl }}
-                titleStyle={{
-                  color: theme.colors.black,
-                  marginLeft: theme.spacing.xl,
-                }}
+                buttonStyle={[spacing.py_xl, styles.borderGrey3]}
+                containerStyle={spacing.mb_xl}
+                titleStyle={[spacing.ml_xl, styles.textBlack]}
               >
                 <Icon
-                  containerStyle={{
-                    position: 'absolute',
-                    left: 28,
-                  }}
+                  containerStyle={[
+                    layout.positionAbsolute,
+                    {
+                      left: SIZING['4xl'],
+                    },
+                  ]}
                   type="ionicon"
                   name="logo-google"
                   color={theme.colors.google}
@@ -148,23 +102,17 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
 
               <Button
                 type="outline"
-                onPress={() => navigation.navigate('HomeTab', { screen: 'Home' })}
-                fullWidth
-                buttonStyle={{
-                  borderColor: theme.colors.greyOutline,
-                  paddingVertical: theme.spacing.xl,
-                }}
-                containerStyle={{ marginBottom: theme.spacing.xl }}
-                titleStyle={{
-                  color: theme.colors.black,
-                  marginLeft: theme.spacing.xl,
-                }}
+                buttonStyle={[spacing.py_xl, styles.borderGrey3]}
+                containerStyle={spacing.mb_xl}
+                titleStyle={[spacing.ml_xl, styles.textBlack]}
               >
                 <Icon
-                  containerStyle={{
-                    position: 'absolute',
-                    left: 28,
-                  }}
+                  containerStyle={[
+                    layout.positionAbsolute,
+                    {
+                      left: SIZING['4xl'],
+                    },
+                  ]}
                   type="ionicon"
                   name="logo-facebook"
                   color={theme.colors.facebook}
@@ -175,12 +123,10 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
           </View>
           <View
             style={[
-              styles.sectionLarge,
-              {
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              },
+              layout.sectionLarge,
+              layout.flexDirRow,
+              layout.alignCenter,
+              layout.justifyCenter,
             ]}
           >
             <Text>Didn&apos;t have an account? </Text>

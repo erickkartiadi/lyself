@@ -3,9 +3,14 @@ import * as Linking from 'expo-linking';
 import React from 'react';
 import { View } from 'react-native';
 
-import { BORDER_RADIUS } from '../../theme/styles';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import shadow from '../../styles/shadow';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
 import { Article } from '../../types/types';
-import { formatTimeAgo } from '../../utils/formatTimeAgo';
+import { formatTimeAgo } from '../../utils/formatTime';
+import useStyles from '../../utils/hooks/useStyles';
 import AnimatedPressable from '../base/AnimatedPressable';
 
 function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
@@ -15,40 +20,32 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
     Linking.openURL(url);
   };
 
+  const styles = useStyles();
+
   return (
     <AnimatedPressable
-      style={{ width: 320, marginTop: theme.spacing.md }}
+      style={[spacing.mt_md, { width: SIZING['13xl'] }]}
       onPress={handleOpenArticle}
     >
       <Image
-        containerStyle={{
-          width: '100%',
-          aspectRatio: 4 / 3,
-        }}
-        borderRadius={BORDER_RADIUS.xl}
+        containerStyle={[
+          layout.w100,
+          border.radius_xl,
+          layout.aspectRatioFourThree,
+          shadow.sm,
+        ]}
         source={{ uri: urlToImage }}
       />
-      <View
-        style={{
-          marginTop: theme.spacing.xl,
-        }}
-      >
+      <View style={spacing.mt_xl}>
         <Text subtitle numberOfLines={3}>
           {title}
         </Text>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginTop: theme.spacing.sm,
-          }}
-        >
-          <Text caption color={theme.colors.grey3}>
+        <View style={[layout.flex, layout.flexDirRow, layout.alignCenter, spacing.mt_sm]}>
+          <Text caption style={styles.textGrey}>
             {source}
           </Text>
           <Icon type="entypo" name="dot-single" color={theme.colors.grey3} />
-          <Text caption color={theme.colors.grey3}>
+          <Text caption style={styles.textGrey}>
             {formatTimeAgo(publishedAt)}
           </Text>
         </View>
@@ -60,15 +57,16 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
 export default ArticleCard;
 
 export function ArticleCardPlaceholder() {
-  const { theme } = useTheme();
-
   return (
-    <View style={{ marginTop: theme.spacing.md }}>
-      <Skeleton width={320} height={240} style={{ borderRadius: BORDER_RADIUS.xl }} />
+    <View style={spacing.mt_md}>
+      <Skeleton
+        width={SIZING['13xl']}
+        height={(SIZING['13xl'] / 4) * 3}
+        style={border.radius_xl}
+      />
 
-      <Skeleton circle height={16} style={{ marginTop: theme.spacing.xl }} />
-      <Skeleton circle height={16} style={{ marginTop: theme.spacing.md }} />
-      <Skeleton circle style={{ marginTop: theme.spacing.md }} height={16} width={200} />
+      <Skeleton circle height={SIZING.xl} style={spacing.mt_xl} />
+      <Skeleton circle height={SIZING.xl} style={spacing.mt_md} />
     </View>
   );
 }

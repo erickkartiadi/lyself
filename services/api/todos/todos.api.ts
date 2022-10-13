@@ -1,29 +1,55 @@
+import { addDoc, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
+
 import { Todo } from '../../../types/types';
-import { apiClient } from '../../axios/axios';
+import { auth, createCollection } from '../../firebase/firebase';
 
 type CreateTodoDto = Omit<Todo, 'id'>;
 type UpdateTodoDto = Todo;
 
 export async function createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {
-  const res = await apiClient.post('/todo', createTodoDto);
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  const todosCol = createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
 
-  return res.data;
+  const todoDoc = await addDoc(todosCol, createTodoDto);
+
+  return { ...createTodoDto, id: todoDoc.id } as Todo;
 }
 
-export async function deleteTodo(id: string): Promise<Todo[]> {
-  const res = await apiClient.delete(`/todo/${id}`);
+export async function deleteTodo(id: string): Promise<string> {
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  const todosCol = createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
 
-  return res.data.todos;
+  const todoDoc = doc(todosCol, id);
+
+  await deleteDoc(todoDoc);
+
+  return todoDoc.id;
 }
 
-export async function updateTodo({ id, ...rest }: UpdateTodoDto): Promise<Todo[]> {
-  const res = await apiClient.patch(`/todo/${id}`, rest);
+export async function updateTodo({
+  id,
+  ...updatedTodoData
+}: UpdateTodoDto): Promise<Todo> {
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  const todosCol = createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
 
-  return res.data.todos;
+  const todoDoc = doc(todosCol, id);
+  await updateDoc(todoDoc, updatedTodoData);
+
+  return { id, ...updatedTodoData } as Todo;
 }
 
 export async function fetchTodos(): Promise<Todo[]> {
-  const res = await apiClient.get('/todo');
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  const todosCol = createCollection<CreateTodoDto>('users', currentUser?.uid, 'todos');
 
-  return res.data.todos;
+  const querySnapshot = await getDocs(todosCol);
+  return querySnapshot.docs.map((document) => ({
+    ...document.data(),
+    id: document.id,
+  })) as Todo[];
 }

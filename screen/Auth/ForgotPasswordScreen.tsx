@@ -10,15 +10,12 @@ import Toast from 'react-native-toast-message';
 
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import BackButton from '../../components/base/BackButton';
-import TextInput from '../../components/base/Input';
-import { forgotPassword } from '../../services/api/auth/auth.api';
-import { styles } from '../../theme/styles';
-import { ForgotPasswordScreenNavigationProps } from '../../types/navigation.types';
-import { User } from '../../types/types';
+import TextInput from '../../components/base/TextInput';
+import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
+import { forgotPassword, ForgotPasswordDto } from '../../services/api/auth/auth.api';
+import layout from '../../styles/layout';
 import { forgotPasswordSchema } from '../../utils/constant/validation/auth.schema';
 import { somethingWentWrongToast } from '../../utils/toast';
-
-type ForgotPasswordFormData = Pick<User, 'email'>;
 
 function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProps) {
   const {
@@ -26,7 +23,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ForgotPasswordFormData>({
+  } = useForm<ForgotPasswordDto>({
     defaultValues: {
       email: '',
     },
@@ -34,11 +31,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
   });
 
   const mutation = useMutation(forgotPassword, {
-    onSuccess: ({
-      envelope: {
-        to: [email],
-      },
-    }) => {
+    onSuccess: (email) => {
       Toast.show({
         type: 'success',
         text1: 'Email sent',
@@ -50,7 +43,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
     },
   });
 
-  const handleForgotPassword = async (forgotPasswordFormData: ForgotPasswordFormData) => {
+  const handleForgotPassword = async (forgotPasswordFormData: ForgotPasswordDto) => {
     try {
       mutation.mutate(forgotPasswordFormData);
     } catch (error) {
@@ -61,7 +54,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[styles.containerGutter, styles.sectionLarge]}
+      contentContainerStyle={[layout.containerGutter, layout.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
@@ -70,20 +63,8 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
           Please enter your email address, we&apos;ll send an email with instructions to
           reset your password.
         </Text>
-        <View
-          style={{
-            flex: 1,
-            aspectRatio: 1,
-            alignItems: 'center',
-          }}
-        >
-          <Image
-            source={forgotPasswordIllustration}
-            style={{
-              flex: 1,
-              width: '100%',
-            }}
-          />
+        <View style={[layout.flex, layout.alignCenter, layout.aspectRatioSquare]}>
+          <Image source={forgotPasswordIllustration} style={[layout.flex, layout.w100]} />
         </View>
         <Controller
           control={control}
@@ -102,11 +83,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
             />
           )}
         />
-        <Button
-          loading={mutation.isLoading}
-          fullWidth
-          onPress={handleSubmit(handleForgotPassword)}
-        >
+        <Button loading={mutation.isLoading} onPress={handleSubmit(handleForgotPassword)}>
           Send Instruction
         </Button>
       </SafeAreaView>
