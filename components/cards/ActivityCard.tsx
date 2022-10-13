@@ -34,16 +34,18 @@ function ActivityCard({
   const styles = useStyles();
 
   return (
-    <Card cardStyle={{ backgroundColor: colorLight }}>
+    <Card cardStyle={{ backgroundColor: colorDark }}>
       <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
         <View style={[layout.flex]}>
           <View>
-            <Text h3>{title}</Text>
-            <Text>{text}</Text>
+            <Text h3 h3Style={styles.textWhite}>
+              {title}
+            </Text>
+            <Text style={styles.textWhite}>{text}</Text>
           </View>
           <View style={[layout.flexDirRow, layout.alignCenter, spacing.mt_lg]}>
             <Button
-              color={colorDark}
+              color={colorLight}
               onPress={onPress}
               uppercase
               titleStyle={styles.textWhite}

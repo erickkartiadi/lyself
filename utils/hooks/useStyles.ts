@@ -5,14 +5,17 @@ const useStyles = makeStyles((theme) => ({
   textPrimary: {
     color: theme.colors.primary,
   },
-  textWhite: {
-    color: theme.colors.white,
-  },
   textBlack: {
     color: theme.colors.black,
   },
+  textWhite: {
+    color: theme.colors.white,
+  },
   textGrey: {
     color: theme.colors.grey3,
+  },
+  textGreyLighter: {
+    color: theme.colors.grey5,
   },
 
   // backgroundColor

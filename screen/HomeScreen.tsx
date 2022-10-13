@@ -26,8 +26,8 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
           image={isDarkMode ? meditationIllustrationDark : meditationIllustrationLight}
           title="Meditation"
           text="Start your day with relaxed mind"
-          colorLight={theme.colors.yellow}
-          colorDark={theme.colors.yellowDark}
+          colorLight={theme.colors.purpleDark}
+          colorDark={theme.colors.purple}
           onPress={() => navigation.navigate('InDevelopment')}
         />
         <VerticalSeparator />
@@ -37,7 +37,7 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
           image={breathingIllustration}
           title="Breathing Exercise"
           text="Let go your anxiety and worries"
-          colorLight={theme.colors.blueLight}
+          colorLight={theme.colors.blueDark}
           colorDark={theme.colors.blue}
           onPress={() => navigation.navigate('InDevelopment')}
         />
