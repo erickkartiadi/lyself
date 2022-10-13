@@ -4,10 +4,10 @@ import * as React from 'react';
 
 import LeftHeader from '../components/layout/LeftHeader';
 import RightHeader from '../components/layout/RightHeader';
-import AccountTabScreen from '../screen/AccountTabScreen';
-import HomeTabScreen from '../screen/HomeTabScreen';
-import NotificationTabScreen from '../screen/NotificationTabScreen';
-import StoryTabScreen from '../screen/Story/StoryTabScreen';
+import AccountScreen from '../screen/AccountScreen';
+import HomeScreen from '../screen/HomeScreen';
+import StoryScreen from '../screen/Story/StoryScreen';
+import TodoScreen from '../screen/Todo/TodoScreen';
 import layout from '../styles/layout';
 import { font } from '../styles/typhography';
 import { GUTTER_SIZE, SIZING } from '../theme/theme';
@@ -32,7 +32,7 @@ function HomeTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   );
 }
 
-function ExploreTabBarIcon({ focused, color, size }: TabBarIconOptions) {
+function StoryTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   return (
     <Icon
       type="ionicon"
@@ -42,11 +42,11 @@ function ExploreTabBarIcon({ focused, color, size }: TabBarIconOptions) {
     />
   );
 }
-function ChatTabBarIcon({ focused, color, size }: TabBarIconOptions) {
+function TodoTabBarIcon({ focused, color, size }: TabBarIconOptions) {
   return (
     <Icon
       type="ionicon"
-      name={focused ? 'notifications' : 'notifications-outline'}
+      name={focused ? 'checkbox' : 'checkbox-outline'}
       color={color}
       size={size}
     />
@@ -66,7 +66,7 @@ function UserTabBarIcon({ focused, color, size }: TabBarIconOptions) {
 function HomeNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="Story"
+      initialRouteName="Home"
       screenOptions={{
         ...navigatorScreenOptions,
 
@@ -92,24 +92,24 @@ function HomeNavigator() {
           tabBarIcon: HomeTabBarIcon,
         }}
         name="Home"
-        component={HomeTabScreen}
+        component={HomeScreen}
       />
       <Tab.Screen
         name="Story"
-        component={StoryTabScreen}
+        component={StoryScreen}
         options={{
-          tabBarIcon: ExploreTabBarIcon,
+          tabBarIcon: StoryTabBarIcon,
           title: 'Stories',
         }}
       />
       <Tab.Screen
-        name="Notification"
-        component={NotificationTabScreen}
-        options={{ tabBarIcon: ChatTabBarIcon, title: 'Notification' }}
+        name="Todo"
+        component={TodoScreen}
+        options={{ tabBarIcon: TodoTabBarIcon }}
       />
       <Tab.Screen
         name="Account"
-        component={AccountTabScreen}
+        component={AccountScreen}
         options={{
           tabBarIcon: UserTabBarIcon,
           title: 'Account',

@@ -41,14 +41,13 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
       navigation.navigate('Login');
       reset();
     },
+    onError: () => {
+      somethingWentWrongToast();
+    },
   });
 
   const handleForgotPassword = async (forgotPasswordFormData: ForgotPasswordDto) => {
-    try {
-      mutation.mutate(forgotPasswordFormData);
-    } catch (error) {
-      if (error) somethingWentWrongToast();
-    }
+    mutation.mutate(forgotPasswordFormData);
   };
 
   return (

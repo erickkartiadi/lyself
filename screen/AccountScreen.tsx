@@ -12,7 +12,7 @@ import { AuthContext } from '../utils/context/AuthContext';
 import useStyles from '../utils/hooks/useStyles';
 import { somethingWentWrongToast } from '../utils/toast';
 
-function AccountTabScreen() {
+function AccountScreen() {
   const { theme } = useTheme();
   const { user, logout } = React.useContext(AuthContext);
 
@@ -118,4 +118,4 @@ function AccountTabScreen() {
   );
 }
 
-export default AccountTabScreen;
+export default AccountScreen;

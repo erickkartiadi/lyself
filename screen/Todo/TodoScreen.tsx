@@ -19,8 +19,8 @@ import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
-import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
+import { somethingWentWrongToast } from '../../utils/toast';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
 import TodoEmptyScreen from './TodoEmptyScreen';
@@ -122,7 +122,6 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
     // TODO add alert
     if (todo === '' || todo === null) return;
 
-    // TODO refactor all mutation
     mutation.mutate(
       {
         completed,
@@ -137,6 +136,9 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         onSuccess: () => {
           todoBottomSheetRef.current?.close();
           reset();
+        },
+        onError: () => {
+          somethingWentWrongToast();
         },
       }
     );
@@ -162,7 +164,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
     [selectedSort, selectedFilter]
   );
 
-  useApplyHeaderWorkaround(navigation.setOptions);
+  // useApplyHeaderWorkaround(navigation.setOptions);
 
   useEffect(() => {
     navigation.setOptions({

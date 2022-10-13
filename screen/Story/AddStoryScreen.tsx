@@ -72,6 +72,9 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           reset();
           navigation.goBack();
         },
+        onError: () => {
+          somethingWentWrongToast();
+        },
       }
     );
   };

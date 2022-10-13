@@ -5,12 +5,12 @@ import { FlatList } from 'react-native-gesture-handler';
 import { VerticalSeparator } from '../../components/layout/ItemSeparator';
 import RefreshControl from '../../components/layout/RefreshControl';
 import StoryCard from '../../components/story/StoryCard';
-import { StoryTabScreenNavigationProps } from '../../navigation/navigation.types';
+import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { useGetStories } from '../../services/api/story/story.hooks';
 import layout from '../../styles/layout';
 import { SIZING } from '../../theme/theme';
 
-function StoryTabScreen({ navigation }: StoryTabScreenNavigationProps) {
+function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   const { theme } = useTheme();
 
   const { data, isFetching, refetch } = useGetStories();
@@ -45,4 +45,4 @@ function StoryTabScreen({ navigation }: StoryTabScreenNavigationProps) {
   );
 }
 
-export default StoryTabScreen;
+export default StoryScreen;

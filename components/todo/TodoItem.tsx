@@ -21,6 +21,7 @@ import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTime';
+import { somethingWentWrongToast } from '../../utils/toast';
 import Card from '../base/Card';
 import Checkbox from '../base/Checkbox';
 import TodoBottomSheet from './TodoBottomSheet';
@@ -88,14 +89,21 @@ function TodoItem({
     )
       return;
 
-    updateMutation.mutate({
-      id,
-      completed: watchCompleted,
-      importanceLevel: watchImportanceLevel,
-      reminderTime: convertedReminderTime,
-      note: watchNote,
-      todo: watchTodo,
-    });
+    updateMutation.mutate(
+      {
+        id,
+        completed: watchCompleted,
+        importanceLevel: watchImportanceLevel,
+        reminderTime: convertedReminderTime,
+        note: watchNote,
+        todo: watchTodo,
+      },
+      {
+        onError: () => {
+          somethingWentWrongToast();
+        },
+      }
+    );
   };
 
   const debounceToggleTodo = useDebouncedCallback(() => {
@@ -103,7 +111,11 @@ function TodoItem({
   }, 500);
 
   const handleDeleteTodo = async () => {
-    deleteMutation.mutate(id);
+    deleteMutation.mutate(id, {
+      onError: () => {
+        somethingWentWrongToast();
+      },
+    });
   };
 
   const isPastDue =

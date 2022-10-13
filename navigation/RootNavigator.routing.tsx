@@ -13,7 +13,6 @@ import AuthNavigator from './AuthNavigator.routing';
 import HomeNavigator from './HomeNavigator.routing';
 import { RootStackParamList } from './navigation.types';
 import StoryNavigator from './StoryNavigator.routing';
-import TodoNavigator from './TodoNavigator.routing';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const prefix = Linking.createURL('/');
@@ -26,7 +25,6 @@ function RootNavigator() {
     prefixes: [prefix],
     config: {
       screens: {
-        TodoStack: 'todo',
         AuthStack: '*',
       },
     },
@@ -48,7 +46,6 @@ function RootNavigator() {
           {user ? (
             <>
               <Stack.Screen name="HomeTab" component={HomeNavigator} />
-              <Stack.Screen name="TodoStack" component={TodoNavigator} />
               <Stack.Screen name="StoryStack" component={StoryNavigator} />
               <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
             </>

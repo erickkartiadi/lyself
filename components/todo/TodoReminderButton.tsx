@@ -30,7 +30,6 @@ function TodoReminderButton({ control }: TodoReminderButtonProps) {
     setIsDatePickerVisible(false);
   };
 
-  // TODO reset after insert
   return (
     <Controller
       control={control}
