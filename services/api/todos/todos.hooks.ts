@@ -29,13 +29,16 @@ export const useGetTodos = (
         filtered = filtered.filter(({ completed }) => completed === isCompleted);
       }
 
-      const sorted = filtered.sort((a, b) =>
-        sortNumber(
-          importanceLevels.findIndex((importance) => importance === a.importanceLevel),
-          importanceLevels.findIndex((importance) => importance === b.importanceLevel),
-          orderBy
+      const sorted = filtered
+        .sort((a, b) =>
+          sortNumber(
+            importanceLevels.findIndex((importance) => importance === a.importanceLevel),
+            importanceLevels.findIndex((importance) => importance === b.importanceLevel),
+            orderBy
+          )
         )
-      );
+        // completed todos are always below
+        .sort((a, b) => sortNumber(Number(a.completed), Number(b.completed), 'ASC'));
 
       if (sort === 'reminderTime') {
         return sortReminderTime(sorted, orderBy);
