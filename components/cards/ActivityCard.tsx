@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Image, ImageSourcePropType, View } from 'react-native';
 
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import useStyles from '../../utils/hooks/useStyles';
@@ -37,8 +38,8 @@ function ActivityCard({
       <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
         <View style={[layout.flex]}>
           <View>
-            <Text h4>{title}</Text>
-            <Text small>{text}</Text>
+            <Text h3>{title}</Text>
+            <Text>{text}</Text>
           </View>
           <View style={[layout.flexDirRow, layout.alignCenter, spacing.mt_lg]}>
             <Button
@@ -47,7 +48,7 @@ function ActivityCard({
               uppercase
               titleStyle={styles.textWhite}
               buttonStyle={[layout.flexDirRow, layout.alignCenter, spacing.pr_lg]}
-              size="sm"
+              size="md"
             >
               <Icon
                 name={iconName}
@@ -64,11 +65,11 @@ function ActivityCard({
           style={[
             layout.alignCenter,
             layout.justifyCenter,
-            layout.w25,
             layout.aspectRatioSquare,
+            width.w_10xl,
           ]}
         >
-          <Image source={image} style={[layout.flex, layout.w100]} />
+          <Image source={image} style={[layout.flex, width.w_100]} />
         </View>
       </View>
     </Card>

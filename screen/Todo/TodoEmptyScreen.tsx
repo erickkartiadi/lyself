@@ -5,8 +5,8 @@ import { Image, View } from 'react-native';
 import noDataImageDark from '../../assets/images/no-data-image-dark.png';
 import noDataImageLight from '../../assets/images/no-data-image-light.png';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
-import { SIZING } from '../../theme/theme';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import useStyles from '../../utils/hooks/useStyles';
 import normalize from '../../utils/normalize';
@@ -17,17 +17,9 @@ function TodoEmptyScreen() {
 
   return (
     <View style={[layout.justifyCenter, layout.alignCenter, layout.flexGrow]}>
-      <View
-        style={[
-          spacing.mb_xl,
-          layout.aspectRatioSquare,
-          {
-            width: SIZING['10xl'],
-          },
-        ]}
-      >
+      <View style={[spacing.mb_xl, layout.aspectRatioSquare, width.w_10xl]}>
         <Image
-          style={[layout.flex, layout.w100]}
+          style={[layout.flex, width.w_100]}
           source={isDarkMode ? noDataImageDark : noDataImageLight}
         />
       </View>

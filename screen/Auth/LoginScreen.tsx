@@ -17,6 +17,7 @@ import TextInput from '../../components/base/TextInput';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 import { login, LoginDto } from '../../services/api/auth/auth.api';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { loginSchema } from '../../utils/constant/validation/auth.schema';
 
@@ -69,7 +70,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         >
           <Image
             source={loginIllustration}
-            style={[layout.flex, layout.w100]}
+            style={[layout.flex, width.w_100]}
             resizeMode="center"
           />
         </View>
@@ -109,7 +110,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         <View
           style={[
             layout.flex,
-            layout.w100,
+            width.w_100,
             layout.flexDirRow,
             layout.alignCenter,
             layout.justifyEnd,

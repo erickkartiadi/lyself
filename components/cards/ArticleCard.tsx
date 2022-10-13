@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
 import shadow from '../../styles/shadow';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import { Article } from '../../types/types';
@@ -23,13 +24,10 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
   const styles = useStyles();
 
   return (
-    <AnimatedPressable
-      style={[spacing.mt_md, { width: SIZING['13xl'] }]}
-      onPress={handleOpenArticle}
-    >
+    <AnimatedPressable style={[spacing.mt_md, width.w_13xl]} onPress={handleOpenArticle}>
       <Image
         containerStyle={[
-          layout.w100,
+          width.w_100,
           border.radius_xl,
           layout.aspectRatioFourThree,
           shadow.sm,

@@ -81,32 +81,6 @@ const layout = StyleSheet.create({
     aspectRatio: 16 / 9,
   },
 
-  // width or height
-  w25: {
-    width: '25%',
-  },
-  w50: {
-    width: '50%',
-  },
-  w75: {
-    width: '75%',
-  },
-  w100: {
-    width: '100%',
-  },
-  h25: {
-    height: '25%',
-  },
-  h50: {
-    height: '50%',
-  },
-  h75: {
-    height: '75%',
-  },
-  h100: {
-    height: '100%',
-  },
-
   // position
   positionAbsolute: {
     position: 'absolute',

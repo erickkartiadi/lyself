@@ -17,6 +17,7 @@ import TextInput from '../../components/base/TextInput';
 import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
 import { register, RegisterUserDto } from '../../services/api/auth/auth.api';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import { registerSchema } from '../../utils/constant/validation/auth.schema';
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
@@ -72,7 +73,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
         >
           <Image
             source={registerIllustration}
-            style={[layout.flex, layout.w100]}
+            style={[layout.flex, width.w_100]}
             resizeMode="center"
           />
         </View>

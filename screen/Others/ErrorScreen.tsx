@@ -4,8 +4,8 @@ import { Image, View } from 'react-native';
 
 import errorImage from '../../assets/images/error-image.png';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
-import { SIZING } from '../../theme/theme';
 import useStyles from '../../utils/hooks/useStyles';
 import normalize from '../../utils/normalize';
 
@@ -15,16 +15,8 @@ function ErrorScreen() {
   return (
     <View style={layout.flex}>
       <View style={[layout.flex, layout.alignCenter, layout.justifyCenter]}>
-        <View
-          style={[
-            spacing.mb_xl,
-            layout.aspectRatioSquare,
-            {
-              width: SIZING['10xl'],
-            },
-          ]}
-        >
-          <Image style={[layout.flex, layout.w100]} source={errorImage} />
+        <View style={[spacing.mb_xl, layout.aspectRatioSquare, width.w_10xl]}>
+          <Image style={[layout.flex, width.w_100]} source={errorImage} />
         </View>
         <Text h4 style={spacing.mb_sm}>
           Something went wrong

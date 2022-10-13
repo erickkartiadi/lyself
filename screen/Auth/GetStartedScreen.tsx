@@ -8,6 +8,7 @@ import getStartedIllustration from '../../assets/images/get-started-illustration
 import NavLink from '../../components/base/NavLink';
 import { GetStartedScreenNavigationProps } from '../../navigation/navigation.types';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
@@ -31,7 +32,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
           ]}
         >
           <View style={[layout.noContainerGutter, layout.aspectRatioFourThree]}>
-            <Image source={getStartedIllustration} style={[layout.flex, layout.w100]} />
+            <Image source={getStartedIllustration} style={[layout.flex, width.w_100]} />
           </View>
           <View style={[layout.container]}>
             <Text style={[layout.sectionLarge, text.center]}>

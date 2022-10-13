@@ -7,7 +7,7 @@ import {
 } from 'react-native-toast-message';
 
 import border from '../../styles/border';
-import layout from '../../styles/layout';
+import { height } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { small, subtitle } from '../../styles/typhography';
 import { GUTTER_SIZE, SIZING } from '../../theme/theme';
@@ -44,7 +44,7 @@ function Toast({ color, icon: { name, type }, ...props }: ToastProps) {
         spacing.px_xl,
         border.radius_lg,
         border.left_width_2xl,
-        layout.h100,
+        height.h_100,
         styles.cardBackground,
         {
           borderLeftColor: color,

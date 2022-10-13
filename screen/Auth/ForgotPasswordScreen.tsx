@@ -14,6 +14,7 @@ import TextInput from '../../components/base/TextInput';
 import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
 import { forgotPassword, ForgotPasswordDto } from '../../services/api/auth/auth.api';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import { forgotPasswordSchema } from '../../utils/constant/validation/auth.schema';
 import { somethingWentWrongToast } from '../../utils/toast';
 
@@ -63,7 +64,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
           reset your password.
         </Text>
         <View style={[layout.flex, layout.alignCenter, layout.aspectRatioSquare]}>
-          <Image source={forgotPasswordIllustration} style={[layout.flex, layout.w100]} />
+          <Image source={forgotPasswordIllustration} style={[layout.flex, width.w_100]} />
         </View>
         <Controller
           control={control}

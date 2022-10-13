@@ -4,6 +4,7 @@ import { Pressable, PressableProps, View } from 'react-native';
 
 import border from '../../styles/border';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 
@@ -28,7 +29,7 @@ function SettingMenu({
       style={[
         layout.flex,
         layout.flexDirRow,
-        layout.w100,
+        width.w_100,
         layout.alignCenter,
         layout.justifyBetween,
         spacing.py_md,

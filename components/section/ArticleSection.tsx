@@ -4,6 +4,7 @@ import { FlatList, View } from 'react-native';
 
 import fetchNews from '../../services/api/news';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import { Article } from '../../types/types';
 import ArticleCard, { ArticleCardPlaceholder } from '../cards/ArticleCard';
 import { HorizontalSeparator } from '../layout/ItemSeparator';
@@ -19,7 +20,7 @@ const renderArticles = ({ item }: { item: Article }) => (
   />
 );
 const renderEmptyArticles = () => (
-  <View style={[layout.w100, layout.flexDirRow]}>
+  <View style={[width.w_100, layout.flexDirRow]}>
     <ArticleCardPlaceholder />
     <HorizontalSeparator />
     <ArticleCardPlaceholder />

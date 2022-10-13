@@ -9,8 +9,9 @@ import HomeScreen from '../screen/HomeScreen';
 import StoryScreen from '../screen/Story/StoryScreen';
 import TodoScreen from '../screen/Todo/TodoScreen';
 import layout from '../styles/layout';
+import { height } from '../styles/size';
 import { font } from '../styles/typhography';
-import { GUTTER_SIZE, SIZING } from '../theme/theme';
+import { GUTTER_SIZE } from '../theme/theme';
 import { HomeTabParamList } from './navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
@@ -71,11 +72,7 @@ function HomeNavigator() {
         ...navigatorScreenOptions,
 
         tabBarShowLabel: false,
-        tabBarStyle: [
-          {
-            height: SIZING['8xl'],
-          },
-        ],
+        tabBarStyle: height.h_8xl,
         headerTitleContainerStyle: { marginStart: 0 },
         headerLeftContainerStyle: {
           marginStart: GUTTER_SIZE,

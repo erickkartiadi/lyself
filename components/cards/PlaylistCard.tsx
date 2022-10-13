@@ -5,8 +5,8 @@ import { View } from 'react-native';
 
 import border from '../../styles/border';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
-import { SIZING } from '../../theme/theme';
 import { Playlist } from '../../types/types';
 import useStyles from '../../utils/hooks/useStyles';
 import AnimatedPressable from '../base/AnimatedPressable';
@@ -22,11 +22,11 @@ function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
     <AnimatedPressable
       key={id}
       onPress={handleOpenSpotifyPlaylist}
-      style={[spacing.mt_md, { width: SIZING['11xl'] }]}
+      style={[spacing.mt_md, width.w_11xl]}
     >
       <Image
-        containerStyle={[layout.w100, border.radius_xl, layout.aspectRatioSquare]}
-        childrenContainerStyle={layout.w100}
+        containerStyle={[width.w_100, border.radius_xl, layout.aspectRatioSquare]}
+        childrenContainerStyle={width.w_100}
         source={{
           uri: imageUrl,
         }}
