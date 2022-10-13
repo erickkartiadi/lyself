@@ -1,116 +1,69 @@
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import { ButtonProps, createTheme, TextProps } from '@rneui/themed';
+import { createTheme, TextProps } from '@rneui/themed';
 
+import border from '../styles/border';
+import layout from '../styles/layout';
+import spacing from '../styles/spacing';
 import {
-  BORDER_RADIUS,
-  darkColors,
-  FONT,
-  GUTTER_SIZE,
-  lightColors,
-  THEME_SPACING,
-} from './theme';
+  caption,
+  heading1,
+  heading2,
+  heading3,
+  heading4,
+  regular,
+  small,
+  subtitle,
+  subtitle2,
+  subtitle3,
+} from '../styles/typhography';
+import { BORDER_RADIUS, darkColors, lightColors, SPACES } from './theme';
 
 const myTheme = createTheme({
-  spacing: { ...THEME_SPACING },
+  spacing: SPACES,
   lightColors,
   darkColors,
   components: {
     Input: () => ({
-      labelStyle: FONT.subtitle,
-      inputStyle: FONT.regular,
-      inputContainerStyle: {
-        borderBottomWidth: 1,
-      },
-      containerStyle: { paddingHorizontal: 0 },
+      labelStyle: subtitle,
+      inputStyle: regular,
+      inputContainerStyle: border.bottom_width_md,
+      containerStyle: spacing.px_0,
     }),
     Card: {
-      containerStyle: {
-        margin: 0,
-        padding: THEME_SPACING.lg,
-        marginTop: THEME_SPACING.md,
-      },
+      containerStyle: spacing.m_0,
     },
     SearchBar: {
-      style: [FONT.regular],
-      inputStyle: FONT.regular,
-    },
-    CheckBox: {
-      textStyle: [
-        FONT.small,
-        {
-          // vertically align text with checkbox icon
-          marginTop: THEME_SPACING.sm * -1,
-        },
-      ],
-      containerStyle: {
-        padding: 0,
-        marginLeft: 0,
-        paddingVertical: THEME_SPACING.md,
-      },
+      style: regular,
+      inputStyle: regular,
     },
     Icon: {
-      containerStyle: { aspectRatio: 1 },
+      containerStyle: layout.aspectRatioSquare,
     },
     Text: (props: TextProps) => ({
-      h1Style: [FONT.heading1],
-      h2Style: [FONT.heading2],
-      h3Style: [FONT.heading3],
-      h4Style: [FONT.heading4],
+      h1Style: heading1,
+      h2Style: heading2,
+      h3Style: heading3,
+      h4Style: heading4,
       style: [
-        FONT.regular,
-        props.subtitle && FONT.subtitle,
-        props.subtitle2 && FONT.subtitle2,
-        props.subtitle3 && FONT.subtitle3,
-        props.small && FONT.small,
-        props.caption && FONT.caption,
-        { ...(props.color && { color: props.color }) },
+        regular,
+        props.subtitle && subtitle,
+        props.subtitle2 && subtitle2,
+        props.subtitle3 && subtitle3,
+        props.small && small,
+        props.caption && caption,
       ],
     }),
-
-    Button: (props: ButtonProps) => ({
+    Button: {
       radius: BORDER_RADIUS.rounded,
-      titleStyle: [FONT.subtitle3],
+      titleStyle: subtitle3,
       size: 'lg',
       uppercase: true,
-    }),
+    },
     FAB: {
-      titleStyle: [FONT.subtitle3],
-    },
-    Dialog: {
-      overlayStyle: {
-        borderRadius: BORDER_RADIUS.md,
-      },
-    },
-    DialogButton: {
-      size: 'md',
-      radius: BORDER_RADIUS.rounded,
-      titleStyle: FONT.caption,
-    },
-    DialogTitle: {
-      titleProps: {
-        style: [
-          FONT.heading4,
-          {
-            marginBottom: THEME_SPACING.md,
-          },
-        ],
-      },
-    },
-    Tab: {
-      variant: 'primary',
-      containerStyle: {
-        padding: THEME_SPACING.md,
-        borderRadius: BORDER_RADIUS.rounded,
-        margin: GUTTER_SIZE,
-      },
-    },
-    TabItem: {
-      containerStyle: {
-        borderRadius: BORDER_RADIUS.rounded,
-      },
+      titleStyle: subtitle3,
     },
     Chip: {
-      titleStyle: [FONT.subtitle3],
+      titleStyle: subtitle3,
     },
   },
 });

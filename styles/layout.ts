@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
-import { GUTTER_SIZE, THEME_SPACING } from './theme';
+import { GUTTER_SIZE, SPACES } from '../theme/theme';
 
-const appStyles = StyleSheet.create({
+const layout = StyleSheet.create({
   flex: {
     flex: 1,
   },
@@ -50,9 +50,6 @@ const appStyles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 
-  w100: {
-    width: '100%',
-  },
   container: {
     flex: 1,
     paddingHorizontal: GUTTER_SIZE,
@@ -64,49 +61,71 @@ const appStyles = StyleSheet.create({
     marginHorizontal: GUTTER_SIZE * -1,
   },
   sectionLarge: {
-    paddingVertical: THEME_SPACING.xl,
+    paddingVertical: SPACES.xl,
   },
   sectionMedium: {
-    paddingVertical: THEME_SPACING.lg,
+    paddingVertical: SPACES.lg,
   },
   sectionSmall: {
-    paddingVertical: THEME_SPACING.md,
+    paddingVertical: SPACES.md,
   },
 
-  // shadow generator -> https://ethercreative.github.io/react-native-shadow-generator/
-  shadowLarge: {
-    shadowColor: '#rgba(0,0,0,0.1)',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-
-    elevation: 6,
+  // layout
+  aspectRatioSquare: {
+    aspectRatio: 1,
   },
-  shadowMedium: {
-    shadowColor: '#rgba(0,0,0,0.1)',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-
-    elevation: 4,
+  aspectRatioFourThree: {
+    aspectRatio: 4 / 3,
   },
-  shadowSmall: {
-    shadowColor: '#rgba(0,0,0,0.1)',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+  aspectRatioWide: {
+    aspectRatio: 16 / 9,
+  },
 
-    elevation: 2,
+  // width or height
+  w25: {
+    width: '25%',
+  },
+  w50: {
+    width: '50%',
+  },
+  w75: {
+    width: '75%',
+  },
+  w100: {
+    width: '100%',
+  },
+  h25: {
+    height: '25%',
+  },
+  h50: {
+    height: '50%',
+  },
+  h75: {
+    height: '75%',
+  },
+  h100: {
+    height: '100%',
+  },
+
+  // position
+  positionAbsolute: {
+    position: 'absolute',
+  },
+  positionRelative: {
+    position: 'relative',
+  },
+
+  overflowHidden: {
+    overflow: 'hidden',
+  },
+
+  // display
+  displayNone: {
+    display: 'none',
+  },
+  displayFlex: {
+    display: 'flex',
   },
 });
 
-export default appStyles;
+export default layout;

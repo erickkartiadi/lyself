@@ -7,8 +7,10 @@ import {
 import * as React from 'react';
 import { FlexStyle, StyleProp, ViewStyle } from 'react-native';
 
-import appStyles from '../../theme/appStyles';
-import { BORDER_RADIUS } from '../../theme/theme';
+import border from '../../styles/border';
+import shadow from '../../styles/shadow';
+import spacing from '../../styles/spacing';
+import useStyles from '../../utils/hooks/useStyles';
 import AnimatedPressable, { AnimatedPressableProps } from './AnimatedPressable';
 
 interface CardProps extends AnimatedPressableProps {
@@ -30,6 +32,7 @@ function Card({
   enablePressAnimation,
 }: CardProps) {
   const { theme } = useTheme();
+  const styles = useStyles();
 
   return (
     <AnimatedPressable
@@ -39,14 +42,14 @@ function Card({
     >
       <RNECard
         containerStyle={[
-          appStyles.shadowLarge,
+          shadow.lg,
+          border.width_sm,
+          styles.borderGrey5,
+          spacing.mt_0,
+          border.radius_lg,
+          styles.cardBackground,
           {
-            borderWidth: 0.35,
-            borderRadius: BORDER_RADIUS.lg,
-            borderColor: theme.colors.grey5,
             padding: enableCardPadding ? theme.spacing[cardPadding] : 0,
-            backgroundColor: theme.colors.cardBackground,
-            marginTop: 0,
           },
           cardStyle,
         ]}

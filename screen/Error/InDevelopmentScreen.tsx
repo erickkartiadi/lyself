@@ -3,14 +3,15 @@ import { Button, Text } from '@rneui/themed';
 import * as React from 'react';
 import { View } from 'react-native';
 
-import appStyles from '../../theme/appStyles';
+import layout from '../../styles/layout';
+import { text } from '../../styles/typhography';
 
 function InDevelopmentScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={[appStyles.container, appStyles.alignCenter, appStyles.justifyCenter]}>
-      <Text h4 style={{ textAlign: 'center' }}>
+    <View style={[layout.container, layout.alignCenter, layout.justifyCenter]}>
+      <Text h4 style={text.center}>
         Sorry, this page is still in development 🚧
       </Text>
       <Button onPress={navigation.goBack} type="clear" title="Go back" />

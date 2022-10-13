@@ -5,9 +5,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import Avatar from '../components/base/Avatar';
 import SettingMenu from '../components/base/SettingMenu';
-import appStyles from '../theme/appStyles';
-import spacing from '../theme/spacing';
+import layout from '../styles/layout';
+import spacing from '../styles/spacing';
+import { SIZING } from '../theme/theme';
 import { AuthContext } from '../utils/context/AuthContext';
+import useStyles from '../utils/hooks/useStyles';
 import { somethingWentWrongToast } from '../utils/toast';
 
 function AccountTabScreen() {
@@ -22,23 +24,29 @@ function AccountTabScreen() {
     }
   };
 
+  const styles = useStyles();
+
   return (
-    <ScrollView contentContainerStyle={[appStyles.sectionLarge]}>
-      <View style={appStyles.sectionLarge}>
+    <ScrollView contentContainerStyle={[layout.sectionLarge]}>
+      <View style={layout.sectionLarge}>
         <View
           style={[
-            appStyles.flex,
-            appStyles.flexDirCol,
-            appStyles.alignCenter,
-            appStyles.justifyCenter,
+            layout.flex,
+            layout.flexDirCol,
+            layout.alignCenter,
+            layout.justifyCenter,
           ]}
         >
-          <Avatar size={7} containerStyle={spacing.mb_xl} avatarUrl={user?.photoURL} />
+          <Avatar
+            size={SIZING['9xl']}
+            containerStyle={spacing.mb_xl}
+            avatarUrl={user?.photoURL}
+          />
           <Text h3>{user?.displayName}</Text>
-          <Text color={theme.colors.grey3}>{user?.email}</Text>
+          <Text style={styles.textGrey}>{user?.email}</Text>
         </View>
       </View>
-      <View style={appStyles.sectionSmall}>
+      <View style={layout.sectionSmall}>
         <SettingMenu
           title="Profile"
           icon={{ backgroundColor: theme.colors.blue, name: 'person', type: 'ionicon' }}
@@ -60,7 +68,7 @@ function AccountTabScreen() {
           }}
         />
       </View>
-      <View style={appStyles.sectionSmall}>
+      <View style={layout.sectionSmall}>
         <SettingMenu
           title="Setting"
           icon={{
@@ -79,7 +87,7 @@ function AccountTabScreen() {
           caption="English"
         />
       </View>
-      <View style={appStyles.sectionSmall}>
+      <View style={layout.sectionSmall}>
         <SettingMenu
           title="Ask a Question"
           icon={{

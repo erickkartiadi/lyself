@@ -13,7 +13,7 @@ import BackButton from '../../components/base/BackButton';
 import TextInput from '../../components/base/TextInput';
 import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
 import { forgotPassword, ForgotPasswordDto } from '../../services/api/auth/auth.api';
-import appStyles from '../../theme/appStyles';
+import layout from '../../styles/layout';
 import { forgotPasswordSchema } from '../../utils/constant/validation/auth.schema';
 import { somethingWentWrongToast } from '../../utils/toast';
 
@@ -54,7 +54,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
+      contentContainerStyle={[layout.containerGutter, layout.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
@@ -63,19 +63,8 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
           Please enter your email address, we&apos;ll send an email with instructions to
           reset your password.
         </Text>
-        <View
-          style={[
-            appStyles.flex,
-            appStyles.alignCenter,
-            {
-              aspectRatio: 1,
-            },
-          ]}
-        >
-          <Image
-            source={forgotPasswordIllustration}
-            style={[appStyles.flex, appStyles.w100]}
-          />
+        <View style={[layout.flex, layout.alignCenter, layout.aspectRatioSquare]}>
+          <Image source={forgotPasswordIllustration} style={[layout.flex, layout.w100]} />
         </View>
         <Controller
           control={control}

@@ -3,13 +3,13 @@ import { Timestamp } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
-import { BORDER_RADIUS } from '../../theme/theme';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { formatReminderTime } from '../../utils/formatTime';
-import normalize from '../../utils/normalize';
 import OptionChip from '../base/OptionChip';
 
 interface TodoReminderButtonProps extends Pick<Todo, 'reminderTime'> {
@@ -52,12 +52,12 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
         onPress={showDatePicker}
         size="lg"
         uppercase
-        containerStyle={[appStyles.flex, appStyles.alignStart]}
+        containerStyle={[layout.flex, layout.alignStart]}
       >
         <Icon
           name="notifications"
           type="ionicon"
-          size={normalize(20)}
+          size={SIZING['2xl']}
           color={reminderTime ? theme.colors.white : theme.colors.black}
           containerStyle={spacing.mr_lg}
         />
@@ -67,16 +67,12 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
             name="close"
             type="ionicon"
             onPress={() => setReminderTime(null)}
-            size={normalize(20)}
+            size={SIZING['2xl']}
             color={theme.colors.black}
-            containerStyle={{
-              marginLeft: theme.spacing.xl * 1.5,
-              borderRadius: BORDER_RADIUS.rounded,
-            }}
+            containerStyle={[border.rounded, spacing.ml_2xl]}
           />
         )}
       </OptionChip>
-      {/* </Button> */}
     </>
   );
 }

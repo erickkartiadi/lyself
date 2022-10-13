@@ -17,18 +17,8 @@ export async function getUser(uid: User['uid']): Promise<User | undefined> {
   const querySnapshot = await getDoc(todoDoc);
 
   return querySnapshot.data();
-  // console.log(querySnapshot.data());
-
-  // if(querySnapshot.exists()) {
-  // return querySnapshot.data();
-  // }
-
-  // console.log();
 }
 
-// export async function getUser {}
-
 export async function updateUser(id: string) {
-  // const todoDoc = doc(usersCol, id);
-  // await addDoc(todoDoc, {});
+  return '';
 }

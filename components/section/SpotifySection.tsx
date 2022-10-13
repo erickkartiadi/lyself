@@ -6,24 +6,13 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
 import { fetchAccessToken, fetchFeaturedPlaylist } from '../../services/api/spotify';
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
 import { Playlist } from '../../types/types';
-import PlaylistCard, { PlaylistCardPlaceholder } from '../cards/PlaylistCard';
-import HorizontalSeparator from '../layout/HorizontalSeparator';
+import PlaylistCard from '../cards/PlaylistCard';
+import { HorizontalSeparator } from '../layout/ItemSeparator';
 import SectionTitle from '../layout/SectionTitle';
 
-const renderEmptyPlaylists = () => (
-  <View style={[appStyles.w100, appStyles.flexDirRow]}>
-    <PlaylistCardPlaceholder />
-    <HorizontalSeparator />
-    <PlaylistCardPlaceholder />
-    <HorizontalSeparator />
-    <PlaylistCardPlaceholder />
-    <HorizontalSeparator />
-    <PlaylistCardPlaceholder />
-  </View>
-);
 const discovery = {
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
@@ -77,7 +66,7 @@ function SpotifySection() {
   }, [response]);
 
   return (
-    <View style={appStyles.sectionLarge}>
+    <View style={layout.sectionLarge}>
       <SectionTitle title="Featured playlist" />
       {isSpotifyTokenAvailable ? (
         <FlatList
@@ -85,11 +74,10 @@ function SpotifySection() {
           overScrollMode="never"
           ItemSeparatorComponent={HorizontalSeparator}
           showsHorizontalScrollIndicator={false}
-          style={appStyles.noContainerGutter}
-          contentContainerStyle={appStyles.containerGutter}
+          style={layout.noContainerGutter}
+          contentContainerStyle={layout.containerGutter}
           data={spotifyQuery.data}
           renderItem={renderPlaylist}
-          ListEmptyComponent={renderEmptyPlaylists}
         />
       ) : (
         <Button

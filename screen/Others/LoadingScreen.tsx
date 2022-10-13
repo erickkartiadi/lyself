@@ -3,17 +3,13 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import loadingAnimation from '../../assets/lottie/loading.json';
-import appStyles from '../../theme/appStyles';
-import normalize from '../../utils/normalize';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
 
 function LoadingScreen() {
   return (
-    <View style={appStyles.flex}>
-      <LottieView
-        autoPlay
-        source={loadingAnimation}
-        style={{ marginBottom: normalize(32, 'height') }}
-      />
+    <View style={layout.flex}>
+      <LottieView autoPlay source={loadingAnimation} style={spacing.mb_2xl} />
     </View>
   );
 }

@@ -4,31 +4,34 @@ import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import useGetUser from '../../services/api/user/users.hooks';
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
 import { Story } from '../../types/types';
 import { formatTimeAgo } from '../../utils/formatTime';
-import normalize from '../../utils/normalize';
+import useStyles from '../../utils/hooks/useStyles';
 import Avatar from '../base/Avatar';
 import Card from '../base/Card';
 
+// TODO add skeleton placeholder
 function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
   const { theme } = useTheme();
+  const styles = useStyles();
 
   const { data } = useGetUser(userId);
 
   return (
     <Card>
-      <View style={[appStyles.flexDirRow, appStyles.alignCenter]}>
+      <View style={[layout.flexDirRow, layout.alignCenter]}>
         <Avatar
-          size={2.75}
+          size={SIZING['5xl']}
           containerStyle={[spacing.mr_lg]}
           rounded
           avatarUrl={anonymous ? null : data?.photoURL}
         />
         <View>
-          <Text subtitle2>{anonymous ? 'Anonymous' : data?.displayName}</Text>
-          <Text caption color={theme.colors.grey3}>
+          <Text subtitle3>{anonymous ? 'Anonymous' : data?.displayName}</Text>
+          <Text caption style={styles.textGrey}>
             {formatTimeAgo(createdAt.toDate())}
           </Text>
         </View>
@@ -44,60 +47,55 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
           </Text>
         )}
       </View>
-      <View style={appStyles.flexDirRow}>
+      <View style={layout.flexDirRow}>
         <Chip
           color="secondary"
-          titleStyle={{ color: theme.colors.grey3 }}
+          titleStyle={styles.textGrey}
           radius="xs"
           size="sm"
           containerStyle={spacing.mr_sm}
         >
           mental illness
         </Chip>
-        <Chip
-          color="secondary"
-          titleStyle={{ color: theme.colors.grey3 }}
-          radius="xs"
-          size="sm"
-        >
+        <Chip color="secondary" titleStyle={styles.textGrey} radius="xs" size="sm">
           motivation
         </Chip>
       </View>
       <Divider color={theme.colors.secondary} style={spacing.my_xl} />
-      <View style={[appStyles.flexDirRow, appStyles.justifyBetween]}>
-        <TouchableOpacity style={[appStyles.flexDirRow, appStyles.alignCenter]}>
+      <View style={[layout.flexDirRow, layout.justifyBetween]}>
+        <TouchableOpacity style={[layout.flexDirRow, layout.alignCenter]}>
           <Icon
             color={theme.colors.grey3}
             name="heart-outline"
             type="ionicon"
             containerStyle={spacing.mr_sm}
-            size={normalize(22, 'height')}
+            size={SIZING['3xl']}
           />
-          <Text small color={theme.colors.grey3}>
+          <Text small style={styles.textGrey}>
             15 likes
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[appStyles.flexDirRow, appStyles.alignCenter]}>
+        <TouchableOpacity style={[layout.flexDirRow, layout.alignCenter]}>
           <Icon
             color={theme.colors.grey3}
             name="chatbox-outline"
             type="ionicon"
-            size={normalize(22, 'height')}
+            size={SIZING['3xl']}
             containerStyle={spacing.mr_sm}
           />
-          <Text small color={theme.colors.grey3}>
+          <Text small style={styles.textGrey}>
             32 replies
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[appStyles.flexDirRow, appStyles.alignCenter]}>
+        <TouchableOpacity style={[layout.flexDirRow, layout.alignCenter]}>
           <Icon
             color={theme.colors.grey3}
             name="eye-outline"
             type="ionicon"
-            size={normalize(22, 'height')}
+            size={SIZING['3xl']}
             containerStyle={spacing.mr_sm}
           />
-          <Text small color={theme.colors.grey3}>
+          <Text small style={styles.textGrey}>
             100 views
           </Text>
         </TouchableOpacity>

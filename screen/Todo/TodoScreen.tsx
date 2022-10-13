@@ -12,13 +12,13 @@ import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomS
 import TodoItem from '../../components/todo/TodoItem';
 import { TodoScreenNavigationProps } from '../../navigation/navigation.types';
 import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks';
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
-import { BORDER_RADIUS } from '../../theme/theme';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useToggle from '../../utils/hooks/useToggle';
-import normalize from '../../utils/normalize';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
@@ -137,10 +137,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
               ? theme.colors.primary
               : theme.colors.black,
         }}
-        containerStyle={{
-          borderRadius: BORDER_RADIUS.rounded,
-          aspectRatio: 1,
-        }}
+        containerStyle={[border.rounded, layout.aspectRatioSquare]}
       />
     ),
     [selectedSort, selectedFilter]
@@ -165,9 +162,9 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         showsHorizontalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
         contentContainerStyle={[
-          appStyles.sectionLarge,
-          appStyles.containerGutter,
-          appStyles.flexGrow,
+          layout.sectionLarge,
+          layout.containerGutter,
+          layout.flexGrow,
         ]}
       >
         {data.length <= 0 ? (
@@ -188,7 +185,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
           <Icon
             name="add"
             type="ionicon"
-            size={normalize(30)}
+            size={SIZING['4xl']}
             color={theme.colors.white}
           />
         }
@@ -210,19 +207,12 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
       />
       <BottomSheet
         bottomSheetRef={filterBottomSheetRef}
-        modalStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
+        modalStyle={[layout.containerGutter, layout.sectionLarge]}
       >
         <Text h2>Filter</Text>
-        <View style={[appStyles.sectionLarge]}>
+        <View style={[layout.sectionLarge]}>
           <SectionTitle title="Sort" />
-          <View
-            style={[
-              appStyles.flex,
-              appStyles.flexDirRow,
-              spacing.mt_sm,
-              appStyles.flexWrap,
-            ]}
-          >
+          <View style={[layout.flex, layout.flexDirRow, spacing.mt_sm, layout.flexWrap]}>
             {sortItems.map(({ label, sort, orderBy }) => (
               <OptionChip
                 key={label}
@@ -238,16 +228,9 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             ))}
           </View>
         </View>
-        <View style={[appStyles.sectionLarge]}>
+        <View style={[layout.sectionLarge]}>
           <SectionTitle title="Filter" />
-          <View
-            style={[
-              appStyles.flex,
-              appStyles.flexDirRow,
-              spacing.mt_sm,
-              appStyles.flexWrap,
-            ]}
-          >
+          <View style={[layout.flex, layout.flexDirRow, spacing.mt_sm, layout.flexWrap]}>
             {filterItems.map(({ label, filter }) => (
               <OptionChip
                 key={label}

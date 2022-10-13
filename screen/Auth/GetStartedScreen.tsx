@@ -7,77 +7,54 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';
 import NavLink from '../../components/base/NavLink';
 import { GetStartedScreenNavigationProps } from '../../navigation/navigation.types';
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { text } from '../../styles/typhography';
+import { SIZING } from '../../theme/theme';
+import useStyles from '../../utils/hooks/useStyles';
 
 function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
   const { theme } = useTheme();
 
+  const styles = useStyles();
+
   return (
-    <ScrollView style={appStyles.flex}>
+    <ScrollView style={layout.flex}>
       <SafeAreaView>
         <View
           style={[
-            appStyles.sectionLarge,
-            appStyles.flex,
+            layout.sectionLarge,
+            layout.flex,
             {
               minHeight: Dimensions.get('window').height,
             },
           ]}
         >
-          <View
-            style={[
-              appStyles.noContainerGutter,
-              {
-                aspectRatio: 4 / 3,
-              },
-            ]}
-          >
-            <Image
-              source={getStartedIllustration}
-              style={[appStyles.flex, appStyles.w100]}
-            />
+          <View style={[layout.noContainerGutter, layout.aspectRatioFourThree]}>
+            <Image source={getStartedIllustration} style={[layout.flex, layout.w100]} />
           </View>
-          <View style={[appStyles.container]}>
-            <Text
-              style={[
-                appStyles.sectionLarge,
-                {
-                  textAlign: 'center',
-                },
-              ]}
-            >
+          <View style={[layout.container]}>
+            <Text style={[layout.sectionLarge, text.center]}>
               <Text h1>Start your mental health journey with</Text>
-              <Text h1 color={theme.colors.primary}>
+              <Text h1 h1Style={styles.textPrimary}>
                 {' '}
                 Lyself
               </Text>
             </Text>
-            <View
-              style={[
-                appStyles.sectionLarge,
-                appStyles.flex,
-                {
-                  justifyContent: 'center',
-                },
-              ]}
-            >
+            <View style={[layout.sectionLarge, layout.flex, layout.justifyCenter]}>
               <Button
                 onPress={() => navigation.navigate('Login')}
                 buttonStyle={spacing.py_xl}
                 containerStyle={spacing.mb_xl}
-                titleStyle={[
-                  spacing.ml_xl,
-                  {
-                    color: theme.colors.white,
-                  },
-                ]}
+                titleStyle={[spacing.ml_xl, styles.textWhite]}
               >
                 <Icon
-                  containerStyle={{
-                    position: 'absolute',
-                    left: 28,
-                  }}
+                  containerStyle={[
+                    layout.positionAbsolute,
+                    {
+                      left: SIZING['4xl'],
+                    },
+                  ]}
                   type="ionicon"
                   name="mail"
                   color={theme.colors.white}
@@ -86,25 +63,17 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                buttonStyle={[
-                  spacing.py_xl,
-                  {
-                    borderColor: theme.colors.greyOutline,
-                  },
-                ]}
+                buttonStyle={[spacing.py_xl, styles.borderGrey3]}
                 containerStyle={spacing.mb_xl}
-                titleStyle={[
-                  spacing.ml_xl,
-                  {
-                    color: theme.colors.black,
-                  },
-                ]}
+                titleStyle={[spacing.ml_xl, styles.textBlack]}
               >
                 <Icon
-                  containerStyle={{
-                    position: 'absolute',
-                    left: 28,
-                  }}
+                  containerStyle={[
+                    layout.positionAbsolute,
+                    {
+                      left: SIZING['4xl'],
+                    },
+                  ]}
                   type="ionicon"
                   name="logo-apple"
                   color={theme.colors.apple}
@@ -113,25 +82,17 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               </Button>
               <Button
                 type="outline"
-                buttonStyle={[
-                  spacing.py_xl,
-                  {
-                    borderColor: theme.colors.greyOutline,
-                  },
-                ]}
+                buttonStyle={[spacing.py_xl, styles.borderGrey3]}
                 containerStyle={spacing.mb_xl}
-                titleStyle={[
-                  spacing.ml_xl,
-                  {
-                    color: theme.colors.black,
-                  },
-                ]}
+                titleStyle={[spacing.ml_xl, styles.textBlack]}
               >
                 <Icon
-                  containerStyle={{
-                    position: 'absolute',
-                    left: 28,
-                  }}
+                  containerStyle={[
+                    layout.positionAbsolute,
+                    {
+                      left: SIZING['4xl'],
+                    },
+                  ]}
                   type="ionicon"
                   name="logo-google"
                   color={theme.colors.google}
@@ -141,25 +102,17 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
 
               <Button
                 type="outline"
-                buttonStyle={[
-                  spacing.py_xl,
-                  {
-                    borderColor: theme.colors.greyOutline,
-                  },
-                ]}
+                buttonStyle={[spacing.py_xl, styles.borderGrey3]}
                 containerStyle={spacing.mb_xl}
-                titleStyle={[
-                  spacing.ml_xl,
-                  {
-                    color: theme.colors.black,
-                  },
-                ]}
+                titleStyle={[spacing.ml_xl, styles.textBlack]}
               >
                 <Icon
-                  containerStyle={{
-                    position: 'absolute',
-                    left: 28,
-                  }}
+                  containerStyle={[
+                    layout.positionAbsolute,
+                    {
+                      left: SIZING['4xl'],
+                    },
+                  ]}
                   type="ionicon"
                   name="logo-facebook"
                   color={theme.colors.facebook}
@@ -170,10 +123,10 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
           </View>
           <View
             style={[
-              appStyles.sectionLarge,
-              appStyles.flexDirRow,
-              appStyles.alignCenter,
-              appStyles.justifyCenter,
+              layout.sectionLarge,
+              layout.flexDirRow,
+              layout.alignCenter,
+              layout.justifyCenter,
             ]}
           >
             <Text>Didn&apos;t have an account? </Text>

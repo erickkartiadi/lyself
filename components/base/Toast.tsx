@@ -6,9 +6,12 @@ import {
   BaseToastProps as RNToastProps,
 } from 'react-native-toast-message';
 
-import spacing from '../../theme/spacing';
-import { BORDER_RADIUS, FONT, GUTTER_SIZE } from '../../theme/theme';
-import normalize from '../../utils/normalize';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { small, subtitle } from '../../styles/typhography';
+import { GUTTER_SIZE, SIZING } from '../../theme/theme';
+import useStyles from '../../utils/hooks/useStyles';
 
 interface ToastProps extends RNToastProps {
   color: string;
@@ -17,18 +20,17 @@ interface ToastProps extends RNToastProps {
 
 function Toast({ color, icon: { name, type }, ...props }: ToastProps) {
   const { theme } = useTheme();
+  const styles = useStyles();
 
   const renderLeadingIcon = () => (
     <View style={{ justifyContent: 'center' }}>
       <Icon
-        size={normalize(24)}
+        size={SIZING['3xl']}
         name={name}
         type={type}
         backgroundColor={color}
         iconStyle={spacing.p_sm}
-        containerStyle={{
-          borderRadius: BORDER_RADIUS.rounded,
-        }}
+        containerStyle={border.rounded}
         color={theme.colors.white}
       />
     </View>
@@ -40,17 +42,17 @@ function Toast({ color, icon: { name, type }, ...props }: ToastProps) {
       style={[
         spacing.py_xl,
         spacing.px_xl,
+        border.radius_lg,
+        border.left_width_2xl,
+        layout.h100,
+        styles.cardBackground,
         {
-          borderRadius: BORDER_RADIUS.lg,
-          backgroundColor: theme.colors.cardBackground,
-          borderLeftWidth: theme.spacing.xs,
           borderLeftColor: color,
           width: Dimensions.get('window').width - GUTTER_SIZE * 2,
-          height: '100%',
         },
       ]}
-      text1Style={[FONT.subtitle, { color: theme.colors.black }]}
-      text2Style={[FONT.small, { color: theme.colors.grey3 }]}
+      text1Style={[subtitle, styles.textBlack]}
+      text2Style={[small, styles.textGrey]}
       text2NumberOfLines={3}
       contentContainerStyle={spacing.pl_xl}
       renderLeadingIcon={renderLeadingIcon}

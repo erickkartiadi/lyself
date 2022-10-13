@@ -8,17 +8,16 @@ import AccountTabScreen from '../screen/AccountTabScreen';
 import HomeTabScreen from '../screen/HomeTabScreen';
 import NotificationTabScreen from '../screen/NotificationTabScreen';
 import StoryTabScreen from '../screen/Story/StoryTabScreen';
-import { FONT_FAMILY, FONT_SIZE, GUTTER_SIZE } from '../theme/theme';
+import layout from '../styles/layout';
+import { font } from '../styles/typhography';
+import { GUTTER_SIZE, SIZING } from '../theme/theme';
 import { HomeTabParamList } from './navigation.types';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 export const navigatorScreenOptions = {
   headerShadowVisible: false,
-  headerTitleStyle: {
-    fontFamily: FONT_FAMILY.medium,
-    fontSize: FONT_SIZE.heading3,
-  },
+  headerTitleStyle: [font.size_xl, font.weight_normal],
   headerRight: RightHeader,
 };
 
@@ -70,11 +69,11 @@ function HomeNavigator() {
       initialRouteName="Story"
       screenOptions={{
         ...navigatorScreenOptions,
+
         tabBarShowLabel: false,
         tabBarStyle: [
           {
-            borderTopWidth: 0,
-            height: 70,
+            height: SIZING['8xl'],
           },
         ],
         headerTitleContainerStyle: { marginStart: 0 },
@@ -88,7 +87,7 @@ function HomeNavigator() {
     >
       <Tab.Screen
         options={{
-          headerTitleStyle: { display: 'none' },
+          headerTitleStyle: layout.displayNone,
           headerLeft: LeftHeader,
           tabBarIcon: HomeTabBarIcon,
         }}

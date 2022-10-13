@@ -8,12 +8,12 @@ import goalIllustrationLight from '../assets/images/goal-light.png';
 import meditationIllustrationDark from '../assets/images/meditation-dark.png';
 import meditationIllustrationLight from '../assets/images/meditation-light.png';
 import ActivityCard from '../components/cards/ActivityCard';
-import VerticalSeparator from '../components/layout/VerticalSeparator';
+import { VerticalSeparator } from '../components/layout/ItemSeparator';
 import ArticleSection from '../components/section/ArticleSection';
 import SpotifySection from '../components/section/SpotifySection';
 import TodoSection from '../components/section/TodoSection';
 import { HomeScreenNavigationProps } from '../navigation/navigation.types';
-import appStyles from '../theme/appStyles';
+import layout from '../styles/layout';
 import { ThemeModeContext } from '../utils/context/ThemeModeContext';
 
 function HomeTabScreen({ navigation }: HomeScreenNavigationProps) {
@@ -21,8 +21,8 @@ function HomeTabScreen({ navigation }: HomeScreenNavigationProps) {
   const { theme } = useTheme();
 
   return (
-    <ScrollView contentContainerStyle={[appStyles.containerGutter]}>
-      <View style={appStyles.sectionLarge}>
+    <ScrollView contentContainerStyle={[layout.containerGutter]}>
+      <View style={layout.sectionLarge}>
         <ActivityCard
           buttonTitle="START"
           iconName="play"
@@ -58,6 +58,7 @@ function HomeTabScreen({ navigation }: HomeScreenNavigationProps) {
           }}
         />
       </View>
+
       <TodoSection />
       <ArticleSection />
       <SpotifySection />

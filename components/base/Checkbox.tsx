@@ -1,23 +1,14 @@
-import { makeStyles, useTheme } from '@rneui/themed';
 import React from 'react';
 import BouncyCheckbox, { IBouncyCheckboxProps } from 'react-native-bouncy-checkbox';
 
-import { FONT } from '../../theme/theme';
+import border from '../../styles/border';
+import { regular, text } from '../../styles/typhography';
 
 interface CheckboxProps extends IBouncyCheckboxProps {
   onCheckboxPress: (checked: boolean) => void;
   checked: boolean;
   size: number;
 }
-
-const useStyles = makeStyles((theme) => ({
-  text: {
-    textDecorationLine: 'none',
-  },
-  border: {
-    borderColor: theme.colors.grey3,
-  },
-}));
 
 function Checkbox({
   onCheckboxPress,
@@ -26,19 +17,14 @@ function Checkbox({
   textStyle,
   ...props
 }: CheckboxProps) {
-  const { theme } = useTheme();
-  const styles = useStyles();
   return (
     <BouncyCheckbox
       {...props}
       size={size}
       disableBuiltInState
       isChecked={checked}
-      iconStyle={{ borderColor: theme.colors.blue }}
-      innerIconStyle={{
-        borderWidth: 2,
-      }}
-      textStyle={[styles.text, FONT.regular, textStyle]}
+      innerIconStyle={border.width_lg}
+      textStyle={[text.decor_line_none, regular, textStyle]}
       onPress={onCheckboxPress}
     />
   );

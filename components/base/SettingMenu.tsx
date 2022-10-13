@@ -1,10 +1,11 @@
-import { Icon, IconProps, normalize, Text, useTheme } from '@rneui/themed';
+import { Icon, IconProps, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { Pressable, PressableProps, View } from 'react-native';
 
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
-import { BORDER_RADIUS } from '../../theme/theme';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
 
 interface SettingMenuProp {
   title: string;
@@ -25,39 +26,34 @@ function SettingMenu({
   return (
     <Pressable
       style={[
-        appStyles.flex,
-        appStyles.flexDirRow,
-        appStyles.w100,
-        appStyles.alignCenter,
-        appStyles.justifyBetween,
+        layout.flex,
+        layout.flexDirRow,
+        layout.w100,
+        layout.alignCenter,
+        layout.justifyBetween,
         spacing.py_md,
       ]}
       android_ripple={{ color: theme.colors.grey4 }}
       onPress={onPress}
     >
-      <View style={[appStyles.container, appStyles.flexDirRow]}>
-        <View style={[appStyles.flex, appStyles.flexDirRow, appStyles.alignCenter]}>
+      <View style={[layout.container, layout.flexDirRow]}>
+        <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
           <Icon
             backgroundColor={backgroundColor}
             name={name}
             type={type}
             color={theme.colors.white}
-            size={normalize(18)}
-            iconStyle={{
-              padding: theme.spacing.md,
-              borderRadius: BORDER_RADIUS.rounded,
-            }}
-            containerStyle={spacing.mr_xl}
+            size={SIZING['2xl']}
+            iconStyle={spacing.p_md}
+            containerStyle={[spacing.mr_xl, border.rounded]}
           />
-          <Text subtitle color={theme.colors.grey1}>
-            {title}
-          </Text>
+          <Text subtitle>{title}</Text>
         </View>
         {rightComponent || (
-          <View style={[appStyles.flexDirRow, appStyles.alignCenter]}>
+          <View style={[layout.flexDirRow, layout.alignCenter]}>
             <Text small>{caption}</Text>
             <Icon
-              size={normalize(18)}
+              size={SIZING['2xl']}
               containerStyle={spacing.ml_sm}
               type="ionicon"
               name="chevron-forward"

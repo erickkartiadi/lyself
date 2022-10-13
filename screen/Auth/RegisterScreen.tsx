@@ -16,7 +16,7 @@ import PasswordInput from '../../components/base/PasswordInput';
 import TextInput from '../../components/base/TextInput';
 import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
 import { register, RegisterUserDto } from '../../services/api/auth/auth.api';
-import appStyles from '../../theme/appStyles';
+import layout from '../../styles/layout';
 import { registerSchema } from '../../utils/constant/validation/auth.schema';
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
@@ -61,24 +61,18 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
+      contentContainerStyle={[layout.containerGutter, layout.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
         <Text h1>Create new account</Text>
         <Text>Just one more step to be part of the {'\n'}Lyself community.</Text>
         <View
-          style={[
-            appStyles.justifyCenter,
-            appStyles.alignCenter,
-            {
-              aspectRatio: 1,
-            },
-          ]}
+          style={[layout.justifyCenter, layout.alignCenter, layout.aspectRatioSquare]}
         >
           <Image
             source={registerIllustration}
-            style={[appStyles.flex, appStyles.w100]}
+            style={[layout.flex, layout.w100]}
             resizeMode="center"
           />
         </View>
@@ -136,10 +130,10 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
         </Button>
         <View
           style={[
-            appStyles.sectionLarge,
-            appStyles.flexDirRow,
-            appStyles.justifyCenter,
-            appStyles.alignCenter,
+            layout.sectionLarge,
+            layout.flexDirRow,
+            layout.justifyCenter,
+            layout.alignCenter,
           ]}
         >
           <Text>Already have an account? </Text>

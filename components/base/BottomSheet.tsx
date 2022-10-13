@@ -1,8 +1,9 @@
-import { useTheme } from '@rneui/themed';
 import * as React from 'react';
 import { Modalize, ModalizeProps } from 'react-native-modalize';
 import { IHandles } from 'react-native-modalize/lib/options';
 import { Portal } from 'react-native-portalize';
+
+import useStyles from '../../utils/hooks/useStyles';
 
 export interface BottomSheetProps extends ModalizeProps {
   bottomSheetRef: React.RefObject<IHandles>;
@@ -14,7 +15,7 @@ function BottomSheet({
   modalStyle,
   ...props
 }: BottomSheetProps) {
-  const { theme } = useTheme();
+  const styles = useStyles();
 
   return (
     <Portal>
@@ -22,8 +23,8 @@ function BottomSheet({
         ref={bottomSheetRef}
         closeOnOverlayTap
         adjustToContentHeight
-        handleStyle={{ backgroundColor: theme.colors.background }}
-        modalStyle={[{ backgroundColor: theme.colors.background }, modalStyle]}
+        handleStyle={styles.defaultBackground}
+        modalStyle={[styles.defaultBackground, modalStyle]}
         {...props}
       >
         {children}

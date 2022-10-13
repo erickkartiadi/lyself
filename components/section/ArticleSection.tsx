@@ -3,10 +3,10 @@ import React from 'react';
 import { FlatList, View } from 'react-native';
 
 import fetchNews from '../../services/api/news';
-import appStyles from '../../theme/appStyles';
+import layout from '../../styles/layout';
 import { Article } from '../../types/types';
 import ArticleCard, { ArticleCardPlaceholder } from '../cards/ArticleCard';
-import HorizontalSeparator from '../layout/HorizontalSeparator';
+import { HorizontalSeparator } from '../layout/ItemSeparator';
 import SectionTitle from '../layout/SectionTitle';
 
 const renderArticles = ({ item }: { item: Article }) => (
@@ -19,7 +19,7 @@ const renderArticles = ({ item }: { item: Article }) => (
   />
 );
 const renderEmptyArticles = () => (
-  <View style={[appStyles.w100, appStyles.flexDirRow]}>
+  <View style={[layout.w100, layout.flexDirRow]}>
     <ArticleCardPlaceholder />
     <HorizontalSeparator />
     <ArticleCardPlaceholder />
@@ -32,7 +32,7 @@ function ArticleSection() {
   const articlesQuery = useQuery<Article[]>(['articles'], fetchNews);
 
   return (
-    <View style={appStyles.sectionLarge}>
+    <View style={layout.sectionLarge}>
       <SectionTitle title="Articles about mental health" showRightComponent />
       <FlatList
         overScrollMode="never"
@@ -40,8 +40,8 @@ function ArticleSection() {
         ListEmptyComponent={renderEmptyArticles}
         ItemSeparatorComponent={HorizontalSeparator}
         showsHorizontalScrollIndicator={false}
-        style={[appStyles.noContainerGutter]}
-        contentContainerStyle={[appStyles.containerGutter]}
+        style={[layout.noContainerGutter]}
+        contentContainerStyle={[layout.containerGutter]}
         data={articlesQuery.data}
         renderItem={renderArticles}
       />

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useCallback } from 'react';
 import { NativeSyntheticEvent, TextLayoutEventData } from 'react-native';
 
-import spacing from '../../theme/spacing';
+import spacing from '../../styles/spacing';
 import ButtonLink from './Link';
 
 type ShowHideTextProps = Pick<TextProps, 'numberOfLines'>;

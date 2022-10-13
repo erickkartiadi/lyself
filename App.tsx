@@ -1,5 +1,3 @@
-// import './services/firebase/firebase';
-
 import { ThemeProvider } from '@rneui/themed';
 import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as Font from 'expo-font';
@@ -10,11 +8,11 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
+import { ErrorToast, InfoToast, SuccessToast } from './components/base/Toast';
 import RootNavigator from './navigation/RootNavigator.routing';
+import layout from './styles/layout';
 import { myTheme } from './theme';
-import appStyles from './theme/appStyles';
 import { customFont } from './theme/theme';
-import toastConfig from './theme/toastConfig';
 import { AuthProvider } from './utils/context/AuthContext';
 import { ThemeModeProvider } from './utils/context/ThemeModeContext';
 import useAppState from './utils/hooks/useAppState';
@@ -62,13 +60,19 @@ export default function App() {
   return (
     <AuthProvider>
       <ThemeProvider theme={myTheme}>
-        <GestureHandlerRootView style={appStyles.flex}>
+        <GestureHandlerRootView style={layout.flex}>
           <SafeAreaProvider onLayout={onLayoutRootView}>
             <ThemeModeProvider>
               <QueryClientProvider client={queryClient}>
                 <RootNavigator />
               </QueryClientProvider>
-              <Toast config={toastConfig} />
+              <Toast
+                config={{
+                  success: SuccessToast,
+                  error: ErrorToast,
+                  info: InfoToast,
+                }}
+              />
             </ThemeModeProvider>
           </SafeAreaProvider>
         </GestureHandlerRootView>

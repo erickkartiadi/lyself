@@ -1,6 +1,9 @@
 import { Chip, ChipProps, Colors, useTheme } from '@rneui/themed';
 import * as React from 'react';
 
+import border from '../../styles/border';
+import spacing from '../../styles/spacing';
+
 interface OptionChipProps extends ChipProps {
   isSelected: boolean;
   chipColor?: keyof Colors;
@@ -19,16 +22,11 @@ function OptionChip({
 
   return (
     <Chip
-      buttonStyle={[
-        {
-          borderWidth: 0,
-        },
-        buttonStyle,
-      ]}
+      buttonStyle={[border.width_0, buttonStyle]}
       titleStyle={[
+        spacing.px_0,
         {
           color: isSelected ? theme.colors.white : theme.colors.black,
-          paddingHorizontal: 0,
         },
         titleStyle,
       ]}

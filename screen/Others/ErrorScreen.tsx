@@ -1,37 +1,35 @@
-import { Text, useTheme } from '@rneui/themed';
+import { Text } from '@rneui/themed';
 import * as React from 'react';
 import { Image, View } from 'react-native';
 
 import errorImage from '../../assets/images/error-image.png';
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
+import useStyles from '../../utils/hooks/useStyles';
 import normalize from '../../utils/normalize';
 
 function ErrorScreen() {
-  const { theme } = useTheme();
+  const styles = useStyles();
 
   return (
-    <View style={appStyles.flex}>
-      <View style={[appStyles.flex, appStyles.alignCenter, appStyles.justifyCenter]}>
+    <View style={layout.flex}>
+      <View style={[layout.flex, layout.alignCenter, layout.justifyCenter]}>
         <View
           style={[
             spacing.mb_xl,
+            layout.aspectRatioSquare,
             {
-              aspectRatio: 1,
-              width: 160,
+              width: SIZING['10xl'],
             },
           ]}
         >
-          <Image style={[appStyles.flex, appStyles.w100]} source={errorImage} />
+          <Image style={[layout.flex, layout.w100]} source={errorImage} />
         </View>
         <Text h4 style={spacing.mb_sm}>
           Something went wrong
         </Text>
-        <Text
-          small
-          color={theme.colors.grey3}
-          style={{ marginBottom: normalize(96, 'height') }}
-        >
+        <Text small style={[styles.textGrey, { marginBottom: normalize(96, 'height') }]}>
           Please try again later
         </Text>
       </View>

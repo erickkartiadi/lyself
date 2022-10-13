@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Text, useTheme } from '@rneui/themed';
+import { Button, Text } from '@rneui/themed';
 import { useMutation } from '@tanstack/react-query';
 import { FirebaseError } from 'firebase/app';
 import React from 'react';
@@ -16,12 +16,11 @@ import PasswordInput from '../../components/base/PasswordInput';
 import TextInput from '../../components/base/TextInput';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 import { login, LoginDto } from '../../services/api/auth/auth.api';
-import appStyles from '../../theme/appStyles';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
 import { loginSchema } from '../../utils/constant/validation/auth.schema';
 
 function LoginScreen({ navigation }: LoginScreenNavigationProps) {
-  const { theme } = useTheme();
-
   const {
     control,
     handleSubmit,
@@ -59,24 +58,18 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[appStyles.containerGutter, appStyles.sectionLarge]}
+      contentContainerStyle={[layout.containerGutter, layout.sectionLarge]}
     >
       <SafeAreaView>
         <BackButton />
         <Text h1>Welcome to Lyself</Text>
         <Text>Login to continue.</Text>
         <View
-          style={[
-            appStyles.alignCenter,
-            appStyles.justifyCenter,
-            {
-              aspectRatio: 1,
-            },
-          ]}
+          style={[layout.alignCenter, layout.justifyCenter, layout.aspectRatioSquare]}
         >
           <Image
             source={loginIllustration}
-            style={[appStyles.flex, appStyles.w100]}
+            style={[layout.flex, layout.w100]}
             resizeMode="center"
           />
         </View>
@@ -115,28 +108,29 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         />
         <View
           style={[
-            appStyles.flex,
-            appStyles.w100,
-            appStyles.flexDirRow,
-            appStyles.alignCenter,
-            appStyles.justifyEnd,
-            {
-              marginTop: theme.spacing.xl * -1,
-              marginBottom: theme.spacing.xl * 1.25,
-            },
+            layout.flex,
+            layout.w100,
+            layout.flexDirRow,
+            layout.alignCenter,
+            layout.justifyEnd,
+            spacing.mt_n_xl,
           ]}
         >
           <NavLink to={{ screen: 'ForgotPassword' }}>Forgot Password?</NavLink>
         </View>
-        <Button loading={mutation.isLoading} onPress={handleSubmit(handleLogin)}>
+        <Button
+          containerStyle={layout.sectionLarge}
+          loading={mutation.isLoading}
+          onPress={handleSubmit(handleLogin)}
+        >
           Login
         </Button>
         <View
           style={[
-            appStyles.sectionLarge,
-            appStyles.flexDirRow,
-            appStyles.justifyCenter,
-            appStyles.alignCenter,
+            layout.sectionLarge,
+            layout.flexDirRow,
+            layout.justifyCenter,
+            layout.alignCenter,
           ]}
         >
           <Text>Didn&apos;t have an account? </Text>

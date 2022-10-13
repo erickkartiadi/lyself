@@ -1,4 +1,4 @@
-import { Button, Chip, Divider, Icon, makeStyles, Text, useTheme } from '@rneui/themed';
+import { Button, Chip, Divider, Icon, Text, useTheme } from '@rneui/themed';
 import { Timestamp } from 'firebase/firestore';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -13,19 +13,14 @@ import TextInput from '../../components/base/TextInput';
 import { AddStoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { CreateStoryDto } from '../../services/api/story/story.api';
 import { useCreateStory } from '../../services/api/story/story.hooks';
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
-import { FONT } from '../../theme/theme';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { heading2 } from '../../styles/typhography';
+import { SIZING } from '../../theme/theme';
 import { AuthContext } from '../../utils/context/AuthContext';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
-import normalize from '../../utils/normalize';
+import useStyles from '../../utils/hooks/useStyles';
 import { somethingWentWrongToast } from '../../utils/toast';
-
-const useStyles = makeStyles((theme) => ({
-  colorGrey3: {
-    color: theme.colors.grey3,
-  },
-}));
 
 function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
   const { theme } = useTheme();
@@ -44,7 +39,6 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
   useApplyHeaderWorkaround(navigation.setOptions);
 
-  // TODO anonymous post
   const handlePostStory = ({ content, title, anonymous }: CreateStoryDto) => {
     if (!user) {
       somethingWentWrongToast();
@@ -101,8 +95,8 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
   return (
     <>
-      <ScrollView contentContainerStyle={[appStyles.container]}>
-        <View style={appStyles.sectionSmall}>
+      <ScrollView contentContainerStyle={[layout.container]}>
+        <View style={layout.sectionSmall}>
           <Controller
             control={control}
             name="title"
@@ -110,7 +104,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
               <TextInput
                 enableErrorMessage={false}
                 showBorder={false}
-                inputStyle={FONT.heading2}
+                inputStyle={heading2}
                 placeholder="Title"
                 multiline
                 onBlur={onBlur}
@@ -136,11 +130,11 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             )}
           />
         </View>
-        <View style={[spacing.mt_md, appStyles.flexDirRow]}>
+        <View style={[spacing.mt_md, layout.flexDirRow]}>
           <Chip
             radius="sm"
             color="secondary"
-            titleStyle={styles.colorGrey3}
+            titleStyle={styles.textGrey}
             containerStyle={[spacing.mr_md, spacing.mb_md]}
           >
             Mental Health
@@ -148,7 +142,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           <Chip
             radius="sm"
             color="secondary"
-            titleStyle={styles.colorGrey3}
+            titleStyle={styles.textGrey}
             containerStyle={spacing.mr_md}
           >
             War
@@ -162,7 +156,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             >
               <Icon
                 containerStyle={spacing.mr_sm}
-                size={normalize(18)}
+                size={SIZING['2xl']}
                 name="tag-plus-outline"
                 color={theme.colors.primary}
                 type="material-community"
@@ -172,12 +166,10 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           </View>
         </View>
         <Divider style={spacing.my_xl} />
-        <View
-          style={[appStyles.flexDirRow, appStyles.justifyBetween, appStyles.alignCenter]}
-        >
+        <View style={[layout.flexDirRow, layout.justifyBetween, layout.alignCenter]}>
           <View>
             <Text subtitle2>Anonymous post</Text>
-            <Text small color={theme.colors.grey3}>
+            <Text small style={styles.textGrey}>
               People cannot see your profile on this story
             </Text>
           </View>
@@ -191,17 +183,8 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
         </View>
       </ScrollView>
       <BottomSheet bottomSheetRef={categoryBottomSheetRef}>
-        <View style={[appStyles.container, appStyles.sectionLarge]}>
+        <View style={[layout.container, layout.sectionLarge]}>
           <Text subtitle>Select Category</Text>
-          <View>
-            {/* <Checkbox
-              text="Category"
-              color={theme.colors.primary}
-              fillColor={theme.colors.primary}
-              checked
-              onCheckboxPress={() => console.log('checked')}
-            /> */}
-          </View>
         </View>
       </BottomSheet>
     </>

@@ -39,6 +39,7 @@ async function registerForPushNotificationsAsync() {
   return token;
 }
 
+// TODO response notification
 export default function useRegisterNotification() {
   const notificationListener = useRef<any>();
   const responseListener = useRef<any>();
@@ -47,15 +48,11 @@ export default function useRegisterNotification() {
     registerForPushNotificationsAsync();
 
     notificationListener.current = Notifications.addNotificationReceivedListener(
-      (notification) => {
-        // console.log(notification.request.content.title);
-      }
+      (notification) => {}
     );
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(
-      (response) => {
-        // console.log(response.);
-      }
+      (response) => {}
     );
 
     return () => {

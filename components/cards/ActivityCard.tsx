@@ -1,18 +1,11 @@
-import {
-  Button,
-  ButtonProps,
-  Icon,
-  IconProps,
-  makeStyles,
-  Text,
-  useTheme,
-} from '@rneui/themed';
+import { Button, ButtonProps, Icon, IconProps, Text, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import { Image, ImageSourcePropType, View } from 'react-native';
 
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
-import normalize from '../../utils/normalize';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
+import useStyles from '../../utils/hooks/useStyles';
 import Card from '../base/Card';
 
 interface ActivityCardProps {
@@ -25,16 +18,6 @@ interface ActivityCardProps {
   iconName: IconProps['name'];
   buttonTitle: string;
 }
-
-const useStyles = makeStyles((theme) => ({
-  imageContainer: {
-    width: '30%',
-    aspectRatio: 1,
-  },
-  buttonTitle: {
-    color: theme.colors.white,
-  },
-}));
 
 function ActivityCard({
   colorDark,
@@ -51,26 +34,26 @@ function ActivityCard({
 
   return (
     <Card cardStyle={{ backgroundColor: colorLight }}>
-      <View style={[appStyles.flex, appStyles.flexDirRow, appStyles.alignCenter]}>
-        <View style={[appStyles.flex]}>
+      <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
+        <View style={[layout.flex]}>
           <View>
             <Text h4>{title}</Text>
             <Text small>{text}</Text>
           </View>
-          <View style={[appStyles.flexDirRow, appStyles.alignCenter, spacing.mt_lg]}>
+          <View style={[layout.flexDirRow, layout.alignCenter, spacing.mt_lg]}>
             <Button
               color={colorDark}
               onPress={onPress}
               uppercase
-              titleStyle={styles.buttonTitle}
-              buttonStyle={[appStyles.flexDirRow, appStyles.alignCenter, spacing.pr_lg]}
+              titleStyle={styles.textWhite}
+              buttonStyle={[layout.flexDirRow, layout.alignCenter, spacing.pr_lg]}
               size="sm"
             >
               <Icon
                 name={iconName}
                 type="ionicon"
                 color={theme.colors.white}
-                size={normalize(18)}
+                size={SIZING['2xl']}
                 containerStyle={spacing.mx_xs}
               />
               {buttonTitle}
@@ -78,9 +61,14 @@ function ActivityCard({
           </View>
         </View>
         <View
-          style={[styles.imageContainer, appStyles.alignCenter, appStyles.justifyCenter]}
+          style={[
+            layout.alignCenter,
+            layout.justifyCenter,
+            layout.w25,
+            layout.aspectRatioSquare,
+          ]}
         >
-          <Image source={image} style={[appStyles.flex, appStyles.w100]} />
+          <Image source={image} style={[layout.flex, layout.w100]} />
         </View>
       </View>
     </Card>

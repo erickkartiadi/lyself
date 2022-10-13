@@ -1,7 +1,5 @@
 import '@rneui/themed';
 
-import { TextStyle } from 'react-native';
-
 declare module '@rneui/themed' {
   export interface Colors {
     primaryDark: string;
@@ -20,12 +18,15 @@ declare module '@rneui/themed' {
     apple: string;
   }
 
+  export interface ThemeSpacing {
+    '2xl': number;
+  }
+
   export interface TextProps {
     subtitle?: boolean;
     subtitle2?: boolean;
     subtitle3?: boolean;
     caption?: boolean;
     small?: boolean;
-    color?: TextStyle['color'];
   }
 }

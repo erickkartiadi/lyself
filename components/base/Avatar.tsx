@@ -1,35 +1,19 @@
 import {
   Avatar as RNEAvatar,
   AvatarProps as RNEAvatarProps,
-  makeStyles,
   useTheme,
 } from '@rneui/themed';
 import * as React from 'react';
 
-import { GUTTER_SIZE } from '../../theme/theme';
-import normalize from '../../utils/normalize';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import useStyles from '../../utils/hooks/useStyles';
 
 interface AvatarProps extends RNEAvatarProps {
-  size?: number;
   avatarUrl?: string | null;
 }
 
-// TODO create custom useStyles hook
-const useStyles = makeStyles((theme) => ({
-  avatarContainer: {
-    overflow: 'hidden',
-    borderWidth: 0.25,
-    borderColor: theme.colors.grey5,
-  },
-}));
-
-function Avatar({
-  size = 3,
-  rounded,
-  containerStyle,
-  avatarUrl: photoUrl,
-  ...props
-}: AvatarProps) {
+function Avatar({ rounded, containerStyle, avatarUrl: photoUrl, ...props }: AvatarProps) {
   const { theme } = useTheme();
 
   const styles = useStyles();
@@ -37,19 +21,22 @@ function Avatar({
   if (photoUrl) {
     return (
       <RNEAvatar
-        size={normalize(size * GUTTER_SIZE)}
         {...props}
         rounded
         source={{
           uri: photoUrl,
         }}
-        containerStyle={[styles.avatarContainer, containerStyle]}
+        containerStyle={[
+          layout.overflowHidden,
+          styles.borderGrey5,
+          border.width_xs,
+          containerStyle,
+        ]}
       />
     );
   }
   return (
     <RNEAvatar
-      size={normalize(size * GUTTER_SIZE)}
       {...props}
       rounded
       icon={{
@@ -58,16 +45,16 @@ function Avatar({
         color: theme.colors.grey3,
       }}
       containerStyle={[
-        styles.avatarContainer,
+        styles.borderGrey5,
+        border.width_xs,
+        styles.secondaryBackground,
         containerStyle,
-        { backgroundColor: theme.colors.secondary },
       ]}
     />
   );
 }
 
 Avatar.defaultProps = {
-  size: 3,
   avatarUrl: null,
 };
 

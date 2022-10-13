@@ -12,14 +12,14 @@ import Animated, {
 import { useDebouncedCallback } from 'use-debounce';
 
 import { useDeleteTodo, useUpdateTodo } from '../../services/api/todos/todos.hooks';
-import appStyles from '../../theme/appStyles';
-import spacing from '../../theme/spacing';
-import { BORDER_RADIUS } from '../../theme/theme';
+import border from '../../styles/border';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTime';
 import useToggle from '../../utils/hooks/useToggle';
-import normalize from '../../utils/normalize';
 import { somethingWentWrongToast } from '../../utils/toast';
 import Card from '../base/Card';
 import Checkbox from '../base/Checkbox';
@@ -98,6 +98,7 @@ function TodoItem({
 
   const isPastDue =
     !isCompleted && dayjs(currentReminderTime?.toDate()).isBefore(dayjs(), 'minute');
+  const pastDueColor = isPastDue ? theme.colors.error : theme.colors.grey3;
 
   return (
     <Animated.View
@@ -112,25 +113,20 @@ function TodoItem({
             loading={deleteMutation.isLoading}
           />
         }
-        rightWidth={normalize(80)}
-        containerStyle={[
-          spacing.mb_md,
-          {
-            padding: 0,
-            borderRadius: BORDER_RADIUS.md,
-            backgroundColor: theme.colors.background,
-          },
-        ]}
+        rightWidth={SIZING['8xl']}
+        containerStyle={[spacing.mb_md, spacing.p_0, border.radius_md]}
         rightStyle={[spacing.mb_md, spacing.pl_md]}
       >
         <Card
           onPress={showBottomSheet}
-          cardStyle={{
-            borderLeftWidth: theme.spacing.sm,
-            borderStartColor: importanceColor,
-          }}
+          cardStyle={[
+            border.left_width_xl,
+            {
+              borderStartColor: importanceColor,
+            },
+          ]}
         >
-          <View style={[appStyles.flex, appStyles.flexDirRow, appStyles.alignCenter]}>
+          <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
             <Checkbox
               fillColor={importanceColor}
               checked={isCompleted}
@@ -138,9 +134,9 @@ function TodoItem({
                 toggleIsCompleted();
                 debounceToggleTodo();
               }}
-              size={normalize(28)}
+              size={SIZING['4xl']}
             />
-            <View style={[appStyles.flex, appStyles.flexDirCol]}>
+            <View style={[layout.flex, layout.flexDirCol]}>
               <Text
                 subtitle
                 numberOfLines={3}
@@ -157,9 +153,9 @@ function TodoItem({
               {!isCompleted && currentReminderTime && (
                 <View
                   style={[
-                    appStyles.flex,
-                    appStyles.flexDirRow,
-                    appStyles.alignCenter,
+                    layout.flex,
+                    layout.flexDirRow,
+                    layout.alignCenter,
                     spacing.mt_xs,
                   ]}
                 >
@@ -167,10 +163,10 @@ function TodoItem({
                     containerStyle={spacing.mr_sm}
                     name="notifications-outline"
                     type="ionicon"
-                    size={16}
-                    color={isPastDue ? theme.colors.error : theme.colors.grey3}
+                    size={SIZING.xl}
+                    color={pastDueColor}
                   />
-                  <Text small color={isPastDue ? theme.colors.error : theme.colors.grey3}>
+                  <Text small style={{ color: pastDueColor }}>
                     {formatReminderTime(currentReminderTime)}
                   </Text>
                 </View>

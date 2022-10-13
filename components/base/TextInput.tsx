@@ -1,9 +1,8 @@
 import { Input, InputProps, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 
-import { FONT } from '../../theme/theme';
-
-// TODO update input styles
+import spacing from '../../styles/spacing';
+import { caption } from '../../styles/typhography';
 
 interface TextInputProps extends InputProps {
   showBorder?: boolean;
@@ -52,10 +51,10 @@ function TextInput({
       inputStyle={[inputStyle]}
       errorMessage={errorMessage}
       errorStyle={[
-        FONT.caption,
+        caption,
+        spacing.mx_0,
         {
           marginBottom: errorMessage ? theme.spacing.xl : 0,
-          marginHorizontal: 0,
           display: enableErrorMessage ? 'flex' : 'none',
         },
       ]}

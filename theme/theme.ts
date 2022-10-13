@@ -3,7 +3,6 @@ import {
   Inter_500Medium,
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
-import { StyleProp, TextStyle } from 'react-native';
 
 import normalize from '../utils/normalize';
 
@@ -47,23 +46,40 @@ export const darkColors = {
   apple: '#FFFFFF',
 };
 
-export const THEME_SPACING = {
+export const SPACES = {
   xs: normalize(4),
   sm: normalize(6),
   md: normalize(8),
   lg: normalize(12),
   xl: normalize(16),
+  '2xl': normalize(20),
+};
+
+export const SIZING = {
+  ...SPACES,
+  '3xl': normalize(24),
+  '4xl': normalize(30),
+  '5xl': normalize(36),
+  '6xl': normalize(48),
+  '7xl': normalize(60),
+  '8xl': normalize(72),
+  '9xl': normalize(96),
+  '10xl': normalize(144),
+  '11xl': normalize(192),
+  '12xl': normalize(288),
+  '13xl': normalize(384),
+  '14xl': normalize(528),
+  '15xl': normalize(672),
 };
 
 export const BORDER_RADIUS = {
   rounded: normalize(999),
-  sm: THEME_SPACING.sm,
-  md: THEME_SPACING.md,
-  lg: THEME_SPACING.lg,
-  xl: THEME_SPACING.xl,
+  xs: SPACES.xs,
+  sm: SPACES.sm,
+  md: SPACES.md,
+  lg: SPACES.lg,
+  xl: SPACES.xl,
 };
-
-export const GUTTER_SIZE = THEME_SPACING.xl;
 
 // scale: 1.125 - major second
 export const FONT_SIZE = {
@@ -76,97 +92,10 @@ export const FONT_SIZE = {
   caption: normalize(12.44),
 };
 
-// for fontFamily theme styling or component that can't use theme font
 export const FONT_FAMILY = {
   regular: 'Inter',
   medium: 'Inter-Medium',
   bold: 'Inter-Bold',
-};
-
-export type Font =
-  | 'heading1'
-  | 'heading2'
-  | 'heading3'
-  | 'heading4'
-  | 'subtitle'
-  | 'subtitle2'
-  | 'subtitle3'
-  | 'regular'
-  | 'small'
-  | 'caption';
-
-// TODO move font to styles
-export const FONT: { [key in Font]: StyleProp<TextStyle> } = {
-  heading1: {
-    fontSize: FONT_SIZE.heading1,
-    letterSpacing: normalize(-0.019),
-    lineHeight: normalize(34),
-    fontFamily: FONT_FAMILY.bold,
-    fontWeight: 'normal',
-  },
-  heading2: {
-    fontSize: FONT_SIZE.heading2,
-    letterSpacing: normalize(-0.018),
-    lineHeight: normalize(30),
-    fontFamily: FONT_FAMILY.bold,
-    fontWeight: 'normal',
-  },
-  heading3: {
-    fontSize: FONT_SIZE.heading3,
-    letterSpacing: normalize(-0.017),
-    lineHeight: normalize(28),
-    fontFamily: FONT_FAMILY.bold,
-    fontWeight: 'normal',
-  },
-  heading4: {
-    fontSize: FONT_SIZE.heading4,
-    letterSpacing: normalize(-0.014),
-    lineHeight: normalize(25),
-    fontFamily: FONT_FAMILY.bold,
-    fontWeight: 'normal',
-  },
-  subtitle: {
-    fontSize: FONT_SIZE.heading4,
-    letterSpacing: normalize(-0.014),
-    lineHeight: normalize(25),
-    fontFamily: FONT_FAMILY.medium,
-    fontWeight: 'normal',
-  },
-  subtitle2: {
-    fontSize: FONT_SIZE.body1,
-    letterSpacing: normalize(-0.006),
-    lineHeight: normalize(20),
-    fontFamily: FONT_FAMILY.medium,
-    fontWeight: 'normal',
-  },
-  subtitle3: {
-    fontSize: FONT_SIZE.caption,
-    letterSpacing: normalize(-0.006),
-    lineHeight: normalize(20),
-    fontFamily: FONT_FAMILY.medium,
-    fontWeight: 'normal',
-  },
-  regular: {
-    fontFamily: FONT_FAMILY.regular,
-    fontSize: FONT_SIZE.body1,
-    letterSpacing: normalize(-0.011),
-    lineHeight: normalize(22),
-    fontWeight: 'normal',
-  },
-  small: {
-    fontSize: FONT_SIZE.body2,
-    letterSpacing: normalize(-0.006),
-    lineHeight: normalize(20),
-    fontFamily: FONT_FAMILY.regular,
-    fontWeight: 'normal',
-  },
-  caption: {
-    fontSize: FONT_SIZE.caption,
-    fontFamily: FONT_FAMILY.regular,
-    lineHeight: normalize(17),
-    letterSpacing: normalize(0),
-    fontWeight: 'normal',
-  },
 };
 
 // for loading custom fonts: App.tsx
@@ -175,3 +104,5 @@ export const customFont = {
   [FONT_FAMILY.medium]: Inter_500Medium,
   [FONT_FAMILY.bold]: Inter_700Bold,
 };
+
+export const GUTTER_SIZE = SPACES.xl;
