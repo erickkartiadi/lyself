@@ -1,6 +1,7 @@
 import { Icon, ListItem, Text, useTheme } from '@rneui/themed';
 import dayjs from 'dayjs';
-import React, { useRef, useState } from 'react';
+import { Timestamp } from 'firebase/firestore';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
@@ -11,6 +12,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useDebouncedCallback } from 'use-debounce';
 
+import { CreateTodoDto } from '../../services/api/todos/todos.api';
 import { useDeleteTodo, useUpdateTodo } from '../../services/api/todos/todos.hooks';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
@@ -19,11 +21,9 @@ import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTime';
-import useToggle from '../../utils/hooks/useToggle';
-import { somethingWentWrongToast } from '../../utils/toast';
 import Card from '../base/Card';
 import Checkbox from '../base/Checkbox';
-import TodoBottomSheet, { TodoFormData } from './TodoBottomSheet';
+import TodoBottomSheet from './TodoBottomSheet';
 import TodoSwipeableRight from './TodoSwipeableRight';
 
 interface TodoItemProps {
@@ -41,54 +41,64 @@ function TodoItem({
 }: Todo & TodoItemProps) {
   const { theme } = useTheme();
 
-  const [currentImportanceLevel, setCurrentImportanceLevel] = useState(importanceLevel);
-  const [currentReminderTime, setCurrentReminderTime] = useState(reminderTime);
-  const { control, watch } = useForm<TodoFormData>({
+  const { control, watch, setValue } = useForm<CreateTodoDto>({
     defaultValues: {
       todo,
       note,
+      completed,
+      reminderTime,
+      importanceLevel,
     },
   });
-  const [isCompleted, toggleIsCompleted] = useToggle(completed);
 
   const updateMutation = useUpdateTodo();
   const deleteMutation = useDeleteTodo();
 
-  const importanceColor = isCompleted
-    ? theme.colors.success
-    : (theme.colors[IMPORTANCE_COLORS[currentImportanceLevel]] as string);
-
   const bottomSheetRef = useRef<Modalize>(null);
 
-  const showBottomSheet = () => {
-    bottomSheetRef.current?.open();
-  };
-
+  const watchCompleted = watch('completed', completed);
   const watchTodo = watch('todo', todo);
   const watchNote = watch('note', note);
+  const watchReminderTime = watch('reminderTime', reminderTime);
+  const watchImportanceLevel = watch('importanceLevel', importanceLevel);
+
+  const importanceColor = watchCompleted
+    ? theme.colors.success
+    : (theme.colors[IMPORTANCE_COLORS[watchImportanceLevel]] as string);
 
   // close bottom sheet also update todo
-  const closeBottomSheet = () => {
-    bottomSheetRef.current?.close();
-  };
+  const closeBottomSheet = () => bottomSheetRef.current?.close();
+  const showBottomSheet = () => bottomSheetRef.current?.open();
 
   const handleUpdateTodo = async () => {
-    try {
-      updateMutation.mutate({
-        id,
-        completed: isCompleted,
-        importanceLevel: currentImportanceLevel,
-        reminderTime: currentReminderTime,
-        note: watchNote,
-        todo: watchTodo,
-      });
-    } catch (error) {
-      if (error) somethingWentWrongToast();
-    }
+    const convertedReminderTime = watchReminderTime
+      ? new Timestamp(watchReminderTime?.seconds, watchReminderTime?.nanoseconds)
+      : null;
+
+    const isReminderTimeChanged =
+      JSON.stringify(reminderTime) === JSON.stringify(watchReminderTime);
+
+    // no update if there's no change
+    if (
+      completed === watchCompleted &&
+      importanceLevel === watchImportanceLevel &&
+      isReminderTimeChanged &&
+      note === watchNote &&
+      todo === watchTodo
+    )
+      return;
+
+    updateMutation.mutate({
+      id,
+      completed: watchCompleted,
+      importanceLevel: watchImportanceLevel,
+      reminderTime: convertedReminderTime,
+      note: watchNote,
+      todo: watchTodo,
+    });
   };
 
   const debounceToggleTodo = useDebouncedCallback(() => {
-    // TODO don't update if current completed == completed
     handleUpdateTodo();
   }, 500);
 
@@ -97,7 +107,7 @@ function TodoItem({
   };
 
   const isPastDue =
-    !isCompleted && dayjs(currentReminderTime?.toDate()).isBefore(dayjs(), 'minute');
+    !watchCompleted && dayjs(reminderTime?.toDate()).isBefore(dayjs(), 'minute');
   const pastDueColor = isPastDue ? theme.colors.error : theme.colors.grey3;
 
   return (
@@ -128,12 +138,12 @@ function TodoItem({
         >
           <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
             <Checkbox
-              fillColor={importanceColor}
-              checked={isCompleted}
-              onCheckboxPress={() => {
-                toggleIsCompleted();
+              onPress={() => {
+                setValue('completed', !watchCompleted);
                 debounceToggleTodo();
               }}
+              fillColor={importanceColor}
+              checked={watchCompleted}
               size={SIZING['4xl']}
             />
             <View style={[layout.flex, layout.flexDirCol]}>
@@ -142,15 +152,15 @@ function TodoItem({
                 numberOfLines={3}
                 style={{
                   color:
-                    isCompleted || watchTodo === ''
+                    watchCompleted || watchTodo === ''
                       ? theme.colors.grey3
                       : theme.colors.black,
-                  textDecorationLine: isCompleted ? 'line-through' : 'none',
+                  textDecorationLine: watchCompleted ? 'line-through' : 'none',
                 }}
               >
                 {watchTodo === '' ? 'No title' : watchTodo}
               </Text>
-              {!isCompleted && currentReminderTime && (
+              {!watchCompleted && reminderTime && (
                 <View
                   style={[
                     layout.flex,
@@ -167,7 +177,7 @@ function TodoItem({
                     color={pastDueColor}
                   />
                   <Text small style={{ color: pastDueColor }}>
-                    {formatReminderTime(currentReminderTime)}
+                    {formatReminderTime(reminderTime)}
                   </Text>
                 </View>
               )}
@@ -176,20 +186,15 @@ function TodoItem({
         </Card>
       </ListItem.Swipeable>
       <TodoBottomSheet
-        buttonTitle={watchTodo === '' ? 'DELETE' : 'UPDATE'}
+        importanceColor={importanceColor}
         onSubmit={closeBottomSheet}
-        onDeletePress={handleDeleteTodo}
         onClose={handleUpdateTodo}
-        isSaveLoading={updateMutation.isLoading}
+        onDelete={handleDeleteTodo}
+        buttonTitle="UPDATE"
+        isButtonLoading={updateMutation.isLoading}
         isDeleteLoading={deleteMutation.isLoading}
         bottomSheetRef={bottomSheetRef}
-        completed={isCompleted}
         control={control}
-        currentImportanceLevel={currentImportanceLevel}
-        currentReminderTime={currentReminderTime}
-        onCheckboxPress={() => toggleIsCompleted()}
-        setCurrentImportanceLevel={setCurrentImportanceLevel}
-        setCurrentReminderTime={setCurrentReminderTime}
       />
     </Animated.View>
   );

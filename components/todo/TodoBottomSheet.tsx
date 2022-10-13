@@ -1,16 +1,16 @@
 import { Icon } from '@rneui/base';
 import { Button, ButtonProps, useTheme } from '@rneui/themed';
-import React, { Dispatch, SetStateAction } from 'react';
+import * as React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 
+import { CreateTodoDto } from '../../services/api/todos/todos.api';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { heading3 } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
-import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
-import { importanceLevelItems } from '../../utils/sort';
+import { importanceLevels } from '../../utils/sort';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
 import Checkbox from '../base/Checkbox';
 import OptionChip from '../base/OptionChip';
@@ -18,48 +18,32 @@ import TextInput from '../base/TextInput';
 import SectionTitle from '../layout/SectionTitle';
 import TodoReminderButton from './TodoReminderButton';
 
-export type TodoFormData = Pick<Todo, 'todo' | 'note'>;
-
-interface TodoBottomSheetProps extends BottomSheetProps, Pick<Todo, 'completed'> {
-  currentReminderTime: Todo['reminderTime'];
-  currentImportanceLevel: Todo['importanceLevel'];
-  control: Control<TodoFormData>;
-  setCurrentReminderTime: Dispatch<SetStateAction<Todo['reminderTime']>>;
-  setCurrentImportanceLevel: Dispatch<SetStateAction<Todo['importanceLevel']>>;
+interface TodoBottomSheetProps extends BottomSheetProps {
+  control: Control<CreateTodoDto>;
   onSubmit: ButtonProps['onPress'];
-  onDeletePress?: ButtonProps['onPress'];
-  onClose?: () => void;
-  onCheckboxPress: (checked: boolean) => void;
+  onDelete?: ButtonProps['onPress'];
+  buttonTitle: string;
+  importanceColor: string;
   isButtonVisible?: boolean;
   isEditing?: boolean;
+  isButtonLoading: boolean;
   isDeleteLoading?: boolean;
-  isSaveLoading: boolean;
-  buttonTitle: string;
 }
 
 function TodoBottomSheet({
   bottomSheetRef,
-  completed,
-  currentImportanceLevel,
-  currentReminderTime,
-  onCheckboxPress,
   control,
-  setCurrentReminderTime,
-  setCurrentImportanceLevel,
   onSubmit,
   onClose,
   isButtonVisible,
   isEditing,
-  onDeletePress,
+  onDelete,
   isDeleteLoading,
-  isSaveLoading,
+  isButtonLoading,
   buttonTitle,
+  importanceColor,
 }: TodoBottomSheetProps) {
   const { theme } = useTheme();
-
-  const importanceColor = completed
-    ? theme.colors.success
-    : (theme.colors[IMPORTANCE_COLORS[currentImportanceLevel]] as string);
 
   return (
     <BottomSheet
@@ -69,12 +53,18 @@ function TodoBottomSheet({
     >
       <View style={[layout.container, layout.sectionLarge]}>
         <View style={[layout.flex, layout.flexDirRow]}>
-          {/* FIXME checkbox wont toggle */}
-          <Checkbox
-            checked={completed}
-            onCheckboxPress={onCheckboxPress}
-            size={SIZING['4xl']}
-            fillColor={importanceColor}
+          <Controller
+            control={control}
+            name="completed"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Checkbox
+                onPress={() => onChange(!value)}
+                onBlur={onBlur}
+                checked={value}
+                size={SIZING['4xl']}
+                fillColor={importanceColor}
+              />
+            )}
           />
           <Controller
             control={control}
@@ -114,28 +104,33 @@ function TodoBottomSheet({
         </View>
         <View style={layout.sectionMedium}>
           <SectionTitle title="Reminder" />
-          <TodoReminderButton
-            setReminderTime={setCurrentReminderTime}
-            reminderTime={currentReminderTime}
-          />
+          <TodoReminderButton control={control} />
         </View>
         <View style={layout.sectionMedium}>
           <SectionTitle title="Importance" />
           <ScrollView horizontal showsVerticalScrollIndicator={false}>
-            {importanceLevelItems.map(({ importance, label }) => (
-              <OptionChip
-                size="lg"
-                containerStyle={spacing.mr_md}
-                chipColor={IMPORTANCE_COLORS[importance]}
-                radius="sm"
-                uppercase
-                key={importance}
-                isSelected={importance === currentImportanceLevel}
-                onPress={() => setCurrentImportanceLevel(importance)}
-              >
-                {label}
-              </OptionChip>
-            ))}
+            <Controller
+              control={control}
+              name="importanceLevel"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  {importanceLevels.map((importance) => (
+                    <OptionChip
+                      key={importance}
+                      containerStyle={spacing.mr_md}
+                      radius="sm"
+                      size="lg"
+                      chipColor={IMPORTANCE_COLORS[importance]}
+                      uppercase
+                      isSelected={importance === value}
+                      onPress={() => onChange(importance)}
+                    >
+                      {importance}
+                    </OptionChip>
+                  ))}
+                </>
+              )}
+            />
           </ScrollView>
         </View>
         {isButtonVisible && (
@@ -146,7 +141,7 @@ function TodoBottomSheet({
                 radius="md"
                 type="outline"
                 containerStyle={spacing.mr_md}
-                onPress={onDeletePress}
+                onPress={onDelete}
               >
                 <Icon
                   name="trash"
@@ -157,7 +152,7 @@ function TodoBottomSheet({
               </Button>
             )}
             <Button
-              loading={isSaveLoading}
+              loading={isButtonLoading}
               onPress={onSubmit}
               radius="md"
               containerStyle={layout.flex}
@@ -173,9 +168,8 @@ function TodoBottomSheet({
 
 TodoBottomSheet.defaultProps = {
   isButtonVisible: true,
-  onClose: () => {},
-  onDeletePress: () => {},
   isEditing: true,
+  onDelete: () => {},
   isDeleteLoading: false,
 };
 

@@ -24,14 +24,13 @@ export async function cancelNotification(id: string) {
 
 export async function sendTodoReminderNotification(
   id: string,
-  title: string,
   body: string,
   currentReminderTime: Todo['reminderTime'],
-  isCompleted: boolean
+  completed: Todo['completed']
 ) {
-  if (currentReminderTime && !isCompleted)
-    await sendNotification(id, title, body, currentReminderTime.toDate());
-  if (!currentReminderTime || isCompleted) {
+  if (currentReminderTime && !completed)
+    await sendNotification(id, 'Todo Reminder', body, currentReminderTime.toDate());
+  if (!currentReminderTime || completed) {
     await cancelNotification(id);
   }
 }

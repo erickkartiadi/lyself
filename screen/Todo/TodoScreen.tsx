@@ -1,4 +1,5 @@
 import { FAB, Icon, Text, useTheme } from '@rneui/themed';
+import { Timestamp } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
@@ -8,17 +9,17 @@ import BottomSheet from '../../components/base/BottomSheet';
 import OptionChip from '../../components/base/OptionChip';
 import RefreshControl from '../../components/layout/RefreshControl';
 import SectionTitle from '../../components/layout/SectionTitle';
-import TodoBottomSheet, { TodoFormData } from '../../components/todo/TodoBottomSheet';
+import TodoBottomSheet from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
 import { TodoScreenNavigationProps } from '../../navigation/navigation.types';
+import { CreateTodoDto } from '../../services/api/todos/todos.api';
 import { useCreateTodo, useGetTodos } from '../../services/api/todos/todos.hooks';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
-import { Todo } from '../../types/types';
+import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
-import useToggle from '../../utils/hooks/useToggle';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
@@ -73,6 +74,8 @@ const filterItems: {
 
 function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   const { theme } = useTheme();
+  const todoBottomSheetRef = useRef<Modalize>(null);
+  const filterBottomSheetRef = useRef<Modalize>(null);
 
   const [selectedSort, setSelectedSort] = useState<{
     sort: TodoSort;
@@ -81,7 +84,6 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
     sort: 'importanceLevel',
     orderBy: 'DESC',
   });
-
   const [selectedFilter, setSelectedFilter] = useState<TodoFilter>('Todo');
 
   const { isLoading, isError, data, isFetching, refetch } = useGetTodos(
@@ -92,35 +94,52 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
 
   const mutation = useCreateTodo();
 
-  const [isCompleted, toggleIsCompleted] = useToggle(false);
-  const [newImportanceLevel, setNewImportanceLevel] =
-    useState<Todo['importanceLevel']>('none');
-  const [newReminderTime, setNewReminderTime] = useState<Todo['reminderTime']>(null);
-  const { control, handleSubmit, reset, watch } = useForm<TodoFormData>({
+  const { control, handleSubmit, reset, watch } = useForm<CreateTodoDto>({
     defaultValues: {
       todo: '',
       note: '',
+      completed: false,
+      reminderTime: null,
+      importanceLevel: 'none',
     },
   });
+  const watchImportance = watch('importanceLevel');
+  const watchCompleted = watch('completed');
+  const watchTodo = watch('todo');
 
-  const todoBottomSheetRef = useRef<Modalize>(null);
-  const filterBottomSheetRef = useRef<Modalize>(null);
+  const isTodoExist = watchTodo !== '';
+  const importanceColor = watchCompleted
+    ? theme.colors.success
+    : (theme.colors[IMPORTANCE_COLORS[watchImportance]] as string);
 
-  const handleAddTodo = async ({ todo, note }: TodoFormData) => {
+  const handleAddTodo = async ({
+    todo,
+    note,
+    completed,
+    reminderTime,
+    importanceLevel,
+  }: CreateTodoDto) => {
+    // TODO add alert
     if (todo === '' || todo === null) return;
 
-    mutation.mutate({
-      completed: isCompleted,
-      importanceLevel: newImportanceLevel,
-      note,
-      todo,
-      reminderTime: newReminderTime,
-    });
-
-    todoBottomSheetRef.current?.close();
-    setNewImportanceLevel('none');
-    setNewReminderTime(null);
-    reset();
+    // TODO refactor all mutation
+    mutation.mutate(
+      {
+        completed,
+        importanceLevel,
+        note,
+        todo,
+        reminderTime: reminderTime
+          ? new Timestamp(reminderTime?.seconds, reminderTime?.nanoseconds)
+          : null,
+      },
+      {
+        onSuccess: () => {
+          todoBottomSheetRef.current?.close();
+          reset();
+        },
+      }
+    );
   };
 
   const filterButton = React.useCallback(
@@ -192,17 +211,12 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
       />
       <TodoBottomSheet
         buttonTitle="SAVE"
-        isSaveLoading={mutation.isLoading}
+        isButtonLoading={mutation.isLoading}
         onSubmit={handleSubmit(handleAddTodo)}
         bottomSheetRef={todoBottomSheetRef}
-        completed={false}
         control={control}
-        currentImportanceLevel={newImportanceLevel}
-        currentReminderTime={newReminderTime}
-        onCheckboxPress={() => toggleIsCompleted()}
-        setCurrentImportanceLevel={setNewImportanceLevel}
-        setCurrentReminderTime={setNewReminderTime}
-        isButtonVisible={watch('todo', '') !== ''}
+        isButtonVisible={isTodoExist}
+        importanceColor={importanceColor}
         isEditing={false}
       />
       <BottomSheet

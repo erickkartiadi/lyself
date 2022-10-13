@@ -24,27 +24,7 @@ export const sortISOStringDate = (
 export type TodoSort = 'importanceLevel' | 'reminderTime';
 export type TodoFilter = 'Completed' | 'Todo' | 'All';
 
-export const importanceLevelItems: {
-  importance: TodoImportance;
-  label: string;
-}[] = [
-  {
-    importance: 'none',
-    label: 'none',
-  },
-  {
-    importance: 'low',
-    label: 'Low',
-  },
-  {
-    importance: 'medium',
-    label: 'Medium',
-  },
-  {
-    importance: 'high',
-    label: 'High',
-  },
-];
+export const importanceLevels: TodoImportance[] = ['none', 'low', 'medium', 'high'];
 
 export const sortReminderTime = (todos: Todo[], orderBy: OrderBy) => {
   const haveReminderTime = todos

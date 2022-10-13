@@ -3,7 +3,7 @@ import { addDoc, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { Todo } from '../../../types/types';
 import { auth, createCollection } from '../../firebase/firebase';
 
-type CreateTodoDto = Omit<Todo, 'id'>;
+export type CreateTodoDto = Omit<Todo, 'id'>;
 type UpdateTodoDto = Todo;
 
 export async function createTodo(createTodoDto: CreateTodoDto): Promise<Todo> {

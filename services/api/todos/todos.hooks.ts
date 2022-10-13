@@ -6,7 +6,7 @@ import {
   sendTodoReminderNotification,
 } from '../../../utils/notifications';
 import {
-  importanceLevelItems,
+  importanceLevels,
   OrderBy,
   sortNumber,
   sortReminderTime,
@@ -31,12 +31,8 @@ export const useGetTodos = (
 
       const sorted = filtered.sort((a, b) =>
         sortNumber(
-          importanceLevelItems.findIndex(
-            ({ importance }) => importance === a.importanceLevel
-          ),
-          importanceLevelItems.findIndex(
-            ({ importance }) => importance === b.importanceLevel
-          ),
+          importanceLevels.findIndex((importance) => importance === a.importanceLevel),
+          importanceLevels.findIndex((importance) => importance === b.importanceLevel),
           orderBy
         )
       );
@@ -56,7 +52,6 @@ export const useCreateTodo = () => {
     onSuccess: (newTodo: Todo) => {
       sendTodoReminderNotification(
         newTodo.id,
-        'Todo',
         newTodo.todo,
         newTodo.reminderTime,
         newTodo.completed
@@ -75,13 +70,7 @@ export const useUpdateTodo = () => {
 
   return useMutation(updateTodo, {
     onSuccess: (todo) => {
-      sendTodoReminderNotification(
-        todo.id,
-        'Todo',
-        todo.todo,
-        todo.reminderTime,
-        todo.completed
-      );
+      sendTodoReminderNotification(todo.id, todo.todo, todo.reminderTime, todo.completed);
 
       queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) =>
         oldTodos?.map((oldTodo) => {

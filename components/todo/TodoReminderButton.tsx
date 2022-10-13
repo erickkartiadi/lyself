@@ -1,22 +1,23 @@
 import { Icon, useTheme } from '@rneui/themed';
 import { Timestamp } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
+import { Control, Controller } from 'react-hook-form';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
+import { CreateTodoDto } from '../../services/api/todos/todos.api';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
-import { Todo } from '../../types/types';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { formatReminderTime } from '../../utils/formatTime';
 import OptionChip from '../base/OptionChip';
 
-interface TodoReminderButtonProps extends Pick<Todo, 'reminderTime'> {
-  setReminderTime: React.Dispatch<React.SetStateAction<Todo['reminderTime']>>;
+interface TodoReminderButtonProps {
+  control: Control<CreateTodoDto>;
 }
 
-function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButtonProps) {
+function TodoReminderButton({ control }: TodoReminderButtonProps) {
   const { theme } = useTheme();
   const { isDarkMode } = useContext(ThemeModeContext);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
@@ -29,51 +30,58 @@ function TodoReminderButton({ reminderTime, setReminderTime }: TodoReminderButto
     setIsDatePickerVisible(false);
   };
 
-  const handleDatePickerConfirm = (date: Date) => {
-    setReminderTime(Timestamp.fromDate(date));
-    hideDatePicker();
-  };
-
+  // TODO reset after insert
   return (
-    <>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="datetime"
-        onConfirm={handleDatePickerConfirm}
-        onCancel={hideDatePicker}
-        isDarkModeEnabled={isDarkMode}
-        textColor={theme.colors.primary}
-        accentColor={theme.colors.primary}
-        minimumDate={new Date()}
-      />
-      <OptionChip
-        isSelected={reminderTime !== null}
-        radius="sm"
-        onPress={showDatePicker}
-        size="lg"
-        uppercase
-        containerStyle={[layout.flex, layout.alignStart]}
-      >
-        <Icon
-          name="notifications"
-          type="ionicon"
-          size={SIZING['2xl']}
-          color={reminderTime ? theme.colors.white : theme.colors.black}
-          containerStyle={spacing.mr_lg}
-        />
-        {reminderTime ? formatReminderTime(reminderTime) : 'Remind Me'}
-        {reminderTime && (
-          <Icon
-            name="close"
-            type="ionicon"
-            onPress={() => setReminderTime(null)}
-            size={SIZING['2xl']}
-            color={theme.colors.black}
-            containerStyle={[border.rounded, spacing.ml_2xl]}
+    <Controller
+      control={control}
+      name="reminderTime"
+      render={({ field: { onChange, value } }) => (
+        <>
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="datetime"
+            onConfirm={(date: Date) => {
+              onChange(Timestamp.fromDate(date));
+              hideDatePicker();
+            }}
+            onCancel={hideDatePicker}
+            isDarkModeEnabled={isDarkMode}
+            textColor={theme.colors.primary}
+            accentColor={theme.colors.primary}
+            minimumDate={new Date()}
           />
-        )}
-      </OptionChip>
-    </>
+          <OptionChip
+            isSelected={value !== null}
+            radius="sm"
+            onPress={showDatePicker}
+            size="lg"
+            uppercase
+            containerStyle={[layout.flex, layout.alignStart]}
+          >
+            <Icon
+              name="notifications"
+              type="ionicon"
+              size={SIZING['2xl']}
+              color={value ? theme.colors.white : theme.colors.black}
+              containerStyle={spacing.mr_lg}
+            />
+            {value
+              ? formatReminderTime(new Timestamp(value.seconds, value.nanoseconds))
+              : 'Remind Me'}
+            {value && (
+              <Icon
+                name="close"
+                type="ionicon"
+                onPress={() => onChange(null)}
+                size={SIZING['2xl']}
+                color={theme.colors.black}
+                containerStyle={[border.rounded, spacing.ml_2xl]}
+              />
+            )}
+          </OptionChip>
+        </>
+      )}
+    />
   );
 }
 export default TodoReminderButton;

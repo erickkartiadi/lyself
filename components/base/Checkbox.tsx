@@ -5,18 +5,11 @@ import border from '../../styles/border';
 import { regular, text } from '../../styles/typhography';
 
 interface CheckboxProps extends IBouncyCheckboxProps {
-  onCheckboxPress: (checked: boolean) => void;
   checked: boolean;
   size: number;
 }
 
-function Checkbox({
-  onCheckboxPress,
-  checked,
-  size,
-  textStyle,
-  ...props
-}: CheckboxProps) {
+function Checkbox({ checked, size, textStyle, ...props }: CheckboxProps) {
   return (
     <BouncyCheckbox
       {...props}
@@ -25,7 +18,6 @@ function Checkbox({
       isChecked={checked}
       innerIconStyle={border.width_lg}
       textStyle={[text.decor_line_none, regular, textStyle]}
-      onPress={onCheckboxPress}
     />
   );
 }
