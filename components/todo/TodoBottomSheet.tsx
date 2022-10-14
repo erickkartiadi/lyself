@@ -10,10 +10,11 @@ import spacing from '../../styles/spacing';
 import { heading3 } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
+import useStyles from '../../utils/hooks/useStyles';
 import { importanceLevels } from '../../utils/sort';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
 import Checkbox from '../base/Checkbox';
-import OptionChip from '../base/OptionChip';
+import Chip from '../base/Chip';
 import TextInput from '../base/TextInput';
 import SectionTitle from '../layout/SectionTitle';
 import TodoReminderButton from './TodoReminderButton';
@@ -44,6 +45,7 @@ function TodoBottomSheet({
   importanceColor,
 }: TodoBottomSheetProps) {
   const { theme } = useTheme();
+  const styles = useStyles();
 
   return (
     <BottomSheet
@@ -115,18 +117,18 @@ function TodoBottomSheet({
               render={({ field: { onChange, value } }) => (
                 <>
                   {importanceLevels.map((importance) => (
-                    <OptionChip
+                    <Chip
                       key={importance}
                       containerStyle={spacing.mr_md}
                       radius="sm"
                       size="lg"
                       chipColor={IMPORTANCE_COLORS[importance]}
                       uppercase
-                      isSelected={importance === value}
+                      isActive={importance === value}
                       onPress={() => onChange(importance)}
                     >
                       {importance}
-                    </OptionChip>
+                    </Chip>
                   ))}
                 </>
               )}
@@ -155,6 +157,7 @@ function TodoBottomSheet({
               loading={isButtonLoading}
               onPress={onSubmit}
               radius="md"
+              titleStyle={styles.textWhite}
               containerStyle={layout.flex}
             >
               {buttonTitle}

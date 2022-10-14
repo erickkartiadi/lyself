@@ -6,7 +6,7 @@ import { ScrollView, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import BottomSheet from '../../components/base/BottomSheet';
-import OptionChip from '../../components/base/OptionChip';
+import Chip from '../../components/base/Chip';
 import RefreshControl from '../../components/layout/RefreshControl';
 import SectionTitle from '../../components/layout/SectionTitle';
 import TodoBottomSheet from '../../components/todo/TodoBottomSheet';
@@ -228,17 +228,17 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             style={[layout.flex, layout.flex_dir_row, spacing.mt_sm, layout.flex_wrap]}
           >
             {sortItems.map(({ label, sort, orderBy }) => (
-              <OptionChip
+              <Chip
+                chipColor="primary"
+                size="lg"
+                radius="md"
                 key={label}
                 containerStyle={[spacing.mr_md, spacing.mb_md]}
-                size="lg"
                 onPress={() => setSelectedSort({ orderBy, sort })}
-                isSelected={
-                  selectedSort.sort === sort && selectedSort.orderBy === orderBy
-                }
+                isActive={selectedSort.sort === sort && selectedSort.orderBy === orderBy}
               >
                 {label}
-              </OptionChip>
+              </Chip>
             ))}
           </View>
         </View>
@@ -248,15 +248,16 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             style={[layout.flex, layout.flex_dir_row, spacing.mt_sm, layout.flex_wrap]}
           >
             {filterItems.map(({ label, filter }) => (
-              <OptionChip
+              <Chip
+                chipColor="primary"
                 key={label}
                 containerStyle={[spacing.mr_md, spacing.mr_md]}
                 size="lg"
                 onPress={() => setSelectedFilter(filter)}
-                isSelected={selectedFilter === filter}
+                isActive={selectedFilter === filter}
               >
                 {label}
-              </OptionChip>
+              </Chip>
             ))}
           </View>
         </View>

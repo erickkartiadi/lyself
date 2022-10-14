@@ -1,4 +1,4 @@
-import { Button, Chip, Divider, Icon, Text, useTheme } from '@rneui/themed';
+import { Button, Divider, Icon, Text, useTheme } from '@rneui/themed';
 import { Timestamp } from 'firebase/firestore';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -7,6 +7,7 @@ import { Modalize } from 'react-native-modalize';
 import Toast from 'react-native-toast-message';
 
 import BottomSheet from '../../components/base/BottomSheet';
+import Chip from '../../components/base/Chip';
 import ButtonLink from '../../components/base/Link';
 import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
@@ -134,22 +135,8 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           />
         </View>
         <View style={[spacing.mt_md, layout.flex_dir_row]}>
-          <Chip
-            radius="sm"
-            color="secondary"
-            titleStyle={styles.textGrey}
-            containerStyle={[spacing.mr_md, spacing.mb_md]}
-          >
-            Mental Health
-          </Chip>
-          <Chip
-            radius="sm"
-            color="secondary"
-            titleStyle={styles.textGrey}
-            containerStyle={spacing.mr_md}
-          >
-            War
-          </Chip>
+          <Chip containerStyle={[spacing.mr_md]}>Mental Health</Chip>
+          <Chip containerStyle={spacing.mr_md}>War</Chip>
           <View>
             <Button
               type="outline"

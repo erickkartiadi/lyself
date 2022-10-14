@@ -1,4 +1,4 @@
-import { Chip, Divider, Icon, Text, useTheme } from '@rneui/themed';
+import { Divider, Icon, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,6 +12,7 @@ import { formatTimeAgo } from '../../utils/formatTime';
 import useStyles from '../../utils/hooks/useStyles';
 import Avatar from '../base/Avatar';
 import Card from '../base/Card';
+import Chip from '../base/Chip';
 
 // TODO add skeleton placeholder
 function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
@@ -48,18 +49,10 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
         )}
       </View>
       <View style={layout.flex_dir_row}>
-        <Chip
-          color="secondary"
-          titleStyle={styles.textGrey}
-          radius="xs"
-          size="sm"
-          containerStyle={spacing.mr_sm}
-        >
+        <Chip size="sm" containerStyle={spacing.mr_md}>
           mental illness
         </Chip>
-        <Chip color="secondary" titleStyle={styles.textGrey} radius="xs" size="sm">
-          motivation
-        </Chip>
+        <Chip size="sm">motivation</Chip>
       </View>
       <Divider color={theme.colors.secondary} style={spacing.my_xl} />
       <View style={[layout.flex_dir_row, layout.justify_between]}>

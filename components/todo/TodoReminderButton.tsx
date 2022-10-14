@@ -1,4 +1,4 @@
-import { Icon, useTheme } from '@rneui/themed';
+import { Button, Icon, useTheme } from '@rneui/themed';
 import { Timestamp } from 'firebase/firestore';
 import React, { useContext, useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
@@ -11,7 +11,6 @@ import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import { ThemeModeContext } from '../../utils/context/ThemeModeContext';
 import { formatReminderTime } from '../../utils/formatTime';
-import OptionChip from '../base/OptionChip';
 
 interface TodoReminderButtonProps {
   control: Control<CreateTodoDto>;
@@ -49,8 +48,12 @@ function TodoReminderButton({ control }: TodoReminderButtonProps) {
             accentColor={theme.colors.primary}
             minimumDate={new Date()}
           />
-          <OptionChip
-            isSelected={value !== null}
+          <Button
+            // isSelected={value !== null}
+            color={value ? 'primary' : 'secondary'}
+            titleStyle={{
+              color: value ? theme.colors.white : theme.colors.black,
+            }}
             radius="sm"
             onPress={showDatePicker}
             size="lg"
@@ -77,7 +80,7 @@ function TodoReminderButton({ control }: TodoReminderButtonProps) {
                 containerStyle={[border.rounded, spacing.ml_2xl]}
               />
             )}
-          </OptionChip>
+          </Button>
         </>
       )}
     />
