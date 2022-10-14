@@ -130,7 +130,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
           : null,
       },
       {
-        onSuccess: () => {
+        onSettled: () => {
           todoBottomSheetRef.current?.close();
           reset();
         },
@@ -162,7 +162,6 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
   );
 
   // useApplyHeaderWorkaround(navigation.setOptions);
-
   useEffect(() => {
     navigation.setOptions({
       headerTitle: selectedFilter,

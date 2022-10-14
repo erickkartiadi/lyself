@@ -27,19 +27,7 @@ import Checkbox from '../base/Checkbox';
 import TodoBottomSheet from './TodoBottomSheet';
 import TodoSwipeableRight from './TodoSwipeableRight';
 
-interface TodoItemProps {
-  enableAnimation?: boolean;
-}
-
-function TodoItem({
-  importanceLevel,
-  reminderTime,
-  todo,
-  note,
-  completed,
-  id,
-  enableAnimation,
-}: Todo & TodoItemProps) {
+function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: Todo) {
   const { theme } = useTheme();
 
   const { control, watch, setValue } = useForm<CreateTodoDto>({
@@ -99,6 +87,9 @@ function TodoItem({
         todo: watchTodo,
       },
       {
+        onSettled: () => {
+          closeBottomSheet();
+        },
         onError: () => {
           somethingWentWrongToast();
         },
@@ -109,7 +100,8 @@ function TodoItem({
   const debounceToggleTodo = useDebouncedCallback(() => {
     handleUpdateTodo();
   }, 500);
-  // FIXME handle conflict update & delete todo
+
+  // FIXME
   const handleDeleteTodo = async () => {
     deleteMutation.mutate(id, {
       onSuccess: () => {
@@ -127,9 +119,9 @@ function TodoItem({
 
   return (
     <Animated.View
-      layout={enableAnimation ? SequencedTransition : undefined}
-      entering={enableAnimation ? LightSpeedInLeft : undefined}
-      exiting={enableAnimation ? LightSpeedOutLeft : undefined}
+      layout={SequencedTransition}
+      entering={LightSpeedInLeft}
+      exiting={LightSpeedOutLeft}
     >
       <ListItem.Swipeable
         rightContent={
@@ -202,7 +194,7 @@ function TodoItem({
       </ListItem.Swipeable>
       <TodoBottomSheet
         importanceColor={importanceColor}
-        onSubmit={closeBottomSheet}
+        onSubmit={handleUpdateTodo}
         onClose={handleUpdateTodo}
         onDelete={handleDeleteTodo}
         buttonTitle="UPDATE"
