@@ -20,7 +20,7 @@ const renderArticles = ({ item }: { item: Article }) => (
   />
 );
 const renderEmptyArticles = () => (
-  <View style={[width.w_100, layout.flexDirRow]}>
+  <View style={[width.w_100, layout.flex_dir_row]}>
     <ArticleCardPlaceholder />
     <HorizontalSeparator />
     <ArticleCardPlaceholder />
@@ -33,7 +33,7 @@ function ArticleSection() {
   const articlesQuery = useQuery<Article[]>(['articles'], fetchNews);
 
   return (
-    <View style={layout.sectionLarge}>
+    <View style={layout.section_lg}>
       <SectionTitle title="Articles about mental health" showRightComponent />
       <FlatList
         overScrollMode="never"
@@ -41,8 +41,8 @@ function ArticleSection() {
         ListEmptyComponent={renderEmptyArticles}
         ItemSeparatorComponent={HorizontalSeparator}
         showsHorizontalScrollIndicator={false}
-        style={[layout.noContainerGutter]}
-        contentContainerStyle={[layout.containerGutter]}
+        style={[layout.no_container_gutter]}
+        contentContainerStyle={[layout.container_gutter]}
         data={articlesQuery.data}
         renderItem={renderArticles}
       />

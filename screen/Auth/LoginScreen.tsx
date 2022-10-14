@@ -59,15 +59,13 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[layout.containerGutter, layout.sectionLarge]}
+      contentContainerStyle={[layout.container_gutter, layout.section_lg]}
     >
       <SafeAreaView>
         <BackButton />
         <Text h1>Welcome to Lyself</Text>
         <Text>Login to continue.</Text>
-        <View
-          style={[layout.alignCenter, layout.justifyCenter, layout.aspectRatioSquare]}
-        >
+        <View style={[layout.align_center, layout.justify_center, layout.ratio_square]}>
           <Image
             source={loginIllustration}
             style={[layout.flex, width.w_100]}
@@ -111,16 +109,16 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
           style={[
             layout.flex,
             width.w_100,
-            layout.flexDirRow,
-            layout.alignCenter,
-            layout.justifyEnd,
+            layout.flex_dir_row,
+            layout.align_center,
+            layout.justify_end,
             spacing.mt_n_xl,
           ]}
         >
           <NavLink to={{ screen: 'ForgotPassword' }}>Forgot Password?</NavLink>
         </View>
         <Button
-          containerStyle={layout.sectionLarge}
+          containerStyle={layout.section_lg}
           loading={mutation.isLoading}
           onPress={handleSubmit(handleLogin)}
         >
@@ -128,10 +126,10 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         </Button>
         <View
           style={[
-            layout.sectionLarge,
-            layout.flexDirRow,
-            layout.justifyCenter,
-            layout.alignCenter,
+            layout.section_lg,
+            layout.flex_dir_row,
+            layout.justify_center,
+            layout.align_center,
           ]}
         >
           <Text>Didn&apos;t have an account? </Text>

@@ -14,8 +14,8 @@ function ErrorScreen() {
 
   return (
     <View style={layout.flex}>
-      <View style={[layout.flex, layout.alignCenter, layout.justifyCenter]}>
-        <View style={[spacing.mb_xl, layout.aspectRatioSquare, width.w_10xl]}>
+      <View style={[layout.flex, layout.align_center, layout.justify_center]}>
+        <View style={[spacing.mb_xl, layout.ratio_square, width.w_10xl]}>
           <Image style={[layout.flex, width.w_100]} source={errorImage} />
         </View>
         <Text h4 style={spacing.mb_sm}>

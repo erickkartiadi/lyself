@@ -19,7 +19,7 @@ function RightHeader() {
       name={isDarkMode ? 'moon-outline' : 'sunny-outline'}
       type="ionicon"
       onPress={toggleThemeMode}
-      containerStyle={[spacing.mr_lg, border.rounded, layout.aspectRatioSquare]}
+      containerStyle={[spacing.mr_lg, border.rounded, layout.ratio_square]}
       color={theme.colors.black}
       underlayColor={theme.colors.primary}
     />

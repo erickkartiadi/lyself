@@ -29,7 +29,7 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
         containerStyle={[
           width.w_100,
           border.radius_xl,
-          layout.aspectRatioFourThree,
+          layout.ratio_fourThree,
           shadow.sm,
         ]}
         source={{ uri: urlToImage }}
@@ -38,7 +38,9 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
         <Text subtitle numberOfLines={3}>
           {title}
         </Text>
-        <View style={[layout.flex, layout.flexDirRow, layout.alignCenter, spacing.mt_sm]}>
+        <View
+          style={[layout.flex, layout.flex_dir_row, layout.align_center, spacing.mt_sm]}
+        >
           <Text caption style={styles.textGrey}>
             {source}
           </Text>

@@ -62,15 +62,13 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[layout.containerGutter, layout.sectionLarge]}
+      contentContainerStyle={[layout.container_gutter, layout.section_lg]}
     >
       <SafeAreaView>
         <BackButton />
         <Text h1>Create new account</Text>
         <Text>Just one more step to be part of the {'\n'}Lyself community.</Text>
-        <View
-          style={[layout.justifyCenter, layout.alignCenter, layout.aspectRatioSquare]}
-        >
+        <View style={[layout.justify_center, layout.align_center, layout.ratio_square]}>
           <Image
             source={registerIllustration}
             style={[layout.flex, width.w_100]}
@@ -131,10 +129,10 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
         </Button>
         <View
           style={[
-            layout.sectionLarge,
-            layout.flexDirRow,
-            layout.justifyCenter,
-            layout.alignCenter,
+            layout.section_lg,
+            layout.flex_dir_row,
+            layout.justify_center,
+            layout.align_center,
           ]}
         >
           <Text>Already have an account? </Text>

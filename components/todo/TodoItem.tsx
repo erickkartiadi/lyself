@@ -109,9 +109,12 @@ function TodoItem({
   const debounceToggleTodo = useDebouncedCallback(() => {
     handleUpdateTodo();
   }, 500);
-
+  // FIXME handle conflict update & delete todo
   const handleDeleteTodo = async () => {
     deleteMutation.mutate(id, {
+      onSuccess: () => {
+        closeBottomSheet();
+      },
       onError: () => {
         somethingWentWrongToast();
       },
@@ -148,7 +151,7 @@ function TodoItem({
             },
           ]}
         >
-          <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
+          <View style={[layout.flex, layout.flex_dir_row, layout.align_center]}>
             <Checkbox
               onPress={() => {
                 setValue('completed', !watchCompleted);
@@ -158,7 +161,7 @@ function TodoItem({
               checked={watchCompleted}
               size={SIZING['4xl']}
             />
-            <View style={[layout.flex, layout.flexDirCol]}>
+            <View style={[layout.flex, layout.flex_dir_col]}>
               <Text
                 subtitle
                 numberOfLines={3}
@@ -176,8 +179,8 @@ function TodoItem({
                 <View
                   style={[
                     layout.flex,
-                    layout.flexDirRow,
-                    layout.alignCenter,
+                    layout.flex_dir_row,
+                    layout.align_center,
                     spacing.mt_xs,
                   ]}
                 >

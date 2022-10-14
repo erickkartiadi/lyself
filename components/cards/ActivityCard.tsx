@@ -35,7 +35,7 @@ function ActivityCard({
 
   return (
     <Card cardStyle={{ backgroundColor: colorDark }}>
-      <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
+      <View style={[layout.flex, layout.flex_dir_row, layout.align_center]}>
         <View style={[layout.flex]}>
           <View>
             <Text h3 h3Style={styles.textWhite}>
@@ -43,13 +43,13 @@ function ActivityCard({
             </Text>
             <Text style={styles.textWhite}>{text}</Text>
           </View>
-          <View style={[layout.flexDirRow, layout.alignCenter, spacing.mt_lg]}>
+          <View style={[layout.flex_dir_row, layout.align_center, spacing.mt_lg]}>
             <Button
               color={colorLight}
               onPress={onPress}
               uppercase
               titleStyle={styles.textWhite}
-              buttonStyle={[layout.flexDirRow, layout.alignCenter, spacing.pr_lg]}
+              buttonStyle={[layout.flex_dir_row, layout.align_center, spacing.pr_lg]}
               size="md"
             >
               <Icon
@@ -65,9 +65,9 @@ function ActivityCard({
         </View>
         <View
           style={[
-            layout.alignCenter,
-            layout.justifyCenter,
-            layout.aspectRatioSquare,
+            layout.align_center,
+            layout.justify_center,
+            layout.ratio_square,
             width.w_10xl,
           ]}
         >

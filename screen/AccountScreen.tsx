@@ -27,14 +27,14 @@ function AccountScreen() {
   const styles = useStyles();
 
   return (
-    <ScrollView contentContainerStyle={[layout.sectionLarge]}>
-      <View style={layout.sectionLarge}>
+    <ScrollView contentContainerStyle={[layout.section_lg]}>
+      <View style={layout.section_lg}>
         <View
           style={[
             layout.flex,
-            layout.flexDirCol,
-            layout.alignCenter,
-            layout.justifyCenter,
+            layout.flex_dir_col,
+            layout.align_center,
+            layout.justify_center,
           ]}
         >
           <Avatar
@@ -46,7 +46,7 @@ function AccountScreen() {
           <Text style={styles.textGrey}>{user?.email}</Text>
         </View>
       </View>
-      <View style={layout.sectionSmall}>
+      <View style={layout.section_sm}>
         <SettingMenu
           title="Profile"
           icon={{ backgroundColor: theme.colors.blue, name: 'person', type: 'ionicon' }}
@@ -68,7 +68,7 @@ function AccountScreen() {
           }}
         />
       </View>
-      <View style={layout.sectionSmall}>
+      <View style={layout.section_sm}>
         <SettingMenu
           title="Setting"
           icon={{
@@ -87,7 +87,7 @@ function AccountScreen() {
           caption="English"
         />
       </View>
-      <View style={layout.sectionSmall}>
+      <View style={layout.section_sm}>
         <SettingMenu
           title="Ask a Question"
           icon={{

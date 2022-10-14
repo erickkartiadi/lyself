@@ -6,47 +6,47 @@ const layout = StyleSheet.create({
   flex: {
     flex: 1,
   },
-  flexGrow: {
+  flex_grow: {
     flexGrow: 1,
   },
-  flexShrink: {
+  flex_shrink: {
     flexShrink: 1,
   },
-  flexWrap: {
+  flex_wrap: {
     flexWrap: 'wrap',
   },
 
-  flexDirRow: {
+  flex_dir_row: {
     flexDirection: 'row',
   },
-  flexDirCol: {
+  flex_dir_col: {
     flexDirection: 'column',
   },
-  alignCenter: {
+  align_center: {
     alignItems: 'center',
   },
-  alignStart: {
+  align_start: {
     alignItems: 'flex-start',
   },
-  alignEnd: {
+  align_end: {
     alignItems: 'flex-end',
   },
-  alignSelfStart: {
+  align_self_start: {
     alignSelf: 'flex-start',
   },
-  alignSelfEnd: {
+  align_self_end: {
     alignSelf: 'flex-end',
   },
-  justifyCenter: {
+  justify_center: {
     justifyContent: 'center',
   },
-  justifyBetween: {
+  justify_between: {
     justifyContent: 'space-between',
   },
-  justifyEnd: {
+  justify_end: {
     justifyContent: 'flex-end',
   },
-  justifyStart: {
+  justify_start: {
     justifyContent: 'flex-start',
   },
 
@@ -54,50 +54,50 @@ const layout = StyleSheet.create({
     flex: 1,
     paddingHorizontal: GUTTER_SIZE,
   },
-  containerGutter: {
+  container_gutter: {
     paddingHorizontal: GUTTER_SIZE,
   },
-  noContainerGutter: {
+  no_container_gutter: {
     marginHorizontal: GUTTER_SIZE * -1,
   },
-  sectionLarge: {
+  section_lg: {
     paddingVertical: SPACES.xl,
   },
-  sectionMedium: {
+  section_md: {
     paddingVertical: SPACES.lg,
   },
-  sectionSmall: {
+  section_sm: {
     paddingVertical: SPACES.md,
   },
 
   // layout
-  aspectRatioSquare: {
+  ratio_square: {
     aspectRatio: 1,
   },
-  aspectRatioFourThree: {
+  ratio_fourThree: {
     aspectRatio: 4 / 3,
   },
-  aspectRatioWide: {
+  ratio_wide: {
     aspectRatio: 16 / 9,
   },
 
   // position
-  positionAbsolute: {
+  position_absolute: {
     position: 'absolute',
   },
-  positionRelative: {
+  position_relative: {
     position: 'relative',
   },
 
-  overflowHidden: {
+  overflow_hidden: {
     overflow: 'hidden',
   },
 
   // display
-  displayNone: {
+  display_none: {
     display: 'none',
   },
-  displayFlex: {
+  display_flex: {
     display: 'flex',
   },
 });

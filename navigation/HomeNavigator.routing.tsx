@@ -84,7 +84,7 @@ function HomeNavigator() {
     >
       <Tab.Screen
         options={{
-          headerTitleStyle: layout.displayNone,
+          headerTitleStyle: layout.display_none,
           headerLeft: LeftHeader,
           tabBarIcon: HomeTabBarIcon,
         }}

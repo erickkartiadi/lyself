@@ -24,25 +24,25 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
       <SafeAreaView>
         <View
           style={[
-            layout.sectionLarge,
+            layout.section_lg,
             layout.flex,
             {
               minHeight: Dimensions.get('window').height,
             },
           ]}
         >
-          <View style={[layout.noContainerGutter, layout.aspectRatioFourThree]}>
+          <View style={[layout.no_container_gutter, layout.ratio_fourThree]}>
             <Image source={getStartedIllustration} style={[layout.flex, width.w_100]} />
           </View>
           <View style={[layout.container]}>
-            <Text style={[layout.sectionLarge, text.center]}>
+            <Text style={[layout.section_lg, text.center]}>
               <Text h1>Start your mental health journey with</Text>
               <Text h1 h1Style={styles.textPrimary}>
                 {' '}
                 Lyself
               </Text>
             </Text>
-            <View style={[layout.sectionLarge, layout.flex, layout.justifyCenter]}>
+            <View style={[layout.section_lg, layout.flex, layout.justify_center]}>
               <Button
                 onPress={() => navigation.navigate('Login')}
                 buttonStyle={spacing.py_xl}
@@ -51,7 +51,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               >
                 <Icon
                   containerStyle={[
-                    layout.positionAbsolute,
+                    layout.position_absolute,
                     {
                       left: SIZING['4xl'],
                     },
@@ -70,7 +70,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               >
                 <Icon
                   containerStyle={[
-                    layout.positionAbsolute,
+                    layout.position_absolute,
                     {
                       left: SIZING['4xl'],
                     },
@@ -89,7 +89,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               >
                 <Icon
                   containerStyle={[
-                    layout.positionAbsolute,
+                    layout.position_absolute,
                     {
                       left: SIZING['4xl'],
                     },
@@ -109,7 +109,7 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
               >
                 <Icon
                   containerStyle={[
-                    layout.positionAbsolute,
+                    layout.position_absolute,
                     {
                       left: SIZING['4xl'],
                     },
@@ -124,10 +124,10 @@ function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
           </View>
           <View
             style={[
-              layout.sectionLarge,
-              layout.flexDirRow,
-              layout.alignCenter,
-              layout.justifyCenter,
+              layout.section_lg,
+              layout.flex_dir_row,
+              layout.align_center,
+              layout.justify_center,
             ]}
           >
             <Text>Didn&apos;t have an account? </Text>

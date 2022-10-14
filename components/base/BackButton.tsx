@@ -15,7 +15,7 @@ function BackButton() {
     <Button
       type="outline"
       onPress={goBack}
-      containerStyle={[spacing.mb_xl, layout.alignSelfStart]}
+      containerStyle={[spacing.mb_xl, layout.align_self_start]}
       buttonStyle={[spacing.py_md, spacing.px_md]}
     >
       <Icon size={SIZING['2xl']} name="arrow-back-outline" type="ionicon" />

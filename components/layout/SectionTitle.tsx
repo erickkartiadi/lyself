@@ -27,9 +27,9 @@ function SectionTitle({
     <View
       style={[
         layout.flex,
-        layout.flexDirRow,
-        layout.justifyBetween,
-        layout.alignCenter,
+        layout.flex_dir_row,
+        layout.justify_between,
+        layout.align_center,
         {
           marginBottom: theme.spacing[marginBottom],
         },
@@ -42,7 +42,7 @@ function SectionTitle({
         </Text>
         {showRightComponent && !rightComponent ? (
           <NavLink
-            style={[layout.alignEnd, layout.flexShrink]}
+            style={[layout.align_end, layout.flex_shrink]}
             to={{
               screen: showRightComponent && screen && screen,
             }}

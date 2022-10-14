@@ -18,8 +18,8 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
   const { theme } = useTheme();
 
   return (
-    <ScrollView contentContainerStyle={[layout.containerGutter]}>
-      <View style={layout.sectionLarge}>
+    <ScrollView contentContainerStyle={[layout.container_gutter]}>
+      <View style={layout.section_lg}>
         <ActivityCard
           buttonTitle="START"
           iconName="play"

@@ -37,7 +37,7 @@ const myTheme = createTheme({
       inputStyle: regular,
     },
     Icon: {
-      containerStyle: layout.aspectRatioSquare,
+      containerStyle: layout.ratio_square,
     },
     Text: (props: TextProps) => ({
       h1Style: heading1,

@@ -27,7 +27,7 @@ function Avatar({ rounded, containerStyle, avatarUrl: photoUrl, ...props }: Avat
           uri: photoUrl,
         }}
         containerStyle={[
-          layout.overflowHidden,
+          layout.overflow_hidden,
           styles.borderGrey5,
           border.width_xs,
           containerStyle,

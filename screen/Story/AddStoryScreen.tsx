@@ -99,7 +99,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
   return (
     <>
       <ScrollView contentContainerStyle={[layout.container]}>
-        <View style={layout.sectionSmall}>
+        <View style={layout.section_sm}>
           <Controller
             control={control}
             name="title"
@@ -133,7 +133,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             )}
           />
         </View>
-        <View style={[spacing.mt_md, layout.flexDirRow]}>
+        <View style={[spacing.mt_md, layout.flex_dir_row]}>
           <Chip
             radius="sm"
             color="secondary"
@@ -169,7 +169,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           </View>
         </View>
         <Divider style={spacing.my_xl} />
-        <View style={[layout.flexDirRow, layout.justifyBetween, layout.alignCenter]}>
+        <View style={[layout.flex_dir_row, layout.justify_between, layout.align_center]}>
           <View>
             <Text subtitle2>Anonymous post</Text>
             <Text small style={styles.textGrey}>
@@ -186,7 +186,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
         </View>
       </ScrollView>
       <BottomSheet bottomSheetRef={categoryBottomSheetRef}>
-        <View style={[layout.container, layout.sectionLarge]}>
+        <View style={[layout.container, layout.section_lg]}>
           <Text subtitle>Select Category</Text>
         </View>
       </BottomSheet>

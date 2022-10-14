@@ -25,7 +25,7 @@ function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
       style={[spacing.mt_md, width.w_11xl]}
     >
       <Image
-        containerStyle={[width.w_100, border.radius_xl, layout.aspectRatioSquare]}
+        containerStyle={[width.w_100, border.radius_xl, layout.ratio_square]}
         childrenContainerStyle={width.w_100}
         source={{
           uri: imageUrl,

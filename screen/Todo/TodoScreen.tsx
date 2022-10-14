@@ -119,9 +119,6 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
     reminderTime,
     importanceLevel,
   }: CreateTodoDto) => {
-    // TODO add alert
-    if (todo === '' || todo === null) return;
-
     mutation.mutate(
       {
         completed,
@@ -158,7 +155,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
               ? theme.colors.primary
               : theme.colors.black,
         }}
-        containerStyle={[border.rounded, layout.aspectRatioSquare]}
+        containerStyle={[border.rounded, layout.ratio_square]}
       />
     ),
     [selectedSort, selectedFilter]
@@ -183,9 +180,9 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         showsHorizontalScrollIndicator={false}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
         contentContainerStyle={[
-          layout.sectionLarge,
-          layout.containerGutter,
-          layout.flexGrow,
+          layout.section_lg,
+          layout.container_gutter,
+          layout.flex_grow,
         ]}
       >
         {data.length <= 0 ? (
@@ -223,12 +220,14 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
       />
       <BottomSheet
         bottomSheetRef={filterBottomSheetRef}
-        modalStyle={[layout.containerGutter, layout.sectionLarge]}
+        modalStyle={[layout.container_gutter, layout.section_lg]}
       >
         <Text h2>Filter</Text>
-        <View style={[layout.sectionLarge]}>
+        <View style={[layout.section_lg]}>
           <SectionTitle title="Sort" />
-          <View style={[layout.flex, layout.flexDirRow, spacing.mt_sm, layout.flexWrap]}>
+          <View
+            style={[layout.flex, layout.flex_dir_row, spacing.mt_sm, layout.flex_wrap]}
+          >
             {sortItems.map(({ label, sort, orderBy }) => (
               <OptionChip
                 key={label}
@@ -244,9 +243,11 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             ))}
           </View>
         </View>
-        <View style={[layout.sectionLarge]}>
+        <View style={[layout.section_lg]}>
           <SectionTitle title="Filter" />
-          <View style={[layout.flex, layout.flexDirRow, spacing.mt_sm, layout.flexWrap]}>
+          <View
+            style={[layout.flex, layout.flex_dir_row, spacing.mt_sm, layout.flex_wrap]}
+          >
             {filterItems.map(({ label, filter }) => (
               <OptionChip
                 key={label}

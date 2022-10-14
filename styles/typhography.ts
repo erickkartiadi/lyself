@@ -59,7 +59,7 @@ export const font = StyleSheet.create({
     fontFamily: FONT_FAMILY.regular,
     fontWeight: 'normal',
   },
-  weight_medium: {
+  weight_md: {
     fontFamily: FONT_FAMILY.medium,
     fontWeight: 'normal',
   },
@@ -73,9 +73,9 @@ export const heading1 = StyleSheet.flatten([font.size_3xl, font.weight_bold]);
 export const heading2 = StyleSheet.flatten([font.size_2xl, font.weight_bold]);
 export const heading3 = StyleSheet.flatten([font.size_xl, font.weight_bold]);
 export const heading4 = StyleSheet.flatten([font.size_lg, font.weight_bold]);
-export const subtitle = StyleSheet.flatten([font.size_lg, font.weight_medium]);
-export const subtitle2 = StyleSheet.flatten([font.size_md, font.weight_medium]);
-export const subtitle3 = StyleSheet.flatten([font.size_sm, font.weight_medium]);
+export const subtitle = StyleSheet.flatten([font.size_lg, font.weight_md]);
+export const subtitle2 = StyleSheet.flatten([font.size_md, font.weight_md]);
+export const subtitle3 = StyleSheet.flatten([font.size_sm, font.weight_md]);
 export const regular = StyleSheet.flatten([font.size_md, font.weight_normal]);
 export const small = StyleSheet.flatten([font.size_sm, font.weight_normal]);
 export const caption = StyleSheet.flatten([font.size_xs, font.weight_normal]);

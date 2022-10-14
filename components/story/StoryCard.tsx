@@ -22,7 +22,7 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
 
   return (
     <Card>
-      <View style={[layout.flexDirRow, layout.alignCenter]}>
+      <View style={[layout.flex_dir_row, layout.align_center]}>
         <Avatar
           size={SIZING['5xl']}
           containerStyle={[spacing.mr_lg]}
@@ -47,7 +47,7 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
           </Text>
         )}
       </View>
-      <View style={layout.flexDirRow}>
+      <View style={layout.flex_dir_row}>
         <Chip
           color="secondary"
           titleStyle={styles.textGrey}
@@ -62,8 +62,8 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
         </Chip>
       </View>
       <Divider color={theme.colors.secondary} style={spacing.my_xl} />
-      <View style={[layout.flexDirRow, layout.justifyBetween]}>
-        <TouchableOpacity style={[layout.flexDirRow, layout.alignCenter]}>
+      <View style={[layout.flex_dir_row, layout.justify_between]}>
+        <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>
           <Icon
             color={theme.colors.grey3}
             name="heart-outline"
@@ -75,7 +75,7 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
             15 likes
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[layout.flexDirRow, layout.alignCenter]}>
+        <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>
           <Icon
             color={theme.colors.grey3}
             name="chatbox-outline"
@@ -87,7 +87,7 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
             32 replies
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[layout.flexDirRow, layout.alignCenter]}>
+        <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>
           <Icon
             color={theme.colors.grey3}
             name="eye-outline"

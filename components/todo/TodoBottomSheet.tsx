@@ -51,8 +51,8 @@ function TodoBottomSheet({
       bottomSheetRef={bottomSheetRef}
       onClose={onClose}
     >
-      <View style={[layout.container, layout.sectionLarge]}>
-        <View style={[layout.flex, layout.flexDirRow]}>
+      <View style={[layout.container, layout.section_lg]}>
+        <View style={[layout.flex, layout.flex_dir_row]}>
           <Controller
             control={control}
             name="completed"
@@ -84,7 +84,7 @@ function TodoBottomSheet({
             )}
           />
         </View>
-        <View style={layout.sectionMedium}>
+        <View style={layout.section_md}>
           <SectionTitle title="Note" marginBottom="sm" />
           <Controller
             control={control}
@@ -102,11 +102,11 @@ function TodoBottomSheet({
             )}
           />
         </View>
-        <View style={layout.sectionMedium}>
+        <View style={layout.section_md}>
           <SectionTitle title="Reminder" />
           <TodoReminderButton control={control} />
         </View>
-        <View style={layout.sectionMedium}>
+        <View style={layout.section_md}>
           <SectionTitle title="Importance" />
           <ScrollView horizontal showsVerticalScrollIndicator={false}>
             <Controller
@@ -134,7 +134,7 @@ function TodoBottomSheet({
           </ScrollView>
         </View>
         {isButtonVisible && (
-          <View style={[layout.flexDirRow, spacing.mt_xl]}>
+          <View style={[layout.flex_dir_row, spacing.mt_xl]}>
             {isEditing && (
               <Button
                 loading={isDeleteLoading}

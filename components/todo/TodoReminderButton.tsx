@@ -55,7 +55,7 @@ function TodoReminderButton({ control }: TodoReminderButtonProps) {
             onPress={showDatePicker}
             size="lg"
             uppercase
-            containerStyle={[layout.flex, layout.alignStart]}
+            containerStyle={[layout.flex, layout.align_start]}
           >
             <Icon
               name="notifications"

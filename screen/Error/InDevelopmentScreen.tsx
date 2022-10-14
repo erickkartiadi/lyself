@@ -10,7 +10,7 @@ function InDevelopmentScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={[layout.container, layout.alignCenter, layout.justifyCenter]}>
+    <View style={[layout.container, layout.align_center, layout.justify_center]}>
       <Text h4 style={text.center}>
         Sorry, this page is still in development 🚧
       </Text>

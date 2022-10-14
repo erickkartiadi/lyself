@@ -28,17 +28,17 @@ function SettingMenu({
     <Pressable
       style={[
         layout.flex,
-        layout.flexDirRow,
+        layout.flex_dir_row,
         width.w_100,
-        layout.alignCenter,
-        layout.justifyBetween,
+        layout.align_center,
+        layout.justify_between,
         spacing.py_md,
       ]}
       android_ripple={{ color: theme.colors.grey4 }}
       onPress={onPress}
     >
-      <View style={[layout.container, layout.flexDirRow]}>
-        <View style={[layout.flex, layout.flexDirRow, layout.alignCenter]}>
+      <View style={[layout.container, layout.flex_dir_row]}>
+        <View style={[layout.flex, layout.flex_dir_row, layout.align_center]}>
           <Icon
             backgroundColor={backgroundColor}
             name={name}
@@ -51,7 +51,7 @@ function SettingMenu({
           <Text subtitle>{title}</Text>
         </View>
         {rightComponent || (
-          <View style={[layout.flexDirRow, layout.alignCenter]}>
+          <View style={[layout.flex_dir_row, layout.align_center]}>
             <Text small>{caption}</Text>
             <Icon
               size={SIZING['2xl']}

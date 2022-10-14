@@ -66,7 +66,7 @@ function SpotifySection() {
   }, [response]);
 
   return (
-    <View style={layout.sectionLarge}>
+    <View style={layout.section_lg}>
       <SectionTitle title="Featured playlist" />
       {isSpotifyTokenAvailable ? (
         <FlatList
@@ -74,8 +74,8 @@ function SpotifySection() {
           overScrollMode="never"
           ItemSeparatorComponent={HorizontalSeparator}
           showsHorizontalScrollIndicator={false}
-          style={layout.noContainerGutter}
-          contentContainerStyle={layout.containerGutter}
+          style={layout.no_container_gutter}
+          contentContainerStyle={layout.container_gutter}
           data={spotifyQuery.data}
           renderItem={renderPlaylist}
         />

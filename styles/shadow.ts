@@ -13,7 +13,7 @@ const shadow = StyleSheet.create({
 
     elevation: 6,
   },
-  medium: {
+  md: {
     shadowColor: '#rgba(0,0,0,0.1)',
     shadowOffset: {
       width: 0,

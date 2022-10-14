@@ -54,7 +54,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[layout.containerGutter, layout.sectionLarge]}
+      contentContainerStyle={[layout.container_gutter, layout.section_lg]}
     >
       <SafeAreaView>
         <BackButton />
@@ -63,7 +63,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
           Please enter your email address, we&apos;ll send an email with instructions to
           reset your password.
         </Text>
-        <View style={[layout.flex, layout.alignCenter, layout.aspectRatioSquare]}>
+        <View style={[layout.flex, layout.align_center, layout.ratio_square]}>
           <Image source={forgotPasswordIllustration} style={[layout.flex, width.w_100]} />
         </View>
         <Controller

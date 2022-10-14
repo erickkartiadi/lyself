@@ -16,8 +16,8 @@ function TodoEmptyScreen() {
   const styles = useStyles();
 
   return (
-    <View style={[layout.justifyCenter, layout.alignCenter, layout.flexGrow]}>
-      <View style={[spacing.mb_xl, layout.aspectRatioSquare, width.w_10xl]}>
+    <View style={[layout.justify_center, layout.align_center, layout.flex_grow]}>
+      <View style={[spacing.mb_xl, layout.ratio_square, width.w_10xl]}>
         <Image
           style={[layout.flex, width.w_100]}
           source={isDarkMode ? noDataImageDark : noDataImageLight}

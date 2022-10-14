@@ -19,9 +19,9 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
     <>
       <FlatList
         contentContainerStyle={[
-          layout.flexGrow,
-          layout.containerGutter,
-          layout.sectionLarge,
+          layout.flex_grow,
+          layout.container_gutter,
+          layout.section_lg,
         ]}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
         ItemSeparatorComponent={VerticalSeparator}
