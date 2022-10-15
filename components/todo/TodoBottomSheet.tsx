@@ -49,6 +49,7 @@ function TodoBottomSheet({
 
   return (
     <BottomSheet
+      adjustToContentHeight
       scrollViewProps={{ keyboardShouldPersistTaps: 'handled' }}
       bottomSheetRef={bottomSheetRef}
       onClose={onClose}
@@ -63,7 +64,6 @@ function TodoBottomSheet({
                 onPress={() => onChange(!value)}
                 onBlur={onBlur}
                 checked={value}
-                size={SIZING['4xl']}
                 fillColor={importanceColor}
               />
             )}

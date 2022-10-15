@@ -22,7 +22,6 @@ function BottomSheet({
       <Modalize
         ref={bottomSheetRef}
         closeOnOverlayTap
-        adjustToContentHeight
         handleStyle={styles.defaultBackground}
         modalStyle={[styles.defaultBackground, modalStyle]}
         {...props}

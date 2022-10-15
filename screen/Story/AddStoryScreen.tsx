@@ -9,11 +9,14 @@ import Toast from 'react-native-toast-message';
 import BottomSheet from '../../components/base/BottomSheet';
 import Chip from '../../components/base/Chip';
 import ButtonLink from '../../components/base/Link';
+import Radio from '../../components/base/Radio';
 import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
+import { VerticalSeparator } from '../../components/layout/ItemSeparator';
+import SectionTitle from '../../components/layout/SectionTitle';
 import { AddStoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { CreateStoryDto } from '../../services/api/story/story.api';
-import { useCreateStory } from '../../services/api/story/story.hooks';
+import { useCreateStory, useGetCategories } from '../../services/api/story/story.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { heading2 } from '../../styles/typhography';
@@ -30,6 +33,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
       content: '',
       title: '',
       anonymous: false,
+      categoryId: '',
     },
   });
   const { user } = React.useContext(AuthContext);
@@ -40,12 +44,13 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
   useApplyHeaderWorkaround(navigation.setOptions);
 
-  const handlePostStory = ({ content, title, anonymous }: CreateStoryDto) => {
+  const handlePostStory = ({ content, title, anonymous, categoryId }: CreateStoryDto) => {
     if (!user) {
       somethingWentWrongToast();
       return;
     }
 
+    // TODO refactor with validation schema
     if (title === '') {
       Toast.show({
         type: 'error',
@@ -55,11 +60,21 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
       return;
     }
 
+    if (categoryId === '') {
+      Toast.show({
+        type: 'error',
+        text1: 'Category is empty',
+        text2: 'You must choose your story category',
+      });
+      return;
+    }
+
     storyMutation.mutate(
       {
         anonymous,
         content,
         title,
+        categoryId,
         userId: user.uid,
         createdAt: Timestamp.fromDate(new Date()),
       },
@@ -96,6 +111,12 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
   const categoryBottomSheetRef = React.useRef<Modalize>(null);
   const handleShowBottomSheet = () => categoryBottomSheetRef.current?.open();
+
+  const { data: categoryData } = useGetCategories();
+
+  console.log(categoryData);
+
+  const [selectedCategory, setSelectedCategory] = React.useState('');
 
   return (
     <>
@@ -135,8 +156,9 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           />
         </View>
         <View style={[spacing.mt_md, layout.flex_dir_row]}>
-          <Chip containerStyle={[spacing.mr_md]}>Mental Health</Chip>
-          <Chip containerStyle={spacing.mr_md}>War</Chip>
+          {selectedCategory !== '' && (
+            <Chip containerStyle={[spacing.mr_md]}>{selectedCategory}</Chip>
+          )}
           <View>
             <Button
               type="outline"
@@ -151,7 +173,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
                 color={theme.colors.primary}
                 type="material-community"
               />
-              Add Category
+              {selectedCategory !== '' ? 'Change Category' : 'Select Category'}
             </Button>
           </View>
         </View>
@@ -172,11 +194,33 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           />
         </View>
       </ScrollView>
-      <BottomSheet bottomSheetRef={categoryBottomSheetRef}>
-        <View style={[layout.container, layout.section_lg]}>
-          <Text subtitle>Select Category</Text>
-        </View>
-      </BottomSheet>
+      <BottomSheet
+        bottomSheetRef={categoryBottomSheetRef}
+        flatListProps={{
+          data: categoryData,
+          renderItem: ({ item }) => (
+            <Controller
+              control={control}
+              name="categoryId"
+              render={({ field: { onChange, value } }) => (
+                <Radio
+                  checked={value === item.id}
+                  text={item.label}
+                  onPress={() => {
+                    onChange(item.id);
+                    setSelectedCategory(item.labelShort);
+                  }}
+                />
+              )}
+            />
+          ),
+          ListHeaderComponent: (
+            <SectionTitle title="Select Category" marginBottom="2xl" />
+          ),
+          ItemSeparatorComponent: VerticalSeparator,
+          contentContainerStyle: [layout.section_lg, layout.container_gutter],
+        }}
+      />
     </>
   );
 }

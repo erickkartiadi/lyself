@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import { useFindCategory } from '../../services/api/story/story.hooks';
 import useGetUser from '../../services/api/user/users.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
@@ -15,11 +16,12 @@ import Card from '../base/Card';
 import Chip from '../base/Chip';
 
 // TODO add skeleton placeholder
-function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
+function StoryCard({ anonymous, content, createdAt, title, userId, categoryId }: Story) {
   const { theme } = useTheme();
   const styles = useStyles();
 
   const { data } = useGetUser(userId);
+  const { data: categoryData } = useFindCategory(categoryId);
 
   return (
     <Card>
@@ -50,9 +52,8 @@ function StoryCard({ anonymous, content, createdAt, title, userId }: Story) {
       </View>
       <View style={layout.flex_dir_row}>
         <Chip size="sm" containerStyle={spacing.mr_md}>
-          mental illness
+          {categoryData?.labelShort}
         </Chip>
-        <Chip size="sm">motivation</Chip>
       </View>
       <Divider color={theme.colors.secondary} style={spacing.my_xl} />
       <View style={[layout.flex_dir_row, layout.justify_between]}>

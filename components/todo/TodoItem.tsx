@@ -151,7 +151,6 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
               }}
               fillColor={importanceColor}
               checked={watchCompleted}
-              size={SIZING['4xl']}
             />
             <View style={[layout.flex, layout.flex_dir_col]}>
               <Text

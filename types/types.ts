@@ -31,10 +31,19 @@ export type Todo = {
 };
 
 export type Story = {
+  id: string;
   title: string;
   content: string;
   createdAt: Timestamp;
   updatedAt: string;
   anonymous: boolean;
   userId: string;
+  categoryId: string;
+};
+
+export type Category = {
+  id: string;
+  label: string;
+  labelShort: string;
+  storyIds: string[];
 };

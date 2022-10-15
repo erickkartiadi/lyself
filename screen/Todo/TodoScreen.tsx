@@ -218,6 +218,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         isEditing={false}
       />
       <BottomSheet
+        adjustToContentHeight
         bottomSheetRef={filterBottomSheetRef}
         modalStyle={[layout.container_gutter, layout.section_lg]}
       >
