@@ -18,10 +18,43 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   const { theme } = useTheme();
   const styles = useStyles();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>('all');
 
-  const { data, isFetching, refetch } = useGetStories(selectedCategory);
+  const { data, isFetching, refetch } = useGetStories(selectedCategoryId);
   const { data: categoriesData } = useGetCategories();
+
+  const StoryChipFilters = (
+    <View style={[styles.defaultBackground, spacing.mb_xl, layout.flex_dir_row]}>
+      <FlatList
+        horizontal
+        overScrollMode="never"
+        style={layout.no_container_gutter}
+        contentContainerStyle={layout.container_gutter}
+        showsHorizontalScrollIndicator={false}
+        data={categoriesData}
+        ListHeaderComponent={
+          <Chip
+            chipColor="primary"
+            isActive={selectedCategoryId === 'all'}
+            onPress={() => setSelectedCategoryId('all')}
+            containerStyle={spacing.mr_md}
+          >
+            All
+          </Chip>
+        }
+        renderItem={({ item }) => (
+          <Chip
+            chipColor="primary"
+            isActive={item.id === selectedCategoryId}
+            onPress={() => setSelectedCategoryId(item.id)}
+            containerStyle={spacing.mr_md}
+          >
+            {item.labelShort}
+          </Chip>
+        )}
+      />
+    </View>
+  );
 
   return (
     <>
@@ -31,36 +64,7 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
           layout.container_gutter,
           layout.section_lg,
         ]}
-        ListHeaderComponent={
-          <View style={[styles.defaultBackground, spacing.mb_xl, layout.flex_dir_row]}>
-            <FlatList
-              horizontal
-              overScrollMode="never"
-              style={layout.no_container_gutter}
-              contentContainerStyle={layout.container_gutter}
-              showsHorizontalScrollIndicator={false}
-              data={categoriesData}
-              ListHeaderComponent={
-                <Chip
-                  isActive={selectedCategory === 'all'}
-                  onPress={() => setSelectedCategory('all')}
-                  containerStyle={spacing.mr_md}
-                >
-                  All
-                </Chip>
-              }
-              renderItem={({ item }) => (
-                <Chip
-                  isActive={item.id === selectedCategory}
-                  onPress={() => setSelectedCategory(item.id)}
-                  containerStyle={spacing.mr_md}
-                >
-                  {item.labelShort}
-                </Chip>
-              )}
-            />
-          </View>
-        }
+        ListHeaderComponent={StoryChipFilters}
         refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
         ItemSeparatorComponent={VerticalSeparator}
         renderItem={({ item }) => <StoryCard {...item} />}

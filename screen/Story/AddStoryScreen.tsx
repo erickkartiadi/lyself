@@ -114,8 +114,6 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
   const { data: categoryData } = useGetCategories();
 
-  console.log(categoryData);
-
   const [selectedCategory, setSelectedCategory] = React.useState('');
 
   return (
