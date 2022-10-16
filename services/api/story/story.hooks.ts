@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 
 import { Category, Story } from '../../../types/types';
+import { sortNumber } from '../../../utils/sort';
 import { somethingWentWrongToast } from '../../../utils/toast';
 import {
   createCategory,
@@ -18,7 +19,13 @@ export const useGetStories = (categoryId: string) =>
     staleTime: 1000 * 60 * 15,
   });
 
-export const useGetCategories = () => useQuery<Category[]>(['category'], fetchCategories);
+export const useGetCategories = () =>
+  useQuery<Category[]>(['category'], fetchCategories, {
+    select: (data) =>
+      data.sort((a, b) => sortNumber(a.storyIds.length, b.storyIds.length, 'DESC')),
+    refetchInterval: 1000 * 60 * 15,
+    staleTime: 1000 * 60 * 15,
+  });
 
 // add newly created story to cache
 export const useCreateStory = () =>

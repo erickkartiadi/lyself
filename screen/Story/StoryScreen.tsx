@@ -20,9 +20,24 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('all');
 
-  // TODO refetch both categories & stories
-  const { data, isFetching, refetch } = useGetStories(selectedCategoryId);
-  const { data: categoriesData } = useGetCategories();
+  const {
+    data,
+    isRefetching: isStoriesRefetching,
+    refetch: refetchStories,
+  } = useGetStories(selectedCategoryId);
+
+  const {
+    data: categoriesData,
+    isRefetching: isCategoriesRefetching,
+    refetch: refetchCategories,
+  } = useGetCategories();
+
+  const handleOnRefresh = () => {
+    refetchCategories();
+    refetchStories();
+  };
+
+  const isRefreshing = isStoriesRefetching || isCategoriesRefetching;
 
   const StoryChipFilters = (
     <View style={[styles.defaultBackground, spacing.mb_xl, layout.flex_dir_row]}>
@@ -43,7 +58,6 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
             All
           </Chip>
         }
-        // TODO sort render by post count
         renderItem={({ item }) => (
           <Chip
             chipColor="primary"
@@ -67,7 +81,9 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
           layout.section_lg,
         ]}
         ListHeaderComponent={StoryChipFilters}
-        refreshControl={<RefreshControl refreshing={isFetching} onRefresh={refetch} />}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={handleOnRefresh} />
+        }
         // TODO add list empty component
         ItemSeparatorComponent={VerticalSeparator}
         renderItem={({ item }) => <StoryCard {...item} />}

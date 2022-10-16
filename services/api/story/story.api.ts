@@ -69,8 +69,6 @@ export async function findCategory(categoryId: string): Promise<Category> {
 }
 
 export async function fetchCategories(): Promise<Category[]> {
-  console.log('fetch categories');
-
   const querySnapshot = await getDocs(categoryCol);
   return querySnapshot.docs.map((document) => ({ ...document.data(), id: document.id }));
 }
