@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Divider, Icon, Text, useTheme } from '@rneui/themed';
 import { Timestamp } from 'firebase/firestore';
 import * as React from 'react';
@@ -6,66 +7,55 @@ import { ScrollView, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import Toast from 'react-native-toast-message';
 
-import BottomSheet from '../../components/base/BottomSheet';
 import Chip from '../../components/base/Chip';
 import ButtonLink from '../../components/base/Link';
-import Radio from '../../components/base/Radio';
 import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
-import { VerticalSeparator } from '../../components/layout/ItemSeparator';
-import SectionTitle from '../../components/layout/SectionTitle';
+import AddCategoryBottomSheet from '../../components/story/AddCategoryBottomSheet';
+import SelectCategoryBottomSheet from '../../components/story/SelectCategoryBottomSheet';
 import { AddStoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { CreateStoryDto } from '../../services/api/story/story.api';
-import { useCreateStory, useGetCategories } from '../../services/api/story/story.hooks';
+import { useCreateStory } from '../../services/api/story/story.hooks';
+import border from '../../styles/border';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { heading2 } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
+import { createStorySchema } from '../../utils/constant/validation/story.schema';
 import { AuthContext } from '../../utils/context/AuthContext';
 import useApplyHeaderWorkaround from '../../utils/hooks/useApplyHeaderWorkaround';
 import useStyles from '../../utils/hooks/useStyles';
 import { somethingWentWrongToast } from '../../utils/toast';
 
 function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
+  useApplyHeaderWorkaround(navigation.setOptions);
+
   const { theme } = useTheme();
-  const { control, handleSubmit, reset } = useForm<CreateStoryDto>({
+  const styles = useStyles();
+  const { user } = React.useContext(AuthContext);
+
+  const [selectedCategory, setSelectedCategory] = React.useState('');
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreateStoryDto>({
     defaultValues: {
       content: '',
       title: '',
       anonymous: false,
       categoryId: '',
     },
+    resolver: yupResolver(createStorySchema),
   });
-  const { user } = React.useContext(AuthContext);
 
   const storyMutation = useCreateStory();
-
-  const styles = useStyles();
-
-  useApplyHeaderWorkaround(navigation.setOptions);
 
   const handlePostStory = ({ content, title, anonymous, categoryId }: CreateStoryDto) => {
     if (!user) {
       somethingWentWrongToast();
-      return;
-    }
-
-    // TODO refactor with validation schema
-    if (title === '') {
-      Toast.show({
-        type: 'error',
-        text1: 'Title is empty',
-        text2: 'You must add title to your story',
-      });
-      return;
-    }
-
-    if (categoryId === '') {
-      Toast.show({
-        type: 'error',
-        text1: 'Category is empty',
-        text2: 'You must choose your story category',
-      });
       return;
     }
 
@@ -103,18 +93,20 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
     ),
     []
   );
+
   React.useEffect(() => {
     navigation.setOptions({
       headerRight: postButton,
     });
   }, []);
 
-  const categoryBottomSheetRef = React.useRef<Modalize>(null);
-  const handleShowBottomSheet = () => categoryBottomSheetRef.current?.open();
+  const selectCategoryBottomSheetRef = React.useRef<Modalize>(null);
+  const addCategoryBottomSheetRef = React.useRef<Modalize>(null);
 
-  const { data: categoryData } = useGetCategories();
-
-  const [selectedCategory, setSelectedCategory] = React.useState('');
+  const showSelectCategoryBottomSheet = () =>
+    selectCategoryBottomSheetRef.current?.open();
+  const hideSelectCategoryBottomSheet = () =>
+    selectCategoryBottomSheetRef.current?.close();
 
   return (
     <>
@@ -125,10 +117,17 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             name="title"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                enableErrorMessage={false}
-                showBorder={false}
+                renderErrorMessage={errors.title !== undefined}
+                errorMessage={errors.title && errors.title.message}
+                inputContainerStyle={[
+                  spacing.px_0,
+                  spacing.py_0,
+                  layout.backgroundTransparent,
+                  border.colorTransparent,
+                ]}
+                errorStyle={[spacing.mt_0, spacing.mb_0]}
                 inputStyle={heading2}
-                placeholder="Title"
+                placeholder="Your Story Title"
                 multiline
                 onBlur={onBlur}
                 onChangeText={onChange}
@@ -141,9 +140,16 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             name="content"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                containerStyle={spacing.mt_sm}
-                enableErrorMessage={false}
-                showBorder={false}
+                renderErrorMessage={errors.content !== undefined}
+                errorMessage={errors.content && errors.content.message}
+                errorStyle={[spacing.mt_0, spacing.mb_0]}
+                inputContainerStyle={[
+                  spacing.px_0,
+                  spacing.py_0,
+                  layout.backgroundTransparent,
+                  border.colorTransparent,
+                ]}
+                containerStyle={spacing.mt_xs}
                 placeholder="Type your story here."
                 multiline
                 onBlur={onBlur}
@@ -153,7 +159,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             )}
           />
         </View>
-        <View style={[spacing.mt_md, layout.flex_dir_row]}>
+        <View style={[spacing.mt_lg, layout.flex_dir_row]}>
           {selectedCategory !== '' && (
             <Chip containerStyle={[spacing.mr_md]}>{selectedCategory}</Chip>
           )}
@@ -162,7 +168,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
               type="outline"
               size="md"
               uppercase={false}
-              onPress={handleShowBottomSheet}
+              onPress={showSelectCategoryBottomSheet}
             >
               <Icon
                 containerStyle={spacing.mr_sm}
@@ -175,6 +181,11 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             </Button>
           </View>
         </View>
+        {errors.categoryId && (
+          <Text caption style={[styles.textError, spacing.mt_sm]}>
+            {errors.categoryId.message}
+          </Text>
+        )}
         <Divider style={spacing.my_xl} />
         <View style={[layout.flex_dir_row, layout.justify_between, layout.align_center]}>
           <View>
@@ -192,33 +203,17 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           />
         </View>
       </ScrollView>
-      <BottomSheet
-        bottomSheetRef={categoryBottomSheetRef}
-        flatListProps={{
-          data: categoryData,
-          renderItem: ({ item }) => (
-            <Controller
-              control={control}
-              name="categoryId"
-              render={({ field: { onChange, value } }) => (
-                <Radio
-                  checked={value === item.id}
-                  text={item.label}
-                  onPress={() => {
-                    onChange(item.id);
-                    setSelectedCategory(item.labelShort);
-                  }}
-                />
-              )}
-            />
-          ),
-          ListHeaderComponent: (
-            <SectionTitle title="Select Category" marginBottom="2xl" />
-          ),
-          ItemSeparatorComponent: VerticalSeparator,
-          contentContainerStyle: [layout.section_lg, layout.container_gutter],
+
+      <SelectCategoryBottomSheet
+        control={control}
+        headerActionOnPress={() => {
+          hideSelectCategoryBottomSheet();
+          addCategoryBottomSheetRef.current?.open();
         }}
+        bottomSheetRef={selectCategoryBottomSheetRef}
+        setSelectedCategory={setSelectedCategory}
       />
+      <AddCategoryBottomSheet bottomSheetRef={addCategoryBottomSheetRef} />
     </>
   );
 }

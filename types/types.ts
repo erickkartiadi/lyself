@@ -43,7 +43,7 @@ export type Story = {
 
 export type Category = {
   id: string;
-  label: string;
-  labelShort: string;
+  name: string;
+  nameShort: string;
   storyIds: string[];
 };

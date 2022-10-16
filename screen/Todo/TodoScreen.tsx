@@ -8,7 +8,6 @@ import { Modalize } from 'react-native-modalize';
 import BottomSheet from '../../components/base/BottomSheet';
 import Chip from '../../components/base/Chip';
 import RefreshControl from '../../components/layout/RefreshControl';
-import SectionTitle from '../../components/layout/SectionTitle';
 import TodoBottomSheet from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
 import { TodoScreenNavigationProps } from '../../navigation/navigation.types';
@@ -218,15 +217,16 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         isEditing={false}
       />
       <BottomSheet
+        showHeader={false}
         adjustToContentHeight
         bottomSheetRef={filterBottomSheetRef}
-        modalStyle={[layout.container_gutter, layout.section_lg]}
+        headerTitle="Filter"
+        modalStyle={[layout.container_gutter]}
       >
-        <Text h2>Filter</Text>
         <View style={[layout.section_lg]}>
-          <SectionTitle title="Sort" />
+          <Text subtitle>Sort</Text>
           <View
-            style={[layout.flex, layout.flex_dir_row, spacing.mt_sm, layout.flex_wrap]}
+            style={[layout.flex, layout.flex_dir_row, spacing.mt_lg, layout.flex_wrap]}
           >
             {sortItems.map(({ label, sort, orderBy }) => (
               <Chip
@@ -244,9 +244,9 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
           </View>
         </View>
         <View style={[layout.section_lg]}>
-          <SectionTitle title="Filter" />
+          <Text subtitle>Filter</Text>
           <View
-            style={[layout.flex, layout.flex_dir_row, spacing.mt_sm, layout.flex_wrap]}
+            style={[layout.flex, layout.flex_dir_row, spacing.mt_md, layout.flex_wrap]}
           >
             {filterItems.map(({ label, filter }) => (
               <Chip

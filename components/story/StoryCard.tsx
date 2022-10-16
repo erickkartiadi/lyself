@@ -52,7 +52,7 @@ function StoryCard({ anonymous, content, createdAt, title, userId, categoryId }:
       </View>
       <View style={layout.flex_dir_row}>
         <Chip size="sm" containerStyle={spacing.mr_md}>
-          {categoryData?.labelShort}
+          {categoryData?.nameShort}
         </Chip>
       </View>
       <Divider color={theme.colors.secondary} style={spacing.my_xl} />

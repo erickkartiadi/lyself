@@ -27,6 +27,11 @@ export async function fetchStories(categoryId: string): Promise<Story[]> {
   if (categoryId !== 'all') {
     const categorySnapshot = await getDoc(doc(categoryCol, categoryId));
     const storyIds = categorySnapshot.data()?.storyIds;
+
+    if (storyIds && storyIds?.length <= 0) {
+      return [];
+    }
+
     const q = query(storyCol, where(documentId(), 'in', storyIds));
     snapshot = await getDocs(q);
   } else {
@@ -37,12 +42,6 @@ export async function fetchStories(categoryId: string): Promise<Story[]> {
     ...document.data(),
     id: document.id,
   })) as Story[];
-}
-
-export async function findCategory(categoryId: string): Promise<Category> {
-  const categoryDoc = await getDoc(doc(categoryCol, categoryId));
-
-  return categoryDoc.data() as Category;
 }
 
 // TODO add user id
@@ -57,7 +56,21 @@ export async function updateStory(CreateStoryDto: CreateStoryDto) {
   return 'tes';
 }
 
+export async function createCategory(
+  createCategoryDto: CreateCategoryDto
+): Promise<void> {
+  await addDoc(categoryCol, createCategoryDto);
+}
+
+export async function findCategory(categoryId: string): Promise<Category> {
+  const categoryDoc = await getDoc(doc(categoryCol, categoryId));
+
+  return categoryDoc.data() as Category;
+}
+
 export async function fetchCategories(): Promise<Category[]> {
+  console.log('fetch categories');
+
   const querySnapshot = await getDocs(categoryCol);
   return querySnapshot.docs.map((document) => ({ ...document.data(), id: document.id }));
 }

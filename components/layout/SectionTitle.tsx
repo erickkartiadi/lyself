@@ -42,7 +42,6 @@ function SectionTitle({
         </Text>
         {showRightComponent && !rightComponent ? (
           <NavLink
-            style={[layout.align_end, layout.flex_shrink]}
             to={{
               screen: showRightComponent && screen && screen,
             }}

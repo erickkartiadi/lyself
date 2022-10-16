@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   textGreyLighter: {
     color: theme.colors.grey5,
   },
+  textError: {
+    color: theme.colors.error,
+  },
 
   // backgroundColor
   defaultBackground: {
