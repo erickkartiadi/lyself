@@ -131,6 +131,10 @@ const border = StyleSheet.create({
   rounded: {
     borderRadius: BORDER_RADIUS.rounded,
   },
+
+  colorTransparent: {
+    borderColor: 'transparent',
+  },
 });
 
 export default border;

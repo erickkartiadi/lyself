@@ -2,7 +2,6 @@ import { Icon, InputProps, useTheme } from '@rneui/themed';
 import React from 'react';
 
 import border from '../../styles/border';
-import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import useToggle from '../../utils/hooks/useToggle';
 import TextInput from './TextInput';
@@ -16,14 +15,14 @@ function PasswordInput({ label, placeholder, ...props }: InputProps) {
       label={label}
       placeholder={placeholder}
       secureTextEntry={!isPasswordVisible}
+      rightIconContainerStyle={{ marginHorizontal: 0, marginVertical: 0 }}
       rightIcon={
         <Icon
-          name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'}
+          name={isPasswordVisible ? 'eye-off' : 'eye'}
           type="ionicon"
           containerStyle={border.rounded}
           size={SIZING['3xl']}
-          iconStyle={spacing.p_sm}
-          color={theme.colors.black}
+          color={theme.colors.grey3}
           onPress={() => togglePasswordVisible()}
         />
       }

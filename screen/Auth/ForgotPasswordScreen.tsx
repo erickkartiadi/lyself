@@ -71,6 +71,7 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
           name="email"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
+              renderErrorMessage={errors.email !== undefined}
               errorMessage={errors.email && errors.email.message}
               onChangeText={onChange}
               onBlur={onBlur}

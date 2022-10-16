@@ -17,7 +17,7 @@ import TextInput from '../../components/base/TextInput';
 import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
 import { register, RegisterUserDto } from '../../services/api/auth/auth.api';
 import layout from '../../styles/layout';
-import { width } from '../../styles/size';
+import { height, width } from '../../styles/size';
 import { registerSchema } from '../../utils/constant/validation/auth.schema';
 
 function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
@@ -68,18 +68,21 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
         <BackButton />
         <Text h1>Create new account</Text>
         <Text>Just one more step to be part of the {'\n'}Lyself community.</Text>
-        <View style={[layout.justify_center, layout.align_center, layout.ratio_square]}>
-          <Image
-            source={registerIllustration}
-            style={[layout.flex, width.w_100]}
-            resizeMode="center"
-          />
+        <View style={[layout.align_center]}>
+          <View style={[height.h_13xl, layout.ratio_square]}>
+            <Image
+              source={registerIllustration}
+              style={[layout.flex, width.w_100]}
+              resizeMode="center"
+            />
+          </View>
         </View>
         <Controller
           control={control}
           name="name"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
+              renderErrorMessage={errors.name !== undefined}
               errorMessage={errors.name && errors.name.message}
               onBlur={onBlur}
               onChangeText={onChange}
@@ -96,6 +99,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
           name="email"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
+              renderErrorMessage={errors.email !== undefined}
               errorMessage={errors.email && errors.email.message}
               onChangeText={onChange}
               onBlur={onBlur}
@@ -115,6 +119,7 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             <PasswordInput
               autoComplete="password"
               textContentType="password"
+              renderErrorMessage={errors.password !== undefined}
               errorMessage={errors.password && errors.password.message}
               onChangeText={onChange}
               onBlur={onBlur}
@@ -124,7 +129,11 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
             />
           )}
         />
-        <Button loading={mutation.isLoading} onPress={handleSubmit(handleRegister)}>
+        <Button
+          containerStyle={layout.section_md}
+          loading={mutation.isLoading}
+          onPress={handleSubmit(handleRegister)}
+        >
           Create Account
         </Button>
         <View

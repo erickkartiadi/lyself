@@ -24,10 +24,11 @@ const myTheme = createTheme({
   darkColors,
   components: {
     Input: () => ({
-      labelStyle: subtitle,
+      labelStyle: subtitle2,
       inputStyle: regular,
       inputContainerStyle: border.bottom_width_md,
       containerStyle: spacing.px_0,
+      rightIconContainerStyle: [spacing.py_0, spacing.px_0],
     }),
     Card: {
       containerStyle: spacing.m_0,

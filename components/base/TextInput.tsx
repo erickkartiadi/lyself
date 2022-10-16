@@ -1,13 +1,10 @@
 import { Input, InputProps, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
 
+import border from '../../styles/border';
 import spacing from '../../styles/spacing';
-import { caption } from '../../styles/typhography';
-
-interface TextInputProps extends InputProps {
-  showBorder?: boolean;
-  enableErrorMessage?: boolean;
-}
+import { caption, regular } from '../../styles/typhography';
+import useStyles from '../../utils/hooks/useStyles';
 
 function TextInput({
   label,
@@ -15,18 +12,19 @@ function TextInput({
   ref,
   onBlur,
   errorMessage,
-  enableErrorMessage,
-  showBorder,
   inputStyle,
   inputContainerStyle,
   containerStyle,
+  errorStyle,
   ...props
-}: TextInputProps) {
+}: InputProps) {
   const { theme } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
-  let borderColor = theme.colors.grey4;
-  if (isFocused) borderColor = theme.colors.grey2;
+  const styles = useStyles();
+
+  let borderColor = theme.colors.secondary;
+  if (isFocused) borderColor = theme.colors.grey4;
   if (errorMessage) borderColor = theme.colors.error;
 
   return (
@@ -36,38 +34,37 @@ function TextInput({
         onBlur?.(e);
         setIsFocused(false);
       }}
-      labelStyle={{
-        color: theme.colors.black,
-      }}
-      containerStyle={[containerStyle]}
+      labelStyle={[styles.textBlack, spacing.mb_sm]}
       selectionColor={theme.colors.primary}
       inputContainerStyle={[
+        spacing.px_lg,
+        spacing.py_xs,
+        styles.borderGrey5,
+        border.width_md,
+        border.radius_lg,
+        styles.secondaryBackground,
         {
           borderColor,
-          borderBottomWidth: showBorder ? 1 : 0,
         },
         inputContainerStyle,
       ]}
-      inputStyle={[inputStyle]}
+      containerStyle={[containerStyle]}
+      inputStyle={[regular, inputStyle]}
       errorMessage={errorMessage}
       errorStyle={[
         caption,
         spacing.mx_0,
-        {
-          marginBottom: errorMessage ? theme.spacing.xl : 0,
-          display: enableErrorMessage ? 'flex' : 'none',
-        },
+        spacing.mt_sm,
+        spacing.mb_xl,
+        spacing.m_0,
+        errorStyle,
       ]}
       label={label}
+      placeholderTextColor={theme.colors.grey2}
       placeholder={placeholder}
       {...props}
     />
   );
 }
-
-TextInput.defaultProps = {
-  showBorder: true,
-  enableErrorMessage: true,
-};
 
 export default TextInput;

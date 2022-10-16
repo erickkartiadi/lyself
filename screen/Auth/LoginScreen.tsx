@@ -17,7 +17,7 @@ import TextInput from '../../components/base/TextInput';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
 import { login, LoginDto } from '../../services/api/auth/auth.api';
 import layout from '../../styles/layout';
-import { width } from '../../styles/size';
+import { height, width } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { loginSchema } from '../../utils/constant/validation/auth.schema';
 
@@ -65,18 +65,21 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         <BackButton />
         <Text h1>Welcome to Lyself</Text>
         <Text>Login to continue.</Text>
-        <View style={[layout.align_center, layout.justify_center, layout.ratio_square]}>
-          <Image
-            source={loginIllustration}
-            style={[layout.flex, width.w_100]}
-            resizeMode="center"
-          />
+        <View style={[layout.align_center]}>
+          <View style={[height.h_13xl, layout.ratio_square]}>
+            <Image
+              source={loginIllustration}
+              style={[layout.flex, width.w_100]}
+              resizeMode="center"
+            />
+          </View>
         </View>
         <Controller
           control={control}
           name="email"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
+              renderErrorMessage={errors.password !== undefined}
               errorMessage={errors.email && errors.email.message}
               onChangeText={onChange}
               onBlur={onBlur}
@@ -96,6 +99,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             <PasswordInput
               autoComplete="password"
               textContentType="password"
+              renderErrorMessage={errors.password !== undefined}
               errorMessage={errors.password && errors.password.message}
               onChangeText={onChange}
               onBlur={onBlur}
@@ -112,7 +116,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
             layout.flex_dir_row,
             layout.align_center,
             layout.justify_end,
-            spacing.mt_n_xl,
+            spacing.mt_n_lg,
           ]}
         >
           <NavLink to={{ screen: 'ForgotPassword' }}>Forgot Password?</NavLink>

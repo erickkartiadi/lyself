@@ -100,6 +100,10 @@ const layout = StyleSheet.create({
   display_flex: {
     display: 'flex',
   },
+
+  backgroundTransparent: {
+    backgroundColor: 'transparent',
+  },
 });
 
 export default layout;

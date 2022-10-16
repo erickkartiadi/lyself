@@ -5,6 +5,7 @@ import { Control, Controller } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 
 import { CreateTodoDto } from '../../services/api/todos/todos.api';
+import border from '../../styles/border';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { heading3 } from '../../styles/typhography';
@@ -49,10 +50,12 @@ function TodoBottomSheet({
 
   return (
     <BottomSheet
+      showHeader={false}
       adjustToContentHeight
       scrollViewProps={{ keyboardShouldPersistTaps: 'handled' }}
       bottomSheetRef={bottomSheetRef}
       onClose={onClose}
+      closeOnOverlayTap
     >
       <View style={[layout.container, layout.section_lg]}>
         <View style={[layout.flex, layout.flex_dir_row]}>
@@ -73,10 +76,16 @@ function TodoBottomSheet({
             name="todo"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                showBorder={false}
-                enableErrorMessage={false}
+                renderErrorMessage={false}
+                errorStyle={[spacing.mt_0, spacing.mb_0]}
                 placeholder="What are you planning today?"
                 multiline
+                inputContainerStyle={[
+                  spacing.px_0,
+                  spacing.py_0,
+                  layout.backgroundTransparent,
+                  border.colorTransparent,
+                ]}
                 containerStyle={layout.flex}
                 inputStyle={heading3}
                 onBlur={onBlur}
@@ -93,8 +102,14 @@ function TodoBottomSheet({
             name="note"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                showBorder={false}
-                enableErrorMessage={false}
+                renderErrorMessage={false}
+                errorStyle={[spacing.mt_0, spacing.mb_0]}
+                inputContainerStyle={[
+                  spacing.px_0,
+                  spacing.py_0,
+                  layout.backgroundTransparent,
+                  border.colorTransparent,
+                ]}
                 placeholder="Add note"
                 onChangeText={onChange}
                 onBlur={onBlur}
