@@ -5,7 +5,6 @@ import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
-import Toast from 'react-native-toast-message';
 
 import Chip from '../../components/base/Chip';
 import ButtonLink from '../../components/base/Link';
@@ -70,16 +69,8 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
       },
       {
         onSuccess: () => {
-          Toast.show({
-            type: 'success',
-            text1: 'Success',
-            text2: 'Your story has been created',
-          });
           reset();
           navigation.goBack();
-        },
-        onError: () => {
-          somethingWentWrongToast();
         },
       }
     );

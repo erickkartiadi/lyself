@@ -1,13 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
-import { useMutation } from '@tanstack/react-query';
-import { FirebaseError } from 'firebase/app';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Toast from 'react-native-toast-message';
 
 import loginIllustration from '../../assets/images/login-illustration.png';
 import BackButton from '../../components/base/BackButton';
@@ -15,7 +12,8 @@ import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
 import TextInput from '../../components/base/TextInput';
 import { LoginScreenNavigationProps } from '../../navigation/navigation.types';
-import { login, LoginDto } from '../../services/api/auth/auth.api';
+import { LoginDto } from '../../services/api/auth/auth.api';
+import { useLogin } from '../../services/api/auth/auth.hooks';
 import layout from '../../styles/layout';
 import { height, width } from '../../styles/size';
 import spacing from '../../styles/spacing';
@@ -35,25 +33,17 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
     resolver: yupResolver(loginSchema),
   });
 
-  const mutation = useMutation(login, {
-    onSuccess: () => {
-      navigation.navigate('HomeTab', {
-        screen: 'Home',
-      });
-
-      reset();
-    },
-    onError: (error: FirebaseError) => {
-      Toast.show({
-        type: 'error',
-        text1: error.name,
-        text2: error.message,
-      });
-    },
-  });
+  const loginMutation = useLogin();
 
   const handleLogin = async (loginFormData: LoginDto) => {
-    mutation.mutate(loginFormData);
+    loginMutation.mutate(loginFormData, {
+      onSuccess: () => {
+        navigation.navigate('HomeTab', {
+          screen: 'Home',
+        });
+        reset();
+      },
+    });
   };
 
   return (
@@ -123,7 +113,7 @@ function LoginScreen({ navigation }: LoginScreenNavigationProps) {
         </View>
         <Button
           containerStyle={layout.section_lg}
-          loading={mutation.isLoading}
+          loading={loginMutation.isLoading}
           onPress={handleSubmit(handleLogin)}
         >
           Login

@@ -21,7 +21,20 @@ export const useGetStories = (categoryId: string) =>
 export const useGetCategories = () => useQuery<Category[]>(['category'], fetchCategories);
 
 // add newly created story to cache
-export const useCreateStory = () => useMutation(createStory);
+export const useCreateStory = () =>
+  useMutation(createStory, {
+    onSuccess: () => {
+      Toast.show({
+        type: 'success',
+        text1: 'Success',
+        text2: 'Your story has been created',
+      });
+    },
+    onError: () => {
+      somethingWentWrongToast();
+    },
+  });
+
 export const useUpdateStory = () => useMutation(updateStory);
 
 // TODO use Category id type

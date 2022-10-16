@@ -1,7 +1,7 @@
 import Constant from 'expo-constants';
 
-import { Article } from '../../types/types';
-import { newsClient } from '../axios/axios';
+import { Article } from '../../../types/types';
+import { newsClient } from '../../axios/axios';
 
 type NewsEverything = {
   source: {

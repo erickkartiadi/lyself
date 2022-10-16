@@ -1,8 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FlatList, View } from 'react-native';
 
-import fetchNews from '../../services/api/news';
+import useGetNews from '../../services/api/news/news.hooks';
 import layout from '../../styles/layout';
 import { width } from '../../styles/size';
 import { Article } from '../../types/types';
@@ -30,7 +29,7 @@ const renderEmptyArticles = () => (
 );
 
 function ArticleSection() {
-  const articlesQuery = useQuery<Article[]>(['articles'], fetchNews);
+  const { data } = useGetNews();
 
   return (
     <View style={layout.section_lg}>
@@ -43,7 +42,7 @@ function ArticleSection() {
         showsHorizontalScrollIndicator={false}
         style={[layout.no_container_gutter]}
         contentContainerStyle={[layout.container_gutter]}
-        data={articlesQuery.data}
+        data={data}
         renderItem={renderArticles}
       />
     </View>

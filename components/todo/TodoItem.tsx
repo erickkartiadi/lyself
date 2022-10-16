@@ -21,7 +21,6 @@ import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTime';
-import { somethingWentWrongToast } from '../../utils/toast';
 import Card from '../base/Card';
 import Checkbox from '../base/Checkbox';
 import TodoBottomSheet from './TodoBottomSheet';
@@ -40,8 +39,8 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     },
   });
 
-  const updateMutation = useUpdateTodo();
-  const deleteMutation = useDeleteTodo();
+  const updateTodoMutation = useUpdateTodo();
+  const deleteTodoMutation = useDeleteTodo();
 
   const bottomSheetRef = useRef<Modalize>(null);
 
@@ -77,7 +76,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     )
       return;
 
-    updateMutation.mutate(
+    updateTodoMutation.mutate(
       {
         id,
         completed: watchCompleted,
@@ -90,9 +89,6 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         onSettled: () => {
           closeBottomSheet();
         },
-        onError: () => {
-          somethingWentWrongToast();
-        },
       }
     );
   };
@@ -103,12 +99,9 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
 
   // FIXME
   const handleDeleteTodo = async () => {
-    deleteMutation.mutate(id, {
+    deleteTodoMutation.mutate(id, {
       onSuccess: () => {
         closeBottomSheet();
-      },
-      onError: () => {
-        somethingWentWrongToast();
       },
     });
   };
@@ -127,7 +120,7 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         rightContent={
           <TodoSwipeableRight
             onPress={handleDeleteTodo}
-            loading={deleteMutation.isLoading}
+            loading={deleteTodoMutation.isLoading}
           />
         }
         rightWidth={SIZING['8xl']}
@@ -197,8 +190,8 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         onClose={handleUpdateTodo}
         onDelete={handleDeleteTodo}
         buttonTitle="UPDATE"
-        isButtonLoading={updateMutation.isLoading}
-        isDeleteLoading={deleteMutation.isLoading}
+        isButtonLoading={updateTodoMutation.isLoading}
+        isDeleteLoading={deleteTodoMutation.isLoading}
         bottomSheetRef={bottomSheetRef}
         control={control}
       />

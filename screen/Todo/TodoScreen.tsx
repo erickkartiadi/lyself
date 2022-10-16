@@ -19,7 +19,6 @@ import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
-import { somethingWentWrongToast } from '../../utils/toast';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
 import TodoEmptyScreen from './TodoEmptyScreen';
@@ -132,9 +131,6 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         onSettled: () => {
           todoBottomSheetRef.current?.close();
           reset();
-        },
-        onError: () => {
-          somethingWentWrongToast();
         },
       }
     );

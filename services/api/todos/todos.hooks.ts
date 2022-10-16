@@ -13,6 +13,7 @@ import {
   TodoFilter,
   TodoSort,
 } from '../../../utils/sort';
+import { somethingWentWrongToast } from '../../../utils/toast';
 import { createTodo, deleteTodo, fetchTodos, updateTodo } from './todos.api';
 
 export const useGetTodos = (
@@ -65,6 +66,9 @@ export const useCreateTodo = () => {
         newTodo,
       ]);
     },
+    onError: () => {
+      somethingWentWrongToast();
+    },
   });
 };
 
@@ -82,6 +86,9 @@ export const useUpdateTodo = () => {
         })
       );
     },
+    onError: () => {
+      somethingWentWrongToast();
+    },
   });
 };
 
@@ -95,6 +102,9 @@ export const useDeleteTodo = () => {
       queryClient.setQueryData<Todo[]>(['todos'], (oldTodos) =>
         oldTodos?.filter((todo) => todo.id !== todoId)
       );
+    },
+    onError: () => {
+      somethingWentWrongToast();
     },
   });
 };

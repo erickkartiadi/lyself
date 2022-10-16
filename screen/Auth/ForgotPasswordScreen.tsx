@@ -1,22 +1,20 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
-import { useMutation } from '@tanstack/react-query';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Toast from 'react-native-toast-message';
 
 import forgotPasswordIllustration from '../../assets/images/forgot-password-illustration.png';
 import BackButton from '../../components/base/BackButton';
 import TextInput from '../../components/base/TextInput';
 import { ForgotPasswordScreenNavigationProps } from '../../navigation/navigation.types';
-import { forgotPassword, ForgotPasswordDto } from '../../services/api/auth/auth.api';
+import { ForgotPasswordDto } from '../../services/api/auth/auth.api';
+import { useForgotPassword } from '../../services/api/auth/auth.hooks';
 import layout from '../../styles/layout';
 import { width } from '../../styles/size';
 import { forgotPasswordSchema } from '../../utils/constant/validation/auth.schema';
-import { somethingWentWrongToast } from '../../utils/toast';
 
 function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProps) {
   const {
@@ -31,24 +29,14 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
     resolver: yupResolver(forgotPasswordSchema),
   });
 
-  const mutation = useMutation(forgotPassword, {
-    onSuccess: (email) => {
-      Toast.show({
-        type: 'success',
-        text1: 'Email sent',
-        text2: `We have sent you a reset password email to ${email}. Please check your inbox.`,
-        visibilityTime: 10000,
-      });
-      navigation.navigate('Login');
-      reset();
-    },
-    onError: () => {
-      somethingWentWrongToast();
-    },
-  });
-
+  const forgotPasswordMutation = useForgotPassword();
   const handleForgotPassword = async (forgotPasswordFormData: ForgotPasswordDto) => {
-    mutation.mutate(forgotPasswordFormData);
+    forgotPasswordMutation.mutate(forgotPasswordFormData, {
+      onSuccess: () => {
+        navigation.navigate('Login');
+        reset();
+      },
+    });
   };
 
   return (
@@ -84,7 +72,10 @@ function ForgotPasswordScreen({ navigation }: ForgotPasswordScreenNavigationProp
             />
           )}
         />
-        <Button loading={mutation.isLoading} onPress={handleSubmit(handleForgotPassword)}>
+        <Button
+          loading={forgotPasswordMutation.isLoading}
+          onPress={handleSubmit(handleForgotPassword)}
+        >
           Send Instruction
         </Button>
       </SafeAreaView>

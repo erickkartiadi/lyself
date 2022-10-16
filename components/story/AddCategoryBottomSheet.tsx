@@ -42,7 +42,6 @@ function AddCategoryBottomSheet({ bottomSheetRef }: AddCategoryBottomSheetProps)
         storyIds: [],
       },
       {
-        // TODO move function to hook
         onSuccess: () => {
           bottomSheetRef.current?.close();
           reset();

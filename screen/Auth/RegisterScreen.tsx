@@ -1,13 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
-import { useMutation } from '@tanstack/react-query';
-import { FirebaseError } from 'firebase/app';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Toast from 'react-native-toast-message';
 
 import registerIllustration from '../../assets/images/register-illustration.png';
 import BackButton from '../../components/base/BackButton';
@@ -15,7 +12,8 @@ import NavLink from '../../components/base/NavLink';
 import PasswordInput from '../../components/base/PasswordInput';
 import TextInput from '../../components/base/TextInput';
 import { RegisterScreenNavigationProps } from '../../navigation/navigation.types';
-import { register, RegisterUserDto } from '../../services/api/auth/auth.api';
+import { RegisterUserDto } from '../../services/api/auth/auth.api';
+import { useRegister } from '../../services/api/auth/auth.hooks';
 import layout from '../../styles/layout';
 import { height, width } from '../../styles/size';
 import { registerSchema } from '../../utils/constant/validation/auth.schema';
@@ -35,28 +33,15 @@ function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
     resolver: yupResolver(registerSchema),
   });
 
-  const mutation = useMutation(register, {
-    onSuccess: ({ user: { email } }) => {
-      Toast.show({
-        type: 'success',
-        text1: 'Email confirmation sent',
-        text2: `We have sent you a confirmation email to ${email}, please confirm your email address.`,
-      });
-      navigation.navigate('Login');
-
-      reset();
-    },
-    onError: (error: FirebaseError) => {
-      Toast.show({
-        type: 'error',
-        text1: error.name,
-        text2: error.message,
-      });
-    },
-  });
+  const mutation = useRegister();
 
   const handleRegister = async (registerFormData: RegisterUserDto) => {
-    mutation.mutate(registerFormData);
+    mutation.mutate(registerFormData, {
+      onSuccess: () => {
+        navigation.navigate('Login');
+        reset();
+      },
+    });
   };
 
   return (
