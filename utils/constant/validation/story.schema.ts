@@ -7,6 +7,6 @@ export const createStorySchema = object({
 });
 
 export const createCategorySchema = object({
-  name: string().required(),
+  name: string().required().lowercase(),
   nameShort: string(),
 });

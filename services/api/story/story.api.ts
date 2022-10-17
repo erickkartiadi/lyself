@@ -5,6 +5,7 @@ import {
   documentId,
   getDoc,
   getDocs,
+  limit,
   query,
   updateDoc,
   where,
@@ -44,7 +45,6 @@ export async function fetchStories(categoryId: string): Promise<Story[]> {
   })) as Story[];
 }
 
-// TODO add user id
 export async function createStory(createStoryDto: CreateStoryDto): Promise<void> {
   const newStory = await addDoc(storyCol, createStoryDto);
   await updateDoc(doc(categoryCol, createStoryDto.categoryId), {
@@ -62,13 +62,31 @@ export async function createCategory(
   await addDoc(categoryCol, createCategoryDto);
 }
 
-export async function findCategory(categoryId: string): Promise<Category> {
+export async function findCategory(categoryId: Story['categoryId']): Promise<Category> {
   const categoryDoc = await getDoc(doc(categoryCol, categoryId));
 
-  return categoryDoc.data() as Category;
+  if (categoryDoc.exists()) return { ...categoryDoc.data(), id: categoryDoc.id };
+  throw new Error('Category not found');
 }
 
 export async function fetchCategories(): Promise<Category[]> {
   const querySnapshot = await getDocs(categoryCol);
+  return querySnapshot.docs.map((document) => ({ ...document.data(), id: document.id }));
+}
+
+export async function searchCategories(search?: string): Promise<Category[]> {
+  let q = query(categoryCol);
+
+  if (search) {
+    const searchLower = search?.toLowerCase();
+    q = query(
+      categoryCol,
+      where('name', '>=', searchLower),
+      where('name', '<=', `${searchLower}\uf8ff`)
+    );
+  }
+
+  const querySnapshot = await getDocs(query(q, limit(10)));
+
   return querySnapshot.docs.map((document) => ({ ...document.data(), id: document.id }));
 }

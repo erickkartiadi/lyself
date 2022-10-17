@@ -10,7 +10,7 @@ import Chip from '../../components/base/Chip';
 import ButtonLink from '../../components/base/Link';
 import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
-import AddCategoryBottomSheet from '../../components/story/AddCategoryBottomSheet';
+import CreateCategoryBottomSheet from '../../components/story/CreateCategoryBottomSheet';
 import SelectCategoryBottomSheet from '../../components/story/SelectCategoryBottomSheet';
 import { AddStoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { CreateStoryDto } from '../../services/api/story/story.api';
@@ -204,7 +204,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
         bottomSheetRef={selectCategoryBottomSheetRef}
         setSelectedCategory={setSelectedCategory}
       />
-      <AddCategoryBottomSheet bottomSheetRef={addCategoryBottomSheetRef} />
+      <CreateCategoryBottomSheet bottomSheetRef={addCategoryBottomSheetRef} />
     </>
   );
 }

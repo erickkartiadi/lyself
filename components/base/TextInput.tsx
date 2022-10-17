@@ -35,7 +35,6 @@ function TextInput({
         setIsFocused(false);
       }}
       labelStyle={[styles.textBlack, spacing.mb_sm]}
-      selectionColor={theme.colors.primary}
       inputContainerStyle={[
         spacing.px_lg,
         spacing.py_xs,

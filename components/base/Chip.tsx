@@ -12,7 +12,7 @@ interface ChipProps extends RNEChipProps {
   isActive?: boolean;
 }
 
-function Chip({ isActive, chipColor = 'grey3', ...props }: ChipProps) {
+function Chip({ titleStyle, isActive, chipColor = 'grey3', ...props }: ChipProps) {
   const { theme } = useTheme();
 
   const selectedColor = theme.colors[chipColor] as string;
@@ -22,9 +22,12 @@ function Chip({ isActive, chipColor = 'grey3', ...props }: ChipProps) {
   return (
     <RNEChip
       color={alphaColor}
-      titleStyle={{
-        color: titleColor,
-      }}
+      titleStyle={[
+        {
+          color: titleColor,
+        },
+        titleStyle,
+      ]}
       radius="xs"
       {...props}
     />

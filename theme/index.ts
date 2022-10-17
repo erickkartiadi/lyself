@@ -29,13 +29,22 @@ const myTheme = createTheme({
       inputContainerStyle: border.bottom_width_md,
       containerStyle: spacing.px_0,
       rightIconContainerStyle: [spacing.py_0, spacing.px_0],
+      selectionColor: lightColors.primary,
     }),
     Card: {
       containerStyle: spacing.m_0,
     },
     SearchBar: {
+      selectionColor: lightColors.primary,
       style: regular,
       inputStyle: regular,
+      containerStyle: [
+        spacing.p_0,
+        layout.backgroundTransparent,
+        border.top_width_0,
+        border.bottom_width_0,
+        spacing.mb_2xl,
+      ],
     },
     Icon: {
       containerStyle: layout.ratio_square,

@@ -10,6 +10,7 @@ import {
   fetchCategories,
   fetchStories,
   findCategory,
+  searchCategories,
   updateStory,
 } from './story.api';
 
@@ -25,6 +26,15 @@ export const useGetCategories = () =>
       data.sort((a, b) => sortNumber(a.storyIds.length, b.storyIds.length, 'DESC')),
     refetchInterval: 1000 * 60 * 15,
     staleTime: 1000 * 60 * 15,
+  });
+
+export const useSearchCategories = (search?: string) =>
+  useQuery<Category[]>(['category', search], () => searchCategories(search), {
+    select: (data) =>
+      data.sort((a, b) => sortNumber(a.storyIds.length, b.storyIds.length, 'DESC')),
+    refetchInterval: 1000 * 60 * 15,
+    staleTime: 1000 * 60 * 15,
+    enabled: Boolean(search),
   });
 
 // add newly created story to cache
@@ -44,8 +54,7 @@ export const useCreateStory = () =>
 
 export const useUpdateStory = () => useMutation(updateStory);
 
-// TODO use Category id type
-export const useFindCategory = (categoryId: string) =>
+export const useFindCategory = (categoryId: Story['categoryId']) =>
   useQuery<Category>(['category', categoryId], () => findCategory(categoryId), {
     refetchInterval: 1000 * 60 * 15,
     staleTime: 1000 * 60 * 15,

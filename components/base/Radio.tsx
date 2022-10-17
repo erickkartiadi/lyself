@@ -1,6 +1,7 @@
 import { Icon, useTheme } from '@rneui/themed';
 import * as React from 'react';
 
+import layout from '../../styles/layout';
 import Checkbox, { CheckboxProps } from './Checkbox';
 
 function Radio({ checked, ...props }: CheckboxProps) {
@@ -17,6 +18,7 @@ function Radio({ checked, ...props }: CheckboxProps) {
           <Icon color={theme.colors.white} name="dot-fill" type="octicon" />
         ) : undefined
       }
+      textContainerStyle={layout.flex}
       {...props}
     />
   );

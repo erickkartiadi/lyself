@@ -7,6 +7,7 @@ import { useFindCategory } from '../../services/api/story/story.hooks';
 import useGetUser from '../../services/api/user/users.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
+import { text } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
 import { Story } from '../../types/types';
 import { formatTimeAgo } from '../../utils/formatTime';
@@ -49,11 +50,21 @@ function StoryCard({ anonymous, content, createdAt, title, userId, categoryId }:
           </Text>
         )}
       </View>
-      <View style={layout.flex_dir_row}>
-        <Chip size="sm" containerStyle={spacing.mr_md}>
-          {categoryData?.nameShort}
-        </Chip>
-      </View>
+      {categoryData && (
+        <View style={layout.flex_dir_row}>
+          <Chip
+            size="sm"
+            containerStyle={spacing.mr_md}
+            titleStyle={
+              categoryData?.name !== categoryData?.nameShort
+                ? text.uppercase
+                : text.capitalize
+            }
+          >
+            {categoryData?.nameShort}
+          </Chip>
+        </View>
+      )}
       <Divider color={theme.colors.secondary} style={spacing.my_xl} />
       <View style={[layout.flex_dir_row, layout.justify_between]}>
         <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>

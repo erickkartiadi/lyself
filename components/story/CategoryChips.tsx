@@ -5,6 +5,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { useGetCategories } from '../../services/api/story/story.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
+import { text } from '../../styles/typhography';
 import useStyles from '../../utils/hooks/useStyles';
 import Chip from '../base/Chip';
 
@@ -46,6 +47,7 @@ function CategoryChips({
             isActive={item.id === selectedCategoryId}
             onPress={() => setSelectedCategoryId(item.id)}
             containerStyle={spacing.mr_md}
+            titleStyle={item.name !== item.nameShort ? text.uppercase : text.capitalize}
           >
             {item.nameShort}
           </Chip>

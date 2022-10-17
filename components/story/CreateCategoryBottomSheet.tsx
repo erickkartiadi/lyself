@@ -14,10 +14,10 @@ import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
 import ButtonLink from '../base/Link';
 import TextInput from '../base/TextInput';
 
-type AddCategoryBottomSheetProps = BottomSheetProps;
+type CreateCategoryBottomSheetProps = BottomSheetProps;
 
 // TODO only confirmed user can add category
-function AddCategoryBottomSheet({ bottomSheetRef }: AddCategoryBottomSheetProps) {
+function CreateCategoryBottomSheet({ bottomSheetRef }: CreateCategoryBottomSheetProps) {
   const [isAbbreviationVisible, toggleAbbreviationVisible] = useToggle(false);
 
   const {
@@ -52,6 +52,7 @@ function AddCategoryBottomSheet({ bottomSheetRef }: AddCategoryBottomSheetProps)
 
   return (
     <BottomSheet
+      onClose={() => toggleAbbreviationVisible(false)}
       bottomSheetRef={bottomSheetRef}
       modalStyle={[layout.container_gutter]}
       adjustToContentHeight
@@ -124,4 +125,4 @@ function AddCategoryBottomSheet({ bottomSheetRef }: AddCategoryBottomSheetProps)
   );
 }
 
-export default AddCategoryBottomSheet;
+export default CreateCategoryBottomSheet;
