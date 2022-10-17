@@ -1,36 +1,34 @@
 import { FAB, Icon, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-import Chip from '../../components/base/Chip';
 import { VerticalSeparator } from '../../components/layout/ItemSeparator';
 import RefreshControl from '../../components/layout/RefreshControl';
+import CategoryChips from '../../components/story/CategoryChips';
 import StoryCard from '../../components/story/StoryCard';
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { useGetCategories, useGetStories } from '../../services/api/story/story.hooks';
 import layout from '../../styles/layout';
-import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
-import useStyles from '../../utils/hooks/useStyles';
+import EmptyScreen from '../Others/EmptyScreen';
+import ErrorScreen from '../Others/ErrorScreen';
+import LoadingScreen from '../Others/LoadingScreen';
 
 function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   const { theme } = useTheme();
-  const styles = useStyles();
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('all');
 
   const {
     data,
+    isError,
     isRefetching: isStoriesRefetching,
     refetch: refetchStories,
+    isLoading: isStoriesLoading,
   } = useGetStories(selectedCategoryId);
 
-  const {
-    data: categoriesData,
-    isRefetching: isCategoriesRefetching,
-    refetch: refetchCategories,
-  } = useGetCategories();
+  const { isRefetching: isCategoriesRefetching, refetch: refetchCategories } =
+    useGetCategories();
 
   const handleOnRefresh = () => {
     refetchCategories();
@@ -39,39 +37,7 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
 
   const isRefreshing = isStoriesRefetching || isCategoriesRefetching;
 
-  const StoryChipFilters = (
-    <View style={[styles.defaultBackground, spacing.mb_xl, layout.flex_dir_row]}>
-      <FlatList
-        horizontal
-        overScrollMode="never"
-        style={layout.no_container_gutter}
-        contentContainerStyle={layout.container_gutter}
-        showsHorizontalScrollIndicator={false}
-        data={categoriesData}
-        ListHeaderComponent={
-          <Chip
-            chipColor="primary"
-            isActive={selectedCategoryId === 'all'}
-            onPress={() => setSelectedCategoryId('all')}
-            containerStyle={spacing.mr_md}
-          >
-            All
-          </Chip>
-        }
-        renderItem={({ item }) => (
-          <Chip
-            chipColor="primary"
-            isActive={item.id === selectedCategoryId}
-            onPress={() => setSelectedCategoryId(item.id)}
-            containerStyle={spacing.mr_md}
-          >
-            {item.nameShort}
-          </Chip>
-        )}
-      />
-    </View>
-  );
-
+  if (isError) return <ErrorScreen />;
   return (
     <>
       <FlatList
@@ -80,11 +46,25 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
           layout.container_gutter,
           layout.section_lg,
         ]}
-        ListHeaderComponent={StoryChipFilters}
+        ListHeaderComponent={
+          <CategoryChips
+            selectedCategoryId={selectedCategoryId}
+            setSelectedCategoryId={setSelectedCategoryId}
+          />
+        }
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={handleOnRefresh} />
         }
-        // TODO add list empty component
+        ListEmptyComponent={
+          isStoriesLoading ? (
+            <LoadingScreen />
+          ) : (
+            <EmptyScreen
+              title="This category is empty"
+              text='Tap "+" to add your own story'
+            />
+          )
+        }
         ItemSeparatorComponent={VerticalSeparator}
         renderItem={({ item }) => <StoryCard {...item} />}
         data={data}

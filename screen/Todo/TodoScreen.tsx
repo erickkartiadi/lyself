@@ -19,9 +19,9 @@ import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
+import EmptyScreen from '../Others/EmptyScreen';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
-import TodoEmptyScreen from './TodoEmptyScreen';
 
 const sortItems: {
   label: string;
@@ -180,7 +180,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         ]}
       >
         {data.length <= 0 ? (
-          <TodoEmptyScreen />
+          <EmptyScreen title="Your list is empty" text='Tap "+" button to add new list' />
         ) : (
           <>
             {data.map((props) => (
@@ -227,8 +227,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
             {sortItems.map(({ label, sort, orderBy }) => (
               <Chip
                 chipColor="primary"
-                size="lg"
-                radius="md"
+                size="md"
                 key={label}
                 containerStyle={[spacing.mr_md, spacing.mb_md]}
                 onPress={() => setSelectedSort({ orderBy, sort })}
@@ -249,7 +248,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
                 chipColor="primary"
                 key={label}
                 containerStyle={[spacing.mr_md, spacing.mr_md]}
-                size="lg"
+                size="md"
                 onPress={() => setSelectedFilter(filter)}
                 isActive={selectedFilter === filter}
               >

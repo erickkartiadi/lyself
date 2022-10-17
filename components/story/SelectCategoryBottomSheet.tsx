@@ -22,7 +22,6 @@ function SelectCategoryBottomSheet({
 }: SelectCategoryBottomSheetProps) {
   const { data: categoryData, refetch } = useGetCategories();
 
-  // TODO add skeleton
   return (
     <BottomSheet
       showHeader

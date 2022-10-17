@@ -15,7 +15,6 @@ import Avatar from '../base/Avatar';
 import Card from '../base/Card';
 import Chip from '../base/Chip';
 
-// TODO add skeleton placeholder
 function StoryCard({ anonymous, content, createdAt, title, userId, categoryId }: Story) {
   const { theme } = useTheme();
   const styles = useStyles();
