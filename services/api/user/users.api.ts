@@ -5,20 +5,16 @@ import { createCollection } from '../../firebase/firebase';
 
 type CreateUserDto = User;
 
-const usersCol = createCollection<User>('users');
+export const usersCol = createCollection<User>('users');
 
 export async function createUser(createUserDto: CreateUserDto) {
-  const todoDoc = doc(usersCol, createUserDto.uid);
-  await setDoc(todoDoc, createUserDto);
+  const userDoc = doc(usersCol, createUserDto.uid);
+  await setDoc(userDoc, createUserDto);
 }
 
 export async function getUser(uid: User['uid']): Promise<User | undefined> {
-  const todoDoc = doc(usersCol, uid);
-  const querySnapshot = await getDoc(todoDoc);
+  const userDoc = doc(usersCol, uid);
+  const querySnapshot = await getDoc(userDoc);
 
   return querySnapshot.data();
-}
-
-export async function updateUser(id: string) {
-  return '';
 }

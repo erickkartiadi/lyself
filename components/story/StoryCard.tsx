@@ -1,27 +1,55 @@
 import { Divider, Icon, Text, useTheme } from '@rneui/themed';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useDebouncedCallback } from 'use-debounce';
 
-import { useFindCategory } from '../../services/api/story/story.hooks';
+import { useFindCategory, useLikeStory } from '../../services/api/story/story.hooks';
 import useGetUser from '../../services/api/user/users.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
 import { Story } from '../../types/types';
+import { AuthContext } from '../../utils/context/AuthContext';
 import { formatTimeAgo } from '../../utils/formatTime';
 import useStyles from '../../utils/hooks/useStyles';
 import Avatar from '../base/Avatar';
 import Card from '../base/Card';
 import Chip from '../base/Chip';
 
-function StoryCard({ anonymous, content, createdAt, title, userId, categoryId }: Story) {
+function StoryCard({
+  anonymous,
+  content,
+  createdAt,
+  title,
+  creatorId,
+  categoryId,
+  id,
+  likedUsersIds,
+}: Story) {
   const { theme } = useTheme();
   const styles = useStyles();
 
-  const { data } = useGetUser(userId);
+  const { user } = useContext(AuthContext);
+
+  const { data: creatorData } = useGetUser(creatorId);
   const { data: categoryData } = useFindCategory(categoryId);
+  const likeStoryMutation = useLikeStory();
+
+  const [isLiked, setIsLiked] = useState(
+    likedUsersIds.some((likedUserId) => likedUserId === user?.uid)
+  );
+
+  const debounceUpdateLike = useDebouncedCallback(() => {
+    if (!user) return;
+
+    likeStoryMutation.mutate({
+      currentUserId: user.uid,
+      id,
+      cancelLike: !isLiked,
+    });
+  }, 500);
 
   return (
     <Card>
@@ -30,16 +58,15 @@ function StoryCard({ anonymous, content, createdAt, title, userId, categoryId }:
           size={SIZING['5xl']}
           containerStyle={[spacing.mr_lg]}
           rounded
-          avatarUrl={anonymous ? null : data?.photoURL}
+          avatarUrl={anonymous ? null : creatorData?.photoURL}
         />
         <View>
-          <Text subtitle3>{anonymous ? 'Anonymous' : data?.displayName}</Text>
+          <Text subtitle3>{anonymous ? 'Anonymous' : creatorData?.displayName}</Text>
           <Text caption style={styles.textGrey}>
             {formatTimeAgo(createdAt.toDate())}
           </Text>
         </View>
       </View>
-
       <View style={spacing.my_xl}>
         <Text numberOfLines={3} h4>
           {title}
@@ -67,16 +94,22 @@ function StoryCard({ anonymous, content, createdAt, title, userId, categoryId }:
       )}
       <Divider color={theme.colors.secondary} style={spacing.my_xl} />
       <View style={[layout.flex_dir_row, layout.justify_between]}>
-        <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>
+        <TouchableOpacity
+          onPress={() => {
+            setIsLiked((prev) => !prev);
+            debounceUpdateLike();
+          }}
+          style={[layout.flex_dir_row, layout.align_center]}
+        >
           <Icon
-            color={theme.colors.grey3}
-            name="heart-outline"
+            color={isLiked ? theme.colors.primary : theme.colors.grey3}
+            name={isLiked ? 'heart' : 'heart-outline'}
             type="ionicon"
             containerStyle={spacing.mr_sm}
             size={SIZING['3xl']}
           />
-          <Text small style={styles.textGrey}>
-            15 likes
+          <Text small style={isLiked ? styles.textPrimary : styles.textGrey}>
+            {likedUsersIds.length} likes
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>

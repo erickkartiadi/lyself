@@ -64,8 +64,9 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
         content,
         title,
         categoryId,
-        userId: user.uid,
+        creatorId: user.uid,
         createdAt: Timestamp.fromDate(new Date()),
+        likedUsersIds: [],
       },
       {
         onSuccess: () => {

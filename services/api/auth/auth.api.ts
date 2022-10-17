@@ -38,6 +38,7 @@ export async function register({
     email: user.email,
     photoURL: user.photoURL,
     uid: user.uid,
+    likedStoryIds: [],
   });
 
   return userCredential;

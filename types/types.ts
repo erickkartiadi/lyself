@@ -1,8 +1,6 @@
 import { User as FirebaseUser } from 'firebase/auth';
 import { Timestamp } from 'firebase/firestore';
 
-export type User = Pick<FirebaseUser, 'displayName' | 'email' | 'photoURL' | 'uid'>;
-
 export type Playlist = {
   id: string;
   creator: string;
@@ -35,10 +33,10 @@ export type Story = {
   title: string;
   content: string;
   createdAt: Timestamp;
-  updatedAt: string;
   anonymous: boolean;
-  userId: string;
+  creatorId: string;
   categoryId: string;
+  likedUsersIds: string[];
 };
 
 export type Category = {
@@ -46,4 +44,8 @@ export type Category = {
   name: string;
   nameShort: string;
   storyIds: string[];
+};
+
+export type User = Pick<FirebaseUser, 'displayName' | 'email' | 'photoURL' | 'uid'> & {
+  likedStoryIds: string[];
 };

@@ -10,16 +10,30 @@ import {
   fetchCategories,
   fetchStories,
   findCategory,
+  likeStory,
   searchCategories,
-  updateStory,
 } from './story.api';
 
 export const useGetStories = (categoryId: string) =>
-  useQuery<Story[]>(['story', categoryId], () => fetchStories(categoryId), {
-    refetchInterval: 1000 * 60 * 15,
-    staleTime: 1000 * 60 * 15,
+  useQuery<Story[]>(['story', categoryId], () => fetchStories(categoryId));
+
+export const useCreateStory = () =>
+  useMutation(createStory, {
+    onSuccess: () => {
+      Toast.show({
+        type: 'success',
+        text1: 'Success',
+        text2: 'Your story has been created',
+      });
+    },
+    onError: () => {
+      somethingWentWrongToast();
+    },
   });
 
+export const useLikeStory = () => useMutation(likeStory);
+
+// CATEGORIES
 export const useGetCategories = () =>
   useQuery<Category[]>(['category'], fetchCategories, {
     select: (data) =>
@@ -36,23 +50,6 @@ export const useSearchCategories = (search?: string) =>
     staleTime: 1000 * 60 * 15,
     enabled: Boolean(search),
   });
-
-// add newly created story to cache
-export const useCreateStory = () =>
-  useMutation(createStory, {
-    onSuccess: () => {
-      Toast.show({
-        type: 'success',
-        text1: 'Success',
-        text2: 'Your story has been created',
-      });
-    },
-    onError: () => {
-      somethingWentWrongToast();
-    },
-  });
-
-export const useUpdateStory = () => useMutation(updateStory);
 
 export const useFindCategory = (categoryId: Story['categoryId']) =>
   useQuery<Category>(['category', categoryId], () => findCategory(categoryId), {

@@ -1,5 +1,6 @@
 import {
   addDoc,
+  arrayRemove,
   arrayUnion,
   doc,
   documentId,
@@ -11,13 +12,17 @@ import {
   where,
 } from 'firebase/firestore';
 
-import { Category, Story } from '../../../types/types';
+import { Category, Story, User } from '../../../types/types';
 import { createCollection } from '../../firebase/firebase';
+import { usersCol } from '../user/users.api';
 
 export type CreateStoryDto = Omit<Story, 'updatedAt' | 'id'>;
-export type UpdateTodoDto = Story;
+export type LikeStoryDto = Pick<Story, 'id'> & {
+  currentUserId: User['uid'];
+  cancelLike: boolean;
+};
+
 export type CreateCategoryDto = Omit<Category, 'id'>;
-export type UpdateCategoryDto = Omit<Category, 'id' | 'label'>;
 
 const storyCol = createCollection<CreateStoryDto>('story');
 const categoryCol = createCollection<CreateCategoryDto>('category');
@@ -52,9 +57,24 @@ export async function createStory(createStoryDto: CreateStoryDto): Promise<void>
   });
 }
 
-export async function updateStory(CreateStoryDto: CreateStoryDto) {
-  return 'tes';
+export async function likeStory({
+  id,
+  currentUserId,
+  cancelLike,
+}: LikeStoryDto): Promise<void> {
+  const userDoc = doc(usersCol, currentUserId);
+  const storyDoc = doc(storyCol, id);
+
+  await updateDoc(userDoc, {
+    likedStoryIds: cancelLike ? arrayRemove(id) : arrayUnion(id),
+  });
+
+  await updateDoc(storyDoc, {
+    likedUsersIds: cancelLike ? arrayRemove(currentUserId) : arrayUnion(currentUserId),
+  });
 }
+
+// CATEGORY
 
 export async function createCategory(
   createCategoryDto: CreateCategoryDto
