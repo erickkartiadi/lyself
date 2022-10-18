@@ -1,7 +1,9 @@
 import { FAB, Icon, useTheme } from '@rneui/themed';
 import React, { useState } from 'react';
+import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
+import ActivityIndicator from '../../components/base/ActivityIndicator';
 import { VerticalSeparator } from '../../components/layout/ItemSeparator';
 import RefreshControl from '../../components/layout/RefreshControl';
 import CategoryChips from '../../components/story/CategoryChips';
@@ -9,6 +11,7 @@ import StoryCard from '../../components/story/StoryCard';
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { useGetCategories, useGetStories } from '../../services/api/story/story.hooks';
 import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import EmptyScreen from '../Others/EmptyScreen';
 import ErrorScreen from '../Others/ErrorScreen';
@@ -22,9 +25,11 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   const {
     data,
     isError,
+    isFetchingNextPage,
     isRefetching: isStoriesRefetching,
     refetch: refetchStories,
     isLoading: isStoriesLoading,
+    fetchNextPage,
   } = useGetStories(selectedCategoryId);
 
   const { isRefetching: isCategoriesRefetching, refetch: refetchCategories } =
@@ -35,7 +40,8 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
     refetchStories();
   };
 
-  const isRefreshing = isStoriesRefetching || isCategoriesRefetching;
+  const isRefreshing =
+    (isStoriesRefetching || isCategoriesRefetching) && !isFetchingNextPage;
 
   if (isError) return <ErrorScreen />;
   return (
@@ -67,7 +73,12 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
         }
         ItemSeparatorComponent={VerticalSeparator}
         renderItem={({ item }) => <StoryCard {...item} />}
-        data={data}
+        data={data?.pages.map((page) => page).flat()}
+        onEndReached={() => fetchNextPage()}
+        onEndReachedThreshold={0.2}
+        ListFooterComponent={
+          <View style={spacing.mt_xl}>{isFetchingNextPage && <ActivityIndicator />}</View>
+        }
       />
       <FAB
         placement="right"

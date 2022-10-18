@@ -3,11 +3,12 @@ import {
   arrayRemove,
   arrayUnion,
   doc,
-  documentId,
   getDoc,
   getDocs,
   limit,
+  orderBy,
   query,
+  startAfter,
   updateDoc,
   where,
 } from 'firebase/firestore';
@@ -27,23 +28,26 @@ export type CreateCategoryDto = Omit<Category, 'id'>;
 const storyCol = createCollection<CreateStoryDto>('story');
 const categoryCol = createCollection<CreateCategoryDto>('category');
 
-export async function fetchStories(categoryId: string): Promise<Story[]> {
-  let snapshot;
+export async function fetchStories(
+  pageParam: Story | null,
+  categoryId: string
+): Promise<Story[]> {
+  if (!pageParam) return [];
+
+  let q = query(storyCol, orderBy('createdAt', 'desc'), limit(10));
 
   if (categoryId !== 'all') {
-    const categorySnapshot = await getDoc(doc(categoryCol, categoryId));
-    const storyIds = categorySnapshot.data()?.storyIds;
-
-    if (storyIds && storyIds?.length <= 0) {
-      return [];
-    }
-
-    const q = query(storyCol, where(documentId(), 'in', storyIds));
-    snapshot = await getDocs(q);
-  } else {
-    snapshot = await getDocs(storyCol);
+    const filteredQuery = query(q, where('categoryId', '==', categoryId));
+    q = filteredQuery;
   }
 
+  if (pageParam?.id !== null) {
+    const currSnapshot = await getDoc(doc(storyCol, pageParam.id));
+    const nextQuery = query(q, startAfter(currSnapshot));
+    q = nextQuery;
+  }
+
+  const snapshot = await getDocs(q);
   return snapshot.docs.map((document) => ({
     ...document.data(),
     id: document.id,

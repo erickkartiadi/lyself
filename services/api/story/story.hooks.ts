@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 
 import { Category, Story } from '../../../types/types';
@@ -14,8 +14,17 @@ import {
   searchCategories,
 } from './story.api';
 
+// export const useGetStories = (categoryId: string) =>
+//   useQuery<Story[]>(['story', categoryId], () => fetchStories(categoryId));
+
 export const useGetStories = (categoryId: string) =>
-  useQuery<Story[]>(['story', categoryId], () => fetchStories(categoryId));
+  useInfiniteQuery(
+    ['story', categoryId],
+    ({ pageParam = { id: null } }) => fetchStories(pageParam, categoryId),
+    {
+      getNextPageParam: (lastPage) => lastPage[lastPage.length - 1] ?? null,
+    }
+  );
 
 export const useCreateStory = () =>
   useMutation(createStory, {
