@@ -1,7 +1,7 @@
+import axios from 'axios';
 import Constant from 'expo-constants';
 
 import { Article } from '../../../types/types';
-import { newsClient } from '../../axios/axios';
 
 type NewsEverything = {
   source: {
@@ -17,8 +17,8 @@ type NewsEverything = {
   content: string;
 };
 
-export default async function fetchNews(): Promise<Article[]> {
-  const res = await newsClient.get('https://newsapi.org/v2/everything', {
+export default async function getNews(): Promise<Article[]> {
+  const res = await axios.get('https://newsapi.org/v2/everything', {
     params: {
       q: '"mental health"',
       pageSize: 10,

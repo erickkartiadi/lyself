@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-import { useGetCategories } from '../../services/api/story/story.hooks';
+import { useGetCategories } from '../../services/api/stories/stories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
@@ -30,7 +30,7 @@ function CategoryChips({
         style={layout.no_container_gutter}
         contentContainerStyle={layout.container_gutter}
         showsHorizontalScrollIndicator={false}
-        data={data}
+        data={data?.pages.flatMap((page) => page)}
         ListHeaderComponent={
           <Chip
             chipColor="primary"

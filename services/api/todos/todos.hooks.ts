@@ -14,7 +14,7 @@ import {
   TodoSort,
 } from '../../../utils/sort';
 import { somethingWentWrongToast } from '../../../utils/toast';
-import { createTodo, deleteTodo, fetchTodos, updateTodo } from './todos.api';
+import { createTodo, deleteTodo, getTodos, updateTodo } from './todos.api';
 
 export const useGetTodos = (
   filter: TodoFilter,
@@ -22,7 +22,7 @@ export const useGetTodos = (
   orderBy: OrderBy = 'ASC',
   limit?: number
 ) =>
-  useQuery<Todo[]>(['todos'], fetchTodos, {
+  useQuery<Todo[]>(['todos'], getTodos, {
     select: (data) => {
       let filtered = data;
       if (filter !== 'All') {

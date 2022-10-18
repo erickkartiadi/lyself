@@ -7,12 +7,12 @@ import { somethingWentWrongToast } from '../../../utils/toast';
 import {
   createCategory,
   createStory,
-  fetchCategories,
-  fetchStories,
   findCategory,
+  getCategories,
+  getStories,
   likeStory,
   searchCategories,
-} from './story.api';
+} from './stories.api';
 
 // export const useGetStories = (categoryId: string) =>
 //   useQuery<Story[]>(['story', categoryId], () => fetchStories(categoryId));
@@ -20,9 +20,11 @@ import {
 export const useGetStories = (categoryId: string) =>
   useInfiniteQuery(
     ['story', categoryId],
-    ({ pageParam = { id: null } }) => fetchStories(pageParam, categoryId),
+    ({ pageParam = { id: null } }) => getStories(pageParam, categoryId),
     {
       getNextPageParam: (lastPage) => lastPage[lastPage.length - 1] ?? null,
+      staleTime: 120000,
+      refetchInterval: 120000,
     }
   );
 
@@ -44,11 +46,12 @@ export const useLikeStory = () => useMutation(likeStory);
 
 // CATEGORIES
 export const useGetCategories = () =>
-  useQuery<Category[]>(['category'], fetchCategories, {
-    select: (data) =>
-      data.sort((a, b) => sortNumber(a.storyIds.length, b.storyIds.length, 'DESC')),
-    refetchInterval: 1000 * 60 * 15,
-    staleTime: 1000 * 60 * 15,
+  useInfiniteQuery<Category[]>(['category'], getCategories, {
+    select: (data) => {
+      console.log(data);
+      return data;
+    },
+    // data.sort((a, b) => sortNumber(a.storyIds.length, b.storyIds.length, 'DESC')),
   });
 
 export const useSearchCategories = (search?: string) =>

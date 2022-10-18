@@ -1,9 +1,9 @@
+import axios from 'axios';
 import { Buffer } from 'buffer';
 import Constant from 'expo-constants';
 import * as SecureStore from 'expo-secure-store';
 
 import { Playlist } from '../../types/types';
-import { spotifyClient } from '../axios/axios';
 
 const clientId = Constant.manifest?.extra?.spotifyClientId;
 const clientSecret = Constant.manifest?.extra?.spotifyClientSecret;
@@ -63,7 +63,7 @@ type SpotifyPlaylist = {
 };
 
 export async function fetchAccessToken(code: string): Promise<void> {
-  const res = await spotifyClient.post('https://accounts.spotify.com/api/token', null, {
+  const res = await axios.post('https://accounts.spotify.com/api/token', null, {
     headers: {
       Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString(
         'base64'
@@ -95,7 +95,7 @@ export async function fetchAccessToken(code: string): Promise<void> {
 export async function fetchRefreshToken(): Promise<void> {
   const refreshToken = await SecureStore.getItemAsync(spotifyRefreshTokenKey);
 
-  const res = await spotifyClient.post('https://accounts.spotify.com/api/token', null, {
+  const res = await axios.post('https://accounts.spotify.com/api/token', null, {
     headers: {
       Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString(
         'base64'
@@ -124,16 +124,13 @@ export async function fetchFeaturedPlaylist(): Promise<Playlist[]> {
 
   if (isTokenExpired) await fetchRefreshToken();
 
-  const res = await spotifyClient.get(
-    'https://api.spotify.com/v1/browse/featured-playlists',
-    {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const res = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return res.data.playlists.items.map((item: SpotifyPlaylist) => ({
     id: item.id,

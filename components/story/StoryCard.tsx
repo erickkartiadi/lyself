@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { useFindCategory, useLikeStory } from '../../services/api/story/story.hooks';
+import { useFindCategory, useLikeStory } from '../../services/api/stories/stories.hooks';
 import useGetUser from '../../services/api/user/users.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';

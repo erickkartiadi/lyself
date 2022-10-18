@@ -5,11 +5,10 @@ import { FlatList } from 'react-native-gesture-handler';
 
 import ActivityIndicator from '../../components/base/ActivityIndicator';
 import { VerticalSeparator } from '../../components/layout/ItemSeparator';
-import RefreshControl from '../../components/layout/RefreshControl';
 import CategoryChips from '../../components/story/CategoryChips';
 import StoryCard from '../../components/story/StoryCard';
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
-import { useGetCategories, useGetStories } from '../../services/api/story/story.hooks';
+import { useGetStories } from '../../services/api/stories/stories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
@@ -26,22 +25,9 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
     data,
     isError,
     isFetchingNextPage,
-    isRefetching: isStoriesRefetching,
-    refetch: refetchStories,
     isLoading: isStoriesLoading,
     fetchNextPage,
   } = useGetStories(selectedCategoryId);
-
-  const { isRefetching: isCategoriesRefetching, refetch: refetchCategories } =
-    useGetCategories();
-
-  const handleOnRefresh = () => {
-    refetchCategories();
-    refetchStories();
-  };
-
-  const isRefreshing =
-    (isStoriesRefetching || isCategoriesRefetching) && !isFetchingNextPage;
 
   if (isError) return <ErrorScreen />;
   return (
@@ -58,9 +44,6 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
             setSelectedCategoryId={setSelectedCategoryId}
           />
         }
-        refreshControl={
-          <RefreshControl refreshing={isRefreshing} onRefresh={handleOnRefresh} />
-        }
         ListEmptyComponent={
           isStoriesLoading ? (
             <LoadingScreen />
@@ -73,7 +56,7 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
         }
         ItemSeparatorComponent={VerticalSeparator}
         renderItem={({ item }) => <StoryCard {...item} />}
-        data={data?.pages.map((page) => page).flat()}
+        data={data?.pages.flatMap((page) => page)}
         onEndReached={() => fetchNextPage()}
         onEndReachedThreshold={0.2}
         ListFooterComponent={

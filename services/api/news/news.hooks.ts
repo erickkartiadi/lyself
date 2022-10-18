@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { Article } from '../../../types/types';
-import fetchNews from './news';
+import getNews from './news.api';
 
 const useGetNews = () =>
-  useQuery<Article[]>(['articles'], fetchNews, {
+  useQuery<Article[]>(['articles'], getNews, {
     staleTime: 3600000,
   });
 export default useGetNews;

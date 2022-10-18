@@ -8,6 +8,8 @@ import {
   getFirestore,
 } from 'firebase/firestore';
 
+import { Category, Story, Todo, User } from '../../types/types';
+
 const firebaseConfig = {
   apiKey: Constants.manifest?.extra?.firebaseApiKey,
   authDomain: Constants.manifest?.extra?.firebaseAuthDomain,
@@ -25,7 +27,17 @@ export const auth = getAuth(app);
 
 export const db = getFirestore(app);
 
+// create collection with typescript data type
 export const createCollection = <T = DocumentData>(
   path: string,
   ...pathSegments: string[]
 ) => collection(db, path, ...pathSegments) as CollectionReference<T>;
+
+export const storyColRef = createCollection<Story>('story');
+export const categoryColRef = createCollection<Category>('category');
+export const usersColRef = createCollection<User>('users');
+export const todosColRef = () => {
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  return createCollection<Todo>('users', currentUser?.uid, 'todos');
+};

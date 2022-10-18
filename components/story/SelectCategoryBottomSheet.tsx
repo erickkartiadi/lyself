@@ -4,8 +4,8 @@ import { Control, Controller } from 'react-hook-form';
 import { View } from 'react-native';
 import { useDebounce } from 'use-debounce';
 
-import { CreateStoryDto } from '../../services/api/story/story.api';
-import { useSearchCategories } from '../../services/api/story/story.hooks';
+import { CreateStoryDto } from '../../services/api/stories/stories.api';
+import { useSearchCategories } from '../../services/api/stories/stories.hooks';
 import layout from '../../styles/layout';
 import { height } from '../../styles/size';
 import spacing from '../../styles/spacing';

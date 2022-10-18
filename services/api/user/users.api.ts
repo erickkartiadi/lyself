@@ -1,20 +1,17 @@
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 import { User } from '../../../types/types';
-import { createCollection } from '../../firebase/firebase';
+import { usersColRef } from '../../firebase/firebase';
 
 type CreateUserDto = User;
 
-export const usersCol = createCollection<User>('users');
-
 export async function createUser(createUserDto: CreateUserDto) {
-  const userDoc = doc(usersCol, createUserDto.uid);
-  await setDoc(userDoc, createUserDto);
+  const userDocRef = doc(usersColRef, createUserDto.uid);
+  await setDoc(userDocRef, createUserDto);
 }
 
-export async function getUser(uid: User['uid']): Promise<User | undefined> {
-  const userDoc = doc(usersCol, uid);
-  const querySnapshot = await getDoc(userDoc);
-
-  return querySnapshot.data();
+export async function findUser(uid: User['uid']): Promise<User | undefined> {
+  const userDocRef = doc(usersColRef, uid);
+  const snapshot = await getDoc(userDocRef);
+  return snapshot.data();
 }
