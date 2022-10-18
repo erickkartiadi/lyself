@@ -6,8 +6,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
+import ButtonLink from '../../components/base/ButtonLink';
 import Chip from '../../components/base/Chip';
-import ButtonLink from '../../components/base/Link';
 import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
 import CreateCategoryBottomSheet from '../../components/story/CreateCategoryBottomSheet';

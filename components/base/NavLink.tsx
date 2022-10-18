@@ -2,7 +2,7 @@ import { NavigationAction, ParamListBase, useLinkProps } from '@react-navigation
 import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo';
 import React from 'react';
 
-import ButtonLink, { ButtonLinkProps } from './Link';
+import ButtonLink, { ButtonLinkProps } from './ButtonLink';
 
 interface NavLinkProps<ParamList extends ReactNavigation.RootParamList>
   extends ButtonLinkProps {

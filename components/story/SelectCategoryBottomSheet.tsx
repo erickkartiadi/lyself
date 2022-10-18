@@ -45,6 +45,11 @@ function SelectCategoryBottomSheet({
       onOpen={refetch}
       headerTitle="Select Category"
       headerActionTitle="Add Category"
+      headerActionIcon={{
+        name: 'plus',
+        type: 'material-community',
+      }}
+      headerActionRightIcon={false}
       modalStyle={[layout.container_gutter]}
       adjustToContentHeight
       bottomSheetRef={bottomSheetRef}

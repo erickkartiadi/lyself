@@ -8,13 +8,15 @@ import { Portal } from 'react-native-portalize';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
 import useStyles from '../../utils/hooks/useStyles';
-import ButtonLink, { ButtonLinkProps } from './Link';
+import ButtonLink, { ButtonLinkProps } from './ButtonLink';
 
 export interface BottomSheetProps extends ModalizeProps {
   bottomSheetRef: React.RefObject<IHandles>;
   showHeader?: boolean;
   headerTitle?: string;
   headerActionTitle?: string;
+  headerActionIcon?: ButtonLinkProps['icon'];
+  headerActionRightIcon?: ButtonLinkProps['rightIcon'];
   headerActionType?: 'icon' | 'button';
   headerActionOnPress?: ButtonLinkProps['onPress'];
 }
@@ -28,6 +30,8 @@ function BottomSheet({
   headerActionTitle,
   headerActionOnPress,
   headerActionType,
+  headerActionIcon,
+  headerActionRightIcon,
   ...props
 }: BottomSheetProps) {
   const styles = useStyles();
@@ -59,7 +63,12 @@ function BottomSheet({
                   onPress={headerActionOnPress}
                 />
               ) : (
-                <ButtonLink color="primary" onPress={headerActionOnPress}>
+                <ButtonLink
+                  rightIcon={headerActionRightIcon}
+                  icon={headerActionIcon}
+                  color="primary"
+                  onPress={headerActionOnPress}
+                >
                   {headerActionTitle}
                 </ButtonLink>
               )}
@@ -80,6 +89,8 @@ BottomSheet.defaultProps = {
   headerActionTitle: 'Cancel',
   headerActionOnPress: () => {},
   headerActionType: 'button',
+  headerActionIcon: {},
+  headerActionRightIcon: true,
 };
 
 export default BottomSheet;

@@ -14,7 +14,7 @@ import spacing from '../../styles/spacing';
 import { createCategorySchema } from '../../utils/constant/validation/story.schema';
 import useToggle from '../../utils/hooks/useToggle';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
-import ButtonLink from '../base/Link';
+import ButtonLink from '../base/ButtonLink';
 import TextInput from '../base/TextInput';
 
 type CreateCategoryBottomSheetProps = BottomSheetProps;
@@ -63,6 +63,9 @@ function CreateCategoryBottomSheet({ bottomSheetRef }: CreateCategoryBottomSheet
       bottomSheetRef={bottomSheetRef}
       modalStyle={[layout.container_gutter]}
       adjustToContentHeight
+      scrollViewProps={{
+        keyboardShouldPersistTaps: 'handled',
+      }}
       showHeader
       headerTitle="Create Category"
       headerActionOnPress={() => {

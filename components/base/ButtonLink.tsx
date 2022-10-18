@@ -8,6 +8,7 @@ import { SIZING } from '../../theme/theme';
 export interface ButtonLinkProps extends TouchableOpacityProps {
   color?: 'primary' | 'blue';
   icon?: IconProps;
+  rightIcon?: boolean;
 }
 
 function ButtonLink({
@@ -15,6 +16,7 @@ function ButtonLink({
   children,
   color = 'blue',
   icon,
+  rightIcon,
   style,
   ...props
 }: React.PropsWithChildren<ButtonLinkProps>) {
@@ -22,7 +24,11 @@ function ButtonLink({
 
   return (
     <TouchableOpacity
-      style={[layout.flex_dir_row, layout.align_center, style]}
+      style={[
+        rightIcon ? layout.flex_dir_row : layout.flex_dir_row_reverse,
+        layout.align_center,
+        style,
+      ]}
       onPress={onPress}
       {...props}
     >
@@ -41,6 +47,7 @@ function ButtonLink({
 ButtonLink.defaultProps = {
   color: 'blue',
   icon: undefined,
+  rightIcon: true,
 };
 
 export default ButtonLink;

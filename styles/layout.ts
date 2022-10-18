@@ -19,6 +19,9 @@ const layout = StyleSheet.create({
   flex_dir_row: {
     flexDirection: 'row',
   },
+  flex_dir_row_reverse: {
+    flexDirection: 'row-reverse',
+  },
   flex_dir_col: {
     flexDirection: 'column',
   },
