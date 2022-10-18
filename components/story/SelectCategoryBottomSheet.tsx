@@ -49,6 +49,7 @@ function SelectCategoryBottomSheet({
       adjustToContentHeight
       bottomSheetRef={bottomSheetRef}
       flatListProps={{
+        keyboardShouldPersistTaps: 'handled',
         ListHeaderComponent: (
           <SearchBar
             placeholder="Search category..."

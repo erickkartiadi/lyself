@@ -45,6 +45,7 @@ function CreateCategoryBottomSheet({ bottomSheetRef }: CreateCategoryBottomSheet
         name,
         nameShort: nameShort === '' ? name : nameShort,
         storyIds: [],
+        storyCount: 0,
       },
       {
         onSuccess: () => {

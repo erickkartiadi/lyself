@@ -20,7 +20,7 @@ function CategoryChips({
 }: CategoryChipsProps) {
   const styles = useStyles();
 
-  const { data } = useGetCategories();
+  const { data, fetchNextPage } = useGetCategories();
 
   return (
     <View style={[styles.defaultBackground, spacing.mb_xl, layout.flex_dir_row]}>
@@ -41,6 +41,8 @@ function CategoryChips({
             All
           </Chip>
         }
+        onEndReached={() => fetchNextPage()}
+        onEndReachedThreshold={0.2}
         renderItem={({ item }) => (
           <Chip
             chipColor="primary"

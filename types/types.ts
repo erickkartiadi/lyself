@@ -44,6 +44,7 @@ export type Category = {
   name: string;
   nameShort: string;
   storyIds: string[];
+  storyCount: number;
 };
 
 export type User = Pick<FirebaseUser, 'displayName' | 'email' | 'photoURL' | 'uid'> & {

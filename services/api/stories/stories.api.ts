@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  increment,
   limit,
   orderBy,
   query,
@@ -36,7 +37,6 @@ export async function getStories(
     q = filteredQuery;
   }
 
-  // first data
   if (pageParam?.id !== null) {
     const currSnapshot = await getDoc(doc(storyColRef, pageParam.id));
     const nextQuery = query(q, startAfter(currSnapshot));
@@ -54,6 +54,7 @@ export async function createStory(createStoryDto: CreateStoryDto): Promise<void>
   const newStoryRef = await addDoc(storyColRef, createStoryDto);
   await updateDoc(doc(categoryColRef, createStoryDto.categoryId), {
     storyIds: arrayUnion(newStoryRef.id),
+    storyCount: increment(1),
   });
 }
 
@@ -76,8 +77,19 @@ export async function likeStory({
 
 // CATEGORY
 
-export async function getCategories(): Promise<Category[]> {
-  const snapshot = await getDocs(categoryColRef);
+export async function getCategories(pageParam: Category | null): Promise<Category[]> {
+  if (!pageParam) return [];
+
+  // initial data
+  let q = query(categoryColRef, orderBy('storyCount', 'desc'), limit(5));
+
+  if (pageParam?.id !== null) {
+    const categoryDocRef = doc(categoryColRef, pageParam.id);
+    const currSnapshot = await getDoc(categoryDocRef);
+    q = query(q, startAfter(currSnapshot));
+  }
+
+  const snapshot = await getDocs(q);
   return snapshot.docs.map((document) => ({ ...document.data(), id: document.id }));
 }
 
@@ -101,6 +113,7 @@ export async function searchCategories(search?: string): Promise<Category[]> {
     const searchLower = search?.toLowerCase();
     const searchQuery = query(
       q,
+      orderBy('name'),
       where('name', '>=', searchLower),
       where('name', '<=', `${searchLower}\uf8ff`)
     );
@@ -108,6 +121,7 @@ export async function searchCategories(search?: string): Promise<Category[]> {
     q = searchQuery;
   }
 
-  const snapshot = await getDocs(query(q, limit(10)));
+  q = query(q, orderBy('storyCount', 'desc'), limit(10));
+  const snapshot = await getDocs(q);
   return snapshot.docs.map((document) => ({ ...document.data(), id: document.id }));
 }

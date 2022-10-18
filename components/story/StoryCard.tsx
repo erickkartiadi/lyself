@@ -1,5 +1,5 @@
 import { Divider, Icon, Text, useTheme } from '@rneui/themed';
-import React, { useContext, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDebouncedCallback } from 'use-debounce';
@@ -141,4 +141,4 @@ function StoryCard({
   );
 }
 
-export default StoryCard;
+export default memo(StoryCard);
