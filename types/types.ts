@@ -36,7 +36,6 @@ export type Story = {
   anonymous: boolean;
   creatorId: string;
   categoryId: string;
-  likedUsersIds: string[];
 };
 
 export type Category = {
@@ -45,6 +44,11 @@ export type Category = {
   nameShort: string;
   storyIds: string[];
   storyCount: number;
+};
+
+export type Upvote = {
+  userIds: string[];
+  count: number;
 };
 
 export type User = Pick<FirebaseUser, 'displayName' | 'email' | 'photoURL' | 'uid'> & {

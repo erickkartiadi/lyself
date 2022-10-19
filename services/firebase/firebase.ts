@@ -8,7 +8,7 @@ import {
   getFirestore,
 } from 'firebase/firestore';
 
-import { Category, Story, Todo, User } from '../../types/types';
+import { Category, Story, Todo, Upvote, User } from '../../types/types';
 
 const firebaseConfig = {
   apiKey: Constants.manifest?.extra?.firebaseApiKey,
@@ -33,8 +33,9 @@ export const createCollection = <T = DocumentData>(
   ...pathSegments: string[]
 ) => collection(db, path, ...pathSegments) as CollectionReference<T>;
 
-export const storyColRef = createCollection<Story>('story');
-export const categoryColRef = createCollection<Category>('category');
+export const upvoteColRef = createCollection<Upvote>('upvotes');
+export const storyColRef = createCollection<Story>('stories');
+export const categoryColRef = createCollection<Category>('categories');
 export const usersColRef = createCollection<User>('users');
 export const todosColRef = () => {
   const { currentUser } = auth;

@@ -1,14 +1,19 @@
 import { FAB, Icon, useTheme } from '@rneui/themed';
+import { useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import ActivityIndicator from '../../components/base/ActivityIndicator';
 import { VerticalSeparator } from '../../components/layout/ItemSeparator';
+import RefreshControl from '../../components/layout/RefreshControl';
 import CategoryChips from '../../components/story/CategoryChips';
 import StoryCard from '../../components/story/StoryCard';
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
-import { useGetStories } from '../../services/api/stories/stories.hooks';
+import {
+  useGetCategories,
+  useGetStories,
+} from '../../services/api/stories/stories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
@@ -18,6 +23,7 @@ import LoadingScreen from '../Others/LoadingScreen';
 
 function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   const { theme } = useTheme();
+  const queryClient = useQueryClient();
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('all');
 
@@ -26,8 +32,19 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
     isError,
     isFetchingNextPage,
     isLoading: isStoriesLoading,
-    fetchNextPage,
+    fetchNextPage: fetchNextStories,
+    refetch: refetchStories,
+    isRefetching: isStoriesRefetching,
   } = useGetStories(selectedCategoryId);
+
+  const { refetch: refetchCategories } = useGetCategories();
+
+  const handleOnRefresh = () => {
+    refetchStories();
+    refetchCategories();
+    queryClient.invalidateQueries(['upvote']);
+  };
+  const isRefreshing = isStoriesRefetching;
 
   if (isError) return <ErrorScreen />;
   return (
@@ -54,10 +71,13 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
             />
           )
         }
+        refreshControl={
+          <RefreshControl onRefresh={handleOnRefresh} refreshing={isRefreshing} />
+        }
         ItemSeparatorComponent={VerticalSeparator}
         renderItem={({ item }) => <StoryCard {...item} />}
         data={data?.pages.flatMap((page) => page)}
-        onEndReached={() => fetchNextPage()}
+        onEndReached={() => fetchNextStories()}
         onEndReachedThreshold={0.2}
         ListFooterComponent={
           <View style={spacing.mt_xl}>{isFetchingNextPage && <ActivityIndicator />}</View>

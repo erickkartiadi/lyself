@@ -1,4 +1,9 @@
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 
 import { Category, Story } from '../../../types/types';
@@ -7,14 +12,12 @@ import {
   createCategory,
   createStory,
   findCategory,
+  findUpvote,
   getCategories,
   getStories,
-  likeStory,
   searchCategories,
+  upvoteStory,
 } from './stories.api';
-
-// export const useGetStories = (categoryId: string) =>
-//   useQuery<Story[]>(['story', categoryId], () => fetchStories(categoryId));
 
 export const useGetStories = (categoryId: string) =>
   useInfiniteQuery(
@@ -23,7 +26,6 @@ export const useGetStories = (categoryId: string) =>
     {
       getNextPageParam: (lastPage) => lastPage[lastPage.length - 1] ?? null,
       staleTime: 120000,
-      refetchInterval: 120000,
     }
   );
 
@@ -41,7 +43,18 @@ export const useCreateStory = () =>
     },
   });
 
-export const useLikeStory = () => useMutation(likeStory);
+// UPVOTE
+export const useUpvoteStory = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(upvoteStory, {
+    onSettled: (storyId) => {
+      queryClient.invalidateQueries(['upvote', storyId]);
+    },
+  });
+};
+export const useFindUpvote = (storyId: Story['id']) =>
+  useQuery(['upvote', storyId], () => findUpvote(storyId));
 
 // CATEGORIES
 export const useGetCategories = () =>

@@ -5,10 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
 import { CreateCategoryDto } from '../../services/api/stories/stories.api';
-import {
-  useCreateCategory,
-  useGetCategories,
-} from '../../services/api/stories/stories.hooks';
+import { useCreateCategory } from '../../services/api/stories/stories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { createCategorySchema } from '../../utils/constant/validation/story.schema';
@@ -37,7 +34,6 @@ function CreateCategoryBottomSheet({ bottomSheetRef }: CreateCategoryBottomSheet
   });
 
   const createCategoryMutation = useCreateCategory();
-  const { refetch } = useGetCategories();
 
   const handleAddCategory = ({ name, nameShort }: CreateCategoryDto) => {
     createCategoryMutation.mutate(
@@ -49,7 +45,6 @@ function CreateCategoryBottomSheet({ bottomSheetRef }: CreateCategoryBottomSheet
       },
       {
         onSuccess: () => {
-          refetch();
           bottomSheetRef.current?.close();
           reset();
         },

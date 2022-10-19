@@ -9,18 +9,24 @@ import {
   limit,
   orderBy,
   query,
+  setDoc,
   startAfter,
   updateDoc,
   where,
 } from 'firebase/firestore';
 
-import { Category, Story, User } from '../../../types/types';
-import { categoryColRef, storyColRef, usersColRef } from '../../firebase/firebase';
+import { Category, Story, Upvote, User } from '../../../types/types';
+import {
+  categoryColRef,
+  storyColRef,
+  upvoteColRef,
+  usersColRef,
+} from '../../firebase/firebase';
 
 export type CreateStoryDto = Omit<Story, 'updatedAt' | 'id'>;
-export type LikeStoryDto = Pick<Story, 'id'> & {
+export type UpvoteStoryDto = Pick<Story, 'id'> & {
   currentUserId: User['uid'];
-  cancelLike: boolean;
+  cancelUpvote: boolean;
 };
 export type CreateCategoryDto = Omit<Category, 'id'>;
 
@@ -56,23 +62,39 @@ export async function createStory(createStoryDto: CreateStoryDto): Promise<void>
     storyIds: arrayUnion(newStoryRef.id),
     storyCount: increment(1),
   });
+  await setDoc(doc(upvoteColRef, newStoryRef.id), {
+    count: 0,
+    userIds: [],
+  });
 }
 
-export async function likeStory({
+// UPVOTE
+export async function upvoteStory({
   id,
   currentUserId,
-  cancelLike,
-}: LikeStoryDto): Promise<void> {
+  cancelUpvote,
+}: UpvoteStoryDto): Promise<Story['id']> {
   const userDocRef = doc(usersColRef, currentUserId);
-  const storyDocRef = doc(storyColRef, id);
 
   await updateDoc(userDocRef, {
-    likedStoryIds: cancelLike ? arrayRemove(id) : arrayUnion(id),
+    likedStoryIds: cancelUpvote ? arrayRemove(id) : arrayUnion(id),
   });
 
-  await updateDoc(storyDocRef, {
-    likedUsersIds: cancelLike ? arrayRemove(currentUserId) : arrayUnion(currentUserId),
+  await updateDoc(doc(upvoteColRef, id), {
+    userIds: cancelUpvote ? arrayRemove(currentUserId) : arrayUnion(currentUserId),
+    count: increment(cancelUpvote ? -1 : 1),
   });
+
+  return id;
+}
+
+export async function findUpvote(storyId: Story['id']): Promise<Upvote> {
+  const snapshot = await getDoc(doc(upvoteColRef, storyId));
+  if (snapshot.exists()) return { ...snapshot.data() };
+  return {
+    userIds: [],
+    count: 0,
+  };
 }
 
 // CATEGORY

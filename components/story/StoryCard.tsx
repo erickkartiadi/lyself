@@ -1,22 +1,21 @@
 import { Divider, Icon, Text, useTheme } from '@rneui/themed';
-import React, { memo, useContext, useState } from 'react';
+import React, { memo } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useDebouncedCallback } from 'use-debounce';
 
-import { useFindCategory, useLikeStory } from '../../services/api/stories/stories.hooks';
+import { useFindCategory } from '../../services/api/stories/stories.hooks';
 import useGetUser from '../../services/api/user/users.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
 import { Story } from '../../types/types';
-import { AuthContext } from '../../utils/context/AuthContext';
 import { formatTimeAgo } from '../../utils/formatTime';
 import useStyles from '../../utils/hooks/useStyles';
 import Avatar from '../base/Avatar';
 import Card from '../base/Card';
 import Chip from '../base/Chip';
+import UpvoteStoryButton from './UpvoteStoryButton';
 
 function StoryCard({
   anonymous,
@@ -26,30 +25,12 @@ function StoryCard({
   creatorId,
   categoryId,
   id,
-  likedUsersIds,
 }: Story) {
   const { theme } = useTheme();
   const styles = useStyles();
 
-  const { user } = useContext(AuthContext);
-
   const { data: creatorData } = useGetUser(creatorId);
   const { data: categoryData } = useFindCategory(categoryId);
-  const likeStoryMutation = useLikeStory();
-
-  const [isLiked, setIsLiked] = useState(
-    likedUsersIds.some((likedUserId) => likedUserId === user?.uid)
-  );
-
-  const debounceUpdateLike = useDebouncedCallback(() => {
-    if (!user) return;
-
-    likeStoryMutation.mutate({
-      currentUserId: user.uid,
-      id,
-      cancelLike: !isLiked,
-    });
-  }, 500);
 
   return (
     <Card>
@@ -94,24 +75,7 @@ function StoryCard({
       )}
       <Divider color={theme.colors.secondary} style={spacing.my_xl} />
       <View style={[layout.flex_dir_row, layout.justify_between]}>
-        <TouchableOpacity
-          onPress={() => {
-            setIsLiked((prev) => !prev);
-            debounceUpdateLike();
-          }}
-          style={[layout.flex_dir_row, layout.align_center]}
-        >
-          <Icon
-            color={isLiked ? theme.colors.primary : theme.colors.grey3}
-            name={isLiked ? 'heart' : 'heart-outline'}
-            type="ionicon"
-            containerStyle={spacing.mr_sm}
-            size={SIZING['3xl']}
-          />
-          <Text small style={isLiked ? styles.textPrimary : styles.textGrey}>
-            {likedUsersIds.length} likes
-          </Text>
-        </TouchableOpacity>
+        <UpvoteStoryButton id={id} />
         <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>
           <Icon
             color={theme.colors.grey3}
