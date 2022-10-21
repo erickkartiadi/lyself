@@ -1,6 +1,6 @@
 import { Text } from '@rneui/themed';
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { Image, ImageSourcePropType, View } from 'react-native';
 
 import emptyIllustration from '../../assets/images/empty-illustration.png';
 import layout from '../../styles/layout';
@@ -12,15 +12,16 @@ import normalize from '../../utils/normalize';
 interface EmptyScreenProps {
   title: string;
   text: string;
+  source?: ImageSourcePropType;
 }
 
-function EmptyScreen({ title, text }: EmptyScreenProps) {
+function EmptyState({ title, text, source = emptyIllustration }: EmptyScreenProps) {
   const styles = useStyles();
 
   return (
     <View style={[layout.justify_center, layout.align_center, layout.flex_grow]}>
-      <View style={[spacing.mb_xl, layout.ratio_square, width.w_12xl]}>
-        <Image style={[layout.flex, width.w_100]} source={emptyIllustration} />
+      <View style={[spacing.mb_xl, layout.ratio_square, width.w_11xl]}>
+        <Image style={[layout.flex, width.w_100]} source={source} />
       </View>
       <Text h4 style={spacing.mb_sm}>
         {title}
@@ -32,4 +33,8 @@ function EmptyScreen({ title, text }: EmptyScreenProps) {
   );
 }
 
-export default EmptyScreen;
+EmptyState.defaultProps = {
+  source: emptyIllustration,
+};
+
+export default EmptyState;

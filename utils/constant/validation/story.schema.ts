@@ -10,3 +10,7 @@ export const createCategorySchema = object({
   name: string().required().lowercase(),
   nameShort: string(),
 });
+
+export const createReplySchema = object({
+  reply: string().required(),
+});

@@ -8,7 +8,7 @@ import {
   getFirestore,
 } from 'firebase/firestore';
 
-import { Category, Story, Todo, Upvote, User } from '../../types/types';
+import { Category, Reply, Story, Todo, Upvote, User } from '../../types/types';
 
 const firebaseConfig = {
   apiKey: Constants.manifest?.extra?.firebaseApiKey,
@@ -36,7 +36,11 @@ export const createCollection = <T = DocumentData>(
 export const upvoteColRef = createCollection<Upvote>('upvotes');
 export const storyColRef = createCollection<Story>('stories');
 export const categoryColRef = createCollection<Category>('categories');
+
 export const usersColRef = createCollection<User>('users');
+
+export const replyColRef = (storyId: string) =>
+  createCollection<Reply>('replies', storyId, 'reply');
 export const todosColRef = () => {
   const { currentUser } = auth;
   if (!currentUser) throw new Error('Unauthorized');

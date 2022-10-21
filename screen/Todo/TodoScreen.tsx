@@ -7,6 +7,7 @@ import { Modalize } from 'react-native-modalize';
 
 import BottomSheet from '../../components/base/BottomSheet';
 import Chip from '../../components/base/Chip';
+import EmptyState from '../../components/base/EmptyState';
 import RefreshControl from '../../components/layout/RefreshControl';
 import TodoBottomSheet from '../../components/todo/TodoBottomSheet';
 import TodoItem from '../../components/todo/TodoItem';
@@ -19,7 +20,6 @@ import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { OrderBy, TodoFilter, TodoSort } from '../../utils/sort';
-import EmptyScreen from '../Others/EmptyScreen';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
 
@@ -180,7 +180,7 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         ]}
       >
         {data.length <= 0 ? (
-          <EmptyScreen title="Your list is empty" text='Tap "+" button to add new list' />
+          <EmptyState title="Your list is empty" text='Tap "+" button to add new list' />
         ) : (
           <>
             {data.map((props) => (

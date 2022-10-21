@@ -1,108 +1,140 @@
-import { Divider, Icon, Text, useTheme } from '@rneui/themed';
-import React, { memo } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Icon, Text, useTheme } from '@rneui/themed';
+import React, { memo, useContext } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { useFindCategory } from '../../services/api/stories/stories.hooks';
+import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
+import { useFindCategory } from '../../services/api/stories/categories/categories.hooks';
+import { useFindReplyCount } from '../../services/api/stories/replies/replies.hooks';
 import useGetUser from '../../services/api/user/users.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
 import { Story } from '../../types/types';
+import { AuthContext } from '../../utils/context/AuthContext';
 import { formatTimeAgo } from '../../utils/formatTime';
 import useStyles from '../../utils/hooks/useStyles';
 import Avatar from '../base/Avatar';
 import Card from '../base/Card';
-import Chip from '../base/Chip';
-import UpvoteStoryButton from './UpvoteStoryButton';
+import { HorizontalSeparator } from '../layout/ItemSeparator';
+import UpvoteButton from './UpvoteButton';
 
-function StoryCard({
-  anonymous,
-  content,
-  createdAt,
-  title,
-  creatorId,
-  categoryId,
-  id,
-}: Story) {
+interface StoryCardProps extends Story {
+  isOnDetailScreen?: boolean;
+}
+
+function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
+  const { isAnonymous, content, createdAt, title, creatorId, categoryId, id } = props;
   const { theme } = useTheme();
   const styles = useStyles();
+  const navigation = useNavigation<StoryScreenNavigationProps['navigation']>();
+  const { user } = useContext(AuthContext);
 
   const { data: creatorData } = useGetUser(creatorId);
   const { data: categoryData } = useFindCategory(categoryId);
+  const { data: replyCountData } = useFindReplyCount(id);
+
+  const handleNavigateToDetail = () => {
+    navigation.navigate('StoryStack', {
+      screen: 'StoryDetail',
+      params: props,
+    });
+  };
+
+  const isCurrentUserStory = creatorId === user?.uid;
+
+  const textStyle =
+    isCurrentUserStory && !isAnonymous ? styles.textPrimary : styles.textBlack;
+
+  let displayName = isCurrentUserStory ? 'You' : creatorData?.displayName;
+  displayName = isAnonymous ? 'Anonymous' : displayName;
+
+  const borderStyle =
+    !isOnDetailScreen && isCurrentUserStory && !isAnonymous
+      ? styles.borderPrimary
+      : styles.borderGrey5;
 
   return (
-    <Card>
-      <View style={[layout.flex_dir_row, layout.align_center]}>
-        <Avatar
-          size={SIZING['5xl']}
-          containerStyle={[spacing.mr_lg]}
-          rounded
-          avatarUrl={anonymous ? null : creatorData?.photoURL}
-        />
-        <View>
-          <Text subtitle3>{anonymous ? 'Anonymous' : creatorData?.displayName}</Text>
-          <Text caption style={styles.textGrey}>
-            {formatTimeAgo(createdAt.toDate())}
-          </Text>
+    <Card cardStyle={[borderStyle]}>
+      <TouchableOpacity disabled={isOnDetailScreen} onPress={handleNavigateToDetail}>
+        {/* TODO go to user profile */}
+        <View style={[layout.flex_dir_row, layout.justify_between, layout.align_center]}>
+          <View style={[layout.flex_dir_row, layout.align_center]}>
+            <Avatar
+              size={SIZING['5xl']}
+              containerStyle={[spacing.mr_lg]}
+              rounded
+              avatarUrl={isAnonymous ? null : creatorData?.photoURL}
+            />
+            <View>
+              <Text subtitle3 style={textStyle}>
+                {displayName}
+              </Text>
+              <View style={[layout.flex_dir_row, layout.align_center]}>
+                <Text caption style={styles.textGrey}>
+                  {formatTimeAgo(createdAt.toDate())}
+                </Text>
+                <Icon
+                  type="entypo"
+                  size={SIZING.xl}
+                  name="dot-single"
+                  color={theme.colors.grey3}
+                />
+                <Text
+                  caption
+                  style={[
+                    styles.textGrey,
+                    categoryData?.name !== categoryData?.nameShort
+                      ? text.uppercase
+                      : text.capitalize,
+                  ]}
+                >
+                  {categoryData?.nameShort}
+                </Text>
+              </View>
+            </View>
+          </View>
         </View>
-      </View>
-      <View style={spacing.my_xl}>
-        <Text numberOfLines={3} h4>
-          {title}
-        </Text>
-        {content !== '' && (
-          <Text style={spacing.mt_sm} small numberOfLines={6}>
-            {content}
+        <View style={spacing.my_xl}>
+          <Text numberOfLines={3} subtitle style={spacing.mb_xs}>
+            {title}
           </Text>
-        )}
-      </View>
-      {categoryData && (
-        <View style={layout.flex_dir_row}>
-          <Chip
-            size="sm"
-            containerStyle={spacing.mr_md}
-            titleStyle={
-              categoryData?.name !== categoryData?.nameShort
-                ? text.uppercase
-                : text.capitalize
-            }
-          >
-            {categoryData?.nameShort}
-          </Chip>
+          {content && (
+            <Text small numberOfLines={isOnDetailScreen ? undefined : 3}>
+              {content}
+            </Text>
+          )}
         </View>
-      )}
-      <Divider color={theme.colors.secondary} style={spacing.my_xl} />
-      <View style={[layout.flex_dir_row, layout.justify_between]}>
-        <UpvoteStoryButton id={id} />
-        <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>
-          <Icon
-            color={theme.colors.grey3}
-            name="chatbox-outline"
-            type="ionicon"
-            size={SIZING['3xl']}
-            containerStyle={spacing.mr_sm}
-          />
-          <Text small style={styles.textGrey}>
-            32 replies
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>
-          <Icon
-            color={theme.colors.grey3}
-            name="eye-outline"
-            type="ionicon"
-            size={SIZING['3xl']}
-            containerStyle={spacing.mr_sm}
-          />
-          <Text small style={styles.textGrey}>
-            100 views
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <View style={[layout.flex_dir_row, layout.justify_start]}>
+          <UpvoteButton type="story" id={id} />
+          <HorizontalSeparator />
+          {!isOnDetailScreen && (
+            <TouchableOpacity
+              onPress={handleNavigateToDetail}
+              style={[layout.flex_dir_row, layout.align_center]}
+            >
+              <Icon
+                color={theme.colors.grey3}
+                name="chatbubble-ellipses-outline"
+                type="ionicon"
+                size={SIZING['3xl']}
+                containerStyle={spacing.mr_sm}
+              />
+              <Text small style={styles.textGrey}>
+                {replyCountData} replies
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </TouchableOpacity>
     </Card>
   );
 }
+
+StoryCard.defaultProps = {
+  isOnDetailScreen: false,
+};
 
 export default memo(StoryCard);

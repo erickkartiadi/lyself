@@ -39,6 +39,7 @@ export async function register({
     photoURL: user.photoURL,
     uid: user.uid,
     likedStoryIds: [],
+    likedReplyIds: [],
   });
 
   return userCredential;

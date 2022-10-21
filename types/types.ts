@@ -33,9 +33,10 @@ export type Story = {
   title: string;
   content: string;
   createdAt: Timestamp;
-  anonymous: boolean;
   creatorId: string;
   categoryId: string;
+  isAnonymous: boolean;
+  isCommentDisabled: boolean;
 };
 
 export type Category = {
@@ -53,4 +54,13 @@ export type Upvote = {
 
 export type User = Pick<FirebaseUser, 'displayName' | 'email' | 'photoURL' | 'uid'> & {
   likedStoryIds: string[];
+  likedReplyIds: string[];
+};
+
+export type Reply = {
+  id: string;
+  storyId: Story['id'];
+  reply: string;
+  createdAt: Timestamp;
+  userId: User['uid'];
 };

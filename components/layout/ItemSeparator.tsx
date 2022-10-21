@@ -11,4 +11,8 @@ function VerticalSeparator() {
   return <View style={spacing.my_md} />;
 }
 
-export { HorizontalSeparator, VerticalSeparator };
+function VerticalSeparatorSmall() {
+  return <View style={spacing.my_xs} />;
+}
+
+export { HorizontalSeparator, VerticalSeparator, VerticalSeparatorSmall };

@@ -10,6 +10,7 @@ import ButtonLink from '../../components/base/ButtonLink';
 import Chip from '../../components/base/Chip';
 import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
+import { VerticalSeparator } from '../../components/layout/ItemSeparator';
 import CreateCategoryBottomSheet from '../../components/story/CreateCategoryBottomSheet';
 import SelectCategoryBottomSheet from '../../components/story/SelectCategoryBottomSheet';
 import { AddStoryScreenNavigationProps } from '../../navigation/navigation.types';
@@ -44,15 +45,22 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
     defaultValues: {
       content: '',
       title: '',
-      anonymous: false,
       categoryId: '',
+      isAnonymous: false,
+      isCommentDisabled: false,
     },
     resolver: yupResolver(createStorySchema),
   });
 
   const storyMutation = useCreateStory();
 
-  const handlePostStory = ({ content, title, anonymous, categoryId }: CreateStoryDto) => {
+  const handlePostStory = ({
+    content,
+    title,
+    isAnonymous,
+    categoryId,
+    isCommentDisabled,
+  }: CreateStoryDto) => {
     if (!user) {
       somethingWentWrongToast();
       return;
@@ -60,12 +68,13 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
     storyMutation.mutate(
       {
-        anonymous,
+        isAnonymous,
         content,
         title,
         categoryId,
         creatorId: user.uid,
         createdAt: Timestamp.fromDate(new Date()),
+        isCommentDisabled,
       },
       {
         onSuccess: () => {
@@ -187,7 +196,23 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
           </View>
           <Controller
             control={control}
-            name="anonymous"
+            name="isAnonymous"
+            render={({ field: { onChange, value } }) => (
+              <SwitchToggle value={value} onValueChange={onChange} />
+            )}
+          />
+        </View>
+        <VerticalSeparator />
+        <View style={[layout.flex_dir_row, layout.justify_between, layout.align_center]}>
+          <View>
+            <Text subtitle2>Disable comment</Text>
+            <Text small style={styles.textGrey}>
+              People cannot reply to this story
+            </Text>
+          </View>
+          <Controller
+            control={control}
+            name="isCommentDisabled"
             render={({ field: { onChange, value } }) => (
               <SwitchToggle value={value} onValueChange={onChange} />
             )}

@@ -2,6 +2,9 @@ import { makeStyles } from '@rneui/themed';
 
 // for styles that use the dynamic theme object
 const useStyles = makeStyles((theme) => ({
+  textBlue: {
+    color: theme.colors.blue,
+  },
   textPrimary: {
     color: theme.colors.primary,
   },
@@ -10,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   },
   textWhite: {
     color: theme.colors.white,
+  },
+  textGreyDarker: {
+    color: theme.colors.grey1,
   },
   textGrey: {
     color: theme.colors.grey3,
@@ -33,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   // border
+  borderPrimary: {
+    borderColor: theme.colors.primary,
+  },
   borderGrey3: {
     borderColor: theme.colors.grey3,
   },

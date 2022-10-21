@@ -97,7 +97,6 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     handleUpdateTodo();
   }, 500);
 
-  // FIXME
   const handleDeleteTodo = async () => {
     deleteTodoMutation.mutate(id, {
       onSuccess: () => {

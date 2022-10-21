@@ -1,6 +1,8 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import { Story } from '../types/types';
+
 export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
@@ -28,6 +30,7 @@ export type TodoStackParamList = {
 
 export type StoryStackParamList = {
   AddStory: undefined;
+  StoryDetail: Story;
 };
 
 export type GetStartedScreenNavigationProps = NativeStackScreenProps<
@@ -63,6 +66,11 @@ export type TodoScreenNavigationProps = NativeStackScreenProps<
 export type AddStoryScreenNavigationProps = NativeStackScreenProps<
   StoryStackParamList,
   'AddStory'
+>;
+
+export type StoryDetailScreenNavigationProps = NativeStackScreenProps<
+  StoryStackParamList,
+  'StoryDetail'
 >;
 
 export type AccountScreenNavigationProps = NativeStackScreenProps<

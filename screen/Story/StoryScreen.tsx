@@ -5,19 +5,17 @@ import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import ActivityIndicator from '../../components/base/ActivityIndicator';
+import EmptyState from '../../components/base/EmptyState';
 import { VerticalSeparator } from '../../components/layout/ItemSeparator';
 import RefreshControl from '../../components/layout/RefreshControl';
 import CategoryChips from '../../components/story/CategoryChips';
 import StoryCard from '../../components/story/StoryCard';
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
-import {
-  useGetCategories,
-  useGetStories,
-} from '../../services/api/stories/stories.hooks';
+import { useGetCategories } from '../../services/api/stories/categories/categories.hooks';
+import { useGetStories } from '../../services/api/stories/stories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
-import EmptyScreen from '../Others/EmptyScreen';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
 
@@ -65,7 +63,7 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
           isStoriesLoading ? (
             <LoadingScreen />
           ) : (
-            <EmptyScreen
+            <EmptyState
               title="This category is empty"
               text='Tap "+" to add your own story'
             />

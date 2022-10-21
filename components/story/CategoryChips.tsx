@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-import { useGetCategories } from '../../services/api/stories/stories.hooks';
+import { useGetCategories } from '../../services/api/stories/categories/categories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';

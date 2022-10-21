@@ -4,8 +4,8 @@ import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { CreateCategoryDto } from '../../services/api/stories/stories.api';
-import { useCreateCategory } from '../../services/api/stories/stories.hooks';
+import { CreateCategoryDto } from '../../services/api/stories/categories/categories.api';
+import { useCreateCategory } from '../../services/api/stories/categories/categories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { createCategorySchema } from '../../utils/constant/validation/story.schema';
