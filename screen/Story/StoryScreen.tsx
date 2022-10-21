@@ -16,8 +16,11 @@ import { useGetStories } from '../../services/api/stories/stories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
+import { Story } from '../../types/types';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
+
+const renderStory = ({ item }: { item: Story }) => <StoryCard key={item.id} {...item} />;
 
 function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   const { theme } = useTheme();
@@ -45,6 +48,7 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   const isRefreshing = isStoriesRefetching;
 
   if (isError) return <ErrorScreen />;
+
   return (
     <>
       <FlatList
@@ -73,7 +77,7 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
           <RefreshControl onRefresh={handleOnRefresh} refreshing={isRefreshing} />
         }
         ItemSeparatorComponent={VerticalSeparator}
-        renderItem={({ item }) => <StoryCard {...item} />}
+        renderItem={renderStory}
         data={data?.pages.flatMap((page) => page)}
         onEndReached={() => fetchNextStories()}
         onEndReachedThreshold={0.2}

@@ -59,7 +59,7 @@ export type User = Pick<FirebaseUser, 'displayName' | 'email' | 'photoURL' | 'ui
 
 export type Reply = {
   id: string;
-  storyId: Story['id'];
+  repliedId: Story['id'] | Reply['id'];
   reply: string;
   createdAt: Timestamp;
   userId: User['uid'];

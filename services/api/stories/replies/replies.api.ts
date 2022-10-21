@@ -15,18 +15,18 @@ import { replyColRef, upvoteColRef } from '../../../firebase/firebase';
 export type CreateReplyDto = Omit<Reply, 'id' | 'createdAt'>;
 
 export async function createReply({
-  storyId,
+  repliedId,
   reply,
   userId,
 }: CreateReplyDto): Promise<Reply> {
   const data = {
     createdAt: Timestamp.fromDate(new Date()),
     reply,
-    storyId,
+    repliedId,
     userId,
   };
 
-  const replyDocRef = await addDoc(replyColRef(storyId), data);
+  const replyDocRef = await addDoc(replyColRef(repliedId), data);
 
   await setDoc(doc(upvoteColRef, replyDocRef.id), {
     count: 0,
@@ -37,7 +37,7 @@ export async function createReply({
 }
 
 export async function getReplies(storyId: Story['id']): Promise<Reply[]> {
-  const q = query(replyColRef(storyId), orderBy('createdAt', 'desc'));
+  const q = query(replyColRef(storyId), orderBy('createdAt', 'asc'));
   const snapshot = await getDocs(q);
 
   return snapshot.docs.map((document) => ({

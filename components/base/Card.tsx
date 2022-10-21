@@ -13,7 +13,7 @@ import spacing from '../../styles/spacing';
 import useStyles from '../../utils/hooks/useStyles';
 import AnimatedPressable, { AnimatedPressableProps } from './AnimatedPressable';
 
-interface CardProps extends AnimatedPressableProps {
+export interface CardProps extends AnimatedPressableProps {
   width?: FlexStyle['width'];
   cardPadding?: keyof ThemeSpacing;
   enableCardPadding?: boolean;

@@ -10,6 +10,7 @@ import layout from '../../styles/layout';
 import { height } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
+import { Category } from '../../types/types';
 import capitalizeEachWord from '../../utils/capitalizeEachWord';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
 import Radio from '../base/Radio';
@@ -39,6 +40,29 @@ function SelectCategoryBottomSheet({
     setSearchText(value === '' ? undefined : value);
   };
 
+  const renderCategoryRadioButton = ({ item }: { item: Category }) => (
+    <Controller
+      key={item.id}
+      control={control}
+      name="categoryId"
+      render={({ field: { onChange, value } }) => {
+        const name = capitalizeEachWord(item.name);
+        const nameShort = capitalizeEachWord(item?.nameShort);
+        const hasAbbreviation = item.name !== item.nameShort;
+
+        return (
+          <Radio
+            checked={value === item.id}
+            text={hasAbbreviation ? `${name} (${nameShort})` : name}
+            onPress={() => {
+              onChange(item.id);
+              setSelectedCategory(nameShort);
+            }}
+          />
+        );
+      }}
+    />
+  );
   return (
     <BottomSheet
       showHeader
@@ -77,28 +101,7 @@ function SelectCategoryBottomSheet({
             </Text>
           </View>
         ),
-        renderItem: ({ item }) => (
-          <Controller
-            control={control}
-            name="categoryId"
-            render={({ field: { onChange, value } }) => {
-              const name = capitalizeEachWord(item.name);
-              const nameShort = capitalizeEachWord(item?.nameShort);
-              const hasAbbreviation = item.name !== item.nameShort;
-
-              return (
-                <Radio
-                  checked={value === item.id}
-                  text={hasAbbreviation ? `${name} (${nameShort})` : name}
-                  onPress={() => {
-                    onChange(item.id);
-                    setSelectedCategory(nameShort);
-                  }}
-                />
-              );
-            }}
-          />
-        ),
+        renderItem: renderCategoryRadioButton,
         contentContainerStyle: [spacing.mb_2xl, spacing.mt_md],
         ItemSeparatorComponent: VerticalSeparator,
       }}

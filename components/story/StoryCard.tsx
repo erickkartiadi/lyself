@@ -6,7 +6,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { useFindCategory } from '../../services/api/stories/categories/categories.hooks';
-import { useFindReplyCount } from '../../services/api/stories/replies/replies.hooks';
 import useGetUser from '../../services/api/user/users.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
@@ -34,7 +33,6 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
 
   const { data: creatorData } = useGetUser(creatorId);
   const { data: categoryData } = useFindCategory(categoryId);
-  const { data: replyCountData } = useFindReplyCount(id);
 
   const handleNavigateToDetail = () => {
     navigation.navigate('StoryStack', {
@@ -123,7 +121,7 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
                 containerStyle={spacing.mr_sm}
               />
               <Text small style={styles.textGrey}>
-                {replyCountData} replies
+                Reply
               </Text>
             </TouchableOpacity>
           )}

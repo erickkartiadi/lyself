@@ -6,6 +6,7 @@ import { useGetCategories } from '../../services/api/stories/categories/categori
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
+import { Category } from '../../types/types';
 import useStyles from '../../utils/hooks/useStyles';
 import Chip from '../base/Chip';
 
@@ -21,6 +22,19 @@ function CategoryChips({
   const styles = useStyles();
 
   const { data, fetchNextPage } = useGetCategories();
+
+  const renderCategoryChips = ({ item }: { item: Category }) => (
+    <Chip
+      key={item.id}
+      chipColor="primary"
+      isActive={item.id === selectedCategoryId}
+      onPress={() => setSelectedCategoryId(item.id)}
+      containerStyle={spacing.mr_md}
+      titleStyle={item.name !== item.nameShort ? text.uppercase : text.capitalize}
+    >
+      {item.nameShort}
+    </Chip>
+  );
 
   return (
     <View style={[styles.defaultBackground, spacing.mb_xl, layout.flex_dir_row]}>
@@ -43,17 +57,7 @@ function CategoryChips({
         }
         onEndReached={() => fetchNextPage()}
         onEndReachedThreshold={0.2}
-        renderItem={({ item }) => (
-          <Chip
-            chipColor="primary"
-            isActive={item.id === selectedCategoryId}
-            onPress={() => setSelectedCategoryId(item.id)}
-            containerStyle={spacing.mr_md}
-            titleStyle={item.name !== item.nameShort ? text.uppercase : text.capitalize}
-          >
-            {item.nameShort}
-          </Chip>
-        )}
+        renderItem={renderCategoryChips}
       />
     </View>
   );

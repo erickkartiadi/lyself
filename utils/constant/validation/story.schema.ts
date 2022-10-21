@@ -12,5 +12,5 @@ export const createCategorySchema = object({
 });
 
 export const createReplySchema = object({
-  reply: string().required(),
+  reply: string().required().trim(),
 });
