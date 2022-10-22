@@ -1,7 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
 import { Icon, Text, useTheme } from '@rneui/themed';
 import * as React from 'react';
 import { Pressable, View } from 'react-native';
 
+import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { useDeleteStory } from '../../services/api/stories/stories.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
@@ -11,18 +13,25 @@ import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
 
 interface StoryActionBottomSheetProps
   extends BottomSheetProps,
-    Pick<Story, 'id' | 'categoryId'> {}
+    Omit<Story, 'createdAt' | 'creatorId'> {}
 
 function StoryActionBottomSheet({
   id,
   categoryId,
+  content,
+  isAnonymous,
+  isCommentDisabled,
+  title,
   bottomSheetRef,
 }: StoryActionBottomSheetProps) {
   const closeBottomSheet = () => bottomSheetRef.current?.close();
   const { theme } = useTheme();
 
+  const navigation = useNavigation<StoryScreenNavigationProps['navigation']>();
+
   const deleteStoryMutation = useDeleteStory();
 
+  // TODO add confirmation dialog
   const handleDeleteStory = () => {
     deleteStoryMutation.mutate(
       {
@@ -37,6 +46,22 @@ function StoryActionBottomSheet({
     );
   };
 
+  const navigateToEditScreen = () => {
+    navigation.navigate('StoryStack', {
+      screen: 'EditStory',
+      params: {
+        categoryId,
+        content,
+        id,
+        isAnonymous,
+        isCommentDisabled,
+        title,
+      },
+    });
+
+    closeBottomSheet();
+  };
+
   return (
     <BottomSheet
       modalStyle={layout.container_gutter}
@@ -49,7 +74,7 @@ function StoryActionBottomSheet({
       <View style={spacing.mb_xl}>
         <Pressable
           android_ripple={{ color: theme.colors.secondary }}
-          onPress={() => console.log('edit')}
+          onPress={navigateToEditScreen}
           style={[layout.container_gutter, spacing.py_lg]}
         >
           <View style={[layout.flex_dir_row, layout.align_center]}>

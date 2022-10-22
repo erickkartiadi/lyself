@@ -27,6 +27,7 @@ import {
 import { findUser } from '../user/users.api';
 
 export type CreateStoryDto = Omit<Story, 'updatedAt' | 'id'>;
+export type UpdateStoryDto = Partial<Story>;
 export type DeleteStoryDto = Pick<Story, 'id' | 'categoryId'>;
 export type SaveStoryDto = {
   id: Story['id'];
@@ -111,6 +112,14 @@ export async function createStory(createStoryDto: CreateStoryDto): Promise<void>
     count: 0,
     userIds: [],
   });
+}
+
+export async function updateStory({
+  id,
+  ...updateStoryDto
+}: UpdateStoryDto): Promise<void> {
+  const storyDocRef = doc(storyColRef, id);
+  await updateDoc(storyDocRef, updateStoryDto);
 }
 
 export async function saveStory({

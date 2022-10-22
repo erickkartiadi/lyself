@@ -30,6 +30,7 @@ export type TodoStackParamList = {
 
 export type StoryStackParamList = {
   AddStory: undefined;
+  EditStory: Omit<Story, 'createdAt' | 'creatorId'>;
   StoryDetail: Story;
 };
 
@@ -66,6 +67,11 @@ export type TodoScreenNavigationProps = NativeStackScreenProps<
 export type AddStoryScreenNavigationProps = NativeStackScreenProps<
   StoryStackParamList,
   'AddStory'
+>;
+
+export type EditStoryScreenNavigationProps = NativeStackScreenProps<
+  StoryStackParamList,
+  'EditStory'
 >;
 
 export type StoryDetailScreenNavigationProps = NativeStackScreenProps<

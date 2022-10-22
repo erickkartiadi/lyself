@@ -9,6 +9,7 @@ import {
   getStories,
   getUserStories,
   saveStory,
+  updateStory,
 } from './stories.api';
 
 export const useGetStories = (categoryId: string) =>
@@ -38,6 +39,20 @@ export const useCreateStory = () =>
         type: 'success',
         text1: 'Success',
         text2: 'Your story has been created',
+      });
+    },
+    onError: () => {
+      somethingWentWrongToast();
+    },
+  });
+
+export const useUpdateStory = () =>
+  useMutation(updateStory, {
+    onSuccess: () => {
+      Toast.show({
+        type: 'success',
+        text1: 'Success',
+        text2: 'Your story has been updated',
       });
     },
     onError: () => {

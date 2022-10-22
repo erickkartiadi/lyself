@@ -158,11 +158,7 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
         </View>
       </Card>
 
-      <StoryActionBottomSheet
-        categoryId={categoryId}
-        id={id}
-        bottomSheetRef={bottomSheetRef}
-      />
+      <StoryActionBottomSheet {...props} bottomSheetRef={bottomSheetRef} />
     </>
   );
 }
