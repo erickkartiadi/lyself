@@ -70,7 +70,7 @@ function StoryDetailScreen({
               <EmptyState
                 source={isCommentDisabled ? disableIllustration : undefined}
                 title={isCommentDisabled ? 'Comment is disabled' : 'No reply here'}
-                text={
+                subtitle={
                   isCommentDisabled
                     ? 'You cannot reply on this story'
                     : 'Be the first to reply on this story.'

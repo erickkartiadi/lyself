@@ -1,7 +1,9 @@
 import {
   addDoc,
+  arrayRemove,
   arrayUnion,
   doc,
+  documentId,
   getDoc,
   getDocs,
   increment,
@@ -14,10 +16,21 @@ import {
   where,
 } from 'firebase/firestore';
 
-import { Story } from '../../../types/types';
-import { categoryColRef, storyColRef, upvoteColRef } from '../../firebase/firebase';
+import { Story, User, UserStoryType } from '../../../types/types';
+import {
+  categoryColRef,
+  storyColRef,
+  upvoteColRef,
+  usersColRef,
+} from '../../firebase/firebase';
+import { findUser } from '../user/users.api';
 
 export type CreateStoryDto = Omit<Story, 'updatedAt' | 'id'>;
+export type SaveStoryDto = {
+  id: Story['id'];
+  currentUserId: User['uid'];
+  cancelSave: boolean;
+};
 
 export async function getStories(
   pageParam: Story | null,
@@ -45,6 +58,47 @@ export async function getStories(
   })) as Story[];
 }
 
+export async function getUserStories(
+  pageParam: Story | null,
+  userId: User['uid'] | undefined,
+  type: UserStoryType
+): Promise<Story[]> {
+  if (!userId) throw new Error('Unauthorized');
+  if (!pageParam) return [];
+
+  let q = query(storyColRef);
+
+  if (type !== 'user') {
+    const user = await findUser(userId);
+    if (!user) throw new Error('unauthorized');
+
+    let ids = user.likedStoryIds;
+    if (type === 'saved') ids = user.savedStoryIds;
+
+    if (ids.length <= 0) return [];
+
+    q = query(q, where(documentId(), 'in', ids));
+  }
+
+  if (type === 'user') {
+    q = query(q, where('creatorId', '==', userId));
+  }
+
+  q = query(q, limit(5));
+
+  if (pageParam?.id !== null) {
+    const currSnapshot = await getDoc(doc(storyColRef, pageParam.id));
+    const nextQuery = query(q, startAfter(currSnapshot));
+    q = nextQuery;
+  }
+
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((document) => ({
+    ...document.data(),
+    id: document.id,
+  })) as Story[];
+}
+
 export async function createStory(createStoryDto: CreateStoryDto): Promise<void> {
   const newStoryRef = await addDoc(storyColRef, createStoryDto);
   await updateDoc(doc(categoryColRef, createStoryDto.categoryId), {
@@ -54,5 +108,17 @@ export async function createStory(createStoryDto: CreateStoryDto): Promise<void>
   await setDoc(doc(upvoteColRef, newStoryRef.id), {
     count: 0,
     userIds: [],
+  });
+}
+
+export async function saveStory({
+  cancelSave,
+  currentUserId,
+  id,
+}: SaveStoryDto): Promise<void> {
+  const userDocRef = doc(usersColRef, currentUserId);
+
+  await updateDoc(userDocRef, {
+    savedStoryIds: cancelSave ? arrayRemove(id) : arrayUnion(id),
   });
 }

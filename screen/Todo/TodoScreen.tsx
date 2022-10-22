@@ -180,7 +180,10 @@ function TodoScreen({ navigation }: TodoScreenNavigationProps) {
         ]}
       >
         {data.length <= 0 ? (
-          <EmptyState title="Your list is empty" text='Tap "+" button to add new list' />
+          <EmptyState
+            title="Your list is empty"
+            subtitle='Tap "+" button to add new list'
+          />
         ) : (
           <>
             {data.map((props) => (

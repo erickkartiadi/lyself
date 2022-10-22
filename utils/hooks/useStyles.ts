@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   textGreyDarker: {
     color: theme.colors.grey1,
   },
+  textWarning: {
+    color: theme.colors.warning,
+  },
   textGrey: {
     color: theme.colors.grey3,
   },

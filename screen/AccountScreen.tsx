@@ -1,10 +1,11 @@
-import { Text, useTheme } from '@rneui/themed';
+import { Icon } from '@rneui/base';
+import { Tab, TabView, Text, useTheme } from '@rneui/themed';
 import React from 'react';
 import { View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 
+import StoryTabView from '../components/account/StoryTabView';
 import Avatar from '../components/base/Avatar';
-import SettingMenu from '../components/base/SettingMenu';
+import TabItem from '../components/base/TabItem';
 import layout from '../styles/layout';
 import spacing from '../styles/spacing';
 import { SIZING } from '../theme/theme';
@@ -25,96 +26,54 @@ function AccountScreen() {
   };
 
   const styles = useStyles();
+  const [index, setIndex] = React.useState(0);
 
   return (
-    <ScrollView contentContainerStyle={[layout.section_lg]}>
-      <View style={layout.section_lg}>
-        <View
-          style={[
-            layout.flex,
-            layout.flex_dir_col,
-            layout.align_center,
-            layout.justify_center,
-          ]}
-        >
+    <>
+      <View
+        style={[
+          layout.flex_dir_row,
+          layout.justify_between,
+          layout.align_center,
+          layout.container_gutter,
+          layout.section_md,
+        ]}
+      >
+        <View style={[layout.flex_dir_row, layout.align_center]}>
           <Avatar
-            size={SIZING['9xl']}
-            containerStyle={spacing.mb_xl}
+            size={SIZING['8xl']}
+            containerStyle={spacing.mr_xl}
             avatarUrl={user?.photoURL}
           />
-          <Text h3>{user?.displayName}</Text>
-          <Text style={styles.textGrey}>{user?.email}</Text>
+          <View>
+            <Text h4>{user?.displayName}</Text>
+            <Text style={styles.textGrey}>{user?.email}</Text>
+          </View>
         </View>
-      </View>
-      <View style={layout.section_sm}>
-        <SettingMenu
-          title="Profile"
-          icon={{ backgroundColor: theme.colors.blue, name: 'person', type: 'ionicon' }}
-        />
-        <SettingMenu
-          title="Notification"
-          icon={{
-            backgroundColor: theme.colors.primary,
-            name: 'notifications',
-            type: 'ionicon',
-          }}
-        />
-        <SettingMenu
-          title="Privacy"
-          icon={{
-            backgroundColor: theme.colors.purple,
-            name: 'lock-closed',
-            type: 'ionicon',
-          }}
+        <Icon
+          name="exit-outline"
+          type="ionicon"
+          color={theme.colors.error}
+          onPress={handleLogout}
         />
       </View>
-      <View style={layout.section_sm}>
-        <SettingMenu
-          title="Setting"
-          icon={{
-            backgroundColor: theme.colors.grey0,
-            name: 'settings',
-            type: 'ionicon',
-          }}
-        />
-        <SettingMenu
-          title="Security"
-          icon={{ backgroundColor: theme.colors.grey4, name: 'shield', type: 'ionicon' }}
-        />
-        <SettingMenu
-          title="Language"
-          icon={{ backgroundColor: theme.colors.warning, name: 'globe', type: 'ionicon' }}
-          caption="English"
-        />
+      <View style={[layout.container_gutter, layout.section_md]}>
+        <Tab
+          containerStyle={styles.secondaryBackground}
+          value={index}
+          onChange={(e) => setIndex(e)}
+        >
+          <TabItem title="My Story" />
+          <TabItem title="Liked" />
+          <TabItem title="Saved" />
+        </Tab>
       </View>
-      <View style={layout.section_sm}>
-        <SettingMenu
-          title="Ask a Question"
-          icon={{
-            backgroundColor: theme.colors.primary,
-            name: 'chatbubbles',
-            type: 'ionicon',
-          }}
-        />
-        <SettingMenu
-          title="FAQ"
-          icon={{ backgroundColor: theme.colors.blue, name: 'book', type: 'ionicon' }}
-        />
-        <SettingMenu
-          title="Become Our Partner"
-          icon={{
-            backgroundColor: theme.colors.success,
-            name: 'handshake',
-            type: 'material-community',
-          }}
-        />
-      </View>
-      <SettingMenu
-        title="Sign Out"
-        icon={{ backgroundColor: theme.colors.error, name: 'log-out', type: 'ionicon' }}
-        onPress={handleLogout}
-      />
-    </ScrollView>
+      <TabView value={index} onChange={setIndex}>
+        <StoryTabView type="user" />
+        <StoryTabView type="liked" />
+        <StoryTabView type="saved" />
+      </TabView>
+    </>
   );
 }
 

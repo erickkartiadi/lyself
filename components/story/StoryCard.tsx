@@ -18,6 +18,7 @@ import useStyles from '../../utils/hooks/useStyles';
 import Avatar from '../base/Avatar';
 import Card from '../base/Card';
 import { HorizontalSeparator } from '../layout/ItemSeparator';
+import SaveButton from './SaveButton';
 import UpvoteButton from './UpvoteButton';
 
 interface StoryCardProps extends Story {
@@ -49,15 +50,10 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
   let displayName = isCurrentUserStory ? 'You' : creatorData?.displayName;
   displayName = isAnonymous ? 'Anonymous' : displayName;
 
-  const borderStyle =
-    !isOnDetailScreen && isCurrentUserStory && !isAnonymous
-      ? styles.borderPrimary
-      : styles.borderGrey5;
-
   return (
-    <Card cardStyle={[borderStyle]}>
+    <Card>
+      {/* TODO go to user profile */}
       <TouchableOpacity disabled={isOnDetailScreen} onPress={handleNavigateToDetail}>
-        {/* TODO go to user profile */}
         <View style={[layout.flex_dir_row, layout.justify_between, layout.align_center]}>
           <View style={[layout.flex_dir_row, layout.align_center]}>
             <Avatar
@@ -105,28 +101,44 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
             </Text>
           )}
         </View>
-        <View style={[layout.flex_dir_row, layout.justify_start]}>
+      </TouchableOpacity>
+      <View style={[layout.flex_dir_row, layout.justify_between, layout.align_center]}>
+        <View style={[layout.flex_dir_row]}>
           <UpvoteButton type="story" id={id} />
           <HorizontalSeparator />
+          <SaveButton id={id} />
           {!isOnDetailScreen && (
-            <TouchableOpacity
-              onPress={handleNavigateToDetail}
-              style={[layout.flex_dir_row, layout.align_center]}
-            >
-              <Icon
-                color={theme.colors.grey3}
-                name="chatbubble-ellipses-outline"
-                type="ionicon"
-                size={SIZING['3xl']}
-                containerStyle={spacing.mr_sm}
-              />
-              <Text small style={styles.textGrey}>
-                Reply
-              </Text>
-            </TouchableOpacity>
+            <>
+              <HorizontalSeparator />
+              <TouchableOpacity
+                onPress={handleNavigateToDetail}
+                style={[layout.flex_dir_row, layout.align_center]}
+              >
+                <Icon
+                  color={theme.colors.grey3}
+                  name="chatbubble-ellipses-outline"
+                  type="ionicon"
+                  size={SIZING['3xl']}
+                  containerStyle={spacing.mr_sm}
+                />
+                <Text small style={styles.textGrey}>
+                  Reply
+                </Text>
+              </TouchableOpacity>
+            </>
           )}
         </View>
-      </TouchableOpacity>
+        <View style={[layout.flex_dir_row]}>
+          <TouchableOpacity style={[layout.flex_dir_row, layout.align_center]}>
+            <Icon
+              color={theme.colors.grey3}
+              name="dots-horizontal"
+              type="material-community"
+              size={SIZING['3xl']}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     </Card>
   );
 }

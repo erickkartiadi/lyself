@@ -55,7 +55,10 @@ export type Upvote = {
 export type User = Pick<FirebaseUser, 'displayName' | 'email' | 'photoURL' | 'uid'> & {
   likedStoryIds: string[];
   likedReplyIds: string[];
+  savedStoryIds: string[];
 };
+
+export type UserStoryType = 'user' | 'liked' | 'saved';
 
 export type Reply = {
   id: string;

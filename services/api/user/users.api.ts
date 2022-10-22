@@ -10,7 +10,9 @@ export async function createUser(createUserDto: CreateUserDto) {
   await setDoc(userDocRef, createUserDto);
 }
 
-export async function findUser(uid: User['uid']): Promise<User | undefined> {
+export async function findUser(uid: User['uid'] | undefined): Promise<User | undefined> {
+  if (!uid) return undefined;
+
   const userDocRef = doc(usersColRef, uid);
   const snapshot = await getDoc(userDocRef);
   return snapshot.data();

@@ -69,7 +69,7 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
           ) : (
             <EmptyState
               title="This category is empty"
-              text='Tap "+" to add your own story'
+              subtitle='Tap "+" to add your own story'
             />
           )
         }

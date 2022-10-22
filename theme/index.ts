@@ -75,6 +75,10 @@ const myTheme = createTheme({
     Chip: {
       titleStyle: subtitle3,
     },
+    Tab: {
+      containerStyle: border.rounded,
+      disableIndicator: true,
+    },
   },
 });
 

@@ -40,6 +40,7 @@ export async function register({
     uid: user.uid,
     likedStoryIds: [],
     likedReplyIds: [],
+    savedStoryIds: [],
   });
 
   return userCredential;
