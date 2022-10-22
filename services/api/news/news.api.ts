@@ -20,9 +20,10 @@ type NewsEverything = {
 export default async function getNews(): Promise<Article[]> {
   const res = await axios.get('https://newsapi.org/v2/everything', {
     params: {
-      q: '"mental health"',
-      pageSize: 10,
+      q: 'mental health OR psychology OR wellness',
+      pageSize: 20,
       apiKey: Constant.manifest?.extra?.newsApiKey,
+      sortBy: 'relevancy',
     },
   });
 

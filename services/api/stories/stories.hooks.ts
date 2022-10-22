@@ -3,7 +3,13 @@ import Toast from 'react-native-toast-message';
 
 import { User, UserStoryType } from '../../../types/types';
 import { somethingWentWrongToast } from '../../../utils/toast';
-import { createStory, getStories, getUserStories, saveStory } from './stories.api';
+import {
+  createStory,
+  deleteStory,
+  getStories,
+  getUserStories,
+  saveStory,
+} from './stories.api';
 
 export const useGetStories = (categoryId: string) =>
   useInfiniteQuery(
@@ -45,6 +51,21 @@ export const useSaveStory = () => {
   return useMutation(saveStory, {
     onSettled: () => {
       queryClient.invalidateQueries(['user']);
+    },
+  });
+};
+
+export const useDeleteStory = () => {
+  const query = useQueryClient();
+  return useMutation(deleteStory, {
+    onSuccess: () => {
+      Toast.show({
+        type: 'success',
+        text1: 'Success',
+        text2: 'Your story has been deleted.',
+      });
+
+      query.invalidateQueries(['story']);
     },
   });
 };

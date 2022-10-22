@@ -2,6 +2,7 @@ import {
   addDoc,
   arrayRemove,
   arrayUnion,
+  deleteDoc,
   doc,
   documentId,
   getDoc,
@@ -26,6 +27,7 @@ import {
 import { findUser } from '../user/users.api';
 
 export type CreateStoryDto = Omit<Story, 'updatedAt' | 'id'>;
+export type DeleteStoryDto = Pick<Story, 'id' | 'categoryId'>;
 export type SaveStoryDto = {
   id: Story['id'];
   currentUserId: User['uid'];
@@ -121,4 +123,20 @@ export async function saveStory({
   await updateDoc(userDocRef, {
     savedStoryIds: cancelSave ? arrayRemove(id) : arrayUnion(id),
   });
+}
+
+export async function deleteStory({ id, categoryId }: DeleteStoryDto) {
+  const storyDocRef = doc(storyColRef, id);
+
+  // remove from stories collection
+  await deleteDoc(storyDocRef);
+
+  // remove category storyIds and decrement storyCount
+  await updateDoc(doc(categoryColRef, categoryId), {
+    storyIds: arrayRemove(id),
+    storyCount: increment(-1),
+  });
+
+  // removes upvote collection
+  await deleteDoc(doc(upvoteColRef, id));
 }
