@@ -15,6 +15,7 @@ import {
   subtitle,
   subtitle2,
   subtitle3,
+  text,
 } from '../styles/typhography';
 import { BORDER_RADIUS, darkColors, lightColors, SPACES } from './theme';
 
@@ -78,6 +79,12 @@ const myTheme = createTheme({
     Tab: {
       containerStyle: border.rounded,
       disableIndicator: true,
+    },
+    DialogTitle: {
+      titleStyle: heading3,
+    },
+    DialogButton: {
+      titleStyle: [subtitle3, text.uppercase],
     },
   },
 });

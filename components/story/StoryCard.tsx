@@ -7,7 +7,7 @@ import { Modalize } from 'react-native-modalize';
 
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { useFindCategory } from '../../services/api/stories/categories/categories.hooks';
-import useGetUser from '../../services/api/user/users.hooks';
+import { useFindUser } from '../../services/api/user/users.hooks';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
@@ -35,7 +35,7 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
   const navigation = useNavigation<StoryScreenNavigationProps['navigation']>();
   const { user } = useContext(AuthContext);
 
-  const { data: creatorData } = useGetUser(creatorId);
+  const { data: creatorData } = useFindUser(creatorId);
   const { data: categoryData } = useFindCategory(categoryId);
 
   const handleNavigateToDetail = () => {

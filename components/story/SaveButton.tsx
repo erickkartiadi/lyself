@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { useSaveStory } from '../../services/api/stories/stories.hooks';
-import useGetUser from '../../services/api/user/users.hooks';
+import { useFindUser } from '../../services/api/user/users.hooks';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
@@ -16,7 +16,7 @@ function SaveButton({ id }: Pick<Story, 'id'>) {
   const { theme } = useTheme();
   const styles = useStyles();
   const { user } = React.useContext(AuthContext);
-  const { data: currentUserData } = useGetUser(user?.uid);
+  const { data: currentUserData } = useFindUser(user?.uid);
 
   const saveStoryMutation = useSaveStory();
 

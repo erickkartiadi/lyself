@@ -6,10 +6,9 @@ import {
 import * as React from 'react';
 
 import border from '../../styles/border';
-import layout from '../../styles/layout';
 import useStyles from '../../utils/hooks/useStyles';
 
-interface AvatarProps extends RNEAvatarProps {
+interface AvatarProps extends React.PropsWithChildren<RNEAvatarProps> {
   avatarUrl?: string | null;
 }
 
@@ -26,12 +25,7 @@ function Avatar({ rounded, containerStyle, avatarUrl: photoUrl, ...props }: Avat
         source={{
           uri: photoUrl,
         }}
-        containerStyle={[
-          layout.overflow_hidden,
-          styles.borderGrey5,
-          border.width_xs,
-          containerStyle,
-        ]}
+        containerStyle={[styles.borderGrey5, border.width_xs, containerStyle]}
       />
     );
   }

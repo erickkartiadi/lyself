@@ -4,9 +4,11 @@ import { getAuth } from 'firebase/auth';
 import {
   collection,
   CollectionReference,
+  doc,
   DocumentData,
   getFirestore,
 } from 'firebase/firestore';
+import { getStorage, ref } from 'firebase/storage';
 
 import { Category, Reply, Story, Todo, Upvote, User } from '../../types/types';
 
@@ -26,6 +28,7 @@ export default app;
 export const auth = getAuth(app);
 
 export const db = getFirestore(app);
+export const storage = getStorage(app);
 
 // create collection with typescript data type
 export const createCollection = <T = DocumentData>(
@@ -46,3 +49,13 @@ export const todosColRef = () => {
   if (!currentUser) throw new Error('Unauthorized');
   return createCollection<Todo>('users', currentUser?.uid, 'todos');
 };
+
+export const currentUserDocRef = () => {
+  const { currentUser } = auth;
+  if (!currentUser) throw new Error('Unauthorized');
+  return doc<User>(usersColRef, currentUser?.uid);
+};
+
+// STORAGE
+export const storageRef = ref(storage);
+export const profileRef = ref(storageRef, 'profiles/');

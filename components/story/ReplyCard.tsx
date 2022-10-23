@@ -4,7 +4,7 @@ import { FlatList, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import { useGetReplies } from '../../services/api/stories/replies/replies.hooks';
-import useGetUser from '../../services/api/user/users.hooks';
+import { useFindUser } from '../../services/api/user/users.hooks';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
@@ -37,7 +37,7 @@ function ReplyCard({
   const { user } = React.useContext(AuthContext);
   const { theme } = useTheme();
   const replyBottomSheetRef = React.useRef<Modalize>(null);
-  const { data: replierData } = useGetUser(userId);
+  const { data: replierData } = useFindUser(userId);
 
   const isCurrentUserReply = userId === user?.uid;
   const isCreatorReply = storyCreatorId === userId;

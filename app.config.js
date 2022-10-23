@@ -73,6 +73,13 @@ export default {
           color: '#ffffff',
         },
       ],
+      [
+        'expo-image-picker',
+        {
+          photosPermission:
+            'The app accesses your photos to let you change your profile picture.',
+        },
+      ],
     ],
     extra: {
       ...Config,
