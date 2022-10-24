@@ -66,7 +66,7 @@ function StoryDetailScreen({
           isLoading ? (
             <ActivityIndicator />
           ) : (
-            <View style={[layout.section_lg, spacing.mt_2xl]}>
+            <View style={[layout.flex, spacing.mt_2xl]}>
               <EmptyState
                 source={isCommentDisabled ? disableIllustration : undefined}
                 title={isCommentDisabled ? 'Comment is disabled' : 'No reply here'}

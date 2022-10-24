@@ -1,3 +1,5 @@
+import 'react-native-get-random-values';
+
 import Constants from 'expo-constants';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
@@ -8,7 +10,14 @@ import {
   DocumentData,
   getFirestore,
 } from 'firebase/firestore';
-import { getStorage, ref } from 'firebase/storage';
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  StorageReference,
+  uploadBytes,
+} from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Category, Reply, Story, Todo, Upvote, User } from '../../types/types';
 
@@ -59,3 +68,26 @@ export const currentUserDocRef = () => {
 // STORAGE
 export const storageRef = ref(storage);
 export const profileRef = ref(storageRef, 'profiles/');
+export const storyImageRef = ref(storageRef, 'story/');
+
+export const uploadImageAsync = async (imageRef: StorageReference, uri: string) => {
+  const blob = (await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = () => {
+      resolve(xhr.response);
+    };
+    xhr.onerror = () => {
+      reject(new TypeError('Network request failed'));
+    };
+    xhr.responseType = 'blob';
+    xhr.open('GET', uri, true);
+    xhr.send(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  })) as any;
+
+  const currentRef = ref(imageRef, uuidv4());
+  await uploadBytes(currentRef, blob);
+  blob.close();
+
+  return getDownloadURL(currentRef);
+};

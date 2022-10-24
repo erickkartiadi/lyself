@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { Icon, Text, useTheme } from '@rneui/themed';
+import { Icon, Image, Text, useTheme } from '@rneui/themed';
 import React, { memo, useContext, useRef } from 'react';
 import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -10,6 +10,7 @@ import { useFindCategory } from '../../services/api/stories/categories/categorie
 import { useFindUser } from '../../services/api/user/users.hooks';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
@@ -28,8 +29,10 @@ interface StoryCardProps extends Story {
   isOnDetailScreen?: boolean;
 }
 
+// TODO press image to zoom
 function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
-  const { isAnonymous, content, createdAt, title, creatorId, categoryId, id } = props;
+  const { isAnonymous, imageUri, content, createdAt, title, creatorId, categoryId, id } =
+    props;
   const { theme } = useTheme();
   const styles = useStyles();
   const navigation = useNavigation<StoryScreenNavigationProps['navigation']>();
@@ -60,58 +63,93 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
     <>
       <Card>
         {/* TODO go to user profile */}
-        <TouchableOpacity disabled={isOnDetailScreen} onPress={handleNavigateToDetail}>
-          <View
-            style={[layout.flex_dir_row, layout.justify_between, layout.align_center]}
-          >
+
+        <View style={[layout.flex_dir_row, layout.align_center, spacing.mb_sm]}>
+          <Avatar
+            size={SIZING['5xl']}
+            containerStyle={[spacing.mr_lg]}
+            rounded
+            avatarUrl={isAnonymous ? null : creatorData?.photoURL}
+          />
+          <View>
+            <Text subtitle3 style={textStyle}>
+              {displayName}
+            </Text>
             <View style={[layout.flex_dir_row, layout.align_center]}>
-              <Avatar
-                size={SIZING['5xl']}
-                containerStyle={[spacing.mr_lg]}
-                rounded
-                avatarUrl={isAnonymous ? null : creatorData?.photoURL}
+              <Text caption style={styles.textGrey}>
+                {formatTimeAgo(createdAt.toDate())}
+              </Text>
+              <Icon
+                type="entypo"
+                size={SIZING.xl}
+                name="dot-single"
+                color={theme.colors.grey3}
               />
-              <View>
-                <Text subtitle3 style={textStyle}>
-                  {displayName}
-                </Text>
-                <View style={[layout.flex_dir_row, layout.align_center]}>
-                  <Text caption style={styles.textGrey}>
-                    {formatTimeAgo(createdAt.toDate())}
-                  </Text>
-                  <Icon
-                    type="entypo"
-                    size={SIZING.xl}
-                    name="dot-single"
-                    color={theme.colors.grey3}
-                  />
-                  <Text
-                    caption
-                    style={[
-                      styles.textGrey,
-                      categoryData?.name !== categoryData?.nameShort
-                        ? text.uppercase
-                        : text.capitalize,
-                    ]}
-                  >
-                    {categoryData?.nameShort}
-                  </Text>
-                </View>
-              </View>
+              <Text
+                caption
+                style={[
+                  styles.textGrey,
+                  categoryData?.name !== categoryData?.nameShort
+                    ? text.uppercase
+                    : text.capitalize,
+                ]}
+              >
+                {categoryData?.nameShort}
+              </Text>
             </View>
           </View>
-          <View style={spacing.my_xl}>
-            <Text numberOfLines={3} subtitle style={spacing.mb_xs}>
-              {title}
-            </Text>
-            {content && (
-              <Text small numberOfLines={isOnDetailScreen ? undefined : 3}>
-                {content}
-              </Text>
-            )}
+          <View style={layout.flex} />
+          {isCurrentUserStory && (
+            <View style={[layout.flex_dir_row]}>
+              <Icon
+                onPress={showBottomSheet}
+                color={theme.colors.grey3}
+                name="dots-vertical"
+                type="material-community"
+                size={SIZING['3xl']}
+                containerStyle={border.rounded}
+              />
+            </View>
+          )}
+        </View>
+        {imageUri && (
+          <View style={layout.section_sm}>
+            <Image
+              style={[
+                layout.ratio_wide,
+                width.w_100,
+                layout.flex,
+                border.radius_xl,
+                border.width_sm,
+                styles.borderGrey5,
+              ]}
+              source={{ uri: imageUri }}
+            />
           </View>
+        )}
+        <TouchableOpacity
+          disabled={isOnDetailScreen}
+          onPress={handleNavigateToDetail}
+          style={layout.section_sm}
+        >
+          <Text numberOfLines={2} subtitle style={spacing.mb_xs}>
+            {title}
+          </Text>
+          {content && (
+            <Text small numberOfLines={isOnDetailScreen ? undefined : 3}>
+              {content}
+            </Text>
+          )}
         </TouchableOpacity>
-        <View style={[layout.flex_dir_row, layout.justify_between, layout.align_center]}>
+
+        <View
+          style={[
+            layout.flex_dir_row,
+            layout.justify_between,
+            layout.align_center,
+            spacing.mt_sm,
+          ]}
+        >
           <View style={[layout.flex_dir_row]}>
             <UpvoteButton type="story" id={id} />
             <HorizontalSeparator />
@@ -137,24 +175,6 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
               </>
             )}
           </View>
-          {isCurrentUserStory && (
-            <View style={[layout.flex_dir_row]}>
-              <Icon
-                onPress={showBottomSheet}
-                hitSlop={{
-                  bottom: 50,
-                  top: 50,
-                  left: 50,
-                  right: 50,
-                }}
-                color={theme.colors.grey3}
-                name="dots-horizontal"
-                type="material-community"
-                size={SIZING['3xl']}
-                containerStyle={border.rounded}
-              />
-            </View>
-          )}
         </View>
       </Card>
 

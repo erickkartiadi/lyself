@@ -21,6 +21,8 @@ import { Story, User, UserStoryType } from '../../../types/types';
 import {
   categoryColRef,
   storyColRef,
+  storyImageRef,
+  uploadImageAsync,
   upvoteColRef,
   usersColRef,
 } from '../../firebase/firebase';
@@ -102,8 +104,17 @@ export async function getUserStories(
   })) as Story[];
 }
 
-export async function createStory(createStoryDto: CreateStoryDto): Promise<void> {
-  const newStoryRef = await addDoc(storyColRef, createStoryDto);
+export async function createStory({
+  imageUri,
+  ...createStoryDto
+}: CreateStoryDto): Promise<void> {
+  const downloadUrl = imageUri ? await uploadImageAsync(storyImageRef, imageUri) : '';
+
+  const newStoryRef = await addDoc<CreateStoryDto>(storyColRef, {
+    ...createStoryDto,
+    imageUri: downloadUrl,
+  });
+
   await updateDoc(doc(categoryColRef, createStoryDto.categoryId), {
     storyIds: arrayUnion(newStoryRef.id),
     storyCount: increment(1),
@@ -116,10 +127,18 @@ export async function createStory(createStoryDto: CreateStoryDto): Promise<void>
 
 export async function updateStory({
   id,
+  imageUri,
   ...updateStoryDto
 }: UpdateStoryDto): Promise<void> {
+  // const upda
+  // check if the image from cache
+  let downloadUrl = imageUri;
+  if (imageUri?.startsWith('file')) {
+    downloadUrl = imageUri ? await uploadImageAsync(storyImageRef, imageUri) : '';
+  }
+
   const storyDocRef = doc(storyColRef, id);
-  await updateDoc(storyDocRef, updateStoryDto);
+  await updateDoc(storyDocRef, { ...updateStoryDto, imageUri: downloadUrl });
 }
 
 export async function saveStory({

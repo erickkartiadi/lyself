@@ -33,6 +33,7 @@ export type Story = {
   title: string;
   content: string;
   createdAt: Timestamp;
+  imageUri: string;
   creatorId: string;
   categoryId: string;
   isAnonymous: boolean;

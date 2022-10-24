@@ -4,11 +4,13 @@ import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
 import layout from '../../styles/layout';
 import { SIZING } from '../../theme/theme';
+import ActivityIndicator from './ActivityIndicator';
 
 export interface ButtonLinkProps extends TouchableOpacityProps {
   color?: 'primary' | 'blue';
   icon?: IconProps;
   rightIcon?: boolean;
+  loading?: boolean;
 }
 
 function ButtonLink({
@@ -18,6 +20,7 @@ function ButtonLink({
   icon,
   rightIcon,
   style,
+  loading,
   ...props
 }: React.PropsWithChildren<ButtonLinkProps>) {
   const { theme } = useTheme();
@@ -37,7 +40,7 @@ function ButtonLink({
           color: theme.colors[color],
         }}
       >
-        {children}
+        {loading ? <ActivityIndicator color={theme.colors[color]} /> : children}
       </Text>
       {icon && <Icon size={SIZING['3xl']} color={theme.colors[color]} {...icon} />}
     </TouchableOpacity>
@@ -48,6 +51,7 @@ ButtonLink.defaultProps = {
   color: 'blue',
   icon: undefined,
   rightIcon: true,
+  loading: false,
 };
 
 export default ButtonLink;

@@ -1,5 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Divider, Icon, Text, useTheme } from '@rneui/themed';
+import { Button, Divider, Icon, Image, Text, useTheme } from '@rneui/themed';
+import colorAlpha from 'color-alpha';
+import * as ImagePicker from 'expo-image-picker';
 import { Timestamp } from 'firebase/firestore';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -8,6 +10,7 @@ import { Modalize } from 'react-native-modalize';
 
 import ButtonLink from '../../components/base/ButtonLink';
 import Chip from '../../components/base/Chip';
+import ImagePickerBottomSheet from '../../components/base/ImagePickerBottomSheet';
 import SwitchToggle from '../../components/base/Switch';
 import TextInput from '../../components/base/TextInput';
 import { VerticalSeparator } from '../../components/layout/ItemSeparator';
@@ -18,6 +21,7 @@ import { CreateStoryDto } from '../../services/api/stories/stories.api';
 import { useCreateStory } from '../../services/api/stories/stories.hooks';
 import border from '../../styles/border';
 import layout from '../../styles/layout';
+import { width } from '../../styles/size';
 import spacing from '../../styles/spacing';
 import { heading2 } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
@@ -40,6 +44,8 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
     control,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<CreateStoryDto>({
     defaultValues: {
@@ -48,6 +54,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
       categoryId: '',
       isAnonymous: false,
       isCommentDisabled: false,
+      imageUri: undefined,
     },
     resolver: yupResolver(createStorySchema),
   });
@@ -60,6 +67,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
     isAnonymous,
     categoryId,
     isCommentDisabled,
+    imageUri,
   }: CreateStoryDto) => {
     if (!user) {
       somethingWentWrongToast();
@@ -75,6 +83,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
         creatorId: user.uid,
         createdAt: Timestamp.fromDate(new Date()),
         isCommentDisabled,
+        imageUri,
       },
       {
         onSuccess: () => {
@@ -87,7 +96,11 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
   const postButton = React.useCallback(
     () => (
-      <ButtonLink color="primary" onPress={handleSubmit(handlePostStory)}>
+      <ButtonLink
+        loading={storyMutation.isLoading}
+        color="primary"
+        onPress={handleSubmit(handlePostStory)}
+      >
         POST
       </ButtonLink>
     ),
@@ -102,15 +115,34 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
 
   const selectCategoryBottomSheetRef = React.useRef<Modalize>(null);
   const addCategoryBottomSheetRef = React.useRef<Modalize>(null);
+  const imagePickerBottomSheetRef = React.useRef<Modalize>(null);
 
   const showSelectCategoryBottomSheet = () =>
     selectCategoryBottomSheetRef.current?.open();
   const hideSelectCategoryBottomSheet = () =>
     selectCategoryBottomSheetRef.current?.close();
 
+  const showImagePickerBottomSheet = () => imagePickerBottomSheetRef.current?.open();
+  const hideImagePickerBottomSheet = () => imagePickerBottomSheetRef.current?.close();
+
+  const handleImagePicked = async (pickerResult: ImagePicker.ImagePickerResult) => {
+    hideImagePickerBottomSheet();
+
+    if (!pickerResult.cancelled) {
+      setValue('imageUri', pickerResult.uri);
+    }
+  };
+
+  const watchImage = watch('imageUri');
+
+  const handleRemoveImage = () => {
+    setValue('imageUri', '');
+    hideImagePickerBottomSheet();
+  };
+
   return (
     <>
-      <ScrollView contentContainerStyle={[layout.container]}>
+      <ScrollView contentContainerStyle={[layout.container_gutter]}>
         <View style={layout.section_sm}>
           <Controller
             control={control}
@@ -159,7 +191,52 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             )}
           />
         </View>
-        <View style={[spacing.mt_lg, layout.flex_dir_row]}>
+        {watchImage && (
+          <View style={layout.section_sm}>
+            <View>
+              <Image
+                style={[layout.ratio_wide, width.w_100, layout.flex, border.radius_xl]}
+                source={{ uri: watchImage }}
+              />
+              <Icon
+                onPress={handleRemoveImage}
+                containerStyle={{
+                  position: 'absolute',
+                  right: 0,
+                  margin: 8,
+                }}
+                iconStyle={{
+                  padding: theme.spacing.xs,
+                  borderRadius: 999,
+                }}
+                size={SIZING['2xl']}
+                backgroundColor={colorAlpha(theme.colors.grey4, 0.75)}
+                color={theme.colors.grey0}
+                name="close"
+              />
+            </View>
+          </View>
+        )}
+        <View style={[layout.section_sm, layout.flex_dir_row]}>
+          <View>
+            <Button
+              type="outline"
+              size="md"
+              uppercase={false}
+              onPress={showImagePickerBottomSheet}
+            >
+              <Icon
+                containerStyle={spacing.mr_sm}
+                size={SIZING['2xl']}
+                name="image-outline"
+                color={theme.colors.primary}
+                type="material-community"
+              />
+              {watchImage ? 'Change Picture' : 'Select Picture'}
+            </Button>
+          </View>
+        </View>
+        <View style={[layout.section_sm, layout.flex_dir_row]}>
           {selectedCategory !== '' && (
             <Chip containerStyle={[spacing.mr_md]}>{selectedCategory}</Chip>
           )}
@@ -181,6 +258,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
             </Button>
           </View>
         </View>
+
         {errors.categoryId && (
           <Text caption style={[styles.textError, spacing.mt_sm]}>
             {errors.categoryId.message}
@@ -230,6 +308,12 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
         setSelectedCategory={setSelectedCategory}
       />
       <CreateCategoryBottomSheet bottomSheetRef={addCategoryBottomSheetRef} />
+      <ImagePickerBottomSheet
+        headerTitle="Choose picture"
+        handleImagePicked={handleImagePicked}
+        bottomSheetRef={imagePickerBottomSheetRef}
+        headerActionOnPress={hideImagePickerBottomSheet}
+      />
     </>
   );
 }

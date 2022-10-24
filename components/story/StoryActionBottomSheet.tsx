@@ -24,6 +24,7 @@ function StoryActionBottomSheet({
   isCommentDisabled,
   title,
   bottomSheetRef,
+  imageUri,
 }: StoryActionBottomSheetProps) {
   const closeBottomSheet = () => bottomSheetRef.current?.close();
   const { theme } = useTheme();
@@ -40,7 +41,6 @@ function StoryActionBottomSheet({
   const handleCloseDialog = () => {
     setIsDialogVisible(false);
   };
-  // TODO add confirmation dialog
   const handleDeleteStory = () => {
     deleteStoryMutation.mutate(
       {
@@ -65,6 +65,7 @@ function StoryActionBottomSheet({
         isAnonymous,
         isCommentDisabled,
         title,
+        imageUri,
       },
     });
 

@@ -1,15 +1,13 @@
-import 'react-native-get-random-values';
-
 import { Avatar as RNEAvatar, Icon, Tab, TabView, Text, useTheme } from '@rneui/themed';
 import * as ImagePicker from 'expo-image-picker';
 import * as React from 'react';
-import { Platform, Pressable, View } from 'react-native';
+import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
-import Toast from 'react-native-toast-message';
 
 import StoryTabView from '../components/account/StoryTabView';
 import Avatar from '../components/base/Avatar';
-import BottomSheet from '../components/base/BottomSheet';
+import ImagePickerBottomSheet from '../components/base/ImagePickerBottomSheet';
+import ItemPressable from '../components/base/ItemPressable';
 import TabItem from '../components/base/TabItem';
 import {
   useChangeProfile,
@@ -55,46 +53,6 @@ function AccountScreen() {
 
     if (!pickerResult.cancelled) {
       changeProfileMutation.mutate(pickerResult.uri);
-    }
-  };
-
-  const handleTakePhoto = async () => {
-    if (Platform.OS !== 'web') {
-      const { status } = await ImagePicker.requestCameraPermissionsAsync();
-      if (status !== 'granted') {
-        Toast.show({
-          type: 'info',
-          text1: 'Info',
-          text2: 'Sorry we need camera permission to change your profile picture',
-        });
-      } else {
-        const pickerResult = await ImagePicker.launchCameraAsync({
-          allowsEditing: true,
-          aspect: [4, 3],
-        });
-
-        handleImagePicked(pickerResult);
-      }
-    }
-  };
-
-  const handlePickImage = async () => {
-    if (Platform.OS !== 'web') {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status !== 'granted') {
-        Toast.show({
-          type: 'info',
-          text1: 'Info',
-          text2: 'Sorry we need camera permission to change your profile picture',
-        });
-      } else {
-        const pickerResult = await ImagePicker.launchImageLibraryAsync({
-          allowsEditing: true,
-          aspect: [1, 1],
-        });
-
-        handleImagePicked(pickerResult);
-      }
     }
   };
 
@@ -157,65 +115,25 @@ function AccountScreen() {
         <StoryTabView type="liked" />
         <StoryTabView type="saved" />
       </TabView>
-      <BottomSheet
-        adjustToContentHeight
-        modalStyle={layout.container_gutter}
-        childrenStyle={layout.no_container_gutter}
+      <ImagePickerBottomSheet
+        handleImagePicked={handleImagePicked}
         headerTitle="Change Profile Picture"
         bottomSheetRef={bottomSheetRef}
         headerActionOnPress={closeBottomSheet}
       >
-        <View style={spacing.mb_xl}>
-          <Pressable
-            android_ripple={{ color: theme.colors.secondary }}
-            onPress={handlePickImage}
-            style={[layout.container_gutter, spacing.py_lg]}
-          >
-            <View style={[layout.flex_dir_row, layout.align_center]}>
-              <Icon
-                name="image-multiple-outline"
-                size={SIZING['4xl']}
-                type="material-community"
-                color={theme.colors.blue}
-                containerStyle={spacing.mr_lg}
-              />
-              <Text subtitle>Open Gallery</Text>
-            </View>
-          </Pressable>
-          <Pressable
-            android_ripple={{ color: theme.colors.secondary }}
-            onPress={handleTakePhoto}
-            style={[layout.container_gutter, spacing.py_lg]}
-          >
-            <View style={[layout.flex_dir_row, layout.align_center]}>
-              <Icon
-                name="camera-outline"
-                size={SIZING['4xl']}
-                type="material-community"
-                color={theme.colors.blue}
-                containerStyle={spacing.mr_lg}
-              />
-              <Text subtitle>Take Picture</Text>
-            </View>
-          </Pressable>
-          <Pressable
-            android_ripple={{ color: theme.colors.secondary }}
+        {currentUserData?.photoURL && (
+          <ItemPressable
             onPress={handleRemoveProfile}
-            style={[layout.container_gutter, spacing.py_lg]}
-          >
-            <View style={[layout.flex_dir_row, layout.align_center]}>
-              <Icon
-                name="image-off-outline"
-                size={SIZING['4xl']}
-                type="material-community"
-                color={theme.colors.error}
-                containerStyle={spacing.mr_lg}
-              />
-              <Text subtitle>Remove Profile Picture</Text>
-            </View>
-          </Pressable>
-        </View>
-      </BottomSheet>
+            iconProps={{
+              color: theme.colors.error,
+              name: 'image-off-outline',
+              size: SIZING['4xl'],
+              type: 'material-community',
+            }}
+            title="Remove Profile Picture"
+          />
+        )}
+      </ImagePickerBottomSheet>
     </>
   );
 }
