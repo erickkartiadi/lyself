@@ -2,6 +2,7 @@ import { ThemeProvider } from '@rneui/themed';
 import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { Auth, onAuthStateChanged } from 'firebase/auth';
 import React, { useCallback, useEffect, useState } from 'react';
 import { AppStateStatus, Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -10,6 +11,7 @@ import Toast from 'react-native-toast-message';
 
 import { ErrorToast, InfoToast, SuccessToast } from './components/base/Toast';
 import RootNavigator from './navigation/RootNavigator.routing';
+import { auth } from './services/firebase/firebase';
 import layout from './styles/layout';
 import { myTheme } from './theme';
 import { customFont } from './theme/theme';
@@ -32,11 +34,25 @@ export default function App() {
   useAppState(onAppStateChange);
   useRegisterNotification();
 
+  function waitFirebaseAuth(currAuth: Auth) {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(
+        currAuth,
+        (user) => {
+          unsubscribe();
+          resolve(user);
+        },
+        reject
+      );
+    });
+  }
+
   useEffect(() => {
     async function prepare() {
       try {
         await SplashScreen.preventAutoHideAsync();
         await Font.loadAsync(customFont);
+        await waitFirebaseAuth(auth);
       } finally {
         setAppIsReady(true);
       }

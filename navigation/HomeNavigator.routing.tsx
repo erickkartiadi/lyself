@@ -71,7 +71,7 @@ function UserTabBarIcon({ focused, color, size }: TabBarIconOptions) {
         border.width_lg,
         {
           borderColor: focused ? color : theme.colors.grey5,
-          borderWidth: currentUserData?.photoURL && focused ? 1.5 : 0,
+          borderWidth: !currentUserData?.photoURL || focused ? 1.5 : 0,
         },
       ]}
       avatarUrl={currentUserData?.photoURL}
