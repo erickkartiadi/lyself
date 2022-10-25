@@ -1,8 +1,11 @@
 import Constant from 'expo-constants';
 import {
   createUserWithEmailAndPassword,
+  getAdditionalUserInfo,
+  GoogleAuthProvider,
   sendEmailVerification,
   sendPasswordResetEmail,
+  signInWithCredential,
   signInWithEmailAndPassword,
   updateProfile,
   UserCredential,
@@ -44,6 +47,26 @@ export async function register({
   });
 
   return userCredential;
+}
+
+export async function loginWithGoogle(idToken: string) {
+  const credential = GoogleAuthProvider.credential(idToken);
+  const userCredential = await signInWithCredential(auth, credential);
+
+  const additionalInfo = getAdditionalUserInfo(userCredential);
+
+  if (additionalInfo?.isNewUser) {
+    const { user } = userCredential;
+    await createUser({
+      displayName: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+      uid: user.uid,
+      likedStoryIds: [],
+      likedReplyIds: [],
+      savedStoryIds: [],
+    });
+  }
 }
 
 export async function login({ email, password }: LoginDto): Promise<UserCredential> {

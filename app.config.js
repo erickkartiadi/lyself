@@ -10,6 +10,7 @@ const Config = {
   firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   firebaseAppId: process.env.FIREBASE_APP_ID,
   firebaseMeasurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  firebaseAuthGoogleClientId: process.env.FIREBASE_AUTH_GOOGLE_CLIENT_ID,
 
   spotifyClientId: process.env.SPOTIFY_CLIENT_ID,
   spotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,

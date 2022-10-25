@@ -3,10 +3,21 @@ import { FirebaseError } from 'firebase/app';
 import Toast from 'react-native-toast-message';
 
 import { somethingWentWrongToast } from '../../../utils/toast';
-import { forgotPassword, login, register } from './auth.api';
+import { forgotPassword, login, loginWithGoogle, register } from './auth.api';
 
 export const useLogin = () =>
   useMutation(login, {
+    onError: (error: FirebaseError) => {
+      Toast.show({
+        type: 'error',
+        text1: error.name,
+        text2: error.message,
+      });
+    },
+  });
+
+export const useLoginWithGoogle = () =>
+  useMutation(loginWithGoogle, {
     onError: (error: FirebaseError) => {
       Toast.show({
         type: 'error',
