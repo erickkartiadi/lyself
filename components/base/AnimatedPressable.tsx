@@ -7,47 +7,43 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 
-export interface AnimatedPressableProps extends AnimateProps<ViewProps> {
-  onPress?: PressableProps['onPress'];
-  enablePressAnimation?: boolean;
-  children?: React.ReactNode;
+export interface AnimatedPressableProps extends PressableProps {
+  containerStyle?: AnimateProps<ViewProps>['style'];
 }
 
 function AnimatedPressable({
   onPress,
-  style,
+  containerStyle,
   children,
-  enablePressAnimation = true,
   ...props
 }: AnimatedPressableProps) {
   const scaleValue = useSharedValue(1);
   const opacityValue = useSharedValue(1);
 
-  const animatedStyles = useAnimatedStyle(() => ({
+  const pressableStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scaleValue.value }],
     opacity: opacityValue.value,
   }));
 
   const onPressInAnimation = () => {
-    if (!enablePressAnimation) return;
     if (!onPress) return;
     scaleValue.value = withSpring(0.95);
     opacityValue.value = withSpring(0.9);
   };
 
   const onPressOutAnimation = () => {
-    if (!enablePressAnimation) return;
     if (!onPress) return;
     scaleValue.value = withSpring(1);
     opacityValue.value = withSpring(1);
   };
 
   return (
-    <Animated.View style={[animatedStyles, style]} {...props}>
+    <Animated.View style={[pressableStyle, containerStyle]}>
       <Pressable
         onPressIn={onPressInAnimation}
         onPressOut={onPressOutAnimation}
         onPress={onPress}
+        {...props}
       >
         {children}
       </Pressable>
@@ -56,9 +52,7 @@ function AnimatedPressable({
 }
 
 AnimatedPressable.defaultProps = {
-  enablePressAnimation: true,
-  onPress: null,
-  children: undefined,
+  containerStyle: {},
 };
 
 export default AnimatedPressable;

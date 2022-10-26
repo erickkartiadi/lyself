@@ -21,6 +21,7 @@ import { SIZING } from '../../theme/theme';
 import { Todo } from '../../types/types';
 import IMPORTANCE_COLORS from '../../utils/constant/constant';
 import { formatReminderTime } from '../../utils/formatTime';
+import AnimatedPressable from '../base/AnimatedPressable';
 import Card from '../base/Card';
 import Checkbox from '../base/Checkbox';
 import TodoBottomSheet from './TodoBottomSheet';
@@ -126,62 +127,63 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
         containerStyle={[spacing.mb_md, spacing.p_0, border.radius_md]}
         rightStyle={[spacing.mb_md, spacing.pl_md]}
       >
-        <Card
-          onPress={showBottomSheet}
-          cardStyle={[
-            border.left_width_xl,
-            {
-              borderStartColor: importanceColor,
-            },
-          ]}
-        >
-          <View style={[layout.flex, layout.flex_dir_row, layout.align_center]}>
-            <Checkbox
-              onPress={() => {
-                setValue('completed', !watchCompleted);
-                debounceToggleTodo();
-              }}
-              fillColor={importanceColor}
-              checked={watchCompleted}
-            />
-            <View style={[layout.flex, layout.flex_dir_col]}>
-              <Text
-                subtitle
-                numberOfLines={3}
-                style={{
-                  color:
-                    watchCompleted || watchTodo === ''
-                      ? theme.colors.grey3
-                      : theme.colors.black,
-                  textDecorationLine: watchCompleted ? 'line-through' : 'none',
+        <AnimatedPressable onPress={showBottomSheet} containerStyle={layout.flex}>
+          <Card
+            containerStyle={[
+              border.left_width_xl,
+              {
+                borderStartColor: importanceColor,
+              },
+            ]}
+          >
+            <View style={[layout.flex, layout.flex_dir_row, layout.align_center]}>
+              <Checkbox
+                onPress={() => {
+                  setValue('completed', !watchCompleted);
+                  debounceToggleTodo();
                 }}
-              >
-                {watchTodo === '' ? 'No title' : watchTodo}
-              </Text>
-              {!watchCompleted && reminderTime && (
-                <View
-                  style={[
-                    layout.flex,
-                    layout.flex_dir_row,
-                    layout.align_center,
-                    spacing.mt_xs,
-                  ]}
+                fillColor={importanceColor}
+                checked={watchCompleted}
+              />
+              <View style={[layout.flex, layout.flex_dir_col]}>
+                <Text
+                  subtitle
+                  numberOfLines={3}
+                  style={{
+                    color:
+                      watchCompleted || watchTodo === ''
+                        ? theme.colors.grey3
+                        : theme.colors.black,
+                    textDecorationLine: watchCompleted ? 'line-through' : 'none',
+                  }}
                 >
-                  <Icon
-                    containerStyle={spacing.mr_sm}
-                    name="notifications-outline"
-                    type="ionicon"
-                    size={SIZING.xl}
-                    color={pastDueColor}
-                  />
-                  <Text small style={{ color: pastDueColor }}>
-                    {formatReminderTime(reminderTime)}
-                  </Text>
-                </View>
-              )}
+                  {watchTodo === '' ? 'No title' : watchTodo}
+                </Text>
+                {!watchCompleted && reminderTime && (
+                  <View
+                    style={[
+                      layout.flex,
+                      layout.flex_dir_row,
+                      layout.align_center,
+                      spacing.mt_xs,
+                    ]}
+                  >
+                    <Icon
+                      containerStyle={spacing.mr_sm}
+                      name="notifications-outline"
+                      type="ionicon"
+                      size={SIZING.xl}
+                      color={pastDueColor}
+                    />
+                    <Text small style={{ color: pastDueColor }}>
+                      {formatReminderTime(reminderTime)}
+                    </Text>
+                  </View>
+                )}
+              </View>
             </View>
-          </View>
-        </Card>
+          </Card>
+        </AnimatedPressable>
       </ListItem.Swipeable>
       <TodoBottomSheet
         importanceColor={importanceColor}
@@ -197,9 +199,5 @@ function TodoItem({ importanceLevel, reminderTime, todo, note, completed, id }: 
     </Animated.View>
   );
 }
-
-TodoItem.defaultProps = {
-  enableAnimation: true,
-};
 
 export default TodoItem;

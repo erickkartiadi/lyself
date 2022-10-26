@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { Icon, Image, Text, useTheme } from '@rneui/themed';
 import React, { memo, useContext, useRef } from 'react';
-import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
@@ -169,7 +168,7 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
                     containerStyle={spacing.mr_sm}
                   />
                   <Text small style={styles.textGrey}>
-                    Reply
+                    Comments
                   </Text>
                 </TouchableOpacity>
               </>

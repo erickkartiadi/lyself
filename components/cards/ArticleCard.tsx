@@ -24,7 +24,10 @@ function ArticleCard({ title, source, publishedAt, url, urlToImage }: Article) {
   const styles = useStyles();
 
   return (
-    <AnimatedPressable style={[spacing.mt_md, width.w_13xl]} onPress={handleOpenArticle}>
+    <AnimatedPressable
+      containerStyle={[spacing.mt_md, width.w_13xl]}
+      onPress={handleOpenArticle}
+    >
       <Image
         containerStyle={[
           width.w_100,

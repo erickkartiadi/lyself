@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native';
 
 import { useGetCategories } from '../../services/api/stories/categories/categories.hooks';
 import layout from '../../styles/layout';

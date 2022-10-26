@@ -16,6 +16,7 @@ function Avatar({ rounded, containerStyle, avatarUrl: photoUrl, ...props }: Avat
   const { theme } = useTheme();
 
   const styles = useStyles();
+  const avatarStyle = [styles.borderGrey5, border.width_xs, containerStyle];
 
   if (photoUrl) {
     return (
@@ -25,7 +26,7 @@ function Avatar({ rounded, containerStyle, avatarUrl: photoUrl, ...props }: Avat
         source={{
           uri: photoUrl,
         }}
-        containerStyle={[styles.borderGrey5, border.width_xs, containerStyle]}
+        containerStyle={[avatarStyle]}
       />
     );
   }
@@ -38,12 +39,7 @@ function Avatar({ rounded, containerStyle, avatarUrl: photoUrl, ...props }: Avat
         type: 'ionicon',
         color: theme.colors.grey3,
       }}
-      containerStyle={[
-        styles.borderGrey5,
-        border.width_xs,
-        styles.secondaryBackground,
-        containerStyle,
-      ]}
+      containerStyle={[styles.secondaryBackground, avatarStyle]}
     />
   );
 }

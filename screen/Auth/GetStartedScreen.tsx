@@ -1,7 +1,6 @@
 import { Button, Icon, Text, useTheme } from '@rneui/themed';
 import React from 'react';
-import { Dimensions, Image, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Dimensions, Image, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getStartedIllustration from '../../assets/images/get-started-illustration.png';

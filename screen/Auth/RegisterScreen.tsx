@@ -2,8 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Text } from '@rneui/themed';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Image, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Image, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import registerIllustration from '../../assets/images/register-illustration.png';

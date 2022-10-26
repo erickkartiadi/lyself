@@ -22,7 +22,7 @@ function PlaylistCard({ imageUrl, id, name, creator, spotifyUrl }: Playlist) {
     <AnimatedPressable
       key={id}
       onPress={handleOpenSpotifyPlaylist}
-      style={[spacing.mt_md, width.w_11xl]}
+      containerStyle={[spacing.mt_md, width.w_11xl]}
     >
       <Image
         containerStyle={[width.w_100, border.radius_xl, layout.ratio_square]}

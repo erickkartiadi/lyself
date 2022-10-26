@@ -2,7 +2,13 @@ import { FAB, Icon, useTheme } from '@rneui/themed';
 import { useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import Animated, {
+  Easing,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import ActivityIndicator from '../../components/base/ActivityIndicator';
 import EmptyState from '../../components/base/EmptyState';
@@ -17,6 +23,7 @@ import layout from '../../styles/layout';
 import spacing from '../../styles/spacing';
 import { SIZING } from '../../theme/theme';
 import { Story } from '../../types/types';
+import useStyles from '../../utils/hooks/useStyles';
 import ErrorScreen from '../Others/ErrorScreen';
 import LoadingScreen from '../Others/LoadingScreen';
 
@@ -27,7 +34,7 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   const queryClient = useQueryClient();
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('all');
-
+  const styles = useStyles();
   const {
     data,
     isError,
@@ -47,21 +54,89 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
   };
   const isRefreshing = isStoriesRefetching;
 
-  if (isError) return <ErrorScreen />;
+  const fabTranslateY = useSharedValue(0);
+  const categoryTranslateY = useSharedValue(0);
+  const fabOpacity = useSharedValue(1);
+  const categoryOpacity = useSharedValue(1);
+  const lastContentOffset = useSharedValue(0);
+  const isScrolling = useSharedValue(false);
+  const duration = 400;
 
+  const animatedCategoryStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: withTiming(categoryTranslateY.value, {
+          duration,
+          easing: Easing.inOut(Easing.ease),
+        }),
+      },
+    ],
+    opacity: withTiming(categoryOpacity.value, {
+      duration,
+      easing: Easing.inOut(Easing.ease),
+    }),
+  }));
+
+  const animatedFABStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: withTiming(fabTranslateY.value, {
+          duration,
+          easing: Easing.inOut(Easing.ease),
+        }),
+      },
+    ],
+    opacity: withTiming(fabOpacity.value, {
+      duration,
+      easing: Easing.inOut(Easing.ease),
+    }),
+  }));
+
+  // TODO throttle event
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      // scroll up
+      if (lastContentOffset.value > event.contentOffset.y && isScrolling.value) {
+        fabTranslateY.value = 0;
+
+        categoryTranslateY.value = 0;
+        categoryOpacity.value = 1;
+        fabOpacity.value = 1;
+      }
+      // scroll down
+      else if (lastContentOffset.value < event.contentOffset.y && isScrolling.value) {
+        fabTranslateY.value = 100;
+        categoryTranslateY.value = -100;
+        categoryOpacity.value = 0;
+        fabOpacity.value = 0;
+      }
+      lastContentOffset.value = event.contentOffset.y;
+    },
+    onBeginDrag: () => {
+      isScrolling.value = true;
+    },
+    onEndDrag: () => {
+      isScrolling.value = false;
+    },
+  });
+
+  if (isError) return <ErrorScreen />;
   return (
     <>
-      <FlatList
-        contentContainerStyle={[
-          layout.flex_grow,
-          layout.container_gutter,
-          layout.section_lg,
-        ]}
+      <Animated.FlatList
+        scrollEventThrottle={1000}
+        onScroll={scrollHandler}
+        contentContainerStyle={[layout.flex_grow, layout.container_gutter]}
+        alwaysBounceVertical={false}
+        stickyHeaderIndices={[0]}
+        overScrollMode="never"
         ListHeaderComponent={
-          <CategoryChips
-            selectedCategoryId={selectedCategoryId}
-            setSelectedCategoryId={setSelectedCategoryId}
-          />
+          <Animated.View style={[styles.defaultBackground, animatedCategoryStyle]}>
+            <CategoryChips
+              selectedCategoryId={selectedCategoryId}
+              setSelectedCategoryId={setSelectedCategoryId}
+            />
+          </Animated.View>
         }
         ListEmptyComponent={
           isStoriesLoading ? (
@@ -85,19 +160,21 @@ function StoryScreen({ navigation }: StoryScreenNavigationProps) {
           <View style={spacing.mt_xl}>{isFetchingNextPage && <ActivityIndicator />}</View>
         }
       />
-      <FAB
-        placement="right"
-        color={theme.colors.primary}
-        onPress={() => navigation.navigate('StoryStack', { screen: 'AddStory' })}
-        icon={
-          <Icon
-            name="add"
-            type="ionicon"
-            size={SIZING['4xl']}
-            color={theme.colors.white}
-          />
-        }
-      />
+      <Animated.View style={animatedFABStyle}>
+        <FAB
+          placement="right"
+          color={theme.colors.primary}
+          onPress={() => navigation.navigate('StoryStack', { screen: 'AddStory' })}
+          icon={
+            <Icon
+              name="add"
+              type="ionicon"
+              size={SIZING['4xl']}
+              color={theme.colors.white}
+            />
+          }
+        />
+      </Animated.View>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { Icon, Text, useTheme } from '@rneui/themed';
 import React, { useContext } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { UpvoteStoryDto } from '../../services/api/stories/upvotes/upvotes.api';
@@ -17,9 +17,16 @@ import useStyles from '../../utils/hooks/useStyles';
 interface UpvoteStoryButtonProps extends Pick<UpvoteStoryDto, 'id' | 'type'> {
   buttonStyle?: 'column' | 'row';
   showText?: boolean;
+  iconSize?: number;
 }
 
-function UpvoteButton({ id, showText, buttonStyle, type }: UpvoteStoryButtonProps) {
+function UpvoteButton({
+  id,
+  iconSize,
+  showText,
+  buttonStyle,
+  type,
+}: UpvoteStoryButtonProps) {
   const { theme } = useTheme();
   const styles = useStyles();
   const { user } = useContext(AuthContext);
@@ -42,6 +49,7 @@ function UpvoteButton({ id, showText, buttonStyle, type }: UpvoteStoryButtonProp
 
   return (
     <TouchableOpacity
+      disabled={upvoteMutation.isLoading}
       onPress={debounceUpdateLike}
       style={[
         buttonStyle === 'row' ? layout.flex_dir_row : layout.flex_dir_col,
@@ -53,7 +61,7 @@ function UpvoteButton({ id, showText, buttonStyle, type }: UpvoteStoryButtonProp
         name={isLiked ? 'heart' : 'heart-outline'}
         type="ionicon"
         containerStyle={buttonStyle === 'row' && spacing.mr_sm}
-        size={SIZING['3xl']}
+        size={iconSize}
       />
       <Text small style={isLiked ? styles.textPrimary : styles.textGrey}>
         {upvoteData?.count}
@@ -66,6 +74,7 @@ function UpvoteButton({ id, showText, buttonStyle, type }: UpvoteStoryButtonProp
 UpvoteButton.defaultProps = {
   buttonStyle: 'row',
   showText: true,
+  iconSize: SIZING['3xl'],
 };
 
 export default UpvoteButton;

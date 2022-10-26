@@ -17,7 +17,11 @@ import StoryCard from '../story/StoryCard';
 
 const renderStory = ({ item }: { item: Story }) => <StoryCard key={item.id} {...item} />;
 
-function StoryTabView({ type }: { type: UserStoryType }) {
+interface StoryTabViewProps {
+  type: UserStoryType;
+}
+
+function StoryTabView({ type }: StoryTabViewProps) {
   const { user } = React.useContext(AuthContext);
 
   const { data, fetchNextPage, isLoading, isRefetching, refetch, isFetchingNextPage } =

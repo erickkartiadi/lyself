@@ -34,7 +34,7 @@ function ActivityCard({
   const styles = useStyles();
 
   return (
-    <Card cardStyle={{ backgroundColor: colorDark }}>
+    <Card containerStyle={{ backgroundColor: colorDark }}>
       <View style={[layout.flex, layout.flex_dir_row, layout.align_center]}>
         <View style={[layout.flex]}>
           <View>
