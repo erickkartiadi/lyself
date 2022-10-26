@@ -43,16 +43,7 @@ function SpotifySection() {
     {
       responseType: ResponseType.Code,
       clientId: Constant?.manifest?.extra?.spotifyClientId,
-      scopes: [
-        'user-read-currently-playing',
-        'user-read-recently-played',
-        'user-read-playback-state',
-        'user-top-read',
-        'user-modify-playback-state',
-        'streaming',
-        'user-read-email',
-        'user-read-private',
-      ],
+      scopes: [],
       usePKCE: false,
       redirectUri: Constant?.manifest?.extra?.redirectUri,
     },

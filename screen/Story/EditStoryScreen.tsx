@@ -102,18 +102,22 @@ function EditStoryScreen({
 
   const postButton = React.useCallback(
     () => (
-      <ButtonLink color="primary" onPress={handleSubmit(handleUpdateStory)}>
+      <ButtonLink
+        loading={updateStoryMutation.isLoading}
+        color="primary"
+        onPress={handleSubmit(handleUpdateStory)}
+      >
         UPDATE
       </ButtonLink>
     ),
-    []
+    [updateStoryMutation.isLoading]
   );
 
   React.useEffect(() => {
     navigation.setOptions({
       headerRight: postButton,
     });
-  }, []);
+  }, [updateStoryMutation.isLoading]);
 
   const selectCategoryBottomSheetRef = React.useRef<Modalize>(null);
   const addCategoryBottomSheetRef = React.useRef<Modalize>(null);
@@ -321,6 +325,7 @@ function EditStoryScreen({
       />
       <CreateCategoryBottomSheet bottomSheetRef={addCategoryBottomSheetRef} />
       <ImagePickerBottomSheet
+        aspectRatio={[16, 9]}
         headerTitle="Choose picture"
         handleImagePicked={handleImagePicked}
         bottomSheetRef={imagePickerBottomSheetRef}

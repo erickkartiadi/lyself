@@ -116,6 +116,7 @@ function AccountScreen() {
         <StoryTabView type="saved" />
       </TabView>
       <ImagePickerBottomSheet
+        aspectRatio={[1, 1]}
         handleImagePicked={handleImagePicked}
         headerTitle="Change Profile Picture"
         bottomSheetRef={bottomSheetRef}

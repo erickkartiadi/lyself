@@ -124,7 +124,9 @@ export async function fetchFeaturedPlaylist(): Promise<Playlist[]> {
 
   if (isTokenExpired) await fetchRefreshToken();
 
-  const res = await axios.get('https://api.spotify.com/v1/browse/featured-playlists', {
+  const categoryId = '0JQ5DAqbMKFLb2EqgLtpjC'; // wellness category
+  const url = `https://api.spotify.com/v1/browse/categories/${categoryId}/playlists`;
+  const res = await axios.get(url, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

@@ -104,14 +104,14 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
         POST
       </ButtonLink>
     ),
-    []
+    [storyMutation.isLoading]
   );
 
   React.useEffect(() => {
     navigation.setOptions({
       headerRight: postButton,
     });
-  }, []);
+  }, [storyMutation.isLoading]);
 
   const selectCategoryBottomSheetRef = React.useRef<Modalize>(null);
   const addCategoryBottomSheetRef = React.useRef<Modalize>(null);
@@ -309,6 +309,7 @@ function AddStoryScreen({ navigation }: AddStoryScreenNavigationProps) {
       />
       <CreateCategoryBottomSheet bottomSheetRef={addCategoryBottomSheetRef} />
       <ImagePickerBottomSheet
+        aspectRatio={[16, 9]}
         headerTitle="Choose picture"
         handleImagePicked={handleImagePicked}
         bottomSheetRef={imagePickerBottomSheetRef}

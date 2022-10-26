@@ -12,15 +12,18 @@ import ItemPressable from './ItemPressable';
 
 interface ImagePickerBottomSheetProps extends React.PropsWithChildren<BottomSheetProps> {
   handleImagePicked: (pickerResult: ImagePicker.ImagePickerResult) => Promise<void>;
+  aspectRatio: [number, number];
 }
 
 function ImagePickerBottomSheet({
   bottomSheetRef,
   handleImagePicked,
   children,
+  aspectRatio,
   ...props
 }: ImagePickerBottomSheetProps) {
   const { theme } = useTheme();
+
   const handleTakePhoto = async () => {
     if (Platform.OS !== 'web') {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -28,12 +31,12 @@ function ImagePickerBottomSheet({
         Toast.show({
           type: 'info',
           text1: 'Info',
-          text2: 'Sorry we need camera permission to change your profile picture',
+          text2: 'Sorry we need camera permission to use picture',
         });
       } else {
         const pickerResult = await ImagePicker.launchCameraAsync({
           allowsEditing: true,
-          aspect: [4, 3],
+          aspect: aspectRatio,
         });
 
         handleImagePicked(pickerResult);
@@ -48,12 +51,12 @@ function ImagePickerBottomSheet({
         Toast.show({
           type: 'info',
           text1: 'Info',
-          text2: 'Sorry we need camera permission to change your profile picture',
+          text2: 'Sorry we need storage permission to select picture',
         });
       } else {
         const pickerResult = await ImagePicker.launchImageLibraryAsync({
           allowsEditing: true,
-          aspect: [1, 1],
+          aspect: aspectRatio,
         });
 
         handleImagePicked(pickerResult);
