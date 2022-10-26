@@ -13,6 +13,9 @@ function GoogleSignInButton() {
   const { theme } = useTheme();
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: Constants.manifest?.extra?.firebaseAuthGoogleClientId,
+    expoClientId: Constants.manifest?.extra?.firebaseAuthGoogleExpoClientId,
+    iosClientId: Constants.manifest?.extra?.firebaseAuthGoogleIosClientId,
+    androidClientId: Constants.manifest?.extra?.firebaseAuthGoogleAndroidClientId,
   });
 
   const loginWithGoogle = useLoginWithGoogle();

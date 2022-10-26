@@ -1,5 +1,4 @@
 import { Button, Icon, Text, useTheme } from '@rneui/themed';
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import { Dimensions, Image, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -15,8 +14,6 @@ import spacing from '../../styles/spacing';
 import { text } from '../../styles/typhography';
 import { SIZING } from '../../theme/theme';
 import useStyles from '../../utils/hooks/useStyles';
-
-WebBrowser.maybeCompleteAuthSession();
 
 function GetStartedScreen({ navigation }: GetStartedScreenNavigationProps) {
   const { theme } = useTheme();

@@ -11,6 +11,9 @@ const Config = {
   firebaseAppId: process.env.FIREBASE_APP_ID,
   firebaseMeasurementId: process.env.FIREBASE_MEASUREMENT_ID,
   firebaseAuthGoogleClientId: process.env.FIREBASE_AUTH_GOOGLE_CLIENT_ID,
+  firebaseAuthGoogleExpoClientId: process.env.FIREBASE_AUTH_GOOGLE_EXPO_CLIENT_ID,
+  firebaseAuthGoogleIosClientId: process.env.FIREBASE_AUTH_GOOGLE_IOS_CLIENT_ID,
+  firebaseAuthGoogleAndroidClientId: process.env.FIREBASE_AUTH_GOOGLE_ANDROID_CLIENT_ID,
 
   spotifyClientId: process.env.SPOTIFY_CLIENT_ID,
   spotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
@@ -78,7 +81,7 @@ export default {
         'expo-image-picker',
         {
           photosPermission:
-            'The app accesses your photos to let you change your profile picture.',
+            'The app accesses your photos to let you add image to your story and change your profile picture.',
         },
       ],
     ],
