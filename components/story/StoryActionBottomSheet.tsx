@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import { Icon, Text, useTheme } from '@rneui/themed';
+import { useTheme } from '@rneui/themed';
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
 import { StoryScreenNavigationProps } from '../../navigation/navigation.types';
 import { useDeleteStory } from '../../services/api/stories/stories.hooks';
@@ -11,6 +11,7 @@ import { SIZING } from '../../theme/theme';
 import { Story } from '../../types/types';
 import BottomSheet, { BottomSheetProps } from '../base/BottomSheet';
 import Dialog from '../base/Dialog';
+import ItemPressable from '../base/ItemPressable';
 
 interface StoryActionBottomSheetProps
   extends BottomSheetProps,
@@ -83,38 +84,26 @@ function StoryActionBottomSheet({
         headerActionOnPress={closeBottomSheet}
       >
         <View style={spacing.mb_xl}>
-          <Pressable
-            android_ripple={{ color: theme.colors.secondary }}
+          <ItemPressable
             onPress={navigateToEditScreen}
-            style={[layout.container_gutter, spacing.py_lg]}
-          >
-            <View style={[layout.flex_dir_row, layout.align_center]}>
-              <Icon
-                name="note-edit-outline"
-                size={SIZING['4xl']}
-                type="material-community"
-                color={theme.colors.blue}
-                containerStyle={spacing.mr_lg}
-              />
-              <Text subtitle>Edit Story</Text>
-            </View>
-          </Pressable>
-          <Pressable
-            android_ripple={{ color: theme.colors.secondary }}
+            iconProps={{
+              name: 'note-edit-outline',
+              type: 'material-community',
+              size: SIZING['4xl'],
+              color: theme.colors.blue,
+            }}
+            title="Edit Story"
+          />
+          <ItemPressable
             onPress={handleOpenDialog}
-            style={[layout.container_gutter, spacing.py_lg]}
-          >
-            <View style={[layout.flex_dir_row, layout.align_center]}>
-              <Icon
-                name="note-remove-outline"
-                size={SIZING['4xl']}
-                type="material-community"
-                color={theme.colors.error}
-                containerStyle={spacing.mr_lg}
-              />
-              <Text subtitle>Delete Story</Text>
-            </View>
-          </Pressable>
+            iconProps={{
+              name: 'note-remove-outline',
+              type: 'material-community',
+              size: SIZING['4xl'],
+              color: theme.colors.error,
+            }}
+            title="Delete Story"
+          />
         </View>
       </BottomSheet>
       <Dialog

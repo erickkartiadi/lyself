@@ -2,7 +2,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 
 import { Story } from '../../../../types/types';
-import { createReply, findReplyCount, getReplies } from './replies.api';
+import {
+  createReply,
+  deleteReply,
+  findReplyCount,
+  getReplies,
+  updateReply,
+} from './replies.api';
 
 export const useCreateReply = (id: string) => {
   const queryClient = useQueryClient();
@@ -22,6 +28,24 @@ export const useCreateReply = (id: string) => {
         text1: 'Sorry, we cannot add your reply.',
         text2: 'Please try again later',
       });
+    },
+  });
+};
+
+export const useUpdateReply = (id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation(updateReply, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['reply', id]);
+    },
+  });
+};
+
+export const useDeleteReply = (id: string) => {
+  const queryClient = useQueryClient();
+  return useMutation(deleteReply, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['reply', id]);
     },
   });
 };

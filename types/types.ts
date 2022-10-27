@@ -65,6 +65,6 @@ export type Reply = {
   id: string;
   repliedId: Story['id'] | Reply['id'];
   reply: string;
-  createdAt: Timestamp;
   userId: User['uid'];
+  createdAt: Timestamp;
 };

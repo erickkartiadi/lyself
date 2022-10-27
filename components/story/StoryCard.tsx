@@ -103,9 +103,9 @@ function StoryCard({ isOnDetailScreen, ...props }: StoryCardProps) {
               <Icon
                 onPress={showBottomSheet}
                 color={theme.colors.grey3}
-                name="dots-vertical"
-                type="material-community"
-                size={SIZING['3xl']}
+                name="ellipsis-vertical"
+                type="ionicon"
+                size={SIZING['2xl']}
                 containerStyle={border.rounded}
               />
             </View>

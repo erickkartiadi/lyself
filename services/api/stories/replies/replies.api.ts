@@ -7,12 +7,15 @@ import {
   query,
   setDoc,
   Timestamp,
+  updateDoc,
 } from 'firebase/firestore';
 
 import { Reply, Story } from '../../../../types/types';
 import { replyColRef, upvoteColRef } from '../../../firebase/firebase';
 
-export type CreateReplyDto = Omit<Reply, 'id' | 'createdAt'>;
+export type CreateReplyDto = Omit<Reply, 'id' | 'createdAt' | 'updatedAt'>;
+export type UpdateReplyDto = Pick<Reply, 'id' | 'repliedId' | 'reply'>;
+export type DeleteReplyDto = Pick<Reply, 'id' | 'repliedId'>;
 
 export async function createReply({
   repliedId,
@@ -34,6 +37,25 @@ export async function createReply({
   });
 
   return { ...data, id: replyDocRef.id };
+}
+
+export async function updateReply({
+  id,
+  reply: newReply,
+  repliedId,
+}: UpdateReplyDto): Promise<void> {
+  const replyDocRef = doc(replyColRef(repliedId), id);
+  await updateDoc(replyDocRef, {
+    reply: newReply,
+  });
+}
+
+export async function deleteReply({ id, repliedId }: DeleteReplyDto) {
+  const replyDocRef = doc(replyColRef(repliedId), id);
+  await updateDoc(replyDocRef, {
+    reply: '[deleted]',
+    userId: '',
+  });
 }
 
 export async function getReplies(storyId: Story['id']): Promise<Reply[]> {
