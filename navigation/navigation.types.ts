@@ -7,6 +7,9 @@ export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
   StoryStack: NavigatorScreenParams<StoryStackParamList>;
+  MeditationStack: NavigatorScreenParams<MeditationStackParamList>;
+  BreathingStack: NavigatorScreenParams<BreathingStackParamList>;
+  AccountStack: NavigatorScreenParams<AccountStackParamList>;
   InDevelopment: undefined;
 };
 
@@ -32,6 +35,18 @@ export type StoryStackParamList = {
   AddStory: undefined;
   EditStory: Omit<Story, 'createdAt' | 'creatorId'>;
   StoryDetail: Story;
+};
+
+export type MeditationStackParamList = {
+  Meditation: undefined;
+};
+
+export type BreathingStackParamList = {
+  Breathing: undefined;
+};
+
+export type AccountStackParamList = {
+  Setting: undefined;
 };
 
 export type GetStartedScreenNavigationProps = NativeStackScreenProps<
@@ -87,4 +102,19 @@ export type AccountScreenNavigationProps = NativeStackScreenProps<
 export type StoryScreenNavigationProps = NativeStackScreenProps<
   HomeTabParamList & RootStackParamList,
   'Story'
+>;
+
+export type MeditationScreenNavigationProps = NativeStackScreenProps<
+  MeditationStackParamList,
+  'Meditation'
+>;
+
+export type BreathingScreenNavigationProps = NativeStackScreenProps<
+  BreathingStackParamList,
+  'Breathing'
+>;
+
+export type SettingScreenNavigationProps = NativeStackScreenProps<
+  AccountStackParamList,
+  'Setting'
 >;

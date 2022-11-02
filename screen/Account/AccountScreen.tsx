@@ -4,24 +4,25 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
-import StoryTabView from '../components/account/StoryTabView';
-import Avatar from '../components/base/Avatar';
-import ImagePickerBottomSheet from '../components/base/ImagePickerBottomSheet';
-import ItemPressable from '../components/base/ItemPressable';
-import TabItem from '../components/base/TabItem';
+import StoryTabView from '../../components/account/StoryTabView';
+import Avatar from '../../components/base/Avatar';
+import ImagePickerBottomSheet from '../../components/base/ImagePickerBottomSheet';
+import ItemPressable from '../../components/base/ItemPressable';
+import TabItem from '../../components/base/TabItem';
+import { AccountScreenNavigationProps } from '../../navigation/navigation.types';
 import {
   useChangeProfile,
   useFindUser,
   useRemoveProfile,
-} from '../services/api/user/users.hooks';
-import layout from '../styles/layout';
-import spacing from '../styles/spacing';
-import { SIZING } from '../theme/theme';
-import { AuthContext } from '../utils/context/AuthContext';
-import useStyles from '../utils/hooks/useStyles';
-import { somethingWentWrongToast } from '../utils/toast';
+} from '../../services/api/user/users.hooks';
+import layout from '../../styles/layout';
+import spacing from '../../styles/spacing';
+import { SIZING } from '../../theme/theme';
+import { AuthContext } from '../../utils/context/AuthContext';
+import useStyles from '../../utils/hooks/useStyles';
+import { somethingWentWrongToast } from '../../utils/toast';
 
-function AccountScreen() {
+function AccountScreen({ navigation }: AccountScreenNavigationProps) {
   const { theme } = useTheme();
   const { user, logout } = React.useContext(AuthContext);
   const { data: currentUserData } = useFindUser(user?.uid);
@@ -60,6 +61,28 @@ function AccountScreen() {
     removeProfileMutation.mutate();
     closeBottomSheet();
   };
+
+  // const settingButton = React.useCallback(
+  //   () => (
+  //     <Icon
+  //       name="settings-outline"
+  //       type="ionicon"
+  //       onPress={() => {
+  //         navigation.navigate('AccountStack', {
+  //           screen: 'Setting',
+  //         });
+  //       }}
+  //       containerStyle={[border.rounded, layout.ratio_square]}
+  //     />
+  //   ),
+  //   []
+  // );
+
+  // React.useEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight: settingButton,
+  //   });
+  // }, []);
 
   return (
     <>

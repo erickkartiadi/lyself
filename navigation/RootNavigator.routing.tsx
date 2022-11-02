@@ -9,8 +9,11 @@ import InDevelopmentScreen from '../screen/Error/InDevelopmentScreen';
 import { navThemeDark, navThemeLight } from '../theme';
 import { AuthContext } from '../utils/context/AuthContext';
 import { ThemeModeContext } from '../utils/context/ThemeModeContext';
+import AccountNavigator from './AccountNavigator.routing';
 import AuthNavigator from './AuthNavigator.routing';
+import BreathingNavigator from './BreathingNavigator.routing';
 import HomeNavigator from './HomeNavigator.routing';
+import MeditationNavigator from './MeditationNavigator.routing';
 import { RootStackParamList } from './navigation.types';
 import StoryNavigator from './StoryNavigator.routing';
 
@@ -47,6 +50,9 @@ function RootNavigator() {
             <>
               <Stack.Screen name="HomeTab" component={HomeNavigator} />
               <Stack.Screen name="StoryStack" component={StoryNavigator} />
+              <Stack.Screen name="MeditationStack" component={MeditationNavigator} />
+              <Stack.Screen name="BreathingStack" component={BreathingNavigator} />
+              <Stack.Screen name="AccountStack" component={AccountNavigator} />
               <Stack.Screen name="InDevelopment" component={InDevelopmentScreen} />
             </>
           ) : (

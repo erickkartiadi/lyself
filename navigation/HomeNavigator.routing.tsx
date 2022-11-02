@@ -5,7 +5,7 @@ import * as React from 'react';
 import Avatar from '../components/base/Avatar';
 import LeftHeader from '../components/layout/LeftHeader';
 import RightHeader from '../components/layout/RightHeader';
-import AccountScreen from '../screen/AccountScreen';
+import AccountScreen from '../screen/Account/AccountScreen';
 import HomeScreen from '../screen/HomeScreen';
 import StoryScreen from '../screen/Story/StoryScreen';
 import TodoScreen from '../screen/Todo/TodoScreen';

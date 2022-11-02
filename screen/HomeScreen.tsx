@@ -28,7 +28,11 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
           text="Start your day with relaxed mind"
           colorLight={theme.colors.purpleDark}
           colorDark={theme.colors.purple}
-          onPress={() => navigation.navigate('InDevelopment')}
+          onPress={() =>
+            navigation.navigate('MeditationStack', {
+              screen: 'Meditation',
+            })
+          }
         />
         <VerticalSeparator />
         <ActivityCard
@@ -39,7 +43,11 @@ function HomeScreen({ navigation }: HomeScreenNavigationProps) {
           text="Let go your anxiety and worries"
           colorLight={theme.colors.blueDark}
           colorDark={theme.colors.blue}
-          onPress={() => navigation.navigate('InDevelopment')}
+          onPress={() => {
+            navigation.navigate('BreathingStack', {
+              screen: 'Breathing',
+            });
+          }}
         />
       </View>
       <ArticleSection />
